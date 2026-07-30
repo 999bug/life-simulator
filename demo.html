@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>人生模拟器 - Life Simulator</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #1a1a2e;
+    --surface-light: #252540;
+    --text: #e8e8e8;
+    --text-dim: #8888aa;
+    --accent: #c9a96e;
+    --accent-glow: rgba(201, 169, 110, 0.3);
+    --male: #4a90d9;
+    --female: #d96b8a;
+    --danger: #e85d75;
+    --success: #4ac9a0;
+    --health: #e85d75;
+    --intelligence: #5d9ce8;
+    --wealth: #e8c95d;
+    --happiness: #5de8a0;
+    --social: #c95de8;
+    --appearance: #e85dbe;
+    --luck: #5de8d4;
+    --morality: #e8e8e8;
+  }
+
+  body {
+    font-family: 'Microsoft YaHei', 'PingFang SC', -apple-system, sans-serif;
+    background: #000;
+    color: var(--text);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  #app {
+    width: 100vw;
+    height: 100vh;
+    max-width: 960px;
+    max-height: 720px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 0 80px rgba(0,0,0,0.6);
+  }
+
+  /* ======== 粒子背景 ======== */
+  .particles {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 0;
+  }
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    animation: float linear infinite;
+    opacity: 0;
+  }
+  @keyframes float {
+    0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.6; }
+    100% { transform: translateY(-100vh) translateX(40px) scale(0.3); opacity: 0; }
+  }
+
+  /* ======== 场景区域 ======== */
+  .scene-area {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 55%;
+    overflow: hidden;
+    transition: background 1.5s ease;
+  }
+  /* 阶段背景 */
+  .scene-infant { background: linear-gradient(180deg, #FFE0B2 0%, #FFCC80 40%, #FFECB3 100%); }
+  .scene-childhood { background: linear-gradient(180deg, #87CEEB 0%, #98D8C8 40%, #7CB342 100%); }
+  .scene-teen { background: linear-gradient(180deg, #2c3e50 0%, #e74c3c 30%, #f39c12 60%, #2ecc71 100%); }
+  .scene-young_adult { background: linear-gradient(180deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%); }
+  .scene-adult { background: linear-gradient(180deg, #4a5568 0%, #2d3748 50%, #1a202c 100%); }
+  .scene-middle_age { background: linear-gradient(180deg, #c05621 0%, #dd6b20 30%, #ecc94b 60%, #f7fafc 100%); }
+  .scene-elder { background: linear-gradient(180deg, #f6ad55 0%, #fbd38d 30%, #fefcbf 60%, #e2e8f0 100%); }
+
+  /* ======== 场景装饰 SVG ======== */
+  .scene-decor {
+    position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; transition: opacity 1s ease;
+  }
+
+  /* ======== 人物剪影 ======== */
+  .character-container {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    transition: all 0.8s ease;
+  }
+  .character-svg { transition: all 0.8s ease; }
+
+  /* ======== 场景文字叠加 ======== */
+  .age-badge {
+    position: absolute; top: 20px; left: 24px;
+    font-size: 14px; color: rgba(255,255,255,0.85);
+    background: rgba(0,0,0,0.4); backdrop-filter: blur(6px);
+    padding: 8px 18px; border-radius: 20px; letter-spacing: 2px;
+    z-index: 2; transition: all 0.5s ease;
+  }
+  .stage-label-overlay {
+    position: absolute; bottom: 40px; right: 24px;
+    font-size: 13px; color: rgba(255,255,255,0.5);
+    letter-spacing: 4px; z-index: 2;
+  }
+
+  /* ======== 过渡遮罩 ======== */
+  .transition-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: #000; z-index: 10; pointer-events: none;
+    opacity: 0; transition: opacity 0.4s ease;
+  }
+  .transition-overlay.active { opacity: 1; pointer-events: all; }
+
+  /* ======== 状态栏 ======== */
+  .status-bar {
+    position: absolute; top: 55%; left: 0; right: 0;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+    padding: 10px 20px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.95), rgba(10,10,20,0.95));
+    backdrop-filter: blur(12px);
+    z-index: 3;
+    transition: all 0.3s ease;
+  }
+  .stat-item {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 11px; padding: 3px 0;
+  }
+  .stat-icon { font-size: 14px; width: 20px; text-align: center; flex-shrink: 0; }
+  .stat-label { color: var(--text-dim); width: 24px; flex-shrink: 0; font-size: 10px; }
+  .stat-bar-wrap {
+    flex: 1; height: 5px; background: rgba(255,255,255,0.08);
+    border-radius: 3px; overflow: hidden; position: relative;
+  }
+  .stat-bar-fill {
+    height: 100%; border-radius: 3px;
+    transition: width 1s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+  }
+  .stat-bar-fill.pulse { animation: barPulse 0.6s ease; }
+  @keyframes barPulse {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.8); }
+  }
+  .stat-val {
+    color: var(--text-dim); width: 26px; text-align: right;
+    font-size: 11px; font-weight: 600; flex-shrink: 0;
+    transition: color 0.5s ease;
+  }
+  .stat-val.changed-up { color: var(--success); }
+  .stat-val.changed-down { color: var(--danger); }
+
+  /* ======== 对话框 ======== */
+  .dialog-area {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.92), rgba(0,0,0,0.97));
+    backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    z-index: 3;
+    transition: height 0.3s ease;
+  }
+  .dialog-inner { padding: 16px 28px 12px; min-height: 80px; }
+  .dialog-meta {
+    display: flex; gap: 20px; margin-bottom: 8px;
+    font-size: 10px; color: var(--text-dim); letter-spacing: 1px;
+  }
+  .dialog-meta .name-display { color: var(--accent); font-weight: 600; }
+  .dialog-text {
+    font-size: 18px; line-height: 1.9; letter-spacing: 1px;
+    min-height: 60px; position: relative;
+  }
+  .dialog-text .cursor::after {
+    content: '▎'; color: var(--accent);
+    animation: blink 0.8s infinite; margin-left: 1px;
+  }
+  .dialog-text .cursor.done::after { display: none; }
+
+  /* ======== 选项面板 ======== */
+  .choice-panel {
+    padding: 8px 28px 18px;
+    display: flex; flex-direction: column; gap: 7px;
+  }
+  .choice-btn {
+    width: 100%; padding: 12px 18px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px; color: var(--text);
+    font-size: 15px; letter-spacing: 1px;
+    cursor: pointer; transition: all 0.2s ease;
+    text-align: left; display: flex; justify-content: space-between; align-items: center;
+    font-family: inherit; position: relative; overflow: hidden;
+  }
+  .choice-btn::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; background: var(--accent); transform: scaleY(0);
+    transition: transform 0.2s ease; border-radius: 0 2px 2px 0;
+  }
+  .choice-btn:hover {
+    background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2);
+    transform: translateX(6px);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+  .choice-btn:hover::before { transform: scaleY(1); }
+  .choice-btn:active { transform: scale(0.98); transition: transform 0.05s; }
+  .choice-effects {
+    font-size: 10px; color: var(--text-dim); letter-spacing: 0.5px;
+    white-space: nowrap; flex-shrink: 0; margin-left: 12px;
+  }
+  .choice-effects .pos { color: var(--success); }
+  .choice-effects .neg { color: var(--danger); }
+
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  /* ======== 标题页 ======== */
+  .screen-title {
+    width: 100%; height: 100%;
+    background: radial-gradient(ellipse at center, #1a1a30 0%, #0a0a14 70%);
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 24px; position: relative; overflow: hidden;
+  }
+  .screen-title .title-decor {
+    position: absolute; width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(201,169,110,0.06) 0%, transparent 60%);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    animation: titleGlow 4s ease-in-out infinite;
+  }
+  @keyframes titleGlow {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+  }
+  .title-logo {
+    font-size: 56px; font-weight: 200; letter-spacing: 14px;
+    color: var(--accent); text-shadow: 0 0 50px var(--accent-glow);
+    z-index: 1; animation: fadeInDown 1.4s ease;
+  }
+  .title-subtitle {
+    font-size: 14px; color: var(--text-dim); letter-spacing: 8px;
+    z-index: 1; animation: fadeInUp 1.4s ease;
+  }
+  .name-input-wrap {
+    z-index: 1; animation: fadeIn 1.8s ease;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+  }
+  .name-input-wrap label {
+    font-size: 12px; color: var(--text-dim); letter-spacing: 3px;
+  }
+  .name-input-wrap input {
+    width: 220px; padding: 10px 16px;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px; color: var(--text); font-size: 16px;
+    text-align: center; letter-spacing: 3px; outline: none;
+    font-family: inherit; transition: all 0.3s ease;
+  }
+  .name-input-wrap input:focus {
+    border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow);
+  }
+  .gender-select {
+    display: flex; gap: 20px; z-index: 1; animation: fadeIn 2s ease;
+  }
+  .gender-btn {
+    width: 130px; height: 150px;
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 16px;
+    background: rgba(255,255,255,0.03); cursor: pointer;
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 10px;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+    color: var(--text-dim); font-size: 16px; letter-spacing: 2px;
+  }
+  .gender-btn:hover {
+    transform: translateY(-6px); border-color: rgba(255,255,255,0.3);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+  }
+  .gender-btn .icon { font-size: 44px; transition: transform 0.3s ease; }
+  .gender-btn:hover .icon { transform: scale(1.15); }
+  .gender-btn.male:hover { border-color: var(--male); box-shadow: 0 12px 30px rgba(74,144,217,0.25); color: var(--male); }
+  .gender-btn.female:hover { border-color: var(--female); box-shadow: 0 12px 30px rgba(217,107,138,0.25); color: var(--female); }
+  .gender-btn.selected.male { border-color: var(--male); box-shadow: 0 0 35px rgba(74,144,217,0.35); background: rgba(74,144,217,0.1); color: var(--male); }
+  .gender-btn.selected.female { border-color: var(--female); box-shadow: 0 0 35px rgba(217,107,138,0.35); background: rgba(217,107,138,0.1); color: var(--female); }
+  .start-btn {
+    padding: 14px 56px; border: none; border-radius: 30px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+    color: rgba(255,255,255,0.3); font-size: 17px; letter-spacing: 6px;
+    cursor: pointer; transition: all 0.4s ease; z-index: 1;
+    font-weight: 400; border: 1px solid rgba(255,255,255,0.08);
+  }
+  .start-btn.active {
+    background: linear-gradient(135deg, var(--accent), #a88b4e);
+    color: #1a1a2e; font-weight: 700; border-color: transparent;
+    box-shadow: 0 8px 32px var(--accent-glow);
+  }
+  .start-btn.active:hover { transform: scale(1.06); }
+
+  /* ======== 结局页 ======== */
+  .screen-summary {
+    width: 100%; height: 100%;
+    background: linear-gradient(180deg, #0a0a14 0%, #1a1a2e 55%, #0a0a14 100%);
+    display: flex; flex-direction: column; align-items: center;
+    padding: 40px 40px; overflow-y: auto; gap: 16px; position: relative;
+  }
+  .summary-title {
+    font-size: 38px; font-weight: 200; letter-spacing: 10px; color: var(--accent);
+    animation: fadeInDown 0.8s ease;
+  }
+  .summary-subtitle {
+    font-size: 14px; color: var(--text-dim); letter-spacing: 4px;
+  }
+  .summary-desc {
+    color: var(--text-dim); font-size: 14px; text-align: center;
+    max-width: 440px; line-height: 2;
+    animation: fadeIn 1.2s ease;
+  }
+  .summary-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    width: 100%; max-width: 620px; animation: fadeInUp 1s ease;
+  }
+  .summary-stat {
+    text-align: center; padding: 14px 8px;
+    background: var(--surface); border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.04);
+    transition: all 0.3s ease;
+  }
+  .summary-stat:hover {
+    border-color: rgba(255,255,255,0.15);
+    transform: translateY(-2px);
+  }
+  .summary-stat .val { font-size: 26px; font-weight: 300; }
+  .summary-stat .lbl { font-size: 10px; color: var(--text-dim); margin-top: 4px; }
+  .score-circle {
+    width: 90px; height: 90px; border-radius: 50%;
+    border: 2px solid var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px; color: var(--accent); font-weight: 200;
+    animation: fadeIn 1.5s ease; position: relative;
+  }
+  .score-circle::before {
+    content: ''; position: absolute; inset: -6px; border-radius: 50%;
+    border: 1px solid rgba(201,169,110,0.2);
+  }
+  .timeline {
+    width: 100%; max-width: 620px; animation: fadeInUp 1.3s ease;
+  }
+  .timeline h3 {
+    font-size: 13px; letter-spacing: 4px; color: var(--accent);
+    margin-bottom: 10px; font-weight: 400;
+  }
+  .timeline-item {
+    display: flex; gap: 12px; padding: 6px 0;
+    font-size: 12px; border-bottom: 1px solid rgba(255,255,255,0.02);
+  }
+  .timeline-item .age { color: var(--accent); min-width: 34px; }
+  .timeline-item .desc { color: var(--text-dim); }
+  .restart-btn {
+    padding: 12px 36px; border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 24px; background: transparent;
+    color: var(--text-dim); font-size: 14px; letter-spacing: 4px;
+    cursor: pointer; transition: all 0.3s ease; margin-top: 4px;
+    font-family: inherit;
+  }
+  .restart-btn:hover {
+    border-color: var(--accent); color: var(--accent);
+    box-shadow: 0 4px 20px var(--accent-glow);
+  }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes fadeInDown { from { opacity: 0; transform: translateY(-24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+  .hidden { display: none !important; }
+
+  /* 滚动条 */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+// ============ 工具函数 ============
+function clamp(v, min, max) { return v < min ? min : v > max ? max : v; }
+
+// ============ 常量 ============
+const ATTR_NAMES = {
+  health:'健康', intelligence:'智力', wealth:'财富', happiness:'幸福',
+  social:'社交', appearance:'魅力', luck:'运气', morality:'道德'
+};
+const ATTR_COLORS = {
+  health:'#e85d75', intelligence:'#5d9ce8', wealth:'#e8c95d',
+  happiness:'#5de8a0', social:'#c95de8', appearance:'#e85dbe',
+  luck:'#5de8d4', morality:'#e8e8e8'
+};
+const ATTR_ICONS = {
+  health:'💪', intelligence:'🧠', wealth:'💰', happiness:'😊',
+  social:'👥', appearance:'🎨', luck:'🍀', morality:'⚖️'
+};
+
+const STAGES = ['infant','childhood','teen','young_adult','adult','middle_age','elder'];
+const STAGE_LABELS = {
+  infant:'婴儿期', childhood:'童年', teen:'少年',
+  young_adult:'青年', adult:'中年', middle_age:'中老年', elder:'晚年'
+};
+const STAGE_RANGES = {
+  infant:[0,2], childhood:[3,11], teen:[12,17],
+  young_adult:[18,29], adult:[30,49], middle_age:[50,64], elder:[65,90]
+};
+
+// ============ 粒子系统 ============
+function createParticles(container) {
+  const wrap = document.createElement('div');
+  wrap.className = 'particles';
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = 1.5 + Math.random() * 3;
+    p.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}%;
+      bottom:-${Math.random()*20}px;
+      background:rgba(201,169,110,${0.15 + Math.random()*0.25});
+      animation-duration:${8 + Math.random()*15}s;
+      animation-delay:${Math.random()*10}s;
+    `;
+    wrap.appendChild(p);
+  }
+  container.appendChild(wrap);
+}
+
+// ============ 场景装饰 ============
+function createSceneDecor(stage, container) {
+  const el = document.createElement('div');
+  el.className = 'scene-decor';
+  const svg = [];
+
+  if (stage === 'infant') {
+    // 柔和云朵 + 星星
+    svg.push(`<circle cx="120" cy="80" r="45" fill="rgba(255,255,255,0.25)"/>
+      <circle cx="160" cy="70" r="35" fill="rgba(255,255,255,0.2)"/>
+      <circle cx="85" cy="75" r="30" fill="rgba(255,255,255,0.2)"/>
+      <circle cx="680" cy="100" r="40" fill="rgba(255,255,255,0.2)"/>
+      <circle cx="720" cy="90" r="30" fill="rgba(255,255,255,0.15)"/>
+      <circle cx="500" cy="40" r="2" fill="rgba(255,255,200,0.5)"/>
+      <circle cx="550" cy="55" r="1.5" fill="rgba(255,255,200,0.4)"/>
+      <circle cx="450" cy="30" r="1" fill="rgba(255,255,200,0.3)"/>`);
+  } else if (stage === 'childhood') {
+    // 树 + 蝴蝶 + 阳光
+    svg.push(`<circle cx="80" cy="250" r="55" fill="#5a8a3c"/>
+      <circle cx="50" cy="230" r="40" fill="#4a7a2c"/>
+      <circle cx="110" cy="235" r="38" fill="#6a9a4c"/>
+      <rect x="72" y="300" width="16" height="80" fill="#6b4c3b" rx="4"/>
+      <circle cx="750" cy="240" r="50" fill="#5a8a3c"/>
+      <circle cx="720" cy="220" r="35" fill="#4a7a2c"/>
+      <rect x="742" y="290" width="16" height="70" fill="#6b4c3b" rx="4"/>
+      <circle cx="400" cy="50" r="35" fill="rgba(255,255,200,0.4)"/>
+      <circle cx="400" cy="50" r="25" fill="rgba(255,255,150,0.6)"/>
+      <text x="200" y="180" font-size="18" fill="rgba(100,180,255,0.3)">🦋</text>
+      <text x="600" y="160" font-size="14" fill="rgba(100,180,255,0.25)">🦋</text>`);
+  } else if (stage === 'teen') {
+    // 城市剪影 + 星星
+    svg.push(`<rect x="0" y="220" width="100%" height="180" fill="rgba(0,0,0,0.25)"/>
+      <rect x="30" y="180" width="50" height="120" fill="rgba(0,0,0,0.35)" rx="2"/>
+      <rect x="100" y="150" width="40" height="150" fill="rgba(0,0,0,0.3)" rx="2"/>
+      <rect x="160" y="200" width="60" height="100" fill="rgba(0,0,0,0.35)" rx="2"/>
+      <rect x="240" y="130" width="35" height="170" fill="rgba(0,0,0,0.3)" rx="2"/>
+      <rect x="600" y="160" width="45" height="140" fill="rgba(0,0,0,0.3)" rx="2"/>
+      <rect x="660" y="190" width="55" height="110" fill="rgba(0,0,0,0.35)" rx="2"/>
+      <rect x="740" y="140" width="40" height="160" fill="rgba(0,0,0,0.3)" rx="2"/>
+      <rect x="800" y="170" width="50" height="130" fill="rgba(0,0,0,0.35)" rx="2"/>
+      ${Array.from({length:30}, (_,i) => `<circle cx="${Math.random()*900}" cy="${Math.random()*160}" r="${0.5+Math.random()*1.5}" fill="rgba(255,255,255,${0.3+Math.random()*0.5})"/>`).join('')}`);
+  } else if (stage === 'young_adult') {
+    // 现代城市夜景
+    svg.push(`<rect x="0" y="200" width="100%" height="200" fill="rgba(0,0,0,0.3)"/>
+      <rect x="20" y="170" width="55" height="130" fill="rgba(10,10,30,0.5)" rx="2"/>
+      <rect x="90" y="140" width="45" height="160" fill="rgba(10,10,30,0.45)" rx="2"/>
+      <rect x="150" y="180" width="65" height="120" fill="rgba(10,10,30,0.5)" rx="2"/>
+      <rect x="650" y="155" width="50" height="145" fill="rgba(10,10,30,0.45)" rx="2"/>
+      <rect x="720" y="175" width="60" height="125" fill="rgba(10,10,30,0.5)" rx="2"/>
+      <rect x="800" y="145" width="45" height="155" fill="rgba(10,10,30,0.45)" rx="2"/>
+      ${Array.from({length:20}, (_,i) => `<rect x="${20+Math.random()*850}" y="${140+Math.random()*60}" width="3" height="3" fill="rgba(255,220,150,${0.5+Math.random()*0.5})"/>`).join('')}`);  // 窗口灯光
+  } else if (stage === 'adult') {
+    // 房屋 + 车
+    svg.push(`<rect x="300" y="180" width="200" height="160" fill="#4a3a2a"/>
+      <polygon points="280,180 400,100 520,180" fill="#6b3a3a"/>
+      <rect x="340" y="220" width="30" height="30" fill="rgba(255,220,150,0.4)"/>
+      <rect x="410" y="220" width="30" height="30" fill="rgba(255,220,150,0.3)"/>
+      <rect x="380" y="280" width="30" height="50" fill="#3a2a1a"/>
+      <rect x="100" y="280" width="120" height="45" fill="#3a5a8a" rx="10"/>
+      <circle cx="130" cy="330" r="12" fill="#1a1a1a"/>
+      <circle cx="190" cy="330" r="12" fill="#1a1a1a"/>
+      <rect x="640" y="200" width="80" height="150" fill="rgba(255,255,255,0.08)"/>`);
+  } else if (stage === 'middle_age') {
+    // 夕阳 + 花园
+    svg.push(`<circle cx="700" cy="100" r="50" fill="rgba(255,150,50,0.5)"/>
+      <circle cx="700" cy="100" r="40" fill="rgba(255,180,80,0.6)"/>
+      <circle cx="200" cy="280" r="40" fill="#4a7a2a"/>
+      <circle cx="230" cy="270" r="35" fill="#5a8a3a"/>
+      <rect x="192" y="300" width="16" height="50" fill="#5b3a2a" rx="3"/>
+      <circle cx="600" cy="290" r="35" fill="#4a7a2a"/>
+      <rect x="592" y="310" width="16" height="40" fill="#5b3a2a" rx="3"/>
+      <text x="150" y="250" font-size="10" fill="rgba(200,100,50,0.3)">🌿</text>
+      <text x="550" y="260" font-size="10" fill="rgba(200,100,50,0.3)">🌿</text>`);
+  } else if (stage === 'elder') {
+    // 秋叶 + 长椅
+    svg.push(`<circle cx="700" cy="80" r="45" fill="rgba(255,180,80,0.4)"/>
+      <rect x="350" y="320" width="100" height="12" fill="#6b4a3a" rx="3"/>
+      <rect x="360" y="300" width="6" height="25" fill="#5a3a2a"/>
+      <rect x="440" y="300" width="6" height="25" fill="#5a3a2a"/>
+      <circle cx="150" cy="270" r="35" fill="#a06030"/>
+      <circle cx="180" cy="260" r="30" fill="#b07040"/>
+      <rect x="142" y="290" width="14" height="50" fill="#5a3a2a" rx="3"/>
+      <circle cx="750" cy="280" r="30" fill="#a06030"/>
+      <rect x="742" y="295" width="14" height="40" fill="#5a3a2a" rx="3"/>
+      <text x="100" y="150" font-size="16" fill="rgba(180,100,30,0.25)">🍂</text>
+      <text x="650" y="130" font-size="13" fill="rgba(180,100,30,0.2)">🍂</text>
+      <text x="400" y="170" font-size="11" fill="rgba(180,100,30,0.18)">🍂</text>`);
+  }
+
+  el.innerHTML = `<svg width="100%" height="100%" viewBox="0 0 900 400" preserveAspectRatio="xMidYMax slice">${svg.join('')}</svg>`;
+  container.appendChild(el);
+}
+
+// ============ 人物剪影 ============
+function createCharacter(stage, gender, container) {
+  const wrap = document.createElement('div');
+  wrap.className = 'character-container';
+  let svgContent = '';
+
+  const baseX = 450, baseY = 380; // 脚底位置
+
+  if (stage === 'infant') {
+    // 婴儿 — 襁褓
+    svgContent = `
+      <ellipse cx="${baseX}" cy="${baseY-18}" rx="22" ry="28" fill="rgba(255,255,255,0.12)"/>
+      <circle cx="${baseX}" cy="${baseY-42}" r="14" fill="rgba(255,220,180,0.15)"/>
+      <ellipse cx="${baseX}" cy="${baseY-50}" rx="8" ry="5" fill="rgba(255,200,150,0.1)"/>`;
+  } else if (stage === 'childhood') {
+    // 小孩
+    svgContent = `
+      <circle cx="${baseX}" cy="${baseY-95}" r="18" fill="rgba(255,220,180,0.15)"/>
+      <rect x="${baseX-12}" y="${baseY-77}" width="24" height="40" fill="rgba(255,255,255,0.1)" rx="10"/>
+      <rect x="${baseX-14}" y="${baseY-37}" width="8" height="30" fill="rgba(255,255,255,0.08)" rx="4"/>
+      <rect x="${baseX+6}" y="${baseY-37}" width="8" height="30" fill="rgba(255,255,255,0.08)" rx="4"/>`;
+  } else if (stage === 'teen') {
+    // 少年
+    svgContent = `
+      <circle cx="${baseX}" cy="${baseY-130}" r="20" fill="rgba(255,220,180,0.15)"/>
+      <rect x="${baseX-14}" y="${baseY-110}" width="28" height="55" fill="rgba(255,255,255,0.1)" rx="12"/>
+      <rect x="${baseX-16}" y="${baseY-55}" width="10" height="45" fill="rgba(255,255,255,0.08)" rx="5"/>
+      <rect x="${baseX+6}" y="${baseY-55}" width="10" height="45" fill="rgba(255,255,255,0.08)" rx="5"/>`;
+  } else if (stage === 'young_adult') {
+    // 青年
+    svgContent = `
+      <circle cx="${baseX}" cy="${baseY-155}" r="22" fill="rgba(255,220,180,0.15)"/>
+      <rect x="${baseX-16}" y="${baseY-133}" width="32" height="65" fill="rgba(255,255,255,0.1)" rx="14"/>
+      <rect x="${baseX-18}" y="${baseY-68}" width="12" height="55" fill="rgba(255,255,255,0.08)" rx="6"/>
+      <rect x="${baseX+6}" y="${baseY-68}" width="12" height="55" fill="rgba(255,255,255,0.08)" rx="6"/>`;
+  } else if (stage === 'adult') {
+    // 中年 — 略宽
+    svgContent = `
+      <circle cx="${baseX}" cy="${baseY-155}" r="23" fill="rgba(255,220,180,0.15)"/>
+      <rect x="${baseX-19}" y="${baseY-132}" width="38" height="68" fill="rgba(255,255,255,0.1)" rx="15"/>
+      <rect x="${baseX-20}" y="${baseY-64}" width="13" height="52" fill="rgba(255,255,255,0.08)" rx="6"/>
+      <rect x="${baseX+7}" y="${baseY-64}" width="13" height="52" fill="rgba(255,255,255,0.08)" rx="6"/>`;
+  } else if (stage === 'middle_age') {
+    // 中老年 — 微驼
+    svgContent = `
+      <circle cx="${baseX+5}" cy="${baseY-150}" r="23" fill="rgba(255,220,180,0.14)"/>
+      <rect x="${baseX-14}" y="${baseY-128}" width="36" height="65" fill="rgba(255,255,255,0.09)" rx="14" transform="rotate(-3,${baseX},${baseY-95})"/>
+      <rect x="${baseX-18}" y="${baseY-63}" width="13" height="50" fill="rgba(255,255,255,0.07)" rx="6"/>
+      <rect x="${baseX+5}" y="${baseY-63}" width="13" height="50" fill="rgba(255,255,255,0.07)" rx="6"/>`;
+  } else {
+    // 晚年 — 佝偻 + 拐杖
+    svgContent = `
+      <circle cx="${baseX+8}" cy="${baseY-140}" r="22" fill="rgba(255,220,180,0.12)"/>
+      <rect x="${baseX-12}" y="${baseY-120}" width="34" height="58" fill="rgba(255,255,255,0.08)" rx="13" transform="rotate(-6,${baseX+5},${baseY-90})"/>
+      <rect x="${baseX-16}" y="${baseY-62}" width="12" height="48" fill="rgba(255,255,255,0.06)" rx="5"/>
+      <rect x="${baseX+4}" y="${baseY-62}" width="12" height="48" fill="rgba(255,255,255,0.06)" rx="5"/>
+      <line x1="${baseX+30}" y1="${baseY-100}" x2="${baseX+50}" y2="${baseY+5}" stroke="rgba(255,255,255,0.1)" stroke-width="3" stroke-linecap="round"/>`;
+  }
+
+  wrap.innerHTML = `<svg class="character-svg" width="100%" height="100%" viewBox="0 0 900 400" preserveAspectRatio="xMidYMax slice">${svgContent}</svg>`;
+  container.appendChild(wrap);
+}
+
+// ============ 游戏状态 ============
+function createState(gender, name) {
+  return {
+    gender, name: name || (gender === 'male' ? '小明' : '小美'),
+    age: 0, stage: 'infant', stageIdx: 0,
+    attrs: {
+      health: 80, intelligence: 30, wealth: 20, happiness: 70,
+      social: 20, appearance: 50, luck: 50, morality: 50
+    },
+    flags: [], history: [], phase: 'playing'
+  };
+}
+
+// ============ MVP 事件 ============
+const EVENTS = [
+  { id:'birth', stage:'infant', age:0,
+    text:'一个新的生命来到了这个世界。产房里响起第一声啼哭。\n\n父母看着襁褓中的你，疲惫的脸上满是温柔与期待。人生这条漫长的路，从此刻开始。',
+    choices:[{ text:'……', effects:'', outcomes:{ attr:{}, nextAge:1, flags:[] } }] },
+  { id:'first_words', stage:'infant', age:1,
+    text:'你开始咿呀学语了。妈妈每天对着你说话，教你叫"爸爸"、"妈妈"。\n\n这天，你含糊地发出了第一个有意义的音节。全家人高兴极了。',
+    choices:[{ text:'……', effects:'', outcomes:{ attr:{ intelligence:3, happiness:5, social:2 }, nextAge:3, flags:[] } }] },
+  { id:'kindergarten', stage:'childhood', age:3,
+    text:'三岁了，第一天上幼儿园。陌生的教室里摆满了玩具，周围全是没见过的小朋友。有的在哭，有的在笑，有的在抢积木。\n\n老师蹲下来，温柔地问你想玩什么。你——',
+    choices:[
+      { text:'开心地跑向积木区，主动和旁边的小朋友搭话', effects:'👥+8 😊+5 🧠+2', outcomes:{ attr:{social:8,happiness:5,intelligence:2}, nextAge:5, flags:['outgoing_kid'] } },
+      { text:'安静地走到图书角，一个人翻绘本', effects:'👥-3 😊-2 🧠+6', outcomes:{ attr:{social:-3,happiness:-2,intelligence:6}, nextAge:5, flags:[] } },
+      { text:'紧紧抱着妈妈的腿不肯松手', effects:'😊-8 👥-5 💪-2', outcomes:{ attr:{happiness:-8,social:-5,health:-2}, nextAge:5, flags:['shy_kid'] } }
+    ] },
+  { id:'hobby_choice', stage:'childhood', age:6,
+    text:'上小学了。爸妈觉得你应该在课外学点什么。周末带你去了少年宫，各种兴趣班看得人眼花缭乱。\n\n他们蹲下来认真地说："你自己选一个，但要坚持。"',
+    choices:[
+      { text:'画画！你从小就喜欢在纸上涂涂抹抹', effects:'🎨+6 😊+5 💰-3', outcomes:{ attr:{appearance:6,happiness:5,wealth:-3}, nextAge:8, flags:['art_skill'] } },
+      { text:'钢琴。虽然看起来很辛苦，但弹琴的人好酷', effects:'🎨+4 🧠+5 💰-4', outcomes:{ attr:{appearance:4,intelligence:5,wealth:-4}, nextAge:8, flags:['music_skill'] } },
+      { text:'都不想去，周末想和院子里的小伙伴玩', effects:'😊+8 👥+5 🎨-3', outcomes:{ attr:{happiness:8,social:5,appearance:-3}, nextAge:8, flags:['free_range'] } },
+      { text:'爸爸推荐的编程班。虽然不太懂，但电脑很神奇', effects:'🧠+10 👥-3 😊-1', outcomes:{ attr:{intelligence:10,social:-3,happiness:-1}, nextAge:8, flags:['coding_early'] } }
+    ] },
+  { id:'new_friend', stage:'childhood', age:10,
+    text:'班里转来了一个新同学。他总是一个人坐在角落里，课间也不和别人一起玩。\n\n有天下雨，他没带伞，站在校门口的屋檐下等雨停。你手里刚好有伞。',
+    choices:[
+      { text:'走过去说"一起走吧"，把他送到他家的巷子口', effects:'👥+10 😊+5 ⚖️+5', outcomes:{ attr:{social:10,happiness:5,morality:5}, nextAge:12, flags:['kind_heart','best_friend'] } },
+      { text:'叫上几个同学一起去认识他，大家一起玩', effects:'👥+7 😊+4 🧠+2', outcomes:{ attr:{social:7,happiness:4,intelligence:2}, nextAge:12, flags:['best_friend'] } },
+      { text:'假装没看见，和朋友们说说笑笑地走了', effects:'⚖️-5 👥-2 🍀-3', outcomes:{ attr:{morality:-5,social:-2,luck:-3}, nextAge:12 } },
+      { text:'觉得他很怪，和几个同学一起笑话他', effects:'⚖️-15 😊-3 👥+5', outcomes:{ attr:{morality:-15,happiness:-3,social:5}, nextAge:12, flags:['bully'] } }
+    ] },
+  { id:'middle_school', stage:'teen', age:14,
+    text:'初二了。成绩在班里中等偏上，老师说你有潜力但不够努力。\n\n同时你发现自己对隔壁班一个同学有了不一样的感觉——每次在走廊碰见，心跳都会加快。',
+    choices:[
+      { text:'把这份悸动写进日记，然后把精力全部砸到学习上', effects:'🧠+12 ⚖️+3 😊-5', outcomes:{ attr:{intelligence:12,morality:3,happiness:-5}, nextAge:16, flags:['focused_study'] } },
+      { text:'鼓起勇气写了封信，约对方放学后在操场见面', effects:'😊+10 🎨+5 🍀+5', outcomes:{ attr:{happiness:10,appearance:5,luck:5}, nextAge:16, flags:['first_love','brave_heart'] } },
+      { text:'和好朋友们聊这件事，把心思花在社交上', effects:'👥+8 😊+3 🧠-5', outcomes:{ attr:{social:8,happiness:3,intelligence:-5}, nextAge:16 } }
+    ] },
+  { id:'high_school_crossroad', stage:'teen', age:16,
+    text:'中考成绩出来了。不算顶尖，但还不错。你面临人生第一个真正的十字路口。\n\n是去重点高中拼一个好大学，还是另辟蹊径？你的选择将深刻影响接下来的人生轨迹。',
+    choices:[
+      { text:'去重点高中，目标是985/211', effects:'🧠+15 💰+5 😊-8 💪-3', outcomes:{ attr:{intelligence:15,wealth:5,happiness:-8,health:-3}, nextAge:18, flags:['academic_path'] } },
+      { text:'上普通高中，保持自己的节奏，全面发展', effects:'👥+8 😊+5 🧠+4', outcomes:{ attr:{social:8,happiness:5,intelligence:4}, nextAge:18, flags:['balanced_path'] } },
+      { text:'去职业高中，学一门实用的技术', effects:'💰+10 ⚖️+5 🧠-6 👥+3', outcomes:{ attr:{wealth:10,morality:5,intelligence:-6,social:3}, nextAge:18, flags:['tech_path'] } }
+    ] },
+  { id:'college_or_not', stage:'young_adult', age:19,
+    text:'高中毕业了。有人去了远方上大学，有人留在家乡开始工作，有人去了部队。\n\n你站在人生的站台上，火车的汽笛已经响了。你要踏上哪一趟列车？',
+    choices:[
+      { text:'去大城市读大学，开阔眼界', effects:'🧠+12 👥+8 💰-6 😊+5', outcomes:{ attr:{intelligence:12,social:8,wealth:-6,happiness:5}, nextAge:22, flags:['went_to_college','big_city'] } },
+      { text:'留在本地读书，离家人近，生活安逸', effects:'💰+5 😊+5 ⚖️+3', outcomes:{ attr:{wealth:5,happiness:5,morality:3}, nextAge:22, flags:['went_to_college','hometown'] } },
+      { text:'不读大学了，直接去工作。社会是最好的学校', effects:'💰+12 🧠-8 👥+5', outcomes:{ attr:{wealth:12,intelligence:-8,social:5}, nextAge:22, flags:['early_work'] } },
+      { text:'gap一年，去旅行、做义工，想清楚自己要什么', effects:'😊+15 👥+10 💰-8 🎨+3', outcomes:{ attr:{happiness:15,social:10,wealth:-8,appearance:3}, nextAge:22, flags:['gap_year'] } }
+    ] },
+  { id:'career_choice', stage:'young_adult', age:23,
+    text:'踏入社会的第一步。投了无数简历，面了十几家公司，终于有几个offer摆在你面前。\n\n有人追求钱、有人追求热爱、有人追求稳定。你呢？',
+    choices:[
+      { text:'去互联网大厂，高薪但高压', effects:'💰+20 🧠+8 😊-8 💪-5', outcomes:{ attr:{wealth:20,intelligence:8,happiness:-8,health:-5}, nextAge:26, flags:['tech_career'] } },
+      { text:'加入一家小而美的创业公司，一起改变世界', effects:'💰+5 😊+8 🍀+10', outcomes:{ attr:{wealth:5,happiness:8,luck:10}, nextAge:26, flags:['startup'] } },
+      { text:'考公务员，铁饭碗，安安稳稳', effects:'💰+12 ⚖️+5 😊+2 🧠-3', outcomes:{ attr:{wealth:12,morality:5,happiness:2,intelligence:-3}, nextAge:26, flags:['civil_servant'] } },
+      { text:'先不工作，趁年轻去看看世界', effects:'😊+15 👥+12 💰-10', outcomes:{ attr:{happiness:15,social:12,wealth:-10}, nextAge:26, flags:['world_traveler'] } }
+    ] },
+  { id:'love_marriage', stage:'young_adult', age:28,
+    text:'身边的人陆续结婚了。朋友圈每周都有婚礼刷屏。\n\n你的恋人今天在散步时突然停下来，认真地看着你说："你觉得…咱俩的未来是什么样的？"\n\n你知道，这是一个很重要的问题。',
+    choices:[
+      { text:'握住对方的手："我想和你一起走下去。"', effects:'😊+12 👥+8 ⚖️+5 💰-5', outcomes:{ attr:{happiness:12,social:8,morality:5,wealth:-5}, nextAge:30, flags:['married'] } },
+      { text:'"再给我两年，事业稳定了就结婚。"', effects:'💰+10 🧠+5 👥-8 😊-3', outcomes:{ attr:{wealth:10,intelligence:5,social:-8,happiness:-3}, nextAge:30 } },
+      { text:'沉默了很久，然后说"我可能…还没有准备好"', effects:'😊-12 👥-8 ⚖️+3 🍀+5', outcomes:{ attr:{happiness:-12,social:-8,morality:3,luck:5}, nextAge:30 } }
+    ] },
+  { id:'midlife_reflection', stage:'adult', age:40,
+    text:'四十岁了。某个深夜，你独自坐在阳台上，看着远处的城市灯火。\n\n半生已过，耳边回响着一句话："你年轻时想要成为的那个人，和现在的你，是同一个人吗？"',
+    choices:[
+      { text:'很满意。虽然没有大富大贵，但每一天都活得踏实', effects:'😊+10 ⚖️+5 💰+8 💪+3', outcomes:{ attr:{happiness:10,morality:5,wealth:8,health:3}, nextAge:44, flags:['content_midlife'] } },
+      { text:'不甘心！辞掉工作去追那个搁置了十年的梦', effects:'🧠+10 😊+8 💰-10 🍀+8', outcomes:{ attr:{intelligence:10,happiness:8,wealth:-10,luck:8}, nextAge:44, flags:['midlife_reinvention'] } },
+      { text:'陷入了很深的迷茫，但生活还得继续', effects:'😊-15 💪-10 🧠+8 ⚖️-3', outcomes:{ attr:{happiness:-15,health:-10,intelligence:8,morality:-3}, nextAge:44 } }
+    ] },
+  { id:'elder_care', stage:'adult', age:48,
+    text:'妈妈的电话越来越频繁了。她不说，但你知道——他们的身体不如从前了。\n\n爸爸上次爬楼梯要歇三次，妈妈的白发也藏不住了。\n\n工作的压力和家庭的责任同时压了过来。',
+    choices:[
+      { text:'减少工作时长，每周至少回去看他们两次', effects:'⚖️+15 😊+8 💰-10 💪+3', outcomes:{ attr:{morality:15,happiness:8,wealth:-10,health:3}, nextAge:52, flags:['filial_child'] } },
+      { text:'请了最好的护工，自己保持每天视频通话', effects:'⚖️+5 💰-8 😊-2', outcomes:{ attr:{morality:5,wealth:-8,happiness:-2}, nextAge:52 } },
+      { text:'把他们接到家里一起住。虽然拥挤，但安心', effects:'⚖️+20 😊+5 💰-5 👥-5 💪-5', outcomes:{ attr:{morality:20,happiness:5,wealth:-5,social:-5,health:-5}, nextAge:52, flags:['filial_child'] } }
+    ] },
+  { id:'retirement', stage:'middle_age', age:60,
+    text:'退休了。办了离职手续走出公司大楼的那一刻，你站了很久。\n\n四十年了。从青涩的新人到满头白发，这座城市的每一条路都见证过你的脚步。\n\n现在，时间终于完完整整地属于你自己了。',
+    choices:[
+      { text:'收拾行李开始环游世界！护照早就准备好了', effects:'😊+12 👥+8 💰-10 💪+5', outcomes:{ attr:{happiness:12,social:8,wealth:-10,health:5}, nextAge:64, flags:['world_tour'] } },
+      { text:'加入社区志愿者，用自己的经验帮助别人', effects:'⚖️+12 👥+8 😊+5', outcomes:{ attr:{morality:12,social:8,happiness:5}, nextAge:64, flags:['volunteer'] } },
+      { text:'回归田园。在郊区租了块地，种菜养花看书', effects:'😊+10 💪+10 💰-5 👥-3', outcomes:{ attr:{happiness:10,health:10,wealth:-5,social:-3}, nextAge:64, flags:['gardener'] } }
+    ] },
+  { id:'twilight_years', stage:'elder', age:70,
+    text:'黄昏时分，你坐在公园的长椅上。叶子一片一片地落下来，像缓缓翻过的日历。\n\n一个年轻人路过，停下来问你在想什么。\n\n你想了想。一生走到这里，如果你要把最重要的东西浓缩成一句话，那会是什么？',
+    choices:[
+      { text:'「勇敢去爱，别怕受伤。没有什么比爱更值得。」', effects:'最终章', outcomes:{ attr:{happiness:10,morality:5}, final:true } },
+      { text:'「钱很重要，但不是最重要的。健康和时间才是。」', effects:'最终章', outcomes:{ attr:{wealth:5,morality:10,health:5}, final:true } },
+      { text:'「做你自己。别人的期待是别人的，你的人生是你的。」', effects:'最终章', outcomes:{ attr:{happiness:8,intelligence:5,morality:3}, final:true } },
+      { text:'「如果重来一次，不知道还会不会选这条路……」', effects:'最终章', outcomes:{ attr:{happiness:-3,luck:8,morality:3}, final:true } }
+    ] }
+];
+
+// ============ 核心引擎 ============
+const app = document.getElementById('app');
+let state = null;
+let chosenGender = null;
+let playerName = '';
+let eventPtr = 0;      // 当前事件索引
+let feedbackText = '';  // 选择反馈文字
+let isTyping = false;
+let typeTimer = null;
+
+function findEvent() {
+  const now = EVENTS[eventPtr];
+  if (now && now.stage === state.stage && now.age <= state.age + 2) return now;
+  // 尝试推进阶段
+  const nextIdx = STAGES.indexOf(state.stage) + 1;
+  if (nextIdx < STAGES.length) {
+    const nextStage = STAGES[nextIdx];
+    const [minAge] = STAGE_RANGES[nextStage];
+    state.stage = nextStage;
+    state.stageIdx = nextIdx;
+    state.age = minAge;
+    // 找到下一阶段的第一个事件
+    for (let i = 0; i < EVENTS.length; i++) {
+      if (EVENTS[i].stage === nextStage) { eventPtr = i; return EVENTS[i]; }
+    }
+  }
+  return null;
+}
+
+function applyOutcomes(out) {
+  if (out.attr) {
+    for (const [k, v] of Object.entries(out.attr)) {
+      state.attrs[k] = clamp(state.attrs[k] + v, 0, 100);
+    }
+  }
+  if (out.flags) out.flags.forEach(f => { if (!state.flags.includes(f)) state.flags.push(f); });
+  if (out.nextAge) state.age = out.nextAge;
+  // 阶段更新
+  for (const [s, [lo, hi]] of Object.entries(STAGE_RANGES)) {
+    if (state.age >= lo && state.age <= hi && state.stage !== s) {
+      state.stage = s;
+      state.stageIdx = STAGES.indexOf(s);
+      break;
+    }
+  }
+  // 老年健康衰减
+  if (state.age >= 65) {
+    state.attrs.health = clamp(state.attrs.health - 3 + (state.attrs.luck / 60), 0, 100);
+  }
+  // 死亡判定
+  if (state.attrs.health <= 0 || state.age >= 90) {
+    state.phase = 'summary';
+    state.age = Math.min(state.age, 90);
+    state.attrs.health = Math.max(state.attrs.health, 0);
+  }
+}
+
+// ============ 渲染：标题页 ============
+function renderTitle() {
+  eventPtr = 0; feedbackText = ''; state = null; chosenGender = null; playerName = '';
+  if (typeTimer) { clearTimeout(typeTimer); typeTimer = null; }
+  app.innerHTML = `
+    <div class="screen-title">
+      <div class="title-decor"></div>
+      <div class="title-logo">人生模拟器</div>
+      <div class="title-subtitle">L I F E  ·  S I M U L A T O R</div>
+      <div class="name-input-wrap">
+        <label>你的名字</label>
+        <input type="text" id="nameInput" placeholder="输入名字或留空" maxlength="8">
+      </div>
+      <div class="gender-select">
+        <div class="gender-btn male" id="btnMale"><span class="icon">👦</span><span>男 生</span></div>
+        <div class="gender-btn female" id="btnFemale"><span class="icon">👧</span><span>女 生</span></div>
+      </div>
+      <button class="start-btn" id="startBtn" disabled>开 始 人 生</button>
+    </div>
+  `;
+  createParticles(app.querySelector('.screen-title'));
+
+  const nameInput = document.getElementById('nameInput');
+  const btnMale = document.getElementById('btnMale');
+  const btnFemale = document.getElementById('btnFemale');
+  const startBtn = document.getElementById('startBtn');
+
+  function updateStart() {
+    if (chosenGender) {
+      startBtn.classList.add('active');
+      startBtn.disabled = false;
+    }
+  }
+
+  btnMale.addEventListener('click', () => {
+    chosenGender = 'male';
+    btnMale.classList.add('selected'); btnFemale.classList.remove('selected');
+    if (!nameInput.value) nameInput.value = '小明';
+    updateStart();
+  });
+  btnFemale.addEventListener('click', () => {
+    chosenGender = 'female';
+    btnFemale.classList.add('selected'); btnMale.classList.remove('selected');
+    if (!nameInput.value) nameInput.value = '小美';
+    updateStart();
+  });
+  startBtn.addEventListener('click', () => {
+    if (!chosenGender) return;
+    playerName = nameInput.value.trim() || (chosenGender === 'male' ? '小明' : '小美');
+    state = createState(chosenGender, playerName);
+    eventPtr = 0;
+    renderGame();
+  });
+  nameInput.addEventListener('keydown', e => { if (e.key === 'Enter') startBtn.click(); });
+}
+
+// ============ 渲染：游戏主界面 ============
+function renderGame() {
+  if (state.phase === 'summary') { renderSummary(); return; }
+
+  // 处理选择反馈
+  if (feedbackText) {
+    renderFeedback();
+    return;
+  }
+
+  const evt = findEvent();
+  if (!evt) {
+    state.age = 85; state.attrs.health = 0; state.phase = 'summary';
+    renderSummary(); return;
+  }
+
+  const isAuto = evt.choices.length === 1 && evt.choices[0].text === '……';
+  const sceneClass = `scene-${evt.stage}`;
+
+  // 构建 HTML
+  let html = `<div class="transition-overlay active" id="transition"></div>`;
+
+  // 场景区域
+  html += `<div class="scene-area ${sceneClass}" id="sceneArea">
+    <div class="age-badge">${state.gender === 'male' ? '♂' : '♀'} ${state.age}岁 · ${STAGE_LABELS[evt.stage]}</div>
+    <div class="stage-label-overlay">${STAGE_LABELS[evt.stage]}</div>
+  </div>`;
+
+  // 状态栏
+  html += `<div class="status-bar" id="statusBar">${buildStatsHTML(state.attrs)}</div>`;
+
+  // 对话框
+  html += `<div class="dialog-area" id="dialogArea">
+    <div class="dialog-inner">
+      <div class="dialog-meta">
+        <span class="name-display">${state.name}</span>
+        <span>${state.age}岁</span>
+        <span>${STAGE_LABELS[evt.stage]}</span>
+      </div>
+      <div class="dialog-text" id="dialogText"><span class="cursor"></span></div>
+    </div>
+    ${!isAuto ? `<div class="choice-panel hidden" id="choicePanel">${evt.choices.map((c,i) => `
+      <button class="choice-btn" data-idx="${i}">
+        <span>${c.text}</span>
+        ${c.effects ? `<span class="choice-effects">${colorEffects(c.effects)}</span>` : ''}
+      </button>`).join('')}</div>` : ''}
+  </div>`;
+
+  app.innerHTML = html;
+
+  // 场景装饰 + 人物
+  const sceneArea = document.getElementById('sceneArea');
+  createSceneDecor(evt.stage, sceneArea);
+  createCharacter(evt.stage, state.gender, sceneArea);
+
+  // 过渡动画
+  setTimeout(() => {
+    const overlay = document.getElementById('transition');
+    if (overlay) overlay.classList.remove('active');
+    // 开始打字
+    startTypewriter(evt.text, isAuto, evt);
+  }, 400);
+}
+
+function buildStatsHTML(attrs, highlights) {
+  return Object.entries(attrs).map(([k, v]) => {
+    const color = ATTR_COLORS[k];
+    const changed = highlights && highlights[k];
+    const valClass = changed ? (changed > 0 ? 'changed-up' : 'changed-down') : '';
+    return `<div class="stat-item">
+      <span class="stat-icon">${ATTR_ICONS[k]}</span>
+      <span class="stat-label">${ATTR_NAMES[k]}</span>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:${v}%;background:${color}"></div></div>
+      <span class="stat-val ${valClass}">${v}</span>
+    </div>`;
+  }).join('');
+}
+
+function colorEffects(effects) {
+  return effects.split(' ').map(t => {
+    if (t.startsWith('+')) return `<span class="pos">${t}</span>`;
+    if (t.startsWith('-')) return `<span class="neg">${t}</span>`;
+    return t;
+  }).join(' ');
+}
+
+// ============ 打字机效果 ============
+function startTypewriter(text, isAuto, evt) {
+  const el = document.getElementById('dialogText');
+  if (!el) return;
+  el.innerHTML = '<span class="cursor"></span>';
+  const cursor = el.querySelector('.cursor');
+  let i = 0;
+  isTyping = true;
+
+  function type() {
+    if (i < text.length) {
+      const c = text[i];
+      if (c === '\n') {
+        const br = document.createElement('br');
+        cursor.before(br);
+      } else {
+        const span = document.createElement('span');
+        span.textContent = c;
+        cursor.before(span);
+      }
+      i++;
+      typeTimer = setTimeout(type, 30 + Math.random() * 25);
+    } else {
+      cursor.classList.add('done');
+      isTyping = false;
+      if (isAuto) {
+        // 自动事件：点击继续
+        const dialogArea = document.getElementById('dialogArea');
+        if (dialogArea) {
+          dialogArea.style.cursor = 'pointer';
+          dialogArea.addEventListener('click', function handler() {
+            dialogArea.removeEventListener('click', handler);
+            dialogArea.style.cursor = '';
+            feedbackText = '';
+            const out = evt.choices[0].outcomes;
+            applyOutcomes(out);
+            eventPtr++;
+            if (state.phase === 'summary') renderSummary();
+            else renderGame();
+          });
+        }
+      } else {
+        // 显示选项
+        const panel = document.getElementById('choicePanel');
+        if (panel) {
+          panel.classList.remove('hidden');
+          panel.querySelectorAll('.choice-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+              if (isTyping) return;
+              handleChoice(parseInt(btn.dataset.idx), evt);
+            });
+          });
+        }
+      }
+    }
+  }
+  typeTimer = setTimeout(type, 200);
+}
+
+function handleChoice(idx, evt) {
+  const ch = evt.choices[idx];
+  const out = ch.outcomes;
+
+  // 构建反馈文本
+  const changes = out.attr || {};
+  const parts = Object.entries(changes).filter(([,v]) => v !== 0)
+    .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${ATTR_ICONS[k]}${ATTR_NAMES[k]}`);
+  feedbackText = `你选择了「${ch.text}」\n\n${parts.join('  ')}`;
+
+  // 记录历史
+  state.history.push({ age: state.age, stage: state.stage, event: evt.id, choice: idx, text: ch.text });
+
+  applyOutcomes(out);
+  eventPtr++;
+
+  if (out.final || state.phase === 'summary') {
+    state.phase = 'summary';
+    renderSummary();
+  } else {
+    renderGame();
+  }
+}
+
+// ============ 反馈页面 ============
+function renderFeedback() {
+  const evt = findEvent();
+  if (!evt) { renderGame(); return; }
+  const sceneClass = evt ? `scene-${evt.stage}` : 'scene-adult';
+
+  let html = `<div class="transition-overlay active" id="transition"></div>`;
+  html += `<div class="scene-area ${sceneClass}" id="sceneArea">
+    <div class="age-badge">${state.gender === 'male' ? '♂' : '♀'} ${state.age}岁 · ${STAGE_LABELS[state.stage]}</div>
+    <div class="stage-label-overlay">${STAGE_LABELS[state.stage]}</div>
+  </div>`;
+  html += `<div class="status-bar" id="statusBar">${buildStatsHTML(state.attrs)}</div>`;
+  html += `<div class="dialog-area" id="dialogArea" style="cursor:pointer">
+    <div class="dialog-inner">
+      <div class="dialog-meta"><span class="name-display">${state.name}</span><span>${state.age}岁</span></div>
+      <div class="dialog-text" style="white-space:pre-line;text-align:center;color:var(--accent)">${feedbackText}</div>
+      <div style="text-align:center;font-size:11px;color:var(--text-dim);margin-top:10px;animation:pulse 2s infinite">▼ 点击继续</div>
+    </div>
+  </div>`;
+  app.innerHTML = html;
+
+  const sceneArea = document.getElementById('sceneArea');
+  createSceneDecor(state.stage, sceneArea);
+  createCharacter(state.stage, state.gender, sceneArea);
+  setTimeout(() => {
+    const overlay = document.getElementById('transition');
+    if (overlay) overlay.classList.remove('active');
+  }, 300);
+
+  // 点击继续
+  document.getElementById('dialogArea').addEventListener('click', function handler() {
+    feedbackText = '';
+    if (state.phase === 'summary') renderSummary();
+    else renderGame();
+  });
+}
+
+// ============ 结局页 ============
+function renderSummary() {
+  if (typeTimer) { clearTimeout(typeTimer); typeTimer = null; }
+  const attrs = state.attrs;
+  const avg = Math.round(Object.values(attrs).reduce((a, b) => a + b, 0) / 8);
+
+  let title, desc;
+  if (avg >= 75) {
+    title = '辉煌的一生'; desc = '回望来路，满目星辰。你活出了大多数人只敢梦想的人生，每一个重要选择都踩在了对的位置上。\n\n此生无憾。';
+  } else if (avg >= 60) {
+    title = '充实的一生'; desc = '没有惊天动地，但每一步都走得踏实。有爱、有事做、有所期待——也许这就是最好的生活。';
+  } else if (avg >= 45) {
+    title = '平凡的一生'; desc = '有得有失，有笑有泪。你的人生像大多数人的一样，不够完美，但足够真实。';
+  } else if (avg >= 30) {
+    title = '坎坷的一生'; desc = '命运对你并不慷慨，你做过错误的选择，也承受过不该承受的苦。\n\n但这一路走来，你已经尽力了。';
+  } else {
+    title = '艰难的一生'; desc = '这一生写满了挣扎。如果真的有来世，愿你能被温柔以待。';
+  }
+
+  const statsHTML = Object.entries(attrs).map(([k, v]) => `
+    <div class="summary-stat">
+      <div class="val" style="color:${ATTR_COLORS[k]}">${v}</div>
+      <div class="lbl">${ATTR_ICONS[k]} ${ATTR_NAMES[k]}</div>
+    </div>`).join('');
+
+  const timelineHTML = state.history.slice(-10).map(h => `
+    <div class="timeline-item"><span class="age">${h.age}岁</span><span class="desc">${h.text}</span></div>`).join('');
+
+  app.innerHTML = `<div class="screen-summary">
+    <div class="summary-subtitle">${state.gender === 'male' ? '♂' : '♀'} ${state.name} · 享年 ${state.age} 岁</div>
+    <div class="summary-title">${title}</div>
+    <div class="summary-desc">${desc}</div>
+    <div class="score-circle">${avg}</div>
+    <div style="font-size:11px;color:var(--text-dim);letter-spacing:3px">综合评分</div>
+    <div class="summary-stats">${statsHTML}</div>
+    <div class="timeline"><h3>📋 重要选择回顾</h3>${timelineHTML}</div>
+    <button class="restart-btn" id="restartBtn">重新开始</button>
+  </div>`;
+
+  document.getElementById('restartBtn').addEventListener('click', renderTitle);
+}
+
+// ============ 脉冲动画（废弃，用CSS） ============
+
+// 启动
+renderTitle();
+</script>
+</body>
+</html>

@@ -741,7 +741,7 @@ function findEvent() {
 function applyOutcomes(out) {
   if (out.attr) {
     for (const [k, v] of Object.entries(out.attr)) {
-      state.attrs[k] = clamp(state.attrs[k] + v, 0, 100);
+      state.attrs[k] = Math.round(clamp(state.attrs[k] + v, 0, 100));
     }
   }
   if (out.flags) out.flags.forEach(f => { if (!state.flags.includes(f)) state.flags.push(f); });
@@ -756,7 +756,7 @@ function applyOutcomes(out) {
   }
   // 老年健康衰减
   if (state.age >= 65) {
-    state.attrs.health = clamp(state.attrs.health - 3 + (state.attrs.luck / 60), 0, 100);
+    state.attrs.health = Math.round(clamp(state.attrs.health - 3 + (state.attrs.luck / 60), 0, 100));
   }
   // 死亡判定
   if (state.attrs.health <= 0 || state.age >= 90) {

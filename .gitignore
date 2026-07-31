@@ -3,3 +3,8 @@ dist/
 .vite/
 *.local
 .idea/
+
+# 本地工具工作目录（含本地配置与临时文件，勿提交）
+.claude/
+.superpowers/sdd/
+.playwright-mcp/

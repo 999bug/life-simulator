@@ -6,26 +6,96 @@ interface Props {
   onRestart: () => void;
 }
 
+interface Verdict {
+  title: string;
+  desc: string;
+}
+
+/** 按分数兜底的 5 档基础评价 */
+function scoreVerdict(score: number): Verdict {
+  if (score >= 75) {
+    return {
+      title: '辉煌的一生',
+      desc: '回望来路，满目星辰。你活出了大多数人只敢梦想的人生，每一个重要选择都踩在了对的位置上。此生无憾。',
+    };
+  }
+  if (score >= 60) {
+    return {
+      title: '充实的一生',
+      desc: '没有惊天动地，但每一步都走得踏实。有爱、有事做、有所期待——也许这就是最好的生活。',
+    };
+  }
+  if (score >= 45) {
+    return {
+      title: '平凡的一生',
+      desc: '有得有失，有笑有泪。你的人生像大多数人的一样，不够完美，但足够真实。',
+    };
+  }
+  if (score >= 30) {
+    return {
+      title: '坎坷的一生',
+      desc: '命运对你并不慷慨，你做过错误的选择，也承受过不该承受的苦。但这一路走来，你已经尽力了。',
+    };
+  }
+  return {
+    title: '艰难的一生',
+    desc: '这一生写满了挣扎。如果真的有来世，愿你能被温柔以待。',
+  };
+}
+
+/** 按人生路线分档：路线 flag 优先，无路线则按分数兜底 */
+function getVerdict(game: GameState): Verdict {
+  const score = calcScore(game.attributes);
+  const has = (...flags: string[]) => flags.some(f => game.flags.includes(f));
+
+  if (has('startup_success')) {
+    return {
+      title: '创业者的传奇',
+      desc: `从一间办公室到一方天地，你亲手把想法变成了事业。回望来时路，每次破釜沉舟都有了答案。${score >= 75 ? '这是属于你的传奇。' : '虽然起落跌宕，但你始终没有停下。'}`,
+    };
+  }
+  if (has('world_traveler')) {
+    return {
+      title: '行者无疆的一生',
+      desc: `你的脚步丈量过山川湖海，见过太多人一生未见过的风景。${score >= 75 ? '世界很大，而你从容地走完了它。' : '漂泊的日子里，你也曾在深夜想家。'}`,
+    };
+  }
+  if (has('top_university')) {
+    return {
+      title: '学霸的一生',
+      desc: `从重点高中的题海到重点大学的实验室，你用成绩证明了自己。那些别人觉得苦的日子，是你一步步铺出来的路。${score >= 75 ? '知识为你打开了每一扇门。' : '虽然没能登顶，但你已经爬得很高了。'}`,
+    };
+  }
+  if (has('tech_career') && game.attributes.intelligence >= 60) {
+    return {
+      title: '技术精英的一生',
+      desc: `从刷题到写代码，你用技术改变了生活的轨迹。一个个深夜的项目、一次次的攻坚，最终都成了你简历上的注脚。${score >= 75 ? '技术改变命运，你做到了。' : '纵然疲惫，你依然站在浪潮之上。'}`,
+    };
+  }
+  if (has('went_to_college')) {
+    return {
+      title: '知识改变命运的一生',
+      desc: `你相信读书的力量，而它确实把你带向了更远的地方。那些挑灯夜读的夜晚没有白费。${score >= 75 ? '知识为你打开了每一扇门。' : '虽然没能登顶，但你已经爬得很高了。'}`,
+    };
+  }
+  if (has('skilled_worker')) {
+    return {
+      title: '匠心人生',
+      desc: `一门手艺，一生安身。你把重复的日子过成了专注的修行，手上的功夫就是你的底气。${score >= 75 ? '工匠精神在你身上发着光。' : '手艺傍身，日子踏实。'}`,
+    };
+  }
+  if (has('civil_servant')) {
+    return {
+      title: '安稳一生',
+      desc: `没有大风大浪，却有一份细水长流的稳妥。你把日子过成了别人羡慕的安定。${score >= 75 ? '岁月静好，大概就是这副模样。' : '安稳之中，也偶尔遗憾错过了风浪。'}`,
+    };
+  }
+  return scoreVerdict(score);
+}
+
 export default function SummaryScreen({ game, onRestart }: Props) {
   const score = calcScore(game.attributes);
-
-  let title: string, desc: string;
-  if (score >= 75) {
-    title = '辉煌的一生';
-    desc = '回望来路，满目星辰。你活出了大多数人只敢梦想的人生，每一个重要选择都踩在了对的位置上。此生无憾。';
-  } else if (score >= 60) {
-    title = '充实的一生';
-    desc = '没有惊天动地，但每一步都走得踏实。有爱、有事做、有所期待——也许这就是最好的生活。';
-  } else if (score >= 45) {
-    title = '平凡的一生';
-    desc = '有得有失，有笑有泪。你的人生像大多数人的一样，不够完美，但足够真实。';
-  } else if (score >= 30) {
-    title = '坎坷的一生';
-    desc = '命运对你并不慷慨，你做过错误的选择，也承受过不该承受的苦。但这一路走来，你已经尽力了。';
-  } else {
-    title = '艰难的一生';
-    desc = '这一生写满了挣扎。如果真的有来世，愿你能被温柔以待。';
-  }
+  const { title, desc } = getVerdict(game);
 
   return (
     <div className="w-full h-full bg-gradient-to-b from-[#0a0a14] via-[#1a1a2e] to-[#0a0a14]

@@ -1,4 +1,5 @@
 import type { LifeStage } from '../types';
+import SceneDecor from './SceneDecor';
 
 interface Props {
   stage: LifeStage;
@@ -20,6 +21,9 @@ const STAGE_BG: Record<LifeStage, string> = {
 export default function SceneArea({ stage, age, gender, stageLabel }: Props) {
   return (
     <div className={`absolute inset-0 h-[55%] overflow-hidden transition-all duration-1000 ${STAGE_BG[stage]}`}>
+      {/* SVG 场景装饰 */}
+      <SceneDecor stage={stage} />
+
       {/* 年龄标识 */}
       <div className="absolute top-5 left-6 z-10
         text-sm text-white/85 bg-black/40 backdrop-blur

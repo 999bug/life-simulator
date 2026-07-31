@@ -19,16 +19,11 @@ export default function GameScreen({ game, currentEvent, feedback, onChoice, onC
 
   const handleDialogComplete = useCallback(() => {
     if (currentEvent && currentEvent.choices.length === 1 && currentEvent.choices[0].text === '……') {
-      // 纯叙事事件，不显示选择
+      // 纯叙事事件，不显示选择面板，直接等用户点击
     } else {
       setShowChoices(true);
     }
   }, [currentEvent]);
-
-  // 重置
-  const prevEventIdRef = useCallback((id: string) => {
-    setShowChoices(false);
-  }, []);
 
   // 反馈页面
   if (feedback) {
@@ -67,10 +62,12 @@ export default function GameScreen({ game, currentEvent, feedback, onChoice, onC
       {/* 场景 */}
       <SceneArea stage={game.stage} age={game.age} gender={game.gender} stageLabel={stageMeta.label} />
 
-      {/* 状态栏 */}
-      <StatusBar attributes={game.attributes} />
+      {/* 状态栏 — 绝对定位，紧贴场景下方 */}
+      <div className="absolute top-[55%] left-0 right-0 z-10">
+        <StatusBar attributes={game.attributes} />
+      </div>
 
-      {/* 底部区域 */}
+      {/* 底部区域：对话框 + 选项 */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
         <DialogBox
           text={currentEvent.text}
@@ -78,12 +75,13 @@ export default function GameScreen({ game, currentEvent, feedback, onChoice, onC
           age={game.age}
           stage={stageMeta.label}
           autoAdvance={isAuto}
-          onComplete={isAuto ? undefined : handleDialogComplete}
+          onComplete={handleDialogComplete}
+          onAutoContinue={isAuto ? () => onChoice(currentEvent.choices[0]) : undefined}
         />
         <ChoicePanel
-          choices={isAuto ? [] : currentEvent.choices}
+          choices={currentEvent.choices}
           onSelect={onChoice}
-          visible={showChoices && !isAuto}
+          visible={showChoices}
         />
       </div>
     </div>

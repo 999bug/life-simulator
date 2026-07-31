@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, type ReactNode } from 'react';
 
 interface Props {
   text: string;
@@ -6,23 +6,41 @@ interface Props {
   age: number;
   stage: string;
   onComplete?: () => void;
+  onAutoContinue?: () => void;
   autoAdvance?: boolean;
 }
 
-export default function DialogBox({ text, name, age, stage, onComplete, autoAdvance }: Props) {
-  const [displayed, setDisplayed] = useState('');
+export default function DialogBox({ text, name, age, stage, onComplete, onAutoContinue, autoAdvance }: Props) {
+  const [segments, setSegments] = useState<ReactNode[]>([]);
   const [done, setDone] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout>>();
 
   useEffect(() => {
-    setDisplayed('');
+    setSegments([]);
     setDone(false);
-    let i = 0;
-    const chars = [...text];
 
+    // 把文本按换行符拆成片段，换行处插入 <br>
+    const parts = text.split('\n');
+    const allUnits: Array<{ type: 'char'; value: string } | { type: 'br' }> = [];
+
+    for (let p = 0; p < parts.length; p++) {
+      for (const ch of parts[p]) {
+        allUnits.push({ type: 'char', value: ch });
+      }
+      if (p < parts.length - 1) {
+        allUnits.push({ type: 'br' });
+      }
+    }
+
+    let i = 0;
     function type() {
-      if (i < chars.length) {
-        setDisplayed(prev => prev + chars[i]);
+      if (i < allUnits.length) {
+        const unit = allUnits[i];
+        if (unit.type === 'br') {
+          setSegments(prev => [...prev, <br key={`br-${i}`} />]);
+        } else {
+          setSegments(prev => [...prev, unit.value]);
+        }
         i++;
         timerRef.current = setTimeout(type, 25 + Math.random() * 20);
       } else {
@@ -35,10 +53,18 @@ export default function DialogBox({ text, name, age, stage, onComplete, autoAdva
     return () => { if (timerRef.current) clearTimeout(timerRef.current); };
   }, [text]);
 
+  const handleClick = () => {
+    if (!done) return;
+    if (autoAdvance && onAutoContinue) {
+      onAutoContinue();
+    }
+  };
+
   return (
     <div
-      className={`bg-gradient-to-b from-black/92 to-black/97 backdrop-blur-xl border-t border-white/5 ${autoAdvance && done ? 'cursor-pointer' : ''}`}
-      onClick={autoAdvance && done ? onComplete : undefined}
+      className={`bg-gradient-to-b from-black/92 to-black/97 backdrop-blur-xl border-t border-white/5
+        ${autoAdvance && done ? 'cursor-pointer' : ''}`}
+      onClick={handleClick}
     >
       <div className="px-7 py-4 min-h-[80px]">
         {/* 元信息 */}
@@ -49,8 +75,8 @@ export default function DialogBox({ text, name, age, stage, onComplete, autoAdva
         </div>
 
         {/* 文本 */}
-        <div className="text-lg leading-relaxed tracking-wide whitespace-pre-line min-h-[56px]">
-          {displayed}
+        <div className="text-lg leading-relaxed tracking-wide min-h-[56px]">
+          {segments}
           {!done && <span className="text-[#c9a96e] animate-blink ml-0.5">▎</span>}
         </div>
 

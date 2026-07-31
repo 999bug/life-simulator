@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync } from 'fs';
 import { pathToFileURL } from 'url';
 
 /**
- * 106 个 chiled.json 属性名 → 8 大引擎属性映射。
+ * 107 条 chiled.json 属性名 → 8 大引擎属性映射（数据实际使用 106 键，luck 为冗余映射）。
  * INVERSE 中的键为负向维度，映射后数值取反（pressure: +8 → happiness: -8）。
  */
 const ATTR_MAP = {

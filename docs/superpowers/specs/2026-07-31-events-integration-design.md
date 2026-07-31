@@ -56,7 +56,7 @@ useGame.ts（线性播放 + 条件跳过，年龄由事件驱动）
 
 | 目标属性 | 来源属性名 |
 |---|---|
-| intelligence（37+1） | learning, knowledge, intelligence, curiosity, thinking, critical_thinking, logic, observation, memory, problem_solving, research, science, math, language, technology, engineering, creativity, imagination, innovation, independence, self_reliance, experience, maturity, adaptability, skill, talent, growth, planning, strategy, judgement, caution, focus, ambition, vision, self_awareness, efficiency, specialization, **dependence** |
+| intelligence（38+1） | learning, knowledge, intelligence, curiosity, thinking, critical_thinking, logic, observation, memory, problem_solving, research, science, math, language, technology, engineering, creativity, imagination, innovation, independence, self_reliance, experience, maturity, adaptability, skill, talent, growth, planning, strategy, judgement, caution, focus, ambition, vision, self_awareness, efficiency, specialization, special_skill, **dependence** |
 | morality（10+3） | empathy, responsibility, discipline, willpower, patience, persistence, self_control, emotion_control, gratitude, loyalty, **avoidance**, **procrastination**, **impulse** |
 | social（9+1） | social, friendship, relationship, family_relation, teacher_relation, teamwork, communication, leadership, trust, **introversion** |
 | happiness（16+4） | happiness, stability, pride, emotion, entertainment, family_need, freedom, security_need, security, motivation, comfort, fun, balance, interest, interest_change, gaming, **pressure**, **anger**, **anxiety**, **conflict** |

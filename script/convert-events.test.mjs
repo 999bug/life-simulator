@@ -82,3 +82,14 @@ test('完整事件形状（无 effects/flags 的叙事选项）', () => {
     choices: [{ text: '……', effects: '', outcomes: { attr: {} } }],
   });
 });
+
+test('convertAll 正常路径：全量转换并保持顺序', () => {
+  const out = convertAll([base, { ...base, id: 'test_02', age_range: [30, 31] }]);
+  assert.equal(out.length, 2);
+  assert.equal(out[0].id, 'test_01');
+  assert.equal(out[1].stage, 'adult');
+});
+
+test('stage 超界（>95 岁）fallback 为 elder', () => {
+  assert.equal(convertEvent({ ...base, age_range: [96, 97] }).stage, 'elder');
+});

@@ -25,7 +25,7 @@ export const STAGE_META: Record<LifeStage, StageMeta> = {
   young_adult: { label: '青年', range: [18, 29] },
   adult: { label: '中年', range: [30, 49] },
   middle_age: { label: '中老年', range: [50, 64] },
-  elder: { label: '晚年', range: [65, 90] },
+  elder: { label: '晚年', range: [65, 95] },
 };
 
 /** 初始属性 */
@@ -40,8 +40,13 @@ const INITIAL_ATTRS: Attributes = {
   morality: 50,
 };
 
-function clamp(v: number, lo: number, hi: number): number {
-  return v < lo ? lo : v > hi ? hi : v;
+/** 确保所有属性为整数 */
+function ensureInt(attrs: Attributes): Attributes {
+  const out = { ...attrs };
+  for (const k of Object.keys(out) as AttributeKey[]) {
+    out[k] = Math.round(out[k]);
+  }
+  return out;
 }
 
 /** 创建初始状态 */
@@ -59,24 +64,45 @@ export function createInitialState(gender: 'male' | 'female', name: string): Gam
   };
 }
 
-/** 应用选项结果，返回新属性 */
+/** 应用选项结果，返回新属性。保证整数。 */
 export function applyOutcomes(
   attrs: Attributes,
   out: { attr: Partial<Attributes> },
 ): Attributes {
   const next = { ...attrs };
   for (const [k, v] of Object.entries(out.attr)) {
-    next[k as AttributeKey] = Math.round(clamp(next[k as AttributeKey] + v, 0, 100));
+    next[k as AttributeKey] = Math.round(
+      Math.max(0, Math.min(100, next[k as AttributeKey] + v)),
+    );
   }
   return next;
 }
 
-/** 老年健康衰减 */
+/**
+ * 计算剩余寿命上限。
+ *
+ * 基础寿命 70 岁。
+ * 终生平均健康每 5 点 +1 岁 → 健康 100 可活到 90，健康 30 只能到 76。
+ */
+export function calcMaxAge(attrs: Attributes): number {
+  const avgHealth = Object.values(attrs).reduce((a, b) => a + b, 0) / Object.keys(attrs).length;
+  // 基础 68 + 健康红利（最多 +22 = 90）
+  return Math.round(68 + (avgHealth / 100) * 22);
+}
+
+/**
+ * 晚年健康衰减。
+ *
+ * 基础每事件 -3。
+ * 运气每 20 点减免 1 点衰减。
+ * 保证结果为整数。
+ */
 export function applyElderDecay(attrs: Attributes): Attributes {
-  return {
-    ...attrs,
-    health: Math.round(clamp(attrs.health - 3 + attrs.luck / 60, 0, 100)),
-  };
+  const decay = Math.round(3 - attrs.luck / 20);
+  const nextHealth = Math.round(
+    Math.max(0, Math.min(100, attrs.health - decay)),
+  );
+  return { ...attrs, health: nextHealth };
 }
 
 /** 根据年龄推断阶段 */
@@ -88,9 +114,14 @@ export function getStageForAge(age: number): LifeStage {
   return 'elder';
 }
 
-/** 检查是否死亡 */
-export function checkDeath(age: number, health: number): boolean {
-  return health <= 0 || age >= 90;
+/**
+ * 检查是否死亡。
+ *
+ * 健康归零 → 死亡。
+ * 超过个人最大寿命 → 死亡。
+ */
+export function checkDeath(age: number, health: number, maxAge: number): boolean {
+  return health <= 0 || age >= maxAge;
 }
 
 /** 计算综合评分 */
@@ -98,3 +129,6 @@ export function calcScore(attrs: Attributes): number {
   const vals = Object.values(attrs);
   return Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
 }
+
+/** 给属性做最终整数保护 */
+export { ensureInt };

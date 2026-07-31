@@ -6,6 +6,8 @@ import {
   applyElderDecay,
   getStageForAge,
   checkDeath,
+  calcMaxAge,
+  ensureInt,
   STAGE_ORDER,
   STAGE_META,
 } from '../engine/state';
@@ -57,8 +59,12 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         attrs = applyElderDecay(attrs);
       }
 
-      // 死亡判断
-      const isDead = checkDeath(age, attrs.health);
+      // 整数保护
+      attrs = ensureInt(attrs);
+
+      // 死亡判断（动态寿命）
+      const maxAge = calcMaxAge(attrs);
+      const isDead = checkDeath(age, attrs.health, maxAge);
 
       // 记录历史
       const history = [...state.game.history, {
@@ -71,7 +77,7 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
 
       const game: GameState = {
         ...state.game,
-        age: isDead ? Math.min(age, 90) : age,
+        age: isDead ? Math.min(age, maxAge) : age,
         stage,
         stageIdx: STAGE_ORDER.indexOf(stage),
         attributes: attrs,

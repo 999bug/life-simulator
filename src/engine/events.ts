@@ -199,10 +199,10 @@ const EVENTS: LifeEvent[] = [
     id: 'career_choice', stage: 'young_adult', age: 23,
     text: '踏入社会。投了上百份简历、面了十几家公司、被拒了无数次。\n\n终于，几张offer摆在桌上。每一张都指向完全不同的人生。\n\n有人追逐财富、有人追逐热爱、有人追逐安稳。而你——',
     choices: [
-      { text: '去互联网大厂，趁年轻多赚点', effects: '💰+20 🧠+8 😊-8 💪-5', outcomes: { attr: { wealth: 20, intelligence: 8, happiness: -8, health: -5 }, nextAge: 26, flags: ['tech_career'] } },
+      { text: '去互联网大厂，趁年轻多赚点', effects: '💰+20 🧠+8 😊-8 💪-5', outcomes: { attr: { wealth: 20, intelligence: 8, happiness: -8, health: -5 }, nextAge: 26, flags: ['tech_career'], nextEvent: 'tech_life' } },
       { text: '加入创业公司，赌一把大的', effects: '💰+5 😊+8 🍀+10', outcomes: { attr: { wealth: 5, happiness: 8, luck: 10 }, nextAge: 26, flags: ['startup'], nextEvent: 'startup_life' } },
       { text: '考公务员。铁饭碗，安稳过一辈子', effects: '💰+12 ⚖️+5 😊+2 🧠-3', outcomes: { attr: { wealth: 12, morality: 5, happiness: 2, intelligence: -3 }, nextAge: 26, flags: ['civil_servant'], nextEvent: 'civil_life' } },
-      { text: '先不找正式工作。趁年轻去看世界', effects: '😊+15 👥+12 💰-10 🎨+5', outcomes: { attr: { happiness: 15, social: 12, wealth: -10, appearance: 5 }, nextAge: 26, flags: ['world_traveler'] } },
+      { text: '先不找正式工作。趁年轻去看世界', effects: '😊+15 👥+12 💰-10 🎨+5', outcomes: { attr: { happiness: 15, social: 12, wealth: -10, appearance: 5 }, nextAge: 26, flags: ['world_traveler'], nextEvent: 'traveler_life' } },
     ],
   },
   // 分支：创业路线
@@ -223,6 +223,26 @@ const EVENTS: LifeEvent[] = [
     choices: [
       { text: '知足常乐。这种安稳是多少人想要的', effects: '😊+8 ⚖️+5 💰+5', outcomes: { attr: { happiness: 8, morality: 5, wealth: 5 }, nextAge: 28 } },
       { text: '在体制内也不躺平——考了在职研究生，提升自己', effects: '🧠+8 💰+3 😊+3', outcomes: { attr: { intelligence: 8, wealth: 3, happiness: 3 }, nextAge: 28 } },
+    ],
+  },
+  // 分支：大厂路线
+  {
+    id: 'tech_life', stage: 'young_adult', age: 25,
+    text: '大厂两年，你变了。\n\n发际线后退了一点，黑眼圈重了一点，银行账户多了好几个零。学会了在会议室里说"赋能""闭环""颗粒度"，也学会了凌晨三点对着电脑屏幕怀疑人生。\n\n今天拿到年度绩效A+，leader拍着你肩膀说"明年升P7"。你在微信上给爸妈发了个红包，配文"我挺好的"——然后继续低头写周报。',
+    conditions: { hasFlags: ['tech_career'] },
+    choices: [
+      { text: '继续卷。这条路虽然累，但回报也是实打实的', effects: '💰+15 🧠+5 😊-5 💪-5', outcomes: { attr: { wealth: 15, intelligence: 5, happiness: -5, health: -5 }, nextAge: 28, flags: ['tech_lead'] } },
+      { text: '决定辞职。钱够了，想去一家小公司做真正想做的东西', effects: '😊+10 🧠+5 💰-8', outcomes: { attr: { happiness: 10, intelligence: 5, wealth: -8 }, nextAge: 28, flags: ['escaped_rat_race'] } },
+    ],
+  },
+  // 分支：旅行者路线
+  {
+    id: 'traveler_life', stage: 'young_adult', age: 25,
+    text: '你走了很远的路。\n\n在拉萨的街头和陌生人喝过青稞酒、在大理的洱海边看着云发呆了一整个下午、在清迈的夜市里用蹩脚的英语讨价还价。\n\n朋友圈里你是个"过得很酷的人"。但夜深人静的时候，你也会问自己：这样漂着，到底是在寻找什么，还是在逃避什么？',
+    conditions: { hasFlags: ['world_traveler'] },
+    choices: [
+      { text: '在路上找到了一生热爱的事——开了家青年旅舍', effects: '😊+12 💰+5 👥+8', outcomes: { attr: { happiness: 12, wealth: 5, social: 8 }, nextAge: 28, flags: ['hostel_owner'] } },
+      { text: '走累了。回到城市找了份普通工作，但心里装着一个世界', effects: '😊+8 🧠+5 💰+3', outcomes: { attr: { happiness: 8, intelligence: 5, wealth: 3 }, nextAge: 28, flags: ['settled_down'] } },
     ],
   },
   {
@@ -364,17 +384,28 @@ const EVENTS: LifeEvent[] = [
   {
     id: 'golden_years', stage: 'elder', age: 65,
     text: '六十五岁。早上去公园打太极，中午和老伴去菜市场讨价还价，下午在阳台的摇椅上看书打盹。\n\n生活变得很慢。也不着急——反正没有deadline了。\n\n偶尔翻翻旧相册，泛黄的照片里的人笑得那么灿烂。你认出了每一张脸，但有些名字已经模糊了。',
+    conditions: { minAttrs: { health: 35 } },
     choices: [
       { text: '开始写回忆录。把这一生的故事记下来留给孙辈', effects: '😊+8 🧠+5 ⚖️+5', outcomes: { attr: { happiness: 8, intelligence: 5, morality: 5 }, nextAge: 68, flags: ['memoir'] } },
       { text: '组织老同学聚会。有些人五十多年没见了', effects: '👥+10 😊+8', outcomes: { attr: { social: 10, happiness: 8 }, nextAge: 68 } },
       { text: '学着用微信拍短视频，笨拙地拍些花草发出去', effects: '🧠+5 👥+3 😊+3', outcomes: { attr: { intelligence: 5, social: 3, happiness: 3 }, nextAge: 68 } },
     ],
   },
+  // 分支：身体不好
+  {
+    id: 'ailing_elder', stage: 'elder', age: 65,
+    text: '六十五岁。身体的零件一个接一个地出问题——膝盖疼、血压高、血糖也控制不住了。\n\n药盒占了床头柜的一半，医院的走廊比家里的客厅还熟悉。\n\n年轻时透支的那些夜晚，现在连本带利地找回来了。',
+    conditions: { maxAttrs: { health: 35 } },
+    choices: [
+      { text: '虽然身体不好，但心态还行。每天坚持散步半小时', effects: '💪+3 😊+5 ⚖️+3', outcomes: { attr: { health: 3, happiness: 5, morality: 3 }, nextAge: 68 } },
+      { text: '后悔了。当初要是对自己好一点就好了', effects: '😊-5 ⚖️+3', outcomes: { attr: { happiness: -5, morality: 3 }, nextAge: 68, flags: ['regret_health'] } },
+    ],
+  },
   // 分支：富豪路线 vs 普通路线 vs 温馨路线
   {
     id: 'twilight_legacy_rich', stage: 'elder', age: 70,
     text: '七十岁了。你坐在自己公司/大房子的露台上，看着夕阳。\n\n这辈子赚了不少钱。但你也明白了——钱能买来房子，买不来家；能买来钟表，买不来时间。\n\n一个年轻人来采访你，问"成功的秘诀是什么"。你沉默了很久……',
-    conditions: { minAttrs: { wealth: 55 } },
+    conditions: { minAttrs: { wealth: 55, health: 30 } },
     choices: [
       { text: '「钱很重要，但它只是工具。真正富足的是内心。」', effects: '最终章', outcomes: { attr: { morality: 10, happiness: 5 }, final: true } },
       { text: '「运气。我赶上了好时代。能帮到别人的时候尽量帮。」', effects: '最终章', outcomes: { attr: { morality: 8, luck: 5 }, final: true } },

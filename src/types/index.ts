@@ -44,11 +44,7 @@ export interface Choice {
 /** 选择结果 */
 export interface ChoiceOutcome {
   attr: Partial<Attributes>;
-  nextAge?: number;
   flags?: string[];
-  final?: boolean;
-  /** 指定下一个事件 ID（分支） */
-  nextEvent?: string;
 }
 
 /** 事件触发条件 */
@@ -68,6 +64,8 @@ export interface LifeEvent {
   id: string;
   stage: LifeStage;
   age: number;
+  /** 事件标题（如「第一次养宠物」） */
+  title?: string;
   text: string;
   choices: Choice[];
   /** 触发条件（不满足则跳过） */

@@ -9,7 +9,6 @@ import {
   calcMaxAge,
   ensureInt,
   STAGE_ORDER,
-  STAGE_META,
 } from '../engine/state';
 import EVENTS from '../engine/events';
 
@@ -33,7 +32,12 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
   switch (action.type) {
     case 'START_GAME': {
       const game = createInitialState(action.gender, action.name);
-      const first = findFirstEvent(game);
+      const first = EVENTS.find(e => checkConditions(e, game)) ?? null;
+      if (first) {
+        game.age = first.age;
+        game.stage = getStageForAge(first.age);
+        game.stageIdx = STAGE_ORDER.indexOf(game.stage);
+      }
       return { game, currentEvent: first, feedback: null, eventIndex: first ? EVENTS.indexOf(first) : 0 };
     }
 
@@ -50,9 +54,12 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         out.flags.forEach(f => { if (!flags.includes(f)) flags.push(f); });
       }
 
-      // 更新年龄
-      let age = out.nextAge ?? state.game.age;
-      let stage = getStageForAge(age);
+      // 基于更新后的属性/标记，线性扫描下一个满足条件的事件
+      const next = findNextEvent({ ...state.game, attributes: attrs, flags }, state.eventIndex);
+
+      // 年龄由下一个事件驱动；没有下一个事件说明全部播完
+      const age = next ? next.age : state.game.age;
+      const stage = getStageForAge(age);
 
       // 老年衰减
       if (age >= 65) {
@@ -64,7 +71,8 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
 
       // 死亡判断（动态寿命）
       const maxAge = calcMaxAge(attrs);
-      const isDead = checkDeath(age, attrs.health, maxAge);
+      const isDead = next !== null && checkDeath(age, attrs.health, maxAge);
+      const gameOver = isDead || next === null;
 
       // 记录历史
       const history = [...state.game.history, {
@@ -83,7 +91,7 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         attributes: attrs,
         flags,
         history,
-        phase: isDead ? 'summary' : 'playing',
+        phase: gameOver ? 'summary' : 'playing',
       };
 
       // 构建反馈文本
@@ -97,42 +105,17 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         }).join('  ');
       }
 
-      // 找下一个事件
-      let next: LifeEvent | null = null;
-      let nextIdx = state.eventIndex;
-
-      if (out.final || isDead) {
-        next = null;
-      } else if (out.nextEvent) {
-        // 分支跳转
-        const target = EVENTS.find(e => e.id === out.nextEvent);
-        if (target) {
-          next = target;
-          nextIdx = EVENTS.indexOf(target);
-        } else {
-          next = findNextEvent(game, state.eventIndex);
-          nextIdx = next ? EVENTS.indexOf(next) : state.eventIndex + 1;
-        }
-      } else {
-        next = findNextEvent(game, state.eventIndex);
-        nextIdx = next ? EVENTS.indexOf(next) : state.eventIndex + 1;
-      }
-
-      return { game, currentEvent: next, feedback: fb, eventIndex: nextIdx };
+      return {
+        game,
+        currentEvent: gameOver ? null : next,
+        feedback: fb,
+        eventIndex: next ? EVENTS.indexOf(next) : state.eventIndex,
+      };
     }
 
     case 'CONTINUE': {
-      if (state.game.phase === 'summary') return state;
-
-      const next = findNextEvent(state.game, state.eventIndex);
-      const nextIdx = next ? EVENTS.indexOf(next) : state.eventIndex + 1;
-
-      return {
-        ...state,
-        currentEvent: next,
-        feedback: null,
-        eventIndex: nextIdx,
-      };
+      // MAKE_CHOICE 已预载下一个事件，这里只清反馈
+      return { ...state, feedback: null };
     }
 
     case 'RESET':
@@ -145,46 +128,13 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
 
 // ============ 事件查找 ============
 
-/** 找到初始事件 */
-function findFirstEvent(game: GameState): LifeEvent | null {
-  for (let i = 0; i < EVENTS.length; i++) {
-    const e = EVENTS[i];
-    if (e.stage === game.stage && game.age >= e.age - 1 && game.age <= e.age + 1 && checkConditions(e, game)) {
-      return e;
-    }
-  }
-  return EVENTS[0] ?? null;
-}
-
-/** 找到下一个符合条件的候选事件 */
+/** 从 fromIndex 之后线性扫描第一个满足条件的事件 */
 function findNextEvent(game: GameState, fromIndex: number): LifeEvent | null {
-  // 从下一个位置开始扫描
   for (let i = fromIndex + 1; i < EVENTS.length; i++) {
-    const e = EVENTS[i];
-    // 阶段匹配 + 年龄在合理范围 + 满足条件
-    if (e.stage === game.stage && game.age >= e.age - 2 && game.age <= e.age + 3 && checkConditions(e, game)) {
-      return e;
+    if (checkConditions(EVENTS[i], game)) {
+      return EVENTS[i];
     }
   }
-
-  // 当前阶段没找到，推进到下一阶段
-  const currentStageIdx = STAGE_ORDER.indexOf(game.stage);
-  if (currentStageIdx < STAGE_ORDER.length - 1) {
-    const nextStage = STAGE_ORDER[currentStageIdx + 1];
-    const [nextMinAge] = STAGE_META[nextStage].range;
-    // 更新游戏年龄到下一阶段起始
-    game.age = Math.max(game.age, nextMinAge);
-    game.stage = nextStage;
-    game.stageIdx = currentStageIdx + 1;
-
-    for (let i = 0; i < EVENTS.length; i++) {
-      const e = EVENTS[i];
-      if (e.stage === nextStage && checkConditions(e, game)) {
-        return e;
-      }
-    }
-  }
-
   return null;
 }
 

@@ -1,6 +1,6 @@
 # 人生模拟器 Life Simulator
 
-纯前端文字人生模拟游戏：从 0 岁到晚年，在 436 个事件中做出选择，走完属于你的一生。技术栈：React 18 + TypeScript + Vite + Tailwind CSS。
+纯前端文字人生模拟游戏：从 0 岁到晚年，在 468 个事件中做出选择，走完属于你的一生。技术栈：React 18 + TypeScript + Vite + Tailwind CSS。
 
 ## 快速开始
 
@@ -36,7 +36,7 @@ npm run dev        # 启动开发服务器（端口 5173）
 
 ## 游戏数据
 
-事件数据源在 `script/chiled.json`（436 个事件，snake_case 原始格式），修改后运行 `npm run build:events` 生成引擎使用的 `src/engine/events.json`（**请勿手改生成文件**）。
+事件数据源在 `script/chiled.json`（468 个事件，snake_case 原始格式），修改后运行 `npm run build:events` 生成引擎使用的 `src/engine/events.json`（**请勿手改生成文件**）。
 
 - 事件 id 规则：2 位数字后缀为原始主线事件，4 位数字后缀为模拟事件
 - effects 属性键需在 `script/convert-events.mjs` 的 ATTR_MAP 内（未映射键会转换报错）

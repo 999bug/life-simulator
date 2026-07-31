@@ -4398,6 +4398,95 @@
     ]
   },
   {
+    "id": "teen_32",
+    "age_range": [
+      14,
+      14
+    ],
+    "category": "sports",
+    "title": "体育特长生选拔",
+    "text": "十四岁，体育老师找到你：「市体校来挑人了，你百米成绩全校第一，要不要去试试？」训练很苦，早上六点就要到操场，但站在跑道上的那种感觉，让你舍不得说「不」。",
+    "conditions": {
+      "has_flags": [
+        "athlete_path",
+        "sports_talent"
+      ]
+    },
+    "choices": [
+      {
+        "text": "「去！我想跑出点名堂。」",
+        "effects": {
+          "health": 10,
+          "sports": 12,
+          "discipline": 6
+        },
+        "flags_add": [
+          "sports_career"
+        ]
+      },
+      {
+        "text": "还是以学习为主，体育当爱好",
+        "effects": {
+          "learning": 6,
+          "health": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "太苦了，不去了",
+        "effects": {
+          "happiness": -4,
+          "health": -3
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "teen_38",
+    "age_range": [
+      14,
+      14
+    ],
+    "category": "personality",
+    "title": "保家卫国的念头",
+    "text": "十四岁，国庆阅兵。你盯着电视里整齐的方队挪不开眼，爸爸说「你爷爷当年也穿过军装」。那一夜你失眠了，脑子里全是迷彩绿。",
+    "conditions": {
+      "has_flags": [
+        "service_dream"
+      ]
+    },
+    "choices": [
+      {
+        "text": "「将来我要当兵。」",
+        "effects": {
+          "courage": 12,
+          "discipline": 8
+        },
+        "flags_add": [
+          "military_flag"
+        ]
+      },
+      {
+        "text": "「当警察也不错，抓坏人帅。」",
+        "effects": {
+          "courage": 8,
+          "responsibility": 8
+        },
+        "flags_add": [
+          "military_flag"
+        ]
+      },
+      {
+        "text": "他们值得尊敬，但我不想上战场",
+        "effects": {
+          "happiness": 4
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
     "id": "teen_05",
     "age_range": [
       15,
@@ -4575,6 +4664,7 @@
     "text": "十五岁，中考成绩公布那天，你盯着屏幕的手在抖。分数跳出来——超过重点高中线。妈妈眼眶红了，爸爸拍了拍你的肩膀，一句话没说。你想起那些刷题的深夜，值了。",
     "conditions": {
       "has_flags": [
+        "key_middle_school",
         "exam_focus"
       ]
     },
@@ -4653,7 +4743,58 @@
           "willpower": 12,
           "learning": 8,
           "happiness": -10
-        }
+        },
+        "flags_add": [
+          "retake"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "teen_33",
+    "age_range": [
+      15,
+      15
+    ],
+    "category": "sports",
+    "title": "体育生中考",
+    "text": "十五岁，中考。体育特长生有加分，专项测试那天你跑出了个人最好成绩。监考老师都多看了你两眼。学习上你只能算中游，但体育分把你托进了重点高中的线。",
+    "conditions": {
+      "has_flags": [
+        "sports_career"
+      ]
+    },
+    "choices": [
+      {
+        "text": "专项满分！体育分拉满",
+        "effects": {
+          "health": 12,
+          "confidence": 12,
+          "happiness": 8
+        },
+        "flags_add": [
+          "key_high_school"
+        ]
+      },
+      {
+        "text": "成绩一般，但过了线",
+        "effects": {
+          "health": 8,
+          "stability": 6
+        },
+        "flags_add": [
+          "normal_high_school"
+        ]
+      },
+      {
+        "text": "发挥失常，只够普通高中",
+        "effects": {
+          "happiness": -6,
+          "health": 2
+        },
+        "flags_add": [
+          "normal_high_school"
+        ]
       }
     ]
   },
@@ -4864,6 +5005,96 @@
           "leadership": 8,
           "responsibility": 6,
           "trust": 4
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "teen_34",
+    "age_range": [
+      16,
+      16
+    ],
+    "category": "education",
+    "title": "艺考抉择",
+    "text": "十六岁，班主任问你志愿方向。你文化课中等，但画画/乐器在手上很有感觉。集训半年，文化课会落下——艺考是一条捷径，也是一场豪赌。",
+    "conditions": {
+      "has_flags": [
+        "musician_path",
+        "art_skill",
+        "artist_path"
+      ]
+    },
+    "choices": [
+      {
+        "text": "走艺考，把热爱当专业",
+        "effects": {
+          "art": 12,
+          "courage": 10,
+          "learning": -4
+        },
+        "flags_add": [
+          "art_career"
+        ]
+      },
+      {
+        "text": "艺考当保险，文化课不松",
+        "effects": {
+          "learning": 8,
+          "art": 6,
+          "planning": 6
+        },
+        "flags_add": []
+      },
+      {
+        "text": "放弃艺术，专心文化课",
+        "effects": {
+          "learning": 10,
+          "happiness": -4
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "teen_36",
+    "age_range": [
+      16,
+      16
+    ],
+    "category": "education",
+    "title": "医生梦",
+    "text": "十六岁，生物课讲到人体解剖，你听得入了神。老师说「学医很苦，八年起步」，你却在心里想：能救人，苦点怕什么。",
+    "conditions": {
+      "has_flags": [
+        "science_dream",
+        "researcher"
+      ]
+    },
+    "choices": [
+      {
+        "text": "「我想学医。」",
+        "effects": {
+          "learning": 10,
+          "ambition": 8
+        },
+        "flags_add": [
+          "med_dream"
+        ]
+      },
+      {
+        "text": "当爱好了解一下就好",
+        "effects": {
+          "learning": 6
+        },
+        "flags_add": []
+      },
+      {
+        "text": "救人的责任太重了，我担不起",
+        "effects": {
+          "happiness": 2,
+          "learning": -4
         },
         "flags_add": []
       }
@@ -5141,13 +5372,14 @@
       17
     ],
     "category": "education",
-    "title": "高考落榜",
-    "text": "十七岁，高考出分那晚，家里很安静。分数不高，够普通大学，够不上名校。你想起三年里那些没写完的作业、逃掉的晚自习——但没有后悔药。",
+    "title": "高考出分",
+    "text": "十七岁，高考出分那晚，全家守在电脑前。分数没有惊喜，也没有意外——够普通大学，够不上名校。爸妈没说什么，只拍了拍你的肩。你关掉查询页面，心里反而踏实了：路，就从这里开始走。",
     "conditions": {
       "not_flags": [
         "key_high_school",
         "tech_path",
-        "vocational_path"
+        "vocational_path",
+        "retake"
       ]
     },
     "choices": [
@@ -5177,7 +5409,105 @@
           "willpower": 14,
           "learning": 10,
           "happiness": -12
-        }
+        },
+        "flags_add": [
+          "retake"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "teen_31",
+    "age_range": [
+      18,
+      18
+    ],
+    "category": "education",
+    "title": "复读一年的答卷",
+    "text": "十八岁，复读结束。这一年你很少发朋友圈，删掉了所有游戏，把错题本写到第三本。成绩出来的那天，你比第一次平静得多——这一年你重新认识了自己。",
+    "conditions": {
+      "has_flags": [
+        "retake"
+      ]
+    },
+    "choices": [
+      {
+        "text": "逆袭！分数冲过了重点线。",
+        "effects": {
+          "confidence": 22,
+          "learning": 18,
+          "happiness": 12
+        },
+        "flags_add": [
+          "top_university"
+        ]
+      },
+      {
+        "text": "考上了普通学校，也算上岸了。",
+        "effects": {
+          "stability": 14,
+          "learning": 10,
+          "happiness": 8
+        },
+        "flags_add": [
+          "normal_university"
+        ]
+      },
+      {
+        "text": "还是差一点……去学门技术吧。",
+        "effects": {
+          "happiness": -10,
+          "learning": -8
+        },
+        "flags_add": [
+          "vocational_path"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "teen_35",
+    "age_range": [
+      18,
+      18
+    ],
+    "category": "education",
+    "title": "艺考成绩",
+    "text": "十八岁，艺术院校的校考成绩出来了。集训时画废的几百张纸、练到指尖发麻的曲子，都写在这张成绩单上。你的专业课排名——能进心仪的院校。",
+    "conditions": {
+      "has_flags": [
+        "art_career"
+      ]
+    },
+    "choices": [
+      {
+        "text": "专业排名靠前，冲最好的艺术院校！",
+        "effects": {
+          "confidence": 18,
+          "art": 14,
+          "happiness": 10
+        },
+        "flags_add": [
+          "art_admission"
+        ]
+      },
+      {
+        "text": "稳一点，上普通院校的艺术专业",
+        "effects": {
+          "stability": 12,
+          "art": 8
+        },
+        "flags_add": [
+          "art_admission"
+        ]
+      },
+      {
+        "text": "校考失利，回去走文化课",
+        "effects": {
+          "happiness": -8,
+          "learning": 6
+        },
+        "flags_add": []
       }
     ]
   },
@@ -5432,7 +5762,8 @@
       "not_flags": [
         "top_university",
         "tech_path",
-        "vocational_path"
+        "vocational_path",
+        "art_admission"
       ]
     },
     "text": "高考成绩出来了，上了一所不错的本科。虽然不是顶尖名校，但专业是你喜欢的。爸妈挺满意——祖上三代第一个大学生呢。去学校报到那天你回头看了一眼站在校门口挥手告别的爸妈，然后深吸一口气，转身走进了属于你的四年。",
@@ -5563,6 +5894,93 @@
         "effects": {
           "friendship": 8,
           "happiness": 5
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "young_65",
+    "age_range": [
+      19,
+      19
+    ],
+    "category": "sports",
+    "title": "职业运动员之路",
+    "text": "十九岁，省队教练来学校招人。你两项指标都合格——速度、耐力。签约意味着每天训练十小时，也意味着一条不一样的人生。你在训练馆里站了很久，看着墙上那些世界冠军的照片。",
+    "conditions": {
+      "has_flags": [
+        "sports_career"
+      ]
+    },
+    "choices": [
+      {
+        "text": "签！进省队拼一把",
+        "effects": {
+          "health": 14,
+          "ambition": 14,
+          "happiness": 8
+        },
+        "flags_add": [
+          "athlete_pro"
+        ]
+      },
+      {
+        "text": "去体育学院读书，将来当教练",
+        "effects": {
+          "learning": 8,
+          "sports": 10
+        },
+        "flags_add": [
+          "sports_teacher"
+        ]
+      },
+      {
+        "text": "算了吧，体育只是爱好",
+        "effects": {
+          "happiness": 4,
+          "learning": 6
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "young_72",
+    "age_range": [
+      19,
+      19
+    ],
+    "category": "personality",
+    "title": "入伍与警校",
+    "text": "十九岁，你穿上了这身衣服。新兵连/警校的第一个月，被子叠成豆腐块，凌晨五点半吹哨集合。你咬着牙，把每一次训练都当成最后一次。",
+    "conditions": {
+      "has_flags": [
+        "military_flag"
+      ]
+    },
+    "choices": [
+      {
+        "text": "训练标兵！我要当班长",
+        "effects": {
+          "health": 12,
+          "discipline": 12
+        },
+        "flags_add": []
+      },
+      {
+        "text": "选技术兵种/技术警种，学门真本事",
+        "effects": {
+          "technology": 10,
+          "learning": 8
+        },
+        "flags_add": []
+      },
+      {
+        "text": "想家了……申请调回老家",
+        "effects": {
+          "happiness": 6,
+          "discipline": -4
         },
         "flags_add": []
       }
@@ -5843,7 +6261,7 @@
       20
     ],
     "category": "career",
-    "title": "第一份工作",
+    "title": "初入职场",
     "text": "二十岁，毕业前你开始投简历。没有名校光环，面试官问得最多的一个问题是「你的优势是什么」。你跑了十几场招聘会，收到两份 Offer——一份小公司行政，一份销售。薪资不高，但独立生活开始了。",
     "conditions": {
       "has_flags": [
@@ -6144,6 +6562,50 @@
     ]
   },
   {
+    "id": "young_67",
+    "age_range": [
+      21,
+      21
+    ],
+    "category": "personality",
+    "title": "艺术院校的日子",
+    "text": "二十一岁，艺术院校大三。画室/琴房里你从早待到晚，同学的作品展上你的名字开始被提起。老师说你「有灵气」，但也提醒你：艺术这条路，出名和饿肚子常常只隔着一扇门。",
+    "conditions": {
+      "has_flags": [
+        "art_admission"
+      ]
+    },
+    "choices": [
+      {
+        "text": "参加比赛和展览，搏一个成名机会",
+        "effects": {
+          "art": 14,
+          "ambition": 10,
+          "risk": 8
+        },
+        "flags_add": [
+          "artist_pro"
+        ]
+      },
+      {
+        "text": "接商单赚钱，先养活自己",
+        "effects": {
+          "money": 12,
+          "art": 6
+        },
+        "flags_add": []
+      },
+      {
+        "text": "安心打磨作品，等时机",
+        "effects": {
+          "art": 10,
+          "stability": 6
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
     "id": "young_08",
     "age_range": [
       22,
@@ -6199,6 +6661,9 @@
     "conditions": {
       "has_flags": [
         "went_to_college"
+      ],
+      "not_flags": [
+        "med_dream"
       ]
     },
     "text": "二十二岁，大三。图书馆一楼的考研专区已经有人五点半在门口排队。你问自己：考不考？家里说「能考就考」，室友说「上岸再说」。你翻了翻考研论坛，报录比刺眼，可另一条路——就业——好像也没准备好。",
@@ -6358,6 +6823,50 @@
     ]
   },
   {
+    "id": "young_69",
+    "age_range": [
+      22,
+      22
+    ],
+    "category": "education",
+    "title": "医学院五年",
+    "text": "二十二岁，医学院大三。解剖课、生理课、临床课，课本摞起来比你还高。同学里有劝退的，也有像你一样熬下来的。你看着走廊里的「健康所系，性命相托」，把咖啡又续了一杯。",
+    "conditions": {
+      "has_flags": [
+        "med_dream"
+      ]
+    },
+    "choices": [
+      {
+        "text": "咬牙撑住，医生是我的执念",
+        "effects": {
+          "learning": 14,
+          "discipline": 10,
+          "health": -4
+        },
+        "flags_add": [
+          "med_admission"
+        ]
+      },
+      {
+        "text": "读书之余也要好好生活",
+        "effects": {
+          "balance": 8,
+          "happiness": 6
+        },
+        "flags_add": []
+      },
+      {
+        "text": "太难了，转专业吧",
+        "effects": {
+          "learning": -8,
+          "happiness": 4
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
     "id": "young_09",
     "age_range": [
       23,
@@ -6438,7 +6947,9 @@
           "happiness": 8,
           "pride": 6
         },
-        "flags_add": []
+        "flags_add": [
+          "grad_school"
+        ]
       },
       {
         "text": "差了几分落榜。难过一晚，决定二战",
@@ -6572,6 +7083,51 @@
           "money": 6,
           "family_relation": 4,
           "freedom": -4
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "young_66",
+    "age_range": [
+      23,
+      23
+    ],
+    "category": "sports",
+    "title": "赛场与伤病",
+    "text": "二十三岁，你在赛场上的第两千个日夜。一场重要比赛前，你伤了膝盖——医生说「再拼，职业生涯可能提前结束」。教练拍拍你：「你自己决定。」",
+    "conditions": {
+      "has_flags": [
+        "athlete_pro"
+      ]
+    },
+    "choices": [
+      {
+        "text": "带伤上场，拼一个全国奖牌",
+        "effects": {
+          "health": -12,
+          "confidence": 12,
+          "happiness": 6,
+          "ambition": 10
+        },
+        "flags_add": []
+      },
+      {
+        "text": "养伤，退下来做教练，把经验传给下一代",
+        "effects": {
+          "health": 10,
+          "happiness": 8,
+          "sports": 8
+        },
+        "flags_add": []
+      },
+      {
+        "text": "退役，转行开个体育用品店",
+        "effects": {
+          "money": 10,
+          "happiness": 4,
+          "health": 8
         },
         "flags_add": []
       }
@@ -6765,6 +7321,98 @@
           "happiness": 3,
           "money": 2,
           "loyalty": -3
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "young_64",
+    "age_range": [
+      24,
+      24
+    ],
+    "category": "education",
+    "title": "研究生生活",
+    "text": "二十四岁，研二。导师的项目组里你从端茶倒水的小弟变成了能独当一面的主力。实验室的灯亮到深夜，你盯着数据面板，忽然想起大三那个决定考研的夜晚。",
+    "conditions": {
+      "has_flags": [
+        "grad_school"
+      ]
+    },
+    "choices": [
+      {
+        "text": "跟着导师深耕科研，发论文。",
+        "effects": {
+          "learning": 18,
+          "specialization": 14,
+          "happiness": 8
+        },
+        "flags_add": [
+          "tech_career"
+        ]
+      },
+      {
+        "text": "早点去大厂实习，积累人脉和履历。",
+        "effects": {
+          "money": 14,
+          "communication": 10,
+          "social": 8
+        },
+        "flags_add": [
+          "tech_career"
+        ]
+      },
+      {
+        "text": "佛系读研，按时毕业就好。",
+        "effects": {
+          "stability": 10,
+          "happiness": 8
+        }
+      }
+    ]
+  },
+  {
+    "id": "young_68",
+    "age_range": [
+      24,
+      24
+    ],
+    "category": "career",
+    "title": "艺术家的账单",
+    "text": "二十四岁，毕业两年。你的作品在小圈子里有了些名声，但房租和颜料账单不会因为你「有灵气」就少算一分钱。一边是画廊的展位邀约，一边是稳定的商单合同。",
+    "conditions": {
+      "has_flags": [
+        "artist_pro"
+      ]
+    },
+    "choices": [
+      {
+        "text": "签约画廊，专心创作",
+        "effects": {
+          "art": 12,
+          "happiness": 8,
+          "money": -4
+        },
+        "flags_add": [
+          "artist_life"
+        ]
+      },
+      {
+        "text": "做自由职业，接单养活创作",
+        "effects": {
+          "money": 10,
+          "art": 6,
+          "happiness": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "转行做设计，把艺术当爱好",
+        "effects": {
+          "money": 14,
+          "happiness": -2,
+          "art": -4
         },
         "flags_add": []
       }
@@ -6965,6 +7613,93 @@
           "freedom": 5,
           "independence": 4,
           "family_relation": -4
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "young_70",
+    "age_range": [
+      25,
+      25
+    ],
+    "category": "health",
+    "title": "规培医生",
+    "text": "二十五岁，规培第二年。值班、查房、写病历、被患者误解……你见过凌晨四点的医院，也见过抢救成功时家属跪下来的样子。白大褂穿久了，就脱不下来了。",
+    "conditions": {
+      "has_flags": [
+        "med_admission"
+      ]
+    },
+    "choices": [
+      {
+        "text": "「这是我的战场。」",
+        "effects": {
+          "empathy": 12,
+          "health": 6,
+          "happiness": 6
+        },
+        "flags_add": [
+          "doctor"
+        ]
+      },
+      {
+        "text": "医生太累，转行政岗",
+        "effects": {
+          "stability": 8,
+          "money": 6
+        },
+        "flags_add": []
+      },
+      {
+        "text": "辞职，回老家开个小诊所",
+        "effects": {
+          "money": 10,
+          "freedom": 8
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "young_73",
+    "age_range": [
+      25,
+      25
+    ],
+    "category": "career",
+    "title": "军旅与警队",
+    "text": "二十五岁，你在这身制服里第 6 年。演习和行动让你变得沉稳，领导说要给你报功，你敬了个礼：「报告，这是我应该做的。」",
+    "conditions": {
+      "has_flags": [
+        "military_flag"
+      ]
+    },
+    "choices": [
+      {
+        "text": "继续留队，往上走",
+        "effects": {
+          "discipline": 10,
+          "ambition": 8,
+          "health": 6
+        },
+        "flags_add": []
+      },
+      {
+        "text": "转文职/转业，开始安稳人生",
+        "effects": {
+          "stability": 10,
+          "money": 8
+        },
+        "flags_add": []
+      },
+      {
+        "text": "退役，回地方闯一闯",
+        "effects": {
+          "freedom": 10,
+          "ambition": 8,
+          "money": 4
         },
         "flags_add": []
       }
@@ -7598,6 +8333,47 @@
     ]
   },
   {
+    "id": "young_71",
+    "age_range": [
+      28,
+      28
+    ],
+    "category": "career",
+    "title": "主治医师",
+    "text": "二十八岁，你升了主治。门诊一天六十个号，手术排到下周。患者喊你「医生」，你忽然想起十六岁那个说自己想学医的少年——他肯定想不到，你会真的走到今天。",
+    "conditions": {
+      "has_flags": [
+        "doctor"
+      ]
+    },
+    "choices": [
+      {
+        "text": "继续深耕，做专科专家",
+        "effects": {
+          "specialization": 14,
+          "learning": 10
+        },
+        "flags_add": []
+      },
+      {
+        "text": "教学带教，培养年轻医生",
+        "effects": {
+          "communication": 10,
+          "empathy": 8
+        },
+        "flags_add": []
+      },
+      {
+        "text": "试试互联网医疗，换个活法",
+        "effects": {
+          "money": 10,
+          "technology": 8
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
     "id": "young_18",
     "age_range": [
       29,
@@ -7791,6 +8567,47 @@
           "health": 5,
           "happiness": 4,
           "money": -5
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "young_74",
+    "age_range": [
+      29,
+      29
+    ],
+    "category": "personality",
+    "title": "铁血到平常",
+    "text": "二十九岁，你从队伍走向平常生活。褪下制服，穿上便装，你依然站得笔直。那段日子刻进骨头里，成了你人生的底色。",
+    "conditions": {
+      "has_flags": [
+        "military_flag"
+      ]
+    },
+    "choices": [
+      {
+        "text": "平凡生活，军魂不灭",
+        "effects": {
+          "happiness": 8,
+          "stability": 8
+        },
+        "flags_add": []
+      },
+      {
+        "text": "创业，把队伍里的狠劲用上",
+        "effects": {
+          "ambition": 12,
+          "money": 8
+        },
+        "flags_add": []
+      },
+      {
+        "text": "做公益，帮助退役战友",
+        "effects": {
+          "empathy": 10,
+          "gratitude": 8
         },
         "flags_add": []
       }
@@ -17273,6 +18090,502 @@
         "effects": {
           "happiness": 5,
           "maturity": 8
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "elder_61",
+    "age_range": [
+      77,
+      77
+    ],
+    "category": "friend",
+    "title": "长寿的孤独",
+    "text": "七十七岁，老友一个个走了。你翻了翻通讯录，能打通电话的人越来越少。有时一个人坐在公园长椅上，看着年轻人在跑步，你慢慢明白了：长寿是一种福气，也是一种修行。",
+    "choices": [
+      {
+        "text": "「走一个算一个，活着的人要好好活。」",
+        "effects": {
+          "happiness": 6,
+          "gratitude": 8
+        },
+        "flags_add": []
+      },
+      {
+        "text": "给老同学打个电话，约出来喝早茶",
+        "effects": {
+          "social": 8,
+          "happiness": 5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把自己关在家里，不想见人",
+        "effects": {
+          "happiness": -8,
+          "social": -6
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "elder_62",
+    "age_range": [
+      78,
+      78
+    ],
+    "category": "family",
+    "title": "曾孙诞生",
+    "text": "七十八岁，曾孙出生了。产房外你抱着这个皱巴巴的小家伙，忽然想起自己刚出生时奶奶也是这样抱自己的。四代同堂，你觉得自己这一生真的值了。",
+    "choices": [
+      {
+        "text": "「这是我见过最漂亮的小家伙。」",
+        "effects": {
+          "happiness": 10,
+          "family_relation": 8
+        },
+        "flags_add": []
+      },
+      {
+        "text": "悄悄给孩子的教育基金存了一笔",
+        "effects": {
+          "money": -6,
+          "family_relation": 6,
+          "happiness": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "年纪大了，看一眼就交给年轻人吧",
+        "effects": {
+          "happiness": -2,
+          "family_relation": -3
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "elder_63",
+    "age_range": [
+      79,
+      79
+    ],
+    "category": "health",
+    "title": "还能自己买菜",
+    "text": "七十九岁，体检报告出来，医生都惊讶：「你这把年纪，血压血糖比五六十岁的人还稳。」你拎着菜篮子走在早市，摊主老远就喊你，你觉得自己还能再活二十年。",
+    "choices": [
+      {
+        "text": "继续保持，每天早起打太极",
+        "effects": {
+          "health": 8,
+          "discipline": 6
+        },
+        "flags_add": []
+      },
+      {
+        "text": "松一口气，终于可以放开吃了",
+        "effects": {
+          "happiness": 6,
+          "health": -6
+        },
+        "flags_add": []
+      },
+      {
+        "text": "买个血糖仪天天盯着，反而紧张",
+        "effects": {
+          "anxiety": 6,
+          "health": -2
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "elder_64",
+    "age_range": [
+      80,
+      80
+    ],
+    "category": "family",
+    "title": "八十大寿",
+    "text": "八十岁，寿宴摆了整整八桌。儿女、孙辈、曾孙们围着你。你坐在主位上，看着一大家子人，忽然想起二十岁那年你还在为一份工作发愁。这一晃，就是六十年。",
+    "choices": [
+      {
+        "text": "举杯：「这辈子，值了。」",
+        "effects": {
+          "happiness": 10,
+          "family_relation": 8
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把存折分了，让孩子们早点安心",
+        "effects": {
+          "money": -10,
+          "family_relation": 8,
+          "happiness": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "热闹归热闹，散了还是一个人发呆",
+        "effects": {
+          "happiness": -4,
+          "family_relation": -2
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "elder_65",
+    "age_range": [
+      81,
+      81
+    ],
+    "category": "personality",
+    "title": "照片里的人",
+    "text": "八十一岁，整理老相册。照片里的人有的还在，有的已经走了很多年。你忽然很想告诉年轻时的自己：别怕，前面那些路，你都走过去了。",
+    "choices": [
+      {
+        "text": "给每一张照片写上名字和年份",
+        "effects": {
+          "gratitude": 8,
+          "happiness": 6
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把相册翻拍，发给每个孩子一份",
+        "effects": {
+          "family_relation": 8,
+          "money": -4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "看一会儿就合上，不敢看太久",
+        "effects": {
+          "happiness": -4,
+          "avoidance": 4
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "elder_66",
+    "age_range": [
+      82,
+      82
+    ],
+    "category": "personality",
+    "title": "凌晨的收音机",
+    "text": "八十二岁，觉越来越短。凌晨三点醒来，你打开收音机听戏曲，或者干脆起来煮一壶茶。窗外城市还在睡，你觉得自己和这世界的关系变得简单了。",
+    "choices": [
+      {
+        "text": "睡不着就睡不着，起来听会儿广播",
+        "effects": {
+          "happiness": 4,
+          "comfort": 6
+        },
+        "flags_add": []
+      },
+      {
+        "text": "躺在床上数羊，越数越清醒",
+        "effects": {
+          "anxiety": 5,
+          "happiness": -3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把儿孙叫醒聊天，被说「爷爷你饶了我」",
+        "effects": {
+          "social": 5,
+          "family_relation": -3
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "elder_67",
+    "age_range": [
+      83,
+      83
+    ],
+    "category": "friend",
+    "title": "老年大学的新同学",
+    "text": "八十三岁，你在老年大学报了书法班。同桌是个比你小两岁的老太太，写一笔好字。你忽然发现，八十多岁也能交到新朋友，也能学新东西。",
+    "choices": [
+      {
+        "text": "认真学，交几个新朋友",
+        "effects": {
+          "learning": 8,
+          "social": 8,
+          "happiness": 6
+        },
+        "flags_add": []
+      },
+      {
+        "text": "学了两天就嫌手抖，不去了",
+        "effects": {
+          "happiness": -4,
+          "learning": -4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把老伴也拉来一起学",
+        "effects": {
+          "family_relation": 8,
+          "happiness": 6
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "elder_68",
+    "age_range": [
+      84,
+      84
+    ],
+    "category": "personality",
+    "title": "晒太阳的下午",
+    "text": "八十四岁，午后你搬了把椅子坐在院子里晒太阳。猫趴在脚边，茶冒着热气。路过的小学生喊你「老爷爷好」，你笑着应了一声。日子就这样，平静得像一条河。",
+    "choices": [
+      {
+        "text": "享受这一刻，什么都不想",
+        "effects": {
+          "happiness": 8,
+          "comfort": 6
+        },
+        "flags_add": []
+      },
+      {
+        "text": "给孩子打电话，说说今天天气",
+        "effects": {
+          "family_relation": 6,
+          "happiness": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "坐着坐着就难过：这样的日子还有几天",
+        "effects": {
+          "anxiety": 6,
+          "happiness": -5
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "elder_69",
+    "age_range": [
+      85,
+      85
+    ],
+    "category": "family",
+    "title": "重孙绕膝",
+    "text": "八十五岁，重孙满院子跑。你坐在藤椅上，看着这个小家伙学着你走路的样子。生命的接力棒，已经传到了你够不着的地方——但看着它奔跑，你满心欢喜。",
+    "choices": [
+      {
+        "text": "教重孙下象棋，讲自己小时候的事",
+        "effects": {
+          "happiness": 8,
+          "family_relation": 8
+        },
+        "flags_add": []
+      },
+      {
+        "text": "给重孙准备了一笔「长大才许拆」的红包",
+        "effects": {
+          "money": -6,
+          "family_relation": 6
+        },
+        "flags_add": []
+      },
+      {
+        "text": "孩子们闹得头疼，躲回屋里清净",
+        "effects": {
+          "happiness": -3,
+          "family_relation": -4
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "elder_70",
+    "age_range": [
+      86,
+      86
+    ],
+    "category": "health",
+    "title": "身体在报警",
+    "text": "八十六岁，你明显感觉到身体的变化。爬三楼要歇两次，医生说你心脏有点供血不足，要少操劳。你嘴上说没事，心里清楚：机器用久了，零件总要出问题的。",
+    "choices": [
+      {
+        "text": "听医生的，戒了烟酒，按时吃药",
+        "effects": {
+          "health": 6,
+          "discipline": 6,
+          "happiness": -3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "「活到这个岁数够本了」，照旧生活",
+        "effects": {
+          "happiness": 4,
+          "health": -6
+        },
+        "flags_add": []
+      },
+      {
+        "text": "心里害怕，频繁往医院跑",
+        "effects": {
+          "health": 2,
+          "anxiety": 8,
+          "money": -4
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "elder_71",
+    "age_range": [
+      87,
+      87
+    ],
+    "category": "family",
+    "title": "交代后事",
+    "text": "八十七岁，你主动提出把后事安排明白。孩子们红了眼眶说「爸你瞎说什么」，你笑着摆摆手：「人都有这一天，安排好了，我走得安心，你们也省心。」",
+    "choices": [
+      {
+        "text": "把遗嘱、存款、钥匙都交代清楚",
+        "effects": {
+          "family_relation": 8,
+          "stability": 6,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "「该说的都说了，剩下的你们自己决定」",
+        "effects": {
+          "family_relation": 4,
+          "stability": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "抗拒谈这个话题，一提就生气",
+        "effects": {
+          "family_relation": -6,
+          "anxiety": 4
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "elder_72",
+    "age_range": [
+      88,
+      88
+    ],
+    "category": "friend",
+    "title": "送走最后一位老友",
+    "text": "八十八岁，你参加了一场葬礼。这是你认识的人里最后一位还保持着联系的。回家路上你走得很慢，风很大。你忽然很平静：他们先走一步，替你探探路。",
+    "choices": [
+      {
+        "text": "「老张，下辈子还做朋友。」",
+        "effects": {
+          "gratitude": 8,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "回来后把老友的照片都摆出来",
+        "effects": {
+          "happiness": -2,
+          "gratitude": 8
+        },
+        "flags_add": []
+      },
+      {
+        "text": "不想参加任何葬礼了，太难过",
+        "effects": {
+          "happiness": -6,
+          "avoidance": 6
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "elder_73",
+    "age_range": [
+      89,
+      89
+    ],
+    "category": "personality",
+    "title": "百岁愿望",
+    "text": "八十九岁，你许了个愿：想看着重孙上小学。医生说你这个身体，再有几年问题不大。你每天早睡早起，饭后散步，连药都记得比年轻人牢。活着这件事，你越来越认真了。",
+    "choices": [
+      {
+        "text": "「再活十年，看着他们长大。」",
+        "effects": {
+          "health": 6,
+          "happiness": 6,
+          "willpower": 6
+        },
+        "flags_add": []
+      },
+      {
+        "text": "顺其自然，活一天算一天",
+        "effects": {
+          "happiness": 4,
+          "health": -2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "怕死，开始囤各种保健品",
+        "effects": {
+          "money": -8,
+          "health": 2,
+          "anxiety": 4
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "elder_74",
+    "age_range": [
+      90,
+      90
+    ],
+    "category": "family",
+    "title": "寿终正寝",
+    "text": "九十岁。一个秋天的午后，你坐在院子里的藤椅上，阳光正好，猫蜷在你脚边。你慢慢合上眼睛，走完了这一生。走得平静，没有遗憾。来送你的，是四代同堂的家人。",
+    "choices": [
+      {
+        "text": "这一生，值了。",
+        "effects": {
+          "happiness": 10,
+          "gratitude": 10
         },
         "flags_add": []
       }

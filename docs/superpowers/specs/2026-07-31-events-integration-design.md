@@ -12,7 +12,7 @@
 | 决策点 | 结论 |
 |---|---|
 | 事件选择机制 | **保持线性顺序**：357 个事件按数组顺序依次播放，条件不满足的跳过；同一岁多个事件连续触发（age 不变），播完进入下一岁 |
-| 属性体系统一 | **映射到现有 8 大属性**：106 个 JSON 属性名 → 8 个引擎属性，含 10 个取反映射 |
+| 属性体系统一 | **映射到现有 8 大属性**：106 个 JSON 属性名 → 8 个引擎属性，含 9 个取反映射 |
 | 取反映射语义 | 已确认：`pressure: +8` 意为「压力+8」（坏事），映射为 `happiness: -8` |
 | 标题展示 | **显示标题**：`DialogBox` 增加标题展示 |
 | 接入方式 | **构建时转换**：`script/convert-events.mjs` 生成 `src/engine/events.json` |
@@ -44,7 +44,7 @@ useGame.ts（线性播放 + 条件跳过，年龄由事件驱动）
 
 ### 1. 转换脚本 `script/convert-events.mjs`（新增）
 
-- 内置 **ATTR_MAP**：106 个属性名 → 8 大属性（完整表见下），其中 10 个为取反映射
+- 内置 **ATTR_MAP**：106 个属性名 → 8 大属性（完整表见下），其中 9 个为取反映射
 - 遇到未映射的属性名 → **报错退出**，不静默丢失
 - 每个事件：`age = age_range[0]`；`stage` 按年龄推导（与 `getStageForAge` 相同规则）；`title`/`text`/`id` 原样保留；`category` 不接入引擎（仅数据保留在源 JSON）
 - 每个 choice：`effects` 对象 → `outcomes.attr`（映射后同属性**求和合并**，如 `learning+5` 与 `knowledge+3` 合并为 `intelligence+8`）；并用 `ATTR_META` 图标生成 emoji 展示串（如 `💪+10 😊-5`）；`flags_add` → `outcomes.flags`

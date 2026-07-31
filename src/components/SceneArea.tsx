@@ -8,7 +8,7 @@ interface Props {
 }
 
 const STAGE_BG: Record<LifeStage, string> = {
-  infant: 'bg-gradient-to-b from-[#FFE0B2] via-[#FFCC80] to-[#FFECB3]',
+  infant: 'bg-gradient-to-b from-[#d4a76a] via-[#c99555] to-[#b8844a]',
   childhood: 'bg-gradient-to-b from-[#87CEEB] via-[#98D8C8] to-[#7CB342]',
   teen: 'bg-gradient-to-b from-[#2c3e50] via-[#e74c3c]/30 to-[#f39c12]/40',
   young_adult: 'bg-gradient-to-b from-[#1a1a2e] via-[#16213e] to-[#0f3460]',
@@ -29,7 +29,8 @@ export default function SceneArea({ stage, age, gender, stageLabel }: Props) {
 
       {/* 阶段标签 */}
       <div className="absolute bottom-10 right-6 z-10
-        text-[13px] text-white/50 tracking-[4px]">
+        text-[13px] text-white/80 bg-black/30 backdrop-blur
+        px-3 py-1 rounded-full tracking-[4px]">
         {stageLabel}
       </div>
 

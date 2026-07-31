@@ -75,7 +75,7 @@ export default function DialogBox({ text, name, age, stage, onComplete, onAutoCo
         </div>
 
         {/* 文本 */}
-        <div className="text-lg leading-relaxed tracking-wide min-h-[56px]">
+        <div className="text-lg leading-relaxed tracking-wide min-h-[56px] text-white/90">
           {segments}
           {!done && <span className="text-[#c9a96e] animate-blink ml-0.5">▎</span>}
         </div>

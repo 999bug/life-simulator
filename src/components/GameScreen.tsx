@@ -62,13 +62,13 @@ export default function GameScreen({ game, currentEvent, feedback, onChoice, onC
       {/* 场景 */}
       <SceneArea stage={game.stage} age={game.age} gender={game.gender} stageLabel={stageMeta.label} />
 
-      {/* 状态栏 — 绝对定位，紧贴场景下方 */}
-      <div className="absolute top-[55%] left-0 right-0 z-10">
+      {/* 状态栏 — 绝对定位，场景中部偏上（底部区域限高 45% 后不重叠） */}
+      <div className="absolute top-[42%] left-0 right-0 z-10">
         <StatusBar attributes={game.attributes} />
       </div>
 
-      {/* 底部区域：对话框 + 选项 */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
+      {/* 底部区域：对话框 + 选项（限高 45%，不遮挡 top-[55%] 的数值栏） */}
+      <div className="absolute bottom-0 left-0 right-0 z-10 max-h-[45%] overflow-y-auto">
         <DialogBox
           text={currentEvent.text}
           name={game.name}

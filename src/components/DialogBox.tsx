@@ -5,12 +5,13 @@ interface Props {
   name: string;
   age: number;
   stage: string;
+  title?: string;
   onComplete?: () => void;
   onAutoContinue?: () => void;
   autoAdvance?: boolean;
 }
 
-export default function DialogBox({ text, name, age, stage, onComplete, onAutoContinue, autoAdvance }: Props) {
+export default function DialogBox({ text, name, age, stage, title, onComplete, onAutoContinue, autoAdvance }: Props) {
   const [segments, setSegments] = useState<ReactNode[]>([]);
   const [done, setDone] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout>>();
@@ -72,6 +73,7 @@ export default function DialogBox({ text, name, age, stage, onComplete, onAutoCo
           <span className="text-[#c9a96e] font-semibold">{name}</span>
           <span>{age}岁</span>
           <span>{stage}</span>
+          {title && <span className="text-white/60">「{title}」</span>}
         </div>
 
         {/* 文本 */}

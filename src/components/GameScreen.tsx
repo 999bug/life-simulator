@@ -74,6 +74,7 @@ export default function GameScreen({ game, currentEvent, feedback, onChoice, onC
           name={game.name}
           age={game.age}
           stage={stageMeta.label}
+          title={currentEvent.title}
           autoAdvance={isAuto}
           onComplete={handleDialogComplete}
           onAutoContinue={isAuto ? () => onChoice(currentEvent.choices[0]) : undefined}

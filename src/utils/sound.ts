@@ -5,6 +5,14 @@
 
 let ctx: AudioContext | null = null;
 
+/** 全局静音（快速模拟模式屏蔽高频交互音） */
+let muted = false;
+
+/** 设置静音状态 */
+export function setMuted(value: boolean): void {
+  muted = value;
+}
+
 /** 获取（或惰性创建）AudioContext；不可用时返回 null（静默降级） */
 function ensureCtx(): AudioContext | null {
   if (typeof window === 'undefined') {
@@ -33,6 +41,9 @@ function ensureCtx(): AudioContext | null {
  * @param delay 延迟（秒）
  */
 function tone(freq: number, duration: number, type: OscillatorType = 'sine', volume = 0.04, delay = 0): void {
+  if (muted) {
+    return;
+  }
   const c = ensureCtx();
   if (!c) {
     return;

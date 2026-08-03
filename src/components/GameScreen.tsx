@@ -11,11 +11,12 @@ interface Props {
   game: GameState;
   currentEvent: LifeEvent | null;
   feedback: string | null;
+  autoPlay: boolean;
   onChoice: (choice: Choice) => void;
   onContinue: () => void;
 }
 
-export default function GameScreen({ game, currentEvent, feedback, onChoice, onContinue }: Props) {
+export default function GameScreen({ game, currentEvent, feedback, autoPlay, onChoice, onContinue }: Props) {
   const [showChoices, setShowChoices] = useState(false);
 
   const handleDialogComplete = useCallback(() => {
@@ -77,13 +78,14 @@ export default function GameScreen({ game, currentEvent, feedback, onChoice, onC
           stage={stageMeta.label}
           title={currentEvent.title}
           autoAdvance={isAuto}
+          instant={autoPlay}
           onComplete={handleDialogComplete}
           onAutoContinue={isAuto ? () => onChoice(currentEvent.choices[0]) : undefined}
         />
         <ChoicePanel
           choices={currentEvent.choices}
           onSelect={onChoice}
-          visible={showChoices}
+          visible={showChoices && !autoPlay}
           attributes={game.attributes}
           age={game.age}
         />

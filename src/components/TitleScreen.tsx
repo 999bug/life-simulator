@@ -3,11 +3,12 @@ import { sfx } from '../utils/sound';
 
 interface Props {
   onStart: (gender: 'male' | 'female', name: string) => void;
+  onAutoStart: (gender: 'male' | 'female', name: string) => void;
   hasSave: boolean;
   onContinue: () => void;
 }
 
-export default function TitleScreen({ onStart, hasSave, onContinue }: Props) {
+export default function TitleScreen({ onStart, onAutoStart, hasSave, onContinue }: Props) {
   const [gender, setGender] = useState<'male' | 'female' | null>(null);
   const [name, setName] = useState('');
 
@@ -121,6 +122,20 @@ export default function TitleScreen({ onStart, hasSave, onContinue }: Props) {
           }`}
       >
         开 始 人 生
+      </button>
+
+      {/* 快速模拟：随机性别与名字，自动走完一生 */}
+      <button
+        onClick={() => {
+          sfx.select();
+          const gender = Math.random() < 0.5 ? 'male' : 'female';
+          onAutoStart(gender, gender === 'male' ? '小明' : '小美');
+        }}
+        className="px-10 py-2.5 rounded-[30px] text-[13px] tracking-[4px] z-10 transition-all duration-300 border font-sans
+          border-white/15 text-white/35 bg-transparent
+          hover:border-[#c9a96e]/50 hover:text-[#c9a96e] hover:bg-[#c9a96e]/5 cursor-pointer"
+      >
+        ⚡ 快速模拟
       </button>
     </div>
   );

@@ -10,14 +10,23 @@ interface Props {
   onComplete?: () => void;
   onAutoContinue?: () => void;
   autoAdvance?: boolean;
+  /** 立即显示全文（快速模拟模式跳过打字机） */
+  instant?: boolean;
 }
 
-export default function DialogBox({ text, name, age, stage, title, onComplete, onAutoContinue, autoAdvance }: Props) {
+export default function DialogBox({ text, name, age, stage, title, onComplete, onAutoContinue, autoAdvance, instant }: Props) {
   const [segments, setSegments] = useState<ReactNode[]>([]);
   const [done, setDone] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout>>();
 
   useEffect(() => {
+    if (instant) {
+      // 快速模式：一次性渲染全文并立即完成
+      setSegments(text.split('\n').flatMap((p, i) => i === 0 ? [p] : [<br key={`br-${i}`} />, p]));
+      setDone(true);
+      onComplete?.();
+      return;
+    }
     setSegments([]);
     setDone(false);
 

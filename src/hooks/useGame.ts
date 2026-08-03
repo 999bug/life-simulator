@@ -16,6 +16,7 @@ import EVENTS, { shuffleEvents } from '../engine/events';
 // ============ Action 类型 ============
 type Action =
   | { type: 'START_GAME'; gender: 'male' | 'female'; name: string }
+  | { type: 'START_AUTO_GAME'; gender: 'male' | 'female'; name: string }
   | { type: 'MAKE_CHOICE'; choice: Choice; eventId: string }
   | { type: 'CONTINUE' }
   | { type: 'RESET' }
@@ -31,6 +32,8 @@ interface RuntimeState {
   shuffledEvents: LifeEvent[];
   /** 洗牌种子（存档恢复时还原顺序） */
   shuffleSeed: number;
+  /** 快速模拟模式：自动随机选择快速走完一生 */
+  autoPlay: boolean;
 }
 
 // ============ 存档 ============
@@ -87,7 +90,8 @@ function saveState(rt: RuntimeState): void {
 // ============ Reducer ============
 function reducer(state: RuntimeState, action: Action): RuntimeState {
   switch (action.type) {
-    case 'START_GAME': {
+    case 'START_GAME':
+    case 'START_AUTO_GAME': {
       const game = createInitialState(action.gender, action.name);
       // 新一局：随机种子洗牌，同岁组顺序每局不同（重玩性）
       const shuffleSeed = Math.floor(Math.random() * 2 ** 31);
@@ -105,6 +109,7 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         eventIndex: first ? shuffledEvents.indexOf(first) : 0,
         shuffledEvents,
         shuffleSeed,
+        autoPlay: action.type === 'START_AUTO_GAME',
       };
     }
 
@@ -186,6 +191,7 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         eventIndex: next ? state.shuffledEvents.indexOf(next) : state.eventIndex,
         shuffledEvents: state.shuffledEvents,
         shuffleSeed: state.shuffleSeed,
+        autoPlay: state.autoPlay,
       };
     }
 
@@ -195,7 +201,7 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
     }
 
     case 'RESET':
-      return createInitialRuntime();
+      return createInitialRuntime(); // 快速模拟模式随重新开始退出
 
     case 'CONTINUE_GAME': {
       // 从存档恢复：标题页 → 存档中的游戏现场
@@ -210,13 +216,14 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         ? shuffledEvents.find(e => e.id === saved.currentEventId) ?? null
         : null;
       return {
-        // 旧版存档无 deathCause 字段，显式兜底兼容
+        // 旧版存档无 deathCause 字段，显式兜底兼容；恢复为手动模式
         game: { ...saved.game, deathCause: saved.game.deathCause ?? null },
         currentEvent,
         feedback: saved.feedback,
         eventIndex: saved.eventIndex,
         shuffleSeed,
         shuffledEvents,
+        autoPlay: false,
       };
     }
 
@@ -275,10 +282,17 @@ function createInitialRuntime(): RuntimeState {
     currentEvent: null, feedback: null, eventIndex: 0,
     shuffledEvents: EVENTS,
     shuffleSeed: 0,
+    autoPlay: false,
   };
 }
 
 // ============ Hook ============
+
+/** 快速模拟：事件推进间隔（毫秒） */
+const AUTO_PLAY_INTERVAL = 220;
+/** 快速模拟：反馈页跳过间隔（毫秒） */
+const AUTO_PLAY_FEEDBACK_INTERVAL = 50;
+
 export function useGame() {
   const [rt, dispatch] = useReducer(reducer, null, createInitialRuntime);
 
@@ -287,11 +301,32 @@ export function useGame() {
     saveState(rt);
   }, [rt]);
 
+  // 快速模拟：自动随机选择并推进，直到结算
+  useEffect(() => {
+    if (!rt.autoPlay || rt.game.phase !== 'playing') {
+      return;
+    }
+    const timer = setTimeout(() => {
+      if (rt.feedback) {
+        dispatch({ type: 'CONTINUE' });
+      } else if (rt.currentEvent) {
+        const choices = rt.currentEvent.choices;
+        const pick = choices[Math.floor(Math.random() * choices.length)];
+        dispatch({ type: 'MAKE_CHOICE', choice: pick, eventId: rt.currentEvent.id });
+      }
+    }, rt.feedback ? AUTO_PLAY_FEEDBACK_INTERVAL : AUTO_PLAY_INTERVAL);
+    return () => clearTimeout(timer);
+  }, [rt]);
+
   // 标题页是否有可继续的存档（仅初始读取一次）
   const hasSave = useMemo(() => loadSave() !== null, []);
 
   const startGame = useCallback((gender: 'male' | 'female', name: string) => {
     dispatch({ type: 'START_GAME', gender, name });
+  }, []);
+
+  const startAutoGame = useCallback((gender: 'male' | 'female', name: string) => {
+    dispatch({ type: 'START_AUTO_GAME', gender, name });
   }, []);
 
   const makeChoice = useCallback((choice: Choice) => {
@@ -316,7 +351,9 @@ export function useGame() {
     currentEvent: rt.currentEvent,
     feedback: rt.feedback,
     hasSave,
+    autoPlay: rt.autoPlay,
     startGame,
+    startAutoGame,
     makeChoice,
     continue: continue_,
     continueGame,

@@ -84,6 +84,7 @@ export default function GameScreen({ game, currentEvent, feedback, onChoice, onC
           onSelect={onChoice}
           visible={showChoices}
           attributes={game.attributes}
+          age={game.age}
         />
       </div>
     </div>

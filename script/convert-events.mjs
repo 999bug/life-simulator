@@ -5,7 +5,7 @@ import { pathToFileURL } from 'url';
  * 107 条 chiled.json 属性名 → 8 大引擎属性映射（数据实际使用 106 键，luck 为冗余映射）。
  * INVERSE 中的键为负向维度，映射后数值取反（pressure: +8 → happiness: -8）。
  */
-const ATTR_MAP = {
+export const ATTR_MAP = {
   // intelligence 智力（38 个）
   learning: 'intelligence', knowledge: 'intelligence', intelligence: 'intelligence',
   curiosity: 'intelligence', thinking: 'intelligence', critical_thinking: 'intelligence',
@@ -55,7 +55,7 @@ const ATTR_MAP = {
 };
 
 /** 负向维度键：映射后数值取反 */
-const INVERSE = new Set([
+export const INVERSE = new Set([
   'dependence', 'avoidance', 'procrastination', 'impulse', 'introversion',
   'pressure', 'anger', 'anxiety', 'conflict',
 ]);

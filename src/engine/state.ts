@@ -28,16 +28,19 @@ export const STAGE_META: Record<LifeStage, StageMeta> = {
   elder: { label: '晚年', range: [65, 95] },
 };
 
-/** 初始属性 */
+/**
+ * 初始属性。
+ * 刻意偏低，为童年成长留出空间（健康 65 / 智力 25 起步，随事件逐渐成长）。
+ */
 const INITIAL_ATTRS: Attributes = {
-  health: 80,
-  intelligence: 30,
+  health: 65,
+  intelligence: 25,
   wealth: 20,
-  happiness: 70,
-  social: 20,
-  appearance: 50,
+  happiness: 60,
+  social: 25,
+  appearance: 45,
   luck: 50,
-  morality: 50,
+  morality: 45,
 };
 
 /** 确保所有属性为整数 */
@@ -65,40 +68,67 @@ export function createInitialState(gender: 'male' | 'female', name: string): Gam
 }
 
 /**
- * 属性成长上限：属性达到上限后正向收益不再生效，防止数值通胀到满值。
- * 各属性上限不同（魅力/运气受先天与偶然性限制，财富最可积累）。
+ * 年龄锚点成长上限表：属性在对应年龄只能成长到该值，之后正向收益失效。
+ * 锚点之间线性插值，形成"童年偏低 → 中年封顶 → 老年缓降"的渐进曲线，
+ * 防止事件供给过剩导致属性低龄封顶。上限为 100 的属性不受年龄限制。
+ *
+ * 取值依据：童年成长最快但绝对水平低，中年达到一生峰值，老年缓慢回落
+ * （健康由 applyElderDecay 承担回落，此处锚点同步下调作为软约束）。
  */
-export const ATTR_CAP: Record<AttributeKey, number> = {
-  health: 90,
-  intelligence: 92,
-  wealth: 95,
-  happiness: 90,
-  social: 88,
-  appearance: 80,
-  luck: 75,
-  morality: 88,
+const CAP_ANCHORS: Record<AttributeKey, ReadonlyArray<[number, number]>> = {
+  health: [[7, 75], [12, 80], [18, 85], [30, 90], [50, 90], [65, 85]],
+  intelligence: [[7, 55], [12, 72], [18, 85], [30, 92], [50, 92], [65, 88]],
+  wealth: [[7, 30], [12, 45], [18, 65], [30, 85], [50, 95]],
+  happiness: [[7, 75], [18, 88], [30, 90]],
+  social: [[7, 55], [12, 70], [18, 80], [30, 88], [50, 88], [65, 85]],
+  appearance: [[7, 60], [12, 68], [18, 75], [30, 80], [50, 80], [65, 78]],
+  luck: [[0, 75]],
+  morality: [[7, 55], [12, 70], [18, 80], [30, 88], [50, 88], [65, 88]],
 };
 
 /** 距成长上限的过渡带：此距离内的正向收益线性递减 */
 const CAP_TAPER = 15;
 
 /**
+ * 计算属性在指定年龄的成长上限（锚点线性插值）。
+ *
+ * @param age 当前年龄
+ * @param key 属性键
+ * @returns 该年龄的成长上限
+ */
+export function ageCap(age: number, key: AttributeKey): number {
+  const points = CAP_ANCHORS[key];
+  if (age <= points[0][0]) {
+    return points[0][1];
+  }
+  for (let i = 0; i < points.length - 1; i++) {
+    const [a1, c1] = points[i];
+    const [a2, c2] = points[i + 1];
+    if (age <= a2) {
+      return Math.round(c1 + ((c2 - c1) * (age - a1)) / (a2 - a1));
+    }
+  }
+  return points[points.length - 1][1];
+}
+
+/**
  * 计算属性增量的实际生效值。
  *
- * 正向收益按距离成长上限的余量线性递减（过渡带内逐渐归零），
+ * 正向收益按距离年龄成长上限的余量线性递减（过渡带内逐渐归零），
  * 且单次增量不超过剩余空间，属性永不越过上限。
  * 负向惩罚全额生效。过渡带内的正向收益至少生效 1 点。
  *
  * @param key 属性键
  * @param delta 数据表增量
  * @param attrs 当前属性表
+ * @param age 当前年龄（决定成长上限）
  * @returns 实际生效增量
  */
-export function effectiveDelta(key: AttributeKey, delta: number, attrs: Attributes): number {
+export function effectiveDelta(key: AttributeKey, delta: number, attrs: Attributes, age: number): number {
   if (delta <= 0) {
     return delta;
   }
-  const room = ATTR_CAP[key] - (attrs[key] ?? 0);
+  const room = ageCap(age, key) - (attrs[key] ?? 0);
   if (room <= 0) {
     return 0;
   }
@@ -106,16 +136,23 @@ export function effectiveDelta(key: AttributeKey, delta: number, attrs: Attribut
   return Math.max(1, Math.min(room, tapered));
 }
 
-/** 应用选项结果，返回新属性。保证整数。 */
+/**
+ * 应用选项结果，返回新属性。保证整数。
+ *
+ * @param attrs 当前属性表
+ * @param out 选项结果
+ * @param age 当前年龄（决定成长上限）
+ */
 export function applyOutcomes(
   attrs: Attributes,
   out: { attr: Partial<Attributes> },
+  age: number,
 ): Attributes {
   const next = { ...attrs };
   for (const [k, v] of Object.entries(out.attr)) {
     const key = k as AttributeKey;
-    // 收益递减：按当前值折算实际增量
-    const delta = effectiveDelta(key, v, attrs);
+    // 收益递减：按当前值与年龄上限折算实际增量
+    const delta = effectiveDelta(key, v, attrs, age);
     next[key] = Math.round(
       Math.max(0, Math.min(100, next[key] + delta)),
     );
@@ -139,12 +176,12 @@ export function calcMaxAge(attrs: Attributes): number {
  * 晚年健康衰减。
  *
  * 基础每事件 -3。
- * 运气每 20 点减免 1 点衰减。
+ * 运气每 20 点减免 1 点衰减，下限 1：运气再好老年机能也在衰退。
  * 保证结果为整数。
  */
 export function applyElderDecay(attrs: Attributes): Attributes {
-  // 运气减免下限 0：运气足够好时老年不掉血，但不会反向回血
-  const decay = Math.max(0, Math.round(3 - attrs.luck / 20));
+  // 下限 1：运气足够好时每事件只掉 1 点，但不会回血也不会不掉
+  const decay = Math.max(1, Math.round(3 - attrs.luck / 20));
   const nextHealth = Math.round(
     Math.max(0, Math.min(100, attrs.health - decay)),
   );

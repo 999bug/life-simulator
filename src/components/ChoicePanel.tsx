@@ -6,9 +6,10 @@ interface Props {
   onSelect: (choice: Choice) => void;
   visible: boolean;
   attributes: Attributes;
+  age: number;
 }
 
-export default function ChoicePanel({ choices, onSelect, visible, attributes }: Props) {
+export default function ChoicePanel({ choices, onSelect, visible, attributes, age }: Props) {
   if (!visible || choices.length === 0) return null;
 
   return (
@@ -35,7 +36,7 @@ export default function ChoicePanel({ choices, onSelect, visible, attributes }: 
 
           {ch.outcomes.attr && Object.keys(ch.outcomes.attr).length > 0 && (
             <span className="text-[10px] text-white/40 tracking-wide whitespace-nowrap ml-3 shrink-0">
-              {colorEffects(effectsText(ch, attributes))}
+              {colorEffects(effectsText(ch, attributes, age))}
             </span>
           )}
         </button>
@@ -48,11 +49,11 @@ export default function ChoicePanel({ choices, onSelect, visible, attributes }: 
  * 生成实时效果展示串（按当前属性计算实际生效值，与引擎应用结果一致）。
  * 键序沿用转换器生成的 outcomes 顺序。
  */
-function effectsText(ch: Choice, attrs: Attributes): string {
+function effectsText(ch: Choice, attrs: Attributes, age: number): string {
   const attr = ch.outcomes.attr;
   return (Object.keys(attr) as AttributeKey[])
     .filter(k => attr[k] !== 0)
-    .map(k => `${ATTR_META[k].icon}${formatDelta(effectiveDelta(k, attr[k]!, attrs))}`)
+    .map(k => `${ATTR_META[k].icon}${formatDelta(effectiveDelta(k, attr[k]!, attrs, age))}`)
     .join(' ');
 }
 

@@ -46,8 +46,8 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
       const { choice, eventId } = action;
       const out = choice.outcomes;
 
-      // 更新属性
-      let attrs = applyOutcomes(state.game.attributes, out);
+      // 更新属性（当前年龄决定成长上限）
+      let attrs = applyOutcomes(state.game.attributes, out, state.game.age);
 
       // 更新标记
       const flags = [...state.game.flags];
@@ -100,9 +100,9 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
       const attrChanges: Partial<Attributes> = out.attr ?? {};
       const changedKeys = (Object.keys(attrChanges) as AttributeKey[]).filter(k => attrChanges[k] !== 0);
       if (changedKeys.length > 0) {
-        // 反馈展示实际生效值（含收益递减），与属性面板变化一致
+        // 反馈展示实际生效值（含年龄上限收益递减），与属性面板变化一致
         fb += '\n\n' + changedKeys.map(k => {
-          const v = effectiveDelta(k, attrChanges[k]!, state.game.attributes);
+          const v = effectiveDelta(k, attrChanges[k]!, state.game.attributes, state.game.age);
           return `${v > 0 ? '+' : ''}${v}`;
         }).join('  ');
       }
@@ -172,7 +172,7 @@ function createInitialRuntime(): RuntimeState {
   return {
     game: {
       gender: 'male', name: '', age: 0, stage: 'infant', stageIdx: 0,
-      attributes: { health: 80, intelligence: 30, wealth: 20, happiness: 70, social: 20, appearance: 50, luck: 50, morality: 50 },
+      attributes: { health: 65, intelligence: 25, wealth: 20, happiness: 60, social: 25, appearance: 45, luck: 50, morality: 45 },
       flags: [], history: [], phase: 'title',
     },
     currentEvent: null, feedback: null, eventIndex: 0,

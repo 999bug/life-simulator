@@ -286,8 +286,8 @@
       {
         "text": "认真照顾宠物",
         "effects": {
-          "responsibility": 20,
-          "empathy": 15
+          "responsibility": 11,
+          "empathy": 9
         },
         "flags_add": [
           "animal_love"
@@ -321,8 +321,8 @@
       {
         "text": "喜欢探索新地方",
         "effects": {
-          "curiosity": 20,
-          "experience": 10
+          "curiosity": 13,
+          "experience": 7
         },
         "flags_add": [
           "explorer"
@@ -358,8 +358,8 @@
       {
         "text": "主动照顾弟弟妹妹",
         "effects": {
-          "responsibility": 20,
-          "empathy": 15
+          "responsibility": 11,
+          "empathy": 9
         },
         "flags_add": [
           "caring_person"
@@ -396,8 +396,8 @@
       {
         "text": "喜欢观察植物动物",
         "effects": {
-          "observation": 20,
-          "knowledge": 10
+          "observation": 13,
+          "knowledge": 7
         },
         "flags_add": [
           "nature_interest"
@@ -434,8 +434,8 @@
       {
         "text": "爱上阅读",
         "effects": {
-          "knowledge": 20,
-          "imagination": 15
+          "knowledge": 11,
+          "imagination": 9
         },
         "flags_add": [
           "book_reader"
@@ -506,8 +506,8 @@
       {
         "text": "想成为科学家",
         "effects": {
-          "logic": 10,
-          "ambition": 15
+          "logic": 8,
+          "ambition": 12
         },
         "flags_add": [
           "science_dream"
@@ -646,8 +646,8 @@
       {
         "text": "认真观察环境",
         "effects": {
-          "observation": 20,
-          "thinking": 10
+          "observation": 13,
+          "thinking": 7
         }
       },
       {
@@ -719,8 +719,8 @@
       {
         "text": "学习运动",
         "effects": {
-          "health": 20,
-          "sports": 15
+          "health": 11,
+          "sports": 9
         },
         "flags_add": [
           "athlete_path"
@@ -729,8 +729,8 @@
       {
         "text": "学习科技",
         "effects": {
-          "technology": 20,
-          "logic": 15
+          "technology": 11,
+          "logic": 9
         },
         "flags_add": [
           "technology_path"
@@ -761,8 +761,8 @@
       {
         "text": "成为兴趣发展路线",
         "effects": {
-          "creativity": 20,
-          "curiosity": 20
+          "creativity": 10,
+          "curiosity": 10
         },
         "flags_add": [
           "talent_route"
@@ -771,8 +771,8 @@
       {
         "text": "成为社交领导路线",
         "effects": {
-          "social": 20,
-          "leadership": 20
+          "social": 10,
+          "leadership": 10
         },
         "flags_add": [
           "leader_route"
@@ -888,8 +888,8 @@
       {
         "text": "成为亲密朋友",
         "effects": {
-          "friendship": 20,
-          "communication": 10
+          "friendship": 13,
+          "communication": 7
         },
         "flags_add": [
           "desk_friend"
@@ -1003,8 +1003,8 @@
       {
         "text": "参加体育训练",
         "effects": {
-          "health": 20,
-          "sports": 15
+          "health": 11,
+          "sports": 9
         },
         "flags_add": [
           "sports_path"
@@ -1013,8 +1013,8 @@
       {
         "text": "学习计算机",
         "effects": {
-          "technology": 20,
-          "logic": 15
+          "technology": 11,
+          "logic": 9
         },
         "flags_add": [
           "tech_path"
@@ -1035,8 +1035,8 @@
       {
         "text": "大胆表达",
         "effects": {
-          "confidence": 20,
-          "charisma": 15
+          "confidence": 11,
+          "charisma": 9
         },
         "flags_add": [
           "public_speaker"
@@ -1174,8 +1174,8 @@
       {
         "text": "加入校队训练",
         "effects": {
-          "sports": 25,
-          "health": 15
+          "sports": 12,
+          "health": 8
         },
         "flags_add": [
           "school_team"
@@ -1290,8 +1290,8 @@
       {
         "text": "成为长期好友",
         "effects": {
-          "friendship": 25,
-          "trust": 20
+          "friendship": 11,
+          "trust": 9
         },
         "flags_add": [
           "lifelong_friend"
@@ -1371,8 +1371,8 @@
       {
         "text": "成为互相帮助的伙伴",
         "effects": {
-          "teamwork": 20,
-          "friendship": 15
+          "teamwork": 11,
+          "friendship": 9
         }
       },
       {
@@ -1396,8 +1396,8 @@
       {
         "text": "坚持训练",
         "effects": {
-          "sports": 20,
-          "health": 20
+          "sports": 10,
+          "health": 10
         },
         "flags_add": [
           "athlete_seed"
@@ -1430,8 +1430,8 @@
       {
         "text": "成为表演者",
         "effects": {
-          "confidence": 20,
-          "art": 15
+          "confidence": 11,
+          "art": 9
         },
         "flags_add": [
           "performer"
@@ -1465,8 +1465,8 @@
       {
         "text": "学习信息检索",
         "effects": {
-          "technology": 20,
-          "research": 15
+          "technology": 11,
+          "research": 9
         },
         "flags_add": [
           "researcher"
@@ -1530,8 +1530,8 @@
       {
         "text": "加入并维护友情",
         "effects": {
-          "friendship": 20,
-          "trust": 15
+          "friendship": 11,
+          "trust": 9
         },
         "flags_add": [
           "childhood_group"
@@ -1599,8 +1599,8 @@
       {
         "text": "坚持学习",
         "effects": {
-          "logic": 25,
-          "math": 20
+          "logic": 11,
+          "math": 9
         },
         "flags_add": [
           "math_competitor"
@@ -1643,8 +1643,8 @@
       {
         "text": "强化兴趣路线",
         "effects": {
-          "talent": 20,
-          "creativity": 20
+          "talent": 10,
+          "creativity": 10
         },
         "flags_add": [
           "talent_route"
@@ -1653,8 +1653,8 @@
       {
         "text": "强化社交路线",
         "effects": {
-          "social": 20,
-          "leadership": 15
+          "social": 11,
+          "leadership": 9
         },
         "flags_add": [
           "social_route"
@@ -1715,8 +1715,8 @@
       {
         "text": "寻找新的学习方法",
         "effects": {
-          "problem_solving": 20,
-          "learning": 15
+          "problem_solving": 11,
+          "learning": 9
         },
         "flags_add": [
           "adaptive_learner"
@@ -1817,8 +1817,8 @@
       {
         "text": "积极准备",
         "effects": {
-          "competition": 20,
-          "confidence": 20
+          "competition": 10,
+          "confidence": 10
         },
         "flags_add": [
           "school_competitor"
@@ -1851,7 +1851,7 @@
       {
         "text": "总结经验重新开始",
         "effects": {
-          "resilience": 25,
+          "resilience": 20,
           "willpower": 20
         },
         "flags_add": [
@@ -1885,8 +1885,8 @@
       {
         "text": "持续学习",
         "effects": {
-          "technology": 25,
-          "logic": 20
+          "technology": 11,
+          "logic": 9
         },
         "flags_add": [
           "future_programmer"
@@ -1919,8 +1919,8 @@
       {
         "text": "接受专业训练",
         "effects": {
-          "sports": 25,
-          "health": 20
+          "sports": 11,
+          "health": 9
         },
         "flags_add": [
           "athlete_candidate"
@@ -1987,8 +1987,8 @@
       {
         "text": "投入更多时间",
         "effects": {
-          "talent": 25,
-          "skill": 20
+          "talent": 11,
+          "skill": 9
         },
         "flags_add": [
           "special_talent"
@@ -2021,8 +2021,8 @@
       {
         "text": "希望成为科学家",
         "effects": {
-          "science": 20,
-          "learning": 15
+          "science": 11,
+          "learning": 9
         },
         "flags_add": [
           "scientist_path"
@@ -2142,7 +2142,7 @@
       {
         "text": "冷静沟通解决",
         "effects": {
-          "communication": 25,
+          "communication": 20,
           "maturity": 15
         },
         "flags_add": [
@@ -2177,7 +2177,7 @@
       {
         "text": "承担责任",
         "effects": {
-          "leadership": 25,
+          "leadership": 20,
           "responsibility": 20
         },
         "flags_add": [
@@ -2211,8 +2211,8 @@
       {
         "text": "学习商业思维",
         "effects": {
-          "business": 20,
-          "money_management": 20
+          "business": 10,
+          "money_management": 10
         },
         "flags_add": [
           "young_business"
@@ -2245,8 +2245,8 @@
       {
         "text": "建立知识框架",
         "effects": {
-          "logic": 20,
-          "learning": 25
+          "logic": 9,
+          "learning": 11
         },
         "flags_add": [
           "systematic_learner"
@@ -2279,7 +2279,7 @@
       {
         "text": "投入大量训练",
         "effects": {
-          "skill": 25,
+          "skill": 20,
           "confidence": 20
         },
         "flags_add": [
@@ -2313,8 +2313,8 @@
       {
         "text": "保持信任",
         "effects": {
-          "trust": 25,
-          "friendship": 20
+          "trust": 11,
+          "friendship": 9
         },
         "flags_add": [
           "deep_friendship"
@@ -2329,7 +2329,7 @@
       {
         "text": "告诉别人",
         "effects": {
-          "trust": -25
+          "trust": -20
         }
       }
     ]
@@ -2347,8 +2347,8 @@
       {
         "text": "成为长期训练方向",
         "effects": {
-          "talent": 25,
-          "skill": 25
+          "talent": 10,
+          "skill": 10
         },
         "flags_add": [
           "specialist_path"
@@ -2381,8 +2381,8 @@
       {
         "text": "产生探索兴趣",
         "effects": {
-          "technology": 25,
-          "curiosity": 20
+          "technology": 11,
+          "curiosity": 9
         },
         "flags_add": [
           "ai_interest"
@@ -2415,7 +2415,7 @@
       {
         "text": "严格执行计划",
         "effects": {
-          "discipline": 30,
+          "discipline": 20,
           "planning": 15
         },
         "flags_add": [
@@ -2449,9 +2449,9 @@
       {
         "text": "接受挑战",
         "effects": {
-          "learning": 20,
+          "learning": 10,
           "pressure": 10,
-          "ambition": 20
+          "ambition": 10
         },
         "flags_add": [
           "elite_training"
@@ -2484,8 +2484,8 @@
       {
         "text": "坚持体育训练",
         "effects": {
-          "sports": 25,
-          "health": 20
+          "sports": 11,
+          "health": 9
         },
         "flags_add": [
           "sports_focus"
@@ -2503,7 +2503,7 @@
       {
         "text": "寻找平衡",
         "effects": {
-          "balance": 25
+          "balance": 20
         }
       }
     ]
@@ -2610,7 +2610,7 @@
       {
         "text": "接受长期训练",
         "effects": {
-          "skill": 30,
+          "skill": 20,
           "discipline": 20
         },
         "flags_add": [
@@ -2644,7 +2644,7 @@
       {
         "text": "竞选负责人",
         "effects": {
-          "leadership": 30,
+          "leadership": 20,
           "charisma": 15
         },
         "flags_add": [
@@ -2678,8 +2678,8 @@
       {
         "text": "认真研究市场",
         "effects": {
-          "business": 25,
-          "financial": 20
+          "business": 11,
+          "financial": 9
         },
         "flags_add": [
           "young_entrepreneur"
@@ -2712,7 +2712,7 @@
       {
         "text": "认真准备",
         "effects": {
-          "learning": 25,
+          "learning": 20,
           "discipline": 20
         },
         "flags_add": [
@@ -2746,7 +2746,7 @@
       {
         "text": "冲刺重点学校",
         "effects": {
-          "ambition": 25,
+          "ambition": 20,
           "pressure": 15
         },
         "flags_add": [
@@ -2780,8 +2780,8 @@
       {
         "text": "制定详细复习计划",
         "effects": {
-          "learning": 25,
-          "planning": 20,
+          "learning": 11,
+          "planning": 9,
           "discipline": 15
         },
         "flags_add": [
@@ -2815,8 +2815,8 @@
       {
         "text": "互相帮助",
         "effects": {
-          "friendship": 25,
-          "teamwork": 20
+          "friendship": 11,
+          "teamwork": 9
         },
         "flags_add": [
           "study_partner"
@@ -2850,7 +2850,7 @@
       {
         "text": "追求成功",
         "effects": {
-          "ambition": 25
+          "ambition": 20
         },
         "flags_add": [
           "success_oriented"
@@ -2859,7 +2859,7 @@
       {
         "text": "追求快乐",
         "effects": {
-          "happiness": 25
+          "happiness": 20
         },
         "flags_add": [
           "happiness_oriented"
@@ -2868,7 +2868,7 @@
       {
         "text": "追求帮助别人",
         "effects": {
-          "empathy": 25
+          "empathy": 20
         },
         "flags_add": [
           "helper_personality"
@@ -2889,8 +2889,8 @@
       {
         "text": "成为考试型人才",
         "effects": {
-          "learning": 25,
-          "discipline": 25
+          "learning": 20,
+          "discipline": 20
         },
         "flags_add": [
           "academic_route"
@@ -2899,8 +2899,8 @@
       {
         "text": "成为兴趣型人才",
         "effects": {
-          "skill": 25,
-          "creativity": 20
+          "skill": 11,
+          "creativity": 9
         },
         "flags_add": [
           "talent_route"
@@ -2909,8 +2909,8 @@
       {
         "text": "成为领导型人才",
         "effects": {
-          "leadership": 25,
-          "social": 20
+          "leadership": 11,
+          "social": 9
         },
         "flags_add": [
           "leader_route"
@@ -3012,7 +3012,7 @@
       {
         "text": "享受最后的小学生活",
         "effects": {
-          "happiness": 25
+          "happiness": 20
         }
       }
     ]
@@ -3030,8 +3030,8 @@
       {
         "text": "主动了解变化",
         "effects": {
-          "maturity": 25,
-          "self_awareness": 20
+          "maturity": 11,
+          "self_awareness": 9
         }
       },
       {
@@ -3061,7 +3061,7 @@
       {
         "text": "制定严格计划",
         "effects": {
-          "learning": 30,
+          "learning": 20,
           "discipline": 20
         },
         "flags_add": [
@@ -3095,7 +3095,7 @@
       {
         "text": "努力维持友情",
         "effects": {
-          "loyalty": 25,
+          "loyalty": 20,
           "friendship": 20
         },
         "flags_add": [
@@ -3105,7 +3105,7 @@
       {
         "text": "接受人生变化",
         "effects": {
-          "adaptability": 25
+          "adaptability": 20
         }
       },
       {
@@ -3129,7 +3129,7 @@
       {
         "text": "继续强化优势",
         "effects": {
-          "special_skill": 30,
+          "special_skill": 20,
           "confidence": 20
         },
         "flags_add": [
@@ -3139,7 +3139,7 @@
       {
         "text": "补足弱项",
         "effects": {
-          "balance": 25
+          "balance": 20
         }
       },
       {
@@ -3163,8 +3163,8 @@
       {
         "text": "把对方作为目标",
         "effects": {
-          "ambition": 25,
-          "learning": 20
+          "ambition": 11,
+          "learning": 9
         },
         "flags_add": [
           "lifelong_competitor"
@@ -3173,7 +3173,7 @@
       {
         "text": "学习对方优点",
         "effects": {
-          "growth": 25
+          "growth": 20
         }
       },
       {
@@ -3197,8 +3197,8 @@
       {
         "text": "深入研究技术",
         "effects": {
-          "technology": 30,
-          "logic": 20
+          "technology": 12,
+          "logic": 8
         },
         "flags_add": [
           "tech_path"
@@ -3231,15 +3231,15 @@
       {
         "text": "保持理性成长",
         "effects": {
-          "maturity": 25,
+          "maturity": 20,
           "self_control": 20
         }
       },
       {
         "text": "勇敢表达自己",
         "effects": {
-          "courage": 20,
-          "confidence": 15
+          "courage": 11,
+          "confidence": 9
         }
       },
       {
@@ -3266,8 +3266,8 @@
           "learning": ">=80"
         },
         "effects": {
-          "confidence": 30,
-          "future_opportunity": 30
+          "confidence": 20,
+          "future_opportunity": 20
         },
         "flags_add": [
           "key_middle_school"
@@ -3285,7 +3285,7 @@
       {
         "text": "考试失利重新规划",
         "effects": {
-          "resilience": 30
+          "resilience": 20
         }
       }
     ]
@@ -3303,7 +3303,7 @@
       {
         "text": "学业路线",
         "effects": {
-          "learning": 25,
+          "learning": 20,
           "discipline": 20
         },
         "flags_add": [
@@ -3313,8 +3313,8 @@
       {
         "text": "兴趣路线",
         "effects": {
-          "skill": 25,
-          "creativity": 20
+          "skill": 11,
+          "creativity": 9
         },
         "flags_add": [
           "talent_personality"
@@ -3323,7 +3323,7 @@
       {
         "text": "社交领导路线",
         "effects": {
-          "leadership": 25,
+          "leadership": 20,
           "charisma": 20
         },
         "flags_add": [
@@ -3345,8 +3345,8 @@
       {
         "text": "成为专业人才",
         "effects": {
-          "focus": 25,
-          "learning": 20
+          "focus": 11,
+          "learning": 9
         },
         "flags_add": [
           "professional_path"
@@ -3355,7 +3355,7 @@
       {
         "text": "成为创业者",
         "effects": {
-          "business": 25,
+          "business": 20,
           "leadership": 15
         },
         "flags_add": [
@@ -3365,8 +3365,8 @@
       {
         "text": "成为自由创造者",
         "effects": {
-          "creativity": 25,
-          "independence": 15
+          "creativity": 12,
+          "independence": 8
         },
         "flags_add": [
           "creator_path"

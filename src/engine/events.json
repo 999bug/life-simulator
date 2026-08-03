@@ -302,10 +302,10 @@
     "choices": [
       {
         "text": "认真照顾宠物",
-        "effects": "⚖️+35",
+        "effects": "⚖️+20",
         "outcomes": {
           "attr": {
-            "morality": 35
+            "morality": 20
           },
           "flags": [
             "animal_love"
@@ -342,10 +342,10 @@
     "choices": [
       {
         "text": "喜欢探索新地方",
-        "effects": "🧠+30",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 30
+            "intelligence": 20
           },
           "flags": [
             "explorer"
@@ -384,10 +384,10 @@
     "choices": [
       {
         "text": "主动照顾弟弟妹妹",
-        "effects": "⚖️+35",
+        "effects": "⚖️+20",
         "outcomes": {
           "attr": {
-            "morality": 35
+            "morality": 20
           },
           "flags": [
             "caring_person"
@@ -427,10 +427,10 @@
     "choices": [
       {
         "text": "喜欢观察植物动物",
-        "effects": "🧠+30",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 30
+            "intelligence": 20
           },
           "flags": [
             "nature_interest"
@@ -470,10 +470,10 @@
     "choices": [
       {
         "text": "爱上阅读",
-        "effects": "🧠+35",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 35
+            "intelligence": 20
           },
           "flags": [
             "book_reader"
@@ -552,10 +552,10 @@
     "choices": [
       {
         "text": "想成为科学家",
-        "effects": "🧠+25",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 25
+            "intelligence": 20
           },
           "flags": [
             "science_dream"
@@ -714,10 +714,10 @@
       },
       {
         "text": "认真观察环境",
-        "effects": "🧠+30",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 30
+            "intelligence": 20
           }
         }
       },
@@ -797,10 +797,10 @@
       },
       {
         "text": "学习运动",
-        "effects": "💪+35",
+        "effects": "💪+20",
         "outcomes": {
           "attr": {
-            "health": 35
+            "health": 20
           },
           "flags": [
             "athlete_path"
@@ -809,10 +809,10 @@
       },
       {
         "text": "学习科技",
-        "effects": "🧠+35",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 35
+            "intelligence": 20
           },
           "flags": [
             "technology_path"
@@ -843,10 +843,10 @@
       },
       {
         "text": "成为兴趣发展路线",
-        "effects": "🧠+40",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 40
+            "intelligence": 20
           },
           "flags": [
             "talent_route"
@@ -855,10 +855,10 @@
       },
       {
         "text": "成为社交领导路线",
-        "effects": "👥+40",
+        "effects": "👥+20",
         "outcomes": {
           "attr": {
-            "social": 40
+            "social": 20
           },
           "flags": [
             "leader_route"
@@ -984,10 +984,10 @@
     "choices": [
       {
         "text": "成为亲密朋友",
-        "effects": "👥+30",
+        "effects": "👥+20",
         "outcomes": {
           "attr": {
-            "social": 30
+            "social": 20
           },
           "flags": [
             "desk_friend"
@@ -1119,10 +1119,10 @@
       },
       {
         "text": "参加体育训练",
-        "effects": "💪+35",
+        "effects": "💪+20",
         "outcomes": {
           "attr": {
-            "health": 35
+            "health": 20
           },
           "flags": [
             "sports_path"
@@ -1131,10 +1131,10 @@
       },
       {
         "text": "学习计算机",
-        "effects": "🧠+35",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 35
+            "intelligence": 20
           },
           "flags": [
             "tech_path"
@@ -1152,10 +1152,10 @@
     "choices": [
       {
         "text": "大胆表达",
-        "effects": "🎨+35",
+        "effects": "🎨+20",
         "outcomes": {
           "attr": {
-            "appearance": 35
+            "appearance": 20
           },
           "flags": [
             "public_speaker"
@@ -1314,10 +1314,10 @@
     "choices": [
       {
         "text": "加入校队训练",
-        "effects": "💪+40",
+        "effects": "💪+20",
         "outcomes": {
           "attr": {
-            "health": 40
+            "health": 20
           },
           "flags": [
             "school_team"
@@ -1446,10 +1446,10 @@
     "choices": [
       {
         "text": "成为长期好友",
-        "effects": "👥+45",
+        "effects": "👥+20",
         "outcomes": {
           "attr": {
-            "social": 45
+            "social": 20
           },
           "flags": [
             "lifelong_friend"
@@ -1541,10 +1541,10 @@
       },
       {
         "text": "成为互相帮助的伙伴",
-        "effects": "👥+35",
+        "effects": "👥+20",
         "outcomes": {
           "attr": {
-            "social": 35
+            "social": 20
           }
         }
       },
@@ -1568,10 +1568,10 @@
     "choices": [
       {
         "text": "坚持训练",
-        "effects": "💪+40",
+        "effects": "💪+20",
         "outcomes": {
           "attr": {
-            "health": 40
+            "health": 20
           },
           "flags": [
             "athlete_seed"
@@ -1607,10 +1607,10 @@
     "choices": [
       {
         "text": "成为表演者",
-        "effects": "🎨+35",
+        "effects": "🎨+20",
         "outcomes": {
           "attr": {
-            "appearance": 35
+            "appearance": 20
           },
           "flags": [
             "performer"
@@ -1647,10 +1647,10 @@
     "choices": [
       {
         "text": "学习信息检索",
-        "effects": "🧠+35",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 35
+            "intelligence": 20
           },
           "flags": [
             "researcher"
@@ -1723,10 +1723,10 @@
     "choices": [
       {
         "text": "加入并维护友情",
-        "effects": "👥+35",
+        "effects": "👥+20",
         "outcomes": {
           "attr": {
-            "social": 35
+            "social": 20
           },
           "flags": [
             "childhood_group"
@@ -1803,10 +1803,10 @@
     "choices": [
       {
         "text": "坚持学习",
-        "effects": "🧠+45",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 45
+            "intelligence": 20
           },
           "flags": [
             "math_competitor"
@@ -1855,10 +1855,10 @@
       },
       {
         "text": "强化兴趣路线",
-        "effects": "🧠+40",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 40
+            "intelligence": 20
           },
           "flags": [
             "talent_route"
@@ -1867,10 +1867,10 @@
       },
       {
         "text": "强化社交路线",
-        "effects": "👥+35",
+        "effects": "👥+20",
         "outcomes": {
           "attr": {
-            "social": 35
+            "social": 20
           },
           "flags": [
             "social_route"
@@ -1931,10 +1931,10 @@
     "choices": [
       {
         "text": "寻找新的学习方法",
-        "effects": "🧠+35",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 35
+            "intelligence": 20
           },
           "flags": [
             "adaptive_learner"
@@ -2050,10 +2050,10 @@
     "choices": [
       {
         "text": "积极准备",
-        "effects": "🎨+40",
+        "effects": "🎨+20",
         "outcomes": {
           "attr": {
-            "appearance": 40
+            "appearance": 20
           },
           "flags": [
             "school_competitor"
@@ -2089,10 +2089,10 @@
     "choices": [
       {
         "text": "总结经验重新开始",
-        "effects": "💪+25 ⚖️+20",
+        "effects": "💪+20 ⚖️+20",
         "outcomes": {
           "attr": {
-            "health": 25,
+            "health": 20,
             "morality": 20
           },
           "flags": [
@@ -2129,10 +2129,10 @@
     "choices": [
       {
         "text": "持续学习",
-        "effects": "🧠+45",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 45
+            "intelligence": 20
           },
           "flags": [
             "future_programmer"
@@ -2168,10 +2168,10 @@
     "choices": [
       {
         "text": "接受专业训练",
-        "effects": "💪+45",
+        "effects": "💪+20",
         "outcomes": {
           "attr": {
-            "health": 45
+            "health": 20
           },
           "flags": [
             "athlete_candidate"
@@ -2247,10 +2247,10 @@
     "choices": [
       {
         "text": "投入更多时间",
-        "effects": "🧠+45",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 45
+            "intelligence": 20
           },
           "flags": [
             "special_talent"
@@ -2286,10 +2286,10 @@
     "choices": [
       {
         "text": "希望成为科学家",
-        "effects": "🧠+35",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 35
+            "intelligence": 20
           },
           "flags": [
             "scientist_path"
@@ -2422,10 +2422,10 @@
     "choices": [
       {
         "text": "冷静沟通解决",
-        "effects": "🧠+15 👥+25",
+        "effects": "🧠+15 👥+20",
         "outcomes": {
           "attr": {
-            "social": 25,
+            "social": 20,
             "intelligence": 15
           },
           "flags": [
@@ -2463,10 +2463,10 @@
     "choices": [
       {
         "text": "承担责任",
-        "effects": "👥+25 ⚖️+20",
+        "effects": "👥+20 ⚖️+20",
         "outcomes": {
           "attr": {
-            "social": 25,
+            "social": 20,
             "morality": 20
           },
           "flags": [
@@ -2503,10 +2503,10 @@
     "choices": [
       {
         "text": "学习商业思维",
-        "effects": "💰+40",
+        "effects": "💰+20",
         "outcomes": {
           "attr": {
-            "wealth": 40
+            "wealth": 20
           },
           "flags": [
             "young_business"
@@ -2542,10 +2542,10 @@
     "choices": [
       {
         "text": "建立知识框架",
-        "effects": "🧠+45",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 45
+            "intelligence": 20
           },
           "flags": [
             "systematic_learner"
@@ -2581,10 +2581,10 @@
     "choices": [
       {
         "text": "投入大量训练",
-        "effects": "🧠+25 🎨+20",
+        "effects": "🧠+20 🎨+20",
         "outcomes": {
           "attr": {
-            "intelligence": 25,
+            "intelligence": 20,
             "appearance": 20
           },
           "flags": [
@@ -2621,10 +2621,10 @@
     "choices": [
       {
         "text": "保持信任",
-        "effects": "👥+45",
+        "effects": "👥+20",
         "outcomes": {
           "attr": {
-            "social": 45
+            "social": 20
           },
           "flags": [
             "deep_friendship"
@@ -2642,10 +2642,10 @@
       },
       {
         "text": "告诉别人",
-        "effects": "👥-25",
+        "effects": "👥-20",
         "outcomes": {
           "attr": {
-            "social": -25
+            "social": -20
           }
         }
       }
@@ -2660,10 +2660,10 @@
     "choices": [
       {
         "text": "成为长期训练方向",
-        "effects": "🧠+50",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 50
+            "intelligence": 20
           },
           "flags": [
             "specialist_path"
@@ -2699,10 +2699,10 @@
     "choices": [
       {
         "text": "产生探索兴趣",
-        "effects": "🧠+45",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 45
+            "intelligence": 20
           },
           "flags": [
             "ai_interest"
@@ -2738,10 +2738,10 @@
     "choices": [
       {
         "text": "严格执行计划",
-        "effects": "🧠+15 ⚖️+30",
+        "effects": "🧠+15 ⚖️+20",
         "outcomes": {
           "attr": {
-            "morality": 30,
+            "morality": 20,
             "intelligence": 15
           },
           "flags": [
@@ -2778,10 +2778,10 @@
     "choices": [
       {
         "text": "接受挑战",
-        "effects": "🧠+40 😊-10",
+        "effects": "🧠+20 😊-10",
         "outcomes": {
           "attr": {
-            "intelligence": 40,
+            "intelligence": 20,
             "happiness": -10
           },
           "flags": [
@@ -2818,10 +2818,10 @@
     "choices": [
       {
         "text": "坚持体育训练",
-        "effects": "💪+45",
+        "effects": "💪+20",
         "outcomes": {
           "attr": {
-            "health": 45
+            "health": 20
           },
           "flags": [
             "sports_focus"
@@ -2842,10 +2842,10 @@
       },
       {
         "text": "寻找平衡",
-        "effects": "😊+25",
+        "effects": "😊+20",
         "outcomes": {
           "attr": {
-            "happiness": 25
+            "happiness": 20
           }
         }
       }
@@ -2962,10 +2962,10 @@
     "choices": [
       {
         "text": "接受长期训练",
-        "effects": "🧠+30 ⚖️+20",
+        "effects": "🧠+20 ⚖️+20",
         "outcomes": {
           "attr": {
-            "intelligence": 30,
+            "intelligence": 20,
             "morality": 20
           },
           "flags": [
@@ -3002,10 +3002,10 @@
     "choices": [
       {
         "text": "竞选负责人",
-        "effects": "👥+30 🎨+15",
+        "effects": "👥+20 🎨+15",
         "outcomes": {
           "attr": {
-            "social": 30,
+            "social": 20,
             "appearance": 15
           },
           "flags": [
@@ -3042,10 +3042,10 @@
     "choices": [
       {
         "text": "认真研究市场",
-        "effects": "💰+45",
+        "effects": "💰+20",
         "outcomes": {
           "attr": {
-            "wealth": 45
+            "wealth": 20
           },
           "flags": [
             "young_entrepreneur"
@@ -3081,10 +3081,10 @@
     "choices": [
       {
         "text": "认真准备",
-        "effects": "🧠+25 ⚖️+20",
+        "effects": "🧠+20 ⚖️+20",
         "outcomes": {
           "attr": {
-            "intelligence": 25,
+            "intelligence": 20,
             "morality": 20
           },
           "flags": [
@@ -3121,10 +3121,10 @@
     "choices": [
       {
         "text": "冲刺重点学校",
-        "effects": "🧠+25 😊-15",
+        "effects": "🧠+20 😊-15",
         "outcomes": {
           "attr": {
-            "intelligence": 25,
+            "intelligence": 20,
             "happiness": -15
           },
           "flags": [
@@ -3161,10 +3161,10 @@
     "choices": [
       {
         "text": "制定详细复习计划",
-        "effects": "🧠+45 ⚖️+15",
+        "effects": "🧠+20 ⚖️+15",
         "outcomes": {
           "attr": {
-            "intelligence": 45,
+            "intelligence": 20,
             "morality": 15
           },
           "flags": [
@@ -3201,10 +3201,10 @@
     "choices": [
       {
         "text": "互相帮助",
-        "effects": "👥+45",
+        "effects": "👥+20",
         "outcomes": {
           "attr": {
-            "social": 45
+            "social": 20
           },
           "flags": [
             "study_partner"
@@ -3241,10 +3241,10 @@
     "choices": [
       {
         "text": "追求成功",
-        "effects": "🧠+25",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 25
+            "intelligence": 20
           },
           "flags": [
             "success_oriented"
@@ -3253,10 +3253,10 @@
       },
       {
         "text": "追求快乐",
-        "effects": "😊+25",
+        "effects": "😊+20",
         "outcomes": {
           "attr": {
-            "happiness": 25
+            "happiness": 20
           },
           "flags": [
             "happiness_oriented"
@@ -3265,10 +3265,10 @@
       },
       {
         "text": "追求帮助别人",
-        "effects": "⚖️+25",
+        "effects": "⚖️+20",
         "outcomes": {
           "attr": {
-            "morality": 25
+            "morality": 20
           },
           "flags": [
             "helper_personality"
@@ -3286,11 +3286,11 @@
     "choices": [
       {
         "text": "成为考试型人才",
-        "effects": "🧠+25 ⚖️+25",
+        "effects": "🧠+20 ⚖️+20",
         "outcomes": {
           "attr": {
-            "intelligence": 25,
-            "morality": 25
+            "intelligence": 20,
+            "morality": 20
           },
           "flags": [
             "academic_route"
@@ -3299,10 +3299,10 @@
       },
       {
         "text": "成为兴趣型人才",
-        "effects": "🧠+45",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 45
+            "intelligence": 20
           },
           "flags": [
             "talent_route"
@@ -3311,10 +3311,10 @@
       },
       {
         "text": "成为领导型人才",
-        "effects": "👥+45",
+        "effects": "👥+20",
         "outcomes": {
           "attr": {
-            "social": 45
+            "social": 20
           },
           "flags": [
             "leader_route"
@@ -3420,10 +3420,10 @@
       },
       {
         "text": "享受最后的小学生活",
-        "effects": "😊+25",
+        "effects": "😊+20",
         "outcomes": {
           "attr": {
-            "happiness": 25
+            "happiness": 20
           }
         }
       }
@@ -3438,10 +3438,10 @@
     "choices": [
       {
         "text": "主动了解变化",
-        "effects": "🧠+45",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 45
+            "intelligence": 20
           }
         }
       },
@@ -3474,10 +3474,10 @@
     "choices": [
       {
         "text": "制定严格计划",
-        "effects": "🧠+30 ⚖️+20",
+        "effects": "🧠+20 ⚖️+20",
         "outcomes": {
           "attr": {
-            "intelligence": 30,
+            "intelligence": 20,
             "morality": 20
           },
           "flags": [
@@ -3514,10 +3514,10 @@
     "choices": [
       {
         "text": "努力维持友情",
-        "effects": "👥+20 ⚖️+25",
+        "effects": "👥+20 ⚖️+20",
         "outcomes": {
           "attr": {
-            "morality": 25,
+            "morality": 20,
             "social": 20
           },
           "flags": [
@@ -3527,10 +3527,10 @@
       },
       {
         "text": "接受人生变化",
-        "effects": "🧠+25",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 25
+            "intelligence": 20
           }
         }
       },
@@ -3554,10 +3554,10 @@
     "choices": [
       {
         "text": "继续强化优势",
-        "effects": "🧠+30 🎨+20",
+        "effects": "🧠+20 🎨+20",
         "outcomes": {
           "attr": {
-            "intelligence": 30,
+            "intelligence": 20,
             "appearance": 20
           },
           "flags": [
@@ -3567,10 +3567,10 @@
       },
       {
         "text": "补足弱项",
-        "effects": "😊+25",
+        "effects": "😊+20",
         "outcomes": {
           "attr": {
-            "happiness": 25
+            "happiness": 20
           }
         }
       },
@@ -3594,10 +3594,10 @@
     "choices": [
       {
         "text": "把对方作为目标",
-        "effects": "🧠+45",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 45
+            "intelligence": 20
           },
           "flags": [
             "lifelong_competitor"
@@ -3606,10 +3606,10 @@
       },
       {
         "text": "学习对方优点",
-        "effects": "🧠+25",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 25
+            "intelligence": 20
           }
         }
       },
@@ -3633,10 +3633,10 @@
     "choices": [
       {
         "text": "深入研究技术",
-        "effects": "🧠+50",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 50
+            "intelligence": 20
           },
           "flags": [
             "tech_path"
@@ -3672,20 +3672,20 @@
     "choices": [
       {
         "text": "保持理性成长",
-        "effects": "🧠+25 ⚖️+20",
+        "effects": "🧠+20 ⚖️+20",
         "outcomes": {
           "attr": {
-            "intelligence": 25,
+            "intelligence": 20,
             "morality": 20
           }
         }
       },
       {
         "text": "勇敢表达自己",
-        "effects": "🎨+35",
+        "effects": "🎨+20",
         "outcomes": {
           "attr": {
-            "appearance": 35
+            "appearance": 20
           }
         }
       },
@@ -3709,11 +3709,11 @@
     "choices": [
       {
         "text": "进入重点初中",
-        "effects": "🎨+30 🍀+30",
+        "effects": "🎨+20 🍀+20",
         "outcomes": {
           "attr": {
-            "appearance": 30,
-            "luck": 30
+            "appearance": 20,
+            "luck": 20
           },
           "flags": [
             "key_middle_school"
@@ -3734,10 +3734,10 @@
       },
       {
         "text": "考试失利重新规划",
-        "effects": "💪+30",
+        "effects": "💪+20",
         "outcomes": {
           "attr": {
-            "health": 30
+            "health": 20
           }
         }
       }
@@ -3752,10 +3752,10 @@
     "choices": [
       {
         "text": "学业路线",
-        "effects": "🧠+25 ⚖️+20",
+        "effects": "🧠+20 ⚖️+20",
         "outcomes": {
           "attr": {
-            "intelligence": 25,
+            "intelligence": 20,
             "morality": 20
           },
           "flags": [
@@ -3765,10 +3765,10 @@
       },
       {
         "text": "兴趣路线",
-        "effects": "🧠+45",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 45
+            "intelligence": 20
           },
           "flags": [
             "talent_personality"
@@ -3777,10 +3777,10 @@
       },
       {
         "text": "社交领导路线",
-        "effects": "👥+25 🎨+20",
+        "effects": "👥+20 🎨+20",
         "outcomes": {
           "attr": {
-            "social": 25,
+            "social": 20,
             "appearance": 20
           },
           "flags": [
@@ -3799,10 +3799,10 @@
     "choices": [
       {
         "text": "成为专业人才",
-        "effects": "🧠+45",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 45
+            "intelligence": 20
           },
           "flags": [
             "professional_path"
@@ -3811,10 +3811,10 @@
       },
       {
         "text": "成为创业者",
-        "effects": "💰+25 👥+15",
+        "effects": "💰+20 👥+15",
         "outcomes": {
           "attr": {
-            "wealth": 25,
+            "wealth": 20,
             "social": 15
           },
           "flags": [
@@ -3824,10 +3824,10 @@
       },
       {
         "text": "成为自由创造者",
-        "effects": "🧠+40",
+        "effects": "🧠+20",
         "outcomes": {
           "attr": {
-            "intelligence": 40
+            "intelligence": 20
           },
           "flags": [
             "creator_path"

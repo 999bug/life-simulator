@@ -30,11 +30,12 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 - **convert-events.mjs**：唯一转换器。`ATTR_MAP`（107 键）把 chiled 属性名映射到 8 大引擎属性；`INVERSE` 集合内的键是负向维度（取反求和，如 `pressure:+8` → happiness:-8）；未映射键 fail-fast 抛错。`ATTR_ORDER`/`STAGE_RANGES` 需与 `src/engine/state.ts` 的 `ATTR_META`/`STAGE_META` 手动同步
 - **prune-events.mjs**：精选工具。事件 id 规则：**2 位数字后缀 = 原始主线事件（如 child_01），一字不改、永远保留；4 位数字后缀 = 模拟事件（如 child_0017），只能被精选删除、不能改内容**。`keep-list.json` 记录保留清单（审计用）
 - **merge-fragments.mjs**：合并 chiled.json + `script/fragments/` 片段，跑三重校验：convertAll fail-fast + 每岁密度（0-2 岁 1-3 个、3-12 岁 5-12 个、13-75 岁 3-7 个）+ flag 生产/消费配对（has_flags 引用的 flag 必须有产出者，not_flags 不算悬空）
-- `script/build-events.mjs` 是历史遗留工具（硬编码早期事件数组，与 chiled.json 重复），新工作一律用上述三个
+- **clamp-effects.mjs**：效果值钳位工具。4 位模拟事件的效果按转换后属性值等比例压缩到 ±3~±20 声明范围内（多键求和超范围时压缩该属性所有来源键）；2 位主线一字不改。幂等，效果值调整后用它 + build:events
+- `script/build-events.mjs` 是历史遗留工具（硬编码早期事件数组，与 chiled.json 重复），新工作一律用上述四个
 
 ### 引擎（src/engine/）— 纯函数，无副作用
 
-- **state.ts**：属性/阶段元数据（ATTR_META、STAGE_META）与状态纯函数（effectiveDelta 成长上限折算、applyOutcomes 属性钳位 0-100、calcMaxAge 动态寿命、applyElderDecay 65 岁起衰减、checkDeath、calcScore）。**属性成长上限 `ATTR_CAP`**（健康 90/智力 92/财富 95/幸福 90/社交 88/魅力 80/运气 75/道德 88）：正向收益距上限 15 点内线性递减且不越过上限，负向全额；老年衰减下限 0（运气好不掉血但不回血）。选项展示用 effectiveDelta 实时计算，与引擎一致
+- **state.ts**：属性/阶段元数据（ATTR_META、STAGE_META）与状态纯函数（ageCap 年龄锚点上限、effectiveDelta 收益折算、applyOutcomes 属性钳位 0-100、calcMaxAge 动态寿命、applyElderDecay 65 岁起衰减、checkDeath、calcScore）。**年龄锚点成长上限 `CAP_ANCHORS`**（如智力 7:55→18:85→30:92，锚点间线性插值）：正向收益距当前年龄上限 15 点内线性递减且不越过上限，负向全额；老年衰减下限 1（运气再好每事件也掉 1 点）。初始属性刻意偏低（健康 65/智力 25）。选项展示用 effectiveDelta 实时计算，与引擎一致
 - **events.ts**：加载 events.json 为 `LifeEvent[]`（注释标 357 个是过期信息，实际 459）
 - **events.json**：生成物（camelCase 引擎格式：`age`/`outcomes.attr`/`outcomes.flags`/`conditions.hasFlags`），**勿手改**
 

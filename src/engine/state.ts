@@ -1,4 +1,4 @@
-import type { Attributes, AttributeKey, AttributeMeta, GameState, LifeStage, StageMeta } from '../types';
+import type { Attributes, AttributeKey, AttributeMeta, GameState, LifeStage, StageMeta } from '../types/index.ts';
 
 /** 属性元数据 */
 export const ATTR_META: Record<AttributeKey, AttributeMeta> = {
@@ -64,6 +64,48 @@ export function createInitialState(gender: 'male' | 'female', name: string): Gam
   };
 }
 
+/**
+ * 属性成长上限：属性达到上限后正向收益不再生效，防止数值通胀到满值。
+ * 各属性上限不同（魅力/运气受先天与偶然性限制，财富最可积累）。
+ */
+export const ATTR_CAP: Record<AttributeKey, number> = {
+  health: 90,
+  intelligence: 92,
+  wealth: 95,
+  happiness: 90,
+  social: 88,
+  appearance: 80,
+  luck: 75,
+  morality: 88,
+};
+
+/** 距成长上限的过渡带：此距离内的正向收益线性递减 */
+const CAP_TAPER = 15;
+
+/**
+ * 计算属性增量的实际生效值。
+ *
+ * 正向收益按距离成长上限的余量线性递减（过渡带内逐渐归零），
+ * 且单次增量不超过剩余空间，属性永不越过上限。
+ * 负向惩罚全额生效。过渡带内的正向收益至少生效 1 点。
+ *
+ * @param key 属性键
+ * @param delta 数据表增量
+ * @param attrs 当前属性表
+ * @returns 实际生效增量
+ */
+export function effectiveDelta(key: AttributeKey, delta: number, attrs: Attributes): number {
+  if (delta <= 0) {
+    return delta;
+  }
+  const room = ATTR_CAP[key] - (attrs[key] ?? 0);
+  if (room <= 0) {
+    return 0;
+  }
+  const tapered = Math.round(delta * Math.min(1, room / CAP_TAPER));
+  return Math.max(1, Math.min(room, tapered));
+}
+
 /** 应用选项结果，返回新属性。保证整数。 */
 export function applyOutcomes(
   attrs: Attributes,
@@ -71,8 +113,11 @@ export function applyOutcomes(
 ): Attributes {
   const next = { ...attrs };
   for (const [k, v] of Object.entries(out.attr)) {
-    next[k as AttributeKey] = Math.round(
-      Math.max(0, Math.min(100, next[k as AttributeKey] + v)),
+    const key = k as AttributeKey;
+    // 收益递减：按当前值折算实际增量
+    const delta = effectiveDelta(key, v, attrs);
+    next[key] = Math.round(
+      Math.max(0, Math.min(100, next[key] + delta)),
     );
   }
   return next;
@@ -98,7 +143,8 @@ export function calcMaxAge(attrs: Attributes): number {
  * 保证结果为整数。
  */
 export function applyElderDecay(attrs: Attributes): Attributes {
-  const decay = Math.round(3 - attrs.luck / 20);
+  // 运气减免下限 0：运气足够好时老年不掉血，但不会反向回血
+  const decay = Math.max(0, Math.round(3 - attrs.luck / 20));
   const nextHealth = Math.round(
     Math.max(0, Math.min(100, attrs.health - decay)),
   );

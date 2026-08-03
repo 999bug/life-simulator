@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-人生模拟器：React 18 + TypeScript + Vite + Tailwind 的文字人生模拟游戏。纯前端、无后端，游戏内容由 JSON 事件数据驱动。事件数据源 `script/chiled.json`（468 个事件）经转换器生成引擎格式 `src/engine/events.json`，运行时线性播放。
+人生模拟器：React 18 + TypeScript + Vite + Tailwind 的文字人生模拟游戏。纯前端、无后端，游戏内容由 JSON 事件数据驱动。事件数据源 `script/chiled.json`（459 个事件）经转换器生成引擎格式 `src/engine/events.json`，运行时线性播放。
 
 ## 常用命令
 
@@ -12,7 +12,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 npm run dev            # vite dev server（端口 5173）
 npm run build          # tsc && vite build（生产构建）
 npm run build:events   # 重新生成 src/engine/events.json（数据改动后必须跑）
-node --test "script/*.test.mjs"   # 全部数据工具测试（19 个，glob 必须带引号，裸目录形式在本机报错）
+node --test "script/*.test.mjs"   # 数据工具测试（19 个，glob 必须带引号，裸目录形式在本机报错）
+node --experimental-strip-types --test script/engine-state.test.ts   # 引擎 state 测试（14 个，Node 22 直接跑 TS）
 ```
 
 ## 架构
@@ -33,8 +34,8 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 
 ### 引擎（src/engine/）— 纯函数，无副作用
 
-- **state.ts**：属性/阶段元数据（ATTR_META、STAGE_META）与状态纯函数（applyOutcomes 属性钳位 0-100、calcMaxAge 动态寿命、applyElderDecay 65 岁起衰减、checkDeath、calcScore）
-- **events.ts**：加载 events.json 为 `LifeEvent[]`（注释标 357 个是过期信息，实际 428）
+- **state.ts**：属性/阶段元数据（ATTR_META、STAGE_META）与状态纯函数（effectiveDelta 成长上限折算、applyOutcomes 属性钳位 0-100、calcMaxAge 动态寿命、applyElderDecay 65 岁起衰减、checkDeath、calcScore）。**属性成长上限 `ATTR_CAP`**（健康 90/智力 92/财富 95/幸福 90/社交 88/魅力 80/运气 75/道德 88）：正向收益距上限 15 点内线性递减且不越过上限，负向全额；老年衰减下限 0（运气好不掉血但不回血）。选项展示用 effectiveDelta 实时计算，与引擎一致
+- **events.ts**：加载 events.json 为 `LifeEvent[]`（注释标 357 个是过期信息，实际 459）
 - **events.json**：生成物（camelCase 引擎格式：`age`/`outcomes.attr`/`outcomes.flags`/`conditions.hasFlags`），**勿手改**
 
 ### 运行时（src/hooks/useGame.ts）

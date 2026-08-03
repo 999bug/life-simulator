@@ -7,6 +7,7 @@ import {
   getStageForAge,
   checkDeath,
   calcMaxAge,
+  effectiveDelta,
   ensureInt,
   STAGE_ORDER,
 } from '../engine/state';
@@ -99,8 +100,9 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
       const attrChanges: Partial<Attributes> = out.attr ?? {};
       const changedKeys = (Object.keys(attrChanges) as AttributeKey[]).filter(k => attrChanges[k] !== 0);
       if (changedKeys.length > 0) {
+        // 反馈展示实际生效值（含收益递减），与属性面板变化一致
         fb += '\n\n' + changedKeys.map(k => {
-          const v = attrChanges[k]!;
+          const v = effectiveDelta(k, attrChanges[k]!, state.game.attributes);
           return `${v > 0 ? '+' : ''}${v}`;
         }).join('  ');
       }

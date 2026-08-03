@@ -38,85 +38,6 @@
     ]
   },
   {
-    "id": "child_0023",
-    "age_range": [
-      3,
-      6
-    ],
-    "category": "creativity",
-    "title": "制作自己的作品",
-    "text": "你尝试创造一个属于自己的作品。",
-    "choices": [
-      {
-        "text": "不断改进作品",
-        "effects": {
-          "creativity": 20,
-          "patience": 10
-        },
-        "flags_add": [
-          "creator"
-        ]
-      },
-      {
-        "text": "快速完成",
-        "effects": {
-          "efficiency": 10
-        }
-      },
-      {
-        "text": "寻求别人帮助",
-        "effects": {
-          "teamwork": 15
-        }
-      }
-    ]
-  },
-  {
-    "id": "child_01",
-    "age_range": [
-      3,
-      4
-    ],
-    "category": "education",
-    "title": "第一天上幼儿园",
-    "text": "三岁了。第一天上幼儿园——陌生的教室里摆满了五颜六色的玩具，墙上贴着动物贴纸。周围全是和你差不多高的小朋友，有的在嚎啕大哭，有的在抢积木。老师蹲下来温柔地问你想玩什么。",
-    "choices": [
-      {
-        "text": "跑向积木区，大声问「谁要一起搭城堡？」",
-        "effects": {
-          "social": 8,
-          "happiness": 5,
-          "confidence": 8
-        },
-        "flags_add": [
-          "outgoing_kid"
-        ]
-      },
-      {
-        "text": "安静地去图书角，一个人翻绘本",
-        "effects": {
-          "social": -3,
-          "happiness": -2,
-          "learning": 6
-        },
-        "flags_add": [
-          "quiet_kid"
-        ]
-      },
-      {
-        "text": "死死抱着妈妈的腿不松手，眼泪汪汪",
-        "effects": {
-          "happiness": -8,
-          "social": -5,
-          "confidence": -5
-        },
-        "flags_add": [
-          "shy_kid"
-        ]
-      }
-    ]
-  },
-  {
     "id": "child_0101",
     "age_range": [
       3,
@@ -233,6 +154,126 @@
     ]
   },
   {
+    "id": "child_01",
+    "age_range": [
+      3,
+      4
+    ],
+    "category": "education",
+    "title": "第一天上幼儿园",
+    "text": "三岁了。第一天上幼儿园——陌生的教室里摆满了五颜六色的玩具，墙上贴着动物贴纸。周围全是和你差不多高的小朋友，有的在嚎啕大哭，有的在抢积木。老师蹲下来温柔地问你想玩什么。",
+    "choices": [
+      {
+        "text": "跑向积木区，大声问「谁要一起搭城堡？」",
+        "effects": {
+          "social": 8,
+          "happiness": 5,
+          "confidence": 8
+        },
+        "flags_add": [
+          "outgoing_kid"
+        ]
+      },
+      {
+        "text": "安静地去图书角，一个人翻绘本",
+        "effects": {
+          "social": -3,
+          "happiness": -2,
+          "learning": 6
+        },
+        "flags_add": [
+          "quiet_kid"
+        ]
+      },
+      {
+        "text": "死死抱着妈妈的腿不松手，眼泪汪汪",
+        "effects": {
+          "happiness": -8,
+          "social": -5,
+          "confidence": -5
+        },
+        "flags_add": [
+          "shy_kid"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "child_0023",
+    "age_range": [
+      3,
+      6
+    ],
+    "category": "creativity",
+    "title": "制作自己的作品",
+    "text": "你尝试创造一个属于自己的作品。",
+    "choices": [
+      {
+        "text": "不断改进作品",
+        "effects": {
+          "creativity": 20,
+          "patience": 10
+        },
+        "flags_add": [
+          "creator"
+        ]
+      },
+      {
+        "text": "快速完成",
+        "effects": {
+          "efficiency": 10
+        }
+      },
+      {
+        "text": "寻求别人帮助",
+        "effects": {
+          "teamwork": 15
+        }
+      }
+    ]
+  },
+  {
+    "id": "child_02",
+    "age_range": [
+      4,
+      5
+    ],
+    "category": "family",
+    "title": "弟弟妹妹的到来",
+    "text": "四岁那年，妈妈肚子里多了一个小生命。你不太明白「弟弟妹妹」是什么意思，但注意到妈妈的肚子越来越大。有一天他们带你去看那个皱巴巴的、被包在襁褓里的小家伙——这是和你共享同一个血脉的人。",
+    "choices": [
+      {
+        "text": "轻轻摸了摸TA的小手，觉得好神奇",
+        "effects": {
+          "happiness": 5,
+          "empathy": 5,
+          "family_relation": 8
+        },
+        "flags_add": [
+          "loving_sibling"
+        ]
+      },
+      {
+        "text": "有点吃醋——为什么大家都在看TA不看我了",
+        "effects": {
+          "happiness": -3,
+          "empathy": -3,
+          "family_relation": -5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "好奇地观察一切，问了好多「为什么」",
+        "effects": {
+          "curiosity": 8,
+          "learning": 5,
+          "happiness": 3
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
     "id": "child_0018",
     "age_range": [
       4,
@@ -343,38 +384,6 @@
     ]
   },
   {
-    "id": "child_0034",
-    "age_range": [
-      4,
-      6
-    ],
-    "category": "art",
-    "title": "第一次公开展示作品",
-    "text": "你的作品需要展示给别人看。",
-    "choices": [
-      {
-        "text": "勇敢展示",
-        "effects": {
-          "confidence": 15,
-          "creativity": 15
-        }
-      },
-      {
-        "text": "害羞拒绝",
-        "effects": {
-          "creativity": 5,
-          "confidence": -5
-        }
-      },
-      {
-        "text": "接受评价改进",
-        "effects": {
-          "learning": 15
-        }
-      }
-    ]
-  },
-  {
     "id": "child_0039",
     "age_range": [
       4,
@@ -409,86 +418,6 @@
         "effects": {
           "thinking": 10
         }
-      }
-    ]
-  },
-  {
-    "id": "child_02",
-    "age_range": [
-      4,
-      5
-    ],
-    "category": "family",
-    "title": "弟弟妹妹的到来",
-    "text": "四岁那年，妈妈肚子里多了一个小生命。你不太明白「弟弟妹妹」是什么意思，但注意到妈妈的肚子越来越大。有一天他们带你去看那个皱巴巴的、被包在襁褓里的小家伙——这是和你共享同一个血脉的人。",
-    "choices": [
-      {
-        "text": "轻轻摸了摸TA的小手，觉得好神奇",
-        "effects": {
-          "happiness": 5,
-          "empathy": 5,
-          "family_relation": 8
-        },
-        "flags_add": [
-          "loving_sibling"
-        ]
-      },
-      {
-        "text": "有点吃醋——为什么大家都在看TA不看我了",
-        "effects": {
-          "happiness": -3,
-          "empathy": -3,
-          "family_relation": -5
-        },
-        "flags_add": []
-      },
-      {
-        "text": "好奇地观察一切，问了好多「为什么」",
-        "effects": {
-          "curiosity": 8,
-          "learning": 5,
-          "happiness": 3
-        },
-        "flags_add": []
-      }
-    ]
-  },
-  {
-    "id": "child_0017",
-    "age_range": [
-      5,
-      6
-    ],
-    "category": "family",
-    "title": "第一次独立完成任务",
-    "text": "父母让你自己完成一件事情，你需要证明自己已经长大。",
-    "choices": [
-      {
-        "text": "认真完成任务",
-        "effects": {
-          "independence": 15,
-          "confidence": 10
-        },
-        "flags_add": [
-          "responsible"
-        ]
-      },
-      {
-        "text": "请求父母帮助",
-        "effects": {
-          "family_relation": 10,
-          "dependence": 5
-        }
-      },
-      {
-        "text": "拖延直到最后",
-        "effects": {
-          "creativity": 5,
-          "discipline": -5
-        },
-        "flags_add": [
-          "procrastination"
-        ]
       }
     ]
   },
@@ -565,117 +494,6 @@
     ]
   },
   {
-    "id": "child_0021",
-    "age_range": [
-      5,
-      6
-    ],
-    "category": "emotion",
-    "title": "第一次面对失败",
-    "text": "你努力完成一件事，但最终失败了。",
-    "choices": [
-      {
-        "text": "重新尝试",
-        "effects": {
-          "willpower": 20,
-          "resilience": 20
-        },
-        "flags_add": [
-          "never_give_up"
-        ]
-      },
-      {
-        "text": "寻找其他方法",
-        "effects": {
-          "creativity": 15,
-          "intelligence": 10
-        },
-        "flags_add": [
-          "problem_solver"
-        ]
-      },
-      {
-        "text": "放弃",
-        "effects": {
-          "pressure": -10,
-          "confidence": -5
-        }
-      }
-    ]
-  },
-  {
-    "id": "child_0031",
-    "age_range": [
-      5,
-      6
-    ],
-    "category": "technology",
-    "title": "第一次接触互联网",
-    "text": "你开始接触网络世界。",
-    "choices": [
-      {
-        "text": "学习网络知识",
-        "effects": {
-          "technology": 20,
-          "knowledge": 10
-        },
-        "flags_add": [
-          "digital_native"
-        ]
-      },
-      {
-        "text": "观看娱乐内容",
-        "effects": {
-          "happiness": 10,
-          "entertainment": 15
-        }
-      },
-      {
-        "text": "远离网络",
-        "effects": {
-          "focus": 10
-        }
-      }
-    ]
-  },
-  {
-    "id": "child_0032",
-    "age_range": [
-      5,
-      6
-    ],
-    "category": "sports",
-    "title": "第一次参加团队活动",
-    "text": "你需要和其他孩子合作完成任务。",
-    "choices": [
-      {
-        "text": "成为团队领导",
-        "effects": {
-          "leadership": 20,
-          "charisma": 10
-        },
-        "flags_add": [
-          "leader_trait"
-        ]
-      },
-      {
-        "text": "配合团队",
-        "effects": {
-          "teamwork": 20
-        },
-        "flags_add": [
-          "team_player"
-        ]
-      },
-      {
-        "text": "独自完成",
-        "effects": {
-          "independence": 15
-        }
-      }
-    ]
-  },
-  {
     "id": "child_0042",
     "age_range": [
       5,
@@ -716,83 +534,6 @@
     ]
   },
   {
-    "id": "child_0044",
-    "age_range": [
-      5,
-      6
-    ],
-    "category": "learning",
-    "title": "参加兴趣班",
-    "text": "父母希望你学习一项额外技能。",
-    "choices": [
-      {
-        "text": "学习音乐",
-        "effects": {
-          "music": 20,
-          "creativity": 10
-        },
-        "flags_add": [
-          "music_skill"
-        ]
-      },
-      {
-        "text": "学习运动",
-        "effects": {
-          "health": 15,
-          "sports": 15
-        }
-      },
-      {
-        "text": "学习编程",
-        "effects": {
-          "technology": 20,
-          "logic": 15
-        },
-        "flags_add": [
-          "coding_interest"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "child_0048",
-    "age_range": [
-      5,
-      6
-    ],
-    "category": "personality",
-    "title": "第一次面对陌生人",
-    "text": "亲戚带你参加聚会，你需要面对许多陌生人。",
-    "choices": [
-      {
-        "text": "主动交流",
-        "effects": {
-          "charisma": 15,
-          "social": 20
-        },
-        "flags_add": [
-          "social_confident"
-        ]
-      },
-      {
-        "text": "观察后交流",
-        "effects": {
-          "observation": 20,
-          "thinking": 10
-        }
-      },
-      {
-        "text": "尽量避免交流",
-        "effects": {
-          "introversion": 15
-        },
-        "flags_add": [
-          "introvert"
-        ]
-      }
-    ]
-  },
-  {
     "id": "child_0053",
     "age_range": [
       5,
@@ -827,44 +568,6 @@
         "flags_add": [
           "achievement_drive"
         ]
-      }
-    ]
-  },
-  {
-    "id": "child_0055",
-    "age_range": [
-      5,
-      6
-    ],
-    "category": "competition",
-    "title": "第一次排名",
-    "text": "你知道了成绩排名，开始认识竞争。",
-    "choices": [
-      {
-        "text": "努力提升排名",
-        "effects": {
-          "ambition": 20,
-          "learning": 15
-        },
-        "flags_add": [
-          "rank_focus"
-        ]
-      },
-      {
-        "text": "关注自己的进步",
-        "effects": {
-          "happiness": 15,
-          "stability": 10
-        },
-        "flags_add": [
-          "growth_mindset"
-        ]
-      },
-      {
-        "text": "认为排名不重要",
-        "effects": {
-          "freedom": 15
-        }
       }
     ]
   },
@@ -957,112 +660,6 @@
     ]
   },
   {
-    "id": "child_0078",
-    "age_range": [
-      6,
-      6
-    ],
-    "category": "teacher",
-    "title": "遇到第一位重要老师",
-    "text": "一位老师开始影响你的成长。",
-    "choices": [
-      {
-        "text": "努力获得老师认可",
-        "effects": {
-          "discipline": 15,
-          "learning": 15
-        },
-        "flags_add": [
-          "teacher_support"
-        ]
-      },
-      {
-        "text": "保持普通关系",
-        "effects": {
-          "independence": 10
-        }
-      },
-      {
-        "text": "认为老师要求太多",
-        "effects": {
-          "critical_thinking": 10
-        }
-      }
-    ]
-  },
-  {
-    "id": "child_0079",
-    "age_range": [
-      6,
-      6
-    ],
-    "category": "friend",
-    "title": "认识新的朋友",
-    "text": "你在班级里认识了一位性格不同的同学。",
-    "choices": [
-      {
-        "text": "成为好朋友",
-        "effects": {
-          "friendship": 20,
-          "social": 10
-        },
-        "flags_add": [
-          "childhood_best_friend"
-        ]
-      },
-      {
-        "text": "保持竞争关系",
-        "effects": {
-          "competition": 15
-        },
-        "flags_add": [
-          "rival"
-        ]
-      },
-      {
-        "text": "保持距离",
-        "effects": {
-          "independence": 10
-        }
-      }
-    ]
-  },
-  {
-    "id": "child_0080",
-    "age_range": [
-      6,
-      6
-    ],
-    "category": "learning",
-    "title": "第一次家庭作业",
-    "text": "你第一次需要每天完成学习任务。",
-    "choices": [
-      {
-        "text": "制定完成计划",
-        "effects": {
-          "planning": 20,
-          "discipline": 15
-        }
-      },
-      {
-        "text": "想到哪里做到哪里",
-        "effects": {
-          "adaptability": 10
-        }
-      },
-      {
-        "text": "拖延完成",
-        "effects": {
-          "pressure": 10,
-          "discipline": -10
-        },
-        "flags_add": [
-          "procrastinator"
-        ]
-      }
-    ]
-  },
-  {
     "id": "child_0082",
     "age_range": [
       6,
@@ -1095,40 +692,6 @@
         },
         "flags_add": [
           "early_failure"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "child_0083",
-    "age_range": [
-      6,
-      6
-    ],
-    "category": "personality",
-    "title": "第一次被同学认可",
-    "text": "你的某个特点被同学喜欢。",
-    "choices": [
-      {
-        "text": "成为大家关注的人",
-        "effects": {
-          "charisma": 20,
-          "social": 15
-        }
-      },
-      {
-        "text": "保持低调",
-        "effects": {
-          "observation": 15
-        }
-      },
-      {
-        "text": "利用影响力帮助别人",
-        "effects": {
-          "leadership": 20
-        },
-        "flags_add": [
-          "natural_leader"
         ]
       }
     ]
@@ -1172,109 +735,6 @@
         "flags_add": [
           "technology_path"
         ]
-      }
-    ]
-  },
-  {
-    "id": "child_0088",
-    "age_range": [
-      6,
-      6
-    ],
-    "category": "family",
-    "title": "第一次独自外出",
-    "text": "父母允许你独自完成一次短途任务。",
-    "choices": [
-      {
-        "text": "顺利完成任务",
-        "effects": {
-          "independence": 20,
-          "confidence": 15
-        },
-        "flags_add": [
-          "independent_child"
-        ]
-      },
-      {
-        "text": "遇到困难寻求帮助",
-        "effects": {
-          "communication": 15,
-          "adaptability": 10
-        }
-      },
-      {
-        "text": "因为害怕拒绝",
-        "effects": {
-          "security_need": 10
-        }
-      }
-    ]
-  },
-  {
-    "id": "child_0090",
-    "age_range": [
-      6,
-      6
-    ],
-    "category": "health",
-    "title": "第一次坚持锻炼",
-    "text": "你决定培养一个健康习惯。",
-    "choices": [
-      {
-        "text": "每天坚持运动",
-        "effects": {
-          "health": 20,
-          "willpower": 15
-        },
-        "flags_add": [
-          "healthy_lifestyle"
-        ]
-      },
-      {
-        "text": "偶尔运动",
-        "effects": {
-          "health": 10
-        }
-      },
-      {
-        "text": "放弃运动",
-        "effects": {
-          "comfort": 10
-        }
-      }
-    ]
-  },
-  {
-    "id": "child_0093",
-    "age_range": [
-      6,
-      6
-    ],
-    "category": "technology",
-    "title": "第一次接触编程游戏",
-    "text": "你接触到了简单的编程逻辑游戏。",
-    "choices": [
-      {
-        "text": "产生浓厚兴趣",
-        "effects": {
-          "logic": 20,
-          "technology": 20
-        },
-        "flags_add": [
-          "future_engineer"
-        ]
-      },
-      {
-        "text": "觉得只是游戏",
-        "effects": {
-          "fun": 10
-        }
-      },
-      {
-        "text": "更喜欢艺术创造",
-        "effects": {
-          "creativity": 15
-        }
       }
     ]
   },
@@ -1372,48 +832,6 @@
         },
         "flags_add": [
           "coding_early"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "child_05",
-    "age_range": [
-      7,
-      8
-    ],
-    "category": "health",
-    "title": "迷上了看电视",
-    "text": "七岁。你迷上了电视里的动画片。每天放学第一件事就是开电视，作业要妈妈催三遍才写。妈妈叹了口气：「这样下去眼睛要坏掉了。」",
-    "choices": [
-      {
-        "text": "听话减少了看电视时间，和妈妈约定每天只看一小时",
-        "effects": {
-          "discipline": 5,
-          "learning": 3,
-          "health": 2
-        },
-        "flags_add": [
-          "self_discipline_early"
-        ]
-      },
-      {
-        "text": "假装听话但趁妈妈不注意又偷偷打开",
-        "effects": {
-          "discipline": -5,
-          "happiness": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "「那我去外面踢球好了！」自己找到了替代方案",
-        "effects": {
-          "health": 6,
-          "social": 5,
-          "independence": 5
-        },
-        "flags_add": [
-          "outdoor_kid"
         ]
       }
     ]
@@ -1818,42 +1236,44 @@
     ]
   },
   {
-    "id": "child_06",
+    "id": "child_05",
     "age_range": [
-      8,
-      9
+      7,
+      8
     ],
-    "category": "competition",
-    "title": "朗诵比赛",
-    "text": "学校要举办朗诵比赛，语文老师鼓励你报名。你站在班级门口犹豫了很久——脑子里一半是「我想试试」，一半是「万一忘词了多丢人」。",
+    "category": "health",
+    "title": "迷上了看电视",
+    "text": "七岁。你迷上了电视里的动画片。每天放学第一件事就是开电视，作业要妈妈催三遍才写。妈妈叹了口气：「这样下去眼睛要坏掉了。」",
     "choices": [
       {
-        "text": "报名！回家让妈妈陪你练了一个星期",
+        "text": "听话减少了看电视时间，和妈妈约定每天只看一小时",
         "effects": {
-          "confidence": 8,
-          "charisma": 5,
-          "happiness": 5
+          "discipline": 5,
+          "learning": 3,
+          "health": 2
         },
         "flags_add": [
-          "public_speaking"
+          "self_discipline_early"
         ]
       },
       {
-        "text": "不想上台。但帮参赛的同学做了好看的背景板",
+        "text": "假装听话但趁妈妈不注意又偷偷打开",
         "effects": {
-          "creativity": 5,
-          "social": 5,
-          "empathy": 3
+          "discipline": -5,
+          "happiness": 3
         },
         "flags_add": []
       },
       {
-        "text": "算了，把时间花在看书上好了",
+        "text": "「那我去外面踢球好了！」自己找到了替代方案",
         "effects": {
-          "learning": 5,
-          "happiness": -2
+          "health": 6,
+          "social": 5,
+          "independence": 5
         },
-        "flags_add": []
+        "flags_add": [
+          "outdoor_kid"
+        ]
       }
     ]
   },
@@ -2243,40 +1663,40 @@
     ]
   },
   {
-    "id": "child_07",
+    "id": "child_06",
     "age_range": [
-      9,
-      10
+      8,
+      9
     ],
-    "category": "family",
-    "title": "爸妈的争吵",
-    "text": "晚上被争吵声吵醒了。爸妈以为你睡着了，在客厅压低声音吵着——好像是关于钱、关于工作、关于外婆的病。你缩在被子里紧紧抱着枕头。第一次隐约感觉到：大人们的世界也不是牢不可破的。",
+    "category": "competition",
+    "title": "朗诵比赛",
+    "text": "学校要举办朗诵比赛，语文老师鼓励你报名。你站在班级门口犹豫了很久——脑子里一半是「我想试试」，一半是「万一忘词了多丢人」。",
     "choices": [
       {
-        "text": "第二天早起给妈妈倒了杯水，帮爸爸整理了拖鞋",
+        "text": "报名！回家让妈妈陪你练了一个星期",
         "effects": {
-          "empathy": 8,
-          "family_relation": 5,
-          "maturity": 5
+          "confidence": 8,
+          "charisma": 5,
+          "happiness": 5
         },
         "flags_add": [
-          "empathetic"
+          "public_speaking"
         ]
       },
       {
-        "text": "假装什么都没发生。但变得更加安静和敏感了",
+        "text": "不想上台。但帮参赛的同学做了好看的背景板",
         "effects": {
-          "observation": 8,
-          "happiness": -5,
-          "social": -2
+          "creativity": 5,
+          "social": 5,
+          "empathy": 3
         },
         "flags_add": []
       },
       {
-        "text": "去问外婆发生了什么。外婆摸着你的头说「没事」",
+        "text": "算了，把时间花在看书上好了",
         "effects": {
-          "family_relation": 8,
-          "happiness": 2
+          "learning": 5,
+          "happiness": -2
         },
         "flags_add": []
       }
@@ -2670,57 +2090,42 @@
     ]
   },
   {
-    "id": "child_08",
+    "id": "child_07",
     "age_range": [
-      10,
-      11
+      9,
+      10
     ],
-    "category": "friend",
-    "title": "转校生",
-    "text": "班里转来了一个新同学。他总是一个人坐在座位上，课间也不和别人玩。有天下着大雨，放学铃响了很久他还没走——原来没带伞。你手里的伞不大，但两个人挤一挤也够。",
+    "category": "family",
+    "title": "爸妈的争吵",
+    "text": "晚上被争吵声吵醒了。爸妈以为你睡着了，在客厅压低声音吵着——好像是关于钱、关于工作、关于外婆的病。你缩在被子里紧紧抱着枕头。第一次隐约感觉到：大人们的世界也不是牢不可破的。",
     "choices": [
       {
-        "text": "「一起走吧！」笑着把伞举过他的头顶",
+        "text": "第二天早起给妈妈倒了杯水，帮爸爸整理了拖鞋",
         "effects": {
-          "social": 10,
           "empathy": 8,
-          "happiness": 5
+          "family_relation": 5,
+          "maturity": 5
         },
         "flags_add": [
-          "kind_heart",
-          "best_friend"
+          "empathetic"
         ]
       },
       {
-        "text": "叫上几个同学一起送他回家，一路说说笑笑",
+        "text": "假装什么都没发生。但变得更加安静和敏感了",
         "effects": {
-          "social": 7,
-          "happiness": 4,
-          "leadership": 5
-        },
-        "flags_add": [
-          "best_friend"
-        ]
-      },
-      {
-        "text": "假装没看见，和朋友们打打闹闹地跑了",
-        "effects": {
-          "empathy": -5,
-          "social": -2,
-          "pressure": -5
+          "observation": 8,
+          "happiness": -5,
+          "social": -2
         },
         "flags_add": []
       },
       {
-        "text": "觉得他一定有什么毛病，和几个同学一起嘲笑他",
+        "text": "去问外婆发生了什么。外婆摸着你的头说「没事」",
         "effects": {
-          "empathy": -15,
-          "happiness": -3,
-          "social": 5
+          "family_relation": 8,
+          "happiness": 2
         },
-        "flags_add": [
-          "bully"
-        ]
+        "flags_add": []
       }
     ]
   },
@@ -3104,67 +2509,57 @@
     ]
   },
   {
-    "id": "child_09",
+    "id": "child_08",
     "age_range": [
-      11,
-      12
+      10,
+      11
     ],
     "category": "friend",
-    "title": "最受欢迎的同学",
-    "conditions": {
-      "has_flags": [
-        "best_friend"
-      ],
-      "not_flags": [
-        "bully"
-      ]
-    },
-    "text": "自从交了那个好朋友，你们形影不离。一起上学、一起写作业、一起在操场上疯跑。班里同学都说你很可靠。六年级毕业典礼上，你被评为「最受欢迎的同学」。",
+    "title": "转校生",
+    "text": "班里转来了一个新同学。他总是一个人坐在座位上，课间也不和别人玩。有天下着大雨，放学铃响了很久他还没走——原来没带伞。你手里的伞不大，但两个人挤一挤也够。",
     "choices": [
       {
-        "text": "心里暖洋洋的。原来善良真的会传染",
+        "text": "「一起走吧！」笑着把伞举过他的头顶",
         "effects": {
-          "happiness": 8,
-          "social": 6,
-          "empathy": 5
-        },
-        "flags_add": []
-      }
-    ]
-  },
-  {
-    "id": "child_10",
-    "age_range": [
-      11,
-      12
-    ],
-    "category": "personality",
-    "title": "学会道歉",
-    "conditions": {
-      "has_flags": [
-        "bully"
-      ]
-    },
-    "text": "班主任把你叫到办公室谈了很久。她没有骂你——只是让你想象，如果你是那个新同学，第一天到陌生的地方，没有朋友，还有人嘲笑你……你低着头，眼泪掉在校服上。第二天你走到他面前小声说了句「对不起」。",
-    "choices": [
-      {
-        "text": "从此改变了。主动帮新同学适应班级",
-        "effects": {
-          "empathy": 10,
-          "social": 5,
-          "maturity": 8
+          "social": 10,
+          "empathy": 8,
+          "happiness": 5
         },
         "flags_add": [
-          "redeemed"
+          "kind_heart",
+          "best_friend"
         ]
       },
       {
-        "text": "道歉了，但还是不太会和人相处",
+        "text": "叫上几个同学一起送他回家，一路说说笑笑",
         "effects": {
-          "empathy": 3,
-          "happiness": -3
+          "social": 7,
+          "happiness": 4,
+          "leadership": 5
+        },
+        "flags_add": [
+          "best_friend"
+        ]
+      },
+      {
+        "text": "假装没看见，和朋友们打打闹闹地跑了",
+        "effects": {
+          "empathy": -5,
+          "social": -2,
+          "pressure": -5
         },
         "flags_add": []
+      },
+      {
+        "text": "觉得他一定有什么毛病，和几个同学一起嘲笑他",
+        "effects": {
+          "empathy": -15,
+          "happiness": -3,
+          "social": 5
+        },
+        "flags_add": [
+          "bully"
+        ]
       }
     ]
   },
@@ -3520,6 +2915,71 @@
         "flags_add": [
           "leader_route"
         ]
+      }
+    ]
+  },
+  {
+    "id": "child_09",
+    "age_range": [
+      11,
+      12
+    ],
+    "category": "friend",
+    "title": "最受欢迎的同学",
+    "conditions": {
+      "has_flags": [
+        "best_friend"
+      ],
+      "not_flags": [
+        "bully"
+      ]
+    },
+    "text": "自从交了那个好朋友，你们形影不离。一起上学、一起写作业、一起在操场上疯跑。班里同学都说你很可靠。六年级毕业典礼上，你被评为「最受欢迎的同学」。",
+    "choices": [
+      {
+        "text": "心里暖洋洋的。原来善良真的会传染",
+        "effects": {
+          "happiness": 8,
+          "social": 6,
+          "empathy": 5
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "child_10",
+    "age_range": [
+      11,
+      12
+    ],
+    "category": "personality",
+    "title": "学会道歉",
+    "conditions": {
+      "has_flags": [
+        "bully"
+      ]
+    },
+    "text": "班主任把你叫到办公室谈了很久。她没有骂你——只是让你想象，如果你是那个新同学，第一天到陌生的地方，没有朋友，还有人嘲笑你……你低着头，眼泪掉在校服上。第二天你走到他面前小声说了句「对不起」。",
+    "choices": [
+      {
+        "text": "从此改变了。主动帮新同学适应班级",
+        "effects": {
+          "empathy": 10,
+          "social": 5,
+          "maturity": 8
+        },
+        "flags_add": [
+          "redeemed"
+        ]
+      },
+      {
+        "text": "道歉了，但还是不太会和人相处",
+        "effects": {
+          "empathy": 3,
+          "happiness": -3
+        },
+        "flags_add": []
       }
     ]
   },
@@ -3961,6 +3421,47 @@
     ]
   },
   {
+    "id": "teen_26",
+    "age_range": [
+      13,
+      13
+    ],
+    "category": "education",
+    "title": "初中重点班",
+    "text": "十三岁，开学第一天。班主任拿着分班表叫到你的名字——重点班。教室里的同学个个眼神清亮，课间都在讨论竞赛题。你从没觉得学习可以这么有压力，也这么有吸引力。",
+    "conditions": {
+      "has_flags": [
+        "top_student"
+      ]
+    },
+    "choices": [
+      {
+        "text": "「既然进来了，就证明自己配得上。」",
+        "effects": {
+          "learning": 16,
+          "confidence": 10
+        },
+        "flags_add": [
+          "elite_class"
+        ]
+      },
+      {
+        "text": "先观察观察，找到自己的节奏。",
+        "effects": {
+          "learning": 10,
+          "stability": 8
+        }
+      },
+      {
+        "text": "压力太大了，我想回普通班。",
+        "effects": {
+          "happiness": -8,
+          "learning": -6
+        }
+      }
+    ]
+  },
+  {
     "id": "teen_02",
     "age_range": [
       13,
@@ -4162,43 +3663,91 @@
     ]
   },
   {
-    "id": "teen_26",
+    "id": "teen_32",
     "age_range": [
-      13,
-      13
+      14,
+      14
     ],
-    "category": "education",
-    "title": "初中重点班",
-    "text": "十三岁，开学第一天。班主任拿着分班表叫到你的名字——重点班。教室里的同学个个眼神清亮，课间都在讨论竞赛题。你从没觉得学习可以这么有压力，也这么有吸引力。",
+    "category": "sports",
+    "title": "体育特长生选拔",
+    "text": "十四岁，体育老师找到你：「市体校来挑人了，你百米成绩全校第一，要不要去试试？」训练很苦，早上六点就要到操场，但站在跑道上的那种感觉，让你舍不得说「不」。",
     "conditions": {
       "has_flags": [
-        "top_student"
+        "athlete_path",
+        "sports_talent"
       ]
     },
     "choices": [
       {
-        "text": "「既然进来了，就证明自己配得上。」",
+        "text": "「去！我想跑出点名堂。」",
         "effects": {
-          "learning": 16,
-          "confidence": 10
+          "health": 10,
+          "sports": 12,
+          "discipline": 6
         },
         "flags_add": [
-          "elite_class"
+          "sports_career"
         ]
       },
       {
-        "text": "先观察观察，找到自己的节奏。",
+        "text": "还是以学习为主，体育当爱好",
         "effects": {
-          "learning": 10,
-          "stability": 8
-        }
+          "learning": 6,
+          "health": 4
+        },
+        "flags_add": []
       },
       {
-        "text": "压力太大了，我想回普通班。",
+        "text": "太苦了，不去了",
         "effects": {
-          "happiness": -8,
-          "learning": -6
-        }
+          "happiness": -4,
+          "health": -3
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "teen_38",
+    "age_range": [
+      14,
+      14
+    ],
+    "category": "personality",
+    "title": "保家卫国的念头",
+    "text": "十四岁，国庆阅兵。你盯着电视里整齐的方队挪不开眼，爸爸说「你爷爷当年也穿过军装」。那一夜你失眠了，脑子里全是迷彩绿。",
+    "conditions": {
+      "has_flags": [
+        "service_dream"
+      ]
+    },
+    "choices": [
+      {
+        "text": "「将来我要当兵。」",
+        "effects": {
+          "courage": 12,
+          "discipline": 8
+        },
+        "flags_add": [
+          "military_flag"
+        ]
+      },
+      {
+        "text": "「当警察也不错，抓坏人帅。」",
+        "effects": {
+          "courage": 8,
+          "responsibility": 8
+        },
+        "flags_add": [
+          "military_flag"
+        ]
+      },
+      {
+        "text": "他们值得尊敬，但我不想上战场",
+        "effects": {
+          "happiness": 4
+        },
+        "flags_add": []
       }
     ]
   },
@@ -4398,91 +3947,147 @@
     ]
   },
   {
-    "id": "teen_32",
+    "id": "teen_27",
     "age_range": [
-      14,
-      14
+      15,
+      15
     ],
-    "category": "sports",
-    "title": "体育特长生选拔",
-    "text": "十四岁，体育老师找到你：「市体校来挑人了，你百米成绩全校第一，要不要去试试？」训练很苦，早上六点就要到操场，但站在跑道上的那种感觉，让你舍不得说「不」。",
+    "category": "education",
+    "title": "中考成绩公布",
+    "text": "十五岁，中考成绩公布那天，你盯着屏幕的手在抖。分数跳出来——超过重点高中线。妈妈眼眶红了，爸爸拍了拍你的肩膀，一句话没说。你想起那些刷题的深夜，值了。",
     "conditions": {
       "has_flags": [
-        "athlete_path",
-        "sports_talent"
+        "key_middle_school",
+        "exam_focus"
       ]
     },
     "choices": [
       {
-        "text": "「去！我想跑出点名堂。」",
+        "text": "「重点高中，我来报到。」",
         "effects": {
-          "health": 10,
-          "sports": 12,
-          "discipline": 6
+          "confidence": 20,
+          "learning": 15,
+          "happiness": 10
         },
         "flags_add": [
-          "sports_career"
+          "key_high_school"
         ]
       },
       {
-        "text": "还是以学习为主，体育当爱好",
+        "text": "普通高中，适合自己的才是最好的。",
         "effects": {
-          "learning": 6,
-          "health": 4
+          "stability": 15,
+          "happiness": 10
         },
-        "flags_add": []
+        "flags_add": [
+          "normal_high_school"
+        ]
       },
       {
-        "text": "太苦了，不去了",
+        "text": "发挥失常了……去职高学门技术吧。",
         "effects": {
-          "happiness": -4,
-          "health": -3
+          "happiness": -12,
+          "learning": -10
         },
-        "flags_add": []
+        "flags_add": [
+          "vocational_path"
+        ]
       }
     ]
   },
   {
-    "id": "teen_38",
+    "id": "teen_28",
     "age_range": [
-      14,
-      14
+      15,
+      15
     ],
-    "category": "personality",
-    "title": "保家卫国的念头",
-    "text": "十四岁，国庆阅兵。你盯着电视里整齐的方队挪不开眼，爸爸说「你爷爷当年也穿过军装」。那一夜你失眠了，脑子里全是迷彩绿。",
+    "category": "education",
+    "title": "中考成绩公布",
+    "text": "十五岁，中考成绩公布那天，你心里其实有数。分数离重点线差了一截。妈妈叹气，爸爸沉默。你想起过去一年躲进厕所刷手机的那些晚自习——也许早就预料到了。",
     "conditions": {
-      "has_flags": [
-        "service_dream"
+      "not_flags": [
+        "exam_focus"
       ]
     },
     "choices": [
       {
-        "text": "「将来我要当兵。」",
+        "text": "普通高中，重新开始。",
         "effects": {
-          "courage": 12,
-          "discipline": 8
+          "learning": 10,
+          "stability": 8
         },
         "flags_add": [
-          "military_flag"
+          "normal_high_school"
         ]
       },
       {
-        "text": "「当警察也不错，抓坏人帅。」",
+        "text": "去职业高中学门技术，早点挣钱。",
         "effects": {
-          "courage": 8,
-          "responsibility": 8
+          "money": 12,
+          "engineering": 10
         },
         "flags_add": [
-          "military_flag"
+          "vocational_path"
         ]
       },
       {
-        "text": "他们值得尊敬，但我不想上战场",
+        "text": "不甘心，复读一年。",
         "effects": {
-          "happiness": 4
+          "willpower": 12,
+          "learning": 8,
+          "happiness": -10
         },
-        "flags_add": []
+        "flags_add": [
+          "retake"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "teen_33",
+    "age_range": [
+      15,
+      15
+    ],
+    "category": "sports",
+    "title": "体育生中考",
+    "text": "十五岁，中考。体育特长生有加分，专项测试那天你跑出了个人最好成绩。监考老师都多看了你两眼。学习上你只能算中游，但体育分把你托进了重点高中的线。",
+    "conditions": {
+      "has_flags": [
+        "sports_career"
+      ]
+    },
+    "choices": [
+      {
+        "text": "专项满分！体育分拉满",
+        "effects": {
+          "health": 12,
+          "confidence": 12,
+          "happiness": 8
+        },
+        "flags_add": [
+          "key_high_school"
+        ]
+      },
+      {
+        "text": "成绩一般，但过了线",
+        "effects": {
+          "health": 8,
+          "stability": 6
+        },
+        "flags_add": [
+          "normal_high_school"
+        ]
+      },
+      {
+        "text": "发挥失常，只够普通高中",
+        "effects": {
+          "happiness": -6,
+          "health": 2
+        },
+        "flags_add": [
+          "normal_high_school"
+        ]
       }
     ]
   },
@@ -4654,147 +4259,92 @@
     ]
   },
   {
-    "id": "teen_27",
+    "id": "teen_34",
     "age_range": [
-      15,
-      15
+      16,
+      16
     ],
     "category": "education",
-    "title": "中考成绩公布",
-    "text": "十五岁，中考成绩公布那天，你盯着屏幕的手在抖。分数跳出来——超过重点高中线。妈妈眼眶红了，爸爸拍了拍你的肩膀，一句话没说。你想起那些刷题的深夜，值了。",
+    "title": "艺考抉择",
+    "text": "十六岁，班主任问你志愿方向。你文化课中等，但画画/乐器在手上很有感觉。集训半年，文化课会落下——艺考是一条捷径，也是一场豪赌。",
     "conditions": {
       "has_flags": [
-        "key_middle_school",
-        "exam_focus"
+        "musician_path",
+        "art_skill",
+        "artist_path"
       ]
     },
     "choices": [
       {
-        "text": "「重点高中，我来报到。」",
+        "text": "走艺考，把热爱当专业",
         "effects": {
-          "confidence": 20,
-          "learning": 15,
-          "happiness": 10
+          "art": 12,
+          "courage": 10,
+          "learning": -4
         },
         "flags_add": [
-          "key_high_school"
+          "art_career"
         ]
       },
       {
-        "text": "普通高中，适合自己的才是最好的。",
+        "text": "艺考当保险，文化课不松",
         "effects": {
-          "stability": 15,
-          "happiness": 10
+          "learning": 8,
+          "art": 6,
+          "planning": 6
         },
-        "flags_add": [
-          "normal_high_school"
-        ]
+        "flags_add": []
       },
       {
-        "text": "发挥失常了……去职高学门技术吧。",
-        "effects": {
-          "happiness": -12,
-          "learning": -10
-        },
-        "flags_add": [
-          "vocational_path"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "teen_28",
-    "age_range": [
-      15,
-      15
-    ],
-    "category": "education",
-    "title": "中考成绩公布",
-    "text": "十五岁，中考成绩公布那天，你心里其实有数。分数离重点线差了一截。妈妈叹气，爸爸沉默。你想起过去一年躲进厕所刷手机的那些晚自习——也许早就预料到了。",
-    "conditions": {
-      "not_flags": [
-        "exam_focus"
-      ]
-    },
-    "choices": [
-      {
-        "text": "普通高中，重新开始。",
+        "text": "放弃艺术，专心文化课",
         "effects": {
           "learning": 10,
-          "stability": 8
+          "happiness": -4
         },
-        "flags_add": [
-          "normal_high_school"
-        ]
-      },
-      {
-        "text": "去职业高中学门技术，早点挣钱。",
-        "effects": {
-          "money": 12,
-          "engineering": 10
-        },
-        "flags_add": [
-          "vocational_path"
-        ]
-      },
-      {
-        "text": "不甘心，复读一年。",
-        "effects": {
-          "willpower": 12,
-          "learning": 8,
-          "happiness": -10
-        },
-        "flags_add": [
-          "retake"
-        ]
+        "flags_add": []
       }
     ]
   },
   {
-    "id": "teen_33",
+    "id": "teen_36",
     "age_range": [
-      15,
-      15
+      16,
+      16
     ],
-    "category": "sports",
-    "title": "体育生中考",
-    "text": "十五岁，中考。体育特长生有加分，专项测试那天你跑出了个人最好成绩。监考老师都多看了你两眼。学习上你只能算中游，但体育分把你托进了重点高中的线。",
+    "category": "education",
+    "title": "医生梦",
+    "text": "十六岁，生物课讲到人体解剖，你听得入了神。老师说「学医很苦，八年起步」，你却在心里想：能救人，苦点怕什么。",
     "conditions": {
       "has_flags": [
-        "sports_career"
+        "science_dream",
+        "researcher"
       ]
     },
     "choices": [
       {
-        "text": "专项满分！体育分拉满",
+        "text": "「我想学医。」",
         "effects": {
-          "health": 12,
-          "confidence": 12,
-          "happiness": 8
+          "learning": 10,
+          "ambition": 8
         },
         "flags_add": [
-          "key_high_school"
+          "med_dream"
         ]
       },
       {
-        "text": "成绩一般，但过了线",
+        "text": "当爱好了解一下就好",
         "effects": {
-          "health": 8,
-          "stability": 6
+          "learning": 6
         },
-        "flags_add": [
-          "normal_high_school"
-        ]
+        "flags_add": []
       },
       {
-        "text": "发挥失常，只够普通高中",
+        "text": "救人的责任太重了，我担不起",
         "effects": {
-          "happiness": -6,
-          "health": 2
+          "happiness": 2,
+          "learning": -4
         },
-        "flags_add": [
-          "normal_high_school"
-        ]
+        "flags_add": []
       }
     ]
   },
@@ -5011,92 +4561,101 @@
     ]
   },
   {
-    "id": "teen_34",
+    "id": "teen_29",
     "age_range": [
-      16,
-      16
+      17,
+      17
     ],
     "category": "education",
-    "title": "艺考抉择",
-    "text": "十六岁，班主任问你志愿方向。你文化课中等，但画画/乐器在手上很有感觉。集训半年，文化课会落下——艺考是一条捷径，也是一场豪赌。",
+    "title": "高考成绩公布",
+    "text": "十七岁，高考出分那晚，全家守在电脑前。你深吸一口气点下查询——分数出来了，够得着重点大学的线。群里炸了，老师打电话来道贺。三年重点高中的拼搏，在这一刻有了答案。",
     "conditions": {
       "has_flags": [
-        "musician_path",
-        "art_skill",
-        "artist_path"
+        "key_high_school"
       ]
     },
     "choices": [
       {
-        "text": "走艺考，把热爱当专业",
+        "text": "报重点大学——这才是十年的目标。",
         "effects": {
-          "art": 12,
-          "courage": 10,
-          "learning": -4
+          "confidence": 22,
+          "learning": 18,
+          "happiness": 12
         },
         "flags_add": [
-          "art_career"
+          "top_university"
         ]
       },
       {
-        "text": "艺考当保险，文化课不松",
+        "text": "重点线上普通大学的好专业，稳妥。",
         "effects": {
-          "learning": 8,
-          "art": 6,
-          "planning": 6
+          "stability": 16,
+          "happiness": 12
         },
-        "flags_add": []
+        "flags_add": [
+          "normal_university"
+        ]
       },
       {
-        "text": "放弃艺术，专心文化课",
+        "text": "发挥失常……先报个专科。",
         "effects": {
-          "learning": 10,
-          "happiness": -4
+          "happiness": -12,
+          "learning": -10
         },
-        "flags_add": []
+        "flags_add": [
+          "vocational_path"
+        ]
       }
     ]
   },
   {
-    "id": "teen_36",
+    "id": "teen_30",
     "age_range": [
-      16,
-      16
+      17,
+      17
     ],
     "category": "education",
-    "title": "医生梦",
-    "text": "十六岁，生物课讲到人体解剖，你听得入了神。老师说「学医很苦，八年起步」，你却在心里想：能救人，苦点怕什么。",
+    "title": "高考出分",
+    "text": "十七岁，高考出分那晚，全家守在电脑前。分数没有惊喜，也没有意外——够普通大学，够不上名校。爸妈没说什么，只拍了拍你的肩。你关掉查询页面，心里反而踏实了：路，就从这里开始走。",
     "conditions": {
-      "has_flags": [
-        "science_dream",
-        "researcher"
+      "not_flags": [
+        "key_high_school",
+        "tech_path",
+        "vocational_path",
+        "retake"
       ]
     },
     "choices": [
       {
-        "text": "「我想学医。」",
+        "text": "普通大学，也是大学。",
         "effects": {
           "learning": 10,
-          "ambition": 8
+          "happiness": 8
         },
         "flags_add": [
-          "med_dream"
+          "normal_university"
         ]
       },
       {
-        "text": "当爱好了解一下就好",
+        "text": "去专科，早点学门真本事。",
         "effects": {
-          "learning": 6
+          "money": 10,
+          "engineering": 12
         },
-        "flags_add": []
+        "flags_add": [
+          "vocational_path"
+        ]
       },
       {
-        "text": "救人的责任太重了，我担不起",
+        "text": "复读一年，拼一把。",
         "effects": {
-          "happiness": 2,
-          "learning": -4
+          "willpower": 14,
+          "learning": 10,
+          "happiness": -12
         },
-        "flags_add": []
+        "flags_add": [
+          "retake"
+        ]
       }
     ]
   },
@@ -5314,105 +4873,6 @@
           "friendship": -4
         },
         "flags_add": []
-      }
-    ]
-  },
-  {
-    "id": "teen_29",
-    "age_range": [
-      17,
-      17
-    ],
-    "category": "education",
-    "title": "高考成绩公布",
-    "text": "十七岁，高考出分那晚，全家守在电脑前。你深吸一口气点下查询——分数出来了，够得着重点大学的线。群里炸了，老师打电话来道贺。三年重点高中的拼搏，在这一刻有了答案。",
-    "conditions": {
-      "has_flags": [
-        "key_high_school"
-      ]
-    },
-    "choices": [
-      {
-        "text": "报重点大学——这才是十年的目标。",
-        "effects": {
-          "confidence": 22,
-          "learning": 18,
-          "happiness": 12
-        },
-        "flags_add": [
-          "top_university"
-        ]
-      },
-      {
-        "text": "重点线上普通大学的好专业，稳妥。",
-        "effects": {
-          "stability": 16,
-          "happiness": 12
-        },
-        "flags_add": [
-          "normal_university"
-        ]
-      },
-      {
-        "text": "发挥失常……先报个专科。",
-        "effects": {
-          "happiness": -12,
-          "learning": -10
-        },
-        "flags_add": [
-          "vocational_path"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "teen_30",
-    "age_range": [
-      17,
-      17
-    ],
-    "category": "education",
-    "title": "高考出分",
-    "text": "十七岁，高考出分那晚，全家守在电脑前。分数没有惊喜，也没有意外——够普通大学，够不上名校。爸妈没说什么，只拍了拍你的肩。你关掉查询页面，心里反而踏实了：路，就从这里开始走。",
-    "conditions": {
-      "not_flags": [
-        "key_high_school",
-        "tech_path",
-        "vocational_path",
-        "retake"
-      ]
-    },
-    "choices": [
-      {
-        "text": "普通大学，也是大学。",
-        "effects": {
-          "learning": 10,
-          "happiness": 8
-        },
-        "flags_add": [
-          "normal_university"
-        ]
-      },
-      {
-        "text": "去专科，早点学门真本事。",
-        "effects": {
-          "money": 10,
-          "engineering": 12
-        },
-        "flags_add": [
-          "vocational_path"
-        ]
-      },
-      {
-        "text": "复读一年，拼一把。",
-        "effects": {
-          "willpower": 14,
-          "learning": 10,
-          "happiness": -12
-        },
-        "flags_add": [
-          "retake"
-        ]
       }
     ]
   },
@@ -5709,6 +5169,93 @@
     ]
   },
   {
+    "id": "young_65",
+    "age_range": [
+      19,
+      19
+    ],
+    "category": "sports",
+    "title": "职业运动员之路",
+    "text": "十九岁，省队教练来学校招人。你两项指标都合格——速度、耐力。签约意味着每天训练十小时，也意味着一条不一样的人生。你在训练馆里站了很久，看着墙上那些世界冠军的照片。",
+    "conditions": {
+      "has_flags": [
+        "sports_career"
+      ]
+    },
+    "choices": [
+      {
+        "text": "签！进省队拼一把",
+        "effects": {
+          "health": 14,
+          "ambition": 14,
+          "happiness": 8
+        },
+        "flags_add": [
+          "athlete_pro"
+        ]
+      },
+      {
+        "text": "去体育学院读书，将来当教练",
+        "effects": {
+          "learning": 8,
+          "sports": 10
+        },
+        "flags_add": [
+          "sports_teacher"
+        ]
+      },
+      {
+        "text": "算了吧，体育只是爱好",
+        "effects": {
+          "happiness": 4,
+          "learning": 6
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "young_72",
+    "age_range": [
+      19,
+      19
+    ],
+    "category": "personality",
+    "title": "入伍与警校",
+    "text": "十九岁，你穿上了这身衣服。新兵连/警校的第一个月，被子叠成豆腐块，凌晨五点半吹哨集合。你咬着牙，把每一次训练都当成最后一次。",
+    "conditions": {
+      "has_flags": [
+        "military_flag"
+      ]
+    },
+    "choices": [
+      {
+        "text": "训练标兵！我要当班长",
+        "effects": {
+          "health": 12,
+          "discipline": 12
+        },
+        "flags_add": []
+      },
+      {
+        "text": "选技术兵种/技术警种，学门真本事",
+        "effects": {
+          "technology": 10,
+          "learning": 8
+        },
+        "flags_add": []
+      },
+      {
+        "text": "想家了……申请调回老家",
+        "effects": {
+          "happiness": 6,
+          "discipline": -4
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
     "id": "young_02",
     "age_range": [
       19,
@@ -5900,89 +5447,93 @@
     ]
   },
   {
-    "id": "young_65",
+    "id": "young_61",
     "age_range": [
-      19,
-      19
+      20,
+      20
     ],
-    "category": "sports",
-    "title": "职业运动员之路",
-    "text": "十九岁，省队教练来学校招人。你两项指标都合格——速度、耐力。签约意味着每天训练十小时，也意味着一条不一样的人生。你在训练馆里站了很久，看着墙上那些世界冠军的照片。",
+    "category": "career",
+    "title": "名企 Offer",
+    "text": "二十岁，春招。简历投出去第三天，那家你从大一就关注的大厂发来了面试邀请。三轮面试后，HR 打来电话报出薪资——比同龄人高出一大截。你看着 offer 邮件，想起十年前那个熬夜刷题的小学生。",
     "conditions": {
       "has_flags": [
-        "sports_career"
+        "top_university"
       ]
     },
     "choices": [
       {
-        "text": "签！进省队拼一把",
+        "text": "接下 Offer，去大厂打拼。",
         "effects": {
-          "health": 14,
-          "ambition": 14,
+          "money": 20,
+          "confidence": 14,
           "happiness": 8
         },
         "flags_add": [
-          "athlete_pro"
+          "tech_career"
         ]
       },
       {
-        "text": "去体育学院读书，将来当教练",
+        "text": "选外企，生活工作平衡些。",
         "effects": {
-          "learning": 8,
-          "sports": 10
+          "stability": 16,
+          "money": 12,
+          "happiness": 10
         },
         "flags_add": [
-          "sports_teacher"
+          "tech_career"
         ]
       },
       {
-        "text": "算了吧，体育只是爱好",
+        "text": "先不签，我想自己创业。",
         "effects": {
-          "happiness": 4,
-          "learning": 6
+          "ambition": 16,
+          "risk": 10
         },
-        "flags_add": []
+        "flags_add": [
+          "startup"
+        ]
       }
     ]
   },
   {
-    "id": "young_72",
+    "id": "young_62",
     "age_range": [
-      19,
-      19
+      20,
+      20
     ],
-    "category": "personality",
-    "title": "入伍与警校",
-    "text": "十九岁，你穿上了这身衣服。新兵连/警校的第一个月，被子叠成豆腐块，凌晨五点半吹哨集合。你咬着牙，把每一次训练都当成最后一次。",
+    "category": "career",
+    "title": "初入职场",
+    "text": "二十岁，毕业前你开始投简历。没有名校光环，面试官问得最多的一个问题是「你的优势是什么」。你跑了十几场招聘会，收到两份 Offer——一份小公司行政，一份销售。薪资不高，但独立生活开始了。",
     "conditions": {
       "has_flags": [
-        "military_flag"
+        "normal_university"
       ]
     },
     "choices": [
       {
-        "text": "训练标兵！我要当班长",
+        "text": "先干着，积累经验再说。",
         "effects": {
-          "health": 12,
-          "discipline": 12
-        },
-        "flags_add": []
+          "money": 8,
+          "learning": 8,
+          "happiness": 6
+        }
       },
       {
-        "text": "选技术兵种/技术警种，学门真本事",
+        "text": "考公试试，图个安稳。",
         "effects": {
-          "technology": 10,
-          "learning": 8
+          "stability": 14,
+          "money": 6
         },
-        "flags_add": []
+        "flags_add": [
+          "civil_servant"
+        ]
       },
       {
-        "text": "想家了……申请调回老家",
+        "text": "多试试，总能找到适合的。",
         "effects": {
-          "happiness": 6,
-          "discipline": -4
-        },
-        "flags_add": []
+          "experience": 10,
+          "money": 6
+        }
       }
     ]
   },
@@ -6206,93 +5757,93 @@
     ]
   },
   {
-    "id": "young_61",
+    "id": "young_63",
     "age_range": [
-      20,
-      20
+      21,
+      21
     ],
     "category": "career",
-    "title": "名企 Offer",
-    "text": "二十岁，春招。简历投出去第三天，那家你从大一就关注的大厂发来了面试邀请。三轮面试后，HR 打来电话报出薪资——比同龄人高出一大截。你看着 offer 邮件，想起十年前那个熬夜刷题的小学生。",
+    "title": "专科就业",
+    "text": "二十一岁，职校毕业。你比同龄人早两年进入社会。第一份工作是技术工，师傅说「手艺是吃饭的本事」。你每天跟着学，半年后能独立上手，工资也开始涨了。",
     "conditions": {
       "has_flags": [
-        "top_university"
+        "vocational_path"
       ]
     },
     "choices": [
       {
-        "text": "接下 Offer，去大厂打拼。",
+        "text": "把技术练精，做高级技工。",
         "effects": {
-          "money": 20,
-          "confidence": 14,
-          "happiness": 8
+          "engineering": 16,
+          "money": 10
         },
         "flags_add": [
-          "tech_career"
+          "skilled_worker"
         ]
       },
       {
-        "text": "选外企，生活工作平衡些。",
+        "text": "攒点钱，开个小店当老板。",
         "effects": {
-          "stability": 16,
-          "money": 12,
-          "happiness": 10
+          "business": 12,
+          "money": 8
         },
         "flags_add": [
-          "tech_career"
+          "small_business"
         ]
       },
       {
-        "text": "先不签，我想自己创业。",
+        "text": "白天上班，晚上自学考个证。",
         "effects": {
-          "ambition": 16,
-          "risk": 10
+          "learning": 12,
+          "discipline": 10
         },
         "flags_add": [
-          "startup"
+          "skilled_worker"
         ]
       }
     ]
   },
   {
-    "id": "young_62",
+    "id": "young_67",
     "age_range": [
-      20,
-      20
+      21,
+      21
     ],
-    "category": "career",
-    "title": "初入职场",
-    "text": "二十岁，毕业前你开始投简历。没有名校光环，面试官问得最多的一个问题是「你的优势是什么」。你跑了十几场招聘会，收到两份 Offer——一份小公司行政，一份销售。薪资不高，但独立生活开始了。",
+    "category": "personality",
+    "title": "艺术院校的日子",
+    "text": "二十一岁，艺术院校大三。画室/琴房里你从早待到晚，同学的作品展上你的名字开始被提起。老师说你「有灵气」，但也提醒你：艺术这条路，出名和饿肚子常常只隔着一扇门。",
     "conditions": {
       "has_flags": [
-        "normal_university"
+        "art_admission"
       ]
     },
     "choices": [
       {
-        "text": "先干着，积累经验再说。",
+        "text": "参加比赛和展览，搏一个成名机会",
         "effects": {
-          "money": 8,
-          "learning": 8,
-          "happiness": 6
-        }
-      },
-      {
-        "text": "考公试试，图个安稳。",
-        "effects": {
-          "stability": 14,
-          "money": 6
+          "art": 14,
+          "ambition": 10,
+          "risk": 8
         },
         "flags_add": [
-          "civil_servant"
+          "artist_pro"
         ]
       },
       {
-        "text": "多试试，总能找到适合的。",
+        "text": "接商单赚钱，先养活自己",
         "effects": {
-          "experience": 10,
-          "money": 6
-        }
+          "money": 12,
+          "art": 6
+        },
+        "flags_add": []
+      },
+      {
+        "text": "安心打磨作品，等时机",
+        "effects": {
+          "art": 10,
+          "stability": 6
+        },
+        "flags_add": []
       }
     ]
   },
@@ -6515,95 +6066,91 @@
     ]
   },
   {
-    "id": "young_63",
+    "id": "young_69",
     "age_range": [
-      21,
-      21
+      22,
+      22
     ],
-    "category": "career",
-    "title": "专科就业",
-    "text": "二十一岁，职校毕业。你比同龄人早两年进入社会。第一份工作是技术工，师傅说「手艺是吃饭的本事」。你每天跟着学，半年后能独立上手，工资也开始涨了。",
+    "category": "education",
+    "title": "医学院五年",
+    "text": "二十二岁，医学院大三。解剖课、生理课、临床课，课本摞起来比你还高。同学里有劝退的，也有像你一样熬下来的。你看着走廊里的「健康所系，性命相托」，把咖啡又续了一杯。",
     "conditions": {
       "has_flags": [
-        "vocational_path"
+        "med_dream"
       ]
     },
     "choices": [
       {
-        "text": "把技术练精，做高级技工。",
+        "text": "咬牙撑住，医生是我的执念",
         "effects": {
-          "engineering": 16,
-          "money": 10
+          "learning": 14,
+          "discipline": 10,
+          "health": -4
         },
         "flags_add": [
-          "skilled_worker"
+          "med_admission"
         ]
       },
       {
-        "text": "攒点钱，开个小店当老板。",
+        "text": "读书之余也要好好生活",
         "effects": {
-          "business": 12,
-          "money": 8
+          "balance": 8,
+          "happiness": 6
         },
-        "flags_add": [
-          "small_business"
-        ]
+        "flags_add": []
       },
       {
-        "text": "白天上班，晚上自学考个证。",
+        "text": "太难了，转专业吧",
         "effects": {
-          "learning": 12,
-          "discipline": 10
+          "learning": -8,
+          "happiness": 4
         },
-        "flags_add": [
-          "skilled_worker"
-        ]
+        "flags_add": []
       }
     ]
   },
   {
-    "id": "young_67",
+    "id": "wealth_0022",
     "age_range": [
-      21,
-      21
+      22,
+      22
     ],
-    "category": "personality",
-    "title": "艺术院校的日子",
-    "text": "二十一岁，艺术院校大三。画室/琴房里你从早待到晚，同学的作品展上你的名字开始被提起。老师说你「有灵气」，但也提醒你：艺术这条路，出名和饿肚子常常只隔着一扇门。",
-    "conditions": {
-      "has_flags": [
-        "art_admission"
-      ]
-    },
+    "category": "finance",
+    "title": "第一份兼职",
+    "text": "大学快毕业了，室友介绍你去做周末兼职：一家连锁咖啡店的服务员。时薪不高，但能攒下第一笔属于自己的钱。同时班里还有同学接了高薪的网课推销，据说提成很可观，只是被拒绝是家常便饭。",
     "choices": [
       {
-        "text": "参加比赛和展览，搏一个成名机会",
+        "text": "认真端咖啡，踏实攒经验",
         "effects": {
-          "art": 14,
-          "ambition": 10,
-          "risk": 8
-        },
-        "flags_add": [
-          "artist_pro"
-        ]
-      },
-      {
-        "text": "接商单赚钱，先养活自己",
-        "effects": {
-          "money": 12,
-          "art": 6
+          "money": 10,
+          "social": 2
         },
         "flags_add": []
       },
       {
-        "text": "安心打磨作品，等时机",
+        "text": "挑战高提成的推销",
         "effects": {
-          "art": 10,
-          "stability": 6
+          "money": 18,
+          "pressure": 4,
+          "luck": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "专心学业，暂不打工",
+        "effects": {
+          "money": 2,
+          "learning": 5
         },
         "flags_add": []
       }
-    ]
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "young_08",
@@ -6823,44 +6370,45 @@
     ]
   },
   {
-    "id": "young_69",
+    "id": "young_66",
     "age_range": [
-      22,
-      22
+      23,
+      23
     ],
-    "category": "education",
-    "title": "医学院五年",
-    "text": "二十二岁，医学院大三。解剖课、生理课、临床课，课本摞起来比你还高。同学里有劝退的，也有像你一样熬下来的。你看着走廊里的「健康所系，性命相托」，把咖啡又续了一杯。",
+    "category": "sports",
+    "title": "赛场与伤病",
+    "text": "二十三岁，你在赛场上的第两千个日夜。一场重要比赛前，你伤了膝盖——医生说「再拼，职业生涯可能提前结束」。教练拍拍你：「你自己决定。」",
     "conditions": {
       "has_flags": [
-        "med_dream"
+        "athlete_pro"
       ]
     },
     "choices": [
       {
-        "text": "咬牙撑住，医生是我的执念",
+        "text": "带伤上场，拼一个全国奖牌",
         "effects": {
-          "learning": 14,
-          "discipline": 10,
-          "health": -4
-        },
-        "flags_add": [
-          "med_admission"
-        ]
-      },
-      {
-        "text": "读书之余也要好好生活",
-        "effects": {
-          "balance": 8,
-          "happiness": 6
+          "health": -12,
+          "confidence": 12,
+          "happiness": 6,
+          "ambition": 10
         },
         "flags_add": []
       },
       {
-        "text": "太难了，转专业吧",
+        "text": "养伤，退下来做教练，把经验传给下一代",
         "effects": {
-          "learning": -8,
-          "happiness": 4
+          "health": 10,
+          "happiness": 8,
+          "sports": 8
+        },
+        "flags_add": []
+      },
+      {
+        "text": "退役，转行开个体育用品店",
+        "effects": {
+          "money": 10,
+          "happiness": 4,
+          "health": 8
         },
         "flags_add": []
       }
@@ -7089,45 +6637,92 @@
     ]
   },
   {
-    "id": "young_66",
+    "id": "young_64",
     "age_range": [
-      23,
-      23
+      24,
+      24
     ],
-    "category": "sports",
-    "title": "赛场与伤病",
-    "text": "二十三岁，你在赛场上的第两千个日夜。一场重要比赛前，你伤了膝盖——医生说「再拼，职业生涯可能提前结束」。教练拍拍你：「你自己决定。」",
+    "category": "education",
+    "title": "研究生生活",
+    "text": "二十四岁，研二。导师的项目组里你从端茶倒水的小弟变成了能独当一面的主力。实验室的灯亮到深夜，你盯着数据面板，忽然想起大三那个决定考研的夜晚。",
     "conditions": {
       "has_flags": [
-        "athlete_pro"
+        "grad_school"
       ]
     },
     "choices": [
       {
-        "text": "带伤上场，拼一个全国奖牌",
+        "text": "跟着导师深耕科研，发论文。",
         "effects": {
-          "health": -12,
-          "confidence": 12,
-          "happiness": 6,
-          "ambition": 10
+          "learning": 18,
+          "specialization": 14,
+          "happiness": 8
         },
-        "flags_add": []
+        "flags_add": [
+          "tech_career"
+        ]
       },
       {
-        "text": "养伤，退下来做教练，把经验传给下一代",
+        "text": "早点去大厂实习，积累人脉和履历。",
         "effects": {
-          "health": 10,
+          "money": 14,
+          "communication": 10,
+          "social": 8
+        },
+        "flags_add": [
+          "tech_career"
+        ]
+      },
+      {
+        "text": "佛系读研，按时毕业就好。",
+        "effects": {
+          "stability": 10,
+          "happiness": 8
+        }
+      }
+    ]
+  },
+  {
+    "id": "young_68",
+    "age_range": [
+      24,
+      24
+    ],
+    "category": "career",
+    "title": "艺术家的账单",
+    "text": "二十四岁，毕业两年。你的作品在小圈子里有了些名声，但房租和颜料账单不会因为你「有灵气」就少算一分钱。一边是画廊的展位邀约，一边是稳定的商单合同。",
+    "conditions": {
+      "has_flags": [
+        "artist_pro"
+      ]
+    },
+    "choices": [
+      {
+        "text": "签约画廊，专心创作",
+        "effects": {
+          "art": 12,
           "happiness": 8,
-          "sports": 8
+          "money": -4
         },
-        "flags_add": []
+        "flags_add": [
+          "artist_life"
+        ]
       },
       {
-        "text": "退役，转行开个体育用品店",
+        "text": "做自由职业，接单养活创作",
         "effects": {
           "money": 10,
-          "happiness": 4,
-          "health": 8
+          "art": 6,
+          "happiness": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "转行做设计，把艺术当爱好",
+        "effects": {
+          "money": 14,
+          "happiness": -2,
+          "art": -4
         },
         "flags_add": []
       }
@@ -7327,92 +6922,87 @@
     ]
   },
   {
-    "id": "young_64",
+    "id": "young_70",
     "age_range": [
-      24,
-      24
+      25,
+      25
     ],
-    "category": "education",
-    "title": "研究生生活",
-    "text": "二十四岁，研二。导师的项目组里你从端茶倒水的小弟变成了能独当一面的主力。实验室的灯亮到深夜，你盯着数据面板，忽然想起大三那个决定考研的夜晚。",
+    "category": "health",
+    "title": "规培医生",
+    "text": "二十五岁，规培第二年。值班、查房、写病历、被患者误解……你见过凌晨四点的医院，也见过抢救成功时家属跪下来的样子。白大褂穿久了，就脱不下来了。",
     "conditions": {
       "has_flags": [
-        "grad_school"
+        "med_admission"
       ]
     },
     "choices": [
       {
-        "text": "跟着导师深耕科研，发论文。",
+        "text": "「这是我的战场。」",
         "effects": {
-          "learning": 18,
-          "specialization": 14,
-          "happiness": 8
+          "empathy": 12,
+          "health": 6,
+          "happiness": 6
         },
         "flags_add": [
-          "tech_career"
+          "doctor"
         ]
       },
       {
-        "text": "早点去大厂实习，积累人脉和履历。",
+        "text": "医生太累，转行政岗",
         "effects": {
-          "money": 14,
-          "communication": 10,
-          "social": 8
-        },
-        "flags_add": [
-          "tech_career"
-        ]
-      },
-      {
-        "text": "佛系读研，按时毕业就好。",
-        "effects": {
-          "stability": 10,
-          "happiness": 8
-        }
-      }
-    ]
-  },
-  {
-    "id": "young_68",
-    "age_range": [
-      24,
-      24
-    ],
-    "category": "career",
-    "title": "艺术家的账单",
-    "text": "二十四岁，毕业两年。你的作品在小圈子里有了些名声，但房租和颜料账单不会因为你「有灵气」就少算一分钱。一边是画廊的展位邀约，一边是稳定的商单合同。",
-    "conditions": {
-      "has_flags": [
-        "artist_pro"
-      ]
-    },
-    "choices": [
-      {
-        "text": "签约画廊，专心创作",
-        "effects": {
-          "art": 12,
-          "happiness": 8,
-          "money": -4
-        },
-        "flags_add": [
-          "artist_life"
-        ]
-      },
-      {
-        "text": "做自由职业，接单养活创作",
-        "effects": {
-          "money": 10,
-          "art": 6,
-          "happiness": 4
+          "stability": 8,
+          "money": 6
         },
         "flags_add": []
       },
       {
-        "text": "转行做设计，把艺术当爱好",
+        "text": "辞职，回老家开个小诊所",
         "effects": {
-          "money": 14,
-          "happiness": -2,
-          "art": -4
+          "money": 10,
+          "freedom": 8
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "young_73",
+    "age_range": [
+      25,
+      25
+    ],
+    "category": "career",
+    "title": "军旅与警队",
+    "text": "二十五岁，你在这身制服里第 6 年。演习和行动让你变得沉稳，领导说要给你报功，你敬了个礼：「报告，这是我应该做的。」",
+    "conditions": {
+      "has_flags": [
+        "military_flag"
+      ]
+    },
+    "choices": [
+      {
+        "text": "继续留队，往上走",
+        "effects": {
+          "discipline": 10,
+          "ambition": 8,
+          "health": 6
+        },
+        "flags_add": []
+      },
+      {
+        "text": "转文职/转业，开始安稳人生",
+        "effects": {
+          "stability": 10,
+          "money": 8
+        },
+        "flags_add": []
+      },
+      {
+        "text": "退役，回地方闯一闯",
+        "effects": {
+          "freedom": 10,
+          "ambition": 8,
+          "money": 4
         },
         "flags_add": []
       }
@@ -7619,91 +7209,45 @@
     ]
   },
   {
-    "id": "young_70",
+    "id": "wealth_0026",
     "age_range": [
-      25,
-      25
+      26,
+      26
     ],
-    "category": "health",
-    "title": "规培医生",
-    "text": "二十五岁，规培第二年。值班、查房、写病历、被患者误解……你见过凌晨四点的医院，也见过抢救成功时家属跪下来的样子。白大褂穿久了，就脱不下来了。",
-    "conditions": {
-      "has_flags": [
-        "med_admission"
-      ]
-    },
+    "category": "finance",
+    "title": "开始理财",
+    "text": "工作一年，银行卡里终于有了几万块存款。朋友说钱放着不动就是贬值，推荐你学习理财。银行定存、货币基金、还有风险更高的股票基金，选项不少。你盘算着怎么让钱生钱。",
     "choices": [
       {
-        "text": "「这是我的战场。」",
+        "text": "全部存定期，稳妥为上",
         "effects": {
-          "empathy": 12,
-          "health": 6,
-          "happiness": 6
-        },
-        "flags_add": [
-          "doctor"
-        ]
-      },
-      {
-        "text": "医生太累，转行政岗",
-        "effects": {
-          "stability": 8,
-          "money": 6
-        },
-        "flags_add": []
-      },
-      {
-        "text": "辞职，回老家开个小诊所",
-        "effects": {
-          "money": 10,
-          "freedom": 8
-        },
-        "flags_add": []
-      }
-    ]
-  },
-  {
-    "id": "young_73",
-    "age_range": [
-      25,
-      25
-    ],
-    "category": "career",
-    "title": "军旅与警队",
-    "text": "二十五岁，你在这身制服里第 6 年。演习和行动让你变得沉稳，领导说要给你报功，你敬了个礼：「报告，这是我应该做的。」",
-    "conditions": {
-      "has_flags": [
-        "military_flag"
-      ]
-    },
-    "choices": [
-      {
-        "text": "继续留队，往上走",
-        "effects": {
-          "discipline": 10,
-          "ambition": 8,
-          "health": 6
-        },
-        "flags_add": []
-      },
-      {
-        "text": "转文职/转业，开始安稳人生",
-        "effects": {
-          "stability": 10,
           "money": 8
         },
         "flags_add": []
       },
       {
-        "text": "退役，回地方闯一闯",
+        "text": "试水基金定投",
         "effects": {
-          "freedom": 10,
-          "ambition": 8,
-          "money": 4
+          "money": 14,
+          "luck": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "交给专业理财顾问",
+        "effects": {
+          "money": 6,
+          "learning": 3
         },
         "flags_add": []
       }
-    ]
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "young_15",
@@ -8120,6 +7664,47 @@
     ]
   },
   {
+    "id": "young_71",
+    "age_range": [
+      28,
+      28
+    ],
+    "category": "career",
+    "title": "主治医师",
+    "text": "二十八岁，你升了主治。门诊一天六十个号，手术排到下周。患者喊你「医生」，你忽然想起十六岁那个说自己想学医的少年——他肯定想不到，你会真的走到今天。",
+    "conditions": {
+      "has_flags": [
+        "doctor"
+      ]
+    },
+    "choices": [
+      {
+        "text": "继续深耕，做专科专家",
+        "effects": {
+          "specialization": 14,
+          "learning": 10
+        },
+        "flags_add": []
+      },
+      {
+        "text": "教学带教，培养年轻医生",
+        "effects": {
+          "communication": 10,
+          "empathy": 8
+        },
+        "flags_add": []
+      },
+      {
+        "text": "试试互联网医疗，换个活法",
+        "effects": {
+          "money": 10,
+          "technology": 8
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
     "id": "young_17",
     "age_range": [
       28,
@@ -8333,41 +7918,41 @@
     ]
   },
   {
-    "id": "young_71",
+    "id": "young_74",
     "age_range": [
-      28,
-      28
+      29,
+      29
     ],
-    "category": "career",
-    "title": "主治医师",
-    "text": "二十八岁，你升了主治。门诊一天六十个号，手术排到下周。患者喊你「医生」，你忽然想起十六岁那个说自己想学医的少年——他肯定想不到，你会真的走到今天。",
+    "category": "personality",
+    "title": "铁血到平常",
+    "text": "二十九岁，你从队伍走向平常生活。褪下制服，穿上便装，你依然站得笔直。那段日子刻进骨头里，成了你人生的底色。",
     "conditions": {
       "has_flags": [
-        "doctor"
+        "military_flag"
       ]
     },
     "choices": [
       {
-        "text": "继续深耕，做专科专家",
+        "text": "平凡生活，军魂不灭",
         "effects": {
-          "specialization": 14,
-          "learning": 10
+          "happiness": 8,
+          "stability": 8
         },
         "flags_add": []
       },
       {
-        "text": "教学带教，培养年轻医生",
+        "text": "创业，把队伍里的狠劲用上",
         "effects": {
-          "communication": 10,
-          "empathy": 8
+          "ambition": 12,
+          "money": 8
         },
         "flags_add": []
       },
       {
-        "text": "试试互联网医疗，换个活法",
+        "text": "做公益，帮助退役战友",
         "effects": {
-          "money": 10,
-          "technology": 8
+          "empathy": 10,
+          "gratitude": 8
         },
         "flags_add": []
       }
@@ -8573,136 +8158,6 @@
     ]
   },
   {
-    "id": "young_74",
-    "age_range": [
-      29,
-      29
-    ],
-    "category": "personality",
-    "title": "铁血到平常",
-    "text": "二十九岁，你从队伍走向平常生活。褪下制服，穿上便装，你依然站得笔直。那段日子刻进骨头里，成了你人生的底色。",
-    "conditions": {
-      "has_flags": [
-        "military_flag"
-      ]
-    },
-    "choices": [
-      {
-        "text": "平凡生活，军魂不灭",
-        "effects": {
-          "happiness": 8,
-          "stability": 8
-        },
-        "flags_add": []
-      },
-      {
-        "text": "创业，把队伍里的狠劲用上",
-        "effects": {
-          "ambition": 12,
-          "money": 8
-        },
-        "flags_add": []
-      },
-      {
-        "text": "做公益，帮助退役战友",
-        "effects": {
-          "empathy": 10,
-          "gratitude": 8
-        },
-        "flags_add": []
-      }
-    ]
-  },
-  {
-    "id": "adult_01",
-    "age_range": [
-      30,
-      31
-    ],
-    "category": "personality",
-    "title": "三十而立",
-    "text": "三十而立。同学聚会时——有人已经二胎了、有人升了总监、有人创业失败正在打工还债。大家碰杯的时候都有点沉默。回家路上你一直在想：我到底「立」了什么？",
-    "choices": [
-      {
-        "text": "觉得自己干得还不错。每一步都走得很稳",
-        "effects": {
-          "happiness": 8,
-          "confidence": 5,
-          "money": 5
-        },
-        "flags_add": [
-          "thirty_steady"
-        ]
-      },
-      {
-        "text": "焦虑了。换工作、报课程、逼自己学新东西",
-        "effects": {
-          "learning": 10,
-          "happiness": -6,
-          "health": -3
-        },
-        "flags_add": [
-          "career_change"
-        ]
-      },
-      {
-        "text": "恍惚觉得时间过太快了，但不知道该做什么",
-        "effects": {
-          "happiness": -8,
-          "health": -5,
-          "pressure": 8
-        },
-        "flags_add": []
-      }
-    ]
-  },
-  {
-    "id": "adult_02",
-    "age_range": [
-      30,
-      31
-    ],
-    "category": "personality",
-    "title": "三十单身",
-    "conditions": {
-      "not_flags": [
-        "married"
-      ]
-    },
-    "text": "三十岁，单身。过年回家的时候亲戚的关心像刀子一样扎过来——「有对象了吗？」「要求别太高了。」你躲到天台上看着远处的烟花一明一灭。这条路是你自己选的。但有时候也会想：如果当初做了不同的选择……",
-    "choices": [
-      {
-        "text": "不后悔。宁缺毋滥，一个人的生活也精彩",
-        "effects": {
-          "happiness": 5,
-          "independence": 8,
-          "money": 5
-        },
-        "flags_add": [
-          "single_and_thriving"
-        ]
-      },
-      {
-        "text": "开始认真地通过朋友介绍认识新的人",
-        "effects": {
-          "social": 8,
-          "relationship": 5,
-          "happiness": 2
-        },
-        "flags_add": []
-      },
-      {
-        "text": "孤独感越来越重，用工作填满所有时间",
-        "effects": {
-          "money": 10,
-          "happiness": -8,
-          "health": -3
-        },
-        "flags_add": []
-      }
-    ]
-  },
-  {
     "id": "adult_13",
     "age_range": [
       30,
@@ -8859,6 +8314,95 @@
         "effects": {
           "anxiety": 10,
           "happiness": -5
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "adult_01",
+    "age_range": [
+      30,
+      31
+    ],
+    "category": "personality",
+    "title": "三十而立",
+    "text": "三十而立。同学聚会时——有人已经二胎了、有人升了总监、有人创业失败正在打工还债。大家碰杯的时候都有点沉默。回家路上你一直在想：我到底「立」了什么？",
+    "choices": [
+      {
+        "text": "觉得自己干得还不错。每一步都走得很稳",
+        "effects": {
+          "happiness": 8,
+          "confidence": 5,
+          "money": 5
+        },
+        "flags_add": [
+          "thirty_steady"
+        ]
+      },
+      {
+        "text": "焦虑了。换工作、报课程、逼自己学新东西",
+        "effects": {
+          "learning": 10,
+          "happiness": -6,
+          "health": -3
+        },
+        "flags_add": [
+          "career_change"
+        ]
+      },
+      {
+        "text": "恍惚觉得时间过太快了，但不知道该做什么",
+        "effects": {
+          "happiness": -8,
+          "health": -5,
+          "pressure": 8
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "adult_02",
+    "age_range": [
+      30,
+      31
+    ],
+    "category": "personality",
+    "title": "三十单身",
+    "conditions": {
+      "not_flags": [
+        "married"
+      ]
+    },
+    "text": "三十岁，单身。过年回家的时候亲戚的关心像刀子一样扎过来——「有对象了吗？」「要求别太高了。」你躲到天台上看着远处的烟花一明一灭。这条路是你自己选的。但有时候也会想：如果当初做了不同的选择……",
+    "choices": [
+      {
+        "text": "不后悔。宁缺毋滥，一个人的生活也精彩",
+        "effects": {
+          "happiness": 5,
+          "independence": 8,
+          "money": 5
+        },
+        "flags_add": [
+          "single_and_thriving"
+        ]
+      },
+      {
+        "text": "开始认真地通过朋友介绍认识新的人",
+        "effects": {
+          "social": 8,
+          "relationship": 5,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "孤独感越来越重，用工作填满所有时间",
+        "effects": {
+          "money": 10,
+          "happiness": -8,
+          "health": -3
         },
         "flags_add": []
       }
@@ -9069,50 +8613,6 @@
     ]
   },
   {
-    "id": "adult_03",
-    "age_range": [
-      32,
-      33
-    ],
-    "category": "career",
-    "title": "晋升竞赛",
-    "text": "部门经理的位置空出来了。你和另一个同事都在候选名单上。你们关系原本不错——一起吃午饭、一起吐槽加班。但自从名单出来以后，茶水间碰面时的微笑都变得有点僵硬了。",
-    "choices": [
-      {
-        "text": "公平竞争。展示了最漂亮的业绩数据和下季度规划",
-        "effects": {
-          "money": 8,
-          "learning": 5,
-          "social": -3,
-          "confidence": 5
-        },
-        "flags_add": [
-          "promoted"
-        ]
-      },
-      {
-        "text": "主动和TA沟通——「不管谁上，我们都要继续好好合作」",
-        "effects": {
-          "empathy": 8,
-          "relationship": 5,
-          "happiness": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "私下打听了总监的偏好，针对性地包装了自己",
-        "effects": {
-          "money": 8,
-          "learning": 3,
-          "empathy": -5
-        },
-        "flags_add": [
-          "promoted"
-        ]
-      }
-    ]
-  },
-  {
     "id": "adult_22",
     "age_range": [
       32,
@@ -9271,6 +8771,93 @@
           "health": 5
         },
         "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "wealth_0032",
+    "age_range": [
+      32,
+      32
+    ],
+    "category": "finance",
+    "title": "升职加薪",
+    "text": "领导找你谈话，说公司要提拔一批中层，你有机会。但升职意味着更重的担子和更长的加班。另一边，同行开出了更高的薪水挖你，跳槽可能更快赚到钱，但也可能水土不服。",
+    "choices": [
+      {
+        "text": "留在原公司升职",
+        "effects": {
+          "money": 14,
+          "social": 3,
+          "pressure": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "跳槽去拿高薪",
+        "effects": {
+          "money": 18,
+          "luck": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "婉拒升职，保持现状",
+        "effects": {
+          "money": 3,
+          "happiness": 6
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "adult_03",
+    "age_range": [
+      32,
+      33
+    ],
+    "category": "career",
+    "title": "晋升竞赛",
+    "text": "部门经理的位置空出来了。你和另一个同事都在候选名单上。你们关系原本不错——一起吃午饭、一起吐槽加班。但自从名单出来以后，茶水间碰面时的微笑都变得有点僵硬了。",
+    "choices": [
+      {
+        "text": "公平竞争。展示了最漂亮的业绩数据和下季度规划",
+        "effects": {
+          "money": 8,
+          "learning": 5,
+          "social": -3,
+          "confidence": 5
+        },
+        "flags_add": [
+          "promoted"
+        ]
+      },
+      {
+        "text": "主动和TA沟通——「不管谁上，我们都要继续好好合作」",
+        "effects": {
+          "empathy": 8,
+          "relationship": 5,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "私下打听了总监的偏好，针对性地包装了自己",
+        "effects": {
+          "money": 8,
+          "learning": 3,
+          "empathy": -5
+        },
+        "flags_add": [
+          "promoted"
+        ]
       }
     ]
   },
@@ -9479,48 +9066,6 @@
     ]
   },
   {
-    "id": "adult_04",
-    "age_range": [
-      34,
-      35
-    ],
-    "category": "health",
-    "title": "体检报告",
-    "text": "年度体检报告出来了。几个红色箭头刺眼地躺在纸上——脂肪肝、颈椎曲度变直、血脂偏高。医生推了推眼镜：「年轻人，身体可不是永动机。」你从医院出来，秋风把落叶吹到脚边。",
-    "choices": [
-      {
-        "text": "从明天开始跑步+调整饮食。这是最后一次看到红箭头",
-        "effects": {
-          "health": 10,
-          "happiness": 5,
-          "discipline": 8,
-          "money": -3
-        },
-        "flags_add": [
-          "fitness_journey"
-        ]
-      },
-      {
-        "text": "吓了几天，然后继续熬夜加班。没办法啊",
-        "effects": {
-          "health": -8,
-          "money": 8,
-          "happiness": -3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "办了健身卡。去了三周，第四周找不到了",
-        "effects": {
-          "health": 3,
-          "money": -3,
-          "happiness": -2
-        },
-        "flags_add": []
-      }
-    ]
-  },
-  {
     "id": "adult_31",
     "age_range": [
       34,
@@ -9687,46 +9232,42 @@
     ]
   },
   {
-    "id": "adult_05",
+    "id": "adult_04",
     "age_range": [
-      35,
-      36
+      34,
+      35
     ],
-    "category": "friend",
-    "title": "七年之痒",
-    "conditions": {
-      "has_flags": [
-        "married"
-      ]
-    },
-    "text": "七年了。热恋时的激情像退潮一样慢慢褪去，露出日常生活的礁石。你们开始为一些小事吵架——谁洗碗、谁接孩子、谁忘了关客厅的灯。昨天晚上TA背对着你睡，你看着TA的后脑勺，心里一阵凉。",
+    "category": "health",
+    "title": "体检报告",
+    "text": "年度体检报告出来了。几个红色箭头刺眼地躺在纸上——脂肪肝、颈椎曲度变直、血脂偏高。医生推了推眼镜：「年轻人，身体可不是永动机。」你从医院出来，秋风把落叶吹到脚边。",
     "choices": [
       {
-        "text": "约TA去第一次约会的那家餐厅。点上当年的菜，聊了很多",
+        "text": "从明天开始跑步+调整饮食。这是最后一次看到红箭头",
         "effects": {
-          "happiness": 10,
-          "relationship": 8,
-          "empathy": 5
+          "health": 10,
+          "happiness": 5,
+          "discipline": 8,
+          "money": -3
         },
         "flags_add": [
-          "marriage_renewed"
+          "fitness_journey"
         ]
       },
       {
-        "text": "觉得太累了。各退一步，分居一段时间冷静",
+        "text": "吓了几天，然后继续熬夜加班。没办法啊",
         "effects": {
-          "happiness": -8,
-          "relationship": -8,
-          "independence": 5
+          "health": -8,
+          "money": 8,
+          "happiness": -3
         },
         "flags_add": []
       },
       {
-        "text": "把心里的话全都倒出来。吵了一整夜，但第二天早上TA给你倒了杯水",
+        "text": "办了健身卡。去了三周，第四周找不到了",
         "effects": {
-          "happiness": 3,
-          "empathy": 5,
-          "relationship": 3
+          "health": 3,
+          "money": -3,
+          "happiness": -2
         },
         "flags_add": []
       }
@@ -9939,6 +9480,52 @@
     ]
   },
   {
+    "id": "adult_05",
+    "age_range": [
+      35,
+      36
+    ],
+    "category": "friend",
+    "title": "七年之痒",
+    "conditions": {
+      "has_flags": [
+        "married"
+      ]
+    },
+    "text": "七年了。热恋时的激情像退潮一样慢慢褪去，露出日常生活的礁石。你们开始为一些小事吵架——谁洗碗、谁接孩子、谁忘了关客厅的灯。昨天晚上TA背对着你睡，你看着TA的后脑勺，心里一阵凉。",
+    "choices": [
+      {
+        "text": "约TA去第一次约会的那家餐厅。点上当年的菜，聊了很多",
+        "effects": {
+          "happiness": 10,
+          "relationship": 8,
+          "empathy": 5
+        },
+        "flags_add": [
+          "marriage_renewed"
+        ]
+      },
+      {
+        "text": "觉得太累了。各退一步，分居一段时间冷静",
+        "effects": {
+          "happiness": -8,
+          "relationship": -8,
+          "independence": 5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把心里的话全都倒出来。吵了一整夜，但第二天早上TA给你倒了杯水",
+        "effects": {
+          "happiness": 3,
+          "empathy": 5,
+          "relationship": 3
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
     "id": "adult_40",
     "age_range": [
       36,
@@ -10104,46 +9691,46 @@
     ]
   },
   {
-    "id": "adult_06",
+    "id": "wealth_0036",
     "age_range": [
-      37,
-      38
+      36,
+      36
     ],
-    "category": "family",
-    "title": "父母的衰老",
-    "text": "妈妈的电话越来越多了。她总说「没事，就是想听听你的声音」。上个月爸爸住院的事她从没提过——等你从亲戚嘴里知道的时候爸爸已经出院一周了。你在工位上挂了电话，看着屏幕上的deadline，心里翻江倒海。",
+    "category": "finance",
+    "title": "理财复盘",
+    "text": "年初跟风买的那支基金涨了不少，账面浮盈够买一辆车。要不要落袋为安？朋友说行情还会继续，理财顾问却提醒你落袋的才是自己的。钱的事，每个人都说得很有道理。",
     "choices": [
       {
-        "text": "请了年假回家。工作可以再找，爸妈的时间不能等",
+        "text": "落袋为安",
         "effects": {
-          "empathy": 15,
-          "family_relation": 10,
-          "happiness": 8,
-          "money": -5
-        },
-        "flags_add": [
-          "prioritized_family"
-        ]
-      },
-      {
-        "text": "每天固定时间视频通话，按月打生活费",
-        "effects": {
-          "empathy": 5,
-          "money": -5,
+          "money": 12,
           "happiness": 2
         },
         "flags_add": []
       },
       {
-        "text": "心里难受，但项目走不开。对自己说下次一定请假",
+        "text": "继续持有，等更大回报",
         "effects": {
-          "happiness": -8,
-          "empathy": -5,
-          "money": 5
+          "money": 16,
+          "luck": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "取出部分改善生活",
+        "effects": {
+          "money": 8,
+          "happiness": 4
         },
         "flags_add": []
       }
-    ]
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "adult_44",
@@ -10316,32 +9903,42 @@
     ]
   },
   {
-    "id": "adult_07",
+    "id": "adult_06",
     "age_range": [
-      38,
-      39
+      37,
+      38
     ],
-    "category": "personality",
-    "title": "山区里的孩子",
-    "text": "朋友拉你周末去给山区孩子送冬衣。开车三个小时到了山里，一个扎马尾的小女孩拉着你的衣角叫你「叔叔/阿姨」，她的小手凉凉的，但眼睛亮亮的。回城的路上你一句话没说。周一上班打开电脑总觉得屏幕上的PPT有什么地方不对。",
+    "category": "family",
+    "title": "父母的衰老",
+    "text": "妈妈的电话越来越多了。她总说「没事，就是想听听你的声音」。上个月爸爸住院的事她从没提过——等你从亲戚嘴里知道的时候爸爸已经出院一周了。你在工位上挂了电话，看着屏幕上的deadline，心里翻江倒海。",
     "choices": [
       {
-        "text": "从此定期参与公益活动。资助了那个小女孩上学",
+        "text": "请了年假回家。工作可以再找，爸妈的时间不能等",
         "effects": {
           "empathy": 15,
-          "happiness": 10,
+          "family_relation": 10,
+          "happiness": 8,
           "money": -5
         },
         "flags_add": [
-          "philanthropist"
+          "prioritized_family"
         ]
       },
       {
-        "text": "捐了一笔钱。虽然人没再去，但心里有个温暖的角落",
+        "text": "每天固定时间视频通话，按月打生活费",
         "effects": {
-          "empathy": 8,
-          "happiness": 3,
-          "money": -3
+          "empathy": 5,
+          "money": -5,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "心里难受，但项目走不开。对自己说下次一定请假",
+        "effects": {
+          "happiness": -8,
+          "empathy": -5,
+          "money": 5
         },
         "flags_add": []
       }
@@ -10552,6 +10149,38 @@
     ]
   },
   {
+    "id": "adult_07",
+    "age_range": [
+      38,
+      39
+    ],
+    "category": "personality",
+    "title": "山区里的孩子",
+    "text": "朋友拉你周末去给山区孩子送冬衣。开车三个小时到了山里，一个扎马尾的小女孩拉着你的衣角叫你「叔叔/阿姨」，她的小手凉凉的，但眼睛亮亮的。回城的路上你一句话没说。周一上班打开电脑总觉得屏幕上的PPT有什么地方不对。",
+    "choices": [
+      {
+        "text": "从此定期参与公益活动。资助了那个小女孩上学",
+        "effects": {
+          "empathy": 15,
+          "happiness": 10,
+          "money": -5
+        },
+        "flags_add": [
+          "philanthropist"
+        ]
+      },
+      {
+        "text": "捐了一笔钱。虽然人没再去，但心里有个温暖的角落",
+        "effects": {
+          "empathy": 8,
+          "happiness": 3,
+          "money": -3
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
     "id": "adult_53",
     "age_range": [
       39,
@@ -10707,51 +10336,6 @@
           "happiness": -3,
           "maturity": 8,
           "comfort": 5
-        },
-        "flags_add": []
-      }
-    ]
-  },
-  {
-    "id": "adult_08",
-    "age_range": [
-      40,
-      41
-    ],
-    "category": "personality",
-    "title": "四十不惑",
-    "text": "四十岁。某个初夏的夜晚一个人坐在阳台上。远处万家灯火，每扇窗户后面都有不一样的人生。你想起二十岁时写在日记里的话——那个想要成为的人、想去的地方、想要的生活。一股复杂的情绪涌上来，说不清是满足、遗憾、释然还是不甘。",
-    "choices": [
-      {
-        "text": "很满足。虽然没有波澜壮阔，但每一天都活得很踏实",
-        "effects": {
-          "happiness": 10,
-          "confidence": 8,
-          "money": 8,
-          "health": 3
-        },
-        "flags_add": [
-          "content_midlife"
-        ]
-      },
-      {
-        "text": "不甘心！辞掉工作去追那个搁置了十五年的梦想",
-        "effects": {
-          "independence": 15,
-          "happiness": 8,
-          "money": -10,
-          "learning": 5
-        },
-        "flags_add": [
-          "midlife_reinvention"
-        ]
-      },
-      {
-        "text": "哭了很久，然后擦干眼泪继续生活",
-        "effects": {
-          "happiness": -15,
-          "health": -10,
-          "maturity": 8
         },
         "flags_add": []
       }
@@ -10975,6 +10559,51 @@
     ]
   },
   {
+    "id": "adult_08",
+    "age_range": [
+      40,
+      41
+    ],
+    "category": "personality",
+    "title": "四十不惑",
+    "text": "四十岁。某个初夏的夜晚一个人坐在阳台上。远处万家灯火，每扇窗户后面都有不一样的人生。你想起二十岁时写在日记里的话——那个想要成为的人、想去的地方、想要的生活。一股复杂的情绪涌上来，说不清是满足、遗憾、释然还是不甘。",
+    "choices": [
+      {
+        "text": "很满足。虽然没有波澜壮阔，但每一天都活得很踏实",
+        "effects": {
+          "happiness": 10,
+          "confidence": 8,
+          "money": 8,
+          "health": 3
+        },
+        "flags_add": [
+          "content_midlife"
+        ]
+      },
+      {
+        "text": "不甘心！辞掉工作去追那个搁置了十五年的梦想",
+        "effects": {
+          "independence": 15,
+          "happiness": 8,
+          "money": -10,
+          "learning": 5
+        },
+        "flags_add": [
+          "midlife_reinvention"
+        ]
+      },
+      {
+        "text": "哭了很久，然后擦干眼泪继续生活",
+        "effects": {
+          "happiness": -15,
+          "health": -10,
+          "maturity": 8
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
     "id": "adult_62",
     "age_range": [
       41,
@@ -11136,45 +10765,46 @@
     ]
   },
   {
-    "id": "adult_09",
+    "id": "wealth_0041",
     "age_range": [
-      42,
-      43
+      41,
+      41
     ],
-    "category": "health",
-    "title": "职业倦怠",
-    "text": "持续的加班、反复的会议、永远改不完的方案。某天早上闹钟响的时候你按掉了它，然后盯着天花板看了二十分钟。身体没有问题——但没有动力做任何事，连最喜欢的菜吃到嘴里都像嚼蜡。你第一次认真地问自己：我是不是有点坚持不下去了？",
+    "category": "finance",
+    "title": "中年财务规划",
+    "text": "上有老下有小，家里的开支像流水。家人提议做一份家庭财务规划：孩子的教育金、父母的养老、你们自己的保险。每月固定存下一笔，虽不多，但积少成多。",
     "choices": [
       {
-        "text": "去看心理医生了。每周三下午，聊了半年",
+        "text": "立即开始执行规划",
         "effects": {
-          "health": 8,
-          "happiness": 8,
-          "money": -5
-        },
-        "flags_add": [
-          "therapy_helped"
-        ]
-      },
-      {
-        "text": "请了长假去海边住了两周。每天看日出日落，什么都不想",
-        "effects": {
-          "happiness": 10,
-          "money": -5,
-          "health": 3
+          "money": 10,
+          "happiness": 2
         },
         "flags_add": []
       },
       {
-        "text": "硬扛着。跟谁都没说，自己默默扛了下来",
+        "text": "等收入更高些再说",
         "effects": {
-          "health": -8,
-          "happiness": -10,
-          "maturity": 5
+          "money": 4,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "让我来管钱",
+        "effects": {
+          "money": 8,
+          "social": 2
         },
         "flags_add": []
       }
-    ]
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "adult_66",
@@ -11338,6 +10968,47 @@
           "money_management": 10,
           "saving": 10,
           "discipline": 5
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "adult_09",
+    "age_range": [
+      42,
+      43
+    ],
+    "category": "health",
+    "title": "职业倦怠",
+    "text": "持续的加班、反复的会议、永远改不完的方案。某天早上闹钟响的时候你按掉了它，然后盯着天花板看了二十分钟。身体没有问题——但没有动力做任何事，连最喜欢的菜吃到嘴里都像嚼蜡。你第一次认真地问自己：我是不是有点坚持不下去了？",
+    "choices": [
+      {
+        "text": "去看心理医生了。每周三下午，聊了半年",
+        "effects": {
+          "health": 8,
+          "happiness": 8,
+          "money": -5
+        },
+        "flags_add": [
+          "therapy_helped"
+        ]
+      },
+      {
+        "text": "请了长假去海边住了两周。每天看日出日落，什么都不想",
+        "effects": {
+          "happiness": 10,
+          "money": -5,
+          "health": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "硬扛着。跟谁都没说，自己默默扛了下来",
+        "effects": {
+          "health": -8,
+          "happiness": -10,
+          "maturity": 5
         },
         "flags_add": []
       }
@@ -11539,52 +11210,6 @@
     ]
   },
   {
-    "id": "adult_10",
-    "age_range": [
-      44,
-      45
-    ],
-    "category": "family",
-    "title": "孩子的教育",
-    "conditions": {
-      "has_flags": [
-        "married"
-      ]
-    },
-    "text": "孩子上中学了。每天作业写到深夜，周末被补习班塞满。你看着TA伏在书桌上的瘦小背影，想起了当年的自己。那个时候你最讨厌爸妈说的那些话，现在好像也快要从自己嘴里说出来了。",
-    "choices": [
-      {
-        "text": "和TA好好谈了一次。问TA到底喜欢什么，而不是逼TA学什么",
-        "effects": {
-          "family_relation": 10,
-          "empathy": 8,
-          "happiness": 8
-        },
-        "flags_add": [
-          "good_parent"
-        ]
-      },
-      {
-        "text": "现在不卷以后就晚了——报了最好的补习班",
-        "effects": {
-          "money": -8,
-          "discipline": 5,
-          "happiness": -5
-        },
-        "flags_add": []
-      },
-      {
-        "text": "放手让TA自己安排。路要自己走",
-        "effects": {
-          "happiness": 5,
-          "independence": 5,
-          "empathy": 3
-        },
-        "flags_add": []
-      }
-    ]
-  },
-  {
     "id": "adult_75",
     "age_range": [
       44,
@@ -11740,6 +11365,52 @@
           "health": -5,
           "comfort": 3,
           "avoidance": 3
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "adult_10",
+    "age_range": [
+      44,
+      45
+    ],
+    "category": "family",
+    "title": "孩子的教育",
+    "conditions": {
+      "has_flags": [
+        "married"
+      ]
+    },
+    "text": "孩子上中学了。每天作业写到深夜，周末被补习班塞满。你看着TA伏在书桌上的瘦小背影，想起了当年的自己。那个时候你最讨厌爸妈说的那些话，现在好像也快要从自己嘴里说出来了。",
+    "choices": [
+      {
+        "text": "和TA好好谈了一次。问TA到底喜欢什么，而不是逼TA学什么",
+        "effects": {
+          "family_relation": 10,
+          "empathy": 8,
+          "happiness": 8
+        },
+        "flags_add": [
+          "good_parent"
+        ]
+      },
+      {
+        "text": "现在不卷以后就晚了——报了最好的补习班",
+        "effects": {
+          "money": -8,
+          "discipline": 5,
+          "happiness": -5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "放手让TA自己安排。路要自己走",
+        "effects": {
+          "happiness": 5,
+          "independence": 5,
+          "empathy": 3
         },
         "flags_add": []
       }
@@ -11905,45 +11576,6 @@
         "effects": {
           "happiness": -8,
           "anxiety": 5
-        },
-        "flags_add": []
-      }
-    ]
-  },
-  {
-    "id": "adult_11",
-    "age_range": [
-      46,
-      47
-    ],
-    "category": "friend",
-    "title": "同学聚会",
-    "text": "高中同学二十年聚会。饭桌上——当年的班长现在在做房产中介、学霸在大厂被裁了正在家里带娃、当初最不爱说话的那个现在是上市公司CFO。酒过三巡有人提议每个人都讲一件「这些年最难忘的事」。轮到你了——",
-    "choices": [
-      {
-        "text": "讲了那个曾经帮过的孩子现在考上大学回来看你的事",
-        "effects": {
-          "happiness": 8,
-          "empathy": 5,
-          "social": 5
-        },
-        "flags_add": []
-      },
-      {
-        "text": "坦承这些年不容易，但好在都过来了",
-        "effects": {
-          "social": 8,
-          "happiness": 3,
-          "confidence": 5
-        },
-        "flags_add": []
-      },
-      {
-        "text": "心里有点不是滋味。总觉得别人都过得比自己好",
-        "effects": {
-          "happiness": -5,
-          "pressure": 8,
-          "money": -3
         },
         "flags_add": []
       }
@@ -12154,6 +11786,45 @@
     ]
   },
   {
+    "id": "adult_11",
+    "age_range": [
+      46,
+      47
+    ],
+    "category": "friend",
+    "title": "同学聚会",
+    "text": "高中同学二十年聚会。饭桌上——当年的班长现在在做房产中介、学霸在大厂被裁了正在家里带娃、当初最不爱说话的那个现在是上市公司CFO。酒过三巡有人提议每个人都讲一件「这些年最难忘的事」。轮到你了——",
+    "choices": [
+      {
+        "text": "讲了那个曾经帮过的孩子现在考上大学回来看你的事",
+        "effects": {
+          "happiness": 8,
+          "empathy": 5,
+          "social": 5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "坦承这些年不容易，但好在都过来了",
+        "effects": {
+          "social": 8,
+          "happiness": 3,
+          "confidence": 5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "心里有点不是滋味。总觉得别人都过得比自己好",
+        "effects": {
+          "happiness": -5,
+          "pressure": 8,
+          "money": -3
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
     "id": "adult_88",
     "age_range": [
       47,
@@ -12315,47 +11986,47 @@
     ]
   },
   {
-    "id": "adult_12",
+    "id": "wealth_0047",
     "age_range": [
-      48,
-      49
+      47,
+      47
     ],
-    "category": "family",
-    "title": "上有老下有小",
-    "text": "爸爸的膝盖不行了走路要拄拐。妈妈的记性越来越差，这周已经是第三次把钥匙锁在屋里了。每次打电话回去他们都说「没事没事你忙你的」——但你听得出电话那头的虚弱。上有老、下有小。四十多岁，是所有重量的支点。",
+    "category": "finance",
+    "title": "被动收入",
+    "text": "你手里有一套早年买的房子在出租，租金稳定但不高。中介建议你重新装修提高租金，或者卖掉换成更核心地段的公寓。这是你第一次认真琢磨「睡后收入」。",
     "choices": [
       {
-        "text": "把爸妈接到家里一起住。虽然挤，但踏实",
+        "text": "装修一番，提高租金",
         "effects": {
-          "empathy": 20,
-          "family_relation": 15,
-          "happiness": 8,
-          "money": -5,
-          "health": -3
-        },
-        "flags_add": [
-          "filial_child"
-        ]
-      },
-      {
-        "text": "请了最好的护工，自己每周回去看一次",
-        "effects": {
-          "empathy": 5,
-          "money": -10,
-          "happiness": -2
+          "money": 14,
+          "happiness": 2,
+          "pressure": 2
         },
         "flags_add": []
       },
       {
-        "text": "办了养老社区入住。环境好有医护，爸妈起初不习惯但后来交了新朋友",
+        "text": "卖掉换核心地段",
         "effects": {
-          "empathy": 10,
-          "money": -12,
+          "money": 18,
+          "luck": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "维持现状，图个省心",
+        "effects": {
+          "money": 6,
           "happiness": 3
         },
         "flags_add": []
       }
-    ]
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "adult_92",
@@ -12508,6 +12179,49 @@
           "happiness": -8,
           "self_awareness": 5,
           "anxiety": 3
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "adult_12",
+    "age_range": [
+      48,
+      49
+    ],
+    "category": "family",
+    "title": "上有老下有小",
+    "text": "爸爸的膝盖不行了走路要拄拐。妈妈的记性越来越差，这周已经是第三次把钥匙锁在屋里了。每次打电话回去他们都说「没事没事你忙你的」——但你听得出电话那头的虚弱。上有老、下有小。四十多岁，是所有重量的支点。",
+    "choices": [
+      {
+        "text": "把爸妈接到家里一起住。虽然挤，但踏实",
+        "effects": {
+          "empathy": 20,
+          "family_relation": 15,
+          "happiness": 8,
+          "money": -5,
+          "health": -3
+        },
+        "flags_add": [
+          "filial_child"
+        ]
+      },
+      {
+        "text": "请了最好的护工，自己每周回去看一次",
+        "effects": {
+          "empathy": 5,
+          "money": -10,
+          "happiness": -2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "办了养老社区入住。环境好有医护，爸妈起初不习惯但后来交了新朋友",
+        "effects": {
+          "empathy": 10,
+          "money": -12,
+          "happiness": 3
         },
         "flags_add": []
       }
@@ -12719,46 +12433,6 @@
     ]
   },
   {
-    "id": "mid_01",
-    "age_range": [
-      50,
-      52
-    ],
-    "category": "family",
-    "title": "空巢",
-    "text": "孩子考上大学走了。送TA到学校那天帮TA铺好床单挂好蚊帐，嘱咐了无数遍「好好吃饭」——「知道了知道了！」TA一边推你出门一边笑着嫌你啰嗦。回来的火车上窗外田野飞驰而过，车厢好安静。家里少了个人，房子突然变大了。",
-    "choices": [
-      {
-        "text": "重新捡起年轻时的爱好。学画画/吉他/摄影",
-        "effects": {
-          "happiness": 8,
-          "creativity": 6,
-          "learning": 3
-        },
-        "flags_add": [
-          "rediscovered_hobby"
-        ]
-      },
-      {
-        "text": "把空出来的房间改成书房，终于有时间读那些年攒的书了",
-        "effects": {
-          "learning": 8,
-          "happiness": 5
-        },
-        "flags_add": []
-      },
-      {
-        "text": "闲不下来，去社区大学旁听",
-        "effects": {
-          "learning": 6,
-          "social": 5,
-          "happiness": 3
-        },
-        "flags_add": []
-      }
-    ]
-  },
-  {
     "id": "mid_08",
     "age_range": [
       50,
@@ -12959,6 +12633,46 @@
           "conflict": 6,
           "pressure": 5
         }
+      }
+    ]
+  },
+  {
+    "id": "mid_01",
+    "age_range": [
+      50,
+      52
+    ],
+    "category": "family",
+    "title": "空巢",
+    "text": "孩子考上大学走了。送TA到学校那天帮TA铺好床单挂好蚊帐，嘱咐了无数遍「好好吃饭」——「知道了知道了！」TA一边推你出门一边笑着嫌你啰嗦。回来的火车上窗外田野飞驰而过，车厢好安静。家里少了个人，房子突然变大了。",
+    "choices": [
+      {
+        "text": "重新捡起年轻时的爱好。学画画/吉他/摄影",
+        "effects": {
+          "happiness": 8,
+          "creativity": 6,
+          "learning": 3
+        },
+        "flags_add": [
+          "rediscovered_hobby"
+        ]
+      },
+      {
+        "text": "把空出来的房间改成书房，终于有时间读那些年攒的书了",
+        "effects": {
+          "learning": 8,
+          "happiness": 5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "闲不下来，去社区大学旁听",
+        "effects": {
+          "learning": 6,
+          "social": 5,
+          "happiness": 3
+        },
+        "flags_add": []
       }
     ]
   },
@@ -15649,87 +15363,6 @@
     ]
   },
   {
-    "id": "elder_01",
-    "age_range": [
-      65,
-      66
-    ],
-    "category": "personality",
-    "title": "安享晚年",
-    "conditions": {
-      "min_attrs": {
-        "health": 35
-      }
-    },
-    "text": "六十五岁。早上去公园打太极，中午和老伴去菜市场讨价还价，下午在阳台的摇椅上看书打盹。生活变得很慢——也不着急，反正没有deadline了。偶尔翻翻旧相册，泛黄的照片里的人笑得那么灿烂。你认出了每一张脸，但有些名字已经模糊了。",
-    "choices": [
-      {
-        "text": "开始写回忆录。把这一生的故事记下来留给孙辈",
-        "effects": {
-          "happiness": 8,
-          "learning": 5,
-          "creativity": 5
-        },
-        "flags_add": [
-          "memoir"
-        ]
-      },
-      {
-        "text": "组织老同学聚会。有些人五十多年没见了",
-        "effects": {
-          "social": 10,
-          "happiness": 8
-        },
-        "flags_add": []
-      },
-      {
-        "text": "学着用微信拍短视频，笨拙地拍些花草发出去",
-        "effects": {
-          "technology": 5,
-          "social": 3,
-          "happiness": 3
-        },
-        "flags_add": []
-      }
-    ]
-  },
-  {
-    "id": "elder_02",
-    "age_range": [
-      65,
-      66
-    ],
-    "category": "health",
-    "title": "疾病缠身",
-    "conditions": {
-      "max_attrs": {
-        "health": 35
-      }
-    },
-    "text": "六十五岁。身体的零件一个接一个地出问题——膝盖疼、血压高、血糖也控制不住了。药盒占了床头柜的一半，医院的走廊比家里的客厅还熟悉。年轻时透支的那些夜晚，现在连本带利地找回来了。",
-    "choices": [
-      {
-        "text": "虽然身体不好，但心态还行。每天坚持散步半小时",
-        "effects": {
-          "health": 3,
-          "happiness": 5,
-          "discipline": 5
-        },
-        "flags_add": []
-      },
-      {
-        "text": "后悔了。当初要是对自己好一点就好了",
-        "effects": {
-          "happiness": -5,
-          "maturity": 5
-        },
-        "flags_add": [
-          "regret_health"
-        ]
-      }
-    ]
-  },
-  {
     "id": "elder_11",
     "age_range": [
       65,
@@ -15891,6 +15524,87 @@
           "happiness": -3
         },
         "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "elder_01",
+    "age_range": [
+      65,
+      66
+    ],
+    "category": "personality",
+    "title": "安享晚年",
+    "conditions": {
+      "min_attrs": {
+        "health": 35
+      }
+    },
+    "text": "六十五岁。早上去公园打太极，中午和老伴去菜市场讨价还价，下午在阳台的摇椅上看书打盹。生活变得很慢——也不着急，反正没有deadline了。偶尔翻翻旧相册，泛黄的照片里的人笑得那么灿烂。你认出了每一张脸，但有些名字已经模糊了。",
+    "choices": [
+      {
+        "text": "开始写回忆录。把这一生的故事记下来留给孙辈",
+        "effects": {
+          "happiness": 8,
+          "learning": 5,
+          "creativity": 5
+        },
+        "flags_add": [
+          "memoir"
+        ]
+      },
+      {
+        "text": "组织老同学聚会。有些人五十多年没见了",
+        "effects": {
+          "social": 10,
+          "happiness": 8
+        },
+        "flags_add": []
+      },
+      {
+        "text": "学着用微信拍短视频，笨拙地拍些花草发出去",
+        "effects": {
+          "technology": 5,
+          "social": 3,
+          "happiness": 3
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "elder_02",
+    "age_range": [
+      65,
+      66
+    ],
+    "category": "health",
+    "title": "疾病缠身",
+    "conditions": {
+      "max_attrs": {
+        "health": 35
+      }
+    },
+    "text": "六十五岁。身体的零件一个接一个地出问题——膝盖疼、血压高、血糖也控制不住了。药盒占了床头柜的一半，医院的走廊比家里的客厅还熟悉。年轻时透支的那些夜晚，现在连本带利地找回来了。",
+    "choices": [
+      {
+        "text": "虽然身体不好，但心态还行。每天坚持散步半小时",
+        "effects": {
+          "health": 3,
+          "happiness": 5,
+          "discipline": 5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "后悔了。当初要是对自己好一点就好了",
+        "effects": {
+          "happiness": -5,
+          "maturity": 5
+        },
+        "flags_add": [
+          "regret_health"
+        ]
       }
     ]
   },
@@ -16259,40 +15973,6 @@
     ]
   },
   {
-    "id": "elder_03",
-    "age_range": [
-      68,
-      69
-    ],
-    "category": "family",
-    "title": "孙辈的时光",
-    "conditions": {
-      "has_flags": [
-        "grandparent"
-      ]
-    },
-    "text": "孙子/孙女放暑假了，吵着要来爷爷奶奶家。小不点趴在你膝盖上仰着脸问：「你小时候是什么样的呀？」你愣了一下——从来没人问过你这个问题。你翻出藏在柜子深处的那本旧相册，一页一页地给TA讲。那些尘封了几十年的故事，说起来的时候好像就发生在昨天。",
-    "choices": [
-      {
-        "text": "讲了很多——好的坏的、骄傲的遗憾的。TA听得入迷了",
-        "effects": {
-          "happiness": 10,
-          "family_relation": 8,
-          "learning": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "挑那些快乐的故事讲。不想让TA太早知道人生有多难",
-        "effects": {
-          "happiness": 5,
-          "empathy": 3
-        },
-        "flags_add": []
-      }
-    ]
-  },
-  {
     "id": "elder_24",
     "age_range": [
       68,
@@ -16451,6 +16131,40 @@
         "effects": {
           "independence": 5,
           "avoidance": 5
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "elder_03",
+    "age_range": [
+      68,
+      69
+    ],
+    "category": "family",
+    "title": "孙辈的时光",
+    "conditions": {
+      "has_flags": [
+        "grandparent"
+      ]
+    },
+    "text": "孙子/孙女放暑假了，吵着要来爷爷奶奶家。小不点趴在你膝盖上仰着脸问：「你小时候是什么样的呀？」你愣了一下——从来没人问过你这个问题。你翻出藏在柜子深处的那本旧相册，一页一页地给TA讲。那些尘封了几十年的故事，说起来的时候好像就发生在昨天。",
+    "choices": [
+      {
+        "text": "讲了很多——好的坏的、骄傲的遗憾的。TA听得入迷了",
+        "effects": {
+          "happiness": 10,
+          "family_relation": 8,
+          "learning": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "挑那些快乐的故事讲。不想让TA太早知道人生有多难",
+        "effects": {
+          "happiness": 5,
+          "empathy": 3
         },
         "flags_add": []
       }
@@ -16626,122 +16340,6 @@
     ]
   },
   {
-    "id": "elder_04",
-    "age_range": [
-      70,
-      71
-    ],
-    "category": "personality",
-    "title": "富足的回望",
-    "conditions": {
-      "min_attrs": {
-        "money": 55,
-        "health": 30
-      }
-    },
-    "text": "七十岁了。你坐在自己大房子的露台上看着夕阳。这辈子赚了不少钱。但你也明白了——钱能买来房子，买不来家；能买来钟表，买不来时间。一个年轻人来采访你问「成功的秘诀是什么」。你沉默了很久……",
-    "choices": [
-      {
-        "text": "「钱很重要，但它只是工具。真正富足的是内心。」",
-        "effects": {
-          "empathy": 10,
-          "happiness": 5,
-          "maturity": 8
-        },
-        "flags_add": []
-      },
-      {
-        "text": "「运气。我赶上了好时代。能帮到别人的时候尽量帮。」",
-        "effects": {
-          "empathy": 8,
-          "independence": 5
-        },
-        "flags_add": []
-      }
-    ]
-  },
-  {
-    "id": "elder_05",
-    "age_range": [
-      70,
-      71
-    ],
-    "category": "personality",
-    "title": "清贫的智慧",
-    "conditions": {
-      "max_attrs": {
-        "money": 35
-      }
-    },
-    "text": "七十岁了。钱一直不宽裕，但你有一群惦记着你的老朋友和时不时来看你的晚辈。坐在老旧的沙发上，旁边的收音机放着咿咿呀呀的戏曲。窗外银杏叶落了满地。你想起这辈子——苦过、累过、笑过、哭过。如果要留一句话给这个世界……",
-    "choices": [
-      {
-        "text": "「钱少的时候，爱就要多。这辈子值了。」",
-        "effects": {
-          "happiness": 10,
-          "empathy": 8,
-          "social": 5
-        },
-        "flags_add": []
-      },
-      {
-        "text": "「如果重来一次……可能还是老样子吧。」",
-        "effects": {
-          "happiness": -2,
-          "maturity": 8
-        },
-        "flags_add": []
-      }
-    ]
-  },
-  {
-    "id": "elder_06",
-    "age_range": [
-      70,
-      71
-    ],
-    "category": "personality",
-    "title": "平凡的回望",
-    "text": "黄昏时分你坐在公园的长椅上。旁边放着刚买的面包——老伴嘱咐你出来买的。银杏叶落了一地，一个小孩跑过来捡叶子，他的奶奶在后面追。你看着他们笑了。小孩跑远了，公园又安静下来。一生走到这里，把最重要的领悟浓缩成一句话——",
-    "choices": [
-      {
-        "text": "「爱是最值得的事。勇敢去爱，别怕受伤。」",
-        "effects": {
-          "happiness": 10,
-          "empathy": 5,
-          "relationship": 5
-        },
-        "flags_add": []
-      },
-      {
-        "text": "「做自己。人生不长，不要活在别人的期待里。」",
-        "effects": {
-          "happiness": 8,
-          "independence": 8,
-          "maturity": 5
-        },
-        "flags_add": []
-      },
-      {
-        "text": "「钱和健康，健康更重要。可惜年轻时不明白。」",
-        "effects": {
-          "money": 3,
-          "health": 8,
-          "empathy": 5
-        },
-        "flags_add": []
-      },
-      {
-        "text": "「如果能重来一次……」",
-        "effects": {
-          "happiness": -2,
-          "independence": 8
-        },
-        "flags_add": []
-      }
-    ]
-  },
-  {
     "id": "elder_32",
     "age_range": [
       70,
@@ -16903,6 +16501,122 @@
         "effects": {
           "happiness": 3,
           "maturity": 3
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "elder_04",
+    "age_range": [
+      70,
+      71
+    ],
+    "category": "personality",
+    "title": "富足的回望",
+    "conditions": {
+      "min_attrs": {
+        "money": 55,
+        "health": 30
+      }
+    },
+    "text": "七十岁了。你坐在自己大房子的露台上看着夕阳。这辈子赚了不少钱。但你也明白了——钱能买来房子，买不来家；能买来钟表，买不来时间。一个年轻人来采访你问「成功的秘诀是什么」。你沉默了很久……",
+    "choices": [
+      {
+        "text": "「钱很重要，但它只是工具。真正富足的是内心。」",
+        "effects": {
+          "empathy": 10,
+          "happiness": 5,
+          "maturity": 8
+        },
+        "flags_add": []
+      },
+      {
+        "text": "「运气。我赶上了好时代。能帮到别人的时候尽量帮。」",
+        "effects": {
+          "empathy": 8,
+          "independence": 5
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "elder_05",
+    "age_range": [
+      70,
+      71
+    ],
+    "category": "personality",
+    "title": "清贫的智慧",
+    "conditions": {
+      "max_attrs": {
+        "money": 35
+      }
+    },
+    "text": "七十岁了。钱一直不宽裕，但你有一群惦记着你的老朋友和时不时来看你的晚辈。坐在老旧的沙发上，旁边的收音机放着咿咿呀呀的戏曲。窗外银杏叶落了满地。你想起这辈子——苦过、累过、笑过、哭过。如果要留一句话给这个世界……",
+    "choices": [
+      {
+        "text": "「钱少的时候，爱就要多。这辈子值了。」",
+        "effects": {
+          "happiness": 10,
+          "empathy": 8,
+          "social": 5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "「如果重来一次……可能还是老样子吧。」",
+        "effects": {
+          "happiness": -2,
+          "maturity": 8
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "elder_06",
+    "age_range": [
+      70,
+      71
+    ],
+    "category": "personality",
+    "title": "平凡的回望",
+    "text": "黄昏时分你坐在公园的长椅上。旁边放着刚买的面包——老伴嘱咐你出来买的。银杏叶落了一地，一个小孩跑过来捡叶子，他的奶奶在后面追。你看着他们笑了。小孩跑远了，公园又安静下来。一生走到这里，把最重要的领悟浓缩成一句话——",
+    "choices": [
+      {
+        "text": "「爱是最值得的事。勇敢去爱，别怕受伤。」",
+        "effects": {
+          "happiness": 10,
+          "empathy": 5,
+          "relationship": 5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "「做自己。人生不长，不要活在别人的期待里。」",
+        "effects": {
+          "happiness": 8,
+          "independence": 8,
+          "maturity": 5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "「钱和健康，健康更重要。可惜年轻时不明白。」",
+        "effects": {
+          "money": 3,
+          "health": 8,
+          "empathy": 5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "「如果能重来一次……」",
+        "effects": {
+          "happiness": -2,
+          "independence": 8
         },
         "flags_add": []
       }
@@ -17080,76 +16794,6 @@
     ]
   },
   {
-    "id": "elder_07",
-    "age_range": [
-      72,
-      73
-    ],
-    "category": "career",
-    "title": "真正的遗产",
-    "conditions": {
-      "min_attrs": {
-        "money": 55,
-        "empathy": 40
-      }
-    },
-    "text": "你的公司成了很多人谈论的话题。有媒体来采访，有大学请你去讲座。但你最在意的不是这个——你资助的那些孩子里有人成了医生、有人做了老师、有人开了自己的工作室。他们的照片被你在墙上贴了一排。这些才是你心里真正的「成功」。",
-    "choices": [
-      {
-        "text": "「我这辈子最骄傲的不是赚了多少钱，而是帮了多少人。」",
-        "effects": {
-          "empathy": 10,
-          "happiness": 8,
-          "maturity": 8
-        },
-        "flags_add": []
-      },
-      {
-        "text": "「钱是手段，不是目的。可惜很多人一辈子都没搞明白。」",
-        "effects": {
-          "empathy": 5,
-          "learning": 5
-        },
-        "flags_add": []
-      }
-    ]
-  },
-  {
-    "id": "elder_08",
-    "age_range": [
-      72,
-      73
-    ],
-    "category": "health",
-    "title": "艰难的晚年",
-    "conditions": {
-      "max_attrs": {
-        "money": 30,
-        "health": 30
-      }
-    },
-    "text": "钱不多、身体也不好、儿女们各有各的难处。这些年在医院和家里之间来回跑，药盒占了床头柜的一半。但今天天气不错。隔壁老李头拎着象棋过来敲你的门——「来一局？」你慢慢坐起来。外面的阳光透过窗户照在棋盘上。活着，好像也不是那么坏。",
-    "choices": [
-      {
-        "text": "「日子苦是苦了点，但能走到今天也是一种本事。」",
-        "effects": {
-          "happiness": 5,
-          "maturity": 8,
-          "confidence": 5
-        },
-        "flags_add": []
-      },
-      {
-        "text": "「下辈子，可能该对自己好一点。」",
-        "effects": {
-          "happiness": -3,
-          "independence": 5
-        },
-        "flags_add": []
-      }
-    ]
-  },
-  {
     "id": "elder_40",
     "age_range": [
       72,
@@ -17308,6 +16952,76 @@
         "effects": {
           "happiness": 5,
           "maturity": 5
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "elder_07",
+    "age_range": [
+      72,
+      73
+    ],
+    "category": "career",
+    "title": "真正的遗产",
+    "conditions": {
+      "min_attrs": {
+        "money": 55,
+        "empathy": 40
+      }
+    },
+    "text": "你的公司成了很多人谈论的话题。有媒体来采访，有大学请你去讲座。但你最在意的不是这个——你资助的那些孩子里有人成了医生、有人做了老师、有人开了自己的工作室。他们的照片被你在墙上贴了一排。这些才是你心里真正的「成功」。",
+    "choices": [
+      {
+        "text": "「我这辈子最骄傲的不是赚了多少钱，而是帮了多少人。」",
+        "effects": {
+          "empathy": 10,
+          "happiness": 8,
+          "maturity": 8
+        },
+        "flags_add": []
+      },
+      {
+        "text": "「钱是手段，不是目的。可惜很多人一辈子都没搞明白。」",
+        "effects": {
+          "empathy": 5,
+          "learning": 5
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "elder_08",
+    "age_range": [
+      72,
+      73
+    ],
+    "category": "health",
+    "title": "艰难的晚年",
+    "conditions": {
+      "max_attrs": {
+        "money": 30,
+        "health": 30
+      }
+    },
+    "text": "钱不多、身体也不好、儿女们各有各的难处。这些年在医院和家里之间来回跑，药盒占了床头柜的一半。但今天天气不错。隔壁老李头拎着象棋过来敲你的门——「来一局？」你慢慢坐起来。外面的阳光透过窗户照在棋盘上。活着，好像也不是那么坏。",
+    "choices": [
+      {
+        "text": "「日子苦是苦了点，但能走到今天也是一种本事。」",
+        "effects": {
+          "happiness": 5,
+          "maturity": 8,
+          "confidence": 5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "「下辈子，可能该对自己好一点。」",
+        "effects": {
+          "happiness": -3,
+          "independence": 5
         },
         "flags_add": []
       }
@@ -17691,82 +17405,6 @@
     ]
   },
   {
-    "id": "elder_09",
-    "age_range": [
-      75,
-      76
-    ],
-    "category": "family",
-    "title": "最后一个愿望",
-    "conditions": {
-      "has_flags": [
-        "married"
-      ]
-    },
-    "text": "七十五岁生日那天孩子们都回来了。家里很久没这么热闹了——小孩子们在客厅追逐打闹、大人们围在厨房里一边做饭一边聊着各自的烦恼。你坐在角落的单人沙发里裹着毯子看着这一切。心里想：差不多了。这一生该经历的都经历了。如果还有一个愿望……",
-    "choices": [
-      {
-        "text": "「希望你们都能好好爱自己。」在心里默默许愿",
-        "effects": {
-          "happiness": 12,
-          "family_relation": 10,
-          "empathy": 8
-        },
-        "flags_add": []
-      },
-      {
-        "text": "「没什么愿望了。这样就很好。」",
-        "effects": {
-          "happiness": 10,
-          "empathy": 5
-        },
-        "flags_add": []
-      },
-      {
-        "text": "「多希望还能再活一遍……」",
-        "effects": {
-          "happiness": -3,
-          "maturity": 5
-        },
-        "flags_add": []
-      }
-    ]
-  },
-  {
-    "id": "elder_10",
-    "age_range": [
-      75,
-      76
-    ],
-    "category": "personality",
-    "title": "独自的黄昏",
-    "conditions": {
-      "not_flags": [
-        "married"
-      ]
-    },
-    "text": "七十五岁。一个人的公寓里很安静——只有墙上时钟的滴答声。窗外的世界依然喧嚣，年轻人的笑声从楼下传来。这辈子一个人走了大半程。不是没有遇到过机会，只是在每一个路口你都选择了另一条路。后悔吗？你想了想……",
-    "choices": [
-      {
-        "text": "「不后悔。自由是一生最好的伴侣。」",
-        "effects": {
-          "happiness": 8,
-          "independence": 10,
-          "confidence": 5
-        },
-        "flags_add": []
-      },
-      {
-        "text": "「有时候也会想——如果当初……」",
-        "effects": {
-          "happiness": -3,
-          "independence": 8
-        },
-        "flags_add": []
-      }
-    ]
-  },
-  {
     "id": "elder_53",
     "age_range": [
       75,
@@ -17932,6 +17570,82 @@
         "effects": {
           "relationship": 5,
           "maturity": 8
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "elder_09",
+    "age_range": [
+      75,
+      76
+    ],
+    "category": "family",
+    "title": "最后一个愿望",
+    "conditions": {
+      "has_flags": [
+        "married"
+      ]
+    },
+    "text": "七十五岁生日那天孩子们都回来了。家里很久没这么热闹了——小孩子们在客厅追逐打闹、大人们围在厨房里一边做饭一边聊着各自的烦恼。你坐在角落的单人沙发里裹着毯子看着这一切。心里想：差不多了。这一生该经历的都经历了。如果还有一个愿望……",
+    "choices": [
+      {
+        "text": "「希望你们都能好好爱自己。」在心里默默许愿",
+        "effects": {
+          "happiness": 12,
+          "family_relation": 10,
+          "empathy": 8
+        },
+        "flags_add": []
+      },
+      {
+        "text": "「没什么愿望了。这样就很好。」",
+        "effects": {
+          "happiness": 10,
+          "empathy": 5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "「多希望还能再活一遍……」",
+        "effects": {
+          "happiness": -3,
+          "maturity": 5
+        },
+        "flags_add": []
+      }
+    ]
+  },
+  {
+    "id": "elder_10",
+    "age_range": [
+      75,
+      76
+    ],
+    "category": "personality",
+    "title": "独自的黄昏",
+    "conditions": {
+      "not_flags": [
+        "married"
+      ]
+    },
+    "text": "七十五岁。一个人的公寓里很安静——只有墙上时钟的滴答声。窗外的世界依然喧嚣，年轻人的笑声从楼下传来。这辈子一个人走了大半程。不是没有遇到过机会，只是在每一个路口你都选择了另一条路。后悔吗？你想了想……",
+    "choices": [
+      {
+        "text": "「不后悔。自由是一生最好的伴侣。」",
+        "effects": {
+          "happiness": 8,
+          "independence": 10,
+          "confidence": 5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "「有时候也会想——如果当初……」",
+        "effects": {
+          "happiness": -3,
+          "independence": 8
         },
         "flags_add": []
       }

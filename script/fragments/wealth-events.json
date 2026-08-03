@@ -1,0 +1,80 @@
+[
+  {
+    "id": "wealth_0022",
+    "age_range": [22, 22],
+    "category": "finance",
+    "title": "第一份兼职",
+    "text": "大学快毕业了，室友介绍你去做周末兼职：一家连锁咖啡店的服务员。时薪不高，但能攒下第一笔属于自己的钱。同时班里还有同学接了高薪的网课推销，据说提成很可观，只是被拒绝是家常便饭。",
+    "choices": [
+      { "text": "认真端咖啡，踏实攒经验", "effects": { "money": 10, "social": 2 }, "flags_add": [] },
+      { "text": "挑战高提成的推销", "effects": { "money": 18, "pressure": 4, "luck": 2 }, "flags_add": [] },
+      { "text": "专心学业，暂不打工", "effects": { "money": 2, "learning": 5 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "wealth_0026",
+    "age_range": [26, 26],
+    "category": "finance",
+    "title": "开始理财",
+    "text": "工作一年，银行卡里终于有了几万块存款。朋友说钱放着不动就是贬值，推荐你学习理财。银行定存、货币基金、还有风险更高的股票基金，选项不少。你盘算着怎么让钱生钱。",
+    "choices": [
+      { "text": "全部存定期，稳妥为上", "effects": { "money": 8 }, "flags_add": [] },
+      { "text": "试水基金定投", "effects": { "money": 14, "luck": 3 }, "flags_add": [] },
+      { "text": "交给专业理财顾问", "effects": { "money": 6, "learning": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "wealth_0032",
+    "age_range": [32, 32],
+    "category": "finance",
+    "title": "升职加薪",
+    "text": "领导找你谈话，说公司要提拔一批中层，你有机会。但升职意味着更重的担子和更长的加班。另一边，同行开出了更高的薪水挖你，跳槽可能更快赚到钱，但也可能水土不服。",
+    "choices": [
+      { "text": "留在原公司升职", "effects": { "money": 14, "social": 3, "pressure": 3 }, "flags_add": [] },
+      { "text": "跳槽去拿高薪", "effects": { "money": 18, "luck": 2 }, "flags_add": [] },
+      { "text": "婉拒升职，保持现状", "effects": { "money": 3, "happiness": 6 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "wealth_0036",
+    "age_range": [36, 36],
+    "category": "finance",
+    "title": "理财复盘",
+    "text": "年初跟风买的那支基金涨了不少，账面浮盈够买一辆车。要不要落袋为安？朋友说行情还会继续，理财顾问却提醒你落袋的才是自己的。钱的事，每个人都说得很有道理。",
+    "choices": [
+      { "text": "落袋为安", "effects": { "money": 12, "happiness": 2 }, "flags_add": [] },
+      { "text": "继续持有，等更大回报", "effects": { "money": 16, "luck": 3 }, "flags_add": [] },
+      { "text": "取出部分改善生活", "effects": { "money": 8, "happiness": 4 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "wealth_0041",
+    "age_range": [41, 41],
+    "category": "finance",
+    "title": "中年财务规划",
+    "text": "上有老下有小，家里的开支像流水。家人提议做一份家庭财务规划：孩子的教育金、父母的养老、你们自己的保险。每月固定存下一笔，虽不多，但积少成多。",
+    "choices": [
+      { "text": "立即开始执行规划", "effects": { "money": 10, "happiness": 2 }, "flags_add": [] },
+      { "text": "等收入更高些再说", "effects": { "money": 4, "happiness": 3 }, "flags_add": [] },
+      { "text": "让我来管钱", "effects": { "money": 8, "social": 2 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "wealth_0047",
+    "age_range": [47, 47],
+    "category": "finance",
+    "title": "被动收入",
+    "text": "你手里有一套早年买的房子在出租，租金稳定但不高。中介建议你重新装修提高租金，或者卖掉换成更核心地段的公寓。这是你第一次认真琢磨「睡后收入」。",
+    "choices": [
+      { "text": "装修一番，提高租金", "effects": { "money": 14, "happiness": 2, "pressure": 2 }, "flags_add": [] },
+      { "text": "卖掉换核心地段", "effects": { "money": 18, "luck": 2 }, "flags_add": [] },
+      { "text": "维持现状，图个省心", "effects": { "money": 6, "happiness": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  }
+]

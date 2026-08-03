@@ -1,12 +1,14 @@
-import type { Choice } from '../types';
+import type { AttributeKey, Attributes, Choice } from '../types';
+import { ATTR_META, effectiveDelta } from '../engine/state';
 
 interface Props {
   choices: Choice[];
   onSelect: (choice: Choice) => void;
   visible: boolean;
+  attributes: Attributes;
 }
 
-export default function ChoicePanel({ choices, onSelect, visible }: Props) {
+export default function ChoicePanel({ choices, onSelect, visible, attributes }: Props) {
   if (!visible || choices.length === 0) return null;
 
   return (
@@ -31,15 +33,31 @@ export default function ChoicePanel({ choices, onSelect, visible }: Props) {
 
           <span>{ch.text}</span>
 
-          {ch.effects && (
+          {ch.outcomes.attr && Object.keys(ch.outcomes.attr).length > 0 && (
             <span className="text-[10px] text-white/40 tracking-wide whitespace-nowrap ml-3 shrink-0">
-              {colorEffects(ch.effects)}
+              {colorEffects(effectsText(ch, attributes))}
             </span>
           )}
         </button>
       ))}
     </div>
   );
+}
+
+/**
+ * 生成实时效果展示串（按当前属性计算实际生效值，与引擎应用结果一致）。
+ * 键序沿用转换器生成的 outcomes 顺序。
+ */
+function effectsText(ch: Choice, attrs: Attributes): string {
+  const attr = ch.outcomes.attr;
+  return (Object.keys(attr) as AttributeKey[])
+    .filter(k => attr[k] !== 0)
+    .map(k => `${ATTR_META[k].icon}${formatDelta(effectiveDelta(k, attr[k]!, attrs))}`)
+    .join(' ');
+}
+
+function formatDelta(v: number): string {
+  return v > 0 ? `+${v}` : `${v}`;
 }
 
 function colorEffects(effects: string) {

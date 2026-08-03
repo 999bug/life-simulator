@@ -1,5 +1,5 @@
-import { useReducer, useCallback } from 'react';
-import type { AttributeKey, Attributes, Choice, GameState, LifeEvent } from '../types';
+import { useReducer, useCallback, useEffect, useMemo } from 'react';
+import type { AttributeKey, Attributes, Choice, DeathCause, GameState, LifeEvent } from '../types';
 import {
   createInitialState,
   applyOutcomes,
@@ -11,21 +11,77 @@ import {
   ensureInt,
   STAGE_ORDER,
 } from '../engine/state';
-import EVENTS from '../engine/events';
+import EVENTS, { shuffleEvents } from '../engine/events';
 
 // ============ Action 类型 ============
 type Action =
   | { type: 'START_GAME'; gender: 'male' | 'female'; name: string }
   | { type: 'MAKE_CHOICE'; choice: Choice; eventId: string }
   | { type: 'CONTINUE' }
-  | { type: 'RESET' };
+  | { type: 'RESET' }
+  | { type: 'CONTINUE_GAME' };
 
 // ============ 运行时状态（不参与 React 渲染）============
 interface RuntimeState {
   game: GameState;
   currentEvent: LifeEvent | null;
   feedback: string | null;
-  eventIndex: number;       // 当前事件在 EVENTS 数组中的位置
+  eventIndex: number;       // 当前事件在 shuffledEvents 数组中的位置
+  /** 本局事件顺序（同岁组内按种子洗牌，重开一局顺序不同） */
+  shuffledEvents: LifeEvent[];
+  /** 洗牌种子（存档恢复时还原顺序） */
+  shuffleSeed: number;
+}
+
+// ============ 存档 ============
+
+/** localStorage 存档键 */
+const SAVE_KEY = 'life-sim-save-v1';
+
+/** 存档结构：游戏状态 + 当前事件 id + 洗牌种子（引用恢复时按种子还原事件顺序） */
+interface SaveData {
+  game: GameState;
+  currentEventId: string | null;
+  feedback: string | null;
+  eventIndex: number;
+  shuffleSeed: number;
+}
+
+/** 读取存档，损坏或不存在返回 null */
+function loadSave(): SaveData | null {
+  try {
+    const raw = localStorage.getItem(SAVE_KEY);
+    if (!raw) {
+      return null;
+    }
+    const data = JSON.parse(raw) as SaveData;
+    if (!data?.game || typeof data.eventIndex !== 'number') {
+      return null;
+    }
+    return data;
+  } catch {
+    return null;
+  }
+}
+
+/** 持久化当前状态；标题页状态（新游戏未开始）时清除存档 */
+function saveState(rt: RuntimeState): void {
+  if (!rt.game || rt.game.phase === 'title') {
+    localStorage.removeItem(SAVE_KEY);
+    return;
+  }
+  const data: SaveData = {
+    game: rt.game,
+    currentEventId: rt.currentEvent?.id ?? null,
+    feedback: rt.feedback,
+    eventIndex: rt.eventIndex,
+    shuffleSeed: rt.shuffleSeed,
+  };
+  try {
+    localStorage.setItem(SAVE_KEY, JSON.stringify(data));
+  } catch {
+    // 存储不可用（隐私模式/满额）时静默降级为不保存
+  }
 }
 
 // ============ Reducer ============
@@ -33,13 +89,23 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
   switch (action.type) {
     case 'START_GAME': {
       const game = createInitialState(action.gender, action.name);
-      const first = EVENTS.find(e => checkConditions(e, game)) ?? null;
+      // 新一局：随机种子洗牌，同岁组顺序每局不同（重玩性）
+      const shuffleSeed = Math.floor(Math.random() * 2 ** 31);
+      const shuffledEvents = shuffleEvents(EVENTS, shuffleSeed);
+      const first = shuffledEvents.find(e => checkConditions(e, game)) ?? null;
       if (first) {
         game.age = first.age;
         game.stage = getStageForAge(first.age);
         game.stageIdx = STAGE_ORDER.indexOf(game.stage);
       }
-      return { game, currentEvent: first, feedback: null, eventIndex: first ? EVENTS.indexOf(first) : 0 };
+      return {
+        game,
+        currentEvent: first,
+        feedback: null,
+        eventIndex: first ? shuffledEvents.indexOf(first) : 0,
+        shuffledEvents,
+        shuffleSeed,
+      };
     }
 
     case 'MAKE_CHOICE': {
@@ -56,7 +122,7 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
       }
 
       // 基于更新后的属性/标记，线性扫描下一个满足条件的事件
-      const next = findNextEvent({ ...state.game, attributes: attrs, flags }, state.eventIndex);
+      const next = findNextEvent({ ...state.game, attributes: attrs, flags }, state.eventIndex, state.shuffledEvents);
 
       // 年龄由下一个事件驱动；没有下一个事件说明全部播完
       const age = next ? next.age : state.game.age;
@@ -75,6 +141,11 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
       const isDead = next !== null && checkDeath(age, attrs.health, maxAge);
       const gameOver = isDead || next === null;
 
+      // 死因：健康归零 → 耗尽；超过寿命或事件播完 → 寿终
+      const deathCause: DeathCause | null = isDead
+        ? (attrs.health <= 0 ? 'health' : 'lifespan')
+        : (next === null ? 'lifespan' : null);
+
       // 记录历史
       const history = [...state.game.history, {
         age: state.game.age,
@@ -92,6 +163,7 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         attributes: attrs,
         flags,
         history,
+        deathCause,
         phase: gameOver ? 'summary' : 'playing',
       };
 
@@ -111,7 +183,9 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         game,
         currentEvent: gameOver ? null : next,
         feedback: fb,
-        eventIndex: next ? EVENTS.indexOf(next) : state.eventIndex,
+        eventIndex: next ? state.shuffledEvents.indexOf(next) : state.eventIndex,
+        shuffledEvents: state.shuffledEvents,
+        shuffleSeed: state.shuffleSeed,
       };
     }
 
@@ -123,6 +197,29 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
     case 'RESET':
       return createInitialRuntime();
 
+    case 'CONTINUE_GAME': {
+      // 从存档恢复：标题页 → 存档中的游戏现场
+      const saved = loadSave();
+      if (!saved) {
+        return state;
+      }
+      // 按存档种子还原本局事件顺序（旧版存档无种子则用默认顺序）
+      const shuffleSeed = typeof saved.shuffleSeed === 'number' ? saved.shuffleSeed : 0;
+      const shuffledEvents = shuffleEvents(EVENTS, shuffleSeed);
+      const currentEvent = saved.currentEventId
+        ? shuffledEvents.find(e => e.id === saved.currentEventId) ?? null
+        : null;
+      return {
+        // 旧版存档无 deathCause 字段，显式兜底兼容
+        game: { ...saved.game, deathCause: saved.game.deathCause ?? null },
+        currentEvent,
+        feedback: saved.feedback,
+        eventIndex: saved.eventIndex,
+        shuffleSeed,
+        shuffledEvents,
+      };
+    }
+
     default:
       return state;
   }
@@ -130,11 +227,11 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
 
 // ============ 事件查找 ============
 
-/** 从 fromIndex 之后线性扫描第一个满足条件的事件 */
-function findNextEvent(game: GameState, fromIndex: number): LifeEvent | null {
-  for (let i = fromIndex + 1; i < EVENTS.length; i++) {
-    if (checkConditions(EVENTS[i], game)) {
-      return EVENTS[i];
+/** 从 fromIndex 之后线性扫描第一个满足条件的事件（在洗牌后的顺序上查找） */
+function findNextEvent(game: GameState, fromIndex: number, events: LifeEvent[]): LifeEvent | null {
+  for (let i = fromIndex + 1; i < events.length; i++) {
+    if (checkConditions(events[i], game)) {
+      return events[i];
     }
   }
   return null;
@@ -173,15 +270,25 @@ function createInitialRuntime(): RuntimeState {
     game: {
       gender: 'male', name: '', age: 0, stage: 'infant', stageIdx: 0,
       attributes: { health: 65, intelligence: 25, wealth: 20, happiness: 60, social: 25, appearance: 45, luck: 50, morality: 45 },
-      flags: [], history: [], phase: 'title',
+      flags: [], history: [], phase: 'title', deathCause: null,
     },
     currentEvent: null, feedback: null, eventIndex: 0,
+    shuffledEvents: EVENTS,
+    shuffleSeed: 0,
   };
 }
 
 // ============ Hook ============
 export function useGame() {
   const [rt, dispatch] = useReducer(reducer, null, createInitialRuntime);
+
+  // 每次状态变化后持久化（标题页自动清除存档）
+  useEffect(() => {
+    saveState(rt);
+  }, [rt]);
+
+  // 标题页是否有可继续的存档（仅初始读取一次）
+  const hasSave = useMemo(() => loadSave() !== null, []);
 
   const startGame = useCallback((gender: 'male' | 'female', name: string) => {
     dispatch({ type: 'START_GAME', gender, name });
@@ -200,13 +307,19 @@ export function useGame() {
     dispatch({ type: 'RESET' });
   }, []);
 
+  const continueGame = useCallback(() => {
+    dispatch({ type: 'CONTINUE_GAME' });
+  }, []);
+
   return {
     game: rt.game,
     currentEvent: rt.currentEvent,
     feedback: rt.feedback,
+    hasSave,
     startGame,
     makeChoice,
     continue: continue_,
+    continueGame,
     reset,
   };
 }

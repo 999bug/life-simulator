@@ -72,6 +72,9 @@ export interface LifeEvent {
   conditions?: EventCondition;
 }
 
+/** 死因 */
+export type DeathCause = 'health' | 'lifespan';
+
 /** 游戏状态 */
 export interface GameState {
   gender: 'male' | 'female';
@@ -83,6 +86,8 @@ export interface GameState {
   flags: string[];
   history: ChoiceRecord[];
   phase: GamePhase;
+  /** 死因：健康归零 / 寿终正寝（存活时为空） */
+  deathCause: DeathCause | null;
 }
 
 /** 属性元数据 */

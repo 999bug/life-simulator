@@ -1,15 +1,19 @@
 import { useState } from 'react';
+import { sfx } from '../utils/sound';
 
 interface Props {
   onStart: (gender: 'male' | 'female', name: string) => void;
+  hasSave: boolean;
+  onContinue: () => void;
 }
 
-export default function TitleScreen({ onStart }: Props) {
+export default function TitleScreen({ onStart, hasSave, onContinue }: Props) {
   const [gender, setGender] = useState<'male' | 'female' | null>(null);
   const [name, setName] = useState('');
 
   const handleStart = () => {
     if (!gender) return;
+    sfx.select();
     const finalName = name.trim() || (gender === 'male' ? '小明' : '小美');
     onStart(gender, finalName);
   };
@@ -41,7 +45,7 @@ export default function TitleScreen({ onStart }: Props) {
       </div>
 
       {/* 标题 */}
-      <h1 className="text-[52px] font-extralight tracking-[14px] text-[#c9a96e]
+      <h1 className="text-[36px] sm:text-[52px] font-extralight tracking-[10px] sm:tracking-[14px] text-[#c9a96e]
         [text-shadow:0_0_50px_rgba(201,169,110,0.3)] z-10 animate-[fadeInDown_1.4s_ease]">
         人生模拟器
       </h1>
@@ -93,6 +97,18 @@ export default function TitleScreen({ onStart }: Props) {
           <span>女 生</span>
         </button>
       </div>
+
+      {/* 继续人生（有存档时显示） */}
+      {hasSave && (
+        <button
+          onClick={() => { sfx.select(); onContinue(); }}
+          className="px-14 py-3 rounded-[30px] text-[15px] tracking-[6px] z-10 transition-all duration-300 border font-sans
+            border-[#c9a96e]/40 text-[#c9a96e] bg-transparent
+            hover:bg-[#c9a96e]/10 hover:shadow-[0_0_24px_rgba(201,169,110,0.25)] hover:scale-[1.02] cursor-pointer"
+        >
+          继 续 人 生
+        </button>
+      )}
 
       {/* 开始按钮 */}
       <button

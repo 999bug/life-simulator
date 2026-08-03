@@ -3,20 +3,22 @@ import { pathToFileURL } from 'url';
 import { convertAll } from './convert-events.mjs';
 
 /**
- * 合并基础数据与生成片段：拼接、重复 id 抛错、按 age_range 升序排序。
+ * 合并基础数据与生成片段：跳过已在基础数据中的 id（幂等），按 age_range 升序排序。
+ * 片段文件在合并后保留在 fragments/ 目录，重复运行不会产生重复事件。
  *
  * @param base chiled.json 事件数组
  * @param fragments 片段数组的数组
  * @returns 合并排序后的新数组
  */
 export function mergeFragments(base, fragments) {
-  const all = [...base, ...fragments.flat()];
-  const ids = new Set();
-  for (const e of all) {
+  const all = [...base];
+  const ids = new Set(all.map(e => e.id));
+  for (const e of fragments.flat()) {
     if (ids.has(e.id)) {
-      throw new Error(`duplicate id "${e.id}"`);
+      continue;
     }
     ids.add(e.id);
+    all.push(e);
   }
   all.sort((a, b) => a.age_range[0] - b.age_range[0] || a.age_range[1] - b.age_range[1]);
   return all;

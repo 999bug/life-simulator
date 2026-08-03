@@ -1,5 +1,6 @@
 import type { AttributeKey, Attributes, Choice } from '../types';
 import { ATTR_META, effectiveDelta } from '../engine/state';
+import { sfx } from '../utils/sound';
 
 interface Props {
   choices: Choice[];
@@ -17,7 +18,7 @@ export default function ChoicePanel({ choices, onSelect, visible, attributes, ag
       {choices.map((ch, idx) => (
         <button
           key={idx}
-          onClick={() => onSelect(ch)}
+          onClick={() => { sfx.select(); onSelect(ch); }}
           className="group relative w-full px-4 py-3 text-left
             bg-white/[0.04] border border-white/[0.08] rounded-lg
             text-[15px] tracking-wide

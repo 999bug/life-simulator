@@ -21,11 +21,13 @@ test('fixGapYear：给 gap_year_done 产出者补 gap_year，重复运行不重�
   assert.equal(fixGapYear(events), 0);
 });
 
-test('mergeFragments：合并、重复 id 抛错、按 age_range[0] 排序', () => {
+test('mergeFragments：合并、重复 id 幂等跳过、按 age_range[0] 排序', () => {
   const base = [ev('young_01', 18)];
   const out = mergeFragments(base, [[ev('teen_08', 13)], [ev('young_19', 22)]]);
   assert.deepEqual(out.map(e => e.id), ['teen_08', 'young_01', 'young_19']);
-  assert.throws(() => mergeFragments(base, [[ev('young_01', 20)]]), /duplicate id "young_01"/);
+  // 幂等：片段中已存在于基础数据的 id 跳过，不抛错不重复
+  const again = mergeFragments(out, [[ev('teen_08', 13)], [ev('young_19', 22)]]);
+  assert.deepEqual(again.map(e => e.id), ['teen_08', 'young_01', 'young_19']);
 });
 
 test('checkDistribution：检出超密度与欠密度年龄', () => {

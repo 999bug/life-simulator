@@ -1,0 +1,167 @@
+[
+  {
+    "id": "young_0031",
+    "age_range": [
+      31,
+      31
+    ],
+    "category": "health",
+    "title": "车祸惊魂",
+    "text": "凌晨加班回家的路上，一辆失控的轿车从斜后方撞了上来。你眼前一黑，耳边全是金属摩擦的刺耳声。醒来时你躺在医院里，手臂打着石膏，医生说万幸没有伤到要害。窗外的天刚亮，你盯着天花板，第一次如此真切地感觉到：活着，原来是这么侥幸的事。",
+    "choices": [
+      {
+        "text": "复查到位，安心养伤",
+        "effects": {
+          "health": -8,
+          "happiness": -3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "找人理赔，该争取的都争取",
+        "effects": {
+          "health": -12,
+          "money": 10
+        },
+        "flags_add": []
+      },
+      {
+        "text": "急着出院，工作不能停",
+        "effects": {
+          "health": -18
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "adult_0034",
+    "age_range": [
+      34,
+      34
+    ],
+    "category": "health",
+    "title": "急病住院",
+    "text": "下午开完会，你的右下腹突然剧痛，冷汗一层层地冒出来。同事把你送进医院，诊断为急性阑尾炎，医生说再晚两个小时就穿孔了。手术很顺利，但你躺在病床上看着输液瓶，开始认真盘点这些年欠下的睡眠、饭点和检查。",
+    "choices": [
+      {
+        "text": "彻底休养，做一次全面体检",
+        "effects": {
+          "health": -6,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "检查结果都还好，才放下心",
+        "effects": {
+          "health": -10
+        },
+        "flags_add": []
+      },
+      {
+        "text": "出院就忙，检查以后再说",
+        "effects": {
+          "health": -16
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "adult_0044",
+    "age_range": [
+      44,
+      44
+    ],
+    "category": "career",
+    "title": "裁员风暴",
+    "text": "周一例会上，老板宣布公司业务调整，整个部门都要砍掉。消息像一盆冷水浇下来，工位上一片安静。你在这个行业干了十几年，人到中年，简历却不知道该怎么写。那天你走出写字楼，站在十字路口，第一次觉得自己和这座城市之间，隔着一层玻璃。",
+    "choices": [
+      {
+        "text": "盘算积蓄，从容规划下一步",
+        "effects": {
+          "money": -8,
+          "happiness": -2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "转行重新开始，接受降薪",
+        "effects": {
+          "money": -12,
+          "intelligence": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "焦虑硬扛，先找份差不多的",
+        "effects": {
+          "money": -15,
+          "happiness": -4
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "mid_0052",
+    "age_range": [
+      52,
+      52
+    ],
+    "category": "family",
+    "title": "家里的变故",
+    "text": "半夜的电话总没有好事。家人突然病倒，需要一笔不小的治疗费。你连夜赶到医院，在缴费窗口前，看着屏幕上的数字，第一次体会到什么叫「钱到用时方恨少」。走廊里的灯亮了一整夜，你也坐了一整夜。",
+    "choices": [
+      {
+        "text": "动用积蓄，全力治疗",
+        "effects": {
+          "money": -18,
+          "responsibility": 5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "借钱也要治，不留遗憾",
+        "effects": {
+          "money": -20,
+          "happiness": -3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "量力而行，选择保守治疗",
+        "effects": {
+          "money": -10,
+          "responsibility": -5
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  }
+]

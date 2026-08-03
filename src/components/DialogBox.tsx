@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, type ReactNode } from 'react';
+import { sfx } from '../utils/sound';
 
 interface Props {
   text: string;
@@ -41,6 +42,7 @@ export default function DialogBox({ text, name, age, stage, title, onComplete, o
           setSegments(prev => [...prev, <br key={`br-${i}`} />]);
         } else {
           setSegments(prev => [...prev, unit.value]);
+          sfx.type();
         }
         i++;
         timerRef.current = setTimeout(type, 25 + Math.random() * 20);

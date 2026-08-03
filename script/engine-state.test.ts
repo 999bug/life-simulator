@@ -7,6 +7,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert';
 import { ageCap, applyElderDecay, applyOutcomes, effectiveDelta } from '../src/engine/state.ts';
+import EVENTS, { shuffleEvents } from '../src/engine/events.ts';
 import type { Attributes } from '../src/types/index.ts';
 
 /** 构造测试用属性表 */
@@ -102,4 +103,32 @@ test('老年衰减：运气好也只掉 1 点（下限 1）', () => {
 test('老年衰减：运气低时正常掉血', () => {
   assert.strictEqual(applyElderDecay(attrs({ luck: 20, health: 90 })).health, 88); // decay 2
   assert.strictEqual(applyElderDecay(attrs({ luck: 50, health: 90 })).health, 89); // decay 1
+});
+
+test('shuffleEvents：洗牌保持事件总数与年龄升序', () => {
+  const shuffled = shuffleEvents(EVENTS, 42);
+  assert.strictEqual(shuffled.length, EVENTS.length);
+  for (let i = 1; i < shuffled.length; i++) {
+    assert.ok(shuffled[i].age >= shuffled[i - 1].age, `第 ${i} 个事件年龄回退`);
+  }
+});
+
+test('shuffleEvents：同种子可复现，不同种子顺序不同', () => {
+  const a1 = shuffleEvents(EVENTS, 7).map(e => e.id).join(',');
+  const a2 = shuffleEvents(EVENTS, 7).map(e => e.id).join(',');
+  const b = shuffleEvents(EVENTS, 8).map(e => e.id).join(',');
+  assert.strictEqual(a1, a2);            // 同种子 → 相同顺序
+  assert.notStrictEqual(a1, b);          // 不同种子 → 顺序不同
+});
+
+test('shuffleEvents：同岁组内 flag 依赖被修正（消费在产出之后）', () => {
+  const shuffled = shuffleEvents(EVENTS, 123);
+  // 14 岁组：teen_04 消费 first_love，产出者也在 14 岁
+  const pos = new Map(shuffled.map((e, i) => [e.id, i]));
+  const producers = EVENTS
+    .filter(e => e.age === 14 && e.choices.some(c => c.outcomes?.flags?.includes('first_love')))
+    .map(e => e.id);
+  for (const p of producers) {
+    assert.ok(pos.get(p)! < pos.get('teen_04')!, `first_love 产出 ${p} 应在 teen_04 之前`);
+  }
 });

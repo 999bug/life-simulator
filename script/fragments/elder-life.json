@@ -1,0 +1,781 @@
+[
+  {
+    "id": "elder_0077",
+    "age_range": [
+      77,
+      77
+    ],
+    "category": "friend",
+    "title": "老友的来信",
+    "text": "信箱里躺着一封信，字迹歪歪扭扭，是年轻时一起下乡的老友寄来的。信里说他在老家种了一院子花，还附了一张照片——照片里的老头笑得像个孩子。你捏着信纸，忽然想起五十年前，你们在田埂上聊过的那些不着边际的梦想。",
+    "choices": [
+      {
+        "text": "立刻回信，约他见面",
+        "effects": {
+          "social": 5,
+          "happiness": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把信收进抽屉，改天再说",
+        "effects": {
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "让他寄些花籽来",
+        "effects": {
+          "happiness": 3,
+          "empathy": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0078",
+    "age_range": [
+      78,
+      78
+    ],
+    "category": "personality",
+    "title": "一畦菜园",
+    "text": "你在楼下空地开了一小畦菜园。翻土、播种、浇水，日复一日。番茄挂果那天你高兴得像得了奖，邻居家的小孩围过来看，你顺手摘了一根黄瓜塞给他。有人问你怎么还有这力气，你说：地里的活计，最养人。",
+    "choices": [
+      {
+        "text": "把菜园打理得漂漂亮亮",
+        "effects": {
+          "health": 3,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "教邻居也种一片",
+        "effects": {
+          "social": 4,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "种了几天就懒了",
+        "effects": {
+          "health": -2,
+          "happiness": -1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0079",
+    "age_range": [
+      79,
+      79
+    ],
+    "category": "family",
+    "title": "教孙辈下棋",
+    "text": "周末孙辈来家里，缠着你教下象棋。你摆开棋盘，把「马走日、象走田」念了一遍又一遍。小家伙输了三局，气得鼓起腮帮子，第四局你偷偷放水，他赢了，蹦得老高。老伴在厨房里笑：「老小孩带小小孩。」",
+    "choices": [
+      {
+        "text": "认真教他，不轻易放水",
+        "effects": {
+          "happiness": 2,
+          "patience": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "讲棋也讲当年的故事",
+        "effects": {
+          "happiness": 4,
+          "social": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "赢了就赢了吧",
+        "effects": {
+          "happiness": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0080",
+    "age_range": [
+      80,
+      80
+    ],
+    "category": "family",
+    "title": "八十大寿",
+    "text": "八十岁生日，孩子们张罗了一桌好菜，连在外地的都赶了回来。蛋糕上插着「8」「0」两根蜡烛，孙辈们挤在一起吹蜡烛。你看着满屋子的人，忽然觉得，这辈子最值钱的资产，就是这一屋子热气腾腾的烟火气。",
+    "choices": [
+      {
+        "text": "举杯感谢每一个家人",
+        "effects": {
+          "happiness": 6,
+          "social": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "许愿：儿孙平安",
+        "effects": {
+          "happiness": 3,
+          "gratitude": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "热闹是他们的，你安静看着",
+        "effects": {
+          "happiness": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0081",
+    "age_range": [
+      81,
+      81
+    ],
+    "category": "personality",
+    "title": "遗愿清单",
+    "text": "电视里放了一部关于遗愿清单的电影。你翻出笔记本，一笔一划写下自己还没做过的事：去看一次海、回一趟插队的地方、学会做那道一直不会的菜。写完之后你盯着纸看了很久——原来这辈子，还有这么多想做的事。",
+    "choices": [
+      {
+        "text": "把最想做的事排进日程",
+        "effects": {
+          "happiness": 6
+        },
+        "flags_add": []
+      },
+      {
+        "text": "每完成一项就划掉一项",
+        "effects": {
+          "happiness": 4,
+          "persistence": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "想想就好，懒得动",
+        "effects": {
+          "happiness": -2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0082",
+    "age_range": [
+      82,
+      82
+    ],
+    "category": "friend",
+    "title": "老同学聚会",
+    "text": "当年的老同学张罗了一场聚会，来了十几个人，头发白的白、掉的掉。有人提起上学时谁和谁传过纸条，全桌笑成一团。散场时大家约好明年还聚，可你知道，明年可能就有人不来了。你握了握身边老同学的手，什么都没说。",
+    "choices": [
+      {
+        "text": "主动张罗明年的聚会",
+        "effects": {
+          "social": 5,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "和每个人都好好说说话",
+        "effects": {
+          "social": 3,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "坐在角落，看着他们热闹",
+        "effects": {
+          "happiness": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0083",
+    "age_range": [
+      83,
+      83
+    ],
+    "category": "health",
+    "title": "膝盖的老毛病",
+    "text": "爬楼梯时膝盖一阵酸疼，你扶着扶手歇了半晌。医生说关节老化了，要多走平路、少爬坡。你想起年轻时候一口气爬泰山，现在连三楼都要歇两回。回家的路上你走得很慢，慢到能看清路边每一片落叶的纹路。",
+    "choices": [
+      {
+        "text": "听医生的话，坚持散步",
+        "effects": {
+          "health": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把家搬到一楼",
+        "effects": {
+          "health": 2,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "不服老，照旧爬楼",
+        "effects": {
+          "health": -4
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0084",
+    "age_range": [
+      84,
+      84
+    ],
+    "category": "family",
+    "title": "补拍全家福",
+    "text": "你提议全家补拍一张全家福。照相馆里，大人们忙着整理衣领，孩子们在地上打滚。摄影师喊「看镜头」的时候，你忽然想起上一次拍全家福，还是十年前。快门按下的一瞬间，你笑得很用力——怕下一次，就凑不齐这一屋子人了。",
+    "choices": [
+      {
+        "text": "把照片洗出来挂满墙",
+        "effects": {
+          "happiness": 5,
+          "social": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "再约一次全家旅行",
+        "effects": {
+          "happiness": 4,
+          "health": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "拍完就行",
+        "effects": {
+          "happiness": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0085",
+    "age_range": [
+      85,
+      85
+    ],
+    "category": "personality",
+    "title": "整理旧物",
+    "text": "收拾柜子，翻出一个旧铁盒。里面有一叠泛黄的信、一枚校徽、两张电影票根。信是四十年前朋友写的，字里行间都是少年意气。你坐在藤椅上，一封一封地读，读到某一句忽然笑了，笑着笑着又沉默了。窗外的阳光落在旧纸上，像还给这些信一段岁月。",
+    "choices": [
+      {
+        "text": "把故事讲给孙辈听",
+        "effects": {
+          "happiness": 4,
+          "social": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "给老友打个电话",
+        "effects": {
+          "social": 4,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "合上铁盒，放回原处",
+        "effects": {
+          "happiness": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0086",
+    "age_range": [
+      86,
+      86
+    ],
+    "category": "personality",
+    "title": "楼下的桂花树",
+    "text": "楼下那棵桂花树又开了。你每天黄昏在树下坐一会儿，看放学的小孩跑过，看邻居遛狗回来。有人跟你搭话，你就聊两句；没人，你就看叶子。日子像这棵树的年轮，不声不响，却一圈一圈地长。",
+    "choices": [
+      {
+        "text": "每天准时下楼坐坐",
+        "effects": {
+          "health": 3,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "和每个路过的人打招呼",
+        "effects": {
+          "social": 4,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "就坐在阳台上看看",
+        "effects": {
+          "happiness": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0087",
+    "age_range": [
+      87,
+      87
+    ],
+    "category": "personality",
+    "title": "重读旧日记",
+    "text": "你找出那本扉页都起毛的日记本，从十七岁那页开始读。字迹从青涩到老练，内容从「今天考试考砸了」到「孩子会走路了」。你忽然发现，这本日记其实就是一部纪录片——一个人的一生，都藏在那些平凡到不起眼的句子里。",
+    "choices": [
+      {
+        "text": "在日记末尾补上今天的日子",
+        "effects": {
+          "happiness": 4,
+          "responsibility": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把日记交给孩子保管",
+        "effects": {
+          "happiness": 2,
+          "responsibility": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "读完放回抽屉",
+        "effects": {
+          "happiness": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0088",
+    "age_range": [
+      88,
+      88
+    ],
+    "category": "personality",
+    "title": "交代后事",
+    "text": "你把自己的积蓄、房产、还有那几本存折摊在桌上，一项一项交代清楚。孩子们说「这些事不用您操心」，你摆摆手：「正因为要走，才要说清楚。」说完你心里反而踏实了——该交代的交代完，剩下的日子，都是赚来的。",
+    "choices": [
+      {
+        "text": "把积蓄分给需要的家人",
+        "effects": {
+          "happiness": 2,
+          "responsibility": 5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "留一部分捐给学校",
+        "effects": {
+          "empathy": 6
+        },
+        "flags_add": []
+      },
+      {
+        "text": "交代完就不想了",
+        "effects": {
+          "happiness": 2,
+          "empathy": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0089",
+    "age_range": [
+      89,
+      89
+    ],
+    "category": "personality",
+    "title": "最后一课",
+    "text": "社区请你去给年轻人讲讲这一辈子的经历。你站在讲台上，面对几十双年轻的眼睛，忽然不知道该从哪儿讲起。最后你只说了三句话：好好吃饭，好好睡觉，遇到对的人就抓紧。台下安静了三秒，然后响起了掌声。",
+    "choices": [
+      {
+        "text": "讲一讲那些走过弯路的教训",
+        "effects": {
+          "social": 2,
+          "responsibility": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "讲讲那些开心的往事",
+        "effects": {
+          "happiness": 4,
+          "social": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "讲完就走",
+        "effects": {
+          "happiness": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0090",
+    "age_range": [
+      90,
+      90
+    ],
+    "category": "family",
+    "title": "九十岁生日",
+    "text": "九十岁生日这天，来的人比八十大寿少了一半。你坐在主位上，看着空出来的椅子，心里明白，有些人已经去往另一个世界赴约了。但你仍然举起杯，敬在场的每一个人，也敬那些不在场的人。风从窗口吹进来，你眯起眼——活着，真好。",
+    "choices": [
+      {
+        "text": "敬每一张熟悉的面孔",
+        "effects": {
+          "happiness": 5,
+          "social": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "敬那些已经离开的人",
+        "effects": {
+          "happiness": 2,
+          "gratitude": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "安安静静吃完这顿饭",
+        "effects": {
+          "happiness": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0091",
+    "age_range": [
+      91,
+      91
+    ],
+    "category": "personality",
+    "title": "梦见故人",
+    "text": "夜里你梦见了很多年没见过的人——母亲站在门口对你笑，年轻时的好友在河边喊你，还有那个早已离世的故人。梦里的他们都很年轻。醒来时天刚亮，你躺了一会儿才明白，他们大概是来接你去做客的。你笑了一下：再等等，我还有些日子没过完。",
+    "choices": [
+      {
+        "text": "把梦记下来",
+        "effects": {
+          "happiness": 3,
+          "empathy": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "给还健在的故人打个电话",
+        "effects": {
+          "social": 4,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "当作没做过这个梦",
+        "effects": {
+          "happiness": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0092",
+    "age_range": [
+      92,
+      92
+    ],
+    "category": "personality",
+    "title": "相册里的岁月",
+    "text": "你把几十年攒下的相册全部搬出来，从黑白到彩色，从模糊到清晰。翻到最后一页，是去年补拍的全家福。你用手指轻轻摸了摸照片上每个人的脸，忽然觉得，这一生虽然没有什么惊天动地的大事，但每一张照片里，都住着一整段时光。",
+    "choices": [
+      {
+        "text": "给每张照片写上注释",
+        "effects": {
+          "happiness": 4,
+          "responsibility": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "挑几张寄给远方的家人",
+        "effects": {
+          "social": 3,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "合上相册",
+        "effects": {
+          "happiness": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0093",
+    "age_range": [
+      93,
+      93
+    ],
+    "category": "personality",
+    "title": "种一棵树",
+    "text": "春天，你在老家的院子里种下一棵银杏。有人问：你都九十多了，种树还能看几年？你说：树又不用我看，它是种给以后的人乘凉的。培好土、浇透水，你拄着锄头站了一会儿，想象几十年后，这棵树下坐着的那些不认识的人。",
+    "choices": [
+      {
+        "text": "在树旁立一块小牌子",
+        "effects": {
+          "happiness": 2,
+          "empathy": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "每年春天都回来看看",
+        "effects": {
+          "health": 2,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "种完就好了",
+        "effects": {
+          "happiness": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0094",
+    "age_range": [
+      94,
+      94
+    ],
+    "category": "personality",
+    "title": "春天来了",
+    "text": "今年的春天来得特别慢，你在病床上躺了大半个冬天。医生说你身体各项指标都在下滑，你倒是不太在意。午后太阳好，你让人把轮椅推到院子里，看桃树开了第一朵花。你盯着那朵粉色的花看了很久，忽然觉得，这一辈子值了。",
+    "choices": [
+      {
+        "text": "每天都要出来看看花开",
+        "effects": {
+          "health": 3,
+          "happiness": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把花开的样子讲给家人听",
+        "effects": {
+          "happiness": 3,
+          "social": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "躺着晒太阳就好",
+        "effects": {
+          "happiness": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0095",
+    "age_range": [
+      95,
+      95
+    ],
+    "category": "family",
+    "title": "漫长告别",
+    "text": "你躺在老宅的床上，阳光透过窗棂落在被子上。家人围在床边，你一个一个地看过去，叫得出每一个名字。你说了很多话，又好像什么都没说。最后你看着窗外那棵你亲手种的银杏，轻轻笑了一下，慢慢闭上了眼睛。院子里的树还在，风还在吹，故事，就到这里了。",
+    "choices": [
+      {
+        "text": "把最后的力气，都用在微笑上",
+        "effects": {
+          "happiness": 5,
+          "gratitude": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "握紧每个家人的手",
+        "effects": {
+          "social": 4,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "安静地听完他们的声音",
+        "effects": {
+          "happiness": 2,
+          "empathy": 4
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  }
+]

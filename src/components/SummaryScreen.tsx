@@ -11,6 +11,20 @@ interface Verdict {
   desc: string;
 }
 
+/** 死因文案：说明此生如何落幕 */
+function deathText(cause: 'health' | 'lifespan' | null | undefined): { icon: string; text: string } {
+  if (cause === 'health') {
+    return {
+      icon: '🌙',
+      text: '你的身体终于支撑不住了。最后的时刻，你想起这一生走过的路——那些笑过、哭过、拼过的日子，都随着灯光一起熄灭了。',
+    };
+  }
+  return {
+    icon: '🕯️',
+    text: '在睡梦中，你安静地走完了这一生。家人说，你走得很平静，嘴角还带着一点笑意。这一生，落幕得刚刚好。',
+  };
+}
+
 /** 按分数兜底的 5 档基础评价 */
 function scoreVerdict(score: number): Verdict {
   if (score >= 75) {
@@ -135,7 +149,7 @@ export default function SummaryScreen({ game, onRestart }: Props) {
 
   return (
     <div className="w-full h-full bg-gradient-to-b from-[#0a0a14] via-[#1a1a2e] to-[#0a0a14]
-      flex flex-col items-center px-10 py-10 gap-4 overflow-y-auto">
+      flex flex-col items-center px-5 sm:px-10 py-8 sm:py-10 gap-4 overflow-y-auto">
       <p className="text-sm text-white/40 tracking-[4px]">
         {game.gender === 'male' ? '♂' : '♀'} {game.name} · 享年 {game.age} 岁
       </p>
@@ -145,6 +159,13 @@ export default function SummaryScreen({ game, onRestart }: Props) {
       <p className="text-sm text-white/40 text-center max-w-[400px] leading-relaxed animate-[fadeIn_1.2s_ease]">
         {desc}
       </p>
+
+      {/* 死因与临终叙事 */}
+      <div className="flex items-start gap-3 max-w-[440px] px-5 py-3.5 bg-white/[0.03] border border-white/[0.06] rounded-xl
+        animate-[fadeIn_1.4s_ease]">
+        <span className="text-lg leading-none mt-0.5">{deathText(game.deathCause).icon}</span>
+        <p className="text-xs text-white/50 leading-relaxed">{deathText(game.deathCause).text}</p>
+      </div>
 
       {/* 综合评分 */}
       <div className="w-[80px] h-[80px] rounded-full border-2 border-[#c9a96e]

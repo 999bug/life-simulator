@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import type { Choice, GameState, LifeEvent } from '../types';
 import { STAGE_META } from '../engine/state';
+import { sfx } from '../utils/sound';
 import SceneArea from './SceneArea';
 import StatusBar from './StatusBar';
 import DialogBox from './DialogBox';
@@ -31,11 +32,11 @@ export default function GameScreen({ game, currentEvent, feedback, onChoice, onC
     return (
       <div className="w-full h-full relative">
         <SceneArea stage={game.stage} age={game.age} gender={game.gender} stageLabel={stageMeta.label} />
-        <StatusBar attributes={game.attributes} />
+        <StatusBar attributes={game.attributes} age={game.age} />
         <div
           className="absolute bottom-0 left-0 right-0 bg-gradient-to-b from-black/92 to-black/97
             backdrop-blur-xl border-t border-white/5 cursor-pointer z-10"
-          onClick={onContinue}
+          onClick={() => { sfx.advance(); onContinue(); }}
         >
           <div className="px-7 py-5 text-center">
             <div className="text-lg text-[#c9a96e] whitespace-pre-line leading-relaxed">{feedback}</div>
@@ -64,7 +65,7 @@ export default function GameScreen({ game, currentEvent, feedback, onChoice, onC
 
       {/* 状态栏 — 绝对定位，场景中部偏上（底部区域限高 45% 后不重叠） */}
       <div className="absolute top-[42%] left-0 right-0 z-10">
-        <StatusBar attributes={game.attributes} />
+        <StatusBar attributes={game.attributes} age={game.age} />
       </div>
 
       {/* 底部区域：对话框 + 选项（限高 45%，不遮挡 top-[55%] 的数值栏） */}

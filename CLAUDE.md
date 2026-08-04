@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-人生模拟器：React 18 + TypeScript + Vite + Tailwind 的文字人生模拟游戏。纯前端、无后端，游戏内容由 JSON 事件数据驱动。事件数据源 `script/chiled.json`（490 个事件）经转换器生成引擎格式 `src/engine/events.json`，运行时同岁组内按种子洗牌后线性播放。
+人生模拟器：React 18 + TypeScript + Vite + Tailwind 的文字人生模拟游戏。纯前端、无后端，游戏内容由 JSON 事件数据驱动。事件数据源 `script/chiled.json`（493 个事件）经转换器生成引擎格式 `src/engine/events.json`，运行时同岁组内按种子洗牌后线性播放。
 
 ## 常用命令
 
@@ -36,7 +36,7 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 ### 引擎（src/engine/）— 纯函数，无副作用
 
 - **state.ts**：属性/阶段元数据（ATTR_META、STAGE_META）与状态纯函数（ageCap 年龄锚点上限、effectiveDelta 收益折算、applyOutcomes 属性钳位 0-100、calcMaxAge 动态寿命、applyElderDecay 65 岁起衰减、checkDeath、calcScore）。**年龄锚点成长上限 `CAP_ANCHORS`**（如智力 7:55→18:85→30:92，锚点间线性插值）：正向收益距当前年龄上限 15 点内线性递减且不越过上限，负向全额；老年衰减下限 1（运气再好每事件也掉 1 点）。初始属性刻意偏低（健康 65/智力 25）。选项展示用 effectiveDelta 实时计算，与引擎一致
-- **events.ts**：加载 events.json 为 `LifeEvent[]`（注释标 357 个是过期信息，实际 490）
+- **events.ts**：加载 events.json 为 `LifeEvent[]`（注释标 357 个是过期信息，实际 493）
 - **events.json**：生成物（camelCase 引擎格式：`age`/`outcomes.attr`/`outcomes.flags`/`conditions.hasFlags`），**勿手改**
 
 ### 运行时（src/hooks/useGame.ts）

@@ -19678,5 +19678,410 @@
       }
     ],
     "conditions": {}
+  },
+  {
+    "id": "elder_0101",
+    "age_range": [
+      76,
+      77
+    ],
+    "category": "health",
+    "title": "体检报告",
+    "text": "社区组织的年度体检出了报告。医生说各项指标还算平稳，就是血压偏高，叮嘱你少盐少油，多走动。你拿着报告看了半天，想起年轻时熬夜拼命的那些年——能走到今天，已经是赚了。",
+    "choices": [
+      {
+        "text": "认真记下医嘱，从此每天清晨去公园走两圈",
+        "effects": {
+          "health": 10,
+          "discipline": 4
+        }
+      },
+      {
+        "text": "嘴上应着，转头就忘了，日子照旧",
+        "effects": {
+          "health": -5,
+          "happiness": 2
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
+    "id": "elder_0102",
+    "age_range": [
+      77,
+      78
+    ],
+    "category": "family",
+    "title": "孙辈的电话",
+    "text": "远在另一个城市的小孙女打来电话，叽叽喳喳地讲学校里的趣事，最后甜甜地说了句「爷爷/奶奶我想你了」。挂了电话，你坐在沙发上，嘴角的笑意怎么也压不下去。",
+    "choices": [
+      {
+        "text": "翻出相册，把孙辈从小到大的照片看了一遍又一遍",
+        "effects": {
+          "happiness": 8,
+          "memory": 3
+        }
+      },
+      {
+        "text": "惦记着孙辈，又忍不住念叨儿子儿媳工作太忙",
+        "effects": {
+          "happiness": 3,
+          "family_relation": -2
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
+    "id": "elder_0103",
+    "age_range": [
+      78,
+      79
+    ],
+    "category": "personality",
+    "title": "旧友重逢",
+    "text": "老同学聚会，你见到了几十年没见的同桌。两个头发花白的人站在饭店门口，先是互相打量，然后同时笑出了声。饭桌上大家说起年轻时的事，那些苦日子如今都成了下酒菜。",
+    "choices": [
+      {
+        "text": "留了联系方式，约好以后每月聚一次",
+        "effects": {
+          "social": 9,
+          "happiness": 5
+        }
+      },
+      {
+        "text": "热闹归热闹，散场后还是觉得一个人清静",
+        "effects": {
+          "social": 2,
+          "comfort": 3
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
+    "id": "elder_0104",
+    "age_range": [
+      79,
+      80
+    ],
+    "category": "technology",
+    "title": "学用智能手机",
+    "text": "儿子教你在手机上看视频、发语音。你戴着老花镜，一个功能一个功能地学，手指在屏幕上戳来戳去。第一次成功给老伙计发出语音消息时，你高兴得像个孩子。",
+    "choices": [
+      {
+        "text": "认真学，不懂就问，很快就成了老伙伴里的「技术顾问」",
+        "effects": {
+          "learning": 8,
+          "confidence": 5
+        }
+      },
+      {
+        "text": "学了两天嫌麻烦，还是让子女代劳",
+        "effects": {
+          "learning": -3,
+          "comfort": 3
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
+    "id": "elder_0105",
+    "age_range": [
+      80,
+      81
+    ],
+    "category": "health",
+    "title": "公园里的晨练",
+    "text": "清晨的公园，太极拳、广场舞、快走……你每天雷打不动地出现在同一棵老槐树下。日子久了，晨练的伙伴们互相打招呼、聊家常，比亲邻还热络。",
+    "choices": [
+      {
+        "text": "坚持每天报到，风雨无阻",
+        "effects": {
+          "health": 9,
+          "social": 4
+        }
+      },
+      {
+        "text": "天气好就去，下雨天就窝在家里",
+        "effects": {
+          "health": 3,
+          "comfort": 2
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
+    "id": "elder_0106",
+    "age_range": [
+      81,
+      82
+    ],
+    "category": "family",
+    "title": "老宅的最后一天",
+    "text": "老房子要拆迁了。搬家公司来之前，你在屋里慢慢走了一圈：斑驳的墙面、踩得发亮的门槛、墙角那台老缝纫机。这里装着一家三代人的几十年。关上门的那一刻，你轻轻叹了口气。",
+    "choices": [
+      {
+        "text": "拍了几张照片，把最珍贵的东西都收进箱子里",
+        "effects": {
+          "memory": 6,
+          "happiness": 2
+        }
+      },
+      {
+        "text": "把老物件送给街坊邻居，说「留个念想」",
+        "effects": {
+          "social": 6,
+          "comfort": 3
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
+    "id": "elder_0107",
+    "age_range": [
+      82,
+      83
+    ],
+    "category": "personality",
+    "title": "给晚辈讲故事",
+    "text": "孙辈缠着你讲过去的事。你讲起年轻时下乡、做工、闯荡的那些经历，孩子们听得眼睛发亮。讲到惊险处，你自己也恍惚了——那些事，好像就发生在昨天。",
+    "choices": [
+      {
+        "text": "把一生的故事慢慢讲给他们听，一代传一代",
+        "effects": {
+          "memory": 7,
+          "family_relation": 5
+        }
+      },
+      {
+        "text": "讲一半就摆手说「都是老黄历了，没啥好说的」",
+        "effects": {
+          "memory": -2,
+          "comfort": 3
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
+    "id": "elder_0108",
+    "age_range": [
+      83,
+      84
+    ],
+    "category": "health",
+    "title": "一场小感冒",
+    "text": "入秋的一场感冒，来势汹汹。你躺在床上，看着天花板，第一次清楚地感觉到身体大不如前。好在子女轮流来照顾，热汤、药片、量体温，忙前忙后。",
+    "choices": [
+      {
+        "text": "病好后开始更加爱惜身体，按时体检、注意保暖",
+        "effects": {
+          "health": 8,
+          "discipline": 4
+        }
+      },
+      {
+        "text": "嘴上说没事，心里却开始害怕生病",
+        "effects": {
+          "health": -2,
+          "anxiety": -3
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
+    "id": "elder_0109",
+    "age_range": [
+      84,
+      85
+    ],
+    "category": "family",
+    "title": "金婚纪念",
+    "text": "今天是你们结婚五十周年的日子。孩子们张罗了一桌好菜，你看着身边这个陪你走了半个世纪的人，头发都白了，笑容却还是当年的样子。你端起杯子，千言万语只化作一句「辛苦了」。",
+    "choices": [
+      {
+        "text": "握紧老伴的手，说「下辈子还娶/嫁你」",
+        "effects": {
+          "happiness": 10,
+          "family_relation": 6
+        }
+      },
+      {
+        "text": "嘴上不说，心里却全是感激",
+        "effects": {
+          "happiness": 5,
+          "comfort": 3
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
+    "id": "elder_0110",
+    "age_range": [
+      85,
+      86
+    ],
+    "category": "personality",
+    "title": "黄昏里的合唱团",
+    "text": "社区老年合唱团缺人，邻居硬拉着你去试试。你站在队伍里，跟着大家唱老歌，嗓子虽不如当年，气势却一点不输。指挥说你是「隐藏的高手」，你笑了一晚上。",
+    "choices": [
+      {
+        "text": "加入了合唱团，每周排练成了最期待的事",
+        "effects": {
+          "social": 8,
+          "happiness": 6
+        }
+      },
+      {
+        "text": "唱了一次就觉得不好意思，还是回家听收音机",
+        "effects": {
+          "social": 2,
+          "comfort": 3
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
+    "id": "elder_0111",
+    "age_range": [
+      91,
+      92
+    ],
+    "category": "personality",
+    "title": "写回忆录",
+    "text": "孩子们劝你把一生的经历写下来。你戴上老花镜，从童年写起，一页一页，像重新活了一遍。那些记不清的细节，在笔尖下慢慢清晰起来。",
+    "choices": [
+      {
+        "text": "坚持每天写一点，留给子孙们",
+        "effects": {
+          "memory": 8,
+          "discipline": 5
+        }
+      },
+      {
+        "text": "写了几页就搁下了，觉得往事不堪回首",
+        "effects": {
+          "memory": 2,
+          "comfort": 2
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
+    "id": "elder_0112",
+    "age_range": [
+      92,
+      93
+    ],
+    "category": "health",
+    "title": "阳光下的午后",
+    "text": "午后阳光正好，你坐在院子里的藤椅上晒太阳。暖洋洋的光线落在身上，你眯着眼，听收音机里咿咿呀呀的戏曲。什么都不想，什么都不做，这一刻，时间慢得刚刚好。",
+    "choices": [
+      {
+        "text": "享受这份安宁，心满意足",
+        "effects": {
+          "happiness": 8,
+          "comfort": 5
+        }
+      },
+      {
+        "text": "晒着晒着，竟有些害怕这样的日子不多了",
+        "effects": {
+          "happiness": -3,
+          "security": -2
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
+    "id": "elder_0113",
+    "age_range": [
+      93,
+      94
+    ],
+    "category": "family",
+    "title": "四世同堂",
+    "text": "重孙满月，一家人难得聚得这么齐。你坐在主位上，看着满屋子的人——儿子、孙子、重孙，笑声此起彼伏。你忽然觉得，这一生值了。",
+    "choices": [
+      {
+        "text": "抱着重孙，笑得合不拢嘴",
+        "effects": {
+          "happiness": 10,
+          "family_relation": 6
+        }
+      },
+      {
+        "text": "看着满堂儿孙，悄悄抹了抹眼角",
+        "effects": {
+          "happiness": 6,
+          "comfort": 3
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
+    "id": "elder_0114",
+    "age_range": [
+      94,
+      95
+    ],
+    "category": "personality",
+    "title": "最后的嘱托",
+    "text": "你开始交代身后事：存折放在哪个抽屉，老照片留给谁，还有什么心愿未了。儿女们红着眼眶听你说，你却语气平静，像在安排一次远行。",
+    "choices": [
+      {
+        "text": "把每件事都交代得清清楚楚，无牵无挂",
+        "effects": {
+          "comfort": 8,
+          "security": 5
+        }
+      },
+      {
+        "text": "说着说着，还是舍不得这个人间",
+        "effects": {
+          "happiness": -3,
+          "family_relation": 2
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
+    "id": "elder_0115",
+    "age_range": [
+      95,
+      96
+    ],
+    "category": "personality",
+    "title": "平静的清晨",
+    "text": "又是一个清晨。你醒得很早，窗外的鸟叫和很多年前一样。你慢慢起身，想起这一生走过的路——平凡，琐碎，却也有过闪光的时刻。你笑了，轻声说：「这样的一生，很好。」",
+    "choices": [
+      {
+        "text": "微笑着迎接新的一天",
+        "effects": {
+          "happiness": 8,
+          "stability": 4
+        }
+      },
+      {
+        "text": "静静躺着，回忆这一生的光",
+        "effects": {
+          "memory": 5,
+          "comfort": 3
+        }
+      }
+    ],
+    "conditions": {}
   }
 ]

@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { sfx } from '../utils/sound';
+import type { PaceMode, TypeSpeed } from '../types';
 
 interface Props {
-  onStart: (gender: 'male' | 'female', name: string) => void;
+  onStart: (gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed) => void;
   onAutoStart: (gender: 'male' | 'female', name: string) => void;
   hasSave: boolean;
   onContinue: () => void;
@@ -11,12 +12,14 @@ interface Props {
 export default function TitleScreen({ onStart, onAutoStart, hasSave, onContinue }: Props) {
   const [gender, setGender] = useState<'male' | 'female' | null>(null);
   const [name, setName] = useState('');
+  const [paceMode, setPaceMode] = useState<PaceMode>('full');
+  const [typeSpeed, setTypeSpeed] = useState<TypeSpeed>('normal');
 
   const handleStart = () => {
     if (!gender) return;
     sfx.select();
     const finalName = name.trim() || (gender === 'male' ? '小明' : '小美');
-    onStart(gender, finalName);
+    onStart(gender, finalName, paceMode, typeSpeed);
   };
 
   return (
@@ -110,6 +113,53 @@ export default function TitleScreen({ onStart, onAutoStart, hasSave, onContinue 
           继 续 人 生
         </button>
       )}
+
+      {/* 节奏选择：密度档（开局选定） */}
+      <div className="z-10 flex flex-col items-center gap-2 animate-[fadeIn_1.9s_ease]">
+        <label className="text-xs text-white/40 tracking-[3px]">节奏</label>
+        <div className="flex gap-3">
+          <button
+            onClick={() => { sfx.select(); setPaceMode('full'); }}
+            className={`w-[132px] py-2 rounded-[30px] text-[13px] tracking-[3px] border transition-all duration-300 font-sans
+              ${paceMode === 'full'
+                ? 'border-[#c9a96e] text-[#c9a96e] bg-[#c9a96e]/10 shadow-[0_0_18px_rgba(201,169,110,0.2)]'
+                : 'border-white/15 text-white/40 bg-white/[0.03] hover:border-[#c9a96e]/50 hover:text-[#c9a96e]'}`}
+          >
+            沉浸人生
+          </button>
+          <button
+            onClick={() => { sfx.select(); setPaceMode('lite'); }}
+            className={`w-[132px] py-2 rounded-[30px] text-[13px] tracking-[3px] border transition-all duration-300 font-sans
+              ${paceMode === 'lite'
+                ? 'border-[#c9a96e] text-[#c9a96e] bg-[#c9a96e]/10 shadow-[0_0_18px_rgba(201,169,110,0.2)]'
+                : 'border-white/15 text-white/40 bg-white/[0.03] hover:border-[#c9a96e]/50 hover:text-[#c9a96e]'}`}
+          >
+            精简人生
+          </button>
+        </div>
+        <p className="text-[10px] text-white/30 tracking-[2px]">
+          {paceMode === 'lite' ? '每岁约 2-3 个选择 · 一局约 1 小时' : '全部事件 · 一局 1.5-3 小时'}
+        </p>
+      </div>
+
+      {/* 打字速度（游戏内也可切换） */}
+      <div className="z-10 flex items-center gap-3 animate-[fadeIn_2s_ease]">
+        <label className="text-xs text-white/40 tracking-[3px]">打字</label>
+        <div className="flex gap-2">
+          {([['slow', '慢'], ['normal', '中'], ['fast', '快']] as Array<[TypeSpeed, string]>).map(([v, label]) => (
+            <button
+              key={v}
+              onClick={() => { sfx.select(); setTypeSpeed(v); }}
+              className={`w-8 h-8 rounded-full text-[12px] border transition-all duration-200 font-sans
+                ${typeSpeed === v
+                  ? 'border-[#c9a96e] text-[#c9a96e] bg-[#c9a96e]/10'
+                  : 'border-white/15 text-white/35 hover:border-[#c9a96e]/40 hover:text-[#c9a96e]'}`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
 
       {/* 开始按钮 */}
       <button

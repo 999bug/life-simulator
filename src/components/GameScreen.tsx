@@ -78,7 +78,7 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
       </div>
 
       {/* 底部区域：对话框 + 选项（限高 45%，不遮挡 top-[55%] 的数值栏） */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 max-h-[45%] overflow-y-auto">
+      <div className="absolute bottom-0 left-0 right-0 z-10 max-h-[45%] overflow-y-auto pb-9">
         <DialogBox
           text={currentEvent.text}
           name={game.name}

@@ -68,6 +68,13 @@ function loadSave(): SaveData | null {
     if (!data?.game || typeof data.eventIndex !== 'number') {
       return null;
     }
+    // 档位白名单兜底：非法/未知值回退默认，避免 TYPE_SPEED_RANGES 查表返回 undefined
+    if (data.paceMode !== 'full' && data.paceMode !== 'lite') {
+      data.paceMode = 'full';
+    }
+    if (data.typeSpeed !== 'slow' && data.typeSpeed !== 'normal' && data.typeSpeed !== 'fast') {
+      data.typeSpeed = 'normal';
+    }
     return data;
   } catch {
     return null;

@@ -1,5 +1,6 @@
-import { useReducer, useCallback, useEffect, useMemo } from 'react';
+import { useReducer, useCallback, useEffect } from 'react';
 import type { AttributeKey, Attributes, Choice, DeathCause, GameState, LifeEvent, PaceMode, TypeSpeed } from '../types';
+import { emptySaves, migrateLegacySave, SLOT_COUNT, type SavesV2 } from '../engine/save';
 import {
   createInitialState,
   applyOutcomes,
@@ -21,7 +22,8 @@ type Action =
   | { type: 'CONTINUE' }
   | { type: 'SET_TYPE_SPEED'; typeSpeed: TypeSpeed }
   | { type: 'RESET' }
-  | { type: 'CONTINUE_GAME' };
+  | { type: 'CONTINUE_GAME'; slot: number }
+  | { type: 'HYDRATE_SAVES'; saves: SavesV2 };
 
 // ============ 运行时状态（不参与 React 渲染）============
 interface RuntimeState {
@@ -39,54 +41,57 @@ interface RuntimeState {
   paceMode: PaceMode;
   /** 打字机速度档（游戏内可随时切换） */
   typeSpeed: TypeSpeed;
+  /** v2 存档（3 槽位 + active），HYDRATE_SAVES 水合 */
+  saves: SavesV2;
 }
 
 // ============ 存档 ============
 
-/** localStorage 存档键 */
-const SAVE_KEY = 'life-sim-save-v1';
+/** 存档 v2 key（3 槽位 + active） */
+const SAVE_KEY_V2 = 'life-sim-saves-v2';
+/** 旧版单槽存档 key（首次启动迁移到 v2 后删除） */
+const LEGACY_SAVE_KEY = 'life-sim-save-v1';
 
-/** 存档结构：游戏状态 + 当前事件 id + 洗牌种子（引用恢复时按种子还原事件顺序） */
-interface SaveData {
-  game: GameState;
-  currentEventId: string | null;
-  feedback: string | null;
-  eventIndex: number;
-  shuffleSeed: number;
-  paceMode?: PaceMode;
-  typeSpeed?: TypeSpeed;
+/** 读取 v2 存档；不存在则尝试迁移旧版；都没有返回空结构 */
+function loadSaves(): SavesV2 {
+  try {
+    const raw = localStorage.getItem(SAVE_KEY_V2);
+    if (raw) {
+      const data = JSON.parse(raw) as SavesV2;
+      if (data && Array.isArray(data.slots) && data.slots.length === SLOT_COUNT && typeof data.active === 'number') {
+        return data;
+      }
+    }
+    // 旧版单槽存档迁移
+    const legacy = localStorage.getItem(LEGACY_SAVE_KEY);
+    if (legacy) {
+      const migrated = migrateLegacySave(legacy);
+      localStorage.removeItem(LEGACY_SAVE_KEY);
+      saveSaves(migrated);
+      return migrated;
+    }
+  } catch {
+    // 存储不可用时静默降级为空结构
+  }
+  return emptySaves();
 }
 
-/** 读取存档，损坏或不存在返回 null */
-function loadSave(): SaveData | null {
+/** 持久化 v2 存档 */
+function saveSaves(saves: SavesV2): void {
   try {
-    const raw = localStorage.getItem(SAVE_KEY);
-    if (!raw) {
-      return null;
-    }
-    const data = JSON.parse(raw) as SaveData;
-    if (!data?.game || typeof data.eventIndex !== 'number') {
-      return null;
-    }
-    // 档位白名单兜底：非法/未知值回退默认，避免 TYPE_SPEED_RANGES 查表返回 undefined
-    if (data.paceMode !== 'full' && data.paceMode !== 'lite') {
-      data.paceMode = 'full';
-    }
-    if (data.typeSpeed !== 'slow' && data.typeSpeed !== 'normal' && data.typeSpeed !== 'fast') {
-      data.typeSpeed = 'normal';
-    }
-    return data;
+    localStorage.setItem(SAVE_KEY_V2, JSON.stringify(saves));
   } catch {
-    return null;
+    // 存储不可用（隐私模式/满额）时静默降级为不保存
   }
 }
 
-/** 持久化当前状态；标题页不写不删，保留存档供刷新后「继续人生」 */
+/** 持久化当前状态到 active 槽；标题页状态（新游戏未开始）时不写不删 */
 function saveState(rt: RuntimeState): void {
   if (!rt.game || rt.game.phase === 'title') {
     return;
   }
-  const data: SaveData = {
+  const saves = { ...rt.saves, slots: [...rt.saves.slots] };
+  saves.slots[saves.active] = {
     game: rt.game,
     currentEventId: rt.currentEvent?.id ?? null,
     feedback: rt.feedback,
@@ -95,11 +100,7 @@ function saveState(rt: RuntimeState): void {
     paceMode: rt.paceMode,
     typeSpeed: rt.typeSpeed,
   };
-  try {
-    localStorage.setItem(SAVE_KEY, JSON.stringify(data));
-  } catch {
-    // 存储不可用（隐私模式/满额）时静默降级为不保存
-  }
+  saveSaves(saves);
 }
 
 // ============ Reducer ============
@@ -129,6 +130,7 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         autoPlay: action.type === 'START_AUTO_GAME',
         paceMode,
         typeSpeed: action.type === 'START_AUTO_GAME' ? 'normal' : action.typeSpeed,
+        saves: state.saves,
       };
     }
 
@@ -213,6 +215,7 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         autoPlay: state.autoPlay,
         paceMode: state.paceMode,
         typeSpeed: state.typeSpeed,
+        saves: state.saves,
       };
     }
 
@@ -225,14 +228,20 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
       return { ...state, typeSpeed: action.typeSpeed };
     }
 
-    case 'RESET':
-      // 重新开始 = 放弃上一局：显式清除存档（saveState 在标题页已不写不删）
-      localStorage.removeItem(SAVE_KEY);
-      return createInitialRuntime(); // 快速模拟模式随重新开始退出
+    case 'RESET': {
+      // 重新开始 = 放弃上一局：仅清除当前 active 槽，保留其他槽位
+      const slots = [...state.saves.slots];
+      slots[state.saves.active] = null;
+      const saves = { active: state.saves.active, slots };
+      saveSaves(saves);
+      // 快速模拟模式随重新开始退出；标题页状态下 saveState 不写不删
+      return { ...createInitialRuntime(), saves };
+    }
 
     case 'CONTINUE_GAME': {
-      // 从存档恢复：标题页 → 存档中的游戏现场
-      const saved = loadSave();
+      // 从指定槽位恢复：标题页 → 存档中的游戏现场
+      const { slot } = action;
+      const saved = state.saves.slots[slot];
       if (!saved) {
         return state;
       }
@@ -245,6 +254,7 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
       const currentEvent = saved.currentEventId
         ? shuffledEvents.find(e => e.id === saved.currentEventId) ?? null
         : null;
+      const saves = { ...state.saves, active: slot, slots: [...state.saves.slots] };
       return {
         // 旧版存档无 deathCause 字段，显式兜底兼容；恢复为手动模式
         game: { ...saved.game, deathCause: saved.game.deathCause ?? null },
@@ -256,8 +266,12 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         autoPlay: false,
         paceMode,
         typeSpeed,
+        saves,
       };
     }
+
+    case 'HYDRATE_SAVES':
+      return { ...state, saves: action.saves };
 
     default:
       return state;
@@ -317,6 +331,7 @@ function createInitialRuntime(): RuntimeState {
     autoPlay: false,
     paceMode: 'full',
     typeSpeed: 'normal',
+    saves: emptySaves(),
   };
 }
 
@@ -330,7 +345,12 @@ const AUTO_PLAY_FEEDBACK_INTERVAL = 50;
 export function useGame() {
   const [rt, dispatch] = useReducer(reducer, null, createInitialRuntime);
 
-  // 每次状态变化后持久化（标题页不写不删，保留存档供刷新后继续）
+  // 挂载时一次性读取/迁移存档（迁移有 localStorage 写入副作用，只跑一次）
+  useEffect(() => {
+    dispatch({ type: 'HYDRATE_SAVES', saves: loadSaves() });
+  }, []);
+
+  // 每次状态变化后持久化到 active 槽（标题页不写不删，保留存档供刷新后继续）
   useEffect(() => {
     saveState(rt);
   }, [rt]);
@@ -352,8 +372,8 @@ export function useGame() {
     return () => clearTimeout(timer);
   }, [rt]);
 
-  // 标题页是否有可继续的存档（phase 变化时重新求值，保证 RESET 后按钮状态与存储一致）
-  const hasSave = useMemo(() => loadSave() !== null, [rt.game.phase]);
+  // 标题页是否有可继续的存档（HYDRATE_SAVES 后生效）
+  const hasSave = rt.saves.slots.some(s => s !== null);
 
   const startGame = useCallback((gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed) => {
     dispatch({ type: 'START_GAME', gender, name, paceMode, typeSpeed });
@@ -376,8 +396,8 @@ export function useGame() {
     dispatch({ type: 'RESET' });
   }, []);
 
-  const continueGame = useCallback(() => {
-    dispatch({ type: 'CONTINUE_GAME' });
+  const continueGame = useCallback((slot: number) => {
+    dispatch({ type: 'CONTINUE_GAME', slot });
   }, []);
 
   const setTypeSpeed = useCallback((typeSpeed: TypeSpeed) => {
@@ -389,6 +409,8 @@ export function useGame() {
     currentEvent: rt.currentEvent,
     feedback: rt.feedback,
     hasSave,
+    saves: rt.saves,
+    activeSlot: rt.saves.active,
     autoPlay: rt.autoPlay,
     typeSpeed: rt.typeSpeed,
     startGame,

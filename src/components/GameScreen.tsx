@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import type { Choice, GameState, LifeEvent } from '../types';
+import type { Choice, GameState, LifeEvent, TypeSpeed } from '../types';
 import { STAGE_META } from '../engine/state';
 import { sfx } from '../utils/sound';
 import SceneArea from './SceneArea';
@@ -12,11 +12,19 @@ interface Props {
   currentEvent: LifeEvent | null;
   feedback: string | null;
   autoPlay: boolean;
+  typeSpeed: TypeSpeed;
+  onTypeSpeedChange: (s: TypeSpeed) => void;
   onChoice: (choice: Choice) => void;
   onContinue: () => void;
 }
 
-export default function GameScreen({ game, currentEvent, feedback, autoPlay, onChoice, onContinue }: Props) {
+const SPEED_OPTIONS: Array<{ value: TypeSpeed; label: string }> = [
+  { value: 'slow', label: '慢' },
+  { value: 'normal', label: '中' },
+  { value: 'fast', label: '快' },
+];
+
+export default function GameScreen({ game, currentEvent, feedback, autoPlay, typeSpeed, onTypeSpeedChange, onChoice, onContinue }: Props) {
   const [showChoices, setShowChoices] = useState(false);
 
   const handleDialogComplete = useCallback(() => {
@@ -79,6 +87,7 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, onC
           title={currentEvent.title}
           autoAdvance={isAuto}
           instant={autoPlay}
+          typeSpeed={typeSpeed}
           onComplete={handleDialogComplete}
           onAutoContinue={isAuto ? () => onChoice(currentEvent.choices[0]) : undefined}
         />
@@ -89,6 +98,23 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, onC
           attributes={game.attributes}
           age={game.age}
         />
+      </div>
+
+      {/* 打字速度切换（游戏内实时生效） */}
+      <div className="absolute right-2 bottom-1.5 z-20 flex gap-1.5">
+        {SPEED_OPTIONS.map(s => (
+          <button
+            key={s.value}
+            onClick={() => { sfx.select(); onTypeSpeedChange(s.value); }}
+            title={s.label}
+            className={`w-7 h-7 rounded-full text-[11px] border transition-all duration-200 font-sans
+              ${typeSpeed === s.value
+                ? 'border-[#c9a96e] text-[#c9a96e] bg-[#c9a96e]/10'
+                : 'border-white/15 text-white/35 hover:border-[#c9a96e]/40 hover:text-[#c9a96e]'}`}
+          >
+            {s.label}
+          </button>
+        ))}
       </div>
     </div>
   );

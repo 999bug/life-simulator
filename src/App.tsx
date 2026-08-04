@@ -6,7 +6,7 @@ import GameScreen from './components/GameScreen';
 import SummaryScreen from './components/SummaryScreen';
 
 export default function App() {
-  const { game, currentEvent, feedback, hasSave, autoPlay, startGame, startAutoGame, makeChoice, continue: continue_, continueGame, reset } = useGame();
+  const { game, currentEvent, feedback, hasSave, autoPlay, typeSpeed, startGame, startAutoGame, makeChoice, continue: continue_, continueGame, reset, setTypeSpeed } = useGame();
 
   // 快速模拟模式静音高频交互音；结算页恢复（保留落幕音）
   useEffect(() => {
@@ -32,6 +32,8 @@ export default function App() {
             currentEvent={currentEvent}
             feedback={feedback}
             autoPlay={autoPlay}
+            typeSpeed={typeSpeed}
+            onTypeSpeedChange={setTypeSpeed}
             onChoice={makeChoice}
             onContinue={continue_}
           />

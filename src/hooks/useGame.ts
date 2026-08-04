@@ -1,5 +1,5 @@
 import { useReducer, useCallback, useEffect } from 'react';
-import type { AttributeKey, Attributes, Choice, DeathCause, GameState, LifeEvent, PaceMode, TypeSpeed } from '../types';
+import type { AttributeKey, Attributes, Choice, DeathCause, GameState, GoalKey, LifeEvent, PaceMode, TypeSpeed } from '../types';
 import { emptySaves, isValidSaveData, migrateLegacySave, SLOT_COUNT, type SavesV2 } from '../engine/save';
 import {
   createInitialState,
@@ -16,7 +16,7 @@ import EVENTS, { filterEvents, shuffleEvents } from '../engine/events';
 
 // ============ Action 类型 ============
 type Action =
-  | { type: 'START_GAME'; gender: 'male' | 'female'; name: string; paceMode: PaceMode; typeSpeed: TypeSpeed }
+  | { type: 'START_GAME'; gender: 'male' | 'female'; name: string; paceMode: PaceMode; typeSpeed: TypeSpeed; goal: GoalKey | null }
   | { type: 'START_AUTO_GAME'; gender: 'male' | 'female'; name: string }
   | { type: 'MAKE_CHOICE'; choice: Choice; eventId: string }
   | { type: 'CONTINUE' }
@@ -116,6 +116,8 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
     case 'START_GAME':
     case 'START_AUTO_GAME': {
       const game = createInitialState(action.gender, action.name);
+      // 人生目标仅手动开局可选；快速模拟无目标
+      game.goal = action.type === 'START_GAME' ? action.goal : null;
       // 新一局：随机种子洗牌，同岁组顺序每局不同（重玩性）
       const shuffleSeed = Math.floor(Math.random() * 2 ** 31);
       // 快速模拟固定全量事件；手动模式按所选密度档过滤
@@ -330,7 +332,7 @@ function createInitialRuntime(): RuntimeState {
     game: {
       gender: 'male', name: '', age: 0, stage: 'infant', stageIdx: 0,
       attributes: { health: 65, intelligence: 25, wealth: 20, happiness: 60, social: 25, appearance: 45, luck: 50, morality: 45 },
-      flags: [], history: [], phase: 'title', deathCause: null,
+      flags: [], history: [], phase: 'title', deathCause: null, goal: null,
     },
     currentEvent: null, feedback: null, eventIndex: 0,
     shuffledEvents: EVENTS,
@@ -382,8 +384,8 @@ export function useGame() {
   // 标题页是否有可继续的存档（HYDRATE_SAVES 后生效）
   const hasSave = rt.saves.slots.some(s => s !== null);
 
-  const startGame = useCallback((gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed) => {
-    dispatch({ type: 'START_GAME', gender, name, paceMode, typeSpeed });
+  const startGame = useCallback((gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | null) => {
+    dispatch({ type: 'START_GAME', gender, name, paceMode, typeSpeed, goal });
   }, []);
 
   const startAutoGame = useCallback((gender: 'male' | 'female', name: string) => {

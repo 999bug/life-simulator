@@ -65,6 +65,7 @@ export function createInitialState(gender: 'male' | 'female', name: string): Gam
     history: [],
     phase: 'playing',
     deathCause: null,
+    goal: null,
   };
 }
 

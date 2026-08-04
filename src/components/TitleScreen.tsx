@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { sfx } from '../utils/sound';
-import type { PaceMode, TypeSpeed } from '../types';
+import type { GoalKey, PaceMode, TypeSpeed } from '../types';
+import GoalModal from './GoalModal';
 
 interface Props {
-  onStart: (gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed) => void;
+  onStart: (gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | null) => void;
   onAutoStart: (gender: 'male' | 'female', name: string) => void;
   hasSave: boolean;
   onContinue: () => void;
@@ -14,12 +15,19 @@ export default function TitleScreen({ onStart, onAutoStart, hasSave, onContinue 
   const [name, setName] = useState('');
   const [paceMode, setPaceMode] = useState<PaceMode>('full');
   const [typeSpeed, setTypeSpeed] = useState<TypeSpeed>('normal');
+  const [showGoal, setShowGoal] = useState(false);
 
   const handleStart = () => {
     if (!gender) return;
     sfx.select();
+    setShowGoal(true);  // 先选目标，确认后再开局
+  };
+
+  const handleGoalSelect = (goal: GoalKey | null) => {
+    if (!gender) return;
+    setShowGoal(false);
     const finalName = name.trim() || (gender === 'male' ? '小明' : '小美');
-    onStart(gender, finalName, paceMode, typeSpeed);
+    onStart(gender, finalName, paceMode, typeSpeed, goal);
   };
 
   return (
@@ -187,6 +195,11 @@ export default function TitleScreen({ onStart, onAutoStart, hasSave, onContinue 
       >
         ⚡ 快速模拟
       </button>
+
+      {/* 目标选择模态（开始人生后弹出，确认目标后开局） */}
+      {showGoal && (
+        <GoalModal onSelect={handleGoalSelect} onCancel={() => setShowGoal(false)} />
+      )}
     </div>
   );
 }

@@ -71,6 +71,8 @@ interface RuntimeState {
   eventIndex: number;       // 当前事件在 shuffledEvents 数组中的位置
   /** 本局事件顺序（同岁组内按种子洗牌，重开一局顺序不同） */
   shuffledEvents: LifeEvent[];
+  /** 本局因条件未满足而被跳过的事件（结算页展示「本可发生而未触发」） */
+  skippedEvents: LifeEvent[];
   /** 洗牌种子（存档恢复时还原顺序） */
   shuffleSeed: number;
   /** 快速模拟模式：自动随机选择快速走完一生 */
@@ -173,7 +175,8 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
       // 快速模拟固定全量事件；手动模式按所选密度档过滤
       const paceMode = action.type === 'START_AUTO_GAME' ? 'full' : action.paceMode;
       const shuffledEvents = shuffleEvents(filterEvents(EVENTS, paceMode, shuffleSeed), shuffleSeed);
-      const first = shuffledEvents.find(e => checkConditions(e, game)) ?? null;
+      const firstScan = findNextEvent(game, -1, shuffledEvents);
+      const first = firstScan.event;
       if (first) {
         game.age = first.age;
         game.stage = getStageForAge(first.age);
@@ -185,6 +188,7 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         feedback: null,
         eventIndex: first ? shuffledEvents.indexOf(first) : 0,
         shuffledEvents,
+        skippedEvents: firstScan.skipped,
         shuffleSeed,
         autoPlay: action.type === 'START_AUTO_GAME',
         paceMode,
@@ -211,7 +215,8 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
       }
 
       // 基于更新后的属性/标记，线性扫描下一个满足条件的事件
-      const next = findNextEvent({ ...state.game, attributes: attrs, flags }, state.eventIndex, state.shuffledEvents);
+      const nextScan = findNextEvent({ ...state.game, attributes: attrs, flags }, state.eventIndex, state.shuffledEvents);
+      const next = nextScan.event;
 
       // 年龄由下一个事件驱动；没有下一个事件说明全部播完
       const age = next ? next.age : state.game.age;
@@ -283,6 +288,7 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         currentEvent: gameOver ? null : next,
         feedback: fb,
         eventIndex: next ? state.shuffledEvents.indexOf(next) : state.eventIndex,
+        skippedEvents: [...state.skippedEvents, ...nextScan.skipped],
         shuffledEvents: state.shuffledEvents,
         shuffleSeed: state.shuffleSeed,
         autoPlay: state.autoPlay,
@@ -334,6 +340,7 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         currentEvent,
         feedback: saved.feedback,
         eventIndex: saved.eventIndex,
+        skippedEvents: [],
         shuffleSeed,
         shuffledEvents,
         autoPlay: false,
@@ -364,14 +371,16 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
 
 // ============ 事件查找 ============
 
-/** 从 fromIndex 之后线性扫描第一个满足条件的事件（在洗牌后的顺序上查找） */
-function findNextEvent(game: GameState, fromIndex: number, events: LifeEvent[]): LifeEvent | null {
+/** 从 fromIndex 之后线性扫描：返回第一个满足条件的事件与扫描中跳过的所有事件（条件不满足） */
+function findNextEvent(game: GameState, fromIndex: number, events: LifeEvent[]): { event: LifeEvent | null; skipped: LifeEvent[] } {
+  const skipped: LifeEvent[] = [];
   for (let i = fromIndex + 1; i < events.length; i++) {
     if (checkConditions(events[i], game)) {
-      return events[i];
+      return { event: events[i], skipped };
     }
+    skipped.push(events[i]);
   }
-  return null;
+  return { event: null, skipped };
 }
 
 /** 检查事件条件是否满足 */
@@ -411,6 +420,7 @@ function createInitialRuntime(): RuntimeState {
     },
     currentEvent: null, feedback: null, eventIndex: 0,
     shuffledEvents: EVENTS,
+    skippedEvents: [],
     shuffleSeed: 0,
     autoPlay: false,
     paceMode: 'full',
@@ -506,6 +516,7 @@ export function useGame() {
     game: rt.game,
     currentEvent: rt.currentEvent,
     feedback: rt.feedback,
+    skippedEvents: rt.skippedEvents,
     saves: rt.saves,
     autoPlay: rt.autoPlay,
     typeSpeed: rt.typeSpeed,

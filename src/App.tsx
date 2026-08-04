@@ -6,7 +6,7 @@ import GameScreen from './components/GameScreen';
 import SummaryScreen from './components/SummaryScreen';
 
 export default function App() {
-  const { game, currentEvent, feedback, autoPlay, typeSpeed, saves, achievements, newAchievements, startGame, startAutoGame, makeChoice, continue: continue_, continueGame, reset, setTypeSpeed } = useGame();
+  const { game, currentEvent, feedback, skippedEvents, autoPlay, typeSpeed, saves, achievements, newAchievements, startGame, startAutoGame, makeChoice, continue: continue_, continueGame, reset, setTypeSpeed } = useGame();
 
   // 快速模拟模式静音高频交互音；结算页恢复（保留落幕音）
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function App() {
           />
         )}
         {game.phase === 'summary' && (
-          <SummaryScreen game={game} onRestart={reset} newAchievements={newAchievements} />
+          <SummaryScreen game={game} onRestart={reset} newAchievements={newAchievements} skippedEvents={skippedEvents} />
         )}
       </div>
     </div>

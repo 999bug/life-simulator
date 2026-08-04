@@ -13679,7 +13679,7 @@
     ]
   },
   {
-    "id": "adult_100",
+    "id": "adult_0100",
     "stage": "adult",
     "age": 49,
     "title": "知天命前夜",
@@ -21146,5 +21146,95 @@
       "minAttrs": {},
       "maxAttrs": {}
     }
+  },
+  {
+    "id": "infant_0001",
+    "stage": "infant",
+    "age": 1,
+    "title": "第一次叫妈妈",
+    "text": "你躺在摇篮里，妈妈的脸凑过来，一遍遍教你发音。终于，一个含混却清晰的音节从你嘴里蹦出来。妈妈愣住了，眼眶一下子红了，把你紧紧搂进怀里。整个家都因为这个字热闹了起来。",
+    "choices": [
+      {
+        "text": "扯着嗓子又喊了几声，妈妈笑得眼泪都出来了",
+        "effects": "😊+10 👥+6",
+        "outcomes": {
+          "attr": {
+            "happiness": 10,
+            "social": 6
+          }
+        }
+      },
+      {
+        "text": "喊完就转过头玩手指，好像什么都没发生过",
+        "effects": "🧠+3 😊+5",
+        "outcomes": {
+          "attr": {
+            "happiness": 5,
+            "intelligence": 3
+          }
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
+    "id": "infant_0002",
+    "stage": "infant",
+    "age": 2,
+    "title": "蹒跚学步",
+    "text": "你扶着沙发站起来，小短腿颤颤巍巍。爸爸蹲在不远处张开双臂，鼓励你迈出第一步。你松开手，摇摇晃晃地走了两步，摔了个屁股蹲。全家人的心都提到了嗓子眼，然后一起笑出声来。",
+    "choices": [
+      {
+        "text": "爬起来拍拍手，继续朝爸爸走去，一次比一次稳",
+        "effects": "💪+10 😊+8",
+        "outcomes": {
+          "attr": {
+            "health": 10,
+            "happiness": 8
+          }
+        }
+      },
+      {
+        "text": "摔疼了，坐在地上哇哇大哭，要妈妈抱",
+        "effects": "😊-4 🎨+2",
+        "outcomes": {
+          "attr": {
+            "happiness": -4,
+            "appearance": 2
+          }
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
+    "id": "infant_0003",
+    "stage": "infant",
+    "age": 2,
+    "title": "第一次发脾气",
+    "text": "晚饭前你非要吃饼干，妈妈说不可以。你小脸涨得通红，把积木推得满地都是，哭得惊天动地。奶奶想哄，妈妈拦住了：「规矩得从小立。」你哭累了，抽抽搭搭地坐下来，终于接受了这顿饭前没有饼干的事实。",
+    "choices": [
+      {
+        "text": "抽噎着把积木捡起来，轻轻放回盒子里",
+        "effects": "😊+3 ⚖️+8",
+        "outcomes": {
+          "attr": {
+            "morality": 8,
+            "happiness": 3
+          }
+        }
+      },
+      {
+        "text": "趁大人不注意，偷偷伸手去够饼干盒",
+        "effects": "🍀-5 ⚖️-6",
+        "outcomes": {
+          "attr": {
+            "luck": -5,
+            "morality": -6
+          }
+        }
+      }
+    ],
+    "conditions": {}
   }
 ]

@@ -1,5 +1,5 @@
 import { useReducer, useCallback, useEffect, useMemo } from 'react';
-import type { AttributeKey, Attributes, Choice, DeathCause, GameState, LifeEvent } from '../types';
+import type { AttributeKey, Attributes, Choice, DeathCause, GameState, LifeEvent, PaceMode, TypeSpeed } from '../types';
 import {
   createInitialState,
   applyOutcomes,
@@ -11,14 +11,15 @@ import {
   ensureInt,
   STAGE_ORDER,
 } from '../engine/state';
-import EVENTS, { shuffleEvents } from '../engine/events';
+import EVENTS, { filterEvents, shuffleEvents } from '../engine/events';
 
 // ============ Action 类型 ============
 type Action =
-  | { type: 'START_GAME'; gender: 'male' | 'female'; name: string }
+  | { type: 'START_GAME'; gender: 'male' | 'female'; name: string; paceMode: PaceMode; typeSpeed: TypeSpeed }
   | { type: 'START_AUTO_GAME'; gender: 'male' | 'female'; name: string }
   | { type: 'MAKE_CHOICE'; choice: Choice; eventId: string }
   | { type: 'CONTINUE' }
+  | { type: 'SET_TYPE_SPEED'; typeSpeed: TypeSpeed }
   | { type: 'RESET' }
   | { type: 'CONTINUE_GAME' };
 
@@ -34,6 +35,10 @@ interface RuntimeState {
   shuffleSeed: number;
   /** 快速模拟模式：自动随机选择快速走完一生 */
   autoPlay: boolean;
+  /** 本局密度档位（开局选定，中途不可切） */
+  paceMode: PaceMode;
+  /** 打字机速度档（游戏内可随时切换） */
+  typeSpeed: TypeSpeed;
 }
 
 // ============ 存档 ============
@@ -48,6 +53,8 @@ interface SaveData {
   feedback: string | null;
   eventIndex: number;
   shuffleSeed: number;
+  paceMode?: PaceMode;
+  typeSpeed?: TypeSpeed;
 }
 
 /** 读取存档，损坏或不存在返回 null */
@@ -79,6 +86,8 @@ function saveState(rt: RuntimeState): void {
     feedback: rt.feedback,
     eventIndex: rt.eventIndex,
     shuffleSeed: rt.shuffleSeed,
+    paceMode: rt.paceMode,
+    typeSpeed: rt.typeSpeed,
   };
   try {
     localStorage.setItem(SAVE_KEY, JSON.stringify(data));
@@ -95,7 +104,9 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
       const game = createInitialState(action.gender, action.name);
       // 新一局：随机种子洗牌，同岁组顺序每局不同（重玩性）
       const shuffleSeed = Math.floor(Math.random() * 2 ** 31);
-      const shuffledEvents = shuffleEvents(EVENTS, shuffleSeed);
+      // 快速模拟固定全量事件；手动模式按所选密度档过滤
+      const paceMode = action.type === 'START_AUTO_GAME' ? 'full' : action.paceMode;
+      const shuffledEvents = shuffleEvents(filterEvents(EVENTS, paceMode, shuffleSeed), shuffleSeed);
       const first = shuffledEvents.find(e => checkConditions(e, game)) ?? null;
       if (first) {
         game.age = first.age;
@@ -110,6 +121,8 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         shuffledEvents,
         shuffleSeed,
         autoPlay: action.type === 'START_AUTO_GAME',
+        paceMode,
+        typeSpeed: action.type === 'START_AUTO_GAME' ? 'normal' : action.typeSpeed,
       };
     }
 
@@ -192,12 +205,18 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         shuffledEvents: state.shuffledEvents,
         shuffleSeed: state.shuffleSeed,
         autoPlay: state.autoPlay,
+        paceMode: state.paceMode,
+        typeSpeed: state.typeSpeed,
       };
     }
 
     case 'CONTINUE': {
       // MAKE_CHOICE 已预载下一个事件，这里只清反馈
       return { ...state, feedback: null };
+    }
+
+    case 'SET_TYPE_SPEED': {
+      return { ...state, typeSpeed: action.typeSpeed };
     }
 
     case 'RESET':
@@ -209,9 +228,12 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
       if (!saved) {
         return state;
       }
+      // 旧版存档无档位字段，显式兜底兼容
+      const paceMode = saved.paceMode ?? 'full';
+      const typeSpeed = saved.typeSpeed ?? 'normal';
       // 按存档种子还原本局事件顺序（旧版存档无种子则用默认顺序）
       const shuffleSeed = typeof saved.shuffleSeed === 'number' ? saved.shuffleSeed : 0;
-      const shuffledEvents = shuffleEvents(EVENTS, shuffleSeed);
+      const shuffledEvents = shuffleEvents(filterEvents(EVENTS, paceMode, shuffleSeed), shuffleSeed);
       const currentEvent = saved.currentEventId
         ? shuffledEvents.find(e => e.id === saved.currentEventId) ?? null
         : null;
@@ -224,6 +246,8 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         shuffleSeed,
         shuffledEvents,
         autoPlay: false,
+        paceMode,
+        typeSpeed,
       };
     }
 
@@ -283,6 +307,8 @@ function createInitialRuntime(): RuntimeState {
     shuffledEvents: EVENTS,
     shuffleSeed: 0,
     autoPlay: false,
+    paceMode: 'full',
+    typeSpeed: 'normal',
   };
 }
 
@@ -321,8 +347,8 @@ export function useGame() {
   // 标题页是否有可继续的存档（仅初始读取一次）
   const hasSave = useMemo(() => loadSave() !== null, []);
 
-  const startGame = useCallback((gender: 'male' | 'female', name: string) => {
-    dispatch({ type: 'START_GAME', gender, name });
+  const startGame = useCallback((gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed) => {
+    dispatch({ type: 'START_GAME', gender, name, paceMode, typeSpeed });
   }, []);
 
   const startAutoGame = useCallback((gender: 'male' | 'female', name: string) => {
@@ -346,17 +372,23 @@ export function useGame() {
     dispatch({ type: 'CONTINUE_GAME' });
   }, []);
 
+  const setTypeSpeed = useCallback((typeSpeed: TypeSpeed) => {
+    dispatch({ type: 'SET_TYPE_SPEED', typeSpeed });
+  }, []);
+
   return {
     game: rt.game,
     currentEvent: rt.currentEvent,
     feedback: rt.feedback,
     hasSave,
     autoPlay: rt.autoPlay,
+    typeSpeed: rt.typeSpeed,
     startGame,
     startAutoGame,
     makeChoice,
     continue: continue_,
     continueGame,
     reset,
+    setTypeSpeed,
   };
 }

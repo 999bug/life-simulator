@@ -2,6 +2,7 @@ import { useReducer, useCallback, useEffect } from 'react';
 import type { AchievementId, AttributeKey, Attributes, Choice, DeathCause, GameState, GoalKey, LifeEvent, PaceMode, TypeSpeed } from '../types';
 import { emptySaves, isValidSaveData, migrateLegacySave, SLOT_COUNT, type SavesV2 } from '../engine/save';
 import { checkAchievements } from '../engine/achievements';
+import { verdictKey } from '../engine/verdict';
 import {
   createInitialState,
   applyOutcomes,
@@ -25,6 +26,8 @@ const ACHIEVEMENTS_KEY = 'life-sim-achievements';
 interface AchievementStore {
   unlocked: AchievementId[];
   completedLives: number;
+  /** 累计达成过的结局 key（verdictKey，去重） */
+  endings: string[];
 }
 
 /** 读取成就存储；数据损坏或存储不可用时返回空结构 */
@@ -34,13 +37,14 @@ function loadAchievements(): AchievementStore {
     if (raw) {
       const data = JSON.parse(raw) as AchievementStore;
       if (data && Array.isArray(data.unlocked) && typeof data.completedLives === 'number') {
-        return data;
+        // 旧存档无结局集合字段，显式兜底
+        return { ...data, endings: Array.isArray(data.endings) ? data.endings : [] };
       }
     }
   } catch {
     // 忽略损坏数据
   }
-  return { unlocked: [], completedLives: 0 };
+  return { unlocked: [], completedLives: 0, endings: [] };
 }
 
 /** 持久化成就存储；存储不可用时静默降级 */
@@ -92,6 +96,8 @@ interface RuntimeState {
   pendingNewIds: AchievementId[];
   /** 本局结算后的累计完成局数（待写入存储） */
   pendingLives: number;
+  /** 本局结算的结局 key（verdictKey，待写入存储） */
+  pendingEndingKey: string;
 }
 
 // ============ 存档 ============
@@ -199,6 +205,7 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         achievementPending: false,
         pendingNewIds: [],
         pendingLives: 0,
+        pendingEndingKey: '',
       };
     }
 
@@ -277,6 +284,9 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         }).join('  ');
       }
 
+      // 本局结算的结局 key（verdictKey 纯函数判定：路线 flag 优先，无则按分数档）
+      const endingKey = gameOver ? verdictKey(game) : '';
+
       // 进入结算：判定本局新解锁成就（纯计算，持久化由 effect 完成）
       const newIds = gameOver
         ? checkAchievements({
@@ -284,6 +294,8 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
             completedLives: state.achievements.completedLives + 1,
             wasLite: state.paceMode === 'lite',
             wasAuto: state.autoPlay,
+            // 累计结局数（含本局）：已有集合 + 本局结局若为新则 +1
+            endingsCount: state.achievements.endings.length + (state.achievements.endings.includes(endingKey) ? 0 : 1),
           }).filter(id => !state.achievements.unlocked.includes(id))
         : [];
 
@@ -303,6 +315,7 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         achievementPending: gameOver,
         pendingNewIds: newIds,
         pendingLives: gameOver ? state.achievements.completedLives + 1 : 0,
+        pendingEndingKey: endingKey,
       };
     }
 
@@ -356,6 +369,7 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         achievementPending: false,
         pendingNewIds: [],
         pendingLives: 0,
+        pendingEndingKey: '',
       };
     }
 
@@ -365,7 +379,7 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
 
     case 'ACHIEVEMENTS_PERSISTED': {
       // 成就已写入 localStorage，清除 pending 标志；pendingNewIds 保留到下一局开始（结算页持续展示新解锁）
-      return { ...state, achievementPending: false, pendingLives: 0 };
+      return { ...state, achievementPending: false, pendingLives: 0, pendingEndingKey: '' };
     }
 
     default:
@@ -435,6 +449,7 @@ function createInitialRuntime(): RuntimeState {
     achievementPending: false,
     pendingNewIds: [],
     pendingLives: 0,
+    pendingEndingKey: '',
   };
 }
 
@@ -453,7 +468,7 @@ export function useGame() {
     dispatch({ type: 'HYDRATE_SAVES', saves: loadSaves(), achievements: loadAchievements() });
   }, []);
 
-  // 结算成就持久化（pending 标志只由 MAKE_CHOICE 的 gameOver 置位，读档恢复到 summary 不会触发）
+  // 结算成就持久化：并入结局集合（去重），写库后清标志（pending 标志只由 MAKE_CHOICE 的 gameOver 置位，读档恢复到 summary 不会触发）
   useEffect(() => {
     if (!rt.achievementPending) {
       return;
@@ -461,6 +476,7 @@ export function useGame() {
     saveAchievements({
       unlocked: [...new Set([...rt.achievements.unlocked, ...rt.pendingNewIds])],
       completedLives: rt.pendingLives,
+      endings: [...new Set([...rt.achievements.endings, rt.pendingEndingKey])],
     });
     dispatch({ type: 'ACHIEVEMENTS_PERSISTED' });
   }, [rt.achievementPending]);

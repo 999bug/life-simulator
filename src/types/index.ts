@@ -81,7 +81,8 @@ export type GoalKey = 'wealth' | 'travel' | 'academic' | 'doctor' | 'family' | '
 /** 成就 id */
 export type AchievementId =
   | 'first_life' | 'longevity' | 'early_death' | 'rich' | 'scholar'
-  | 'career' | 'traveler' | 'doctor' | 'balanced' | 'lite_clear' | 'auto_clear' | 'three_lives';
+  | 'career' | 'traveler' | 'doctor' | 'balanced' | 'lite_clear' | 'auto_clear' | 'three_lives'
+  | 'top_score' | 'genius' | 'iron_body' | 'rich_king' | 'big_family' | 'ultra_life' | 'five_endings' | 'ten_lives';
 
 /** 游戏状态 */
 export interface GameState {

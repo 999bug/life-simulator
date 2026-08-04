@@ -67,9 +67,18 @@ test('checkGoal：无目标返回 null；未达成含差距提示', () => {
   assert.match(r.detail, /65/);
 });
 
-test('ACHIEVEMENTS：12 个定义齐全', () => {
-  assert.strictEqual(ACHIEVEMENTS.length, 12);
-  assert.strictEqual(new Set(ACHIEVEMENTS.map(a => a.id)).size, 12);
+test('ACHIEVEMENTS：20 个定义齐全', () => {
+  assert.strictEqual(ACHIEVEMENTS.length, 20);
+  assert.strictEqual(new Set(ACHIEVEMENTS.map(a => a.id)).size, 20);
+});
+
+test('checkAchievements：新增 8 个成就判定', () => {
+  // 属性平均分 86（≥85 触发 top_score）；余项属性补全使 calcScore 正常
+  const g = game({ age: 96, flags: ['married', 'has_child'], attributes: { health: 92, intelligence: 96, wealth: 96, happiness: 85, social: 80, appearance: 80, luck: 80, morality: 80 } });
+  const got = checkAchievements({ game: g, completedLives: 10, wasLite: false, wasAuto: false, endingsCount: 5 });
+  for (const id of ['top_score', 'genius', 'iron_body', 'rich_king', 'big_family', 'ultra_life', 'five_endings', 'ten_lives'] as const) {
+    assert.ok(got.includes(id), `应包含 ${id}`);
+  }
 });
 
 test('checkAchievements：按状态判定全部满足项', () => {

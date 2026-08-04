@@ -6,6 +6,7 @@ import SceneArea from './SceneArea';
 import StatusBar from './StatusBar';
 import DialogBox from './DialogBox';
 import ChoicePanel from './ChoicePanel';
+import ConfirmModal from './ConfirmModal';
 
 interface Props {
   game: GameState;
@@ -16,6 +17,7 @@ interface Props {
   onTypeSpeedChange: (s: TypeSpeed) => void;
   onChoice: (choice: Choice) => void;
   onContinue: () => void;
+  onExit: () => void;
 }
 
 const SPEED_OPTIONS: Array<{ value: TypeSpeed; label: string }> = [
@@ -24,8 +26,9 @@ const SPEED_OPTIONS: Array<{ value: TypeSpeed; label: string }> = [
   { value: 'fast', label: '快' },
 ];
 
-export default function GameScreen({ game, currentEvent, feedback, autoPlay, typeSpeed, onTypeSpeedChange, onChoice, onContinue }: Props) {
+export default function GameScreen({ game, currentEvent, feedback, autoPlay, typeSpeed, onTypeSpeedChange, onChoice, onContinue, onExit }: Props) {
   const [showChoices, setShowChoices] = useState(false);
+  const [showExit, setShowExit] = useState(false);
 
   const handleDialogComplete = useCallback(() => {
     if (currentEvent && currentEvent.choices.length === 1 && currentEvent.choices[0].text === '……') {
@@ -116,6 +119,25 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
           </button>
         ))}
       </div>
+
+      {/* 中途退出：回标题（存档保留在槽中） */}
+      <button
+        onClick={() => setShowExit(true)}
+        title="退出本局"
+        className="absolute top-2 right-2 z-20 w-8 h-8 rounded-full border border-white/15 text-white/40
+          hover:border-[#e85d75] hover:text-[#e85d75] transition-all duration-200 font-sans text-[13px]"
+      >
+        ✕
+      </button>
+
+      {showExit && (
+        <ConfirmModal
+          title="放弃本局"
+          desc="将回到标题页，本局进度会保留在存档槽中。确定放弃吗？"
+          onConfirm={() => { setShowExit(false); onExit(); }}
+          onCancel={() => setShowExit(false)}
+        />
+      )}
     </div>
   );
 }

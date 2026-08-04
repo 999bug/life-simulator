@@ -208,7 +208,7 @@ export default function SummaryScreen({ game, onRestart }: Props) {
           hover:border-[#c9a96e] hover:text-[#c9a96e] hover:shadow-[0_4px_20px_rgba(201,169,110,0.3)]
           transition-all duration-300 mt-2"
       >
-        重新开始
+        回到标题
       </button>
     </div>
   );

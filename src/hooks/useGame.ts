@@ -238,13 +238,9 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
     }
 
     case 'RESET': {
-      // 重新开始 = 放弃上一局：仅清除当前 active 槽，保留其他槽位
-      const slots = [...state.saves.slots];
-      slots[state.saves.active] = null;
-      const saves = { active: state.saves.active, slots };
-      saveSaves(saves);
-      // 快速模拟模式随重新开始退出；标题页状态下 saveState 不写不删
-      return { ...createInitialRuntime(), saves };
+      // 回到标题：存档保留在槽中（槽位保留结局状态，开新局覆盖）
+      const rt = createInitialRuntime();
+      return { ...rt, saves: state.saves };
     }
 
     case 'CONTINUE_GAME': {
@@ -381,9 +377,6 @@ export function useGame() {
     return () => clearTimeout(timer);
   }, [rt]);
 
-  // 标题页是否有可继续的存档（HYDRATE_SAVES 后生效）
-  const hasSave = rt.saves.slots.some(s => s !== null);
-
   const startGame = useCallback((gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | null) => {
     dispatch({ type: 'START_GAME', gender, name, paceMode, typeSpeed, goal });
   }, []);
@@ -417,9 +410,7 @@ export function useGame() {
     game: rt.game,
     currentEvent: rt.currentEvent,
     feedback: rt.feedback,
-    hasSave,
     saves: rt.saves,
-    activeSlot: rt.saves.active,
     autoPlay: rt.autoPlay,
     typeSpeed: rt.typeSpeed,
     startGame,

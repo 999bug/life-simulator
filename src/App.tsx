@@ -36,6 +36,7 @@ export default function App() {
             onTypeSpeedChange={setTypeSpeed}
             onChoice={makeChoice}
             onContinue={continue_}
+            onExit={reset}
           />
         )}
         {game.phase === 'summary' && (

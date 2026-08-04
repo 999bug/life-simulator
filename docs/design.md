@@ -100,7 +100,18 @@ type AttributeKey = 'health' | 'intelligence' | 'wealth' | 'happiness' | 'social
 
 ### 成长曲线（结算页）
 
-引擎在 `GameState.snapshots`（可选字段，`AttrSnapshot[]`）记录**每岁属性快照**（`appendSnapshot` 纯函数）：进入新岁或终局时记录当前属性，同岁内继续事件不重复记录，同岁终局替换该岁条目（保留最终状态）。开局记录首事件年龄的初始属性；旧存档无该字段，从读档岁起重建。结算页以 canvas 折线图（GrowthChart）展示 8 维属性随年龄的轨迹：x 轴 0 → 享年（每 10 岁刻度），y 轴固定 0-100 便于横向对比，末端圆点标记最终状态，图例（HTML）展示各属性终值。
+引擎在 `GameState.snapshots`（可选字段，`AttrSnapshot[]`）记录**每岁属性快照**（`appendSnapshot` 纯函数）：进入新岁或终局时记录当前属性，同岁内继续事件不重复记录，同岁终局替换该岁条目（保留最终状态）。开局记录首事件年龄的初始属性；旧存档无该字段，从读档岁起重建。结算页以 canvas 折线图（GrowthChart，`drawGrowthChart` 纯函数可复用）展示 8 维属性随年龄的轨迹：x 轴 0 → 享年（每 10 岁刻度），y 轴固定 0-100 便于横向对比，末端圆点标记最终状态，图例（HTML）展示各属性终值；分享卡片（960×540）右侧同样绘制迷你版曲线。
+
+### 周目解锁
+
+按 `stats.totalLives + 1` 计算当前周目：
+
+- **第 2 周目起**：标题页解锁「挑战开局」——`applyChallenge` 将开局 8 属性整体下调 10 点（钳位 0），`GameState.challenge` 标记本局，结算页展示「⚔️ 挑战人生」；挑战局评分 ≥ 70 解锁专属成就「破局者」
+- **第 3 周目起**：开局按洗牌种子从命运事件池（`RARE_EVENT_IDS`，15 个精选「命运级」事件）确定性抽取 1 个本局命运事件（`pickFateEvent`，存档随 `fateEventId` 还原）；该事件触发时所有选项效果 ×1.5（`scaleOutcomes`），游戏内显示「⚡ 命运事件 · 效果 ×1.5」角标
+
+### 传记导出
+
+结算页「导出人生传记」：`buildBiographyMarkdown` 将本局人生生成为叙事 markdown（标题/结局/评分 + 按岁分组的大事记（含事件标题与里程碑 ⭐）+ 最终属性表 + 尾声），`downloadText` 触发浏览器下载。
 
 ## 事件系统
 

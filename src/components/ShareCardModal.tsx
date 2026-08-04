@@ -3,6 +3,7 @@ import type { GameState } from '../types';
 import { ATTR_META, calcScore } from '../engine/state';
 import { checkGoal } from '../engine/goals';
 import { GOALS } from '../engine/goals';
+import { drawGrowthChart } from './GrowthChart';
 
 interface Props {
   game: GameState;
@@ -14,6 +15,9 @@ interface Props {
 /** 卡片尺寸（960×540 横版） */
 const CARD_W = 960;
 const CARD_H = 540;
+
+/** 迷你曲线区（右侧） */
+const CHART = { x: 570, y: 130, w: 340, h: 280 };
 
 /** 人生总结分享卡片：canvas 绘制，支持下载 PNG */
 export default function ShareCardModal({ game, verdictTitle, onClose }: Props) {
@@ -39,54 +43,67 @@ export default function ShareCardModal({ game, verdictTitle, onClose }: Props) {
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, CARD_W, CARD_H);
 
-    // 顶部标题
+    const F = '"PingFang SC", "Microsoft YaHei", sans-serif';
+    // 左侧文字列（x=60 起，左对齐）
+    ctx.textAlign = 'left';
     ctx.fillStyle = '#c9a96e';
-    ctx.font = '300 44px "PingFang SC", "Microsoft YaHei", sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('人生模拟器', CARD_W / 2, 84);
-    ctx.font = '300 26px "PingFang SC", "Microsoft YaHei", sans-serif';
+    ctx.font = `300 40px ${F}`;
+    ctx.fillText('人生模拟器', 60, 84);
+    ctx.font = `300 24px ${F}`;
     ctx.fillStyle = 'rgba(255,255,255,0.5)';
-    ctx.fillText(`${game.gender === 'male' ? '♂' : '♀'} ${game.name} · 享年 ${game.age} 岁`, CARD_W / 2, 126);
+    ctx.fillText(`${game.gender === 'male' ? '♂' : '♀'} ${game.name} · 享年 ${game.age} 岁`, 60, 122);
 
     // 结局标题
     ctx.fillStyle = '#e8e8e8';
-    ctx.font = '300 52px "PingFang SC", "Microsoft YaHei", sans-serif';
-    ctx.fillText(verdictTitle, CARD_W / 2, 196);
+    ctx.font = `300 48px ${F}`;
+    ctx.fillText(verdictTitle, 60, 180);
     // 评分
     ctx.fillStyle = '#c9a96e';
-    ctx.font = '600 96px "PingFang SC", "Microsoft YaHei", sans-serif';
-    ctx.fillText(String(score), CARD_W / 2, 300);
-    ctx.font = '300 20px "PingFang SC", "Microsoft YaHei", sans-serif';
+    ctx.font = `600 88px ${F}`;
+    ctx.fillText(String(score), 60, 270);
+    ctx.font = `300 18px ${F}`;
     ctx.fillStyle = 'rgba(255,255,255,0.4)';
-    ctx.fillText('综合评分', CARD_W / 2, 334);
+    ctx.fillText('综合评分', 60, 298);
 
     // 目标
     if (goalDef) {
-      ctx.font = '300 22px "PingFang SC", "Microsoft YaHei", sans-serif';
+      ctx.font = `300 20px ${F}`;
       ctx.fillStyle = goalResult?.achieved ? '#5de8a0' : 'rgba(255,255,255,0.6)';
-      ctx.fillText(`${goalDef.icon} 目标「${goalDef.name}」${goalResult?.achieved ? '已达成' : '未达成'}`, CARD_W / 2, 384);
+      ctx.fillText(`${goalDef.icon} 目标「${goalDef.name}」${goalResult?.achieved ? '已达成' : '未达成'}`, 60, 342);
     }
 
-    // 8 属性（两行四列）
+    // 8 属性（两行四列，紧凑）
     const attrs = Object.entries(game.attributes) as Array<[keyof typeof game.attributes, number]>;
-    ctx.font = '400 22px "PingFang SC", "Microsoft YaHei", sans-serif';
+    ctx.font = `400 20px ${F}`;
     attrs.forEach(([k, v], i) => {
       const col = i % 4;
       const row = Math.floor(i / 4);
-      const x = 120 + col * 200;
-      const y = 430 + row * 44;
       const meta = ATTR_META[k];
       ctx.fillStyle = meta.color;
-      ctx.textAlign = 'left';
-      ctx.fillText(`${meta.icon} ${meta.name} ${v}`, x, y);
+      ctx.fillText(`${meta.icon} ${meta.name} ${v}`, 60 + col * 122, 404 + row * 36);
     });
+
+    // 右侧迷你成长曲线（无快照时跳过）
+    if ((game.snapshots ?? []).length > 0) {
+      ctx.fillStyle = 'rgba(255,255,255,0.04)';
+      ctx.fillRect(CHART.x, CHART.y, CHART.w, CHART.h);
+      ctx.fillStyle = 'rgba(255,255,255,0.35)';
+      ctx.font = `300 16px ${F}`;
+      ctx.textAlign = 'left';
+      ctx.fillText('成长曲线', CHART.x, CHART.y - 10);
+      // drawGrowthChart 以 (0,0) 为原点绘制，平移到曲线区
+      ctx.save();
+      ctx.translate(CHART.x, CHART.y);
+      drawGrowthChart(ctx, game.snapshots!, CHART.w, CHART.h, true);
+      ctx.restore();
+    }
 
     // 底部水印
     ctx.textAlign = 'center';
     ctx.fillStyle = 'rgba(255,255,255,0.2)';
-    ctx.font = '300 16px "PingFang SC", "Microsoft YaHei", sans-serif';
+    ctx.font = `300 16px ${F}`;
     ctx.fillText('由人生模拟器生成', CARD_W / 2, CARD_H - 22);
-  }, [game]);
+  }, [game, verdictTitle]);
 
   const handleDownload = () => {
     const canvas = canvasRef.current;

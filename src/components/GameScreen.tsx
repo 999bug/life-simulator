@@ -14,6 +14,8 @@ interface Props {
   feedback: string | null;
   autoPlay: boolean;
   typeSpeed: TypeSpeed;
+  /** 本局命运事件 id（第 3 周目解锁：该事件效果 ×1.5，展示角标） */
+  fateEventId: string | null;
   onTypeSpeedChange: (s: TypeSpeed) => void;
   onChoice: (choice: Choice) => void;
   onContinue: () => void;
@@ -26,7 +28,7 @@ const SPEED_OPTIONS: Array<{ value: TypeSpeed; label: string }> = [
   { value: 'fast', label: '快' },
 ];
 
-export default function GameScreen({ game, currentEvent, feedback, autoPlay, typeSpeed, onTypeSpeedChange, onChoice, onContinue, onExit }: Props) {
+export default function GameScreen({ game, currentEvent, feedback, autoPlay, typeSpeed, fateEventId, onTypeSpeedChange, onChoice, onContinue, onExit }: Props) {
   const [showChoices, setShowChoices] = useState(false);
   const [showExit, setShowExit] = useState(false);
 
@@ -129,6 +131,14 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
           </button>
         ))}
       </div>
+
+      {/* 命运事件角标（第 3 周目解锁：效果 ×1.5） */}
+      {fateEventId && currentEvent.id === fateEventId && (
+        <div className="absolute top-2 left-2 z-20 px-3 py-1.5 rounded-full border border-[#e8c95d]/40 bg-[#e8c95d]/10
+          text-[#e8c95d] text-[11px] tracking-[2px] animate-pulse">
+          ⚡ 命运事件 · 效果 ×1.5
+        </div>
+      )}
 
       {/* 中途退出：回标题（存档保留在槽中） */}
       <button

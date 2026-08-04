@@ -31,6 +31,7 @@ export const ACHIEVEMENTS: AchievementDef[] = [
   { id: 'ultra_life', icon: '🌅', name: '期颐之年', desc: '享年达到 95 岁' },
   { id: 'five_endings', icon: '📚', name: '阅尽千帆', desc: '累计达成 5 种不同结局' },
   { id: 'ten_lives', icon: '♾️', name: '十世轮回', desc: '累计完成 10 局人生' },
+  { id: 'challenger', icon: '⚔️', name: '破局者', desc: '以挑战开局达成 70 分以上人生' },
 ];
 
 /** 成就判定输入 */
@@ -73,5 +74,6 @@ export function checkAchievements(input: AchievementCheckInput): AchievementId[]
   if (age >= 95) { ids.add('ultra_life'); }
   if (input.endingsCount >= 5) { ids.add('five_endings'); }
   if (completedLives >= 10) { ids.add('ten_lives'); }
+  if (game.challenge && calcScore(attributes) >= 70) { ids.add('challenger'); }
   return [...ids];
 }

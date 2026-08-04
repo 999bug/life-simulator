@@ -190,4 +190,32 @@ export function filterEvents(events: LifeEvent[], mode: PaceMode, seed: number):
   return events.filter(e => selected.has(e));
 }
 
+/**
+ * 命运事件池（第 3 周目解锁）：从全库精选的「命运级」大事件，
+ * 每局按种子抽 1 个作为本局命运事件（效果 ×1.5）。
+ */
+export const RARE_EVENT_IDS = [
+  'birth_01', 'child_02', 'teen_34', 'teen_36',
+  'young_02', 'young_65', 'young_72', 'young_29',
+  'young_11', 'young_13', 'young_17', 'young_58',
+  'adult_57', 'adult_80', 'elder_09',
+];
+
+/**
+ * 按种子从命运事件池抽 1 个（确定性，存档可还原）。
+ *
+ * @param seed 洗牌种子（与 shuffleEvents 共用，保证读档可重建）
+ * @returns 抽中的命运事件；池内事件不在全量事件库时返回 null
+ */
+export function pickFateEvent(seed: number): LifeEvent | null {
+  const rng = mulberry32(seed);
+  const pool = RARE_EVENT_IDS
+    .map(id => EVENTS.find(e => e.id === id))
+    .filter((e): e is LifeEvent => e !== undefined);
+  if (pool.length === 0) {
+    return null;
+  }
+  return pool[Math.floor(rng() * pool.length)];
+}
+
 export default EVENTS;

@@ -31,7 +31,8 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 - **prune-events.mjs**：精选工具。事件 id 规则：**2 位数字后缀 = 原始主线事件（如 child_01），一字不改、永远保留；4 位数字后缀 = 模拟事件（如 child_0017），只能被精选删除、不能改内容**。`keep-list.json` 记录保留清单（审计用）
 - **merge-fragments.mjs**：合并 chiled.json + `script/fragments/` 片段，跑三重校验：convertAll fail-fast + 每岁密度（0-2 岁 1-3 个、3-12 岁 5-12 个、13-75 岁 3-7 个）+ flag 生产/消费配对（has_flags 引用的 flag 必须有产出者，not_flags 不算悬空）。**幂等**：片段中已合并的 id 自动跳过，片段文件保留在 fragments/ 目录可重复运行
 - **clamp-effects.mjs**：效果值钳位工具。4 位模拟事件的效果按转换后属性值等比例压缩到 ±3~±20 声明范围内（多键求和超范围时压缩该属性所有来源键）；2 位主线一字不改。幂等，效果值调整后用它 + build:events
-- `script/build-events.mjs` 是历史遗留工具（硬编码早期事件数组，与 chiled.json 重复），新工作一律用上述四个
+
+事件/效果改动一律走 chiled.json + convert/prune/merge/clamp 管线，不手改 events.json（见「约定」章节）
 
 ### 引擎（src/engine/）— 纯函数，无副作用
 
@@ -54,6 +55,8 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 - **音效**：`src/utils/sound.ts` 用 Web Audio 合成轻量 UI 音效（点击/选择/打字/推进/落幕/成就琶音/阶段过渡），无外部资源，浏览器不可用时静默降级；`setMuted` 供快速模拟模式静音高频交互音
 - **成长曲线**：`GameState.snapshots`（可选，`AttrSnapshot[]`）每岁属性快照——`appendSnapshot`（state.ts）进入新岁或终局记录、同岁内不重复、同岁终局替换该岁条目；开局记首事件年龄，旧存档无字段从读档岁重建；结算页 GrowthChart canvas 绘制（x 0→享年、y 0-100、末端圆点 + HTML 图例带终值）
 - **快速模拟**：标题页「⚡ 快速模拟」以随机性别/名字开局（`START_AUTO_GAME`），自动模式每 220ms 随机选择推进、跳过打字机（DialogBox `instant`）与选择面板，直到结算；重新开始或读档自动退出自动模式
+- **周目解锁**：按 `stats.totalLives + 1` 计算周目——第 2 周目起标题页解锁「⚔️ 挑战开局」（`GameState.challenge`，开局属性 `applyChallenge` 整体 -10，结算评分 ≥70 解锁「破局者」成就）；第 3 周目起抽取**命运事件**（`pickFateEvent(seed)` 从 `RARE_EVENT_IDS` 15 个精选事件按种子抽 1，确定性可存档还原），该事件触发时效果 ×1.5（`scaleOutcomes`）、游戏内显示「⚡ 命运事件」角标
+- **传记导出**：结算页「📜 导出人生传记」——`src/utils/biography.ts` 的 `buildBiographyMarkdown` 生成叙事 markdown（大事记按岁分组 + 事件标题 + 里程碑 ⭐ + 最终属性表），`downloadText` 触发下载
 
 ### UI（src/components/）
 
@@ -61,7 +64,7 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 - **DialogBox**：打字机效果（速度档位 + 点击跳过）+ 「▼ 点击继续」；事件标题显示为「标题」
 - **ChoicePanel**：选项按钮（`button.group` class，effects 展示串由转换器生成）
 - **TitleScreen**：名字/性别 + **节奏档位（沉浸/精简）+ 打字速度 + 3 存档卡片 + 目标选择模态（GoalModal）+ 成就（AchievementsModal）/生涯统计（StatsModal）入口**——720px 高度余量极小（约 1px），改动必须回归检查
-- **SummaryScreen**：结算页（享年 + 结局 + 评分 + 属性 + **成长曲线（GrowthChart canvas 8 维随年龄折线图）+ 人生大事记完整时间线（里程碑 ⭐）+ 目标达成度 + 新解锁成就 + 本可发生而未触发 + 分享卡片（ShareCardModal canvas PNG）**）
+- **SummaryScreen**：结算页（享年 + 结局 + 评分 + 属性 + **成长曲线（GrowthChart canvas 8 维随年龄折线图）+ 人生大事记完整时间线（里程碑 ⭐）+ 目标达成度 + 新解锁成就 + 本可发生而未触发 + 分享卡片（ShareCardModal canvas PNG，含迷你成长曲线）+ 传记导出**）
 - **SceneArea/SceneDecor**：按阶段/年龄渲染的场景背景
 - **App**：移动端视口等比缩放（scale = min(vw/960, vh/720)，<1 才缩放）
 

@@ -67,9 +67,9 @@ test('checkGoal：无目标返回 null；未达成含差距提示', () => {
   assert.match(r.detail, /65/);
 });
 
-test('ACHIEVEMENTS：20 个定义齐全', () => {
-  assert.strictEqual(ACHIEVEMENTS.length, 20);
-  assert.strictEqual(new Set(ACHIEVEMENTS.map(a => a.id)).size, 20);
+test('ACHIEVEMENTS：21 个定义齐全', () => {
+  assert.strictEqual(ACHIEVEMENTS.length, 21);
+  assert.strictEqual(new Set(ACHIEVEMENTS.map(a => a.id)).size, 21);
 });
 
 test('checkAchievements：新增 8 个成就判定', () => {
@@ -98,4 +98,16 @@ test('checkAchievements：英年早逝与快速模拟', () => {
   assert.ok(got.includes('early_death'));
   assert.ok(got.includes('auto_clear'));
   assert.ok(!got.includes('longevity'));
+});
+
+test('checkAchievements：挑战开局 70 分以上解锁破局者', () => {
+  const input = { game: game({ challenge: true }), completedLives: 1, wasLite: false, wasAuto: false, endingsCount: 1 };
+  // 默认属性 60/50/40/60/40/40/40/40 = 46 分 → 不满足
+  assert.ok(!checkAchievements(input).includes('challenger'));
+  // 全属性 75 → 75 分 ≥ 70 → 解锁
+  const high = { ...input, game: game({ challenge: true }, { health: 75, intelligence: 75, wealth: 75, happiness: 75, social: 75, appearance: 75, luck: 75, morality: 75 }) };
+  assert.ok(checkAchievements(high).includes('challenger'));
+  // 非挑战局高分不解锁
+  const noChallenge = { ...high, game: game({}, { health: 75, intelligence: 75, wealth: 75, happiness: 75, social: 75, appearance: 75, luck: 75, morality: 75 }) };
+  assert.ok(!checkAchievements(noChallenge).includes('challenger'));
 });

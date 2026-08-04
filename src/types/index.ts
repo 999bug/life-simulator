@@ -90,7 +90,8 @@ export type GoalKey = 'wealth' | 'travel' | 'academic' | 'doctor' | 'family' | '
 export type AchievementId =
   | 'first_life' | 'longevity' | 'early_death' | 'rich' | 'scholar'
   | 'career' | 'traveler' | 'doctor' | 'balanced' | 'lite_clear' | 'auto_clear' | 'three_lives'
-  | 'top_score' | 'genius' | 'iron_body' | 'rich_king' | 'big_family' | 'ultra_life' | 'five_endings' | 'ten_lives';
+  | 'top_score' | 'genius' | 'iron_body' | 'rich_king' | 'big_family' | 'ultra_life' | 'five_endings' | 'ten_lives'
+  | 'challenger';
 
 /** 游戏状态 */
 export interface GameState {
@@ -109,6 +110,8 @@ export interface GameState {
   goal: GoalKey | null;
   /** 每岁属性快照（结算页成长曲线用；旧存档无此字段，从读档岁起重建） */
   snapshots?: AttrSnapshot[];
+  /** 挑战开局（第 2 周目解锁：开局属性整体下调 10 点；旧存档无此字段） */
+  challenge?: boolean;
 }
 
 /** 属性元数据 */

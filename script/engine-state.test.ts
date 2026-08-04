@@ -6,7 +6,8 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert';
-import { ageCap, appendSnapshot, applyElderDecay, applyOutcomes, calcMaxAge, effectiveDelta } from '../src/engine/state.ts';
+import { ageCap, appendSnapshot, applyChallenge, applyElderDecay, applyOutcomes, calcMaxAge, effectiveDelta, scaleOutcomes } from '../src/engine/state.ts';
+import { pickFateEvent } from '../src/engine/events.ts';
 import EVENTS, { shuffleEvents } from '../src/engine/events.ts';
 import type { Attributes } from '../src/types/index.ts';
 
@@ -176,4 +177,33 @@ test('appendSnapshot：终局进入新岁正常追加', () => {
   const final = appendSnapshot(first, 95, attrs({ health: 10 }), true);
   assert.strictEqual(final.length, 2);
   assert.strictEqual(final[1].age, 95);
+});
+
+test('applyChallenge：属性整体下调 10 点且不低于 0', () => {
+  const out = applyChallenge(attrs({ health: 65, wealth: 5 }));
+  assert.strictEqual(out.health, 55);
+  assert.strictEqual(out.intelligence, 40);   // 50 - 10（attrs 默认 50）
+  assert.strictEqual(out.wealth, 0);          // 5 - 10 → 钳位 0
+  assert.strictEqual(out.luck, 40);           // 50 - 10
+});
+
+test('scaleOutcomes：效果按倍数放大并保留 flags', () => {
+  const out = scaleOutcomes({ attr: { happiness: 8, wealth: -5 }, flags: ['gap_year'] }, 1.5);
+  assert.strictEqual(out.attr.happiness, 12);
+  // JS 四舍五入：round(-7.5) = -7（向正无穷）
+  assert.strictEqual(out.attr.wealth, -7);
+  assert.deepStrictEqual(out.flags, ['gap_year']);
+  // 不修改原对象
+  const raw = { attr: { happiness: 8 }, flags: [] };
+  scaleOutcomes(raw, 1.5);
+  assert.strictEqual(raw.attr.happiness, 8);
+});
+
+test('pickFateEvent：同种子可复现且命中稀有池', () => {
+  const a1 = pickFateEvent(7)!;
+  const a2 = pickFateEvent(7)!;
+  assert.strictEqual(a1.id, a2.id);
+  assert.ok(a1.id.startsWith('birth_') || a1.id.startsWith('child_') || a1.id.startsWith('teen_')
+    || a1.id.startsWith('young_') || a1.id.startsWith('adult_') || a1.id.startsWith('elder_'));
+  assert.ok(a1.id.length > 0);
 });

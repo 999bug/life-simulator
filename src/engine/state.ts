@@ -192,6 +192,38 @@ export function appendSnapshot(
 }
 
 /**
+ * 挑战开局：属性整体下调 10 点（钳位 0-100），第 2 周目解锁。
+ *
+ * @param attrs 初始属性表
+ * @returns 下调后的属性表
+ */
+export function applyChallenge(attrs: Attributes): Attributes {
+  const out = { ...attrs };
+  for (const k of Object.keys(out) as AttributeKey[]) {
+    out[k] = Math.max(0, out[k] - 10);
+  }
+  return out;
+}
+
+/**
+ * 命运事件效果放大：每键 × factor 后四舍五入。
+ *
+ * @param out 选项结果
+ * @param factor 放大倍数（命运事件为 1.5）
+ * @returns 放大后的新结果（不修改原对象）
+ */
+export function scaleOutcomes(
+  out: { attr: Partial<Attributes>; flags?: string[] },
+  factor: number,
+): { attr: Partial<Attributes>; flags?: string[] } {
+  const attr: Partial<Attributes> = {};
+  for (const [k, v] of Object.entries(out.attr)) {
+    attr[k as AttributeKey] = Math.round(v * factor);
+  }
+  return { attr, flags: out.flags };
+}
+
+/**
  * 计算剩余寿命上限。
  *
  * 基础 68 + 平均属性健康红利（红利最多 +35 = 103）；

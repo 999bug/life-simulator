@@ -9,7 +9,7 @@ import AchievementsModal from './AchievementsModal';
 import StatsModal from './StatsModal';
 
 interface Props {
-  onStart: (gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | null) => void;
+  onStart: (gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | null, challenge: boolean) => void;
   onAutoStart: (gender: 'male' | 'female', name: string) => void;
   saves: SavesV2;
   onContinue: (slot: number) => void;
@@ -28,6 +28,10 @@ export default function TitleScreen({ onStart, onAutoStart, saves, onContinue, a
   const [confirmCover, setConfirmCover] = useState(false);
   const [showAchievements, setShowAchievements] = useState(false);
   const [showStats, setShowStats] = useState(false);
+  /** 挑战开局（第 2 周目解锁）：属性整体下调 10 点 */
+  const [challenge, setChallenge] = useState(false);
+  /** 当前是第几周目（累计完成局数 + 1） */
+  const round = stats.totalLives + 1;
 
   const handleStart = () => {
     if (!gender) return;
@@ -49,7 +53,7 @@ export default function TitleScreen({ onStart, onAutoStart, saves, onContinue, a
     if (!gender) return;
     setShowGoal(false);
     const finalName = name.trim() || (gender === 'male' ? '小明' : '小美');
-    onStart(gender, finalName, paceMode, typeSpeed, goal);
+    onStart(gender, finalName, paceMode, typeSpeed, goal, challenge);
   };
 
   return (
@@ -204,6 +208,26 @@ export default function TitleScreen({ onStart, onAutoStart, saves, onContinue, a
           ))}
         </div>
       </div>
+
+      {/* 周目解锁：挑战开局（第 2 周目）+ 命运事件（第 3 周目） */}
+      {round >= 2 && (
+        <div className="z-10 flex items-center gap-3 animate-[fadeIn_2.1s_ease]">
+          <button
+            onClick={() => { sfx.select(); setChallenge(v => !v); }}
+            className={`px-4 py-1.5 rounded-full text-[11px] tracking-[2px] border transition-all duration-200 font-sans
+              ${challenge
+                ? 'border-[#e8a05d] text-[#e8a05d] bg-[#e8a05d]/10 shadow-[0_0_14px_rgba(232,160,93,0.2)]'
+                : 'border-white/15 text-white/35 bg-white/[0.03] hover:border-[#e8a05d]/50 hover:text-[#e8a05d]'}`}
+          >
+            ⚔️ 挑战开局{challenge ? '：属性 -10' : ''}
+          </button>
+          {round >= 3 && (
+            <span className="text-[10px] text-white/30 tracking-[2px]">
+              ⚡ 命运事件已解锁（随机事件效果 ×1.5）
+            </span>
+          )}
+        </div>
+      )}
 
       {/* 开始按钮 */}
       <button

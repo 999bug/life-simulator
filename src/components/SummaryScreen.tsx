@@ -5,6 +5,7 @@ import { GOALS, checkGoal } from '../engine/goals';
 import { ACHIEVEMENTS } from '../engine/achievements';
 import ShareCardModal from './ShareCardModal';
 import GrowthChart from './GrowthChart';
+import { buildBiographyMarkdown, downloadText } from '../utils/biography';
 
 interface Props {
   game: GameState;
@@ -172,6 +173,7 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       flex flex-col items-center px-5 sm:px-10 py-8 sm:py-10 gap-4 overflow-y-auto">
       <p className="text-sm text-white/40 tracking-[4px]">
         {game.gender === 'male' ? '♂' : '♀'} {game.name} · 享年 {game.age} 岁
+        {game.challenge && <span className="text-[#e8a05d] ml-2">⚔️ 挑战人生</span>}
       </p>
       <h2 className="text-[34px] font-extralight tracking-[10px] text-[#c9a96e] animate-[fadeInDown_0.8s_ease]">
         {title}
@@ -288,6 +290,16 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
           transition-all duration-300 mt-2"
       >
         🎴 生成分享卡片
+      </button>
+
+      <button
+        onClick={() => downloadText(`${game.name}-人生传记.md`, buildBiographyMarkdown(game, title, score))}
+        className="px-9 py-3 border border-white/20 rounded-2xl bg-transparent
+          text-sm text-white/50 tracking-[4px] font-sans
+          hover:border-[#c9a96e] hover:text-[#c9a96e] hover:shadow-[0_4px_20px_rgba(201,169,110,0.3)]
+          transition-all duration-300 mt-2"
+      >
+        📜 导出人生传记
       </button>
 
       <button

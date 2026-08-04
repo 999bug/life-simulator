@@ -9,6 +9,8 @@ export interface SaveData {
   shuffleSeed: number;
   paceMode?: 'full' | 'lite';
   typeSpeed?: 'slow' | 'normal' | 'fast';
+  /** 本局命运事件 id（第 3 周目解锁，读档还原；旧档无此字段） */
+  fateEventId?: string | null;
 }
 
 /** v2 存档：active 槽 + 3 槽位 */

@@ -1,8 +1,8 @@
 import { useReducer, useCallback, useEffect } from 'react';
-import type { AchievementId, AttributeKey, Attributes, Choice, DeathCause, GameState, GoalKey, LifeEvent, PaceMode, TypeSpeed } from '../types';
-import { emptySaves, isValidSaveData, migrateLegacySave, SLOT_COUNT, type SavesV2 } from '../engine/save';
-import { checkAchievements } from '../engine/achievements';
-import { verdictKey } from '../engine/verdict';
+import type { AchievementId, AttributeKey, Attributes, Choice, DeathCause, GameState, GoalKey, LifeEvent, PaceMode, TypeSpeed } from '../types/index.ts';
+import { emptySaves, isValidSaveData, migrateLegacySave, SLOT_COUNT, type SavesV2 } from '../engine/save.ts';
+import { checkAchievements } from '../engine/achievements.ts';
+import { verdictKey } from '../engine/verdict.ts';
 import {
   createInitialState,
   applyOutcomes,
@@ -15,9 +15,11 @@ import {
   ageCap,
   ensureInt,
   appendSnapshot,
+  applyChallenge,
+  scaleOutcomes,
   STAGE_ORDER,
-} from '../engine/state';
-import EVENTS, { filterEvents, shuffleEvents } from '../engine/events';
+} from '../engine/state.ts';
+import EVENTS, { filterEvents, shuffleEvents, pickFateEvent } from '../engine/events.ts';
 
 // ============ 成就存储 ============
 
@@ -97,8 +99,8 @@ function saveStats(stats: StatsStore): void {
 }
 
 // ============ Action 类型 ============
-type Action =
-  | { type: 'START_GAME'; gender: 'male' | 'female'; name: string; paceMode: PaceMode; typeSpeed: TypeSpeed; goal: GoalKey | null }
+export type Action =
+  | { type: 'START_GAME'; gender: 'male' | 'female'; name: string; paceMode: PaceMode; typeSpeed: TypeSpeed; goal: GoalKey | null; challenge: boolean }
   | { type: 'START_AUTO_GAME'; gender: 'male' | 'female'; name: string }
   | { type: 'MAKE_CHOICE'; choice: Choice; eventId: string }
   | { type: 'CONTINUE' }
@@ -109,7 +111,7 @@ type Action =
   | { type: 'ACHIEVEMENTS_PERSISTED' };
 
 // ============ 运行时状态（不参与 React 渲染）============
-interface RuntimeState {
+export interface RuntimeState {
   game: GameState;
   currentEvent: LifeEvent | null;
   feedback: string | null;
@@ -140,6 +142,8 @@ interface RuntimeState {
   pendingLives: number;
   /** 本局结算的结局 key（verdictKey，待写入存储） */
   pendingEndingKey: string;
+  /** 本局命运事件 id（第 3 周目解锁：该事件效果 ×1.5；存档还原） */
+  fateEventId: string | null;
 }
 
 // ============ 存档 ============
@@ -207,18 +211,24 @@ function saveState(rt: RuntimeState): void {
     shuffleSeed: rt.shuffleSeed,
     paceMode: rt.paceMode,
     typeSpeed: rt.typeSpeed,
+    fateEventId: rt.fateEventId,
   };
   saveSaves(saves);
 }
 
 // ============ Reducer ============
-function reducer(state: RuntimeState, action: Action): RuntimeState {
+export function reducer(state: RuntimeState, action: Action): RuntimeState {
   switch (action.type) {
     case 'START_GAME':
     case 'START_AUTO_GAME': {
       const game = createInitialState(action.gender, action.name);
       // 人生目标仅手动开局可选；快速模拟无目标
       game.goal = action.type === 'START_GAME' ? action.goal : null;
+      // 挑战开局（第 2 周目解锁）：属性整体下调 10 点，仅手动开局可选
+      game.challenge = action.type === 'START_GAME' && action.challenge;
+      if (game.challenge) {
+        game.attributes = applyChallenge(game.attributes);
+      }
       // 新一局：随机种子洗牌，同岁组顺序每局不同（重玩性）
       const shuffleSeed = Math.floor(Math.random() * 2 ** 31);
       // 快速模拟固定全量事件；手动模式按所选密度档过滤
@@ -233,6 +243,8 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         // 初始快照：首事件年龄 + 开局属性（成长曲线起点）
         game.snapshots = appendSnapshot(undefined, game.age, game.attributes, false);
       }
+      // 第 3 周目起（累计完成 ≥ 2 局）：从命运事件池抽 1 个本局命运事件（效果 ×1.5）
+      const fateEvent = state.stats.totalLives >= 2 ? pickFateEvent(shuffleSeed) : null;
       return {
         game,
         currentEvent: first,
@@ -251,12 +263,16 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         pendingNewIds: [],
         pendingLives: 0,
         pendingEndingKey: '',
+        fateEventId: fateEvent?.id ?? null,
       };
     }
 
     case 'MAKE_CHOICE': {
       const { choice, eventId } = action;
-      const out = choice.outcomes;
+      // 命运事件（第 3 周目解锁）：该事件所有选项效果 ×1.5
+      const out = state.fateEventId === eventId
+        ? scaleOutcomes(choice.outcomes, FATE_MULTIPLIER)
+        : choice.outcomes;
 
       // 更新属性（当前年龄决定成长上限）
       let attrs = applyOutcomes(state.game.attributes, out, state.game.age);
@@ -365,6 +381,7 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         pendingNewIds: newIds,
         pendingLives: gameOver ? state.achievements.completedLives + 1 : 0,
         pendingEndingKey: endingKey,
+        fateEventId: state.fateEventId,
       };
     }
 
@@ -420,6 +437,8 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         pendingNewIds: [],
         pendingLives: 0,
         pendingEndingKey: '',
+        // 旧档无命运事件字段，显式兜底
+        fateEventId: saved.fateEventId ?? null,
       };
     }
 
@@ -479,7 +498,7 @@ function checkConditions(e: LifeEvent, game: GameState): boolean {
   return true;
 }
 
-function createInitialRuntime(): RuntimeState {
+export function createInitialRuntime(): RuntimeState {
   return {
     game: {
       gender: 'male', name: '', age: 0, stage: 'infant', stageIdx: 0,
@@ -502,10 +521,14 @@ function createInitialRuntime(): RuntimeState {
     pendingNewIds: [],
     pendingLives: 0,
     pendingEndingKey: '',
+    fateEventId: null,
   };
 }
 
 // ============ Hook ============
+
+/** 命运事件效果放大倍数 */
+const FATE_MULTIPLIER = 1.5;
 
 /** 快速模拟：事件推进间隔（毫秒） */
 const AUTO_PLAY_INTERVAL = 220;
@@ -562,8 +585,8 @@ export function useGame() {
     return () => clearTimeout(timer);
   }, [rt]);
 
-  const startGame = useCallback((gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | null) => {
-    dispatch({ type: 'START_GAME', gender, name, paceMode, typeSpeed, goal });
+  const startGame = useCallback((gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | null, challenge: boolean = false) => {
+    dispatch({ type: 'START_GAME', gender, name, paceMode, typeSpeed, goal, challenge });
   }, []);
 
   const startAutoGame = useCallback((gender: 'male' | 'female', name: string) => {
@@ -602,6 +625,7 @@ export function useGame() {
     achievements: rt.achievements,
     stats: rt.stats,
     newAchievements: rt.pendingNewIds,
+    fateEventId: rt.fateEventId,
     startGame,
     startAutoGame,
     makeChoice,

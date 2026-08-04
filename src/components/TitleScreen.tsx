@@ -1,24 +1,28 @@
 import { useState } from 'react';
 import { sfx } from '../utils/sound';
-import type { GoalKey, PaceMode, TypeSpeed } from '../types';
+import type { AchievementId, GoalKey, PaceMode, TypeSpeed } from '../types';
 import type { SavesV2 } from '../engine/save';
 import GoalModal from './GoalModal';
 import ConfirmModal from './ConfirmModal';
+import AchievementsModal from './AchievementsModal';
 
 interface Props {
   onStart: (gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | null) => void;
   onAutoStart: (gender: 'male' | 'female', name: string) => void;
   saves: SavesV2;
   onContinue: (slot: number) => void;
+  /** 跨周目成就存储（标题页成就总览展示） */
+  achievements: { unlocked: AchievementId[]; completedLives: number };
 }
 
-export default function TitleScreen({ onStart, onAutoStart, saves, onContinue }: Props) {
+export default function TitleScreen({ onStart, onAutoStart, saves, onContinue, achievements }: Props) {
   const [gender, setGender] = useState<'male' | 'female' | null>(null);
   const [name, setName] = useState('');
   const [paceMode, setPaceMode] = useState<PaceMode>('full');
   const [typeSpeed, setTypeSpeed] = useState<TypeSpeed>('normal');
   const [showGoal, setShowGoal] = useState(false);
   const [confirmCover, setConfirmCover] = useState(false);
+  const [showAchievements, setShowAchievements] = useState(false);
 
   const handleStart = () => {
     if (!gender) return;
@@ -209,19 +213,29 @@ export default function TitleScreen({ onStart, onAutoStart, saves, onContinue }:
         开 始 人 生
       </button>
 
-      {/* 快速模拟：随机性别与名字，自动走完一生 */}
-      <button
-        onClick={() => {
-          sfx.select();
-          const gender = Math.random() < 0.5 ? 'male' : 'female';
-          onAutoStart(gender, gender === 'male' ? '小明' : '小美');
-        }}
-        className="px-10 py-2 rounded-[30px] text-[13px] tracking-[4px] z-10 transition-all duration-300 border font-sans
-          border-white/15 text-white/35 bg-transparent
-          hover:border-[#c9a96e]/50 hover:text-[#c9a96e] hover:bg-[#c9a96e]/5 cursor-pointer"
-      >
-        ⚡ 快速模拟
-      </button>
+      {/* 快捷入口：快速模拟（随机性别与名字自动走完一生）+ 成就总览 */}
+      <div className="z-10 flex items-center gap-4">
+        <button
+          onClick={() => {
+            sfx.select();
+            const gender = Math.random() < 0.5 ? 'male' : 'female';
+            onAutoStart(gender, gender === 'male' ? '小明' : '小美');
+          }}
+          className="px-10 py-2 rounded-[30px] text-[13px] tracking-[4px] transition-all duration-300 border font-sans
+            border-white/15 text-white/35 bg-transparent
+            hover:border-[#c9a96e]/50 hover:text-[#c9a96e] hover:bg-[#c9a96e]/5 cursor-pointer"
+        >
+          ⚡ 快速模拟
+        </button>
+
+        {/* 成就入口 */}
+        <button
+          onClick={() => { sfx.select(); setShowAchievements(true); }}
+          className="text-[12px] text-white/30 tracking-[3px] hover:text-[#c9a96e] transition-colors duration-200 font-sans"
+        >
+          🏆 成就
+        </button>
+      </div>
 
       {/* 目标选择模态（开始人生后弹出，确认目标后开局） */}
       {showGoal && (
@@ -236,6 +250,11 @@ export default function TitleScreen({ onStart, onAutoStart, saves, onContinue }:
           onConfirm={handleCoverConfirm}
           onCancel={() => setConfirmCover(false)}
         />
+      )}
+
+      {/* 成就总览模态（🏆 入口弹出） */}
+      {showAchievements && (
+        <AchievementsModal unlocked={achievements.unlocked} onClose={() => setShowAchievements(false)} />
       )}
     </div>
   );

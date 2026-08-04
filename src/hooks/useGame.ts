@@ -1,6 +1,7 @@
 import { useReducer, useCallback, useEffect } from 'react';
-import type { AttributeKey, Attributes, Choice, DeathCause, GameState, GoalKey, LifeEvent, PaceMode, TypeSpeed } from '../types';
+import type { AchievementId, AttributeKey, Attributes, Choice, DeathCause, GameState, GoalKey, LifeEvent, PaceMode, TypeSpeed } from '../types';
 import { emptySaves, isValidSaveData, migrateLegacySave, SLOT_COUNT, type SavesV2 } from '../engine/save';
+import { checkAchievements } from '../engine/achievements';
 import {
   createInitialState,
   applyOutcomes,
@@ -14,6 +15,42 @@ import {
 } from '../engine/state';
 import EVENTS, { filterEvents, shuffleEvents } from '../engine/events';
 
+// ============ 成就存储 ============
+
+/** 成就存储 key（跨周目） */
+const ACHIEVEMENTS_KEY = 'life-sim-achievements';
+
+/** 成就存储结构 */
+interface AchievementStore {
+  unlocked: AchievementId[];
+  completedLives: number;
+}
+
+/** 读取成就存储；数据损坏或存储不可用时返回空结构 */
+function loadAchievements(): AchievementStore {
+  try {
+    const raw = localStorage.getItem(ACHIEVEMENTS_KEY);
+    if (raw) {
+      const data = JSON.parse(raw) as AchievementStore;
+      if (data && Array.isArray(data.unlocked) && typeof data.completedLives === 'number') {
+        return data;
+      }
+    }
+  } catch {
+    // 忽略损坏数据
+  }
+  return { unlocked: [], completedLives: 0 };
+}
+
+/** 持久化成就存储；存储不可用时静默降级 */
+function saveAchievements(store: AchievementStore): void {
+  try {
+    localStorage.setItem(ACHIEVEMENTS_KEY, JSON.stringify(store));
+  } catch {
+    // 存储不可用静默降级
+  }
+}
+
 // ============ Action 类型 ============
 type Action =
   | { type: 'START_GAME'; gender: 'male' | 'female'; name: string; paceMode: PaceMode; typeSpeed: TypeSpeed; goal: GoalKey | null }
@@ -23,7 +60,8 @@ type Action =
   | { type: 'SET_TYPE_SPEED'; typeSpeed: TypeSpeed }
   | { type: 'RESET' }
   | { type: 'CONTINUE_GAME'; slot: number }
-  | { type: 'HYDRATE_SAVES'; saves: SavesV2 };
+  | { type: 'HYDRATE_SAVES'; saves: SavesV2; achievements: AchievementStore }
+  | { type: 'ACHIEVEMENTS_PERSISTED' };
 
 // ============ 运行时状态（不参与 React 渲染）============
 interface RuntimeState {
@@ -43,6 +81,14 @@ interface RuntimeState {
   typeSpeed: TypeSpeed;
   /** v2 存档（3 槽位 + active），HYDRATE_SAVES 水合 */
   saves: SavesV2;
+  /** 跨周目成就存储（已解锁列表 + 累计完成局数），HYDRATE_SAVES 水合 */
+  achievements: AchievementStore;
+  /** 进入结算但尚未写入成就存储（pending 标志只由 MAKE_CHOICE 的 gameOver 置位，读档恢复不触发） */
+  achievementPending: boolean;
+  /** 本局新解锁成就（判定后暂存，供结算页展示，不进 GameState） */
+  pendingNewIds: AchievementId[];
+  /** 本局结算后的累计完成局数（待写入存储） */
+  pendingLives: number;
 }
 
 // ============ 存档 ============
@@ -140,6 +186,10 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         paceMode,
         typeSpeed: action.type === 'START_AUTO_GAME' ? 'normal' : action.typeSpeed,
         saves: state.saves,
+        achievements: state.achievements,
+        achievementPending: false,
+        pendingNewIds: [],
+        pendingLives: 0,
       };
     }
 
@@ -214,6 +264,16 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         }).join('  ');
       }
 
+      // 进入结算：判定本局新解锁成就（纯计算，持久化由 effect 完成）
+      const newIds = gameOver
+        ? checkAchievements({
+            game,
+            completedLives: state.achievements.completedLives + 1,
+            wasLite: state.paceMode === 'lite',
+            wasAuto: state.autoPlay,
+          }).filter(id => !state.achievements.unlocked.includes(id))
+        : [];
+
       return {
         game,
         currentEvent: gameOver ? null : next,
@@ -225,6 +285,10 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         paceMode: state.paceMode,
         typeSpeed: state.typeSpeed,
         saves: state.saves,
+        achievements: state.achievements,
+        achievementPending: gameOver,
+        pendingNewIds: newIds,
+        pendingLives: gameOver ? state.achievements.completedLives + 1 : 0,
       };
     }
 
@@ -272,11 +336,22 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         paceMode,
         typeSpeed,
         saves,
+        // 读档恢复不经过 MAKE_CHOICE，不重复结算计数
+        achievements: state.achievements,
+        achievementPending: false,
+        pendingNewIds: [],
+        pendingLives: 0,
       };
     }
 
     case 'HYDRATE_SAVES':
-      return { ...state, saves: action.saves };
+      // 存档与成就存储一并水合（成就跨周目，从 localStorage 载入）
+      return { ...state, saves: action.saves, achievements: action.achievements };
+
+    case 'ACHIEVEMENTS_PERSISTED': {
+      // 成就已写入 localStorage，清除 pending 标志；pendingNewIds 保留到下一局开始（结算页持续展示新解锁）
+      return { ...state, achievementPending: false, pendingLives: 0 };
+    }
 
     default:
       return state;
@@ -337,6 +412,11 @@ function createInitialRuntime(): RuntimeState {
     paceMode: 'full',
     typeSpeed: 'normal',
     saves: emptySaves(),
+    // 初始同步读取成就存储（localStorage 同步 API，安全），HYDRATE_SAVES 再水合一次
+    achievements: loadAchievements(),
+    achievementPending: false,
+    pendingNewIds: [],
+    pendingLives: 0,
   };
 }
 
@@ -350,10 +430,22 @@ const AUTO_PLAY_FEEDBACK_INTERVAL = 50;
 export function useGame() {
   const [rt, dispatch] = useReducer(reducer, null, createInitialRuntime);
 
-  // 挂载时一次性读取/迁移存档（迁移有 localStorage 写入副作用，只跑一次）
+  // 挂载时一次性读取/迁移存档（迁移有 localStorage 写入副作用，只跑一次）；成就存储一并载入
   useEffect(() => {
-    dispatch({ type: 'HYDRATE_SAVES', saves: loadSaves() });
+    dispatch({ type: 'HYDRATE_SAVES', saves: loadSaves(), achievements: loadAchievements() });
   }, []);
+
+  // 结算成就持久化（pending 标志只由 MAKE_CHOICE 的 gameOver 置位，读档恢复到 summary 不会触发）
+  useEffect(() => {
+    if (!rt.achievementPending) {
+      return;
+    }
+    saveAchievements({
+      unlocked: [...new Set([...rt.achievements.unlocked, ...rt.pendingNewIds])],
+      completedLives: rt.pendingLives,
+    });
+    dispatch({ type: 'ACHIEVEMENTS_PERSISTED' });
+  }, [rt.achievementPending]);
 
   // 每次状态变化后持久化到 active 槽（标题页不写不删，保留存档供刷新后继续）
   useEffect(() => {
@@ -413,6 +505,8 @@ export function useGame() {
     saves: rt.saves,
     autoPlay: rt.autoPlay,
     typeSpeed: rt.typeSpeed,
+    achievements: rt.achievements,
+    newAchievements: rt.pendingNewIds,
     startGame,
     startAutoGame,
     makeChoice,

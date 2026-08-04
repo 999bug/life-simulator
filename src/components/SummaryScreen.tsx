@@ -1,9 +1,13 @@
-import type { GameState } from '../types';
+import type { AchievementId, GameState } from '../types';
 import { ATTR_META, calcScore } from '../engine/state';
+import { GOALS, checkGoal } from '../engine/goals';
+import { ACHIEVEMENTS } from '../engine/achievements';
 
 interface Props {
   game: GameState;
   onRestart: () => void;
+  /** 本局新解锁成就（useGame 传入，不进 GameState） */
+  newAchievements: AchievementId[];
 }
 
 interface Verdict {
@@ -143,9 +147,10 @@ function getVerdict(game: GameState): Verdict {
   return scoreVerdict(score);
 }
 
-export default function SummaryScreen({ game, onRestart }: Props) {
+export default function SummaryScreen({ game, onRestart, newAchievements }: Props) {
   const score = calcScore(game.attributes);
   const { title, desc } = getVerdict(game);
+  const goal = checkGoal(game.goal, game);
 
   return (
     <div className="w-full h-full bg-gradient-to-b from-[#0a0a14] via-[#1a1a2e] to-[#0a0a14]
@@ -166,6 +171,24 @@ export default function SummaryScreen({ game, onRestart }: Props) {
         <span className="text-lg leading-none mt-0.5">{deathText(game.deathCause).icon}</span>
         <p className="text-xs text-white/50 leading-relaxed">{deathText(game.deathCause).text}</p>
       </div>
+
+      {/* 人生目标达成度（开局选了目标才展示） */}
+      {goal && (
+        <div className={`flex items-start gap-3 max-w-[440px] px-5 py-3.5 rounded-xl border
+          animate-[fadeIn_1.4s_ease]
+          ${goal.achieved ? 'bg-[#c9a96e]/5 border-[#c9a96e]/30' : 'bg-white/[0.03] border-white/[0.06]'}`}>
+          <span className="text-lg leading-none mt-0.5">{goal.achieved ? '✅' : '🎯'}</span>
+          <div>
+            <div className={`text-[13px] ${goal.achieved ? 'text-[#c9a96e]' : 'text-white/60'}`}>
+              {GOALS.find(g => g.key === game.goal)?.name ?? '人生目标'}
+              <span className="ml-2 text-[11px] tracking-[2px] text-white/35">
+                {goal.achieved ? '已达成' : '未达成'}
+              </span>
+            </div>
+            <div className="text-[11px] text-white/40 mt-0.5 leading-relaxed">{goal.detail}</div>
+          </div>
+        </div>
+      )}
 
       {/* 综合评分 */}
       <div className="w-[80px] h-[80px] rounded-full border-2 border-[#c9a96e]
@@ -200,6 +223,23 @@ export default function SummaryScreen({ game, onRestart }: Props) {
           </div>
         ))}
       </div>
+
+      {/* 新解锁成就 */}
+      {newAchievements.length > 0 && (
+        <div className="w-full max-w-[580px] animate-[fadeIn_1.6s_ease]">
+          <h3 className="text-[13px] tracking-[4px] text-[#c9a96e] mb-2.5 font-normal">🏆 新解锁成就</h3>
+          <div className="flex flex-wrap gap-2">
+            {newAchievements.map(id => {
+              const a = ACHIEVEMENTS.find(x => x.id === id)!;
+              return (
+                <div key={id} className="px-3.5 py-2 rounded-lg bg-[#c9a96e]/10 border border-[#c9a96e]/30 text-[12px] text-[#c9a96e]">
+                  {a.icon} {a.name}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       <button
         onClick={onRestart}

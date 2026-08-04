@@ -105,9 +105,9 @@ function loadSaves(): SavesV2 {
     if (raw) {
       const data = JSON.parse(raw) as SavesV2;
       if (data && Array.isArray(data.slots) && data.slots.length === SLOT_COUNT && typeof data.active === 'number') {
-        // 内容级校验：非法槽置 null；active 越界回退 0
+        // 内容级校验：非法槽置 null；active 越界或非整数回退 0
         const slots = data.slots.map(s => (isValidSaveData(s) ? s : null));
-        const active = data.active >= 0 && data.active < SLOT_COUNT ? data.active : 0;
+        const active = Number.isInteger(data.active) && data.active >= 0 && data.active < SLOT_COUNT ? data.active : 0;
         return { active, slots };
       }
     }
@@ -140,6 +140,10 @@ function saveSaves(saves: SavesV2): boolean {
 
 /** 持久化当前状态到 active 槽；标题页状态（新游戏未开始）时不写不删 */
 function saveState(rt: RuntimeState): void {
+  // 快速模拟为临时局：不写入存档槽位（避免静默覆盖正式存档）
+  if (rt.autoPlay) {
+    return;
+  }
   if (!rt.game || rt.game.phase === 'title') {
     return;
   }

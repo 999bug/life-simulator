@@ -32,11 +32,11 @@ export function emptySaves(): SavesV2 {
  * @returns 是否为合法的 SaveData
  */
 export function isValidSaveData(data: unknown): data is SaveData {
-  if (!data || typeof data !== 'object') {
+  if (typeof data !== 'object' || data === null) {
     return false;
   }
-  const d = data as Record<string, unknown>;
-  return !!d.game && typeof d.eventIndex === 'number';
+  const d = data as Partial<SaveData>;
+  return typeof d.game === 'object' && d.game !== null && typeof d.eventIndex === 'number';
 }
 
 /**

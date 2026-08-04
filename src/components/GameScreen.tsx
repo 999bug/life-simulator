@@ -122,7 +122,7 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
 
       {/* 中途退出：回标题（存档保留在槽中） */}
       <button
-        onClick={() => setShowExit(true)}
+        onClick={() => { sfx.select(); setShowExit(true); }}
         title="退出本局"
         className="absolute top-2 right-2 z-20 w-8 h-8 rounded-full border border-white/15 text-white/40
           hover:border-[#e85d75] hover:text-[#e85d75] transition-all duration-200 font-sans text-[13px]"

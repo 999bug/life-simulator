@@ -165,13 +165,13 @@ export function applyOutcomes(
 /**
  * 计算剩余寿命上限。
  *
- * 基础寿命 70 岁。
- * 终生平均健康每 5 点 +1 岁 → 健康 100 可活到 90，健康 30 只能到 76。
+ * 基础 68 + 平均属性健康红利（红利最多 +35 = 103）；
+ * 均衡属性 ≥ 77 时可活到 95 岁，为 91-95 岁事件与「ultra_life」成就打开可达空间。
  */
 export function calcMaxAge(attrs: Attributes): number {
   const avgHealth = Object.values(attrs).reduce((a, b) => a + b, 0) / Object.keys(attrs).length;
-  // 基础 68 + 健康红利（最多 +22 = 90）
-  return Math.round(68 + (avgHealth / 100) * 22);
+  // 基础 68 + 健康红利（最多 +35 = 103，均衡属性 ≥ 77 时可达 95 岁）
+  return Math.round(68 + (avgHealth / 100) * 35);
 }
 
 /**

@@ -46,7 +46,7 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 - **同岁组洗牌（重玩性）**：开局随机种子对同岁事件洗牌（`shuffleEvents`，含 flag 依赖修正——消费事件排在产出者之后），同种子可复现；种子随存档保存
 - **存档**：localStorage 自动持久化（键 `life-sim-save-v1`），标题页显示「继续人生」；含洗牌种子，恢复时还原事件顺序；旧存档无种子/无 deathCause 字段时显式兜底
 - conditions 不满足的事件静默跳过；flags 累积在 `game.flags`（不重复）
-- 死亡判定：健康归零或超过 `calcMaxAge`（基于平均属性，基础 68 + 每 100 平均 +22）；死因记录在 `game.deathCause`（health 耗尽 / lifespan 寿终），结算页展示临终叙事
+- 死亡判定：健康归零或超过 `calcMaxAge`（基于平均属性，基础 68 + 每 100 平均 +35）；死因记录在 `game.deathCause`（health 耗尽 / lifespan 寿终），结算页展示临终叙事
 - `MAKE_CHOICE` 预载下一事件，`CONTINUE` 只清反馈
 - **音效**：`src/utils/sound.ts` 用 Web Audio 合成轻量 UI 音效（点击/选择/打字/推进/落幕），无外部资源，浏览器不可用时静默降级；`setMuted` 供快速模拟模式静音高频交互音
 - **快速模拟**：标题页「⚡ 快速模拟」以随机性别/名字开局（`START_AUTO_GAME`），自动模式每 220ms 随机选择推进、跳过打字机（DialogBox `instant`）与选择面板，直到结算；重新开始或读档自动退出自动模式

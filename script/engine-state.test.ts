@@ -6,7 +6,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert';
-import { ageCap, applyElderDecay, applyOutcomes, effectiveDelta } from '../src/engine/state.ts';
+import { ageCap, applyElderDecay, applyOutcomes, calcMaxAge, effectiveDelta } from '../src/engine/state.ts';
 import EVENTS, { shuffleEvents } from '../src/engine/events.ts';
 import type { Attributes } from '../src/types/index.ts';
 
@@ -93,6 +93,15 @@ test('applyOutcomes：未涉及属性保持不变', () => {
   const next = applyOutcomes(base, { attr: { luck: 5 } }, 30);
   assert.strictEqual(next.health, 50);
   assert.strictEqual(next.luck, 55);
+});
+
+test('calcMaxAge：基础 68 + 健康红利（红利 35 封顶 103）', () => {
+  // 红利基于 8 属性平均，用全属性同值构造（attrs 默认其余 7 项为 50）
+  const flat = (v: number) => attrs({ health: v, intelligence: v, wealth: v, happiness: v, social: v, appearance: v, luck: v, morality: v });
+  assert.strictEqual(calcMaxAge(flat(0)), 68);
+  assert.strictEqual(calcMaxAge(flat(100)), 103);  // 68 + 35
+  assert.strictEqual(calcMaxAge(flat(77)), 95);    // 68 + 26.95 → round 95
+  assert.strictEqual(calcMaxAge(flat(50)), 86);    // 68 + 17.5
 });
 
 test('老年衰减：运气好也只掉 1 点（下限 1）', () => {

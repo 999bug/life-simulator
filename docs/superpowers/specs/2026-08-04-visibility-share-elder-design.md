@@ -36,7 +36,7 @@ flags/属性条件不满足的事件被 `findNextEvent` 静默跳过，玩家完
   - 中部：结局标题（大）+ 综合评分（大数字）
   - 8 属性（emoji 图标 + 数值）
   - 人生目标（若有，含达成状态）
-  - 底部：死因图标 + 日期水印
+  - 底部：水印「由人生模拟器生成」（最终实现：死因图标与日期未绘制，以水印收尾——2026-08-04 审查后回写）
 - 下载：`canvas.toDataURL('image/png')` → `a[download]` 触发下载
 - 新建 `src/components/ShareCardModal.tsx`（canvas 绘制逻辑独立组件）
 

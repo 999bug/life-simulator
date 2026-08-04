@@ -1,26 +1,39 @@
 import { useState } from 'react';
 import { sfx } from '../utils/sound';
 import type { GoalKey, PaceMode, TypeSpeed } from '../types';
+import type { SavesV2 } from '../engine/save';
 import GoalModal from './GoalModal';
+import ConfirmModal from './ConfirmModal';
 
 interface Props {
   onStart: (gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | null) => void;
   onAutoStart: (gender: 'male' | 'female', name: string) => void;
-  hasSave: boolean;
-  onContinue: () => void;
+  saves: SavesV2;
+  onContinue: (slot: number) => void;
 }
 
-export default function TitleScreen({ onStart, onAutoStart, hasSave, onContinue }: Props) {
+export default function TitleScreen({ onStart, onAutoStart, saves, onContinue }: Props) {
   const [gender, setGender] = useState<'male' | 'female' | null>(null);
   const [name, setName] = useState('');
   const [paceMode, setPaceMode] = useState<PaceMode>('full');
   const [typeSpeed, setTypeSpeed] = useState<TypeSpeed>('normal');
   const [showGoal, setShowGoal] = useState(false);
+  const [confirmCover, setConfirmCover] = useState(false);
 
   const handleStart = () => {
     if (!gender) return;
     sfx.select();
-    setShowGoal(true);  // 先选目标，确认后再开局
+    if (saves.slots[saves.active]) {
+      // 选中槽已有存档 → 确认覆盖
+      setConfirmCover(true);
+      return;
+    }
+    setShowGoal(true);
+  };
+
+  const handleCoverConfirm = () => {
+    setConfirmCover(false);
+    setShowGoal(true);
   };
 
   const handleGoalSelect = (goal: GoalKey | null) => {
@@ -110,16 +123,30 @@ export default function TitleScreen({ onStart, onAutoStart, hasSave, onContinue 
         </button>
       </div>
 
-      {/* 继续人生（有存档时显示） */}
-      {hasSave && (
-        <button
-          onClick={() => { sfx.select(); onContinue(); }}
-          className="px-14 py-3 rounded-[30px] text-[15px] tracking-[6px] z-10 transition-all duration-300 border font-sans
-            border-[#c9a96e]/40 text-[#c9a96e] bg-transparent
-            hover:bg-[#c9a96e]/10 hover:shadow-[0_0_24px_rgba(201,169,110,0.25)] hover:scale-[1.02] cursor-pointer"
-        >
-          继 续 人 生
-        </button>
+      {/* 存档槽位（3 卡片，点击继续） */}
+      {saves.slots.some(s => s !== null) && (
+        <div className="z-10 flex gap-2.5 animate-[fadeIn_1.7s_ease]">
+          {saves.slots.map((s, i) => (
+            <button
+              key={i}
+              onClick={() => { if (s) { sfx.select(); onContinue(i); } }}
+              disabled={!s}
+              className={`w-[110px] py-1.5 rounded-xl border text-center transition-all duration-200 font-sans
+                ${s
+                  ? 'border-white/15 bg-white/[0.03] hover:border-[#c9a96e] hover:shadow-[0_0_14px_rgba(201,169,110,0.2)] cursor-pointer'
+                  : 'border-white/[0.06] bg-transparent text-white/20'}`}
+            >
+              {s ? (
+                <>
+                  <div className="text-[13px] text-[#c9a96e]">{s.game.name}</div>
+                  <div className="text-[10px] text-white/40 mt-0.5">{s.game.age} 岁 · {s.game.phase === 'summary' ? '已走完' : s.game.stage === 'infant' ? '婴儿期' : s.game.stage === 'childhood' ? '童年' : s.game.stage === 'teen' ? '少年' : s.game.stage === 'young_adult' ? '青年' : s.game.stage === 'adult' ? '成年' : s.game.stage === 'middle_age' ? '中年' : '老年'}</div>
+                </>
+              ) : (
+                <div className="text-[11px] text-white/25 tracking-[2px]">空槽位</div>
+              )}
+            </button>
+          ))}
+        </div>
       )}
 
       {/* 节奏选择：密度档（开局选定） */}
@@ -199,6 +226,16 @@ export default function TitleScreen({ onStart, onAutoStart, hasSave, onContinue 
       {/* 目标选择模态（开始人生后弹出，确认目标后开局） */}
       {showGoal && (
         <GoalModal onSelect={handleGoalSelect} onCancel={() => setShowGoal(false)} />
+      )}
+
+      {/* 覆盖确认（选中槽已有存档时弹出） */}
+      {confirmCover && (
+        <ConfirmModal
+          title="覆盖存档"
+          desc={`槽位 ${saves.active + 1} 已有存档（${saves.slots[saves.active]?.game.name}，${saves.slots[saves.active]?.game.age} 岁）。开始新人生将覆盖它，确定吗？`}
+          onConfirm={handleCoverConfirm}
+          onCancel={() => setConfirmCover(false)}
+        />
       )}
     </div>
   );

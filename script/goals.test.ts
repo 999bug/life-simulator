@@ -1,0 +1,92 @@
+/**
+ * 目标达成与成就判定引擎测试。
+ *
+ * 运行：node --experimental-strip-types --test script/goals.test.ts
+ */
+import { test } from 'node:test';
+import assert from 'node:assert';
+import { checkGoal, GOALS } from '../src/engine/goals.ts';
+import { checkAchievements, ACHIEVEMENTS } from '../src/engine/achievements.ts';
+import type { GameState, GoalKey, Attributes } from '../src/types/index.ts';
+
+/** 构造测试用游戏状态 */
+function game(overrides: Partial<GameState> = {}, attrs: Partial<Attributes> = {}): GameState {
+  return {
+    gender: 'male', name: '小明', age: 50, stage: 'middle_age', stageIdx: 4,
+    attributes: { health: 60, intelligence: 50, wealth: 40, happiness: 60, social: 40, appearance: 40, luck: 40, morality: 40, ...attrs },
+    flags: [], history: [], phase: 'summary', deathCause: 'lifespan',
+    goal: null, ...overrides,
+  };
+}
+
+test('GOALS：6 个预设齐全且 key 唯一', () => {
+  assert.strictEqual(GOALS.length, 6);
+  assert.strictEqual(new Set(GOALS.map(g => g.key)).size, 6);
+});
+
+test('checkGoal：财富自由（wealth ≥ 80）', () => {
+  assert.strictEqual(checkGoal('wealth', game({}, { wealth: 80 }))!.achieved, true);
+  assert.strictEqual(checkGoal('wealth', game({}, { wealth: 65 }))!.achieved, false);
+  // startup_success 也算达成
+  assert.strictEqual(checkGoal('wealth', game({ flags: ['startup_success'] }))!.achieved, true);
+});
+
+test('checkGoal：环游世界（world_traveler flag）', () => {
+  assert.strictEqual(checkGoal('travel', game({ flags: ['world_traveler'] }))!.achieved, true);
+  assert.strictEqual(checkGoal('travel', game())!.achieved, false);
+});
+
+test('checkGoal：学术深耕（grad_school 或 top_university）', () => {
+  assert.strictEqual(checkGoal('academic', game({ flags: ['grad_school'] }))!.achieved, true);
+  assert.strictEqual(checkGoal('academic', game({ flags: ['top_university'] }))!.achieved, true);
+  assert.strictEqual(checkGoal('academic', game())!.achieved, false);
+});
+
+test('checkGoal：白衣天使（doctor flag）', () => {
+  assert.strictEqual(checkGoal('doctor', game({ flags: ['doctor'] }))!.achieved, true);
+  assert.strictEqual(checkGoal('doctor', game())!.achieved, false);
+});
+
+test('checkGoal：家庭美满（已婚 + 有娃 + 幸福 ≥ 70）', () => {
+  const base = game({ flags: ['married', 'has_child'] }, { happiness: 70 });
+  assert.strictEqual(checkGoal('family', base)!.achieved, true);
+  assert.strictEqual(checkGoal('family', game({ flags: ['married', 'has_child'] }, { happiness: 60 }))!.achieved, false);
+  assert.strictEqual(checkGoal('family', game({ flags: ['married'] }, { happiness: 80 }))!.achieved, false);
+});
+
+test('checkGoal：安稳一生（civil_servant 或 settled_down）', () => {
+  assert.strictEqual(checkGoal('stable', game({ flags: ['civil_servant'] }))!.achieved, true);
+  assert.strictEqual(checkGoal('stable', game({ flags: ['settled_down'] }))!.achieved, true);
+  assert.strictEqual(checkGoal('stable', game())!.achieved, false);
+});
+
+test('checkGoal：无目标返回 null；未达成含差距提示', () => {
+  assert.strictEqual(checkGoal(null, game()), null);
+  const r = checkGoal('wealth', game({}, { wealth: 65 }))!;
+  assert.strictEqual(r.achieved, false);
+  assert.match(r.detail, /65/);
+});
+
+test('ACHIEVEMENTS：12 个定义齐全', () => {
+  assert.strictEqual(ACHIEVEMENTS.length, 12);
+  assert.strictEqual(new Set(ACHIEVEMENTS.map(a => a.id)).size, 12);
+});
+
+test('checkAchievements：按状态判定全部满足项', () => {
+  const g = game({ age: 92, flags: ['world_traveler'], attributes: { wealth: 95, intelligence: 88, health: 80, happiness: 80, social: 70, appearance: 70, luck: 70, morality: 70 } });
+  const got = checkAchievements({ game: g, completedLives: 3, wasLite: true, wasAuto: false });
+  for (const id of ['first_life', 'longevity', 'rich', 'scholar', 'traveler', 'balanced', 'lite_clear', 'three_lives'] as const) {
+    assert.ok(got.includes(id), `应包含 ${id}`);
+  }
+  assert.ok(!got.includes('early_death'));
+  assert.ok(!got.includes('doctor'));
+  assert.ok(!got.includes('auto_clear'));
+});
+
+test('checkAchievements：英年早逝与快速模拟', () => {
+  const g = game({ age: 35 });
+  const got = checkAchievements({ game: g, completedLives: 1, wasLite: false, wasAuto: true });
+  assert.ok(got.includes('early_death'));
+  assert.ok(got.includes('auto_clear'));
+  assert.ok(!got.includes('longevity'));
+});

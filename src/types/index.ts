@@ -75,6 +75,14 @@ export interface LifeEvent {
 /** 死因 */
 export type DeathCause = 'health' | 'lifespan';
 
+/** 人生目标 */
+export type GoalKey = 'wealth' | 'travel' | 'academic' | 'doctor' | 'family' | 'stable';
+
+/** 成就 id */
+export type AchievementId =
+  | 'first_life' | 'longevity' | 'early_death' | 'rich' | 'scholar'
+  | 'career' | 'traveler' | 'doctor' | 'balanced' | 'lite_clear' | 'auto_clear' | 'three_lives';
+
 /** 游戏状态 */
 export interface GameState {
   gender: 'male' | 'female';
@@ -88,6 +96,8 @@ export interface GameState {
   phase: GamePhase;
   /** 死因：健康归零 / 寿终正寝（存活时为空） */
   deathCause: DeathCause | null;
+  /** 人生目标（开局选定，无目标为 null） */
+  goal: GoalKey | null;
 }
 
 /** 属性元数据 */

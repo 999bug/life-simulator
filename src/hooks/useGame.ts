@@ -219,6 +219,8 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
     }
 
     case 'RESET':
+      // 重新开始 = 放弃上一局：显式清除存档（saveState 在标题页已不写不删）
+      localStorage.removeItem(SAVE_KEY);
       return createInitialRuntime(); // 快速模拟模式随重新开始退出
 
     case 'CONTINUE_GAME': {
@@ -343,8 +345,8 @@ export function useGame() {
     return () => clearTimeout(timer);
   }, [rt]);
 
-  // 标题页是否有可继续的存档（仅初始读取一次）
-  const hasSave = useMemo(() => loadSave() !== null, []);
+  // 标题页是否有可继续的存档（phase 变化时重新求值，保证 RESET 后按钮状态与存储一致）
+  const hasSave = useMemo(() => loadSave() !== null, [rt.game.phase]);
 
   const startGame = useCallback((gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed) => {
     dispatch({ type: 'START_GAME', gender, name, paceMode, typeSpeed });

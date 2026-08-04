@@ -10,6 +10,7 @@ import {
   checkDeath,
   calcMaxAge,
   effectiveDelta,
+  ageCap,
   ensureInt,
   STAGE_ORDER,
 } from '../engine/state';
@@ -266,10 +267,13 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
       const attrChanges: Partial<Attributes> = out.attr ?? {};
       const changedKeys = (Object.keys(attrChanges) as AttributeKey[]).filter(k => attrChanges[k] !== 0);
       if (changedKeys.length > 0) {
-        // 反馈展示实际生效值（含年龄上限收益递减），与属性面板变化一致
+        // 反馈展示实际生效值（含年龄上限收益递减）；正向收益距上限 15 点内标注余量
         fb += '\n\n' + changedKeys.map(k => {
           const v = effectiveDelta(k, attrChanges[k]!, state.game.attributes, state.game.age);
-          return `${v > 0 ? '+' : ''}${v}`;
+          const raw = attrChanges[k]!;
+          const room = ageCap(state.game.age, k) - state.game.attributes[k];
+          const decayNote = raw > 0 && room < 15 ? `（距上限${Math.max(0, Math.floor(room))}点）` : '';
+          return `${v > 0 ? '+' : ''}${v}${decayNote}`;
         }).join('  ');
       }
 

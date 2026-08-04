@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { sfx } from '../utils/sound';
 import type { AchievementId, GoalKey, PaceMode, TypeSpeed } from '../types';
 import type { SavesV2 } from '../engine/save';
+import type { StatsStore } from '../hooks/useGame';
 import GoalModal from './GoalModal';
 import ConfirmModal from './ConfirmModal';
 import AchievementsModal from './AchievementsModal';
+import StatsModal from './StatsModal';
 
 interface Props {
   onStart: (gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | null) => void;
@@ -13,9 +15,11 @@ interface Props {
   onContinue: (slot: number) => void;
   /** 跨周目成就存储（标题页成就总览展示） */
   achievements: { unlocked: AchievementId[]; completedLives: number };
+  /** 跨周目生涯统计（标题页生涯总览展示） */
+  stats: StatsStore;
 }
 
-export default function TitleScreen({ onStart, onAutoStart, saves, onContinue, achievements }: Props) {
+export default function TitleScreen({ onStart, onAutoStart, saves, onContinue, achievements, stats }: Props) {
   const [gender, setGender] = useState<'male' | 'female' | null>(null);
   const [name, setName] = useState('');
   const [paceMode, setPaceMode] = useState<PaceMode>('full');
@@ -23,6 +27,7 @@ export default function TitleScreen({ onStart, onAutoStart, saves, onContinue, a
   const [showGoal, setShowGoal] = useState(false);
   const [confirmCover, setConfirmCover] = useState(false);
   const [showAchievements, setShowAchievements] = useState(false);
+  const [showStats, setShowStats] = useState(false);
 
   const handleStart = () => {
     if (!gender) return;
@@ -228,6 +233,14 @@ export default function TitleScreen({ onStart, onAutoStart, saves, onContinue, a
           ⚡ 快速模拟
         </button>
 
+        {/* 生涯入口 */}
+        <button
+          onClick={() => { sfx.select(); setShowStats(true); }}
+          className="text-[12px] text-white/30 tracking-[3px] hover:text-[#c9a96e] transition-colors duration-200 font-sans"
+        >
+          📊 生涯
+        </button>
+
         {/* 成就入口 */}
         <button
           onClick={() => { sfx.select(); setShowAchievements(true); }}
@@ -255,6 +268,11 @@ export default function TitleScreen({ onStart, onAutoStart, saves, onContinue, a
       {/* 成就总览模态（🏆 入口弹出） */}
       {showAchievements && (
         <AchievementsModal unlocked={achievements.unlocked} onClose={() => setShowAchievements(false)} />
+      )}
+
+      {/* 生涯统计模态（📊 入口弹出） */}
+      {showStats && (
+        <StatsModal stats={stats} onClose={() => setShowStats(false)} />
       )}
     </div>
   );

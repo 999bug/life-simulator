@@ -10,6 +10,7 @@ import {
   getStageForAge,
   checkDeath,
   calcMaxAge,
+  calcScore,
   effectiveDelta,
   ageCap,
   ensureInt,
@@ -56,6 +57,44 @@ function saveAchievements(store: AchievementStore): void {
   }
 }
 
+// ============ 生涯统计存储 ============
+
+/** 生涯统计 key（跨周目） */
+const STATS_KEY = 'life-sim-stats';
+
+/** 生涯统计结构 */
+export interface StatsStore {
+  totalLives: number;
+  bestScore: number;
+  totalAge: number;
+  endings: Record<string, number>;
+}
+
+/** 读取生涯统计；数据损坏或存储不可用时返回空结构 */
+function loadStats(): StatsStore {
+  try {
+    const raw = localStorage.getItem(STATS_KEY);
+    if (raw) {
+      const data = JSON.parse(raw) as StatsStore;
+      if (data && typeof data.totalLives === 'number') {
+        return data;
+      }
+    }
+  } catch {
+    // 忽略损坏数据
+  }
+  return { totalLives: 0, bestScore: 0, totalAge: 0, endings: {} };
+}
+
+/** 持久化生涯统计；存储不可用时静默降级 */
+function saveStats(stats: StatsStore): void {
+  try {
+    localStorage.setItem(STATS_KEY, JSON.stringify(stats));
+  } catch {
+    // 存储不可用静默降级
+  }
+}
+
 // ============ Action 类型 ============
 type Action =
   | { type: 'START_GAME'; gender: 'male' | 'female'; name: string; paceMode: PaceMode; typeSpeed: TypeSpeed; goal: GoalKey | null }
@@ -90,6 +129,8 @@ interface RuntimeState {
   saves: SavesV2;
   /** 跨周目成就存储（已解锁列表 + 累计完成局数），HYDRATE_SAVES 水合 */
   achievements: AchievementStore;
+  /** 跨周目生涯统计（总局数/最佳评分/平均寿命/结局分布），初始同步读取，结算后写回 */
+  stats: StatsStore;
   /** 进入结算但尚未写入成就存储（pending 标志只由 MAKE_CHOICE 的 gameOver 置位，读档恢复不触发） */
   achievementPending: boolean;
   /** 本局新解锁成就（判定后暂存，供结算页展示，不进 GameState） */
@@ -202,6 +243,7 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         typeSpeed: action.type === 'START_AUTO_GAME' ? 'normal' : action.typeSpeed,
         saves: state.saves,
         achievements: state.achievements,
+        stats: state.stats,
         achievementPending: false,
         pendingNewIds: [],
         pendingLives: 0,
@@ -312,6 +354,7 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         typeSpeed: state.typeSpeed,
         saves: state.saves,
         achievements: state.achievements,
+        stats: state.stats,
         achievementPending: gameOver,
         pendingNewIds: newIds,
         pendingLives: gameOver ? state.achievements.completedLives + 1 : 0,
@@ -366,6 +409,7 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         saves,
         // 读档恢复不经过 MAKE_CHOICE，不重复结算计数
         achievements: state.achievements,
+        stats: state.stats,
         achievementPending: false,
         pendingNewIds: [],
         pendingLives: 0,
@@ -446,6 +490,8 @@ function createInitialRuntime(): RuntimeState {
     saves: emptySaves(),
     // 初始同步读取成就存储（localStorage 同步 API，安全），HYDRATE_SAVES 再水合一次
     achievements: loadAchievements(),
+    // 生涯统计同样初始同步读取
+    stats: loadStats(),
     achievementPending: false,
     pendingNewIds: [],
     pendingLives: 0,
@@ -468,7 +514,7 @@ export function useGame() {
     dispatch({ type: 'HYDRATE_SAVES', saves: loadSaves(), achievements: loadAchievements() });
   }, []);
 
-  // 结算成就持久化：并入结局集合（去重），写库后清标志（pending 标志只由 MAKE_CHOICE 的 gameOver 置位，读档恢复到 summary 不会触发）
+  // 结算持久化：成就并入结局集合（去重），生涯统计累计本局（与成就同一时机，一次写库），写库后清标志（pending 标志只由 MAKE_CHOICE 的 gameOver 置位，读档恢复到 summary 不会触发）
   useEffect(() => {
     if (!rt.achievementPending) {
       return;
@@ -477,6 +523,13 @@ export function useGame() {
       unlocked: [...new Set([...rt.achievements.unlocked, ...rt.pendingNewIds])],
       completedLives: rt.pendingLives,
       endings: [...new Set([...rt.achievements.endings, rt.pendingEndingKey])],
+    });
+    const score = calcScore(rt.game.attributes);
+    saveStats({
+      totalLives: rt.stats.totalLives + 1,
+      bestScore: Math.max(rt.stats.bestScore, score),
+      totalAge: rt.stats.totalAge + rt.game.age,
+      endings: { ...rt.stats.endings, [rt.pendingEndingKey]: (rt.stats.endings[rt.pendingEndingKey] ?? 0) + 1 },
     });
     dispatch({ type: 'ACHIEVEMENTS_PERSISTED' });
   }, [rt.achievementPending]);
@@ -541,6 +594,7 @@ export function useGame() {
     autoPlay: rt.autoPlay,
     typeSpeed: rt.typeSpeed,
     achievements: rt.achievements,
+    stats: rt.stats,
     newAchievements: rt.pendingNewIds,
     startGame,
     startAutoGame,

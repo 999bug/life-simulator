@@ -151,10 +151,18 @@ function getVerdict(game: GameState): Verdict {
   return scoreVerdict(score);
 }
 
+/** 里程碑 flag：命中则时间线高亮 */
+const MILESTONE_FLAGS = ['went_to_college', 'grad_school', 'top_university', 'married', 'has_child', 'doctor', 'startup_success', 'civil_servant', 'world_traveler', 'athlete_pro', 'military_flag', 'skilled_worker', 'tech_career', 'retired'];
+
 export default function SummaryScreen({ game, onRestart, newAchievements, skippedEvents }: Props) {
   const score = calcScore(game.attributes);
   const { title, desc } = getVerdict(game);
   const goal = checkGoal(game.goal, game);
+  // 完整时间线：全部选择 + 里程碑标记（旧存档无 flags 字段 → 无标记，正常显示）
+  const milestoneHistory = game.history.map(h => ({
+    ...h,
+    isMilestone: (h.flags ?? []).some(f => MILESTONE_FLAGS.includes(f)),
+  }));
   // 分享卡片模态开关
   const [showShare, setShowShare] = useState(false);
 
@@ -219,13 +227,13 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
         })}
       </div>
 
-      {/* 时间线 */}
+      {/* 人生大事记 */}
       <div className="w-full max-w-[580px] animate-[fadeInUp_1.3s_ease]">
-        <h3 className="text-[13px] tracking-[4px] text-[#c9a96e] mb-2.5 font-normal">📋 重要选择回顾</h3>
-        {game.history.slice(-10).map((h, i) => (
+        <h3 className="text-[13px] tracking-[4px] text-[#c9a96e] mb-2.5 font-normal">📖 人生大事记</h3>
+        {milestoneHistory.map((h, i) => (
           <div key={i} className="flex gap-3 py-1.5 text-xs border-b border-white/[0.02]">
             <span className="text-[#c9a96e] min-w-[32px]">{h.age}岁</span>
-            <span className="text-white/40">{h.text}</span>
+            <span className="text-white/40">{h.isMilestone ? '⭐ ' : ''}{h.text}</span>
           </div>
         ))}
       </div>

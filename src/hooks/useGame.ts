@@ -297,6 +297,7 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         eventId,
         choiceIndex: state.currentEvent?.choices.indexOf(choice) ?? 0,
         text: choice.text,
+        flags: out.flags ?? undefined,
       }];
 
       const game: GameState = {

@@ -32,6 +32,8 @@ export interface ChoiceRecord {
   eventId: string;
   choiceIndex: number;
   text: string;
+  /** 该选择产出的 flag（生涯年表里程碑标记用；旧存档无此字段） */
+  flags?: string[];
 }
 
 /** 选项定义 */

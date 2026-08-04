@@ -74,10 +74,9 @@ function loadSave(): SaveData | null {
   }
 }
 
-/** 持久化当前状态；标题页状态（新游戏未开始）时清除存档 */
+/** 持久化当前状态；标题页不写不删，保留存档供刷新后「继续人生」 */
 function saveState(rt: RuntimeState): void {
   if (!rt.game || rt.game.phase === 'title') {
-    localStorage.removeItem(SAVE_KEY);
     return;
   }
   const data: SaveData = {
@@ -322,7 +321,7 @@ const AUTO_PLAY_FEEDBACK_INTERVAL = 50;
 export function useGame() {
   const [rt, dispatch] = useReducer(reducer, null, createInitialRuntime);
 
-  // 每次状态变化后持久化（标题页自动清除存档）
+  // 每次状态变化后持久化（标题页不写不删，保留存档供刷新后继续）
   useEffect(() => {
     saveState(rt);
   }, [rt]);

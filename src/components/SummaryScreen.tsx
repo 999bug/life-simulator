@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import type { AchievementId, GameState, LifeEvent } from '../types';
 import { ATTR_META, calcScore } from '../engine/state';
 import { GOALS, checkGoal } from '../engine/goals';
 import { ACHIEVEMENTS } from '../engine/achievements';
+import ShareCardModal from './ShareCardModal';
 
 interface Props {
   game: GameState;
@@ -153,6 +155,8 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
   const score = calcScore(game.attributes);
   const { title, desc } = getVerdict(game);
   const goal = checkGoal(game.goal, game);
+  // 分享卡片模态开关
+  const [showShare, setShowShare] = useState(false);
 
   return (
     <div className="w-full h-full bg-gradient-to-b from-[#0a0a14] via-[#1a1a2e] to-[#0a0a14]
@@ -262,6 +266,16 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       )}
 
       <button
+        onClick={() => setShowShare(true)}
+        className="px-9 py-3 border border-[#c9a96e]/50 rounded-2xl bg-transparent
+          text-sm text-[#c9a96e] tracking-[4px] font-sans
+          hover:bg-[#c9a96e]/10 hover:shadow-[0_4px_20px_rgba(201,169,110,0.3)]
+          transition-all duration-300 mt-2"
+      >
+        🎴 生成分享卡片
+      </button>
+
+      <button
         onClick={onRestart}
         className="px-9 py-3 border border-white/20 rounded-2xl bg-transparent
           text-sm text-white/40 tracking-[4px] font-sans
@@ -270,6 +284,10 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       >
         回到标题
       </button>
+
+      {showShare && (
+        <ShareCardModal game={game} verdictTitle={title} onClose={() => setShowShare(false)} />
+      )}
     </div>
   );
 }

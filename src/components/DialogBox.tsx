@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef, type ReactNode } from 'react';
 import { sfx } from '../utils/sound';
+import { TYPE_SPEED_RANGES } from '../engine/state';
+import type { TypeSpeed } from '../types';
 
 interface Props {
   text: string;
@@ -12,12 +14,16 @@ interface Props {
   autoAdvance?: boolean;
   /** 立即显示全文（快速模拟模式跳过打字机） */
   instant?: boolean;
+  /** 打字机速度档（默认 normal） */
+  typeSpeed?: TypeSpeed;
 }
 
-export default function DialogBox({ text, name, age, stage, title, onComplete, onAutoContinue, autoAdvance, instant }: Props) {
+export default function DialogBox({ text, name, age, stage, title, onComplete, onAutoContinue, autoAdvance, instant, typeSpeed = 'normal' }: Props) {
   const [segments, setSegments] = useState<ReactNode[]>([]);
   const [done, setDone] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout>>();
+  /** 完整字符单元（点击跳过打字时立即渲染用） */
+  const unitsRef = useRef<Array<{ type: 'char'; value: string } | { type: 'br' }>>([]);
 
   useEffect(() => {
     if (instant) {
@@ -42,6 +48,7 @@ export default function DialogBox({ text, name, age, stage, title, onComplete, o
         allUnits.push({ type: 'br' });
       }
     }
+    unitsRef.current = allUnits;
 
     let i = 0;
     function type() {
@@ -54,7 +61,8 @@ export default function DialogBox({ text, name, age, stage, title, onComplete, o
           sfx.type();
         }
         i++;
-        timerRef.current = setTimeout(type, 25 + Math.random() * 20);
+        const [min, max] = TYPE_SPEED_RANGES[typeSpeed];
+        timerRef.current = setTimeout(type, min + Math.random() * (max - min));
       } else {
         setDone(true);
         onComplete?.();
@@ -66,7 +74,16 @@ export default function DialogBox({ text, name, age, stage, title, onComplete, o
   }, [text]);
 
   const handleClick = () => {
-    if (!done) return;
+    if (!done) {
+      // 跳过打字：立即显示全文并触发完成
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+      setSegments(unitsRef.current.map((u, i) => u.type === 'br' ? <br key={`br-${i}`} /> : u.value));
+      setDone(true);
+      onComplete?.();
+      return;
+    }
     if (autoAdvance && onAutoContinue) {
       onAutoContinue();
     }

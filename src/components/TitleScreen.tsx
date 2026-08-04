@@ -24,7 +24,7 @@ export default function TitleScreen({ onStart, onAutoStart, hasSave, onContinue 
 
   return (
     <div className="w-full h-full bg-[radial-gradient(ellipse_at_center,#1a1a30_0%,#0a0a14_70%)]
-      flex flex-col items-center justify-center gap-6 relative overflow-hidden">
+      flex flex-col items-center justify-center gap-5 relative overflow-hidden">
 
       {/* 光晕动画 */}
       <div className="absolute w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(201,169,110,0.06)_0%,transparent_60%)]
@@ -78,7 +78,7 @@ export default function TitleScreen({ onStart, onAutoStart, hasSave, onContinue 
       <div className="flex gap-5 z-10 animate-[fadeIn_2s_ease]">
         <button
           onClick={() => { setGender('male'); if (!name) setName('小明'); }}
-          className={`w-[120px] h-[140px] border rounded-2xl flex flex-col items-center justify-center gap-2.5
+          className={`w-[120px] h-[130px] border rounded-2xl flex flex-col items-center justify-center gap-2.5
             text-base tracking-[2px] transition-all duration-300
             ${gender === 'male'
               ? 'border-[#4a90d9] shadow-[0_0_35px_rgba(74,144,217,0.35)] bg-[#4a90d9]/10 text-[#4a90d9]'
@@ -90,7 +90,7 @@ export default function TitleScreen({ onStart, onAutoStart, hasSave, onContinue 
         </button>
         <button
           onClick={() => { setGender('female'); if (!name) setName('小美'); }}
-          className={`w-[120px] h-[140px] border rounded-2xl flex flex-col items-center justify-center gap-2.5
+          className={`w-[120px] h-[130px] border rounded-2xl flex flex-col items-center justify-center gap-2.5
             text-base tracking-[2px] transition-all duration-300
             ${gender === 'female'
               ? 'border-[#d96b8a] shadow-[0_0_35px_rgba(217,107,138,0.35)] bg-[#d96b8a]/10 text-[#d96b8a]'
@@ -181,7 +181,7 @@ export default function TitleScreen({ onStart, onAutoStart, hasSave, onContinue 
           const gender = Math.random() < 0.5 ? 'male' : 'female';
           onAutoStart(gender, gender === 'male' ? '小明' : '小美');
         }}
-        className="px-10 py-2.5 rounded-[30px] text-[13px] tracking-[4px] z-10 transition-all duration-300 border font-sans
+        className="px-10 py-2 rounded-[30px] text-[13px] tracking-[4px] z-10 transition-all duration-300 border font-sans
           border-white/15 text-white/35 bg-transparent
           hover:border-[#c9a96e]/50 hover:text-[#c9a96e] hover:bg-[#c9a96e]/5 cursor-pointer"
       >

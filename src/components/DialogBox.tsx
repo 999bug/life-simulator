@@ -22,8 +22,13 @@ export default function DialogBox({ text, name, age, stage, title, onComplete, o
   const [segments, setSegments] = useState<ReactNode[]>([]);
   const [done, setDone] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout>>();
+  /** 打字速度档区间（type() 每 tick 读取最新档位，中途切档实时生效） */
+  const speedRef = useRef(TYPE_SPEED_RANGES[typeSpeed]);
   /** 完整字符单元（点击跳过打字时立即渲染用） */
   const unitsRef = useRef<Array<{ type: 'char'; value: string } | { type: 'br' }>>([]);
+
+  // 每次渲染同步最新档位；不加进 useEffect 依赖数组，避免切档重启打字机
+  speedRef.current = TYPE_SPEED_RANGES[typeSpeed];
 
   useEffect(() => {
     if (instant) {
@@ -61,7 +66,7 @@ export default function DialogBox({ text, name, age, stage, title, onComplete, o
           sfx.type();
         }
         i++;
-        const [min, max] = TYPE_SPEED_RANGES[typeSpeed];
+        const [min, max] = speedRef.current;
         timerRef.current = setTimeout(type, min + Math.random() * (max - min));
       } else {
         setDone(true);

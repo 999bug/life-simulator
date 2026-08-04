@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { prune, fixGapYear } from './prune-events.mjs';
 import { mergeFragments, checkDistribution, checkFlagPairs } from './merge-fragments.mjs';
+import { isValidEventId, convertAll } from './convert-events.mjs';
 
 const ev = (id, age, flags = []) => ({
   id, age_range: [age, age + 1], category: 'family', title: 't', text: 'x',
@@ -48,4 +49,16 @@ test('checkFlagPairs：检出无产出者的条件 flag，not_flags 不算悬空
     { ...ev('a02', 30), conditions: { has_flags: ['married'], not_flags: ['divorced'] } },
   ];
   assert.deepEqual(checkFlagPairs(ok), []);
+});
+
+test('事件 id 规则校验：2 位主线与 4 位模拟通过，其他抛错', () => {
+  assert.strictEqual(isValidEventId('child_01'), true);
+  assert.strictEqual(isValidEventId('child_0017'), true);
+  assert.strictEqual(isValidEventId('adult_100'), false); // 3 位非法
+  assert.strictEqual(isValidEventId('no_number'), false);
+});
+
+test('convertAll 对非法 id 抛错（fail fast）', () => {
+  assert.throws(() => convertAll([ev('adult_100', 30)]), /非法事件 id/);
+  assert.throws(() => convertAll([ev('child_01', 3), ev('a', 5)]), /非法事件 id/);
 });

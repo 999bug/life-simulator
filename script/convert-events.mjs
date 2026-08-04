@@ -173,6 +173,16 @@ function validateRaw(raw) {
   }
 }
 
+/**
+ * 事件 id 规则校验：2 位数字后缀 = 主线（永远保留），4 位数字后缀 = 模拟（可精选删除），其余非法。
+ *
+ * @param id 事件 id
+ * @return 合规返回 true，否则 false
+ */
+export function isValidEventId(id) {
+  return /_\d{2}$/.test(id) || /_\d{4}$/.test(id);
+}
+
 /** 转换单个事件为引擎 LifeEvent 形状 */
 export function convertEvent(raw) {
   validateRaw(raw);
@@ -198,12 +208,16 @@ export function convertEvent(raw) {
   return event;
 }
 
-/** 全量转换入口，重复 id 抛错 */
+/** 全量转换入口，重复 id 或非法 id 抛错 */
 export function convertAll(rawEvents) {
   const ids = new Set();
   return rawEvents.map(raw => {
     if (ids.has(raw.id)) {
       throw new Error(`duplicate id "${raw.id}"`);
+    }
+    // 事件 id 规则：2 位数字后缀 = 主线（永远保留），4 位数字后缀 = 模拟（可精选删除），其余非法
+    if (!isValidEventId(raw.id)) {
+      throw new Error(`非法事件 id（需 2 位主线或 4 位模拟后缀）: ${raw.id}`);
     }
     ids.add(raw.id);
     return convertEvent(raw);

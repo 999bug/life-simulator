@@ -6,7 +6,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert';
-import { ageCap, applyElderDecay, applyOutcomes, calcMaxAge, effectiveDelta } from '../src/engine/state.ts';
+import { ageCap, appendSnapshot, applyElderDecay, applyOutcomes, calcMaxAge, effectiveDelta } from '../src/engine/state.ts';
 import EVENTS, { shuffleEvents } from '../src/engine/events.ts';
 import type { Attributes } from '../src/types/index.ts';
 
@@ -140,4 +140,40 @@ test('shuffleEvents：同岁组内 flag 依赖被修正（消费在产出之后�
   for (const p of producers) {
     assert.ok(pos.get(p)! < pos.get('teen_04')!, `first_love 产出 ${p} 应在 teen_04 之前`);
   }
+});
+
+test('appendSnapshot：无快照首次记录追加起点', () => {
+  const snapshots = appendSnapshot(undefined, 0, attrs({ health: 65 }), false);
+  assert.deepStrictEqual(snapshots, [{ age: 0, attrs: attrs({ health: 65 }) }]);
+});
+
+test('appendSnapshot：进入新岁追加快照', () => {
+  const first = appendSnapshot(undefined, 0, attrs(), false);
+  const second = appendSnapshot(first, 3, attrs({ intelligence: 55 }), false);
+  assert.strictEqual(second.length, 2);
+  assert.strictEqual(second[1].age, 3);
+  assert.strictEqual(second[1].attrs.intelligence, 55);
+});
+
+test('appendSnapshot：同岁内继续事件不重复记录', () => {
+  const first = appendSnapshot(undefined, 7, attrs(), false);
+  const sameAge = appendSnapshot(first, 7, attrs({ health: 70 }), false);
+  assert.strictEqual(sameAge, first); // 引用不变，同岁不记录
+});
+
+test('appendSnapshot：同岁终局替换该岁条目（保留最终状态）', () => {
+  const first = appendSnapshot(undefined, 0, attrs(), false);
+  const entered = appendSnapshot(first, 3, attrs({ health: 60 }), false);
+  // 3 岁事件后健康耗尽死亡：3 岁条目应替换为最终状态
+  const final = appendSnapshot(entered, 3, attrs({ health: 0 }), true);
+  assert.strictEqual(final.length, 2);
+  assert.strictEqual(final[1].age, 3);
+  assert.strictEqual(final[1].attrs.health, 0);
+});
+
+test('appendSnapshot：终局进入新岁正常追加', () => {
+  const first = appendSnapshot(undefined, 0, attrs(), false);
+  const final = appendSnapshot(first, 95, attrs({ health: 10 }), true);
+  assert.strictEqual(final.length, 2);
+  assert.strictEqual(final[1].age, 95);
 });

@@ -1,4 +1,4 @@
-import type { Attributes, AttributeKey, AttributeMeta, GameState, LifeStage, StageMeta, TypeSpeed } from '../types/index.ts';
+import type { AttrSnapshot, Attributes, AttributeKey, AttributeMeta, GameState, LifeStage, StageMeta, TypeSpeed } from '../types/index.ts';
 
 /** 属性元数据 */
 export const ATTR_META: Record<AttributeKey, AttributeMeta> = {
@@ -160,6 +160,35 @@ export function applyOutcomes(
     );
   }
   return next;
+}
+
+/**
+ * 追加每岁属性快照（结算页成长曲线用）。
+ *
+ * 每岁只保留一个点：进入新岁或终局时记录当前属性；
+ * 同岁内继续事件不重复记录；终局与同岁已有记录时替换该岁条目（保留最终状态）。
+ *
+ * @param prev 已有快照（旧存档可能为 undefined）
+ * @param age 当前（新）年龄
+ * @param attrs 当前属性表
+ * @param gameOver 是否终局（死亡或事件播完）
+ * @returns 追加/替换后的快照数组
+ */
+export function appendSnapshot(
+  prev: AttrSnapshot[] | undefined,
+  age: number,
+  attrs: Attributes,
+  gameOver: boolean,
+): AttrSnapshot[] {
+  const snapshots = prev ?? [];
+  const last = snapshots[snapshots.length - 1];
+  // 同岁已记录且非终局：不重复记录
+  if (last && last.age === age && !gameOver) {
+    return snapshots;
+  }
+  // 同岁终局：替换该岁条目；新岁：追加
+  const base = last && last.age === age ? snapshots.slice(0, -1) : snapshots;
+  return [...base, { age, attrs }];
 }
 
 /**

@@ -25,6 +25,12 @@ export type GamePhase = 'title' | 'playing' | 'summary';
 /** 属性表 */
 export type Attributes = Record<AttributeKey, number>;
 
+/** 每岁属性快照（成长曲线用；旧存档无此字段） */
+export interface AttrSnapshot {
+  age: number;
+  attrs: Attributes;
+}
+
 /** 选择记录 */
 export interface ChoiceRecord {
   age: number;
@@ -101,6 +107,8 @@ export interface GameState {
   deathCause: DeathCause | null;
   /** 人生目标（开局选定，无目标为 null） */
   goal: GoalKey | null;
+  /** 每岁属性快照（结算页成长曲线用；旧存档无此字段，从读档岁起重建） */
+  snapshots?: AttrSnapshot[];
 }
 
 /** 属性元数据 */

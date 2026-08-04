@@ -4,6 +4,7 @@ import { ATTR_META, calcScore } from '../engine/state';
 import { GOALS, checkGoal } from '../engine/goals';
 import { ACHIEVEMENTS } from '../engine/achievements';
 import ShareCardModal from './ShareCardModal';
+import GrowthChart from './GrowthChart';
 
 interface Props {
   game: GameState;
@@ -225,6 +226,12 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
             </div>
           );
         })}
+      </div>
+
+      {/* 成长曲线：8 维属性随年龄的轨迹（旧存档无快照 → 组件内降级提示） */}
+      <div className="w-full max-w-[580px] animate-[fadeInUp_1.15s_ease]">
+        <h3 className="text-[13px] tracking-[4px] text-[#c9a96e] mb-2.5 font-normal">📈 成长曲线</h3>
+        <GrowthChart snapshots={game.snapshots ?? []} />
       </div>
 
       {/* 人生大事记 */}

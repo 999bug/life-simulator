@@ -14,6 +14,7 @@ import {
   effectiveDelta,
   ageCap,
   ensureInt,
+  appendSnapshot,
   STAGE_ORDER,
 } from '../engine/state';
 import EVENTS, { filterEvents, shuffleEvents } from '../engine/events';
@@ -229,6 +230,8 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         game.age = first.age;
         game.stage = getStageForAge(first.age);
         game.stageIdx = STAGE_ORDER.indexOf(game.stage);
+        // 初始快照：首事件年龄 + 开局属性（成长曲线起点）
+        game.snapshots = appendSnapshot(undefined, game.age, game.attributes, false);
       }
       return {
         game,
@@ -310,6 +313,8 @@ function reducer(state: RuntimeState, action: Action): RuntimeState {
         history,
         deathCause,
         phase: gameOver ? 'summary' : 'playing',
+        // 每岁属性快照：进入新岁或终局时记录（同岁内不重复）
+        snapshots: appendSnapshot(state.game.snapshots, isDead ? Math.min(age, maxAge) : age, attrs, gameOver),
       };
 
       // 构建反馈文本

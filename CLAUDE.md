@@ -52,6 +52,7 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 - 死亡判定：健康归零或超过 `calcMaxAge`；死因记录在 `game.deathCause`（health 耗尽 / lifespan 寿终），结算页展示临终叙事
 - `MAKE_CHOICE` 预载下一事件（gameOver 时判定成就/统计），`CONTINUE` 只清反馈；反馈页正向收益距年龄上限 15 点内标注「（距上限 X 点）」
 - **音效**：`src/utils/sound.ts` 用 Web Audio 合成轻量 UI 音效（点击/选择/打字/推进/落幕/成就琶音/阶段过渡），无外部资源，浏览器不可用时静默降级；`setMuted` 供快速模拟模式静音高频交互音
+- **成长曲线**：`GameState.snapshots`（可选，`AttrSnapshot[]`）每岁属性快照——`appendSnapshot`（state.ts）进入新岁或终局记录、同岁内不重复、同岁终局替换该岁条目；开局记首事件年龄，旧存档无字段从读档岁重建；结算页 GrowthChart canvas 绘制（x 0→享年、y 0-100、末端圆点 + HTML 图例带终值）
 - **快速模拟**：标题页「⚡ 快速模拟」以随机性别/名字开局（`START_AUTO_GAME`），自动模式每 220ms 随机选择推进、跳过打字机（DialogBox `instant`）与选择面板，直到结算；重新开始或读档自动退出自动模式
 
 ### UI（src/components/）
@@ -60,7 +61,7 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 - **DialogBox**：打字机效果（速度档位 + 点击跳过）+ 「▼ 点击继续」；事件标题显示为「标题」
 - **ChoicePanel**：选项按钮（`button.group` class，effects 展示串由转换器生成）
 - **TitleScreen**：名字/性别 + **节奏档位（沉浸/精简）+ 打字速度 + 3 存档卡片 + 目标选择模态（GoalModal）+ 成就（AchievementsModal）/生涯统计（StatsModal）入口**——720px 高度余量极小（约 1px），改动必须回归检查
-- **SummaryScreen**：结算页（享年 + 结局 + 评分 + 属性 + **人生大事记完整时间线（里程碑 ⭐）+ 目标达成度 + 新解锁成就 + 本可发生而未触发 + 分享卡片（ShareCardModal canvas PNG）**）
+- **SummaryScreen**：结算页（享年 + 结局 + 评分 + 属性 + **成长曲线（GrowthChart canvas 8 维随年龄折线图）+ 人生大事记完整时间线（里程碑 ⭐）+ 目标达成度 + 新解锁成就 + 本可发生而未触发 + 分享卡片（ShareCardModal canvas PNG）**）
 - **SceneArea/SceneDecor**：按阶段/年龄渲染的场景背景
 - **App**：移动端视口等比缩放（scale = min(vw/960, vh/720)，<1 才缩放）
 

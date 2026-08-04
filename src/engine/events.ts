@@ -1,4 +1,4 @@
-import type { LifeEvent } from '../types';
+import type { LifeEvent, PaceMode } from '../types';
 import eventsJson from './events.json' with { type: 'json' };
 
 /**
@@ -92,6 +92,102 @@ export function shuffleEvents(events: LifeEvent[], seed: number): LifeEvent[] {
     out.push(...fixFlagOrder(group));
   }
   return out;
+}
+
+/** 主线事件：2 位数字后缀 id（如 child_01），模拟事件为 4 位（如 child_0017） */
+export function isMainlineEvent(id: string): boolean {
+  return /_\d{2}$/.test(id);
+}
+
+/**
+ * 精简模式每岁目标密度：0-2 岁全保留；3-12 岁 3 个；13 岁以上 2 个。
+ */
+function liteTarget(age: number): number {
+  if (age <= 2) {
+    return Infinity;
+  }
+  if (age <= 12) {
+    return 3;
+  }
+  return 2;
+}
+
+/**
+ * 从数组中按种子抽取 k 个（保持原顺序），k <= 0 或空数组返回空。
+ */
+function pickShuffled<T>(arr: T[], k: number, rng: () => number): T[] {
+  const n = Math.min(k, arr.length);
+  if (n <= 0) {
+    return [];
+  }
+  const idx = new Set<number>();
+  while (idx.size < n) {
+    idx.add(Math.floor(rng() * arr.length));
+  }
+  return [...idx].sort((a, b) => a - b).map(i => arr[i]);
+}
+
+/**
+ * 按档位过滤事件（纯函数，确定性）。
+ * full 返回原数组；lite 每岁主线优先 + seed 抽模拟补足目标密度，
+ * 再跨岁迭代补齐 flag 闭包（消费事件的产出者必须在子集内）。
+ *
+ * @param events 全量事件数组
+ * @param mode 节奏档位
+ * @param seed 抽样种子（与 shuffleEvents 共用，保证读档可重建）
+ * @returns 过滤后的新数组
+ */
+export function filterEvents(events: LifeEvent[], mode: PaceMode, seed: number): LifeEvent[] {
+  if (mode === 'full') {
+    return events;
+  }
+  const rng = mulberry32(seed);
+  const byAge = new Map<number, LifeEvent[]>();
+  for (const e of events) {
+    const list = byAge.get(e.age) ?? [];
+    list.push(e);
+    byAge.set(e.age, list);
+  }
+
+  // 1. 每岁：主线优先 + 模拟事件按种子抽样补足目标密度
+  const selected = new Set<LifeEvent>();
+  for (const age of [...byAge.keys()].sort((a, b) => a - b)) {
+    const group = byAge.get(age)!;
+    const target = liteTarget(age);
+    const mainline = group.filter(e => isMainlineEvent(e.id));
+    const sims = group.filter(e => !isMainlineEvent(e.id));
+    const keptMain = mainline.length <= target ? mainline : pickShuffled(mainline, target, rng);
+    const keptSim = pickShuffled(sims, target - keptMain.length, rng);
+    for (const e of [...keptMain, ...keptSim]) {
+      selected.add(e);
+    }
+  }
+
+  // 2. flag 闭包：消费事件的产出者必须也在子集内（跨岁回溯，产出者列表按岁升序）
+  const producers = new Map<string, LifeEvent[]>();
+  for (const e of events) {
+    const flags = e.choices.flatMap(c => c.outcomes?.flags ?? []);
+    for (const f of flags) {
+      const list = producers.get(f) ?? [];
+      list.push(e);
+      producers.set(f, list);
+    }
+  }
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (const e of [...selected]) {
+      for (const f of e.conditions?.hasFlags ?? []) {
+        const candidates = (producers.get(f) ?? []).filter(p => p !== e);
+        if (candidates.length > 0 && !candidates.some(p => selected.has(p))) {
+          selected.add(candidates[0]);
+          changed = true;
+        }
+      }
+    }
+  }
+
+  return events.filter(e => selected.has(e));
 }
 
 export default EVENTS;

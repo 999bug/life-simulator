@@ -1,4 +1,4 @@
-import type { Attributes, AttributeKey, AttributeMeta, GameState, LifeStage, StageMeta } from '../types/index.ts';
+import type { Attributes, AttributeKey, AttributeMeta, GameState, LifeStage, StageMeta, TypeSpeed } from '../types/index.ts';
 
 /** 属性元数据 */
 export const ATTR_META: Record<AttributeKey, AttributeMeta> = {
@@ -216,3 +216,10 @@ export function calcScore(attrs: Attributes): number {
 
 /** 给属性做最终整数保护 */
 export { ensureInt };
+
+/** 打字机速度档 → 每字符间隔毫秒范围 */
+export const TYPE_SPEED_RANGES: Record<TypeSpeed, [number, number]> = {
+  slow: [50, 70],
+  normal: [25, 45],
+  fast: [8, 15],
+};

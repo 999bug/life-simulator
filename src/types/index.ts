@@ -102,3 +102,9 @@ export interface StageMeta {
   label: string;
   range: [number, number];
 }
+
+/** 节奏档位：事件密度（沉浸全量 / 精简抽样） */
+export type PaceMode = 'full' | 'lite';
+
+/** 打字机速度档 */
+export type TypeSpeed = 'slow' | 'normal' | 'fast';

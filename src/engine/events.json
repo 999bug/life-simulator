@@ -21680,5 +21680,152 @@
       }
     ],
     "conditions": {}
+  },
+  {
+    "id": "elder_0116",
+    "stage": "elder",
+    "age": 86,
+    "title": "老友的告别",
+    "text": "一起晨练的老李走了。送别那天，你站在人群里，看着他的照片，想起他说过「明年咱们还一起爬山」。回到家，你坐在沙发上发了很久的呆，然后翻出老照片，一张一张慢慢看。",
+    "choices": [
+      {
+        "text": "珍惜眼前人，给老伙计们挨个打了电话",
+        "effects": "😊+3 👥+8",
+        "outcomes": {
+          "attr": {
+            "social": 8,
+            "happiness": 3
+          }
+        }
+      },
+      {
+        "text": "沉默了很久，一个人坐到了天黑",
+        "effects": "😊-3",
+        "outcomes": {
+          "attr": {
+            "happiness": -3
+          }
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
+    "id": "elder_0117",
+    "stage": "elder",
+    "age": 87,
+    "title": "孙辈的毕业典礼",
+    "text": "孙辈大学毕业，你受邀去参加典礼。礼堂里坐满了人，你穿着压箱底的正式衣裳，看着台上那个曾经在你怀里打滚的孩子穿着学士服鞠躬。掌声响起时，你悄悄抹了抹眼角。",
+    "choices": [
+      {
+        "text": "把压箱底的传家之物送给了孙辈",
+        "effects": "😊+5 👥+8",
+        "outcomes": {
+          "attr": {
+            "social": 8,
+            "happiness": 5
+          }
+        }
+      },
+      {
+        "text": "只说了句「好好干」，心里却无比骄傲",
+        "effects": "😊+2 👥+4",
+        "outcomes": {
+          "attr": {
+            "social": 4,
+            "happiness": 2
+          }
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
+    "id": "elder_0118",
+    "stage": "elder",
+    "age": 88,
+    "title": "散步的习惯",
+    "text": "医生说多走动有好处，你便把每天的散步当成了功课。清晨沿着河边走，傍晚在小区里绕圈。日子久了，哪条路有台阶、哪棵树春天开花，你都一清二楚。",
+    "choices": [
+      {
+        "text": "坚持了三年，身体比同龄人硬朗不少",
+        "effects": "💪+10 ⚖️+5",
+        "outcomes": {
+          "attr": {
+            "health": 10,
+            "morality": 5
+          }
+        }
+      },
+      {
+        "text": "走了几天就嫌累，又窝回了沙发",
+        "effects": "💪-4 😊+3",
+        "outcomes": {
+          "attr": {
+            "health": -4,
+            "happiness": 3
+          }
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
+    "id": "elder_0119",
+    "stage": "elder",
+    "age": 89,
+    "title": "修缮老屋",
+    "text": "老屋的屋顶漏了雨，孩子们张罗着给你修。你坚持要用老手艺的瓦片，说「这房子住了几十年，不能亏待它」。修好后，你摸着崭新的屋檐，像摸着一个老朋友的脸。",
+    "choices": [
+      {
+        "text": "在老屋里又住了一年，说「这里最安心」",
+        "effects": "😊+11",
+        "outcomes": {
+          "attr": {
+            "happiness": 11
+          }
+        }
+      },
+      {
+        "text": "修好后还是搬去了孩子家，老屋留作念想",
+        "effects": "😊+3 👥+4",
+        "outcomes": {
+          "attr": {
+            "social": 4,
+            "happiness": 3
+          }
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
+    "id": "elder_0120",
+    "stage": "elder",
+    "age": 90,
+    "title": "九十大寿",
+    "text": "九十岁生日，全家老小都回来了。饭店里摆了四桌，最小的重孙刚学会走路，摇摇晃晃地走到你面前喊「太爷爷」。你抱着他，看着满堂儿孙，忽然觉得这辈子活得值了。",
+    "choices": [
+      {
+        "text": "吹蜡烛时，许了一个「儿孙平安」的愿望",
+        "effects": "😊+10 👥+6",
+        "outcomes": {
+          "attr": {
+            "happiness": 10,
+            "social": 6
+          }
+        }
+      },
+      {
+        "text": "笑着说「活够了」，心里却还想多看看这个世界",
+        "effects": "😊+7",
+        "outcomes": {
+          "attr": {
+            "happiness": 7
+          }
+        }
+      }
+    ],
+    "conditions": {}
   }
 ]

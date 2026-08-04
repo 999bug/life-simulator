@@ -26,13 +26,30 @@ export function emptySaves(): SavesV2 {
 }
 
 /**
+ * 校验单槽存档数据是否合法（game 存在且 eventIndex 为 number）。
+ *
+ * @param data 未知数据（JSON 解析结果）
+ * @returns 是否为合法的 SaveData
+ */
+export function isValidSaveData(data: unknown): data is SaveData {
+  if (!data || typeof data !== 'object') {
+    return false;
+  }
+  const d = data as Record<string, unknown>;
+  return !!d.game && typeof d.eventIndex === 'number';
+}
+
+/**
  * 旧版单槽存档（life-sim-save-v1）迁移到 v2 结构。
  *
  * @param raw v1 存档 JSON 字符串
  * @returns 迁入槽 0 的 v2 结构
- * @throws 非法 JSON 时抛出
+ * @throws 非法 JSON 或存档内容不合法时抛出
  */
 export function migrateLegacySave(raw: string): SavesV2 {
   const data = JSON.parse(raw) as SaveData;
+  if (!isValidSaveData(data)) {
+    throw new Error('Invalid legacy save data');
+  }
   return { active: 0, slots: [data, null, null] };
 }

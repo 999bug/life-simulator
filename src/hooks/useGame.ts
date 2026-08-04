@@ -1,6 +1,6 @@
 import { useReducer, useCallback, useEffect } from 'react';
 import type { AttributeKey, Attributes, Choice, DeathCause, GameState, LifeEvent, PaceMode, TypeSpeed } from '../types';
-import { emptySaves, migrateLegacySave, SLOT_COUNT, type SavesV2 } from '../engine/save';
+import { emptySaves, isValidSaveData, migrateLegacySave, SLOT_COUNT, type SavesV2 } from '../engine/save';
 import {
   createInitialState,
   applyOutcomes,
@@ -59,15 +59,20 @@ function loadSaves(): SavesV2 {
     if (raw) {
       const data = JSON.parse(raw) as SavesV2;
       if (data && Array.isArray(data.slots) && data.slots.length === SLOT_COUNT && typeof data.active === 'number') {
-        return data;
+        // 内容级校验：非法槽置 null；active 越界回退 0
+        const slots = data.slots.map(s => (isValidSaveData(s) ? s : null));
+        const active = data.active >= 0 && data.active < SLOT_COUNT ? data.active : 0;
+        return { active, slots };
       }
     }
-    // 旧版单槽存档迁移
+    // 旧版单槽存档迁移（内容校验失败抛错，由外层 catch 捕获后跳过迁移）
     const legacy = localStorage.getItem(LEGACY_SAVE_KEY);
     if (legacy) {
       const migrated = migrateLegacySave(legacy);
-      localStorage.removeItem(LEGACY_SAVE_KEY);
-      saveSaves(migrated);
+      // 先写 v2 成功后才删旧键，避免 setItem 失败导致永久丢档
+      if (saveSaves(migrated)) {
+        localStorage.removeItem(LEGACY_SAVE_KEY);
+      }
       return migrated;
     }
   } catch {
@@ -76,12 +81,14 @@ function loadSaves(): SavesV2 {
   return emptySaves();
 }
 
-/** 持久化 v2 存档 */
-function saveSaves(saves: SavesV2): void {
+/** 持久化 v2 存档；写入成功返回 true */
+function saveSaves(saves: SavesV2): boolean {
   try {
     localStorage.setItem(SAVE_KEY_V2, JSON.stringify(saves));
+    return true;
   } catch {
     // 存储不可用（隐私模式/满额）时静默降级为不保存
+    return false;
   }
 }
 

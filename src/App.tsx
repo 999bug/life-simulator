@@ -20,6 +20,13 @@ export default function App() {
     }
   }, [game.phase]);
 
+  // 结算页新成就解锁音
+  useEffect(() => {
+    if (game.phase === 'summary' && newAchievements.length > 0) {
+      sfx.achievement();
+    }
+  }, [game.phase, newAchievements.length]);
+
   return (
     <div className="w-screen h-screen flex justify-center items-center bg-black overflow-hidden">
       <div className="w-full h-full max-w-[960px] max-h-[720px] relative overflow-hidden rounded-lg shadow-[0_0_80px_rgba(0,0,0,0.6)] text-white">

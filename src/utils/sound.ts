@@ -72,6 +72,17 @@ export const sfx = {
     tone(660, 0.1, 'triangle', 0.06);
     tone(990, 0.12, 'triangle', 0.05, 0.05);
   },
+  /** 成就解锁（三音上行琶音） */
+  achievement: (): void => {
+    tone(523, 0.12, 'triangle', 0.05);
+    tone(659, 0.12, 'triangle', 0.05, 0.08);
+    tone(784, 0.2, 'triangle', 0.05, 0.16);
+  },
+  /** 阶段切换（低音下滑过渡） */
+  stage: (): void => {
+    tone(220, 0.35, 'sine', 0.05);
+    tone(165, 0.4, 'sine', 0.04, 0.12);
+  },
   /** 打字机字符（极轻，避免烦躁） */
   type: (): void => tone(2400, 0.015, 'sine', 0.008),
   /** 事件推进（下行两音） */

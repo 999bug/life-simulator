@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import type { Choice, GameState, LifeEvent, TypeSpeed } from '../types';
 import { STAGE_META } from '../engine/state';
 import { sfx } from '../utils/sound';
@@ -37,6 +37,16 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
       setShowChoices(true);
     }
   }, [currentEvent]);
+
+  // 阶段切换音（跳过首次渲染，只在实际切换阶段时播放）
+  const firstStageRef = useRef(true);
+  useEffect(() => {
+    if (firstStageRef.current) {
+      firstStageRef.current = false;
+      return;
+    }
+    sfx.stage();
+  }, [game.stage]);
 
   // 反馈页面
   if (feedback) {

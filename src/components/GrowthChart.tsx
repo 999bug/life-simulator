@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { AttrSnapshot, AttributeKey } from '../types';
 import { ATTR_META } from '../engine/state';
 
@@ -25,8 +25,9 @@ const FONT = '"PingFang SC", "Microsoft YaHei", sans-serif';
  * @param w 逻辑宽度
  * @param h 逻辑高度
  * @param mini 迷你模式（分享卡片）：去掉网格与轴标签，仅画背景与折线
+ * @param focusKey 聚焦属性：其余属性曲线淡化，聚焦曲线加粗并压在最上层；null 全部正常绘制
  */
-export function drawGrowthChart(ctx: CanvasRenderingContext2D, snapshots: AttrSnapshot[], w: number, h: number, mini: boolean = false): void {
+export function drawGrowthChart(ctx: CanvasRenderingContext2D, snapshots: AttrSnapshot[], w: number, h: number, mini: boolean = false, focusKey: AttributeKey | null = null): void {
   if (snapshots.length === 0) {
     return;
   }
@@ -65,11 +66,18 @@ export function drawGrowthChart(ctx: CanvasRenderingContext2D, snapshots: AttrSn
   }
 
   // 8 条属性折线（图例与终值由 HTML/调用方承载，canvas 内只画线 + 末端圆点）
+  // 聚焦时非焦点线淡化、焦点线最后绘制压在最上层
   const keys = Object.keys(ATTR_META) as AttributeKey[];
-  for (const key of keys) {
+  const ordered = focusKey ? [...keys.filter(k => k !== focusKey), focusKey] : keys;
+  for (const key of ordered) {
     const meta = ATTR_META[key];
+    const focused = key === focusKey;
+    ctx.save();
+    if (focusKey && !focused) {
+      ctx.globalAlpha = 0.1;
+    }
     ctx.strokeStyle = meta.color;
-    ctx.lineWidth = mini ? 2 : 1.5;
+    ctx.lineWidth = mini ? 2 : (focused ? 2.5 : 1.5);
     ctx.lineJoin = 'round';
     ctx.beginPath();
     snapshots.forEach((s, i) => {
@@ -86,8 +94,9 @@ export function drawGrowthChart(ctx: CanvasRenderingContext2D, snapshots: AttrSn
     const last = snapshots[snapshots.length - 1];
     ctx.fillStyle = meta.color;
     ctx.beginPath();
-    ctx.arc(x(last.age), y(last.attrs[key]), mini ? 3 : 2.5, 0, Math.PI * 2);
+    ctx.arc(x(last.age), y(last.attrs[key]), mini ? 3 : (focused ? 3.5 : 2.5), 0, Math.PI * 2);
     ctx.fill();
+    ctx.restore();
   }
 }
 
@@ -95,9 +104,14 @@ export function drawGrowthChart(ctx: CanvasRenderingContext2D, snapshots: AttrSn
  * 成长曲线：8 维属性随年龄的折线图（canvas 绘制）。
  * x 轴为年龄（0 → 享年），y 轴固定 0-100 便于横向对比；
  * 末端圆点标记最终状态，图例由 HTML 承载（含各属性终值）。
+ * 图例可交互：悬停临时聚焦单条曲线（其余淡化），点击固定聚焦、再点取消。
  */
 export default function GrowthChart({ snapshots }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  // 悬停临时预览，点击固定；hover 优先于 pinned
+  const [hovered, setHovered] = useState<AttributeKey | null>(null);
+  const [pinned, setPinned] = useState<AttributeKey | null>(null);
+  const focus = hovered ?? pinned;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -113,8 +127,8 @@ export default function GrowthChart({ snapshots }: Props) {
     canvas.width = W * dpr;
     canvas.height = H * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    drawGrowthChart(ctx, snapshots, W, H);
-  }, [snapshots]);
+    drawGrowthChart(ctx, snapshots, W, H, false, focus);
+  }, [snapshots, focus]);
 
   if (snapshots.length === 0) {
     return (
@@ -132,19 +146,31 @@ export default function GrowthChart({ snapshots }: Props) {
         style={{ width: W, height: H }}
         className="rounded-lg bg-[#1a1a2e] border border-white/[0.04]"
       />
-      {/* 图例：色块 + 属性名 + 终值 */}
-      <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-2.5">
+      {/* 图例：色块 + 属性名 + 终值（悬停聚焦曲线，点击固定） */}
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 mt-2.5">
         {(Object.keys(ATTR_META) as AttributeKey[]).map(key => {
           const meta = ATTR_META[key];
           const last = snapshots[snapshots.length - 1];
+          const active = focus === key;
           return (
-            <span key={key} className="flex items-center gap-1.5 text-[11px] text-white/50">
+            <button
+              key={key}
+              type="button"
+              onMouseEnter={() => setHovered(key)}
+              onMouseLeave={() => setHovered(null)}
+              onFocus={() => setHovered(key)}
+              onBlur={() => setHovered(null)}
+              onClick={() => setPinned(p => (p === key ? null : key))}
+              className={`flex items-center gap-1.5 text-[11px] rounded px-1.5 py-0.5 -mx-1.5 transition-all duration-150 cursor-pointer
+                ${active ? 'bg-white/10 text-white/90' : focus ? 'text-white/50 opacity-35' : 'text-white/50'}`}
+            >
               <span className="w-2.5 h-2.5 rounded-sm inline-block" style={{ background: meta.color }} />
               {meta.icon} {meta.name}
-              <span className="text-white/80 font-medium">{last.attrs[key]}</span>
-            </span>
+              <span className={`font-medium ${active ? 'text-white' : 'text-white/80'}`}>{last.attrs[key]}</span>
+            </button>
           );
         })}
+        <span className="text-[10px] text-white/25 tracking-[1px]">悬停/点击图例聚焦曲线</span>
       </div>
     </div>
   );

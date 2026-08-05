@@ -15086,6 +15086,55 @@
     ]
   },
   {
+    "id": "hosp_0006",
+    "stage": "adult",
+    "age": 46,
+    "title": "与病共处",
+    "text": "出院后的第三年，药盒成了随身物品，复查单攒了一沓。医生说恢复得比预期好，但你心里清楚：这具身体从此是需要精心维护的老机器了。",
+    "category": "health",
+    "choices": [
+      {
+        "text": "严格遵医嘱，把健康管理做成每日功课",
+        "effects": "💪+10 😊-3 ⚖️+5",
+        "outcomes": {
+          "attr": {
+            "health": 10,
+            "morality": 5,
+            "happiness": -3
+          }
+        }
+      },
+      {
+        "text": "该吃吃该喝喝，不想被病定义生活",
+        "effects": "💪-5 😊+6",
+        "outcomes": {
+          "attr": {
+            "happiness": 6,
+            "health": -5
+          }
+        }
+      },
+      {
+        "text": "加入病友互助群，互相打气也分享经验",
+        "effects": "💪+5 👥+5",
+        "outcomes": {
+          "attr": {
+            "health": 5,
+            "social": 5
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "hospitalized"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "adult_11",
     "stage": "adult",
     "age": 46,
@@ -15341,6 +15390,113 @@
     }
   },
   {
+    "id": "research_0006",
+    "stage": "adult",
+    "age": 47,
+    "title": "讲台下的新面孔",
+    "text": "新学期，你的实验室来了几个眼里有光的年轻人，像极了当年的你。带学生要占掉大半研究时间，系里也有人劝你：「这个资历了，出成果才是正事。」",
+    "category": "education",
+    "choices": [
+      {
+        "text": "倾注心血带学生，把一身本事传下去",
+        "effects": "🧠+4 😊+1",
+        "outcomes": {
+          "attr": {
+            "intelligence": 4,
+            "happiness": 1
+          },
+          "flags": [
+            "legacy_mentor"
+          ]
+        }
+      },
+      {
+        "text": "婉拒带教任务，继续冲自己的课题",
+        "effects": "🧠+7 😊-3",
+        "outcomes": {
+          "attr": {
+            "intelligence": 7,
+            "happiness": -3
+          }
+        }
+      },
+      {
+        "text": "象征性带一个，主要精力还是自己的研究",
+        "effects": "🧠+5",
+        "outcomes": {
+          "attr": {
+            "intelligence": 5
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "scholar_name"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "gray_0006",
+    "stage": "adult",
+    "age": 47,
+    "title": "洗白的机会",
+    "text": "政策风口变了，当年的灰色地带正在被纳入监管。有人递来橄榄枝：补一笔钱、走一套流程，生意就能彻底洗白见光。代价是吐出这些年的大半利润。",
+    "category": "personality",
+    "choices": [
+      {
+        "text": "吐出利润洗白。睡个安稳觉，比钱重要",
+        "effects": "💰-10 😊+6 ⚖️+8",
+        "outcomes": {
+          "attr": {
+            "wealth": -10,
+            "morality": 8,
+            "happiness": 6
+          },
+          "flags": [
+            "gray_redeem"
+          ]
+        }
+      },
+      {
+        "text": "转入更深的地下，风浪越大鱼越贵",
+        "effects": "💰+9 😊-4 ⚖️-6",
+        "outcomes": {
+          "attr": {
+            "wealth": 9,
+            "morality": -6,
+            "happiness": -4
+          }
+        }
+      },
+      {
+        "text": "金盆洗手，就此退出这行",
+        "effects": "💰-4 😊+5 ⚖️+4",
+        "outcomes": {
+          "attr": {
+            "wealth": -4,
+            "happiness": 5,
+            "morality": 4
+          },
+          "flags": [
+            "gray_quit"
+          ]
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "gray_deep"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "adult_92",
     "stage": "adult",
     "age": 48,
@@ -15504,6 +15660,57 @@
         }
       }
     ]
+  },
+  {
+    "id": "invest_0006",
+    "stage": "adult",
+    "age": 48,
+    "title": "周期的拐点",
+    "text": "市场连跌了八个月，到处都在割肉离场。你经历过三轮牛熊，直觉告诉你底部不远了，但这次下注的筹码比年轻时大得多，输了就不是重来一次的事。",
+    "category": "finance",
+    "choices": [
+      {
+        "text": "逆势加仓。别人恐惧时，按计划分批买入",
+        "effects": "💰+14 😊-5",
+        "outcomes": {
+          "attr": {
+            "wealth": 14,
+            "happiness": -5
+          },
+          "flags": [
+            "invest_legend"
+          ]
+        }
+      },
+      {
+        "text": "减仓观望，保住这些年的胜利果实",
+        "effects": "💰+3 😊+3",
+        "outcomes": {
+          "attr": {
+            "wealth": 3,
+            "happiness": 3
+          }
+        }
+      },
+      {
+        "text": "全部清仓离场，这个年纪不赌了",
+        "effects": "💰-4 😊+4",
+        "outcomes": {
+          "attr": {
+            "wealth": -4,
+            "happiness": 4
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "investor_sharp"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
   },
   {
     "id": "adult_12",
@@ -16314,6 +16521,55 @@
     }
   },
   {
+    "id": "hosp_0007",
+    "stage": "middle_age",
+    "age": 52,
+    "title": "清单上的最后一项",
+    "text": "病床前写下的那张愿望清单，这些年一项项划掉，如今只剩最后一项。它不算宏大，却一直没腾出勇气或时间去做。窗外的阳光正好，你忽然觉得：就现在吧。",
+    "category": "health",
+    "choices": [
+      {
+        "text": "出发。最后一项划掉的那一刻，眼眶有点热",
+        "effects": "💰-5 😊+12",
+        "outcomes": {
+          "attr": {
+            "happiness": 12,
+            "wealth": -5
+          }
+        }
+      },
+      {
+        "text": "把它留给明年——总要给生活留个念想",
+        "effects": "🧠+3 😊+5",
+        "outcomes": {
+          "attr": {
+            "happiness": 5,
+            "intelligence": 3
+          }
+        }
+      },
+      {
+        "text": "带着家人一起完成，清单变成了全家的纪念",
+        "effects": "💰-4 😊+9 👥+5",
+        "outcomes": {
+          "attr": {
+            "happiness": 9,
+            "social": 5,
+            "wealth": -4
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "bucket_list"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "mid_18",
     "stage": "middle_age",
     "age": 52,
@@ -16528,6 +16784,54 @@
         }
       }
     ]
+  },
+  {
+    "id": "research_0007",
+    "stage": "middle_age",
+    "age": 53,
+    "title": "著作等身",
+    "text": "出版社找上门，想把你的讲义整理成教科书。写书是个苦差事，一坐就是两年，但你的学生说：「老师，您的课应该让更多人听到。」",
+    "category": "education",
+    "choices": [
+      {
+        "text": "接下来。两年伏案，把半生心血写进书里",
+        "effects": "💪-4 🧠+8 😊+4",
+        "outcomes": {
+          "attr": {
+            "intelligence": 8,
+            "health": -4,
+            "happiness": 4
+          }
+        }
+      },
+      {
+        "text": "让学生们共同执笔，自己只做审校",
+        "effects": "🧠+4 👥+5",
+        "outcomes": {
+          "attr": {
+            "intelligence": 4,
+            "social": 5
+          }
+        }
+      },
+      {
+        "text": "婉拒了。学问在讲台上，不在书架上",
+        "effects": "😊+4",
+        "outcomes": {
+          "attr": {
+            "happiness": 4
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "legacy_mentor"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
   },
   {
     "id": "mid_02",
@@ -16811,6 +17115,55 @@
     ]
   },
   {
+    "id": "gray_0007",
+    "stage": "middle_age",
+    "age": 54,
+    "title": "过去的影子",
+    "text": "洗白后的第五年，一个当年圈子里的人找上门来。他混得潦倒，话里话外都是当年的事，暗示你「帮衬帮衬」。你如今的一切都在阳光下，经不起旧账翻腾。",
+    "category": "personality",
+    "choices": [
+      {
+        "text": "给他一笔封口的钱，心里不是滋味",
+        "effects": "💰-8 😊-4",
+        "outcomes": {
+          "attr": {
+            "wealth": -8,
+            "happiness": -4
+          }
+        }
+      },
+      {
+        "text": "拒绝。过去的事已了结，不再受要挟",
+        "effects": "😊-5 ⚖️+7",
+        "outcomes": {
+          "attr": {
+            "morality": 7,
+            "happiness": -5
+          }
+        }
+      },
+      {
+        "text": "帮他在阳光下找份正经工作",
+        "effects": "💰-4 😊+4 ⚖️+6",
+        "outcomes": {
+          "attr": {
+            "wealth": -4,
+            "morality": 6,
+            "happiness": 4
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "gray_redeem"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "mid_28",
     "stage": "middle_age",
     "age": 54,
@@ -17025,6 +17378,54 @@
         }
       }
     ]
+  },
+  {
+    "id": "invest_0007",
+    "stage": "middle_age",
+    "age": 55,
+    "title": "交棒的时刻",
+    "text": "跟了你十年的操盘手能独当一面了，合伙人暗示你可以退居二线。放手，意味着每天不再看盘；不放手，年轻人永远只是执行你的手。",
+    "category": "finance",
+    "choices": [
+      {
+        "text": "交出决策权，转做顾问。看着他们跑赢你当年的纪录",
+        "effects": "😊+7 👥+4",
+        "outcomes": {
+          "attr": {
+            "happiness": 7,
+            "social": 4
+          }
+        }
+      },
+      {
+        "text": "继续亲自掌舵，市场还需要你的手感",
+        "effects": "💰+8 😊-5",
+        "outcomes": {
+          "attr": {
+            "wealth": 8,
+            "happiness": -5
+          }
+        }
+      },
+      {
+        "text": "逐步退出，把大部分仓位换成稳健资产",
+        "effects": "💰+9 😊+2",
+        "outcomes": {
+          "attr": {
+            "wealth": 9,
+            "happiness": 2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "investor_sharp"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
   },
   {
     "id": "mid_03",
@@ -18014,6 +18415,59 @@
     ]
   },
   {
+    "id": "hosp_0008",
+    "stage": "middle_age",
+    "age": 59,
+    "title": "第二次鬼门关",
+    "text": "半夜里胸口一阵熟悉的闷痛，救护车再次把你拉进那家医院。还是那股消毒水味，但这一次你平静得多——这条路你走过，知道该怎么配合医生打赢它。",
+    "category": "health",
+    "choices": [
+      {
+        "text": "积极配合治疗，上次的经验全用上了",
+        "effects": "💪+8 🧠+4 💰-6",
+        "outcomes": {
+          "attr": {
+            "health": 8,
+            "intelligence": 4,
+            "wealth": -6
+          }
+        }
+      },
+      {
+        "text": "病床上还安慰家人：别怕，我熟门熟路",
+        "effects": "💪+3 😊+5 👥+4",
+        "outcomes": {
+          "attr": {
+            "happiness": 5,
+            "social": 4,
+            "health": 3
+          }
+        }
+      },
+      {
+        "text": "这次把遗嘱和后事都安排明白了",
+        "effects": "🧠+5 😊-4 ⚖️+4",
+        "outcomes": {
+          "attr": {
+            "intelligence": 5,
+            "happiness": -4,
+            "morality": 4
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "hospitalized"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {
+        "health": 45
+      }
+    }
+  },
+  {
     "id": "mid_52",
     "stage": "middle_age",
     "age": 59,
@@ -18575,6 +19029,55 @@
     }
   },
   {
+    "id": "research_0008",
+    "stage": "middle_age",
+    "age": 61,
+    "title": "终身成就奖",
+    "text": "学会的颁奖函寄到家里：终身成就奖。颁奖典礼那天，台下坐着你的学生、学生的学生。主持人念你的论文目录，念了整整三分钟。",
+    "category": "education",
+    "choices": [
+      {
+        "text": "上台致谢，把奖项献给一路同行的人",
+        "effects": "😊+13 👥+5",
+        "outcomes": {
+          "attr": {
+            "happiness": 13,
+            "social": 5
+          }
+        }
+      },
+      {
+        "text": "致辞时宣布捐出奖金，设立青年学者基金",
+        "effects": "💰-6 😊+9 ⚖️+5",
+        "outcomes": {
+          "attr": {
+            "wealth": -6,
+            "happiness": 9,
+            "morality": 5
+          }
+        }
+      },
+      {
+        "text": "平静领奖。荣誉是过去式，明天还有新的问题",
+        "effects": "🧠+6 😊+4",
+        "outcomes": {
+          "attr": {
+            "intelligence": 6,
+            "happiness": 4
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "scholar_name"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "mid_60",
     "stage": "middle_age",
     "age": 61,
@@ -18796,6 +19299,56 @@
       "maxAttrs": {
         "wealth": 28
       }
+    }
+  },
+  {
+    "id": "gray_0008",
+    "stage": "middle_age",
+    "age": 62,
+    "title": "一笔旧账",
+    "text": "退出这行二十年了。前些天听说，当年被你挤兑垮的那个同行，如今过得艰难。那个雨夜的谈判你至今记得。子女都已成家，你忽然想做点什么，了结这桩心事。",
+    "category": "personality",
+    "choices": [
+      {
+        "text": "辗转找到他，当面道歉并补偿",
+        "effects": "💰-8 😊+7 ⚖️+10",
+        "outcomes": {
+          "attr": {
+            "wealth": -8,
+            "morality": 10,
+            "happiness": 7
+          }
+        }
+      },
+      {
+        "text": "匿名寄去一笔钱，不打扰彼此的生活",
+        "effects": "💰-5 😊+3 ⚖️+5",
+        "outcomes": {
+          "attr": {
+            "wealth": -5,
+            "morality": 5,
+            "happiness": 3
+          }
+        }
+      },
+      {
+        "text": "往事已矣。把这份愧疚讲给孙辈当教训",
+        "effects": "🧠+4 😊+2",
+        "outcomes": {
+          "attr": {
+            "intelligence": 4,
+            "happiness": 2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "gray_quit"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
     }
   },
   {
@@ -19056,6 +19609,55 @@
       "maxAttrs": {
         "wealth": 25
       }
+    }
+  },
+  {
+    "id": "invest_0008",
+    "stage": "middle_age",
+    "age": 63,
+    "title": "一堂投资课",
+    "text": "母校邀请你回去做一场讲座，讲讲这些年的投资哲学。台下坐满了年轻人，眼神和你当年听前辈讲课时一模一样。有人举手问：「您最大的教训是什么？」",
+    "category": "finance",
+    "choices": [
+      {
+        "text": "讲那次逆势加仓：「纪律比聪明重要」",
+        "effects": "🧠+5 😊+9",
+        "outcomes": {
+          "attr": {
+            "intelligence": 5,
+            "happiness": 9
+          }
+        }
+      },
+      {
+        "text": "讲亏得最惨的一次：「敬畏市场，敬畏运气」",
+        "effects": "🧠+6 😊+4",
+        "outcomes": {
+          "attr": {
+            "intelligence": 6,
+            "happiness": 4
+          }
+        }
+      },
+      {
+        "text": "设立奖学金，让答案由他们自己去寻找",
+        "effects": "💰-5 😊+8 ⚖️+4",
+        "outcomes": {
+          "attr": {
+            "wealth": -5,
+            "happiness": 8,
+            "morality": 4
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "invest_legend"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
     }
   },
   {

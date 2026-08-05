@@ -41,29 +41,33 @@ export default function App() {
 
   return (
     <div className="w-screen h-screen flex justify-center items-center bg-black overflow-hidden">
-      <div className="w-full h-full max-w-[960px] max-h-[720px] relative overflow-hidden rounded-lg shadow-[0_0_80px_rgba(0,0,0,0.6)] text-white" style={{ transform: `scale(${scale})` }}>
-        {game.phase === 'title' && (
-          <TitleScreen onStart={startGame} onAutoStart={startAutoGame} onDailyStart={startDailyGame} saves={saves} onContinue={continueGame} achievements={achievements} stats={stats} daily={daily} />
-        )}
-        {game.phase === 'playing' && (
-          <GameScreen
-            game={game}
-            currentEvent={currentEvent}
-            feedback={feedback}
-            autoPlay={autoPlay}
-            typeSpeed={typeSpeed}
-            fateEventIds={fateEventIds}
-            onTypeSpeedChange={setTypeSpeed}
-            onChoice={makeChoice}
-            onContinue={continue_}
-            onExit={reset}
-            onRestart={restart}
-          />
-        )}
-        {game.phase === 'summary' && (
+      {game.phase === 'summary' ? (
+        // 结算页全屏：脱离 960×720 舞台框（无圆角/阴影/缩放），大屏下用满屏幕
+        <div className="w-full h-full text-white">
           <SummaryScreen game={game} onRestart={reset} newAchievements={newAchievements} skippedEvents={skippedEvents} />
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className="w-full h-full max-w-[960px] max-h-[720px] relative overflow-hidden rounded-lg shadow-[0_0_80px_rgba(0,0,0,0.6)] text-white" style={{ transform: `scale(${scale})` }}>
+          {game.phase === 'title' && (
+            <TitleScreen onStart={startGame} onAutoStart={startAutoGame} onDailyStart={startDailyGame} saves={saves} onContinue={continueGame} achievements={achievements} stats={stats} daily={daily} />
+          )}
+          {game.phase === 'playing' && (
+            <GameScreen
+              game={game}
+              currentEvent={currentEvent}
+              feedback={feedback}
+              autoPlay={autoPlay}
+              typeSpeed={typeSpeed}
+              fateEventIds={fateEventIds}
+              onTypeSpeedChange={setTypeSpeed}
+              onChoice={makeChoice}
+              onContinue={continue_}
+              onExit={reset}
+              onRestart={restart}
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 }

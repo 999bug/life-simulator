@@ -184,7 +184,7 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       </p>
 
       {/* 死因与临终叙事 */}
-      <div className="flex items-start gap-3 max-w-[440px] px-5 py-3.5 bg-white/[0.03] border border-white/[0.06] rounded-xl
+      <div className="flex items-start gap-3 max-w-[560px] px-5 py-3.5 bg-white/[0.03] border border-white/[0.06] rounded-xl
         animate-[fadeIn_1.4s_ease]">
         <span className="text-lg leading-none mt-0.5">{deathText(game.deathCause).icon}</span>
         <p className="text-xs text-white/50 leading-relaxed">{deathText(game.deathCause).text}</p>
@@ -192,7 +192,7 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
 
       {/* 人生目标达成度（开局选了目标才展示） */}
       {goal && (
-        <div className={`flex items-start gap-3 max-w-[440px] px-5 py-3.5 rounded-xl border
+        <div className={`flex items-start gap-3 max-w-[560px] px-5 py-3.5 rounded-xl border
           animate-[fadeIn_1.4s_ease]
           ${goal.achieved ? 'bg-[#c9a96e]/5 border-[#c9a96e]/30' : 'bg-white/[0.03] border-white/[0.06]'}`}>
           <span className="text-lg leading-none mt-0.5">{goal.achieved ? '✅' : '🎯'}</span>
@@ -221,7 +221,7 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       <p className="text-[11px] text-white/40 tracking-[3px]">综合评分</p>
 
       {/* 属性展示 */}
-      <div className="grid grid-cols-4 gap-3 w-full max-w-[580px] animate-[fadeInUp_1s_ease]">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full max-w-[720px] animate-[fadeInUp_1s_ease]">
         {Object.entries(game.attributes).map(([k, v]) => {
           const meta = ATTR_META[k as keyof typeof game.attributes];
           return (
@@ -235,13 +235,13 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       </div>
 
       {/* 成长曲线：8 维属性随年龄的轨迹（旧存档无快照 → 组件内降级提示） */}
-      <div className="w-full max-w-[580px] animate-[fadeInUp_1.15s_ease]">
+      <div className="w-full max-w-[720px] animate-[fadeInUp_1.15s_ease]">
         <h3 className="text-[13px] tracking-[4px] text-[#c9a96e] mb-2.5 font-normal">📈 成长曲线</h3>
         <GrowthChart snapshots={game.snapshots ?? []} />
       </div>
 
       {/* 人生大事记 */}
-      <div className="w-full max-w-[580px] animate-[fadeInUp_1.3s_ease]">
+      <div className="w-full max-w-[720px] animate-[fadeInUp_1.3s_ease]">
         <h3 className="text-[13px] tracking-[4px] text-[#c9a96e] mb-2.5 font-normal">📖 人生大事记</h3>
         {milestoneHistory.map((h, i) => (
           <div key={i} className="flex gap-3 py-1.5 text-xs border-b border-white/[0.02]">
@@ -253,7 +253,7 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
 
       {/* 新解锁成就 */}
       {newAchievements.length > 0 && (
-        <div className="w-full max-w-[580px] animate-[fadeIn_1.6s_ease]">
+        <div className="w-full max-w-[720px] animate-[fadeIn_1.6s_ease]">
           <h3 className="text-[13px] tracking-[4px] text-[#c9a96e] mb-2.5 font-normal">🏆 新解锁成就</h3>
           <div className="flex flex-wrap gap-2">
             {newAchievements.map(id => {
@@ -270,7 +270,7 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
 
       {/* 本可发生而未触发的事件（条件未满足被跳过） */}
       {skippedEvents.length > 0 && (
-        <div className="w-full max-w-[580px] animate-[fadeIn_1.5s_ease]">
+        <div className="w-full max-w-[720px] animate-[fadeIn_1.5s_ease]">
           <h3 className="text-[13px] tracking-[4px] text-[#c9a96e] mb-2.5 font-normal">👻 本可发生而未触发</h3>
           <p className="text-[11px] text-white/35 mb-2">这一生有 {skippedEvents.length} 个事件因条件未满足而未曾发生：</p>
           <div className="flex flex-wrap gap-2">

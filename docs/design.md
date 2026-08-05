@@ -59,6 +59,10 @@ interface GameState {
   flags: string[];
   history: ChoiceRecord[];
   phase: 'title' | 'playing' | 'summary';
+  goal: GoalKey | CustomGoal | null;  // 预设 key 或自定义 { attrs: Partial<Attributes> }
+  challenge?: boolean;  // 挑战开局（第 2 周目）
+  inherited?: boolean;  // 传承加成生效（第 4 周目）
+  snapshots?: AttrSnapshot[];  // 每岁属性快照（成长曲线）
 }
 
 type LifeStage = 'infant' | 'childhood' | 'teen' | 'young_adult' | 'adult' | 'middle_age' | 'elder';
@@ -108,6 +112,17 @@ type AttributeKey = 'health' | 'intelligence' | 'wealth' | 'happiness' | 'social
 
 - **第 2 周目起**：标题页解锁「挑战开局」——`applyChallenge` 将开局 8 属性整体下调 10 点（钳位 0），`GameState.challenge` 标记本局，结算页展示「⚔️ 挑战人生」；挑战局评分 ≥ 70 解锁专属成就「破局者」
 - **第 3 周目起**：开局按洗牌种子从命运事件池（`RARE_EVENT_IDS`，15 个精选「命运级」事件）确定性抽取 1 个本局命运事件（`pickFateEvent`，存档随 `fateEventId` 还原）；该事件触发时所有选项效果 ×1.5（`scaleOutcomes`），游戏内显示「⚡ 命运事件 · 效果 ×1.5」角标
+- **第 4 周目起**：结算把终局属性写入 `stats.lastEndAttrs`，新局开局 `applyInheritance` 取其中最高的 2 项（值 ≥50）各 +8（上限 100），与挑战开局 -10 独立叠加，结算页标注「🧬 传承」；旧存档无 lastEndAttrs 则无加成
+- **第 5 周目起**：`pickFateEvents(seed, count)` 按种子确定性抽取 2 个命运事件（`fateEventIds` 数组，单抽与双抽同种子同源）
+
+### 每日挑战与局中重开
+
+- **每日挑战**：标题页入口以日期确定性种子（`dateToSeed('YYYYMMDD')`）开局，同一天全局同一局；手动播放、无目标/无挑战、不写存档槽；`life-sim-daily` 记录当日最佳（评分/享年），入口旁展示
+- **局中重开**：GameScreen ✕ 确认弹窗增加「重新开始本局」（`RESTART`，同设置新随机种子；每日挑战局保持固定种子），快速模拟不显示
+
+### 自定义目标
+
+GoalModal 预设目标之外可自定义：勾选 ≤3 个属性并设定目标值（0-100），结算时逐属性 `实际值 ≥ 目标值` 全部达标即达成（空 attrs 视为达成），结算页按「目标值/实际值」展示。
 
 ### 传记导出
 

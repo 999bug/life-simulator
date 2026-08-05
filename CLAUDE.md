@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-人生模拟器：React 18 + TypeScript + Vite + Tailwind 的文字人生模拟游戏。纯前端、无后端，游戏内容由 JSON 事件数据驱动。事件数据源 `script/chiled.json`（513 个事件）经转换器生成引擎格式 `src/engine/events.json`，运行时同岁组内按种子洗牌后线性播放。
+人生模拟器：React 18 + TypeScript + Vite + Tailwind 的文字人生模拟游戏。纯前端、无后端，游戏内容由 JSON 事件数据驱动。事件数据源 `script/chiled.json`（513 个事件）+ `script/fragments/` 片段（33 个）经转换器生成引擎格式 `src/engine/events.json`（共 546 个事件），运行时同岁组内按种子洗牌后线性播放。PWA 可安装离线。
 
 ## 常用命令
 
@@ -12,8 +12,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 npm run dev            # vite dev server（端口 5173）
 npm run build          # tsc && vite build（生产构建）
 npm run build:events   # 重新生成 src/engine/events.json（数据改动后必须跑）
-node --test "script/*.test.mjs"   # 数据工具测试（21 个，glob 必须带引号，裸目录形式在本机报错）
-node --experimental-strip-types --test script/engine-state.test.ts script/pace-mode.test.ts script/goals.test.ts script/save.test.ts   # 引擎/档位/目标成就/存档测试（47 个，Node 22 直接跑 TS）
+node --test "script/*.test.mjs"   # 数据工具测试（30 个，glob 必须带引号，裸目录形式在本机报错）
+node --experimental-strip-types --test script/engine-state.test.ts script/pace-mode.test.ts script/goals.test.ts script/save.test.ts script/use-game.test.ts script/gameplay.test.ts script/verdict.test.ts   # 引擎/档位/目标/存档/玩法测试（87 个，Node 22 直接跑 TS）
+npm run test:ui   # UI 组件测试（vitest + Testing Library，18 个）
+node script/stats.mjs   # 事件数据看板（密度/分类/flag 配对/空缺报告）
 ```
 
 ## 架构
@@ -29,8 +31,10 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 - **chiled.json**：事件数据源（snake_case 原始格式：`age_range`/`flags_add`/`has_flags`/`min_attrs`）。**所有事件改动都改这里，不手改 events.json**
 - **convert-events.mjs**：唯一转换器。`ATTR_MAP`（107 键）把 chiled 属性名映射到 8 大引擎属性；`INVERSE` 集合内的键是负向维度（取反求和，如 `pressure:+8` → happiness:-8）；未映射键 fail-fast 抛错；**事件 id 校验**（2 位主线/4 位模拟，其他抛错）。`ATTR_ORDER`/`STAGE_RANGES` 需与 `src/engine/state.ts` 的 `ATTR_META`/`STAGE_META` 手动同步
 - **prune-events.mjs**：精选工具。事件 id 规则：**2 位数字后缀 = 原始主线事件（如 child_01），一字不改、永远保留；4 位数字后缀 = 模拟事件（如 child_0017），只能被精选删除、不能改内容**。`keep-list.json` 记录保留清单（审计用）
-- **merge-fragments.mjs**：合并 chiled.json + `script/fragments/` 片段，跑三重校验：convertAll fail-fast + 每岁密度（0-2 岁 1-3 个、3-12 岁 5-12 个、13-75 岁 3-7 个）+ flag 生产/消费配对（has_flags 引用的 flag 必须有产出者，not_flags 不算悬空）。**幂等**：片段中已合并的 id 自动跳过，片段文件保留在 fragments/ 目录可重复运行
+- **merge-fragments.mjs**：合并 chiled.json + `script/fragments/` 片段，跑三重校验：convertAll fail-fast + 每岁密度（0-2 岁 3-5 个、3-12 岁 5-13 个、13-75 岁 3-8 个）+ flag 生产/消费配对（has_flags 引用的 flag 必须有产出者，not_flags 不算悬空）。**幂等**：片段中已合并的 id 自动跳过，片段文件保留在 fragments/ 目录可重复运行
 - **clamp-effects.mjs**：效果值钳位工具。4 位模拟事件的效果按转换后属性值等比例压缩到 ±3~±20 声明范围内（多键求和超范围时压缩该属性所有来源键）；2 位主线一字不改。幂等，效果值调整后用它 + build:events
+- **stats.mjs**：事件数据看板——每岁密度（0-103）/分类分布/flag 生产-消费配对与悬空引用/效果值范围/2 位 vs 4 位 id 统计/96+ 岁空缺报告，统计逻辑纯函数可测试
+- **gen-icons.mjs**：PWA 图标生成（Node 内置 zlib 手写 PNG 编码器，192/512 主色图标到 public/）
 
 事件/效果改动一律走 chiled.json + convert/prune/merge/clamp 管线，不手改 events.json（见「约定」章节）
 
@@ -48,22 +52,24 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 - **同岁组洗牌（重玩性）**：开局随机种子对同岁事件洗牌（`shuffleEvents`，含 flag 依赖修正——消费事件排在产出者之后），同种子可复现；种子随存档保存
 - **节奏档位**：密度（沉浸全量 / 精简每岁 2-3 个，`filterEvents` 主线优先抽样 + flag 闭包）开局选定；打字速度（慢/中/快）游戏内实时切换（DialogBox speedRef，不重启打字机）；点击跳过打字
 - **存档 v2**：`life-sim-saves-v2` = 3 槽位 + active（`src/engine/save.ts`：SavesV2/migrateLegacySave 旧版自动迁移/isValidSaveData 内容校验）；标题页 3 卡片点击继续、开始新局覆盖确认；**快速模拟不写槽**（autoPlay guard）；RESET 保留槽位（回标题不丢档）
-- **目标/成就/统计**：`goal` 入 GameState；成就存 `life-sim-achievements`（unlocked/completedLives/endings）；统计存 `life-sim-stats`（totalLives/bestScore/totalAge/endings 分布）；结算时经 `achievementPending` 标志一次性持久化（读档恢复不重复计数）
+- **目标/成就/统计**：`goal` 入 GameState（预设 key 或自定义 `CustomGoal {attrs}`——GoalModal 勾选属性+滑杆设目标值，结算逐项达标即达成）；成就存 `life-sim-achievements`（unlocked/completedLives/endings）；统计存 `life-sim-stats`（totalLives/bestScore/totalAge/endings 分布 + lastEndAttrs 终局属性，传承加成用，旧存档缺失无加成）；每日挑战存 `life-sim-daily`（date/bestScore/bestAge，仅当日更新最佳）；结算时经 `achievementPending` 标志一次性持久化（读档恢复不重复计数）
 - conditions 不满足的事件静默跳过；flags 累积在 `game.flags`（不重复）；历史 `history` 含 `flags?` 字段（生涯年表里程碑标记，旧存档兼容）
 - 死亡判定：健康归零或超过 `calcMaxAge`；死因记录在 `game.deathCause`（health 耗尽 / lifespan 寿终），结算页展示临终叙事
 - `MAKE_CHOICE` 预载下一事件（gameOver 时判定成就/统计），`CONTINUE` 只清反馈；反馈页正向收益距年龄上限 15 点内标注「（距上限 X 点）」
 - **音效**：`src/utils/sound.ts` 用 Web Audio 合成轻量 UI 音效（点击/选择/打字/推进/落幕/成就琶音/阶段过渡），无外部资源，浏览器不可用时静默降级；`setMuted` 供快速模拟模式静音高频交互音
 - **成长曲线**：`GameState.snapshots`（可选，`AttrSnapshot[]`）每岁属性快照——`appendSnapshot`（state.ts）进入新岁或终局记录、同岁内不重复、同岁终局替换该岁条目；开局记首事件年龄，旧存档无字段从读档岁重建；结算页 GrowthChart canvas 绘制（x 0→享年、y 0-100、末端圆点 + HTML 图例带终值）
 - **快速模拟**：标题页「⚡ 快速模拟」以随机性别/名字开局（`START_AUTO_GAME`），自动模式每 220ms 随机选择推进、跳过打字机（DialogBox `instant`）与选择面板，直到结算；重新开始或读档自动退出自动模式
-- **周目解锁**：按 `stats.totalLives + 1` 计算周目——第 2 周目起标题页解锁「⚔️ 挑战开局」（`GameState.challenge`，开局属性 `applyChallenge` 整体 -10，结算评分 ≥70 解锁「破局者」成就）；第 3 周目起抽取**命运事件**（`pickFateEvent(seed)` 从 `RARE_EVENT_IDS` 15 个精选事件按种子抽 1，确定性可存档还原），该事件触发时效果 ×1.5（`scaleOutcomes`）、游戏内显示「⚡ 命运事件」角标
+- **每日挑战**：标题页「📅 每日挑战」以日期确定性种子（`dateToSeed`，YYYYMMDD → number）开局，同一天全局同一局；手动播放、无目标/无挑战、不写存档槽（saveState guard 含 isDaily）；入口旁展示「今日最佳 评分/享年」（`life-sim-daily`）
+- **局中重开**：GameScreen ✕ 确认弹窗第三选项「🔄 重新开始本局」（`RESTART` action 复用 startNewGame，同设置新随机种子；每日挑战局重开保持固定种子）；快速模拟不显示
+- **周目解锁**：按 `stats.totalLives + 1` 计算周目——第 2 周目起标题页解锁「⚔️ 挑战开局」（`GameState.challenge`，开局属性 `applyChallenge` 整体 -10，结算评分 ≥70 解锁「破局者」成就）；第 3 周目起抽取**命运事件**（`pickFateEvent(seed)` 从 `RARE_EVENT_IDS` 15 个精选事件按种子抽 1，确定性可存档还原），该事件触发时效果 ×1.5（`scaleOutcomes`）、游戏内显示「⚡ 命运事件」角标；第 4 周目起解锁**传承加成**（结算把终局属性写入 `stats.lastEndAttrs`，开局 `applyInheritance` 取最高 2 项 ≥50 的属性各 +8、上限 100，与挑战 -10 独立叠加，结算页标注「🧬 传承」）；第 5 周目起**双命运事件**（`pickFateEvents(seed, count)` 抽 2 个，`RuntimeState.fateEventIds` 数组，单抽与双抽同种子同源）
 - **传记导出**：结算页「📜 导出人生传记」——`src/utils/biography.ts` 的 `buildBiographyMarkdown` 生成叙事 markdown（大事记按岁分组 + 事件标题 + 里程碑 ⭐ + 最终属性表），`downloadText` 触发下载
 
 ### UI（src/components/）
 
-- **GameScreen**：场景 + 数值栏 + 底部对话框区。**数值栏在 `top-[42%]`，底部区 `max-h-[45%] overflow-y-auto`（含 `pb-9` 防速度按钮遮挡）——两者位置耦合，改动需保持不重叠**；右上角 ✕ 中途退出（确认后回标题，存档保留）
+- **GameScreen**：场景 + 数值栏 + 底部对话框区。**数值栏在 `top-[42%]`，底部区 `max-h-[45%] overflow-y-auto`（含 `pb-9` 防速度按钮遮挡）——两者位置耦合，改动需保持不重叠**；右上角 ✕ 确认弹窗三选项（取消/🔄 重新开始本局/确定回标题，存档保留；快速模拟不显示重开）
 - **DialogBox**：打字机效果（速度档位 + 点击跳过）+ 「▼ 点击继续」；事件标题显示为「标题」
 - **ChoicePanel**：选项按钮（`button.group` class，effects 展示串由转换器生成）
-- **TitleScreen**：名字/性别 + **节奏档位（沉浸/精简）+ 打字速度 + 3 存档卡片 + 目标选择模态（GoalModal）+ 成就（AchievementsModal）/生涯统计（StatsModal）入口**——720px 高度余量极小（约 1px），改动必须回归检查
+- **TitleScreen**：名字/性别 + **节奏档位（沉浸/精简）+ 打字速度 + 3 存档卡片 + 目标选择模态（GoalModal，含「🎯 自定义目标」勾选属性+滑杆设目标值）+ 成就（AchievementsModal）/生涯统计（StatsModal）入口 + 快捷入口行（⚡ 快速模拟/📅 每日挑战/📊 生涯/🏆 成就）**——720px 高度余量极小（约 1px），改动必须回归检查
 - **SummaryScreen**：结算页（享年 + 结局 + 评分 + 属性 + **成长曲线（GrowthChart canvas 8 维随年龄折线图）+ 人生大事记完整时间线（里程碑 ⭐）+ 目标达成度 + 新解锁成就 + 本可发生而未触发 + 分享卡片（ShareCardModal canvas PNG，含迷你成长曲线）+ 传记导出**）
 - **SceneArea/SceneDecor**：按阶段/年龄渲染的场景背景
 - **App**：移动端视口等比缩放（scale = min(vw/960, vh/720)，<1 才缩放）

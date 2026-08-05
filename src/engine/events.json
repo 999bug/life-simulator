@@ -719,10 +719,11 @@
     "choices": [
       {
         "text": "认真照顾宠物",
-        "effects": "⚖️+20",
+        "effects": "💰-4 ⚖️+20",
         "outcomes": {
           "attr": {
-            "morality": 20
+            "morality": 20,
+            "wealth": -4
           },
           "flags": [
             "animal_love"
@@ -803,10 +804,11 @@
     "choices": [
       {
         "text": "主动照顾弟弟妹妹",
-        "effects": "⚖️+20",
+        "effects": "😊-4 ⚖️+20",
         "outcomes": {
           "attr": {
-            "morality": 20
+            "morality": 20,
+            "happiness": -4
           },
           "flags": [
             "caring_person"
@@ -891,10 +893,11 @@
     "choices": [
       {
         "text": "爱上阅读",
-        "effects": "🧠+20",
+        "effects": "🧠+20 👥-3",
         "outcomes": {
           "attr": {
-            "intelligence": 20
+            "intelligence": 20,
+            "social": -3
           },
           "flags": [
             "book_reader"
@@ -1168,11 +1171,12 @@
     "choices": [
       {
         "text": "取得好成绩",
-        "effects": "🧠+10 🎨+20",
+        "effects": "🧠+10 😊-5 🎨+20",
         "outcomes": {
           "attr": {
             "appearance": 20,
-            "intelligence": 10
+            "intelligence": 10,
+            "happiness": -5
           },
           "flags": [
             "early_success"
@@ -1212,11 +1216,12 @@
     "choices": [
       {
         "text": "学习音乐",
-        "effects": "🧠+10 🎨+20",
+        "effects": "🧠+10 💰-4 🎨+20",
         "outcomes": {
           "attr": {
             "appearance": 20,
-            "intelligence": 10
+            "intelligence": 10,
+            "wealth": -4
           },
           "flags": [
             "musician_path"
@@ -1462,11 +1467,12 @@
     "choices": [
       {
         "text": "主动参加竞选",
-        "effects": "👥+15 🎨+15",
+        "effects": "😊-4 👥+15 🎨+15",
         "outcomes": {
           "attr": {
             "social": 15,
-            "appearance": 15
+            "appearance": 15,
+            "happiness": -4
           },
           "flags": [
             "leader_candidate"
@@ -1590,11 +1596,12 @@
     "choices": [
       {
         "text": "进入前列",
-        "effects": "🧠+15 🎨+20",
+        "effects": "🧠+15 😊-5 🎨+20",
         "outcomes": {
           "attr": {
             "appearance": 20,
-            "intelligence": 15
+            "intelligence": 15,
+            "happiness": -5
           },
           "flags": [
             "top_student"
@@ -1656,10 +1663,11 @@
       },
       {
         "text": "全部存起来",
-        "effects": "⚖️+15",
+        "effects": "😊-4 ⚖️+15",
         "outcomes": {
           "attr": {
-            "morality": 15
+            "morality": 15,
+            "happiness": -4
           }
         }
       }
@@ -1813,11 +1821,12 @@
     "choices": [
       {
         "text": "接受训练",
-        "effects": "🧠+20 🎨+15",
+        "effects": "🧠+20 😊-5 🎨+15",
         "outcomes": {
           "attr": {
             "intelligence": 20,
-            "appearance": 15
+            "appearance": 15,
+            "happiness": -5
           },
           "flags": [
             "competition_path"
@@ -1854,11 +1863,12 @@
     "choices": [
       {
         "text": "努力超过对方",
-        "effects": "🧠+20 ⚖️+15",
+        "effects": "🧠+20 👥-4 ⚖️+15",
         "outcomes": {
           "attr": {
             "intelligence": 20,
-            "morality": 15
+            "morality": 15,
+            "social": -4
           },
           "flags": [
             "rivalry"
@@ -1975,11 +1985,12 @@
     "choices": [
       {
         "text": "制定储蓄计划",
-        "effects": "💰+20 ⚖️+10",
+        "effects": "💰+20 😊-4 ⚖️+10",
         "outcomes": {
           "attr": {
             "wealth": 20,
-            "morality": 10
+            "morality": 10,
+            "happiness": -4
           }
         }
       },
@@ -2013,10 +2024,11 @@
     "choices": [
       {
         "text": "加入并维护友情",
-        "effects": "👥+20",
+        "effects": "😊-3 👥+20",
         "outcomes": {
           "attr": {
-            "social": 20
+            "social": 20,
+            "happiness": -3
           },
           "flags": [
             "childhood_group"
@@ -2311,10 +2323,11 @@
     "choices": [
       {
         "text": "接受专业训练",
-        "effects": "💪+20",
+        "effects": "💪+20 👥-3",
         "outcomes": {
           "attr": {
-            "health": 20
+            "health": 20,
+            "social": -3
           },
           "flags": [
             "athlete_candidate"
@@ -2351,10 +2364,11 @@
     "choices": [
       {
         "text": "投入更多时间",
-        "effects": "🧠+20",
+        "effects": "🧠+20 👥-3",
         "outcomes": {
           "attr": {
-            "intelligence": 20
+            "intelligence": 20,
+            "social": -3
           },
           "flags": [
             "special_talent"
@@ -2484,11 +2498,12 @@
     "choices": [
       {
         "text": "冷静沟通解决",
-        "effects": "🧠+15 👥+20",
+        "effects": "🧠+15 😊-3 👥+20",
         "outcomes": {
           "attr": {
             "social": 20,
-            "intelligence": 15
+            "intelligence": 15,
+            "happiness": -3
           },
           "flags": [
             "conflict_solver"
@@ -2566,11 +2581,12 @@
     "choices": [
       {
         "text": "投入大量训练",
-        "effects": "🧠+20 🎨+20",
+        "effects": "🧠+20 😊-5 🎨+20",
         "outcomes": {
           "attr": {
             "intelligence": 20,
-            "appearance": 20
+            "appearance": 20,
+            "happiness": -5
           },
           "flags": [
             "regional_competitor"
@@ -2872,11 +2888,12 @@
     "choices": [
       {
         "text": "接受长期训练",
-        "effects": "🧠+20 ⚖️+20",
+        "effects": "🧠+20 😊-5 ⚖️+20",
         "outcomes": {
           "attr": {
             "intelligence": 20,
-            "morality": 20
+            "morality": 20,
+            "happiness": -5
           },
           "flags": [
             "professional_training"
@@ -3007,11 +3024,12 @@
       },
       {
         "text": "公平竞争",
-        "effects": "🧠+20 🎨+15",
+        "effects": "🧠+20 👥-4 🎨+15",
         "outcomes": {
           "attr": {
             "intelligence": 20,
-            "appearance": 15
+            "appearance": 15,
+            "social": -4
           }
         }
       },
@@ -3234,11 +3252,12 @@
     "choices": [
       {
         "text": "努力维持友情",
-        "effects": "👥+20 ⚖️+20",
+        "effects": "😊-4 👥+20 ⚖️+20",
         "outcomes": {
           "attr": {
             "morality": 20,
-            "social": 20
+            "social": 20,
+            "happiness": -4
           },
           "flags": [
             "childhood_friend"
@@ -3355,11 +3374,12 @@
     "choices": [
       {
         "text": "保持理性成长",
-        "effects": "🧠+20 ⚖️+20",
+        "effects": "🧠+20 😊-4 ⚖️+20",
         "outcomes": {
           "attr": {
             "intelligence": 20,
-            "morality": 20
+            "morality": 20,
+            "happiness": -4
           }
         }
       },
@@ -3393,11 +3413,12 @@
     "choices": [
       {
         "text": "进入重点初中",
-        "effects": "🎨+20 🍀+20",
+        "effects": "😊-4 🎨+20 🍀+20",
         "outcomes": {
           "attr": {
             "appearance": 20,
-            "luck": 20
+            "luck": 20,
+            "happiness": -4
           },
           "flags": [
             "key_middle_school"
@@ -5317,6 +5338,53 @@
     }
   },
   {
+    "id": "young_0032",
+    "stage": "young_adult",
+    "age": 18,
+    "title": "毕业旅行的分岔口",
+    "text": "高考最后一科收卷铃响，教室里炸开了锅。死党凑过来，说计划好了：绿皮火车一路向西，去看青海湖，预算刚好掏空你攒了三年的压岁钱。妈妈则在家念叨，隔壁快餐店招暑期工，一个月能挣两千多。",
+    "category": "friend",
+    "choices": [
+      {
+        "text": "和死党坐上西去的火车，钱花光了，但一辈子难忘",
+        "effects": "💰-6 😊+6 👥+8",
+        "outcomes": {
+          "attr": {
+            "social": 8,
+            "happiness": 6,
+            "wealth": -6
+          }
+        }
+      },
+      {
+        "text": "去快餐店打工，开学前攒下第一笔自己的钱",
+        "effects": "💰+8 😊-3",
+        "outcomes": {
+          "attr": {
+            "wealth": 8,
+            "happiness": -3
+          }
+        }
+      },
+      {
+        "text": "哪也不去，在家吹空调打游戏，舒服又省钱",
+        "effects": "😊+5 👥-2",
+        "outcomes": {
+          "attr": {
+            "happiness": 5,
+            "social": -2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "young_01",
     "stage": "young_adult",
     "age": 18,
@@ -5629,6 +5697,52 @@
     }
   },
   {
+    "id": "young_0033",
+    "stage": "young_adult",
+    "age": 19,
+    "title": "社团招新的抉择",
+    "text": "百团大战的摊位排满了整条林荫道。辩论队学长拍着胸脯说「来了就是主力」，可期末绩点还压在头上，辅导员刚在群里发了奖学金排名。你捏着报名表，站在人潮里有点犹豫。",
+    "category": "education",
+    "choices": [
+      {
+        "text": "加入辩论队，熬夜备赛，学习成绩被拖了一点",
+        "effects": "🧠+1 👥+6",
+        "outcomes": {
+          "attr": {
+            "social": 6,
+            "intelligence": 1
+          }
+        }
+      },
+      {
+        "text": "专心泡图书馆冲绩点，社团活动基本绝缘",
+        "effects": "🧠+8 👥-3",
+        "outcomes": {
+          "attr": {
+            "intelligence": 8,
+            "social": -3
+          }
+        }
+      },
+      {
+        "text": "社团和学习都想要，结果两头都有点跟不上",
+        "effects": "🧠+3 😊-6",
+        "outcomes": {
+          "attr": {
+            "intelligence": 3,
+            "happiness": -6
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "young_02",
     "stage": "young_adult",
     "age": 19,
@@ -5935,6 +6049,52 @@
       "hasFlags": [
         "normal_university"
       ]
+    }
+  },
+  {
+    "id": "young_0034",
+    "stage": "young_adult",
+    "age": 20,
+    "title": "一千公里的距离",
+    "text": "TA 去了另一座城市读书，一千多公里，火车要坐一整夜。视频里的脸越来越模糊，话题越来越短。月底看着银行卡余额，你在想：这个月的票，还买不买。",
+    "category": "love",
+    "choices": [
+      {
+        "text": "买。每个月去看 TA，车票吃掉大半生活费",
+        "effects": "💰-8 😊+6",
+        "outcomes": {
+          "attr": {
+            "happiness": 6,
+            "wealth": -8
+          }
+        }
+      },
+      {
+        "text": "改成视频维系，把生活费省下来，深夜挂电话时有点空",
+        "effects": "💰+3 😊-4",
+        "outcomes": {
+          "attr": {
+            "wealth": 3,
+            "happiness": -4
+          }
+        }
+      },
+      {
+        "text": "和平分手，祝彼此前程似锦，躲在被子里哭了一场",
+        "effects": "🧠+6 😊-6",
+        "outcomes": {
+          "attr": {
+            "intelligence": 6,
+            "happiness": -6
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
     }
   },
   {
@@ -7054,6 +7214,53 @@
     }
   },
   {
+    "id": "young_0035",
+    "stage": "young_adult",
+    "age": 23,
+    "title": "搬出去，还是住家里",
+    "text": "工作定了，住处成了问题。公司附近的一居室，房租要吃掉三分之一的工资；住家里倒是省钱，可妈妈从早饭念叨到晚饭：几点睡、吃什么、对象呢。中介的电话还在兜里震动。",
+    "category": "personality",
+    "choices": [
+      {
+        "text": "自己租房。自由的味道，是月底吃土换来的",
+        "effects": "🧠+8 💰-7",
+        "outcomes": {
+          "attr": {
+            "intelligence": 8,
+            "wealth": -7
+          }
+        }
+      },
+      {
+        "text": "住家里省钱，代价是每天被念叨到耳朵起茧",
+        "effects": "💰+5 😊-6",
+        "outcomes": {
+          "attr": {
+            "wealth": 5,
+            "happiness": -6
+          }
+        }
+      },
+      {
+        "text": "和同事合租折中，水电分摊的摩擦隔三差五",
+        "effects": "💰-3 😊-2 👥+4",
+        "outcomes": {
+          "attr": {
+            "social": 4,
+            "wealth": -3,
+            "happiness": -2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "young_09",
     "stage": "young_adult",
     "age": 23,
@@ -7756,6 +7963,53 @@
     }
   },
   {
+    "id": "young_0036",
+    "stage": "young_adult",
+    "age": 25,
+    "title": "婚礼请柬与份子钱",
+    "text": "大学睡你上铺的兄弟要结婚了，请柬寄到公司，婚礼在老家办。你打开购票软件看了看机票，又看了看群里大家讨论的份子钱行情。这个月的账单，已经排到下个月发工资了。",
+    "category": "friend",
+    "choices": [
+      {
+        "text": "飞回去，包两千。多年情谊，不缩水",
+        "effects": "💰-5 👥+6",
+        "outcomes": {
+          "attr": {
+            "social": 6,
+            "wealth": -5
+          }
+        }
+      },
+      {
+        "text": "包六百意思到了，听说有人在背后嘀咕",
+        "effects": "💰-2 😊-3 👥-2",
+        "outcomes": {
+          "attr": {
+            "wealth": -2,
+            "happiness": -3,
+            "social": -2
+          }
+        }
+      },
+      {
+        "text": "人不到礼到，省下机票钱，视频里说了声恭喜",
+        "effects": "💰+3 👥-3",
+        "outcomes": {
+          "attr": {
+            "wealth": 3,
+            "social": -3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "young_14",
     "stage": "young_adult",
     "age": 25,
@@ -8064,6 +8318,52 @@
     }
   },
   {
+    "id": "young_0037",
+    "stage": "young_adult",
+    "age": 26,
+    "title": "深夜的借钱电话",
+    "text": "晚上十一点，很久没联系的朋友打来电话，支支吾吾半天：生意周转不开，想借两万，说好三个月还。你想起上次吃饭他抢着买单的样子，也想起银行卡里刚攒下的那点积蓄。",
+    "category": "finance",
+    "choices": [
+      {
+        "text": "借了。他连声道谢，只是还钱的日子一推再推",
+        "effects": "💰-6 👥+5",
+        "outcomes": {
+          "attr": {
+            "social": 5,
+            "wealth": -6
+          }
+        }
+      },
+      {
+        "text": "找借口推掉了。电话两头沉默了几秒，关系明显淡了",
+        "effects": "💰+2 👥-5",
+        "outcomes": {
+          "attr": {
+            "wealth": 2,
+            "social": -5
+          }
+        }
+      },
+      {
+        "text": "借一半，认真立了字据，亲兄弟明算账",
+        "effects": "🧠+4 💰-3",
+        "outcomes": {
+          "attr": {
+            "wealth": -3,
+            "intelligence": 4
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "young_15",
     "stage": "young_adult",
     "age": 26,
@@ -8341,6 +8641,99 @@
       "hasFlags": [
         "rivalry"
       ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "young_0038",
+    "stage": "young_adult",
+    "age": 27,
+    "title": "连续加班的第三十一天",
+    "text": "项目冲刺，你已经连续加班一个月。凌晨的写字楼只剩你这一层亮着灯，外卖盒堆在桌角，镜子里的自己眼窝深陷。领导在群里说：「再扛一扛，上线就好了。」",
+    "category": "career",
+    "choices": [
+      {
+        "text": "咬牙扛住。项目上线被点名表扬，体检报告多了两个箭头",
+        "effects": "💪-6 🧠+8",
+        "outcomes": {
+          "attr": {
+            "intelligence": 8,
+            "health": -6
+          }
+        }
+      },
+      {
+        "text": "找领导谈了边界。这个季度的绩效，被打了个 B",
+        "effects": "🧠+5 💰-3",
+        "outcomes": {
+          "attr": {
+            "intelligence": 5,
+            "wealth": -3
+          }
+        }
+      },
+      {
+        "text": "提了离职。走出写字楼那一刻，世界瞬间安静了",
+        "effects": "💰-5 😊+6",
+        "outcomes": {
+          "attr": {
+            "happiness": 6,
+            "wealth": -5
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "young_0039",
+    "stage": "young_adult",
+    "age": 27,
+    "title": "分期免息的陷阱",
+    "text": "种草半年的新手机，购物车页面弹出「十二期免息，每月仅需 599」。你算了算工资，好像也不是不行。下单页面金光闪闪，「立即拥有」四个字一直在闪。",
+    "category": "finance",
+    "choices": [
+      {
+        "text": "分期拿下。后来才发现手续费和会员费滚了一笔",
+        "effects": "💰-8 😊+5 ⚖️-3",
+        "outcomes": {
+          "attr": {
+            "happiness": 5,
+            "wealth": -8,
+            "morality": -3
+          }
+        }
+      },
+      {
+        "text": "忍住没买。月末再看，好像也就那么回事",
+        "effects": "💰+2 ⚖️+6",
+        "outcomes": {
+          "attr": {
+            "morality": 6,
+            "wealth": 2
+          }
+        }
+      },
+      {
+        "text": "买了，玩了两周，挂二手平台回血一半",
+        "effects": "🧠+4 💰-3",
+        "outcomes": {
+          "attr": {
+            "wealth": -3,
+            "intelligence": 4
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
       "notFlags": [],
       "minAttrs": {},
       "maxAttrs": {}
@@ -8973,6 +9366,100 @@
     }
   },
   {
+    "id": "young_0040",
+    "stage": "young_adult",
+    "age": 29,
+    "title": "饭局上的站队",
+    "text": "部门两位领导明争暗斗，周五晚上，其中一位叫你去饭局。酒过三巡，他拍着你的肩膀：「小王是明白人，以后跟着我干。」桌上的人都看着你，等你举杯。",
+    "category": "career",
+    "choices": [
+      {
+        "text": "举杯表态。之后果然被提携，只是心里有点不是滋味",
+        "effects": "💰+5 ⚖️-4",
+        "outcomes": {
+          "attr": {
+            "wealth": 5,
+            "morality": -4
+          }
+        }
+      },
+      {
+        "text": "装病推掉。第二个星期，好项目再没有你的份",
+        "effects": "🧠-3 👥-2 ⚖️+4",
+        "outcomes": {
+          "attr": {
+            "morality": 4,
+            "intelligence": -3,
+            "social": -2
+          }
+        }
+      },
+      {
+        "text": "去了但只吃饭不表态，结果两边都没拿你当自己人",
+        "effects": "🧠+3 👥-2",
+        "outcomes": {
+          "attr": {
+            "social": -2,
+            "intelligence": 3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "young_0041",
+    "stage": "young_adult",
+    "age": 29,
+    "title": "体检报告上的箭头",
+    "text": "公司年度体检，报告上多了三个向上的箭头：血脂、尿酸、脂肪肝倾向。医生推了推眼镜：「年轻人，少熬夜，多运动。」你捏着报告单，站在医院走廊里，第一次认真想了想「身体」这两个字。",
+    "category": "health",
+    "choices": [
+      {
+        "text": "立刻办健身卡，调整作息，和夜宵说再见",
+        "effects": "💪+8 💰-4",
+        "outcomes": {
+          "attr": {
+            "health": 8,
+            "wealth": -4
+          }
+        }
+      },
+      {
+        "text": "收藏了一堆养生帖，然后继续熬夜",
+        "effects": "💪-5 😊+3",
+        "outcomes": {
+          "attr": {
+            "happiness": 3,
+            "health": -5
+          }
+        }
+      },
+      {
+        "text": "找中医慢慢调理，把生活节奏一点点找回来",
+        "effects": "💪+5 💰-3 ⚖️+3",
+        "outcomes": {
+          "attr": {
+            "health": 5,
+            "wealth": -3,
+            "morality": 3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "young_18",
     "stage": "young_adult",
     "age": 29,
@@ -9352,6 +9839,106 @@
     ]
   },
   {
+    "id": "research_0001",
+    "stage": "adult",
+    "age": 30,
+    "title": "研究所的橄榄枝",
+    "text": "大学时发的那篇论文，竟然被省研究所的老教授看到了。他辗转找到你，问愿不愿意进他的项目组：钱不多，方向冷门，但「是做真东西的地方」。窗外的写字楼灯火通明，同学们都在谈年终奖。",
+    "category": "education",
+    "choices": [
+      {
+        "text": "加入项目组，坐冷板凳也认了",
+        "effects": "🧠+8 💰+3",
+        "outcomes": {
+          "attr": {
+            "intelligence": 8,
+            "wealth": 3
+          },
+          "flags": [
+            "research_path"
+          ]
+        }
+      },
+      {
+        "text": "婉拒，去业界挣快钱，专业慢慢荒了",
+        "effects": "🧠-2 💰+8",
+        "outcomes": {
+          "attr": {
+            "wealth": 8,
+            "intelligence": -2
+          }
+        }
+      },
+      {
+        "text": "再想想，拖着拖着就没了下文",
+        "effects": "😊+3",
+        "outcomes": {
+          "attr": {
+            "happiness": 3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {
+        "intelligence": 70
+      },
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "gray_0001",
+    "stage": "adult",
+    "age": 30,
+    "title": "快钱的门道",
+    "text": "饭局上认识的老哥神神秘秘：有批货走灰色渠道，一个月翻番，「规矩都懂，出了事也查不到你」。他把一沓现金拍在桌上当定金。你看着那沓钱，心跳得很快。",
+    "category": "career",
+    "choices": [
+      {
+        "text": "入局。钱来得快，心也悬得快",
+        "effects": "💰+10 🍀-3",
+        "outcomes": {
+          "attr": {
+            "wealth": 10,
+            "luck": -3
+          },
+          "flags": [
+            "gray_deal"
+          ]
+        }
+      },
+      {
+        "text": "把钱推回去：这碗饭，吃不了",
+        "effects": "💰-2 ⚖️+4",
+        "outcomes": {
+          "attr": {
+            "morality": 4,
+            "wealth": -2
+          }
+        }
+      },
+      {
+        "text": "不置可否，回去越想越后怕",
+        "effects": "🧠+3",
+        "outcomes": {
+          "attr": {
+            "intelligence": 3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {
+        "morality": 30
+      }
+    }
+  },
+  {
     "id": "adult_01",
     "stage": "adult",
     "age": 30,
@@ -9713,6 +10300,117 @@
     }
   },
   {
+    "id": "research_0002",
+    "stage": "adult",
+    "age": 31,
+    "title": "第一千次失败",
+    "text": "实验又失败了，这是第一千次。记录本上密密麻麻的红叉，同组的人走了一半。深夜的实验室只剩仪器的嗡鸣，你盯着烧杯，想起老教授说的「做真东西」。",
+    "category": "education",
+    "choices": [
+      {
+        "text": "擦干记录本，开始第一千零一次",
+        "effects": "😊-3 ⚖️+6",
+        "outcomes": {
+          "attr": {
+            "morality": 6,
+            "happiness": -3
+          },
+          "flags": [
+            "paper_breakthrough"
+          ]
+        }
+      },
+      {
+        "text": "换个角度切入，思路忽然活了",
+        "effects": "🧠+5 🍀+3",
+        "outcomes": {
+          "attr": {
+            "intelligence": 5,
+            "luck": 3
+          },
+          "flags": [
+            "paper_breakthrough"
+          ]
+        }
+      },
+      {
+        "text": "承认不是这块料，转行去了企业",
+        "effects": "🧠-3 😊+4",
+        "outcomes": {
+          "attr": {
+            "intelligence": -3,
+            "happiness": 4
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "research_path"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "hosp_0001",
+    "stage": "adult",
+    "age": 31,
+    "title": "凌晨的急诊室",
+    "text": "胸口那阵绞痛把你从梦里拽了出来。凌晨三点的急诊室，白炽灯亮得刺眼，输液管里的药水一滴一滴往下走。医生看完片子，眉头拧在一起：「这么年轻，身体怎么熬成这样。」",
+    "category": "health",
+    "choices": [
+      {
+        "text": "老老实实住院，把这些年欠身体的先还上",
+        "effects": "💪+8 💰-5",
+        "outcomes": {
+          "attr": {
+            "health": 8,
+            "wealth": -5
+          },
+          "flags": [
+            "hospitalized"
+          ]
+        }
+      },
+      {
+        "text": "开点药就走，工作还堆着，哪有时间住院",
+        "effects": "💪-4 💰+2",
+        "outcomes": {
+          "attr": {
+            "health": -4,
+            "wealth": 2
+          },
+          "flags": [
+            "hospitalized"
+          ]
+        }
+      },
+      {
+        "text": "家人连夜赶来，看着你红了眼眶",
+        "effects": "😊-3 👥+4",
+        "outcomes": {
+          "attr": {
+            "happiness": -3,
+            "social": 4
+          },
+          "flags": [
+            "hospitalized"
+          ]
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {
+        "health": 30
+      }
+    }
+  },
+  {
     "id": "adult_22",
     "stage": "adult",
     "age": 32,
@@ -9929,6 +10627,113 @@
     ],
     "conditions": {
       "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "invest_0001",
+    "stage": "adult",
+    "age": 32,
+    "title": "找上门的好项目",
+    "text": "你手里有了些积蓄的消息，不知怎么就传开了。大学同学带着商业计划书约你喝咖啡：新能源配套，回报率高，就差一笔启动资金。他把手机里的测算表推到你面前，数字漂亮得像假的。",
+    "category": "finance",
+    "choices": [
+      {
+        "text": "先尽调再说，花钱请专业人士查了个底朝天",
+        "effects": "🧠+5 💰-3",
+        "outcomes": {
+          "attr": {
+            "intelligence": 5,
+            "wealth": -3
+          },
+          "flags": [
+            "investor"
+          ]
+        }
+      },
+      {
+        "text": "机会不等人，重注一把",
+        "effects": "💰+10 🍀-4",
+        "outcomes": {
+          "attr": {
+            "wealth": 10,
+            "luck": -4
+          },
+          "flags": [
+            "investor"
+          ]
+        }
+      },
+      {
+        "text": "数字漂亮得像假的，那就是假的，婉拒",
+        "effects": "💰+4",
+        "outcomes": {
+          "attr": {
+            "wealth": 4
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {
+        "wealth": 80
+      },
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "gray_0002",
+    "stage": "adult",
+    "age": 32,
+    "title": "越做越大的摊子",
+    "text": "第一笔平安落地后，老哥把你的「份额」又加重了一成。流水越来越大，你换了好车，却开始害怕陌生来电，睡觉总把手机调成静音。深夜里你偶尔会想：这条船，还下得来吗？",
+    "category": "career",
+    "choices": [
+      {
+        "text": "继续加码，撑死胆大的",
+        "effects": "💰+12 😊-5",
+        "outcomes": {
+          "attr": {
+            "wealth": 12,
+            "happiness": -5
+          },
+          "flags": [
+            "gray_deep"
+          ]
+        }
+      },
+      {
+        "text": "找借口抽身，宁可少赚也要睡个安稳觉",
+        "effects": "💰-3 ⚖️+5",
+        "outcomes": {
+          "attr": {
+            "morality": 5,
+            "wealth": -3
+          },
+          "flags": [
+            "gray_quit"
+          ]
+        }
+      },
+      {
+        "text": "找个替身挡在前面，自己往后躲",
+        "effects": "🧠+5 ⚖️-3",
+        "outcomes": {
+          "attr": {
+            "intelligence": 5,
+            "morality": -3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "gray_deal"
+      ],
       "notFlags": [],
       "minAttrs": {},
       "maxAttrs": {}
@@ -10256,6 +11061,113 @@
     }
   },
   {
+    "id": "research_0003",
+    "stage": "adult",
+    "age": 33,
+    "title": "顶刊的录用邮件",
+    "text": "凌晨查邮件，顶刊的录用通知躺在收件箱里，审稿人写着「方法有原创性」。你盯着屏幕看了很久，把那些熬过的夜、失败的数据，都在脑子里过了一遍。老教授已经退休了，你第一个想告诉他。",
+    "category": "career",
+    "choices": [
+      {
+        "text": "继续深耕，把这条路走到底",
+        "effects": "🧠+8 🎨+5",
+        "outcomes": {
+          "attr": {
+            "intelligence": 8,
+            "appearance": 5
+          },
+          "flags": [
+            "scholar_name"
+          ]
+        }
+      },
+      {
+        "text": "把成果转成专利，第一次尝到学术变现",
+        "effects": "🧠+2 💰+8",
+        "outcomes": {
+          "attr": {
+            "wealth": 8,
+            "intelligence": 2
+          },
+          "flags": [
+            "scholar_name"
+          ]
+        }
+      },
+      {
+        "text": "心愿已了，把重心放回生活",
+        "effects": "😊+5",
+        "outcomes": {
+          "attr": {
+            "happiness": 5
+          },
+          "flags": [
+            "scholar_name"
+          ]
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "paper_breakthrough"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "invest_0002",
+    "stage": "adult",
+    "age": 33,
+    "title": "朋友带路的局",
+    "text": "老朋友组了个局，席间全是「内部消息」：某个项目三个月翻番，名额有限。朋友已经投了，一直撺掇你跟上。饭桌上的茅台很香，但合同细则谁都没细看。",
+    "category": "finance",
+    "choices": [
+      {
+        "text": "抹不开面子，跟投了一笔",
+        "effects": "💰+8 👥+3",
+        "outcomes": {
+          "attr": {
+            "wealth": 8,
+            "social": 3
+          }
+        }
+      },
+      {
+        "text": "回家逐条扒合同，果然有诈，从此远离这个圈子",
+        "effects": "🧠+6 👥-4",
+        "outcomes": {
+          "attr": {
+            "intelligence": 6,
+            "social": -4
+          },
+          "flags": [
+            "investor_sharp"
+          ]
+        }
+      },
+      {
+        "text": "全部资金撤到安全区，宁可少赚",
+        "effects": "💰-2 😊+4",
+        "outcomes": {
+          "attr": {
+            "wealth": -2,
+            "happiness": 4
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "investor"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "adult_31",
     "stage": "adult",
     "age": 34,
@@ -10469,6 +11381,109 @@
     ],
     "conditions": {
       "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "invest_0003",
+    "stage": "adult",
+    "age": 34,
+    "title": "爆雷的那个清晨",
+    "text": "项目群的公告停在昨夜：「负责人失联」。你赶到办公地点，大门紧锁，门口已经聚了一群投资者。有人瘫坐在地上，有人已经在打电话报警。你的那笔钱，也在里面。",
+    "category": "finance",
+    "choices": [
+      {
+        "text": "血汗钱打了水漂，蹲在马路牙子上抽了半包烟",
+        "effects": "💰-10 😊-6",
+        "outcomes": {
+          "attr": {
+            "wealth": -10,
+            "happiness": -6
+          }
+        }
+      },
+      {
+        "text": "庆幸提前撤了大半，亏的当交学费",
+        "effects": "🧠+4 💰-3",
+        "outcomes": {
+          "attr": {
+            "wealth": -3,
+            "intelligence": 4
+          },
+          "flags": [
+            "investor_sharp"
+          ]
+        }
+      },
+      {
+        "text": "联合其他受害者报案，能追回一点是一点",
+        "effects": "💰-4 ⚖️+4",
+        "outcomes": {
+          "attr": {
+            "morality": 4,
+            "wealth": -4
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "investor"
+      ],
+      "notFlags": [
+        "investor_sharp"
+      ],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "hosp_0002",
+    "stage": "adult",
+    "age": 34,
+    "title": "病床上的清单",
+    "text": "住院的第七天，隔壁床换了新病人，前天那位没能撑过去。夜里你睡不着，找出一张废纸，在背面写下「如果还能出院，一定要做的事」。写着写着，笔停了——原来想做的事，没几件和工作有关。",
+    "category": "health",
+    "choices": [
+      {
+        "text": "把清单收好，出院后一条一条去实现",
+        "effects": "🧠-3 😊+6",
+        "outcomes": {
+          "attr": {
+            "happiness": 6,
+            "intelligence": -3
+          },
+          "flags": [
+            "bucket_list"
+          ]
+        }
+      },
+      {
+        "text": "发誓彻底改变，从戒掉熬夜开始",
+        "effects": "💪+4 ⚖️+6",
+        "outcomes": {
+          "attr": {
+            "morality": 6,
+            "health": 4
+          }
+        }
+      },
+      {
+        "text": "越想越委屈，凭什么是我",
+        "effects": "😊-8",
+        "outcomes": {
+          "attr": {
+            "happiness": -8
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "hospitalized"
+      ],
       "notFlags": [],
       "minAttrs": {},
       "maxAttrs": {}
@@ -10787,6 +11802,55 @@
     "conditions": {
       "hasFlags": [
         "music_stick"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "gray_0003",
+    "stage": "adult",
+    "age": 35,
+    "title": "半夜的敲门声",
+    "text": "凌晨两点，急促的敲门声。猫眼里是几个陌生面孔：「开门，例行检查。」你的血一下子凉了，手机里有不能见光的东西，保险柜里有说不清的现金。敲门声越来越重。",
+    "category": "career",
+    "choices": [
+      {
+        "text": "从消防通道跑了，从此东躲西藏",
+        "effects": "💰-8 😊-6",
+        "outcomes": {
+          "attr": {
+            "wealth": -8,
+            "happiness": -6
+          }
+        }
+      },
+      {
+        "text": "瘫坐在沙发上等门开，听天由命",
+        "effects": "😊-5 🍀+6",
+        "outcomes": {
+          "attr": {
+            "luck": 6,
+            "happiness": -5
+          }
+        }
+      },
+      {
+        "text": "第二天走进派出所，把这些年全交代了",
+        "effects": "💰-10 😊-4 ⚖️+8",
+        "outcomes": {
+          "attr": {
+            "morality": 8,
+            "wealth": -10,
+            "happiness": -4
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "gray_deep"
       ],
       "notFlags": [],
       "minAttrs": {},
@@ -11115,6 +12179,54 @@
     }
   },
   {
+    "id": "research_0004",
+    "stage": "adult",
+    "age": 36,
+    "title": "你的学生在台下",
+    "text": "课题组建起来了，你成了带团队的人。第一次组会，台下的年轻人眼神和你当年一模一样：又亮又倔。行政事务、经费报表、职称评审，也跟着一起涌了进来。",
+    "category": "career",
+    "choices": [
+      {
+        "text": "把时间留给年轻人，像老教授当年对你那样",
+        "effects": "👥+4 ⚖️+5",
+        "outcomes": {
+          "attr": {
+            "morality": 5,
+            "social": 4
+          }
+        }
+      },
+      {
+        "text": "全力冲击更高头衔，连轴转的日子又开始了",
+        "effects": "🧠+8 😊-5",
+        "outcomes": {
+          "attr": {
+            "intelligence": 8,
+            "happiness": -5
+          }
+        }
+      },
+      {
+        "text": "减少课题，周末留给家人",
+        "effects": "🧠-2 😊+6",
+        "outcomes": {
+          "attr": {
+            "happiness": 6,
+            "intelligence": -2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "scholar_name"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "adult_44",
     "stage": "adult",
     "age": 37,
@@ -11294,6 +12406,57 @@
         }
       }
     ]
+  },
+  {
+    "id": "hosp_0003",
+    "stage": "adult",
+    "age": 37,
+    "title": "出院后的第一公里",
+    "text": "复查结果出来，指标终于回了安全线。医生难得露出笑：「恢复得不错，继续保持。」你把那张清单从钱包里取出来，在第一行「跑一次步」后面，准备打一个勾。",
+    "category": "health",
+    "choices": [
+      {
+        "text": "换上跑鞋，从气喘吁吁的一公里开始",
+        "effects": "💪+8 😊+4",
+        "outcomes": {
+          "attr": {
+            "health": 8,
+            "happiness": 4
+          }
+        }
+      },
+      {
+        "text": "先划掉「带爸妈旅行」，订票出发",
+        "effects": "💰-3 😊+8 🍀+3",
+        "outcomes": {
+          "attr": {
+            "happiness": 8,
+            "luck": 3,
+            "wealth": -3
+          }
+        }
+      },
+      {
+        "text": "工作一忙，清单又塞回了抽屉深处",
+        "effects": "💪-6 😊+3",
+        "outcomes": {
+          "attr": {
+            "health": -6,
+            "happiness": 3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "bucket_list"
+      ],
+      "notFlags": [],
+      "minAttrs": {
+        "health": 31
+      },
+      "maxAttrs": {}
+    }
   },
   {
     "id": "adult_06",
@@ -11608,6 +12771,54 @@
     }
   },
   {
+    "id": "invest_0004",
+    "stage": "adult",
+    "age": 38,
+    "title": "资产配置这道坎",
+    "text": "交过学费之后，你看待收益的眼神变了。书架上多了几本资产配置的书，Excel 表里的组合越来越稳。只是看着别人晒暴利截图时，心里还是会痒一下。",
+    "category": "finance",
+    "choices": [
+      {
+        "text": "按组合纪律执行，睡得着觉比暴利重要",
+        "effects": "💰+8 😊+5",
+        "outcomes": {
+          "attr": {
+            "wealth": 8,
+            "happiness": 5
+          }
+        }
+      },
+      {
+        "text": "小仓位搏一把，输了就当娱乐",
+        "effects": "💰+10 😊-4",
+        "outcomes": {
+          "attr": {
+            "wealth": 10,
+            "happiness": -4
+          }
+        }
+      },
+      {
+        "text": "把大头换成稳健资产，彻底告别刺激",
+        "effects": "💰+6 😊+3",
+        "outcomes": {
+          "attr": {
+            "wealth": 6,
+            "happiness": 3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "investor_sharp"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "adult_07",
     "stage": "adult",
     "age": 38,
@@ -11811,6 +13022,155 @@
         }
       }
     ]
+  },
+  {
+    "id": "invest_0005",
+    "stage": "adult",
+    "age": 39,
+    "title": "财富自由之后",
+    "text": "账户里的数字，已经够你体面地过完这一生。早晨醒来不用看闹钟，也不用看任何人的脸色。问题来了：接下来的日子，钱该往哪儿去，人该往哪儿去？",
+    "category": "finance",
+    "choices": [
+      {
+        "text": "成立助学基金，让更多孩子读得起书",
+        "effects": "💰-5 😊+5 ⚖️+8",
+        "outcomes": {
+          "attr": {
+            "morality": 8,
+            "happiness": 5,
+            "wealth": -5
+          }
+        }
+      },
+      {
+        "text": "设好家族信托，把财富稳稳传下去",
+        "effects": "💰+6 ⚖️+4",
+        "outcomes": {
+          "attr": {
+            "wealth": 6,
+            "morality": 4
+          }
+        }
+      },
+      {
+        "text": "买张机票，把年轻时没去过的地方走一遍",
+        "effects": "💰-4 😊+8",
+        "outcomes": {
+          "attr": {
+            "happiness": 8,
+            "wealth": -4
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "investor_sharp"
+      ],
+      "notFlags": [],
+      "minAttrs": {
+        "wealth": 85
+      },
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "hosp_0004",
+    "stage": "adult",
+    "age": 39,
+    "title": "体检医生的惊讶",
+    "text": "年度体检，医生对着报告单看了两遍，又看看你的年龄：「这个状态，比很多三十岁的人还好。」你笑着说了声谢谢。走廊里，一个年轻人正捏着写满箭头的报告发呆，像极了几年前的你。",
+    "category": "health",
+    "choices": [
+      {
+        "text": "把自己的经历讲给那个年轻人听",
+        "effects": "👥+6 ⚖️+4",
+        "outcomes": {
+          "attr": {
+            "social": 6,
+            "morality": 4
+          }
+        }
+      },
+      {
+        "text": "继续保持，健康是攒出来的复利",
+        "effects": "💪+5 ⚖️+4",
+        "outcomes": {
+          "attr": {
+            "health": 5,
+            "morality": 4
+          }
+        }
+      },
+      {
+        "text": "晚上庆祝一下，拉着老伴吃了一顿好的",
+        "effects": "💪+3 😊+6",
+        "outcomes": {
+          "attr": {
+            "happiness": 6,
+            "health": 3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "bucket_list"
+      ],
+      "notFlags": [],
+      "minAttrs": {
+        "health": 60
+      },
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "gray_0004",
+    "stage": "adult",
+    "age": 39,
+    "title": "上岸之后",
+    "text": "抽身已经有些日子了。正规生意做得不温不火，但至少，陌生来电不再让你心慌。那天路过从前的场子，已经换了招牌。你站在马路对面看了一会儿，转身走进阳光里。",
+    "category": "career",
+    "choices": [
+      {
+        "text": "把正规公司一点点做大，这次走得慢但稳",
+        "effects": "💰+6 ⚖️+4",
+        "outcomes": {
+          "attr": {
+            "wealth": 6,
+            "morality": 4
+          }
+        }
+      },
+      {
+        "text": "匿名资助了几个学生，算是还债",
+        "effects": "💰-5 ⚖️+8",
+        "outcomes": {
+          "attr": {
+            "morality": 8,
+            "wealth": -5
+          }
+        }
+      },
+      {
+        "text": "换了城市换了圈子，过去的事再不提",
+        "effects": "😊+4 👥-3",
+        "outcomes": {
+          "attr": {
+            "happiness": 4,
+            "social": -3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "gray_quit"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
   },
   {
     "id": "adult_57",
@@ -12402,6 +13762,53 @@
     }
   },
   {
+    "id": "research_0005",
+    "stage": "adult",
+    "age": 41,
+    "title": "一辈子的答案",
+    "text": "书架最上层，摆着你这些年的论文合订本。有学生写信来说，是读了你的文章才选的这个方向。你泡了杯茶，坐在窗边看了一下午的云。这条冷板凳，好像真的被你坐热了。",
+    "category": "education",
+    "choices": [
+      {
+        "text": "把这些年写成一本书，留给后来者",
+        "effects": "🧠+6 💰+5",
+        "outcomes": {
+          "attr": {
+            "intelligence": 6,
+            "wealth": 5
+          }
+        }
+      },
+      {
+        "text": "开一门公开课，把冷知识讲成热故事",
+        "effects": "😊+4 👥+6",
+        "outcomes": {
+          "attr": {
+            "social": 6,
+            "happiness": 4
+          }
+        }
+      },
+      {
+        "text": "什么都不做，安静享受这段从容岁月",
+        "effects": "😊+5",
+        "outcomes": {
+          "attr": {
+            "happiness": 5
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "scholar_name"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "adult_66",
     "stage": "adult",
     "age": 42,
@@ -12618,6 +14025,54 @@
     "conditions": {
       "hasFlags": [
         "book_reader"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "gray_0005",
+    "stage": "adult",
+    "age": 42,
+    "title": "那年的选择",
+    "text": "孩子长大了，有一天忽然问你：「爸/妈，你年轻时候是做什么的？」你愣了一下。那些年的钱、那些年的慌，像潮水一样涌上来。饭桌上很安静，等你回答。",
+    "category": "personality",
+    "choices": [
+      {
+        "text": "如实讲给孩子听，包括那些不体面的部分",
+        "effects": "😊+4 ⚖️+6",
+        "outcomes": {
+          "attr": {
+            "morality": 6,
+            "happiness": 4
+          }
+        }
+      },
+      {
+        "text": "岔开话题。有些秘密，就带进坟墓吧",
+        "effects": "😊-3 👥-4",
+        "outcomes": {
+          "attr": {
+            "social": -4,
+            "happiness": -3
+          }
+        }
+      },
+      {
+        "text": "把当年的渠道举报了，迟到了很多年",
+        "effects": "💰-3 ⚖️+5",
+        "outcomes": {
+          "attr": {
+            "morality": 5,
+            "wealth": -3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "gray_deal"
       ],
       "notFlags": [],
       "minAttrs": {},
@@ -12876,6 +14331,54 @@
         }
       }
     ]
+  },
+  {
+    "id": "hosp_0005",
+    "stage": "adult",
+    "age": 43,
+    "title": "一堂生死课",
+    "text": "单位组织健康讲座，不知怎么请你上了台。台下坐着的年轻人，和你当年一样：眼里有光，身上有病，心里有侥幸。你翻开那年的住院手环，慢慢讲了起来。",
+    "category": "health",
+    "choices": [
+      {
+        "text": "把这些年写成小册子，留给更多侥幸的人",
+        "effects": "🧠+5 😊+4",
+        "outcomes": {
+          "attr": {
+            "intelligence": 5,
+            "happiness": 4
+          }
+        }
+      },
+      {
+        "text": "告诉年轻人：别等病床上才列清单",
+        "effects": "👥+5 ⚖️+5",
+        "outcomes": {
+          "attr": {
+            "social": 5,
+            "morality": 5
+          }
+        }
+      },
+      {
+        "text": "讲完就回家，平平淡淡才是真",
+        "effects": "💪+2 😊+5",
+        "outcomes": {
+          "attr": {
+            "happiness": 5,
+            "health": 2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "hospitalized"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
   },
   {
     "id": "adult_75",

@@ -1,0 +1,252 @@
+[
+  {
+    "id": "young_0032",
+    "age_range": [18, 18],
+    "category": "friend",
+    "title": "毕业旅行的分岔口",
+    "text": "高考最后一科收卷铃响，教室里炸开了锅。死党凑过来，说计划好了：绿皮火车一路向西，去看青海湖，预算刚好掏空你攒了三年的压岁钱。妈妈则在家念叨，隔壁快餐店招暑期工，一个月能挣两千多。",
+    "choices": [
+      {
+        "text": "和死党坐上西去的火车，钱花光了，但一辈子难忘",
+        "effects": { "social": 8, "happiness": 6, "money": -6 },
+        "flags_add": []
+      },
+      {
+        "text": "去快餐店打工，开学前攒下第一笔自己的钱",
+        "effects": { "money": 8, "happiness": -3 },
+        "flags_add": []
+      },
+      {
+        "text": "哪也不去，在家吹空调打游戏，舒服又省钱",
+        "effects": { "comfort": 5, "social": -2 },
+        "flags_add": []
+      }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "young_0033",
+    "age_range": [19, 19],
+    "category": "education",
+    "title": "社团招新的抉择",
+    "text": "百团大战的摊位排满了整条林荫道。辩论队学长拍着胸脯说「来了就是主力」，可期末绩点还压在头上，辅导员刚在群里发了奖学金排名。你捏着报名表，站在人潮里有点犹豫。",
+    "choices": [
+      {
+        "text": "加入辩论队，熬夜备赛，学习成绩被拖了一点",
+        "effects": { "social": 6, "intelligence": 5, "learning": -4 },
+        "flags_add": []
+      },
+      {
+        "text": "专心泡图书馆冲绩点，社团活动基本绝缘",
+        "effects": { "learning": 8, "social": -3 },
+        "flags_add": []
+      },
+      {
+        "text": "社团和学习都想要，结果两头都有点跟不上",
+        "effects": { "ambition": 3, "pressure": 6 },
+        "flags_add": []
+      }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "young_0034",
+    "age_range": [20, 20],
+    "category": "love",
+    "title": "一千公里的距离",
+    "text": "TA 去了另一座城市读书，一千多公里，火车要坐一整夜。视频里的脸越来越模糊，话题越来越短。月底看着银行卡余额，你在想：这个月的票，还买不买。",
+    "choices": [
+      {
+        "text": "买。每个月去看 TA，车票吃掉大半生活费",
+        "effects": { "happiness": 6, "money": -8 },
+        "flags_add": []
+      },
+      {
+        "text": "改成视频维系，把生活费省下来，深夜挂电话时有点空",
+        "effects": { "money": 3, "happiness": -4 },
+        "flags_add": []
+      },
+      {
+        "text": "和平分手，祝彼此前程似锦，躲在被子里哭了一场",
+        "effects": { "independence": 6, "happiness": -6 },
+        "flags_add": []
+      }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "young_0035",
+    "age_range": [23, 23],
+    "category": "personality",
+    "title": "搬出去，还是住家里",
+    "text": "工作定了，住处成了问题。公司附近的一居室，房租要吃掉三分之一的工资；住家里倒是省钱，可妈妈从早饭念叨到晚饭：几点睡、吃什么、对象呢。中介的电话还在兜里震动。",
+    "choices": [
+      {
+        "text": "自己租房。自由的味道，是月底吃土换来的",
+        "effects": { "independence": 8, "money": -7 },
+        "flags_add": []
+      },
+      {
+        "text": "住家里省钱，代价是每天被念叨到耳朵起茧",
+        "effects": { "money": 5, "happiness": -4, "pressure": 2 },
+        "flags_add": []
+      },
+      {
+        "text": "和同事合租折中，水电分摊的摩擦隔三差五",
+        "effects": { "social": 4, "money": -3, "happiness": -2 },
+        "flags_add": []
+      }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "young_0036",
+    "age_range": [25, 25],
+    "category": "friend",
+    "title": "婚礼请柬与份子钱",
+    "text": "大学睡你上铺的兄弟要结婚了，请柬寄到公司，婚礼在老家办。你打开购票软件看了看机票，又看了看群里大家讨论的份子钱行情。这个月的账单，已经排到下个月发工资了。",
+    "choices": [
+      {
+        "text": "飞回去，包两千。多年情谊，不缩水",
+        "effects": { "friendship": 6, "money": -5 },
+        "flags_add": []
+      },
+      {
+        "text": "包六百意思到了，听说有人在背后嘀咕",
+        "effects": { "money": -2, "happiness": -3, "social": -2 },
+        "flags_add": []
+      },
+      {
+        "text": "人不到礼到，省下机票钱，视频里说了声恭喜",
+        "effects": { "money": 3, "friendship": -3 },
+        "flags_add": []
+      }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "young_0037",
+    "age_range": [26, 26],
+    "category": "finance",
+    "title": "深夜的借钱电话",
+    "text": "晚上十一点，很久没联系的朋友打来电话，支支吾吾半天：生意周转不开，想借两万，说好三个月还。你想起上次吃饭他抢着买单的样子，也想起银行卡里刚攒下的那点积蓄。",
+    "choices": [
+      {
+        "text": "借了。他连声道谢，只是还钱的日子一推再推",
+        "effects": { "friendship": 5, "money": -6 },
+        "flags_add": []
+      },
+      {
+        "text": "找借口推掉了。电话两头沉默了几秒，关系明显淡了",
+        "effects": { "money": 2, "friendship": -5 },
+        "flags_add": []
+      },
+      {
+        "text": "借一半，认真立了字据，亲兄弟明算账",
+        "effects": { "money": -3, "intelligence": 4 },
+        "flags_add": []
+      }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "young_0038",
+    "age_range": [27, 27],
+    "category": "career",
+    "title": "连续加班的第三十一天",
+    "text": "项目冲刺，你已经连续加班一个月。凌晨的写字楼只剩你这一层亮着灯，外卖盒堆在桌角，镜子里的自己眼窝深陷。领导在群里说：「再扛一扛，上线就好了。」",
+    "choices": [
+      {
+        "text": "咬牙扛住。项目上线被点名表扬，体检报告多了两个箭头",
+        "effects": { "ambition": 8, "health": -6 },
+        "flags_add": []
+      },
+      {
+        "text": "找领导谈了边界。这个季度的绩效，被打了个 B",
+        "effects": { "independence": 5, "money": -3 },
+        "flags_add": []
+      },
+      {
+        "text": "提了离职。走出写字楼那一刻，世界瞬间安静了",
+        "effects": { "happiness": 6, "money": -5 },
+        "flags_add": []
+      }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "young_0039",
+    "age_range": [27, 27],
+    "category": "finance",
+    "title": "分期免息的陷阱",
+    "text": "种草半年的新手机，购物车页面弹出「十二期免息，每月仅需 599」。你算了算工资，好像也不是不行。下单页面金光闪闪，「立即拥有」四个字一直在闪。",
+    "choices": [
+      {
+        "text": "分期拿下。后来才发现手续费和会员费滚了一笔",
+        "effects": { "happiness": 5, "money": -8, "impulse": 3 },
+        "flags_add": []
+      },
+      {
+        "text": "忍住没买。月末再看，好像也就那么回事",
+        "effects": { "discipline": 6, "money": 2 },
+        "flags_add": []
+      },
+      {
+        "text": "买了，玩了两周，挂二手平台回血一半",
+        "effects": { "money": -3, "intelligence": 4 },
+        "flags_add": []
+      }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "young_0040",
+    "age_range": [29, 29],
+    "category": "career",
+    "title": "饭局上的站队",
+    "text": "部门两位领导明争暗斗，周五晚上，其中一位叫你去饭局。酒过三巡，他拍着你的肩膀：「小王是明白人，以后跟着我干。」桌上的人都看着你，等你举杯。",
+    "choices": [
+      {
+        "text": "举杯表态。之后果然被提携，只是心里有点不是滋味",
+        "effects": { "money": 5, "avoidance": 4 },
+        "flags_add": []
+      },
+      {
+        "text": "装病推掉。第二个星期，好项目再没有你的份",
+        "effects": { "self_control": 4, "ambition": -3, "social": -2 },
+        "flags_add": []
+      },
+      {
+        "text": "去了但只吃饭不表态，结果两边都没拿你当自己人",
+        "effects": { "social": -2, "intelligence": 3 },
+        "flags_add": []
+      }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "young_0041",
+    "age_range": [29, 29],
+    "category": "health",
+    "title": "体检报告上的箭头",
+    "text": "公司年度体检，报告上多了三个向上的箭头：血脂、尿酸、脂肪肝倾向。医生推了推眼镜：「年轻人，少熬夜，多运动。」你捏着报告单，站在医院走廊里，第一次认真想了想「身体」这两个字。",
+    "choices": [
+      {
+        "text": "立刻办健身卡，调整作息，和夜宵说再见",
+        "effects": { "health": 8, "money": -4 },
+        "flags_add": []
+      },
+      {
+        "text": "收藏了一堆养生帖，然后继续熬夜",
+        "effects": { "comfort": 3, "health": -5 },
+        "flags_add": []
+      },
+      {
+        "text": "找中医慢慢调理，把生活节奏一点点找回来",
+        "effects": { "health": 5, "money": -3, "patience": 3 },
+        "flags_add": []
+      }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  }
+]

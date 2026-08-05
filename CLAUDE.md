@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-人生模拟器：React 18 + TypeScript + Vite + Tailwind 的文字人生模拟游戏。纯前端、无后端，游戏内容由 JSON 事件数据驱动。事件数据源 `script/chiled.json`（530 个事件：513 原始 + 片段合入，其中 4 位模拟事件经 keep-list 精选 157 个）经转换器生成引擎格式 `src/engine/events.json`（共 530 个事件），运行时同岁组内按种子洗牌后线性播放。PWA 可安装离线。
+人生模拟器：React 18 + TypeScript + Vite + Tailwind 的文字人生模拟游戏。纯前端、无后端，游戏内容由 JSON 事件数据驱动。事件数据源 `script/chiled.json`（560 个事件：523 原始 + 片段合入，其中 4 位模拟事件经 keep-list 精选 187 个）经转换器生成引擎格式 `src/engine/events.json`（共 560 个事件），运行时同岁组内按种子洗牌后线性播放。PWA 可安装离线。
 
 ## 常用命令
 
@@ -33,6 +33,7 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 - **prune-events.mjs**：精选工具。事件 id 规则：**2 位数字后缀 = 原始主线事件（如 child_01），一字不改、永远保留；4 位数字后缀 = 模拟事件（如 child_0017），只能被精选删除、不能改内容**。`keep-list.json` 记录保留清单（审计用，当前 157 条 = 全部保留的模拟事件；新增模拟事件后需同步追加，否则 prune 会被过滤）。运行方式：`node script/prune-events.mjs script/keep-list.json`（写回 chiled.json，含 gap_year 补丁）
 - **merge-fragments.mjs**：合并 chiled.json + `script/fragments/` 片段，跑三重校验：convertAll fail-fast + 每岁密度（0-2 岁 3-5 个、3-12 岁 5-13 个、13-75 岁 3-8 个）+ flag 生产/消费配对（has_flags 引用的 flag 必须有产出者，not_flags 不算悬空）。**幂等**：片段中已合并的 id 自动跳过，片段文件保留在 fragments/ 目录可重复运行
 - **clamp-effects.mjs**：效果值钳位工具。4 位模拟事件的效果按转换后属性值等比例压缩到 ±3~±20 声明范围内（多键求和超范围时压缩该属性所有来源键）；2 位主线一字不改。幂等，效果值调整后用它 + build:events
+- **rebalance-effects.mjs**：抉择质量改造（2026-08 P0-1）。声明式 REBALANCE 表给 3-12 岁 21 个全正模拟事件的高收益选项加代价维度（压力/金钱/社交/幸福，与叙事匹配），「设置为目标值」语义幂等。2 位主线不动。运行后接 build:events
 - **stats.mjs**：事件数据看板——每岁密度（0-103）/分类分布/flag 生产-消费配对与悬空引用/效果值范围/2 位 vs 4 位 id 统计/96+ 岁空缺报告，统计逻辑纯函数可测试
 - **gen-icons.mjs**：PWA 图标生成（Node 内置 zlib 手写 PNG 编码器，192/512 主色图标到 public/）
 
@@ -61,7 +62,7 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 - **快速模拟**：标题页「⚡ 快速模拟」以随机性别/名字开局（`START_AUTO_GAME`），**用精简档抽样（每岁 1-2 个，一局约 30 秒）**；自动模式每 220ms 随机选择推进、跳过打字机（DialogBox `instant`）与选择面板，直到结算；重新开始或读档自动退出自动模式
 - **每日挑战**：标题页「📅 每日挑战」以日期确定性种子（`dateToSeed`，YYYYMMDD → number）开局，同一天全局同一局；手动播放、无目标/无挑战、不写存档槽（saveState guard 含 isDaily）；入口旁展示「今日最佳 评分/享年」（`life-sim-daily`）
 - **局中重开**：GameScreen ✕ 确认弹窗第三选项「🔄 重新开始本局」（`RESTART` action 复用 startNewGame，同设置新随机种子；每日挑战局重开保持固定种子）；快速模拟不显示
-- **周目解锁**：按 `stats.totalLives + 1` 计算周目——第 2 周目起标题页解锁「⚔️ 挑战开局」（`GameState.challenge`，开局属性 `applyChallenge` 整体 -10，结算评分 ≥70 解锁「破局者」成就）；第 3 周目起抽取**命运事件**（`pickFateEvent(seed)` 从 `RARE_EVENT_IDS` 15 个精选事件按种子抽 1，确定性可存档还原），该事件触发时效果 ×1.5（`scaleOutcomes`）、游戏内显示「⚡ 命运事件」角标；第 4 周目起解锁**传承加成**（结算把终局属性写入 `stats.lastEndAttrs`，开局 `applyInheritance` 取最高 2 项 ≥50 的属性各 +8、上限 100，与挑战 -10 独立叠加，结算页标注「🧬 传承」）；第 5 周目起**双命运事件**（`pickFateEvents(seed, count)` 抽 2 个，`RuntimeState.fateEventIds` 数组，单抽与双抽同种子同源）
+- **周目解锁**：按 `stats.totalLives + 1` 计算周目——第 2 周目起标题页解锁「⚔️ 挑战开局」（`GameState.challenge`，开局属性 `applyChallenge` 整体 -10，结算评分 ≥70 解锁「破局者」成就）与「🎭 真实模式」（`GameState.realMode`，ChoicePanel 选项只显示属性倾向箭头 ↑/↓（\|v\|≥8 双箭头、effectiveDelta 为 0 不显示），隐藏精确数值，反馈页仍显示精确变化作事后学习）；第 3 周目起抽取**命运事件**（`pickFateEvent(seed)` 从 `RARE_EVENT_IDS` 15 个精选事件按种子抽 1，确定性可存档还原），该事件触发时效果 ×1.5（`scaleOutcomes`）、游戏内显示「⚡ 命运事件」角标；第 4 周目起解锁**传承加成**（结算把终局属性写入 `stats.lastEndAttrs`，开局 `applyInheritance` 取最高 2 项 ≥50 的属性各 +8、上限 100，与挑战 -10 独立叠加，结算页标注「🧬 传承」）；第 5 周目起**双命运事件**（`pickFateEvents(seed, count)` 抽 2 个，`RuntimeState.fateEventIds` 数组，单抽与双抽同种子同源）
 - **传记导出**：结算页「📜 导出人生传记」——`src/utils/biography.ts` 的 `buildBiographyMarkdown` 生成叙事 markdown（大事记按岁分组 + 事件标题 + 里程碑 ⭐ + 最终属性表），`downloadText` 触发下载
 
 ### UI（src/components/）
@@ -70,7 +71,7 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 - **DialogBox**：打字机效果（速度档位 + 点击跳过）+ 「▼ 点击继续」；事件标题显示为「标题」
 - **ChoicePanel**：选项按钮（`button.group` class，effects 展示串由转换器生成）
 - **TitleScreen**：名字/性别 + **节奏档位（沉浸/精简）+ 打字速度 + 3 存档卡片 + 目标选择模态（GoalModal，含「🎯 自定义目标」勾选属性+滑杆设目标值）+ 成就（AchievementsModal）/生涯统计（StatsModal）入口 + 快捷入口行（⚡ 快速模拟/📅 每日挑战/📊 生涯/🏆 成就）**——720px 高度余量极小（约 1px），改动必须回归检查
-- **SummaryScreen**：结算页（享年 + 结局 + 评分 + 属性 + **成长曲线（GrowthChart canvas 8 维随年龄折线图）+ 人生大事记完整时间线（里程碑 ⭐）+ 目标达成度 + 新解锁成就 + 本可发生而未触发 + 分享卡片（ShareCardModal canvas PNG，含迷你成长曲线）+ 传记导出**）
+- **SummaryScreen**：结算页（享年 + 结局 + 评分 + 属性 + **成长曲线（GrowthChart canvas 8 维随年龄折线图，图例悬停临时聚焦/点击固定聚焦单条曲线，其余淡化）+ 人生大事记完整时间线（里程碑 ⭐）+ 目标达成度 + 新解锁成就 + 本可发生而未触发 + 分享卡片（ShareCardModal canvas PNG，含迷你成长曲线）+ 传记导出**）
 - **SceneArea/SceneDecor/CategoryDecor**：场景背景 = 阶段渐变（STAGE_BG）+ 阶段 SVG 装饰（SceneDecor）+ **事件分类场景**（CategoryDecor，11 分类各一组 SVG 元素：家庭→沙发、事业→写字楼、健康→医疗十字、教育→黑板、友谊→咖啡桌、爱情→爱心、科技→屏幕电路、金融→金币折线、爱好→调色板吉他、运动→跑道篮筐、个性→对话气泡星）+ **选项属性色调响应**（GameScreen 选选项后按效果主属性叠加底部光晕，8 属性→色：health 绿/intelligence 蓝/wealth 金/happiness 橙/social 青/appearance 粉/luck 紫/morality 米白；继续后还原）
 - **App**：移动端视口等比缩放（scale = min(vw/960, vh/720)，<1 才缩放）
 

@@ -1,0 +1,262 @@
+[
+  {
+    "id": "research_0001",
+    "age_range": [30, 30],
+    "category": "education",
+    "title": "研究所的橄榄枝",
+    "text": "大学时发的那篇论文，竟然被省研究所的老教授看到了。他辗转找到你，问愿不愿意进他的项目组：钱不多，方向冷门，但「是做真东西的地方」。窗外的写字楼灯火通明，同学们都在谈年终奖。",
+    "choices": [
+      { "text": "加入项目组，坐冷板凳也认了", "effects": { "learning": 8, "money": 3 }, "flags_add": ["research_path"] },
+      { "text": "婉拒，去业界挣快钱，专业慢慢荒了", "effects": { "money": 8, "intelligence": -2 }, "flags_add": [] },
+      { "text": "再想想，拖着拖着就没了下文", "effects": { "comfort": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": { "intelligence": 70 }, "max_attrs": {} }
+  },
+  {
+    "id": "research_0002",
+    "age_range": [31, 31],
+    "category": "education",
+    "title": "第一千次失败",
+    "text": "实验又失败了，这是第一千次。记录本上密密麻麻的红叉，同组的人走了一半。深夜的实验室只剩仪器的嗡鸣，你盯着烧杯，想起老教授说的「做真东西」。",
+    "choices": [
+      { "text": "擦干记录本，开始第一千零一次", "effects": { "discipline": 6, "happiness": -3 }, "flags_add": ["paper_breakthrough"] },
+      { "text": "换个角度切入，思路忽然活了", "effects": { "intelligence": 5, "luck": 3 }, "flags_add": ["paper_breakthrough"] },
+      { "text": "承认不是这块料，转行去了企业", "effects": { "ambition": -3, "comfort": 4 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["research_path"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "research_0003",
+    "age_range": [33, 33],
+    "category": "career",
+    "title": "顶刊的录用邮件",
+    "text": "凌晨查邮件，顶刊的录用通知躺在收件箱里，审稿人写着「方法有原创性」。你盯着屏幕看了很久，把那些熬过的夜、失败的数据，都在脑子里过了一遍。老教授已经退休了，你第一个想告诉他。",
+    "choices": [
+      { "text": "继续深耕，把这条路走到底", "effects": { "intelligence": 8, "confidence": 5 }, "flags_add": ["scholar_name"] },
+      { "text": "把成果转成专利，第一次尝到学术变现", "effects": { "money": 8, "intelligence": 2 }, "flags_add": ["scholar_name"] },
+      { "text": "心愿已了，把重心放回生活", "effects": { "happiness": 5 }, "flags_add": ["scholar_name"] }
+    ],
+    "conditions": { "has_flags": ["paper_breakthrough"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "research_0004",
+    "age_range": [36, 36],
+    "category": "career",
+    "title": "你的学生在台下",
+    "text": "课题组建起来了，你成了带团队的人。第一次组会，台下的年轻人眼神和你当年一模一样：又亮又倔。行政事务、经费报表、职称评审，也跟着一起涌了进来。",
+    "choices": [
+      { "text": "把时间留给年轻人，像老教授当年对你那样", "effects": { "empathy": 5, "social": 4 }, "flags_add": [] },
+      { "text": "全力冲击更高头衔，连轴转的日子又开始了", "effects": { "ambition": 8, "pressure": 5 }, "flags_add": [] },
+      { "text": "减少课题，周末留给家人", "effects": { "happiness": 6, "ambition": -2 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["scholar_name"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "research_0005",
+    "age_range": [41, 41],
+    "category": "education",
+    "title": "一辈子的答案",
+    "text": "书架最上层，摆着你这些年的论文合订本。有学生写信来说，是读了你的文章才选的这个方向。你泡了杯茶，坐在窗边看了一下午的云。这条冷板凳，好像真的被你坐热了。",
+    "choices": [
+      { "text": "把这些年写成一本书，留给后来者", "effects": { "intelligence": 6, "money": 5 }, "flags_add": [] },
+      { "text": "开一门公开课，把冷知识讲成热故事", "effects": { "social": 6, "happiness": 4 }, "flags_add": [] },
+      { "text": "什么都不做，安静享受这段从容岁月", "effects": { "comfort": 5 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["scholar_name"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "invest_0001",
+    "age_range": [32, 32],
+    "category": "finance",
+    "title": "找上门的好项目",
+    "text": "你手里有了些积蓄的消息，不知怎么就传开了。大学同学带着商业计划书约你喝咖啡：新能源配套，回报率高，就差一笔启动资金。他把手机里的测算表推到你面前，数字漂亮得像假的。",
+    "choices": [
+      { "text": "先尽调再说，花钱请专业人士查了个底朝天", "effects": { "intelligence": 5, "money": -3 }, "flags_add": ["investor"] },
+      { "text": "机会不等人，重注一把", "effects": { "money": 10, "luck": -4 }, "flags_add": ["investor"] },
+      { "text": "数字漂亮得像假的，那就是假的，婉拒", "effects": { "saving": 4 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": { "money": 80 }, "max_attrs": {} }
+  },
+  {
+    "id": "invest_0002",
+    "age_range": [33, 33],
+    "category": "finance",
+    "title": "朋友带路的局",
+    "text": "老朋友组了个局，席间全是「内部消息」：某个项目三个月翻番，名额有限。朋友已经投了，一直撺掇你跟上。饭桌上的茅台很香，但合同细则谁都没细看。",
+    "choices": [
+      { "text": "抹不开面子，跟投了一笔", "effects": { "money": 8, "friendship": 3 }, "flags_add": [] },
+      { "text": "回家逐条扒合同，果然有诈，从此远离这个圈子", "effects": { "intelligence": 6, "friendship": -4 }, "flags_add": ["investor_sharp"] },
+      { "text": "全部资金撤到安全区，宁可少赚", "effects": { "money": -2, "comfort": 4 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["investor"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "invest_0003",
+    "age_range": [34, 34],
+    "category": "finance",
+    "title": "爆雷的那个清晨",
+    "text": "项目群的公告停在昨夜：「负责人失联」。你赶到办公地点，大门紧锁，门口已经聚了一群投资者。有人瘫坐在地上，有人已经在打电话报警。你的那笔钱，也在里面。",
+    "choices": [
+      { "text": "血汗钱打了水漂，蹲在马路牙子上抽了半包烟", "effects": { "money": -10, "happiness": -6 }, "flags_add": [] },
+      { "text": "庆幸提前撤了大半，亏的当交学费", "effects": { "money": -3, "intelligence": 4 }, "flags_add": ["investor_sharp"] },
+      { "text": "联合其他受害者报案，能追回一点是一点", "effects": { "responsibility": 4, "money": -4 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["investor"], "not_flags": ["investor_sharp"], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "invest_0004",
+    "age_range": [38, 38],
+    "category": "finance",
+    "title": "资产配置这道坎",
+    "text": "交过学费之后，你看待收益的眼神变了。书架上多了几本资产配置的书，Excel 表里的组合越来越稳。只是看着别人晒暴利截图时，心里还是会痒一下。",
+    "choices": [
+      { "text": "按组合纪律执行，睡得着觉比暴利重要", "effects": { "money": 8, "stability": 5 }, "flags_add": [] },
+      { "text": "小仓位搏一把，输了就当娱乐", "effects": { "money": 10, "anxiety": 4 }, "flags_add": [] },
+      { "text": "把大头换成稳健资产，彻底告别刺激", "effects": { "saving": 6, "comfort": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["investor_sharp"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "invest_0005",
+    "age_range": [39, 39],
+    "category": "finance",
+    "title": "财富自由之后",
+    "text": "账户里的数字，已经够你体面地过完这一生。早晨醒来不用看闹钟，也不用看任何人的脸色。问题来了：接下来的日子，钱该往哪儿去，人该往哪儿去？",
+    "choices": [
+      { "text": "成立助学基金，让更多孩子读得起书", "effects": { "empathy": 8, "happiness": 5, "money": -5 }, "flags_add": [] },
+      { "text": "设好家族信托，把财富稳稳传下去", "effects": { "money": 6, "responsibility": 4 }, "flags_add": [] },
+      { "text": "买张机票，把年轻时没去过的地方走一遍", "effects": { "happiness": 8, "money": -4 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["investor_sharp"], "not_flags": [], "min_attrs": { "money": 85 }, "max_attrs": {} }
+  },
+  {
+    "id": "hosp_0001",
+    "age_range": [31, 31],
+    "category": "health",
+    "title": "凌晨的急诊室",
+    "text": "胸口那阵绞痛把你从梦里拽了出来。凌晨三点的急诊室，白炽灯亮得刺眼，输液管里的药水一滴一滴往下走。医生看完片子，眉头拧在一起：「这么年轻，身体怎么熬成这样。」",
+    "choices": [
+      { "text": "老老实实住院，把这些年欠身体的先还上", "effects": { "health": 8, "money": -5 }, "flags_add": ["hospitalized"] },
+      { "text": "开点药就走，工作还堆着，哪有时间住院", "effects": { "health": -4, "money": 2 }, "flags_add": ["hospitalized"] },
+      { "text": "家人连夜赶来，看着你红了眼眶", "effects": { "happiness": -3, "social": 4 }, "flags_add": ["hospitalized"] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": { "health": 30 } }
+  },
+  {
+    "id": "hosp_0002",
+    "age_range": [34, 34],
+    "category": "health",
+    "title": "病床上的清单",
+    "text": "住院的第七天，隔壁床换了新病人，前天那位没能撑过去。夜里你睡不着，找出一张废纸，在背面写下「如果还能出院，一定要做的事」。写着写着，笔停了——原来想做的事，没几件和工作有关。",
+    "choices": [
+      { "text": "把清单收好，出院后一条一条去实现", "effects": { "happiness": 6, "ambition": -3 }, "flags_add": ["bucket_list"] },
+      { "text": "发誓彻底改变，从戒掉熬夜开始", "effects": { "discipline": 6, "health": 4 }, "flags_add": [] },
+      { "text": "越想越委屈，凭什么是我", "effects": { "happiness": -5, "anger": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["hospitalized"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "hosp_0003",
+    "age_range": [37, 37],
+    "category": "health",
+    "title": "出院后的第一公里",
+    "text": "复查结果出来，指标终于回了安全线。医生难得露出笑：「恢复得不错，继续保持。」你把那张清单从钱包里取出来，在第一行「跑一次步」后面，准备打一个勾。",
+    "choices": [
+      { "text": "换上跑鞋，从气喘吁吁的一公里开始", "effects": { "health": 8, "happiness": 4 }, "flags_add": [] },
+      { "text": "先划掉「带爸妈旅行」，订票出发", "effects": { "happiness": 8, "luck": 3, "money": -3 }, "flags_add": [] },
+      { "text": "工作一忙，清单又塞回了抽屉深处", "effects": { "health": -6, "comfort": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["bucket_list"], "not_flags": [], "min_attrs": { "health": 31 }, "max_attrs": {} }
+  },
+  {
+    "id": "hosp_0004",
+    "age_range": [39, 39],
+    "category": "health",
+    "title": "体检医生的惊讶",
+    "text": "年度体检，医生对着报告单看了两遍，又看看你的年龄：「这个状态，比很多三十岁的人还好。」你笑着说了声谢谢。走廊里，一个年轻人正捏着写满箭头的报告发呆，像极了几年前的你。",
+    "choices": [
+      { "text": "把自己的经历讲给那个年轻人听", "effects": { "social": 6, "empathy": 4 }, "flags_add": [] },
+      { "text": "继续保持，健康是攒出来的复利", "effects": { "health": 5, "discipline": 4 }, "flags_add": [] },
+      { "text": "晚上庆祝一下，拉着老伴吃了一顿好的", "effects": { "happiness": 6, "health": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["bucket_list"], "not_flags": [], "min_attrs": { "health": 60 }, "max_attrs": {} }
+  },
+  {
+    "id": "hosp_0005",
+    "age_range": [43, 43],
+    "category": "health",
+    "title": "一堂生死课",
+    "text": "单位组织健康讲座，不知怎么请你上了台。台下坐着的年轻人，和你当年一样：眼里有光，身上有病，心里有侥幸。你翻开那年的住院手环，慢慢讲了起来。",
+    "choices": [
+      { "text": "把这些年写成小册子，留给更多侥幸的人", "effects": { "intelligence": 5, "happiness": 4 }, "flags_add": [] },
+      { "text": "告诉年轻人：别等病床上才列清单", "effects": { "social": 5, "empathy": 5 }, "flags_add": [] },
+      { "text": "讲完就回家，平平淡淡才是真", "effects": { "comfort": 5, "health": 2 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["hospitalized"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "gray_0001",
+    "age_range": [30, 30],
+    "category": "career",
+    "title": "快钱的门道",
+    "text": "饭局上认识的老哥神神秘秘：有批货走灰色渠道，一个月翻番，「规矩都懂，出了事也查不到你」。他把一沓现金拍在桌上当定金。你看着那沓钱，心跳得很快。",
+    "choices": [
+      { "text": "入局。钱来得快，心也悬得快", "effects": { "money": 10, "luck": -3 }, "flags_add": ["gray_deal"] },
+      { "text": "把钱推回去：这碗饭，吃不了", "effects": { "self_control": 4, "money": -2 }, "flags_add": [] },
+      { "text": "不置可否，回去越想越后怕", "effects": { "intelligence": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": { "empathy": 30 } }
+  },
+  {
+    "id": "gray_0002",
+    "age_range": [32, 32],
+    "category": "career",
+    "title": "越做越大的摊子",
+    "text": "第一笔平安落地后，老哥把你的「份额」又加重了一成。流水越来越大，你换了好车，却开始害怕陌生来电，睡觉总把手机调成静音。深夜里你偶尔会想：这条船，还下得来吗？",
+    "choices": [
+      { "text": "继续加码，撑死胆大的", "effects": { "money": 12, "anxiety": 5 }, "flags_add": ["gray_deep"] },
+      { "text": "找借口抽身，宁可少赚也要睡个安稳觉", "effects": { "self_control": 5, "money": -3 }, "flags_add": ["gray_quit"] },
+      { "text": "找个替身挡在前面，自己往后躲", "effects": { "intelligence": 5, "avoidance": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["gray_deal"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "gray_0003",
+    "age_range": [35, 35],
+    "category": "career",
+    "title": "半夜的敲门声",
+    "text": "凌晨两点，急促的敲门声。猫眼里是几个陌生面孔：「开门，例行检查。」你的血一下子凉了，手机里有不能见光的东西，保险柜里有说不清的现金。敲门声越来越重。",
+    "choices": [
+      { "text": "从消防通道跑了，从此东躲西藏", "effects": { "money": -8, "anxiety": 6 }, "flags_add": [] },
+      { "text": "瘫坐在沙发上等门开，听天由命", "effects": { "luck": 6, "pressure": 5 }, "flags_add": [] },
+      { "text": "第二天走进派出所，把这些年全交代了", "effects": { "responsibility": 8, "money": -10, "happiness": -4 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["gray_deep"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "gray_0004",
+    "age_range": [39, 39],
+    "category": "career",
+    "title": "上岸之后",
+    "text": "抽身已经有些日子了。正规生意做得不温不火，但至少，陌生来电不再让你心慌。那天路过从前的场子，已经换了招牌。你站在马路对面看了一会儿，转身走进阳光里。",
+    "choices": [
+      { "text": "把正规公司一点点做大，这次走得慢但稳", "effects": { "money": 6, "self_control": 4 }, "flags_add": [] },
+      { "text": "匿名资助了几个学生，算是还债", "effects": { "empathy": 8, "money": -5 }, "flags_add": [] },
+      { "text": "换了城市换了圈子，过去的事再不提", "effects": { "comfort": 4, "social": -3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["gray_quit"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "gray_0005",
+    "age_range": [42, 42],
+    "category": "personality",
+    "title": "那年的选择",
+    "text": "孩子长大了，有一天忽然问你：「爸/妈，你年轻时候是做什么的？」你愣了一下。那些年的钱、那些年的慌，像潮水一样涌上来。饭桌上很安静，等你回答。",
+    "choices": [
+      { "text": "如实讲给孩子听，包括那些不体面的部分", "effects": { "responsibility": 6, "happiness": 4 }, "flags_add": [] },
+      { "text": "岔开话题。有些秘密，就带进坟墓吧", "effects": { "social": -4, "anxiety": 3 }, "flags_add": [] },
+      { "text": "把当年的渠道举报了，迟到了很多年", "effects": { "responsibility": 5, "money": -3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["gray_deal"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  }
+]

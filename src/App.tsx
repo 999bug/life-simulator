@@ -40,14 +40,15 @@ export default function App() {
   }, [game.phase, newAchievements.length]);
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center bg-black overflow-hidden">
+    // 全屏渐变背景（与游戏场景同色系），舞台内容居中显示，无黑边/圆角/阴影的"框"感
+    <div className="w-screen h-screen flex justify-center items-center bg-gradient-to-b from-[#0a0a14] via-[#1a1a2e] to-[#0a0a14] overflow-hidden">
       {game.phase === 'summary' ? (
         // 结算页全屏：脱离 960×720 舞台框（无圆角/阴影/缩放），大屏下用满屏幕
         <div className="w-full h-full text-white">
           <SummaryScreen game={game} onRestart={reset} newAchievements={newAchievements} skippedEvents={skippedEvents} />
         </div>
       ) : (
-        <div className="w-full h-full max-w-[960px] max-h-[720px] relative overflow-hidden rounded-lg shadow-[0_0_80px_rgba(0,0,0,0.6)] text-white" style={{ transform: `scale(${scale})` }}>
+        <div className="w-full h-full max-w-[960px] max-h-[720px] relative overflow-hidden text-white" style={{ transform: `scale(${scale})` }}>
           {game.phase === 'title' && (
             <TitleScreen onStart={startGame} onAutoStart={startAutoGame} onDailyStart={startDailyGame} saves={saves} onContinue={continueGame} achievements={achievements} stats={stats} daily={daily} />
           )}

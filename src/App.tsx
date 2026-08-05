@@ -40,15 +40,16 @@ export default function App() {
   }, [game.phase, newAchievements.length]);
 
   return (
-    // 全屏渐变背景（与游戏场景同色系），舞台内容居中显示，无黑边/圆角/阴影的"框"感
-    <div className="w-screen h-screen flex justify-center items-center bg-gradient-to-b from-[#0a0a14] via-[#1a1a2e] to-[#0a0a14] overflow-hidden">
+    // 全屏径向渐变背景（与标题页同源），标题/对局阶段背景连续无边界
+    <div className="w-screen h-screen flex justify-center items-center bg-[radial-gradient(ellipse_at_center,#1a1a30_0%,#0a0a14_70%)] overflow-hidden">
       {game.phase === 'summary' ? (
         // 结算页全屏：脱离 960×720 舞台框（无圆角/阴影/缩放），大屏下用满屏幕
         <div className="w-full h-full text-white">
           <SummaryScreen game={game} onRestart={reset} newAchievements={newAchievements} skippedEvents={skippedEvents} />
         </div>
       ) : (
-        <div className="w-full h-full max-w-[960px] max-h-[720px] relative overflow-hidden text-white" style={{ transform: `scale(${scale})` }}>
+        // 舞台固定 960×720：scale 公式以此逻辑尺寸为前提，流式尺寸会导致小窗口下二次缩小并裁切内容
+        <div className="w-[960px] h-[720px] relative overflow-hidden text-white" style={{ transform: `scale(${scale})` }}>
           {game.phase === 'title' && (
             <TitleScreen onStart={startGame} onAutoStart={startAutoGame} onDailyStart={startDailyGame} saves={saves} onContinue={continueGame} achievements={achievements} stats={stats} daily={daily} />
           )}

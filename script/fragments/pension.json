@@ -1,0 +1,80 @@
+[
+  {
+    "id": "pension_0001",
+    "age_range": [61, 61],
+    "category": "finance",
+    "title": "第一笔退休金",
+    "text": "退休手续办完的第一个月，退休金准时打到了卡上。数字不算多，但胜在月月都有。你拿着存折在阳台坐了一下午，算起往后日子的柴米油盐。",
+    "choices": [
+      { "text": "精打细算，每月还能存下一点", "effects": { "saving": 12, "happiness": 2 }, "flags_add": [] },
+      { "text": "取出来大半，补贴给子女还房贷", "effects": { "money": -4, "happiness": 4, "family_relation": 3 }, "flags_add": [] },
+      { "text": "给自己报了老年大学的书法班", "effects": { "happiness": 5, "money": -2 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": { "money": 30 } }
+  },
+  {
+    "id": "pension_0002",
+    "age_range": [63, 63],
+    "category": "finance",
+    "title": "社区送来的温暖",
+    "text": "社区网格员挨家挨户登记独居和困难老人，看到你家的光景，第二天就送来了慰问金和免费体检单。你推辞了两句，心里却暖烘烘的——这把年纪了，还有人惦记着。",
+    "choices": [
+      { "text": "收下慰问金，日子宽裕了些", "effects": { "money": 10, "happiness": 3 }, "flags_add": [] },
+      { "text": "慰问金婉拒了，只收下免费体检单", "effects": { "health": 5, "gratitude": 3 }, "flags_add": [] },
+      { "text": "过意不去，报名当了社区义工", "effects": { "social": 5, "happiness": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": { "money": 25 } }
+  },
+  {
+    "id": "pension_0003",
+    "age_range": [65, 65],
+    "category": "finance",
+    "title": "到期的那笔老本",
+    "text": "银行打来电话：年轻时存的一笔定期到期了，本息一起滚了这些年，竟也有了一笔不小的数目。柜员问你要不要转存，你捏着那张泛黄的存单，想起当年省吃俭用存钱的日子。",
+    "choices": [
+      { "text": "本息转存，留着给晚年托底", "effects": { "saving": 14 }, "flags_add": [] },
+      { "text": "取出一部分，把家里的老物件换换新", "effects": { "money": 8, "happiness": 4 }, "flags_add": [] },
+      { "text": "给孙辈包了个大红包，看他们蹦蹦跳跳", "effects": { "happiness": 5, "money": -2, "family_relation": 2 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": { "money": 20 } }
+  },
+  {
+    "id": "pension_0004",
+    "age_range": [62, 62],
+    "category": "health",
+    "title": "医保报销到账",
+    "text": "前阵子住院的账单，医保报销了大头。拿到结算单的那一刻，你长舒一口气——还好当年咬着牙没断缴。剩下的自付部分，比预想的少了一大截。",
+    "choices": [
+      { "text": "省下的钱存进卡里，心里踏实多了", "effects": { "saving": 11 }, "flags_add": [] },
+      { "text": "趁报销到账，把一直舍不得换的药换成好药", "effects": { "health": 6, "money": 3 }, "flags_add": [] },
+      { "text": "约了全面的复查套餐，图个安心", "effects": { "health": 8 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": { "money": 28 } }
+  },
+  {
+    "id": "pension_0005",
+    "age_range": [64, 64],
+    "category": "finance",
+    "title": "高龄津贴",
+    "text": "街道通知你去办高龄津贴登记，每个月多一笔补贴。工作人员笑着说：「这是政策给老人家的心意。」你算了算，一年下来也够交大半年的水电费了。",
+    "choices": [
+      { "text": "按月存起来，积少成多", "effects": { "saving": 12 }, "flags_add": [] },
+      { "text": "用来改善伙食，每天加个蛋添个荤", "effects": { "money": 5, "health": 4 }, "flags_add": [] },
+      { "text": "常请老伙伴们下馆子，热闹", "effects": { "money": 3, "social": 5 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": { "money": 25 } }
+  },
+  {
+    "id": "pension_0006",
+    "age_range": [66, 66],
+    "category": "finance",
+    "title": "以房养老的宣讲会",
+    "text": "银行来社区宣讲「以房养老」：把老房抵押出去，每月领一笔钱，人还住在自己家里。邻居们议论纷纷，有人说划算，有人直摇头。你握着宣传册，心里反复掂量。",
+    "choices": [
+      { "text": "办了。每月多一笔进账，手头一下子宽裕了", "effects": { "money": 13, "happiness": -3 }, "flags_add": [] },
+      { "text": "没办。房子要原样留给子女，是个念想", "effects": { "family_relation": 4, "happiness": 2 }, "flags_add": [] },
+      { "text": "再观望观望，把条款研究了个透", "effects": { "intelligence": 3, "money": 2 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": { "money": 20 } }
+  }
+]

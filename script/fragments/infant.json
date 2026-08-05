@@ -1,0 +1,296 @@
+[
+  {
+    "id": "infant_0004",
+    "age_range": [
+      0,
+      0
+    ],
+    "category": "family",
+    "title": "产房清晨的初啼",
+    "text": "清晨六点的产房走廊安安静静，忽然一声啼哭划破了空气。护士把你裹进小被子抱出来，爸爸举着手机的手在发抖，妈妈躺在病床上虚弱地笑。阳光刚好落在你皱巴巴的小脸上。从这一刻起，这个家的故事里，多了一个你。",
+    "choices": [
+      {
+        "text": "「哇——」地放声大哭，把整个清晨都吵醒了",
+        "effects": {
+          "health": 3,
+          "comfort": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "爸爸忙前忙后，订了最贵的月子餐和护工",
+        "effects": {
+          "family_need": 4,
+          "money": -3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "妈妈把你贴在胸口，笑爸爸笨手笨脚",
+        "effects": {
+          "happiness": 3,
+          "family_relation": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "infant_0005",
+    "age_range": [
+      0,
+      0
+    ],
+    "category": "family",
+    "title": "大雪夜的出生",
+    "text": "预产期提前了一周，那天夜里下着鹅毛大雪。爸爸用军大衣裹住你和妈妈，深一脚浅一脚地往医院赶。值班医生搓着手说来得及时。产房的灯亮了一整夜，雪也落了一整夜。你踩着一路风雪来到这个世界，睁开眼看见的第一束光，是父母通红却含笑的眼睛。",
+    "choices": [
+      {
+        "text": "爸爸借了邻居的三轮车，雪夜里蹬了四十分钟",
+        "effects": {
+          "saving": 3,
+          "patience": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "爸爸咬牙叫了出租车，车费抵他半个月工钱",
+        "effects": {
+          "money": -4,
+          "family_relation": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "护士姐姐往妈妈怀里塞了个暖水袋，说这孩子福气大",
+        "effects": {
+          "happiness": 3,
+          "empathy": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "infant_0006",
+    "age_range": [
+      0,
+      0
+    ],
+    "category": "family",
+    "title": "满月酒",
+    "text": "满月这天，家里摆了酒席。爷爷请了要好的亲戚，鞭炮炸了一地红。妈妈把你抱给一桌桌人看，人人都夸你白胖。爸爸守在门口，一笔一笔记着随礼的账。你被塞了一兜红包，懵懵懂懂打了个哈欠，把满屋子的大人都逗笑了。",
+    "choices": [
+      {
+        "text": "爷爷摆了十几桌，礼金记了满满一页账",
+        "effects": {
+          "family_need": 4,
+          "money": -4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "家里只摆了两桌，收的红包还没有尿布多",
+        "effects": {
+          "saving": 3,
+          "stability": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "你被逗得咯咯笑，挥着小拳头「啊啊」应和",
+        "effects": {
+          "happiness": 4,
+          "social": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "infant_0007",
+    "age_range": [
+      1,
+      1
+    ],
+    "category": "health",
+    "title": "发高烧的夜",
+    "text": "半夜你烧到三十九度，小脸通红。妈妈用温水一遍遍擦你的手心脚心，爸爸裹上大衣跑去敲诊所的门。医生说不要紧，是出疹子。天快亮时烧退了，你睡得很沉。妈妈趴在床边握着你的小脚丫，一夜没有合眼。",
+    "choices": [
+      {
+        "text": "退烧后睁开眼，看见妈妈红红的眼眶，冲她笑了",
+        "effects": {
+          "family_need": 4,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "爸爸背着你跑了三家诊所，药钱花了半月工资",
+        "effects": {
+          "money": -4,
+          "family_relation": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "天亮前妈妈还要赶去上早班，把你交给奶奶守",
+        "effects": {
+          "family_relation": 2,
+          "happiness": -2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "infant_0008",
+    "age_range": [
+      1,
+      1
+    ],
+    "category": "family",
+    "title": "迈出第一步",
+    "text": "你扶着茶几慢慢站起来，小短腿还在打颤。妈妈蹲在三步开外，张开双臂，一遍遍喊你的名字。你犹豫了半分钟，终于松开手，摇摇晃晃迈出一步、两步，一头扑进她怀里。她把你举过头顶转了一圈，整个屋子都是笑声。",
+    "choices": [
+      {
+        "text": "松开手，摇摇晃晃扑进妈妈怀里",
+        "effects": {
+          "happiness": 4,
+          "health": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "扶着墙一步一步慢慢挪，坚决不摔",
+        "effects": {
+          "safety": 3,
+          "patience": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "走了两步就摔了，坐在地上哭，非要妈妈抱",
+        "effects": {
+          "happiness": -2,
+          "family_need": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "infant_0009",
+    "age_range": [
+      2,
+      2
+    ],
+    "category": "family",
+    "title": "邻居串门",
+    "text": "隔壁王婶端着一盘刚出锅的韭菜盒子来串门，你踮着脚趴在门边，眼睛直勾勾地盯着。王婶捏了一小块塞进你嘴里，你吧唧吧唧嚼得满脸是油。妈妈追出来，把一袋自家腌的萝卜干塞回王婶手里。两家的院子里，都多了几分热闹。",
+    "choices": [
+      {
+        "text": "你拉着王婶家的小哥哥，把玩具小车分给他玩",
+        "effects": {
+          "friendship": 4,
+          "social": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "妈妈用萝卜干换回一袋鸡蛋，说谁也不占谁便宜",
+        "effects": {
+          "saving": 3,
+          "family_relation": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "妈妈一整天都在忙，你只好拽着王婶的衣角听她聊天",
+        "effects": {
+          "family_need": -2,
+          "comfort": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "infant_0010",
+    "age_range": [
+      2,
+      2
+    ],
+    "category": "personality",
+    "title": "第一句「不」",
+    "text": "妈妈让你把玩具收起来，你摇摇头，小小声说了句「不」。她愣了一下，你又说了第二遍，声音大了些，带着试探。爸爸在边上笑出声：「嘿，有主意了。」你忽然发现这个字有神奇的魔力，大人会停下来看你。你决定，再多说几遍试试。",
+    "choices": [
+      {
+        "text": "妈妈蹲下来认真告诉你，「不」要说给该说的事",
+        "effects": {
+          "discipline": 4,
+          "patience": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "你叉着腰又喊了两声「不」，全家笑作一团",
+        "effects": {
+          "happiness": 4,
+          "courage": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "妈妈板起脸把玩具收走，你哭得直打嗝",
+        "effects": {
+          "discipline": 5,
+          "happiness": -2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  }
+]

@@ -25,7 +25,7 @@ export function mergeFragments(base, fragments) {
 }
 
 /**
- * 每岁密度校验：0-2 岁每岁 1-3 个；3-12 岁每岁 5-12 个；13-75 岁每岁 3-7 个。
+ * 每岁密度校验：0-2 岁每岁 3-5 个；3-12 岁每岁 5-13 个；13-75 岁每岁 3-8 个。
  *
  * @returns 违规描述数组，空数组表示通过
  */
@@ -37,12 +37,12 @@ export function checkDistribution(events) {
   }
   const violations = [];
   for (const [age, count] of [...perAge].sort((a, b) => a[0] - b[0])) {
-    if (age <= 2 && (count < 1 || count > 3)) {
-      violations.push(`${age} 岁事件 ${count} 个，超出 1-3 范围`);
-    } else if (age >= 3 && age <= 12 && (count < 5 || count > 12)) {
-      violations.push(`${age} 岁事件 ${count} 个，${count < 5 ? '过少' : '过多'}（要求 5-12）`);
-    } else if (age >= 13 && age <= 75 && (count < 3 || count > 7)) {
-      violations.push(`${age} 岁事件 ${count} 个，${count < 3 ? '过少' : '过多'}（要求 3-7）`);
+    if (age <= 2 && (count < 3 || count > 5)) {
+      violations.push(`${age} 岁事件 ${count} 个，超出 3-5 范围`);
+    } else if (age >= 3 && age <= 12 && (count < 5 || count > 13)) {
+      violations.push(`${age} 岁事件 ${count} 个，${count < 5 ? '过少' : '过多'}（要求 5-13）`);
+    } else if (age >= 13 && age <= 75 && (count < 3 || count > 8)) {
+      violations.push(`${age} 岁事件 ${count} 个，${count < 3 ? '过少' : '过多'}（要求 3-8）`);
     }
   }
   return violations;

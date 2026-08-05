@@ -1,5 +1,140 @@
 [
   {
+    "id": "infant_0004",
+    "stage": "infant",
+    "age": 0,
+    "title": "产房清晨的初啼",
+    "text": "清晨六点的产房走廊安安静静，忽然一声啼哭划破了空气。护士把你裹进小被子抱出来，爸爸举着手机的手在发抖，妈妈躺在病床上虚弱地笑。阳光刚好落在你皱巴巴的小脸上。从这一刻起，这个家的故事里，多了一个你。",
+    "choices": [
+      {
+        "text": "「哇——」地放声大哭，把整个清晨都吵醒了",
+        "effects": "💪+3 😊+2",
+        "outcomes": {
+          "attr": {
+            "health": 3,
+            "happiness": 2
+          }
+        }
+      },
+      {
+        "text": "爸爸忙前忙后，订了最贵的月子餐和护工",
+        "effects": "💰-3 😊+4",
+        "outcomes": {
+          "attr": {
+            "happiness": 4,
+            "wealth": -3
+          }
+        }
+      },
+      {
+        "text": "妈妈把你贴在胸口，笑爸爸笨手笨脚",
+        "effects": "😊+3 👥+3",
+        "outcomes": {
+          "attr": {
+            "happiness": 3,
+            "social": 3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "infant_0005",
+    "stage": "infant",
+    "age": 0,
+    "title": "大雪夜的出生",
+    "text": "预产期提前了一周，那天夜里下着鹅毛大雪。爸爸用军大衣裹住你和妈妈，深一脚浅一脚地往医院赶。值班医生搓着手说来得及时。产房的灯亮了一整夜，雪也落了一整夜。你踩着一路风雪来到这个世界，睁开眼看见的第一束光，是父母通红却含笑的眼睛。",
+    "choices": [
+      {
+        "text": "爸爸借了邻居的三轮车，雪夜里蹬了四十分钟",
+        "effects": "💰+3 ⚖️+3",
+        "outcomes": {
+          "attr": {
+            "wealth": 3,
+            "morality": 3
+          }
+        }
+      },
+      {
+        "text": "爸爸咬牙叫了出租车，车费抵他半个月工钱",
+        "effects": "💰-4 👥+4",
+        "outcomes": {
+          "attr": {
+            "wealth": -4,
+            "social": 4
+          }
+        }
+      },
+      {
+        "text": "护士姐姐往妈妈怀里塞了个暖水袋，说这孩子福气大",
+        "effects": "😊+3 ⚖️+2",
+        "outcomes": {
+          "attr": {
+            "happiness": 3,
+            "morality": 2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "infant_0006",
+    "stage": "infant",
+    "age": 0,
+    "title": "满月酒",
+    "text": "满月这天，家里摆了酒席。爷爷请了要好的亲戚，鞭炮炸了一地红。妈妈把你抱给一桌桌人看，人人都夸你白胖。爸爸守在门口，一笔一笔记着随礼的账。你被塞了一兜红包，懵懵懂懂打了个哈欠，把满屋子的大人都逗笑了。",
+    "choices": [
+      {
+        "text": "爷爷摆了十几桌，礼金记了满满一页账",
+        "effects": "💰-4 😊+4",
+        "outcomes": {
+          "attr": {
+            "happiness": 4,
+            "wealth": -4
+          }
+        }
+      },
+      {
+        "text": "家里只摆了两桌，收的红包还没有尿布多",
+        "effects": "💰+3 😊+3",
+        "outcomes": {
+          "attr": {
+            "wealth": 3,
+            "happiness": 3
+          }
+        }
+      },
+      {
+        "text": "你被逗得咯咯笑，挥着小拳头「啊啊」应和",
+        "effects": "😊+4 👥+2",
+        "outcomes": {
+          "attr": {
+            "happiness": 4,
+            "social": 2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "birth_01",
     "stage": "infant",
     "age": 0,
@@ -14,6 +149,94 @@
         }
       }
     ]
+  },
+  {
+    "id": "infant_0007",
+    "stage": "infant",
+    "age": 1,
+    "title": "发高烧的夜",
+    "text": "半夜你烧到三十九度，小脸通红。妈妈用温水一遍遍擦你的手心脚心，爸爸裹上大衣跑去敲诊所的门。医生说不要紧，是出疹子。天快亮时烧退了，你睡得很沉。妈妈趴在床边握着你的小脚丫，一夜没有合眼。",
+    "choices": [
+      {
+        "text": "退烧后睁开眼，看见妈妈红红的眼眶，冲她笑了",
+        "effects": "😊+6",
+        "outcomes": {
+          "attr": {
+            "happiness": 6
+          }
+        }
+      },
+      {
+        "text": "爸爸背着你跑了三家诊所，药钱花了半月工资",
+        "effects": "💰-4 👥+4",
+        "outcomes": {
+          "attr": {
+            "wealth": -4,
+            "social": 4
+          }
+        }
+      },
+      {
+        "text": "天亮前妈妈还要赶去上早班，把你交给奶奶守",
+        "effects": "😊-2 👥+2",
+        "outcomes": {
+          "attr": {
+            "social": 2,
+            "happiness": -2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "infant_0008",
+    "stage": "infant",
+    "age": 1,
+    "title": "迈出第一步",
+    "text": "你扶着茶几慢慢站起来，小短腿还在打颤。妈妈蹲在三步开外，张开双臂，一遍遍喊你的名字。你犹豫了半分钟，终于松开手，摇摇晃晃迈出一步、两步，一头扑进她怀里。她把你举过头顶转了一圈，整个屋子都是笑声。",
+    "choices": [
+      {
+        "text": "松开手，摇摇晃晃扑进妈妈怀里",
+        "effects": "💪+2 😊+4",
+        "outcomes": {
+          "attr": {
+            "happiness": 4,
+            "health": 2
+          }
+        }
+      },
+      {
+        "text": "扶着墙一步一步慢慢挪，坚决不摔",
+        "effects": "💪+3 ⚖️+3",
+        "outcomes": {
+          "attr": {
+            "health": 3,
+            "morality": 3
+          }
+        }
+      },
+      {
+        "text": "走了两步就摔了，坐在地上哭，非要妈妈抱",
+        "effects": "😊+1",
+        "outcomes": {
+          "attr": {
+            "happiness": 1
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
   },
   {
     "id": "birth_02",
@@ -34,6 +257,181 @@
         }
       }
     ]
+  },
+  {
+    "id": "infant_0001",
+    "stage": "infant",
+    "age": 1,
+    "title": "第一次叫妈妈",
+    "text": "你躺在摇篮里，妈妈的脸凑过来，一遍遍教你发音。终于，一个含混却清晰的音节从你嘴里蹦出来。妈妈愣住了，眼眶一下子红了，把你紧紧搂进怀里。整个家都因为这个字热闹了起来。",
+    "choices": [
+      {
+        "text": "扯着嗓子又喊了几声，妈妈笑得眼泪都出来了",
+        "effects": "😊+10 👥+6",
+        "outcomes": {
+          "attr": {
+            "happiness": 10,
+            "social": 6
+          }
+        }
+      },
+      {
+        "text": "喊完就转过头玩手指，好像什么都没发生过",
+        "effects": "🧠+3 😊+5",
+        "outcomes": {
+          "attr": {
+            "happiness": 5,
+            "intelligence": 3
+          }
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
+    "id": "infant_0009",
+    "stage": "infant",
+    "age": 2,
+    "title": "邻居串门",
+    "text": "隔壁王婶端着一盘刚出锅的韭菜盒子来串门，你踮着脚趴在门边，眼睛直勾勾地盯着。王婶捏了一小块塞进你嘴里，你吧唧吧唧嚼得满脸是油。妈妈追出来，把一袋自家腌的萝卜干塞回王婶手里。两家的院子里，都多了几分热闹。",
+    "choices": [
+      {
+        "text": "你拉着王婶家的小哥哥，把玩具小车分给他玩",
+        "effects": "👥+6",
+        "outcomes": {
+          "attr": {
+            "social": 6
+          }
+        }
+      },
+      {
+        "text": "妈妈用萝卜干换回一袋鸡蛋，说谁也不占谁便宜",
+        "effects": "💰+3 👥+2",
+        "outcomes": {
+          "attr": {
+            "wealth": 3,
+            "social": 2
+          }
+        }
+      },
+      {
+        "text": "妈妈一整天都在忙，你只好拽着王婶的衣角听她聊天",
+        "effects": "",
+        "outcomes": {
+          "attr": {}
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "infant_0010",
+    "stage": "infant",
+    "age": 2,
+    "title": "第一句「不」",
+    "text": "妈妈让你把玩具收起来，你摇摇头，小小声说了句「不」。她愣了一下，你又说了第二遍，声音大了些，带着试探。爸爸在边上笑出声：「嘿，有主意了。」你忽然发现这个字有神奇的魔力，大人会停下来看你。你决定，再多说几遍试试。",
+    "choices": [
+      {
+        "text": "妈妈蹲下来认真告诉你，「不」要说给该说的事",
+        "effects": "⚖️+7",
+        "outcomes": {
+          "attr": {
+            "morality": 7
+          }
+        }
+      },
+      {
+        "text": "你叉着腰又喊了两声「不」，全家笑作一团",
+        "effects": "😊+4 🎨+2",
+        "outcomes": {
+          "attr": {
+            "happiness": 4,
+            "appearance": 2
+          }
+        }
+      },
+      {
+        "text": "妈妈板起脸把玩具收走，你哭得直打嗝",
+        "effects": "😊-2 ⚖️+5",
+        "outcomes": {
+          "attr": {
+            "morality": 5,
+            "happiness": -2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "infant_0002",
+    "stage": "infant",
+    "age": 2,
+    "title": "蹒跚学步",
+    "text": "你扶着沙发站起来，小短腿颤颤巍巍。爸爸蹲在不远处张开双臂，鼓励你迈出第一步。你松开手，摇摇晃晃地走了两步，摔了个屁股蹲。全家人的心都提到了嗓子眼，然后一起笑出声来。",
+    "choices": [
+      {
+        "text": "爬起来拍拍手，继续朝爸爸走去，一次比一次稳",
+        "effects": "💪+10 😊+8",
+        "outcomes": {
+          "attr": {
+            "health": 10,
+            "happiness": 8
+          }
+        }
+      },
+      {
+        "text": "摔疼了，坐在地上哇哇大哭，要妈妈抱",
+        "effects": "😊-4 🎨+2",
+        "outcomes": {
+          "attr": {
+            "happiness": -4,
+            "appearance": 2
+          }
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
+    "id": "infant_0003",
+    "stage": "infant",
+    "age": 2,
+    "title": "第一次发脾气",
+    "text": "晚饭前你非要吃饼干，妈妈说不可以。你小脸涨得通红，把积木推得满地都是，哭得惊天动地。奶奶想哄，妈妈拦住了：「规矩得从小立。」你哭累了，抽抽搭搭地坐下来，终于接受了这顿饭前没有饼干的事实。",
+    "choices": [
+      {
+        "text": "抽噎着把积木捡起来，轻轻放回盒子里",
+        "effects": "😊+3 ⚖️+8",
+        "outcomes": {
+          "attr": {
+            "morality": 8,
+            "happiness": 3
+          }
+        }
+      },
+      {
+        "text": "趁大人不注意，偷偷伸手去够饼干盒",
+        "effects": "🍀-5 ⚖️-6",
+        "outcomes": {
+          "attr": {
+            "luck": -5,
+            "morality": -6
+          }
+        }
+      }
+    ],
+    "conditions": {}
   },
   {
     "id": "child_0101",
@@ -866,6 +1264,53 @@
         }
       }
     ]
+  },
+  {
+    "id": "pet_0001",
+    "stage": "childhood",
+    "age": 6,
+    "title": "街角的小狗",
+    "text": "放学路上，你听见墙角的纸箱里传来细碎的呜咽。掀开一看，一只脏兮兮的小狗缩在里面，湿漉漉的眼睛望着你。它很小，小到一只手掌就能托住；它又很倔，明明饿得发抖，还是朝你摇了摇尾巴。天快黑了，风有点凉。",
+    "choices": [
+      {
+        "text": "把它抱回家，求爸妈收留",
+        "effects": "😊+6 ⚖️+4",
+        "outcomes": {
+          "attr": {
+            "happiness": 6,
+            "morality": 4
+          },
+          "flags": [
+            "pet_dog"
+          ]
+        }
+      },
+      {
+        "text": "买根火腿肠喂它，看它吃完",
+        "effects": "😊+3 ⚖️+3",
+        "outcomes": {
+          "attr": {
+            "morality": 3,
+            "happiness": 3
+          }
+        }
+      },
+      {
+        "text": "当作没看见，跑回家",
+        "effects": "😊-3",
+        "outcomes": {
+          "attr": {
+            "happiness": -3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
   },
   {
     "id": "child_04",
@@ -1878,6 +2323,57 @@
         }
       }
     ]
+  },
+  {
+    "id": "music_0001",
+    "stage": "childhood",
+    "age": 8,
+    "title": "第一次摸琴",
+    "text": "商场角落的琴行里，一架钢琴盖着红布。店员掀开布，你踮起脚按下一个白键，「叮」的一声，像一滴水落进心里。你回头拽了拽妈妈的衣角，又怯怯地缩回手。那声音很小，可回家的路上，你的耳朵里一直有那一声「叮」在响。",
+    "choices": [
+      {
+        "text": "鼓起勇气求爸妈，报名学琴",
+        "effects": "💰-5 🎨+8",
+        "outcomes": {
+          "attr": {
+            "appearance": 8,
+            "wealth": -5
+          },
+          "flags": [
+            "music_piano"
+          ]
+        }
+      },
+      {
+        "text": "攒零花钱买琴谱，自己跟着学",
+        "effects": "🧠+4 💰+3 🎨+3",
+        "outcomes": {
+          "attr": {
+            "appearance": 3,
+            "intelligence": 4,
+            "wealth": 3
+          },
+          "flags": [
+            "music_piano"
+          ]
+        }
+      },
+      {
+        "text": "摸着琴盖发了一会儿呆，放下手",
+        "effects": "🧠-3",
+        "outcomes": {
+          "attr": {
+            "intelligence": -3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
   },
   {
     "id": "child_06",
@@ -4245,6 +4741,54 @@
     }
   },
   {
+    "id": "pet_0002",
+    "stage": "teen",
+    "age": 14,
+    "title": "狗老了",
+    "text": "八年过去，当年那只小狗已经是条老狗了。它的腿脚不再利索，上楼梯要歇好几回，毛也白了一大片。今天它蹲在门口等你放学，你蹲下来揉它的头，它蹭了蹭你的手心，尾巴摇得很慢很慢，像是怕摇快了，就会累着。",
+    "choices": [
+      {
+        "text": "放慢脚步，每天陪它多走一段",
+        "effects": "👥+3 ⚖️+4",
+        "outcomes": {
+          "attr": {
+            "morality": 4,
+            "social": 3
+          }
+        }
+      },
+      {
+        "text": "攒零花钱，带它去看兽医",
+        "effects": "💪+3 💰-4 ⚖️+3",
+        "outcomes": {
+          "attr": {
+            "wealth": -4,
+            "health": 3,
+            "morality": 3
+          }
+        }
+      },
+      {
+        "text": "嫌它麻烦，不再理它",
+        "effects": "😊-3 ⚖️-3",
+        "outcomes": {
+          "attr": {
+            "happiness": -3,
+            "morality": -3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "pet_dog"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "teen_03",
     "stage": "teen",
     "age": 14,
@@ -4878,6 +5422,54 @@
         "science_dream",
         "researcher"
       ]
+    }
+  },
+  {
+    "id": "music_0002",
+    "stage": "teen",
+    "age": 16,
+    "title": "校园乐队",
+    "text": "高二，班长在走廊里拦住你：「我们组了个乐队，主唱有了、鼓手有了，就差键盘手，你来不来？」你脑海里闪过八岁那年那一声「叮」。放学后你们在旧琴房排练，调子总跑，笑声比琴声还响。夕阳把琴房染成橘色，你忽然觉得，这就是青春吧。",
+    "choices": [
+      {
+        "text": "加入乐队，当键盘手",
+        "effects": "😊+4 👥+4 🎨+5",
+        "outcomes": {
+          "attr": {
+            "appearance": 5,
+            "social": 4,
+            "happiness": 4
+          }
+        }
+      },
+      {
+        "text": "以学业为重，谢绝邀请",
+        "effects": "🧠+4 😊+3 🎨-3",
+        "outcomes": {
+          "attr": {
+            "intelligence": 4,
+            "happiness": 3,
+            "appearance": -3
+          }
+        }
+      },
+      {
+        "text": "只在周末偷偷去排练",
+        "effects": "🎨+3",
+        "outcomes": {
+          "attr": {
+            "appearance": 3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "music_piano"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
     }
   },
   {
@@ -6487,6 +7079,61 @@
     }
   },
   {
+    "id": "music_0003",
+    "stage": "young_adult",
+    "age": 21,
+    "title": "放弃还是坚持",
+    "text": "毕业那年的春天，你坐在琴凳上，面前摊着两张纸：一张是音乐学院的复试通知，一张是老家国企的录用函。母亲在电话里说：「学琴是爱好，工作是饭碗。」你把琴盖合上又打开、打开又合上。琴房的灯，亮了整夜。",
+    "choices": [
+      {
+        "text": "把录用函叠好收进抽屉，去复试",
+        "effects": "💰-4 🎨+10",
+        "outcomes": {
+          "attr": {
+            "appearance": 10,
+            "wealth": -4
+          },
+          "flags": [
+            "music_stick"
+          ]
+        }
+      },
+      {
+        "text": "回老家上班，把琴留在这里",
+        "effects": "💰+4 😊+5 🎨-4",
+        "outcomes": {
+          "attr": {
+            "happiness": 5,
+            "wealth": 4,
+            "appearance": -4
+          }
+        }
+      },
+      {
+        "text": "先去工作养活自己，琴也不丢",
+        "effects": "🧠+3 😊+3 🎨+3",
+        "outcomes": {
+          "attr": {
+            "appearance": 3,
+            "happiness": 3,
+            "intelligence": 3
+          },
+          "flags": [
+            "music_stick"
+          ]
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "music_piano"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "young_07",
     "stage": "young_adult",
     "age": 21,
@@ -6808,6 +7455,57 @@
     ],
     "conditions": {
       "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "pet_0003",
+    "stage": "young_adult",
+    "age": 22,
+    "title": "送别",
+    "text": "最后一晚，你抱着它坐在阳台上。它已经很老了，老到连抬头的力气都没有，只是安静地趴在你怀里，呼吸轻得像怕打扰你。月亮很圆，你忽然想起六岁那年的纸箱、八年的晨昏、无数个它蹲在门口等你的傍晚。然后，它的呼吸停在了这一刻。",
+    "choices": [
+      {
+        "text": "好好道别，把它埋在院里的树下",
+        "effects": "😊-3 ⚖️+5",
+        "outcomes": {
+          "attr": {
+            "morality": 5,
+            "happiness": -3
+          },
+          "flags": [
+            "pet_memory"
+          ]
+        }
+      },
+      {
+        "text": "抱着它哭一场，说尽想说的话",
+        "effects": "😊+2",
+        "outcomes": {
+          "attr": {
+            "happiness": 2
+          },
+          "flags": [
+            "pet_memory"
+          ]
+        }
+      },
+      {
+        "text": "假装什么都没发生，第二天照常上班",
+        "effects": "😊-1",
+        "outcomes": {
+          "attr": {
+            "happiness": -1
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "pet_dog"
+      ],
       "notFlags": [],
       "minAttrs": {},
       "maxAttrs": {}
@@ -7473,6 +8171,58 @@
       "hasFlags": [
         "artist_pro"
       ]
+    }
+  },
+  {
+    "id": "venture_0001",
+    "stage": "young_adult",
+    "age": 24,
+    "title": "辞职创业",
+    "text": "你在工位上把辞职信打了又删、删了又打。同事劝你：房贷、社保、稳定的工资，丢了可就没了。可你脑子里全是那个想了三年的想法——它像团火，白天压着，夜里烧。窗外写字楼的灯一盏盏亮起，你忽然觉得，自己不能再等了。",
+    "choices": [
+      {
+        "text": "递上辞职信，把积蓄砸进去创业",
+        "effects": "🧠+5 💰-4 🍀+3",
+        "outcomes": {
+          "attr": {
+            "wealth": -4,
+            "intelligence": 5,
+            "luck": 3
+          },
+          "flags": [
+            "venture"
+          ]
+        }
+      },
+      {
+        "text": "先不辞职，边上班边小规模试水",
+        "effects": "🧠+5",
+        "outcomes": {
+          "attr": {
+            "intelligence": 5
+          },
+          "flags": [
+            "venture"
+          ]
+        }
+      },
+      {
+        "text": "撕了辞职信，安心上班",
+        "effects": "🧠-3 💰+3 😊+5",
+        "outcomes": {
+          "attr": {
+            "happiness": 5,
+            "wealth": 3,
+            "intelligence": -3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
     }
   },
   {
@@ -8643,6 +9393,53 @@
     "conditions": {
       "hasFlags": [
         "first_crush"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "venture_0002",
+    "stage": "young_adult",
+    "age": 28,
+    "title": "融资失败",
+    "text": "投资人把你们的商业计划书翻了两遍，最后说了句「再打磨打磨」，把你送出办公室。你数了数账上的钱，只够撑四个月了。合伙人低着头不说话，一根接一根地抽烟。写字楼下的便利店亮着惨白的灯，你站在门口，第一次觉得夜风这么冷。",
+    "choices": [
+      {
+        "text": "咬着牙撑下去，四处找钱",
+        "effects": "💰-5 ⚖️+9",
+        "outcomes": {
+          "attr": {
+            "morality": 9,
+            "wealth": -5
+          }
+        }
+      },
+      {
+        "text": "砍掉一半业务，先活下来",
+        "effects": "🧠+5 💰+4 😊-3",
+        "outcomes": {
+          "attr": {
+            "intelligence": 5,
+            "wealth": 4,
+            "happiness": -3
+          }
+        }
+      },
+      {
+        "text": "消极躺平，任公司半死不活",
+        "effects": "💰-6",
+        "outcomes": {
+          "attr": {
+            "wealth": -6
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "venture"
       ],
       "notFlags": [],
       "minAttrs": {},
@@ -10114,6 +10911,62 @@
     ]
   },
   {
+    "id": "venture_0003",
+    "stage": "adult",
+    "age": 33,
+    "title": "公司活了/关了",
+    "text": "第九个年头，结果终于摊在眼前：账上只剩三位数，还是营收翻了三倍，全看这一个冬天。你把合伙人们叫到一起，办公室的灯从下午亮到深夜。墙上的白板写满了数字和箭头，像一张命运的棋盘。凌晨三点，你放下了笔。",
+    "choices": [
+      {
+        "text": "迎来转机，公司活下来了",
+        "effects": "💰+14 😊+8",
+        "outcomes": {
+          "attr": {
+            "wealth": 14,
+            "happiness": 8
+          },
+          "flags": [
+            "venture_out"
+          ]
+        }
+      },
+      {
+        "text": "回天乏术，亲手关掉公司",
+        "effects": "🧠+4 💰-8",
+        "outcomes": {
+          "attr": {
+            "wealth": -8,
+            "intelligence": 4
+          },
+          "flags": [
+            "venture_out"
+          ]
+        }
+      },
+      {
+        "text": "把公司转让给合伙人，抽身离开",
+        "effects": "💰+7 😊+3",
+        "outcomes": {
+          "attr": {
+            "wealth": 7,
+            "happiness": 3
+          },
+          "flags": [
+            "venture_out"
+          ]
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "venture"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "adult_31",
     "stage": "adult",
     "age": 34,
@@ -10588,6 +11441,55 @@
       "hasFlags": [
         "married"
       ]
+    }
+  },
+  {
+    "id": "music_0004",
+    "stage": "adult",
+    "age": 35,
+    "title": "深夜的钢琴房",
+    "text": "凌晨一点，写字楼十二层的琴房里还亮着灯。你刚下班，手指却像被什么牵着，掀开琴盖，弹了一首十四年前的老曲子。隔壁加班的同事敲了敲门，靠在门框上听完，说：「你这琴声，比我们这层楼的加班费治愈。」你笑了笑，又弹了一遍。",
+    "choices": [
+      {
+        "text": "再忙也留一小时给琴",
+        "effects": "💪-3 🎨+4 ⚖️+4",
+        "outcomes": {
+          "attr": {
+            "appearance": 4,
+            "morality": 4,
+            "health": -3
+          }
+        }
+      },
+      {
+        "text": "把琴房钥匙送给琴行，教孩子们弹琴",
+        "effects": "👥+3 🎨+3 ⚖️+5",
+        "outcomes": {
+          "attr": {
+            "morality": 5,
+            "social": 3,
+            "appearance": 3
+          }
+        }
+      },
+      {
+        "text": "合上琴盖，明天还要早起",
+        "effects": "😊+3 🎨-3",
+        "outcomes": {
+          "attr": {
+            "happiness": 3,
+            "appearance": -3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "music_stick"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
     }
   },
   {
@@ -11859,6 +12761,54 @@
     }
   },
   {
+    "id": "pet_0004",
+    "stage": "adult",
+    "age": 40,
+    "title": "路遇流浪猫",
+    "text": "雨夜加班回家，你在楼下垃圾桶旁看见一只流浪猫，浑身湿透，在路灯下缩成一团。它警惕地望着你，喉咙里发出低低的呜咽。你站在雨里，忽然想起很多年前那个纸箱，和纸箱里那双湿漉漉的眼睛。雨下得更大了。",
+    "choices": [
+      {
+        "text": "把猫带回家，给它一个家",
+        "effects": "💰-3 😊+6 👥+3",
+        "outcomes": {
+          "attr": {
+            "happiness": 6,
+            "social": 3,
+            "wealth": -3
+          }
+        }
+      },
+      {
+        "text": "上楼拿旧毛巾给它擦干，再放点吃的",
+        "effects": "😊+3 ⚖️+5",
+        "outcomes": {
+          "attr": {
+            "morality": 5,
+            "happiness": 3
+          }
+        }
+      },
+      {
+        "text": "看了一会儿，转身走进雨里",
+        "effects": "😊-3 ⚖️-3",
+        "outcomes": {
+          "attr": {
+            "happiness": -3,
+            "morality": -3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "pet_memory"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "adult_08",
     "stage": "adult",
     "age": 40,
@@ -13009,6 +13959,53 @@
         }
       }
     ]
+  },
+  {
+    "id": "venture_0004",
+    "stage": "adult",
+    "age": 45,
+    "title": "行业寒冬",
+    "text": "行业寒潮来了，同行一家接一家地裁员、降薪。你看着当年的老部下收拾工位，心里不是滋味。董事会上吵成一团：收缩保命，还是转型搏一把？窗外北风卷着落叶，你想起二十一年前那个辞职的下午，和那团烧了很久的火。",
+    "choices": [
+      {
+        "text": "壮士断腕，收缩保命",
+        "effects": "💰-4 😊+4 🎨+4",
+        "outcomes": {
+          "attr": {
+            "appearance": 4,
+            "wealth": -4,
+            "happiness": 4
+          }
+        }
+      },
+      {
+        "text": "押上家底，转型新赛道",
+        "effects": "🧠+5 🍀+4",
+        "outcomes": {
+          "attr": {
+            "intelligence": 5,
+            "luck": 4
+          }
+        }
+      },
+      {
+        "text": "躺平观望，等春天自己来",
+        "effects": "💰-6",
+        "outcomes": {
+          "attr": {
+            "wealth": -6
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "venture_out"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
   },
   {
     "id": "adult_83",
@@ -16245,6 +17242,101 @@
     ]
   },
   {
+    "id": "pet_0005",
+    "stage": "middle_age",
+    "age": 60,
+    "title": "想起它",
+    "text": "收拾旧物时，你翻出一张泛黄的照片——六岁的你抱着一只小狗，笑得露出豁牙。照片背面是你当年歪歪扭扭的字：我的小狗，叫豆豆。你摩挲着照片，想起那个纸箱、那八年晨昏、那个月亮很圆的晚上。窗外的晚风，忽然变得很温柔。",
+    "choices": [
+      {
+        "text": "把它的故事讲给孙辈听",
+        "effects": "😊+4 👥+5 ⚖️+3",
+        "outcomes": {
+          "attr": {
+            "social": 5,
+            "happiness": 4,
+            "morality": 3
+          }
+        }
+      },
+      {
+        "text": "画一幅记忆里它奔跑的样子",
+        "effects": "🧠+3 😊+3 🎨+4",
+        "outcomes": {
+          "attr": {
+            "appearance": 4,
+            "happiness": 3,
+            "intelligence": 3
+          }
+        }
+      },
+      {
+        "text": "把照片放回盒底，不再看了",
+        "effects": "😊-3",
+        "outcomes": {
+          "attr": {
+            "happiness": -3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "pet_memory"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "venture_0005",
+    "stage": "middle_age",
+    "age": 60,
+    "title": "回望创业路",
+    "text": "六十岁生日，儿子问你：爸，当年辞职创业，后悔过吗？你端起茶杯想了想。那些彻夜不眠的会议室、追不到的融资、关掉的办公室，和最后活下来的那口气，忽然都变得很轻。你笑了笑：「后悔没早点想明白——人这一辈子，总得为自己烧过一回。」",
+    "choices": [
+      {
+        "text": "把创业这些年写成一本回忆录",
+        "effects": "🧠+7 😊+4",
+        "outcomes": {
+          "attr": {
+            "intelligence": 7,
+            "happiness": 4
+          }
+        }
+      },
+      {
+        "text": "给年轻创业者当导师",
+        "effects": "😊+3 👥+9",
+        "outcomes": {
+          "attr": {
+            "social": 9,
+            "happiness": 3
+          }
+        }
+      },
+      {
+        "text": "庆幸当初选了这条最难的路",
+        "effects": "😊+7 ⚖️+4",
+        "outcomes": {
+          "attr": {
+            "morality": 4,
+            "happiness": 7
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "venture_out"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "mid_06",
     "stage": "middle_age",
     "age": 60,
@@ -18418,6 +19510,55 @@
     }
   },
   {
+    "id": "music_0005",
+    "stage": "elder",
+    "age": 70,
+    "title": "琴声里的前半生",
+    "text": "七十岁生日，你在养老院的旧钢琴前坐下。琴键黄了，音也不太准，但你一弹起来，满屋子的老人都安静了。曲终，前排的老太太问你：「这是什么曲子？」你说：「是一首叫《前半生》的曲子，我弹了五十多年，今天才弹完。」",
+    "choices": [
+      {
+        "text": "教孙辈们弹这首曲子",
+        "effects": "😊+4 👥+4 🎨+4",
+        "outcomes": {
+          "attr": {
+            "social": 4,
+            "appearance": 4,
+            "happiness": 4
+          }
+        }
+      },
+      {
+        "text": "办一场家庭小音乐会，把家人都叫来",
+        "effects": "😊+6 👥+4 🎨+3",
+        "outcomes": {
+          "attr": {
+            "happiness": 6,
+            "social": 4,
+            "appearance": 3
+          }
+        }
+      },
+      {
+        "text": "一个人把当年的曲子，再弹一遍",
+        "effects": "😊+7 ⚖️+3",
+        "outcomes": {
+          "attr": {
+            "happiness": 7,
+            "morality": 3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "music_stick"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "elder_04",
     "stage": "elder",
     "age": 70,
@@ -19784,6 +20925,79 @@
     ]
   },
   {
+    "id": "elderwarm_0001",
+    "stage": "elder",
+    "age": 76,
+    "title": "孙辈来信",
+    "text": "信箱里躺着一封信，是读大学的孙辈寄来的。信封上贴着歪歪的邮票，信纸上写满了学校里的小事：食堂的菜、宿舍的室友、第一次上台演讲。信末写着：等我放假回去看您。你把信读了两遍，字迹虽然潦草，却比什么礼物都珍贵。",
+    "choices": [
+      {
+        "text": "立刻回信，再寄一张近照",
+        "effects": "😊+4 👥+3",
+        "outcomes": {
+          "attr": {
+            "happiness": 4,
+            "social": 3
+          }
+        }
+      },
+      {
+        "text": "把信读给老伴听，一起乐一乐",
+        "effects": "😊+5",
+        "outcomes": {
+          "attr": {
+            "happiness": 5
+          }
+        }
+      },
+      {
+        "text": "让孙辈常打视频来",
+        "effects": "👥+6",
+        "outcomes": {
+          "attr": {
+            "social": 6
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "elder_0101",
+    "stage": "elder",
+    "age": 76,
+    "title": "体检报告",
+    "text": "社区组织的年度体检出了报告。医生说各项指标还算平稳，就是血压偏高，叮嘱你少盐少油，多走动。你拿着报告看了半天，想起年轻时熬夜拼命的那些年——能走到今天，已经是赚了。",
+    "choices": [
+      {
+        "text": "认真记下医嘱，从此每天清晨去公园走两圈",
+        "effects": "💪+10 ⚖️+4",
+        "outcomes": {
+          "attr": {
+            "health": 10,
+            "morality": 4
+          }
+        }
+      },
+      {
+        "text": "嘴上应着，转头就忘了，日子照旧",
+        "effects": "💪-5 😊+2",
+        "outcomes": {
+          "attr": {
+            "health": -5,
+            "happiness": 2
+          }
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
     "id": "elder_61",
     "stage": "elder",
     "age": 77,
@@ -19865,6 +21079,80 @@
       "minAttrs": {},
       "maxAttrs": {}
     }
+  },
+  {
+    "id": "elderwarm_0002",
+    "stage": "elder",
+    "age": 77,
+    "title": "老友重聚",
+    "text": "分别四十年的老友，循着老地址找到了你家。他头发白了大半，一开口还是当年那个调子。你们从中午聊到黄昏，把年轻时一起扛过的事翻来覆去地讲，一会儿笑，一会儿沉默。临走时他握着你的手说：早知道，该早点来。你说：现在也不晚。",
+    "choices": [
+      {
+        "text": "开一瓶存了多年的老酒，边喝边聊",
+        "effects": "😊+4 👥+3",
+        "outcomes": {
+          "attr": {
+            "happiness": 4,
+            "social": 3
+          }
+        }
+      },
+      {
+        "text": "约他常来，把没聊完的话都聊完",
+        "effects": "😊+2 👥+4",
+        "outcomes": {
+          "attr": {
+            "social": 4,
+            "happiness": 2
+          }
+        }
+      },
+      {
+        "text": "一直聊到夜色降临",
+        "effects": "😊+5",
+        "outcomes": {
+          "attr": {
+            "happiness": 5
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "elder_0102",
+    "stage": "elder",
+    "age": 77,
+    "title": "孙辈的电话",
+    "text": "远在另一个城市的小孙女打来电话，叽叽喳喳地讲学校里的趣事，最后甜甜地说了句「爷爷/奶奶我想你了」。挂了电话，你坐在沙发上，嘴角的笑意怎么也压不下去。",
+    "choices": [
+      {
+        "text": "翻出相册，把孙辈从小到大的照片看了一遍又一遍",
+        "effects": "🧠+3 😊+8",
+        "outcomes": {
+          "attr": {
+            "happiness": 8,
+            "intelligence": 3
+          }
+        }
+      },
+      {
+        "text": "惦记着孙辈，又忍不住念叨儿子儿媳工作太忙",
+        "effects": "😊+3 👥-2",
+        "outcomes": {
+          "attr": {
+            "happiness": 3,
+            "social": -2
+          }
+        }
+      }
+    ],
+    "conditions": {}
   },
   {
     "id": "elder_62",
@@ -19952,6 +21240,80 @@
     }
   },
   {
+    "id": "elderwarm_0003",
+    "stage": "elder",
+    "age": 78,
+    "title": "翻老相册",
+    "text": "午后，你和老伴把压箱底的老相册搬出来。黑白照片里的人多半认不出了，老伴却一张张指给你看：这是你二舅，这是隔壁的翠婶。有些照片已经泛黄发脆，你小心地捻着边角，忽然觉得，每一张薄薄的纸片里，都住着一段再也回不去的时光。",
+    "choices": [
+      {
+        "text": "和老伴一张张辨认照片里的人",
+        "effects": "😊+4 👥+2",
+        "outcomes": {
+          "attr": {
+            "happiness": 4,
+            "social": 2
+          }
+        }
+      },
+      {
+        "text": "把照片翻拍下来传给家人",
+        "effects": "🧠+2 👥+4",
+        "outcomes": {
+          "attr": {
+            "social": 4,
+            "intelligence": 2
+          }
+        }
+      },
+      {
+        "text": "看完小心地把相册收好",
+        "effects": "😊+2",
+        "outcomes": {
+          "attr": {
+            "happiness": 2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "elder_0103",
+    "stage": "elder",
+    "age": 78,
+    "title": "旧友重逢",
+    "text": "老同学聚会，你见到了几十年没见的同桌。两个头发花白的人站在饭店门口，先是互相打量，然后同时笑出了声。饭桌上大家说起年轻时的事，那些苦日子如今都成了下酒菜。",
+    "choices": [
+      {
+        "text": "留了联系方式，约好以后每月聚一次",
+        "effects": "😊+5 👥+9",
+        "outcomes": {
+          "attr": {
+            "social": 9,
+            "happiness": 5
+          }
+        }
+      },
+      {
+        "text": "热闹归热闹，散场后还是觉得一个人清静",
+        "effects": "😊+3 👥+2",
+        "outcomes": {
+          "attr": {
+            "social": 2,
+            "happiness": 3
+          }
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
     "id": "elder_63",
     "stage": "elder",
     "age": 79,
@@ -20033,6 +21395,81 @@
       "minAttrs": {},
       "maxAttrs": {}
     }
+  },
+  {
+    "id": "elderwarm_0004",
+    "stage": "elder",
+    "age": 79,
+    "title": "旧信重读",
+    "text": "整理书柜时，你翻出一叠泛黄的家书，是年轻时父母写来的。字迹一笔一划，问吃饱没有、穿暖没有、什么时候回家。你一封一封读下去，读到「你妈又梦到你了」那句，眼眶忽然热了。信纸已经脆得快要碎了，你轻轻把它放回信封，像放回一件珍宝。",
+    "choices": [
+      {
+        "text": "把家书按年月理好，标注清楚",
+        "effects": "🧠+3 ⚖️+3",
+        "outcomes": {
+          "attr": {
+            "morality": 3,
+            "intelligence": 3
+          }
+        }
+      },
+      {
+        "text": "念几段给儿孙听",
+        "effects": "😊+3 👥+3",
+        "outcomes": {
+          "attr": {
+            "social": 3,
+            "happiness": 3
+          }
+        }
+      },
+      {
+        "text": "读完后小心放回盒底",
+        "effects": "😊+2 ⚖️+2",
+        "outcomes": {
+          "attr": {
+            "happiness": 2,
+            "morality": 2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "elder_0104",
+    "stage": "elder",
+    "age": 79,
+    "title": "学用智能手机",
+    "text": "儿子教你在手机上看视频、发语音。你戴着老花镜，一个功能一个功能地学，手指在屏幕上戳来戳去。第一次成功给老伙计发出语音消息时，你高兴得像个孩子。",
+    "choices": [
+      {
+        "text": "认真学，不懂就问，很快就成了老伙伴里的「技术顾问」",
+        "effects": "🧠+8 🎨+5",
+        "outcomes": {
+          "attr": {
+            "intelligence": 8,
+            "appearance": 5
+          }
+        }
+      },
+      {
+        "text": "学了两天嫌麻烦，还是让子女代劳",
+        "effects": "🧠-3 😊+3",
+        "outcomes": {
+          "attr": {
+            "intelligence": -3,
+            "happiness": 3
+          }
+        }
+      }
+    ],
+    "conditions": {}
   },
   {
     "id": "elder_64",
@@ -20119,6 +21556,80 @@
     }
   },
   {
+    "id": "elderwarm_0005",
+    "stage": "elder",
+    "age": 80,
+    "title": "老伴的早餐",
+    "text": "每天早上六点半，老伴雷打不动地端来一碗粥，有时加点红枣，有时撒一把枸杞。你端着碗，看她在厨房里忙活的身影，忽然觉得，这一碗粥比山珍海味都香。你叫她也坐下一起吃，她说：你先吃，我再给你煎个蛋。",
+    "choices": [
+      {
+        "text": "也早起一回，给老伴煮一锅粥",
+        "effects": "😊+4 👥+3",
+        "outcomes": {
+          "attr": {
+            "happiness": 4,
+            "social": 3
+          }
+        }
+      },
+      {
+        "text": "把每天的早餐拍下来，攒成一本相册",
+        "effects": "😊+3 👥+3",
+        "outcomes": {
+          "attr": {
+            "social": 3,
+            "happiness": 3
+          }
+        }
+      },
+      {
+        "text": "端着粥碗，慢慢喝完",
+        "effects": "😊+5",
+        "outcomes": {
+          "attr": {
+            "happiness": 5
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "elder_0105",
+    "stage": "elder",
+    "age": 80,
+    "title": "公园里的晨练",
+    "text": "清晨的公园，太极拳、广场舞、快走……你每天雷打不动地出现在同一棵老槐树下。日子久了，晨练的伙伴们互相打招呼、聊家常，比亲邻还热络。",
+    "choices": [
+      {
+        "text": "坚持每天报到，风雨无阻",
+        "effects": "💪+9 👥+4",
+        "outcomes": {
+          "attr": {
+            "health": 9,
+            "social": 4
+          }
+        }
+      },
+      {
+        "text": "天气好就去，下雨天就窝在家里",
+        "effects": "💪+3 😊+2",
+        "outcomes": {
+          "attr": {
+            "health": 3,
+            "happiness": 2
+          }
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
     "id": "elder_65",
     "stage": "elder",
     "age": 81,
@@ -20201,6 +21712,80 @@
     }
   },
   {
+    "id": "elderwarm_0006",
+    "stage": "elder",
+    "age": 81,
+    "title": "儿时物件",
+    "text": "搬家时，你从旧木箱底翻出儿时的物件：一只掉了漆的铁皮青蛙，一包褪色的玻璃弹珠。拧上发条，青蛙还能跳两下。你把它放在掌心看了很久，好像看到七岁的自己蹲在弄堂口，和一群孩子趴在地上打弹珠，输光了也不肯回家。",
+    "choices": [
+      {
+        "text": "把物件洗干净，讲给孙辈听",
+        "effects": "😊+4 ⚖️+2",
+        "outcomes": {
+          "attr": {
+            "happiness": 4,
+            "morality": 2
+          }
+        }
+      },
+      {
+        "text": "把物件传给最小的孙辈",
+        "effects": "😊+2 👥+3",
+        "outcomes": {
+          "attr": {
+            "social": 3,
+            "happiness": 2
+          }
+        }
+      },
+      {
+        "text": "多看两眼，放回原处",
+        "effects": "😊+2",
+        "outcomes": {
+          "attr": {
+            "happiness": 2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "elder_0106",
+    "stage": "elder",
+    "age": 81,
+    "title": "老宅的最后一天",
+    "text": "老房子要拆迁了。搬家公司来之前，你在屋里慢慢走了一圈：斑驳的墙面、踩得发亮的门槛、墙角那台老缝纫机。这里装着一家三代人的几十年。关上门的那一刻，你轻轻叹了口气。",
+    "choices": [
+      {
+        "text": "拍了几张照片，把最珍贵的东西都收进箱子里",
+        "effects": "🧠+6 😊+2",
+        "outcomes": {
+          "attr": {
+            "intelligence": 6,
+            "happiness": 2
+          }
+        }
+      },
+      {
+        "text": "把老物件送给街坊邻居，说「留个念想」",
+        "effects": "😊+3 👥+6",
+        "outcomes": {
+          "attr": {
+            "social": 6,
+            "happiness": 3
+          }
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
     "id": "elder_66",
     "stage": "elder",
     "age": 82,
@@ -20279,6 +21864,80 @@
       "minAttrs": {},
       "maxAttrs": {}
     }
+  },
+  {
+    "id": "elderwarm_0007",
+    "stage": "elder",
+    "age": 82,
+    "title": "老年大学报名",
+    "text": "社区贴出老年大学招生的通知，书法、国画、合唱，一溜排开。你在通知前站了很久，年轻时想学又没学成的东西，忽然又涌上心头。第二天你揣着报名表去了，教室里坐着的都是花白头发的同学，老师喊你「同学」的时候，你笑出了声。",
+    "choices": [
+      {
+        "text": "报书法班，每周准时上课",
+        "effects": "🧠+4 😊+2",
+        "outcomes": {
+          "attr": {
+            "intelligence": 4,
+            "happiness": 2
+          }
+        }
+      },
+      {
+        "text": "和同班的老伙计切磋交流",
+        "effects": "😊+2 👥+4",
+        "outcomes": {
+          "attr": {
+            "social": 4,
+            "happiness": 2
+          }
+        }
+      },
+      {
+        "text": "先去听听课，再决定报哪个班",
+        "effects": "😊+2",
+        "outcomes": {
+          "attr": {
+            "happiness": 2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "elder_0107",
+    "stage": "elder",
+    "age": 82,
+    "title": "给晚辈讲故事",
+    "text": "孙辈缠着你讲过去的事。你讲起年轻时下乡、做工、闯荡的那些经历，孩子们听得眼睛发亮。讲到惊险处，你自己也恍惚了——那些事，好像就发生在昨天。",
+    "choices": [
+      {
+        "text": "把一生的故事慢慢讲给他们听，一代传一代",
+        "effects": "🧠+7 👥+5",
+        "outcomes": {
+          "attr": {
+            "intelligence": 7,
+            "social": 5
+          }
+        }
+      },
+      {
+        "text": "讲一半就摆手说「都是老黄历了，没啥好说的」",
+        "effects": "🧠-2 😊+3",
+        "outcomes": {
+          "attr": {
+            "intelligence": -2,
+            "happiness": 3
+          }
+        }
+      }
+    ],
+    "conditions": {}
   },
   {
     "id": "elder_67",
@@ -20364,6 +22023,81 @@
     }
   },
   {
+    "id": "elderwarm_0008",
+    "stage": "elder",
+    "age": 83,
+    "title": "打理花园",
+    "text": "阳台上的月季开了，一盆盆挤挤挨挨。你每天早起给花浇水、松土、剪掉枯叶。隔壁小孩路过，总要扒着栏杆看一会儿。你摘了一朵开得最盛的月季递给他，他举着花跑远了。你站在阳台上，觉得这一天的阳光都格外温柔。",
+    "choices": [
+      {
+        "text": "每天清晨浇水施肥，把花养得更好",
+        "effects": "💪+3 😊+3",
+        "outcomes": {
+          "attr": {
+            "health": 3,
+            "happiness": 3
+          }
+        }
+      },
+      {
+        "text": "再买几盆新花，把花园装点得更热闹",
+        "effects": "💰-3 😊+4",
+        "outcomes": {
+          "attr": {
+            "happiness": 4,
+            "wealth": -3
+          }
+        }
+      },
+      {
+        "text": "把开得好的花剪下来送邻居",
+        "effects": "👥+4 ⚖️+2",
+        "outcomes": {
+          "attr": {
+            "social": 4,
+            "morality": 2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "elder_0108",
+    "stage": "elder",
+    "age": 83,
+    "title": "一场小感冒",
+    "text": "入秋的一场感冒，来势汹汹。你躺在床上，看着天花板，第一次清楚地感觉到身体大不如前。好在子女轮流来照顾，热汤、药片、量体温，忙前忙后。",
+    "choices": [
+      {
+        "text": "病好后开始更加爱惜身体，按时体检、注意保暖",
+        "effects": "💪+8 ⚖️+4",
+        "outcomes": {
+          "attr": {
+            "health": 8,
+            "morality": 4
+          }
+        }
+      },
+      {
+        "text": "嘴上说没事，心里却开始害怕生病",
+        "effects": "💪-2 😊+3",
+        "outcomes": {
+          "attr": {
+            "health": -2,
+            "happiness": 3
+          }
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
     "id": "elder_68",
     "stage": "elder",
     "age": 84,
@@ -20443,6 +22177,78 @@
       "minAttrs": {},
       "maxAttrs": {}
     }
+  },
+  {
+    "id": "elderwarm_0009",
+    "stage": "elder",
+    "age": 84,
+    "title": "写回忆录",
+    "text": "你决定把这一辈子写下来。铺开稿纸，从出生那年开始，一年一年地写。写村里的河、城里的桥、第一个月的工资、孩子第一次叫爸爸。写累了就歇一歇，歇好了接着写。儿女们说何必这么辛苦，你说：这些事要是没人记下来，就真的没了。",
+    "choices": [
+      {
+        "text": "每天写一段，从年轻时慢慢写起",
+        "effects": "🧠+3 ⚖️+2",
+        "outcomes": {
+          "attr": {
+            "intelligence": 3,
+            "morality": 2
+          }
+        }
+      },
+      {
+        "text": "口述，让孙辈代笔整理",
+        "effects": "👥+5",
+        "outcomes": {
+          "attr": {
+            "social": 5
+          }
+        }
+      },
+      {
+        "text": "想到哪儿写到哪儿，随性而为",
+        "effects": "😊+2",
+        "outcomes": {
+          "attr": {
+            "happiness": 2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "elder_0109",
+    "stage": "elder",
+    "age": 84,
+    "title": "金婚纪念",
+    "text": "今天是你们结婚五十周年的日子。孩子们张罗了一桌好菜，你看着身边这个陪你走了半个世纪的人，头发都白了，笑容却还是当年的样子。你端起杯子，千言万语只化作一句「辛苦了」。",
+    "choices": [
+      {
+        "text": "握紧老伴的手，说「下辈子还娶/嫁你」",
+        "effects": "😊+10 👥+6",
+        "outcomes": {
+          "attr": {
+            "happiness": 10,
+            "social": 6
+          }
+        }
+      },
+      {
+        "text": "嘴上不说，心里却全是感激",
+        "effects": "😊+8",
+        "outcomes": {
+          "attr": {
+            "happiness": 8
+          }
+        }
+      }
+    ],
+    "conditions": {}
   },
   {
     "id": "elder_69",
@@ -20526,6 +22332,80 @@
       "minAttrs": {},
       "maxAttrs": {}
     }
+  },
+  {
+    "id": "elderwarm_0010",
+    "stage": "elder",
+    "age": 85,
+    "title": "教孩子下棋",
+    "text": "楼下活动室新摆了一张围棋桌，几个孩子围着你学下棋。你捏着棋子，教他们「金角银边草肚皮」，孩子们听得一头雾水，却学得很认真。一个扎辫子的小姑娘赢了第一局，跳起来喊：我赢啦！你笑着收棋子，心里想着：这手艺，总算有人接过去了。",
+    "choices": [
+      {
+        "text": "从最基础的定式教起，不厌其烦",
+        "effects": "😊+2 ⚖️+3",
+        "outcomes": {
+          "attr": {
+            "morality": 3,
+            "happiness": 2
+          }
+        }
+      },
+      {
+        "text": "边下棋边讲棋里的道理",
+        "effects": "🧠+3 👥+2",
+        "outcomes": {
+          "attr": {
+            "intelligence": 3,
+            "social": 2
+          }
+        }
+      },
+      {
+        "text": "和小家伙们下一整天",
+        "effects": "😊+5",
+        "outcomes": {
+          "attr": {
+            "happiness": 5
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "elder_0110",
+    "stage": "elder",
+    "age": 85,
+    "title": "黄昏里的合唱团",
+    "text": "社区老年合唱团缺人，邻居硬拉着你去试试。你站在队伍里，跟着大家唱老歌，嗓子虽不如当年，气势却一点不输。指挥说你是「隐藏的高手」，你笑了一晚上。",
+    "choices": [
+      {
+        "text": "加入了合唱团，每周排练成了最期待的事",
+        "effects": "😊+6 👥+8",
+        "outcomes": {
+          "attr": {
+            "social": 8,
+            "happiness": 6
+          }
+        }
+      },
+      {
+        "text": "唱了一次就觉得不好意思，还是回家听收音机",
+        "effects": "😊+3 👥+2",
+        "outcomes": {
+          "attr": {
+            "social": 2,
+            "happiness": 3
+          }
+        }
+      }
+    ],
+    "conditions": {}
   },
   {
     "id": "elder_70",
@@ -20613,6 +22493,35 @@
     }
   },
   {
+    "id": "elder_0116",
+    "stage": "elder",
+    "age": 86,
+    "title": "老友的告别",
+    "text": "一起晨练的老李走了。送别那天，你站在人群里，看着他的照片，想起他说过「明年咱们还一起爬山」。回到家，你坐在沙发上发了很久的呆，然后翻出老照片，一张一张慢慢看。",
+    "choices": [
+      {
+        "text": "珍惜眼前人，给老伙计们挨个打了电话",
+        "effects": "😊+3 👥+8",
+        "outcomes": {
+          "attr": {
+            "social": 8,
+            "happiness": 3
+          }
+        }
+      },
+      {
+        "text": "沉默了很久，一个人坐到了天黑",
+        "effects": "😊-3",
+        "outcomes": {
+          "attr": {
+            "happiness": -3
+          }
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
     "id": "elder_71",
     "stage": "elder",
     "age": 87,
@@ -20696,6 +22605,36 @@
     }
   },
   {
+    "id": "elder_0117",
+    "stage": "elder",
+    "age": 87,
+    "title": "孙辈的毕业典礼",
+    "text": "孙辈大学毕业，你受邀去参加典礼。礼堂里坐满了人，你穿着压箱底的正式衣裳，看着台上那个曾经在你怀里打滚的孩子穿着学士服鞠躬。掌声响起时，你悄悄抹了抹眼角。",
+    "choices": [
+      {
+        "text": "把压箱底的传家之物送给了孙辈",
+        "effects": "😊+5 👥+8",
+        "outcomes": {
+          "attr": {
+            "social": 8,
+            "happiness": 5
+          }
+        }
+      },
+      {
+        "text": "只说了句「好好干」，心里却无比骄傲",
+        "effects": "😊+2 👥+4",
+        "outcomes": {
+          "attr": {
+            "social": 4,
+            "happiness": 2
+          }
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
     "id": "elder_72",
     "stage": "elder",
     "age": 88,
@@ -20777,6 +22716,36 @@
       "minAttrs": {},
       "maxAttrs": {}
     }
+  },
+  {
+    "id": "elder_0118",
+    "stage": "elder",
+    "age": 88,
+    "title": "散步的习惯",
+    "text": "医生说多走动有好处，你便把每天的散步当成了功课。清晨沿着河边走，傍晚在小区里绕圈。日子久了，哪条路有台阶、哪棵树春天开花，你都一清二楚。",
+    "choices": [
+      {
+        "text": "坚持了三年，身体比同龄人硬朗不少",
+        "effects": "💪+10 ⚖️+5",
+        "outcomes": {
+          "attr": {
+            "health": 10,
+            "morality": 5
+          }
+        }
+      },
+      {
+        "text": "走了几天就嫌累，又窝回了沙发",
+        "effects": "💪-4 😊+3",
+        "outcomes": {
+          "attr": {
+            "health": -4,
+            "happiness": 3
+          }
+        }
+      }
+    ],
+    "conditions": {}
   },
   {
     "id": "elder_73",
@@ -20864,6 +22833,35 @@
     }
   },
   {
+    "id": "elder_0119",
+    "stage": "elder",
+    "age": 89,
+    "title": "修缮老屋",
+    "text": "老屋的屋顶漏了雨，孩子们张罗着给你修。你坚持要用老手艺的瓦片，说「这房子住了几十年，不能亏待它」。修好后，你摸着崭新的屋檐，像摸着一个老朋友的脸。",
+    "choices": [
+      {
+        "text": "在老屋里又住了一年，说「这里最安心」",
+        "effects": "😊+11",
+        "outcomes": {
+          "attr": {
+            "happiness": 11
+          }
+        }
+      },
+      {
+        "text": "修好后还是搬去了孩子家，老屋留作念想",
+        "effects": "😊+3 👥+4",
+        "outcomes": {
+          "attr": {
+            "social": 4,
+            "happiness": 3
+          }
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
     "id": "elder_74",
     "stage": "elder",
     "age": 90,
@@ -20927,6 +22925,35 @@
     }
   },
   {
+    "id": "elder_0120",
+    "stage": "elder",
+    "age": 90,
+    "title": "九十大寿",
+    "text": "九十岁生日，全家老小都回来了。饭店里摆了四桌，最小的重孙刚学会走路，摇摇晃晃地走到你面前喊「太爷爷」。你抱着他，看着满堂儿孙，忽然觉得这辈子活得值了。",
+    "choices": [
+      {
+        "text": "吹蜡烛时，许了一个「儿孙平安」的愿望",
+        "effects": "😊+10 👥+6",
+        "outcomes": {
+          "attr": {
+            "happiness": 10,
+            "social": 6
+          }
+        }
+      },
+      {
+        "text": "笑着说「活够了」，心里却还想多看看这个世界",
+        "effects": "😊+7",
+        "outcomes": {
+          "attr": {
+            "happiness": 7
+          }
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
     "id": "elder_0091",
     "stage": "elder",
     "age": 91,
@@ -20969,6 +22996,36 @@
       "minAttrs": {},
       "maxAttrs": {}
     }
+  },
+  {
+    "id": "elder_0111",
+    "stage": "elder",
+    "age": 91,
+    "title": "写回忆录",
+    "text": "孩子们劝你把一生的经历写下来。你戴上老花镜，从童年写起，一页一页，像重新活了一遍。那些记不清的细节，在笔尖下慢慢清晰起来。",
+    "choices": [
+      {
+        "text": "坚持每天写一点，留给子孙们",
+        "effects": "🧠+8 ⚖️+5",
+        "outcomes": {
+          "attr": {
+            "intelligence": 8,
+            "morality": 5
+          }
+        }
+      },
+      {
+        "text": "写了几页就搁下了，觉得往事不堪回首",
+        "effects": "🧠+2 😊+2",
+        "outcomes": {
+          "attr": {
+            "intelligence": 2,
+            "happiness": 2
+          }
+        }
+      }
+    ],
+    "conditions": {}
   },
   {
     "id": "elder_0092",
@@ -21015,6 +23072,34 @@
     }
   },
   {
+    "id": "elder_0112",
+    "stage": "elder",
+    "age": 92,
+    "title": "阳光下的午后",
+    "text": "午后阳光正好，你坐在院子里的藤椅上晒太阳。暖洋洋的光线落在身上，你眯着眼，听收音机里咿咿呀呀的戏曲。什么都不想，什么都不做，这一刻，时间慢得刚刚好。",
+    "choices": [
+      {
+        "text": "享受这份安宁，心满意足",
+        "effects": "😊+13",
+        "outcomes": {
+          "attr": {
+            "happiness": 13
+          }
+        }
+      },
+      {
+        "text": "晒着晒着，竟有些害怕这样的日子不多了",
+        "effects": "😊-5",
+        "outcomes": {
+          "attr": {
+            "happiness": -5
+          }
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
     "id": "elder_0093",
     "stage": "elder",
     "age": 93,
@@ -21059,6 +23144,35 @@
     }
   },
   {
+    "id": "elder_0113",
+    "stage": "elder",
+    "age": 93,
+    "title": "四世同堂",
+    "text": "重孙满月，一家人难得聚得这么齐。你坐在主位上，看着满屋子的人——儿子、孙子、重孙，笑声此起彼伏。你忽然觉得，这一生值了。",
+    "choices": [
+      {
+        "text": "抱着重孙，笑得合不拢嘴",
+        "effects": "😊+10 👥+6",
+        "outcomes": {
+          "attr": {
+            "happiness": 10,
+            "social": 6
+          }
+        }
+      },
+      {
+        "text": "看着满堂儿孙，悄悄抹了抹眼角",
+        "effects": "😊+9",
+        "outcomes": {
+          "attr": {
+            "happiness": 9
+          }
+        }
+      }
+    ],
+    "conditions": {}
+  },
+  {
     "id": "elder_0094",
     "stage": "elder",
     "age": 94,
@@ -21101,6 +23215,35 @@
       "minAttrs": {},
       "maxAttrs": {}
     }
+  },
+  {
+    "id": "elder_0114",
+    "stage": "elder",
+    "age": 94,
+    "title": "最后的嘱托",
+    "text": "你开始交代身后事：存折放在哪个抽屉，老照片留给谁，还有什么心愿未了。儿女们红着眼眶听你说，你却语气平静，像在安排一次远行。",
+    "choices": [
+      {
+        "text": "把每件事都交代得清清楚楚，无牵无挂",
+        "effects": "😊+13",
+        "outcomes": {
+          "attr": {
+            "happiness": 13
+          }
+        }
+      },
+      {
+        "text": "说着说着，还是舍不得这个人间",
+        "effects": "😊-3 👥+2",
+        "outcomes": {
+          "attr": {
+            "happiness": -3,
+            "social": 2
+          }
+        }
+      }
+    ],
+    "conditions": {}
   },
   {
     "id": "elder_0095",
@@ -21148,511 +23291,6 @@
     }
   },
   {
-    "id": "infant_0001",
-    "stage": "infant",
-    "age": 1,
-    "title": "第一次叫妈妈",
-    "text": "你躺在摇篮里，妈妈的脸凑过来，一遍遍教你发音。终于，一个含混却清晰的音节从你嘴里蹦出来。妈妈愣住了，眼眶一下子红了，把你紧紧搂进怀里。整个家都因为这个字热闹了起来。",
-    "choices": [
-      {
-        "text": "扯着嗓子又喊了几声，妈妈笑得眼泪都出来了",
-        "effects": "😊+10 👥+6",
-        "outcomes": {
-          "attr": {
-            "happiness": 10,
-            "social": 6
-          }
-        }
-      },
-      {
-        "text": "喊完就转过头玩手指，好像什么都没发生过",
-        "effects": "🧠+3 😊+5",
-        "outcomes": {
-          "attr": {
-            "happiness": 5,
-            "intelligence": 3
-          }
-        }
-      }
-    ],
-    "conditions": {}
-  },
-  {
-    "id": "infant_0002",
-    "stage": "infant",
-    "age": 2,
-    "title": "蹒跚学步",
-    "text": "你扶着沙发站起来，小短腿颤颤巍巍。爸爸蹲在不远处张开双臂，鼓励你迈出第一步。你松开手，摇摇晃晃地走了两步，摔了个屁股蹲。全家人的心都提到了嗓子眼，然后一起笑出声来。",
-    "choices": [
-      {
-        "text": "爬起来拍拍手，继续朝爸爸走去，一次比一次稳",
-        "effects": "💪+10 😊+8",
-        "outcomes": {
-          "attr": {
-            "health": 10,
-            "happiness": 8
-          }
-        }
-      },
-      {
-        "text": "摔疼了，坐在地上哇哇大哭，要妈妈抱",
-        "effects": "😊-4 🎨+2",
-        "outcomes": {
-          "attr": {
-            "happiness": -4,
-            "appearance": 2
-          }
-        }
-      }
-    ],
-    "conditions": {}
-  },
-  {
-    "id": "infant_0003",
-    "stage": "infant",
-    "age": 2,
-    "title": "第一次发脾气",
-    "text": "晚饭前你非要吃饼干，妈妈说不可以。你小脸涨得通红，把积木推得满地都是，哭得惊天动地。奶奶想哄，妈妈拦住了：「规矩得从小立。」你哭累了，抽抽搭搭地坐下来，终于接受了这顿饭前没有饼干的事实。",
-    "choices": [
-      {
-        "text": "抽噎着把积木捡起来，轻轻放回盒子里",
-        "effects": "😊+3 ⚖️+8",
-        "outcomes": {
-          "attr": {
-            "morality": 8,
-            "happiness": 3
-          }
-        }
-      },
-      {
-        "text": "趁大人不注意，偷偷伸手去够饼干盒",
-        "effects": "🍀-5 ⚖️-6",
-        "outcomes": {
-          "attr": {
-            "luck": -5,
-            "morality": -6
-          }
-        }
-      }
-    ],
-    "conditions": {}
-  },
-  {
-    "id": "elder_0101",
-    "stage": "elder",
-    "age": 76,
-    "title": "体检报告",
-    "text": "社区组织的年度体检出了报告。医生说各项指标还算平稳，就是血压偏高，叮嘱你少盐少油，多走动。你拿着报告看了半天，想起年轻时熬夜拼命的那些年——能走到今天，已经是赚了。",
-    "choices": [
-      {
-        "text": "认真记下医嘱，从此每天清晨去公园走两圈",
-        "effects": "💪+10 ⚖️+4",
-        "outcomes": {
-          "attr": {
-            "health": 10,
-            "morality": 4
-          }
-        }
-      },
-      {
-        "text": "嘴上应着，转头就忘了，日子照旧",
-        "effects": "💪-5 😊+2",
-        "outcomes": {
-          "attr": {
-            "health": -5,
-            "happiness": 2
-          }
-        }
-      }
-    ],
-    "conditions": {}
-  },
-  {
-    "id": "elder_0102",
-    "stage": "elder",
-    "age": 77,
-    "title": "孙辈的电话",
-    "text": "远在另一个城市的小孙女打来电话，叽叽喳喳地讲学校里的趣事，最后甜甜地说了句「爷爷/奶奶我想你了」。挂了电话，你坐在沙发上，嘴角的笑意怎么也压不下去。",
-    "choices": [
-      {
-        "text": "翻出相册，把孙辈从小到大的照片看了一遍又一遍",
-        "effects": "🧠+3 😊+8",
-        "outcomes": {
-          "attr": {
-            "happiness": 8,
-            "intelligence": 3
-          }
-        }
-      },
-      {
-        "text": "惦记着孙辈，又忍不住念叨儿子儿媳工作太忙",
-        "effects": "😊+3 👥-2",
-        "outcomes": {
-          "attr": {
-            "happiness": 3,
-            "social": -2
-          }
-        }
-      }
-    ],
-    "conditions": {}
-  },
-  {
-    "id": "elder_0103",
-    "stage": "elder",
-    "age": 78,
-    "title": "旧友重逢",
-    "text": "老同学聚会，你见到了几十年没见的同桌。两个头发花白的人站在饭店门口，先是互相打量，然后同时笑出了声。饭桌上大家说起年轻时的事，那些苦日子如今都成了下酒菜。",
-    "choices": [
-      {
-        "text": "留了联系方式，约好以后每月聚一次",
-        "effects": "😊+5 👥+9",
-        "outcomes": {
-          "attr": {
-            "social": 9,
-            "happiness": 5
-          }
-        }
-      },
-      {
-        "text": "热闹归热闹，散场后还是觉得一个人清静",
-        "effects": "😊+3 👥+2",
-        "outcomes": {
-          "attr": {
-            "social": 2,
-            "happiness": 3
-          }
-        }
-      }
-    ],
-    "conditions": {}
-  },
-  {
-    "id": "elder_0104",
-    "stage": "elder",
-    "age": 79,
-    "title": "学用智能手机",
-    "text": "儿子教你在手机上看视频、发语音。你戴着老花镜，一个功能一个功能地学，手指在屏幕上戳来戳去。第一次成功给老伙计发出语音消息时，你高兴得像个孩子。",
-    "choices": [
-      {
-        "text": "认真学，不懂就问，很快就成了老伙伴里的「技术顾问」",
-        "effects": "🧠+8 🎨+5",
-        "outcomes": {
-          "attr": {
-            "intelligence": 8,
-            "appearance": 5
-          }
-        }
-      },
-      {
-        "text": "学了两天嫌麻烦，还是让子女代劳",
-        "effects": "🧠-3 😊+3",
-        "outcomes": {
-          "attr": {
-            "intelligence": -3,
-            "happiness": 3
-          }
-        }
-      }
-    ],
-    "conditions": {}
-  },
-  {
-    "id": "elder_0105",
-    "stage": "elder",
-    "age": 80,
-    "title": "公园里的晨练",
-    "text": "清晨的公园，太极拳、广场舞、快走……你每天雷打不动地出现在同一棵老槐树下。日子久了，晨练的伙伴们互相打招呼、聊家常，比亲邻还热络。",
-    "choices": [
-      {
-        "text": "坚持每天报到，风雨无阻",
-        "effects": "💪+9 👥+4",
-        "outcomes": {
-          "attr": {
-            "health": 9,
-            "social": 4
-          }
-        }
-      },
-      {
-        "text": "天气好就去，下雨天就窝在家里",
-        "effects": "💪+3 😊+2",
-        "outcomes": {
-          "attr": {
-            "health": 3,
-            "happiness": 2
-          }
-        }
-      }
-    ],
-    "conditions": {}
-  },
-  {
-    "id": "elder_0106",
-    "stage": "elder",
-    "age": 81,
-    "title": "老宅的最后一天",
-    "text": "老房子要拆迁了。搬家公司来之前，你在屋里慢慢走了一圈：斑驳的墙面、踩得发亮的门槛、墙角那台老缝纫机。这里装着一家三代人的几十年。关上门的那一刻，你轻轻叹了口气。",
-    "choices": [
-      {
-        "text": "拍了几张照片，把最珍贵的东西都收进箱子里",
-        "effects": "🧠+6 😊+2",
-        "outcomes": {
-          "attr": {
-            "intelligence": 6,
-            "happiness": 2
-          }
-        }
-      },
-      {
-        "text": "把老物件送给街坊邻居，说「留个念想」",
-        "effects": "😊+3 👥+6",
-        "outcomes": {
-          "attr": {
-            "social": 6,
-            "happiness": 3
-          }
-        }
-      }
-    ],
-    "conditions": {}
-  },
-  {
-    "id": "elder_0107",
-    "stage": "elder",
-    "age": 82,
-    "title": "给晚辈讲故事",
-    "text": "孙辈缠着你讲过去的事。你讲起年轻时下乡、做工、闯荡的那些经历，孩子们听得眼睛发亮。讲到惊险处，你自己也恍惚了——那些事，好像就发生在昨天。",
-    "choices": [
-      {
-        "text": "把一生的故事慢慢讲给他们听，一代传一代",
-        "effects": "🧠+7 👥+5",
-        "outcomes": {
-          "attr": {
-            "intelligence": 7,
-            "social": 5
-          }
-        }
-      },
-      {
-        "text": "讲一半就摆手说「都是老黄历了，没啥好说的」",
-        "effects": "🧠-2 😊+3",
-        "outcomes": {
-          "attr": {
-            "intelligence": -2,
-            "happiness": 3
-          }
-        }
-      }
-    ],
-    "conditions": {}
-  },
-  {
-    "id": "elder_0108",
-    "stage": "elder",
-    "age": 83,
-    "title": "一场小感冒",
-    "text": "入秋的一场感冒，来势汹汹。你躺在床上，看着天花板，第一次清楚地感觉到身体大不如前。好在子女轮流来照顾，热汤、药片、量体温，忙前忙后。",
-    "choices": [
-      {
-        "text": "病好后开始更加爱惜身体，按时体检、注意保暖",
-        "effects": "💪+8 ⚖️+4",
-        "outcomes": {
-          "attr": {
-            "health": 8,
-            "morality": 4
-          }
-        }
-      },
-      {
-        "text": "嘴上说没事，心里却开始害怕生病",
-        "effects": "💪-2 😊+3",
-        "outcomes": {
-          "attr": {
-            "health": -2,
-            "happiness": 3
-          }
-        }
-      }
-    ],
-    "conditions": {}
-  },
-  {
-    "id": "elder_0109",
-    "stage": "elder",
-    "age": 84,
-    "title": "金婚纪念",
-    "text": "今天是你们结婚五十周年的日子。孩子们张罗了一桌好菜，你看着身边这个陪你走了半个世纪的人，头发都白了，笑容却还是当年的样子。你端起杯子，千言万语只化作一句「辛苦了」。",
-    "choices": [
-      {
-        "text": "握紧老伴的手，说「下辈子还娶/嫁你」",
-        "effects": "😊+10 👥+6",
-        "outcomes": {
-          "attr": {
-            "happiness": 10,
-            "social": 6
-          }
-        }
-      },
-      {
-        "text": "嘴上不说，心里却全是感激",
-        "effects": "😊+8",
-        "outcomes": {
-          "attr": {
-            "happiness": 8
-          }
-        }
-      }
-    ],
-    "conditions": {}
-  },
-  {
-    "id": "elder_0110",
-    "stage": "elder",
-    "age": 85,
-    "title": "黄昏里的合唱团",
-    "text": "社区老年合唱团缺人，邻居硬拉着你去试试。你站在队伍里，跟着大家唱老歌，嗓子虽不如当年，气势却一点不输。指挥说你是「隐藏的高手」，你笑了一晚上。",
-    "choices": [
-      {
-        "text": "加入了合唱团，每周排练成了最期待的事",
-        "effects": "😊+6 👥+8",
-        "outcomes": {
-          "attr": {
-            "social": 8,
-            "happiness": 6
-          }
-        }
-      },
-      {
-        "text": "唱了一次就觉得不好意思，还是回家听收音机",
-        "effects": "😊+3 👥+2",
-        "outcomes": {
-          "attr": {
-            "social": 2,
-            "happiness": 3
-          }
-        }
-      }
-    ],
-    "conditions": {}
-  },
-  {
-    "id": "elder_0111",
-    "stage": "elder",
-    "age": 91,
-    "title": "写回忆录",
-    "text": "孩子们劝你把一生的经历写下来。你戴上老花镜，从童年写起，一页一页，像重新活了一遍。那些记不清的细节，在笔尖下慢慢清晰起来。",
-    "choices": [
-      {
-        "text": "坚持每天写一点，留给子孙们",
-        "effects": "🧠+8 ⚖️+5",
-        "outcomes": {
-          "attr": {
-            "intelligence": 8,
-            "morality": 5
-          }
-        }
-      },
-      {
-        "text": "写了几页就搁下了，觉得往事不堪回首",
-        "effects": "🧠+2 😊+2",
-        "outcomes": {
-          "attr": {
-            "intelligence": 2,
-            "happiness": 2
-          }
-        }
-      }
-    ],
-    "conditions": {}
-  },
-  {
-    "id": "elder_0112",
-    "stage": "elder",
-    "age": 92,
-    "title": "阳光下的午后",
-    "text": "午后阳光正好，你坐在院子里的藤椅上晒太阳。暖洋洋的光线落在身上，你眯着眼，听收音机里咿咿呀呀的戏曲。什么都不想，什么都不做，这一刻，时间慢得刚刚好。",
-    "choices": [
-      {
-        "text": "享受这份安宁，心满意足",
-        "effects": "😊+13",
-        "outcomes": {
-          "attr": {
-            "happiness": 13
-          }
-        }
-      },
-      {
-        "text": "晒着晒着，竟有些害怕这样的日子不多了",
-        "effects": "😊-5",
-        "outcomes": {
-          "attr": {
-            "happiness": -5
-          }
-        }
-      }
-    ],
-    "conditions": {}
-  },
-  {
-    "id": "elder_0113",
-    "stage": "elder",
-    "age": 93,
-    "title": "四世同堂",
-    "text": "重孙满月，一家人难得聚得这么齐。你坐在主位上，看着满屋子的人——儿子、孙子、重孙，笑声此起彼伏。你忽然觉得，这一生值了。",
-    "choices": [
-      {
-        "text": "抱着重孙，笑得合不拢嘴",
-        "effects": "😊+10 👥+6",
-        "outcomes": {
-          "attr": {
-            "happiness": 10,
-            "social": 6
-          }
-        }
-      },
-      {
-        "text": "看着满堂儿孙，悄悄抹了抹眼角",
-        "effects": "😊+9",
-        "outcomes": {
-          "attr": {
-            "happiness": 9
-          }
-        }
-      }
-    ],
-    "conditions": {}
-  },
-  {
-    "id": "elder_0114",
-    "stage": "elder",
-    "age": 94,
-    "title": "最后的嘱托",
-    "text": "你开始交代身后事：存折放在哪个抽屉，老照片留给谁，还有什么心愿未了。儿女们红着眼眶听你说，你却语气平静，像在安排一次远行。",
-    "choices": [
-      {
-        "text": "把每件事都交代得清清楚楚，无牵无挂",
-        "effects": "😊+13",
-        "outcomes": {
-          "attr": {
-            "happiness": 13
-          }
-        }
-      },
-      {
-        "text": "说着说着，还是舍不得这个人间",
-        "effects": "😊-3 👥+2",
-        "outcomes": {
-          "attr": {
-            "happiness": -3,
-            "social": 2
-          }
-        }
-      }
-    ],
-    "conditions": {}
-  },
-  {
     "id": "elder_0115",
     "stage": "elder",
     "age": 95,
@@ -21682,150 +23320,47 @@
     "conditions": {}
   },
   {
-    "id": "elder_0116",
+    "id": "elder_0121",
     "stage": "elder",
-    "age": 86,
-    "title": "老友的告别",
-    "text": "一起晨练的老李走了。送别那天，你站在人群里，看着他的照片，想起他说过「明年咱们还一起爬山」。回到家，你坐在沙发上发了很久的呆，然后翻出老照片，一张一张慢慢看。",
+    "age": 103,
+    "title": "世纪的回信",
+    "text": "有人问你要不要写回忆录，你摇摇头。这一生已经用一百零三个春秋写完了，不必再补一笔。你坐在窗前，给这漫长的世纪写最后一封回信：谢谢所有的相遇，原谅所有的不顺，这一趟人间，你来过，爱过，值得。落笔之后你轻轻合上信纸，窗外的阳光正好，像一百年前的那个下午。",
     "choices": [
       {
-        "text": "珍惜眼前人，给老伙计们挨个打了电话",
-        "effects": "😊+3 👥+8",
+        "text": "落款：一个走过了整个世纪的人",
+        "effects": "😊+2 ⚖️+2",
         "outcomes": {
           "attr": {
-            "social": 8,
-            "happiness": 3
-          }
-        }
-      },
-      {
-        "text": "沉默了很久，一个人坐到了天黑",
-        "effects": "😊-3",
-        "outcomes": {
-          "attr": {
-            "happiness": -3
-          }
-        }
-      }
-    ],
-    "conditions": {}
-  },
-  {
-    "id": "elder_0117",
-    "stage": "elder",
-    "age": 87,
-    "title": "孙辈的毕业典礼",
-    "text": "孙辈大学毕业，你受邀去参加典礼。礼堂里坐满了人，你穿着压箱底的正式衣裳，看着台上那个曾经在你怀里打滚的孩子穿着学士服鞠躬。掌声响起时，你悄悄抹了抹眼角。",
-    "choices": [
-      {
-        "text": "把压箱底的传家之物送给了孙辈",
-        "effects": "😊+5 👥+8",
-        "outcomes": {
-          "attr": {
-            "social": 8,
-            "happiness": 5
-          }
-        }
-      },
-      {
-        "text": "只说了句「好好干」，心里却无比骄傲",
-        "effects": "😊+2 👥+4",
-        "outcomes": {
-          "attr": {
-            "social": 4,
+            "morality": 2,
             "happiness": 2
           }
         }
-      }
-    ],
-    "conditions": {}
-  },
-  {
-    "id": "elder_0118",
-    "stage": "elder",
-    "age": 88,
-    "title": "散步的习惯",
-    "text": "医生说多走动有好处，你便把每天的散步当成了功课。清晨沿着河边走，傍晚在小区里绕圈。日子久了，哪条路有台阶、哪棵树春天开花，你都一清二楚。",
-    "choices": [
+      },
       {
-        "text": "坚持了三年，身体比同龄人硬朗不少",
-        "effects": "💪+10 ⚖️+5",
+        "text": "把回信寄给一百年前的自己",
+        "effects": "🧠+2 😊+1",
         "outcomes": {
           "attr": {
-            "health": 10,
-            "morality": 5
+            "intelligence": 2,
+            "happiness": 1
           }
         }
       },
       {
-        "text": "走了几天就嫌累，又窝回了沙发",
-        "effects": "💪-4 😊+3",
+        "text": "把信放在枕边，微笑着入睡",
+        "effects": "😊+3",
         "outcomes": {
           "attr": {
-            "health": -4,
             "happiness": 3
           }
         }
       }
     ],
-    "conditions": {}
-  },
-  {
-    "id": "elder_0119",
-    "stage": "elder",
-    "age": 89,
-    "title": "修缮老屋",
-    "text": "老屋的屋顶漏了雨，孩子们张罗着给你修。你坚持要用老手艺的瓦片，说「这房子住了几十年，不能亏待它」。修好后，你摸着崭新的屋檐，像摸着一个老朋友的脸。",
-    "choices": [
-      {
-        "text": "在老屋里又住了一年，说「这里最安心」",
-        "effects": "😊+11",
-        "outcomes": {
-          "attr": {
-            "happiness": 11
-          }
-        }
-      },
-      {
-        "text": "修好后还是搬去了孩子家，老屋留作念想",
-        "effects": "😊+3 👥+4",
-        "outcomes": {
-          "attr": {
-            "social": 4,
-            "happiness": 3
-          }
-        }
-      }
-    ],
-    "conditions": {}
-  },
-  {
-    "id": "elder_0120",
-    "stage": "elder",
-    "age": 90,
-    "title": "九十大寿",
-    "text": "九十岁生日，全家老小都回来了。饭店里摆了四桌，最小的重孙刚学会走路，摇摇晃晃地走到你面前喊「太爷爷」。你抱着他，看着满堂儿孙，忽然觉得这辈子活得值了。",
-    "choices": [
-      {
-        "text": "吹蜡烛时，许了一个「儿孙平安」的愿望",
-        "effects": "😊+10 👥+6",
-        "outcomes": {
-          "attr": {
-            "happiness": 10,
-            "social": 6
-          }
-        }
-      },
-      {
-        "text": "笑着说「活够了」，心里却还想多看看这个世界",
-        "effects": "😊+7",
-        "outcomes": {
-          "attr": {
-            "happiness": 7
-          }
-        }
-      }
-    ],
-    "conditions": {}
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
   }
 ]

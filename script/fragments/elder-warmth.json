@@ -1,0 +1,418 @@
+[
+  {
+    "id": "elderwarm_0001",
+    "age_range": [
+      76,
+      76
+    ],
+    "category": "family",
+    "title": "孙辈来信",
+    "text": "信箱里躺着一封信，是读大学的孙辈寄来的。信封上贴着歪歪的邮票，信纸上写满了学校里的小事：食堂的菜、宿舍的室友、第一次上台演讲。信末写着：等我放假回去看您。你把信读了两遍，字迹虽然潦草，却比什么礼物都珍贵。",
+    "choices": [
+      {
+        "text": "立刻回信，再寄一张近照",
+        "effects": {
+          "happiness": 4,
+          "family_relation": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把信读给老伴听，一起乐一乐",
+        "effects": {
+          "happiness": 3,
+          "comfort": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "让孙辈常打视频来",
+        "effects": {
+          "family_relation": 4,
+          "communication": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elderwarm_0002",
+    "age_range": [
+      77,
+      77
+    ],
+    "category": "friend",
+    "title": "老友重聚",
+    "text": "分别四十年的老友，循着老地址找到了你家。他头发白了大半，一开口还是当年那个调子。你们从中午聊到黄昏，把年轻时一起扛过的事翻来覆去地讲，一会儿笑，一会儿沉默。临走时他握着你的手说：早知道，该早点来。你说：现在也不晚。",
+    "choices": [
+      {
+        "text": "开一瓶存了多年的老酒，边喝边聊",
+        "effects": {
+          "happiness": 4,
+          "friendship": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "约他常来，把没聊完的话都聊完",
+        "effects": {
+          "social": 4,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "一直聊到夜色降临",
+        "effects": {
+          "happiness": 2,
+          "emotion": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elderwarm_0003",
+    "age_range": [
+      78,
+      78
+    ],
+    "category": "family",
+    "title": "翻老相册",
+    "text": "午后，你和老伴把压箱底的老相册搬出来。黑白照片里的人多半认不出了，老伴却一张张指给你看：这是你二舅，这是隔壁的翠婶。有些照片已经泛黄发脆，你小心地捻着边角，忽然觉得，每一张薄薄的纸片里，都住着一段再也回不去的时光。",
+    "choices": [
+      {
+        "text": "和老伴一张张辨认照片里的人",
+        "effects": {
+          "happiness": 4,
+          "family_relation": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把照片翻拍下来传给家人",
+        "effects": {
+          "family_relation": 4,
+          "memory": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "看完小心地把相册收好",
+        "effects": {
+          "happiness": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elderwarm_0004",
+    "age_range": [
+      79,
+      79
+    ],
+    "category": "personality",
+    "title": "旧信重读",
+    "text": "整理书柜时，你翻出一叠泛黄的家书，是年轻时父母写来的。字迹一笔一划，问吃饱没有、穿暖没有、什么时候回家。你一封一封读下去，读到「你妈又梦到你了」那句，眼眶忽然热了。信纸已经脆得快要碎了，你轻轻把它放回信封，像放回一件珍宝。",
+    "choices": [
+      {
+        "text": "把家书按年月理好，标注清楚",
+        "effects": {
+          "empathy": 3,
+          "memory": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "念几段给儿孙听",
+        "effects": {
+          "social": 3,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "读完后小心放回盒底",
+        "effects": {
+          "happiness": 2,
+          "gratitude": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elderwarm_0005",
+    "age_range": [
+      80,
+      80
+    ],
+    "category": "family",
+    "title": "老伴的早餐",
+    "text": "每天早上六点半，老伴雷打不动地端来一碗粥，有时加点红枣，有时撒一把枸杞。你端着碗，看她在厨房里忙活的身影，忽然觉得，这一碗粥比山珍海味都香。你叫她也坐下一起吃，她说：你先吃，我再给你煎个蛋。",
+    "choices": [
+      {
+        "text": "也早起一回，给老伴煮一锅粥",
+        "effects": {
+          "happiness": 4,
+          "family_relation": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把每天的早餐拍下来，攒成一本相册",
+        "effects": {
+          "family_relation": 3,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "端着粥碗，慢慢喝完",
+        "effects": {
+          "comfort": 3,
+          "happiness": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elderwarm_0006",
+    "age_range": [
+      81,
+      81
+    ],
+    "category": "personality",
+    "title": "儿时物件",
+    "text": "搬家时，你从旧木箱底翻出儿时的物件：一只掉了漆的铁皮青蛙，一包褪色的玻璃弹珠。拧上发条，青蛙还能跳两下。你把它放在掌心看了很久，好像看到七岁的自己蹲在弄堂口，和一群孩子趴在地上打弹珠，输光了也不肯回家。",
+    "choices": [
+      {
+        "text": "把物件洗干净，讲给孙辈听",
+        "effects": {
+          "happiness": 4,
+          "empathy": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把物件传给最小的孙辈",
+        "effects": {
+          "family_relation": 3,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "多看两眼，放回原处",
+        "effects": {
+          "happiness": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elderwarm_0007",
+    "age_range": [
+      82,
+      82
+    ],
+    "category": "hobby",
+    "title": "老年大学报名",
+    "text": "社区贴出老年大学招生的通知，书法、国画、合唱，一溜排开。你在通知前站了很久，年轻时想学又没学成的东西，忽然又涌上心头。第二天你揣着报名表去了，教室里坐着的都是花白头发的同学，老师喊你「同学」的时候，你笑出了声。",
+    "choices": [
+      {
+        "text": "报书法班，每周准时上课",
+        "effects": {
+          "learning": 4,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "和同班的老伙计切磋交流",
+        "effects": {
+          "social": 4,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "先去听听课，再决定报哪个班",
+        "effects": {
+          "happiness": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elderwarm_0008",
+    "age_range": [
+      83,
+      83
+    ],
+    "category": "hobby",
+    "title": "打理花园",
+    "text": "阳台上的月季开了，一盆盆挤挤挨挨。你每天早起给花浇水、松土、剪掉枯叶。隔壁小孩路过，总要扒着栏杆看一会儿。你摘了一朵开得最盛的月季递给他，他举着花跑远了。你站在阳台上，觉得这一天的阳光都格外温柔。",
+    "choices": [
+      {
+        "text": "每天清晨浇水施肥，把花养得更好",
+        "effects": {
+          "health": 3,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "再买几盆新花，把花园装点得更热闹",
+        "effects": {
+          "happiness": 4,
+          "money": -3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把开得好的花剪下来送邻居",
+        "effects": {
+          "social": 4,
+          "empathy": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elderwarm_0009",
+    "age_range": [
+      84,
+      84
+    ],
+    "category": "personality",
+    "title": "写回忆录",
+    "text": "你决定把这一辈子写下来。铺开稿纸，从出生那年开始，一年一年地写。写村里的河、城里的桥、第一个月的工资、孩子第一次叫爸爸。写累了就歇一歇，歇好了接着写。儿女们说何必这么辛苦，你说：这些事要是没人记下来，就真的没了。",
+    "choices": [
+      {
+        "text": "每天写一段，从年轻时慢慢写起",
+        "effects": {
+          "memory": 3,
+          "patience": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "口述，让孙辈代笔整理",
+        "effects": {
+          "family_relation": 3,
+          "communication": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "想到哪儿写到哪儿，随性而为",
+        "effects": {
+          "happiness": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elderwarm_0010",
+    "age_range": [
+      85,
+      85
+    ],
+    "category": "friend",
+    "title": "教孩子下棋",
+    "text": "楼下活动室新摆了一张围棋桌，几个孩子围着你学下棋。你捏着棋子，教他们「金角银边草肚皮」，孩子们听得一头雾水，却学得很认真。一个扎辫子的小姑娘赢了第一局，跳起来喊：我赢啦！你笑着收棋子，心里想着：这手艺，总算有人接过去了。",
+    "choices": [
+      {
+        "text": "从最基础的定式教起，不厌其烦",
+        "effects": {
+          "patience": 3,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "边下棋边讲棋里的道理",
+        "effects": {
+          "experience": 3,
+          "social": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "和小家伙们下一整天",
+        "effects": {
+          "happiness": 3,
+          "fun": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  }
+]

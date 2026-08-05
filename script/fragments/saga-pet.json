@@ -1,0 +1,228 @@
+[
+  {
+    "id": "pet_0001",
+    "age_range": [
+      6,
+      6
+    ],
+    "category": "animal",
+    "title": "街角的小狗",
+    "text": "放学路上，你听见墙角的纸箱里传来细碎的呜咽。掀开一看，一只脏兮兮的小狗缩在里面，湿漉漉的眼睛望着你。它很小，小到一只手掌就能托住；它又很倔，明明饿得发抖，还是朝你摇了摇尾巴。天快黑了，风有点凉。",
+    "choices": [
+      {
+        "text": "把它抱回家，求爸妈收留",
+        "effects": {
+          "happiness": 6,
+          "empathy": 4
+        },
+        "flags_add": [
+          "pet_dog"
+        ]
+      },
+      {
+        "text": "买根火腿肠喂它，看它吃完",
+        "effects": {
+          "empathy": 3,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "当作没看见，跑回家",
+        "effects": {
+          "happiness": -3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "pet_0002",
+    "age_range": [
+      14,
+      14
+    ],
+    "category": "family",
+    "title": "狗老了",
+    "text": "八年过去，当年那只小狗已经是条老狗了。它的腿脚不再利索，上楼梯要歇好几回，毛也白了一大片。今天它蹲在门口等你放学，你蹲下来揉它的头，它蹭了蹭你的手心，尾巴摇得很慢很慢，像是怕摇快了，就会累着。",
+    "choices": [
+      {
+        "text": "放慢脚步，每天陪它多走一段",
+        "effects": {
+          "patience": 4,
+          "family_relation": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "攒零花钱，带它去看兽医",
+        "effects": {
+          "money": -4,
+          "health": 3,
+          "responsibility": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "嫌它麻烦，不再理它",
+        "effects": {
+          "happiness": -3,
+          "loyalty": -3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "pet_dog"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "pet_0003",
+    "age_range": [
+      22,
+      22
+    ],
+    "category": "health",
+    "title": "送别",
+    "text": "最后一晚，你抱着它坐在阳台上。它已经很老了，老到连抬头的力气都没有，只是安静地趴在你怀里，呼吸轻得像怕打扰你。月亮很圆，你忽然想起六岁那年的纸箱、八年的晨昏、无数个它蹲在门口等你的傍晚。然后，它的呼吸停在了这一刻。",
+    "choices": [
+      {
+        "text": "好好道别，把它埋在院里的树下",
+        "effects": {
+          "gratitude": 5,
+          "happiness": -3
+        },
+        "flags_add": [
+          "pet_memory"
+        ]
+      },
+      {
+        "text": "抱着它哭一场，说尽想说的话",
+        "effects": {
+          "emotion": 5,
+          "happiness": -3
+        },
+        "flags_add": [
+          "pet_memory"
+        ]
+      },
+      {
+        "text": "假装什么都没发生，第二天照常上班",
+        "effects": {
+          "happiness": -4,
+          "stability": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "pet_dog"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "pet_0004",
+    "age_range": [
+      40,
+      40
+    ],
+    "category": "animal",
+    "title": "路遇流浪猫",
+    "text": "雨夜加班回家，你在楼下垃圾桶旁看见一只流浪猫，浑身湿透，在路灯下缩成一团。它警惕地望着你，喉咙里发出低低的呜咽。你站在雨里，忽然想起很多年前那个纸箱，和纸箱里那双湿漉漉的眼睛。雨下得更大了。",
+    "choices": [
+      {
+        "text": "把猫带回家，给它一个家",
+        "effects": {
+          "happiness": 6,
+          "family_relation": 3,
+          "money": -3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "上楼拿旧毛巾给它擦干，再放点吃的",
+        "effects": {
+          "empathy": 5,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "看了一会儿，转身走进雨里",
+        "effects": {
+          "happiness": -3,
+          "empathy": -3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "pet_memory"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "pet_0005",
+    "age_range": [
+      60,
+      60
+    ],
+    "category": "animal",
+    "title": "想起它",
+    "text": "收拾旧物时，你翻出一张泛黄的照片——六岁的你抱着一只小狗，笑得露出豁牙。照片背面是你当年歪歪扭扭的字：我的小狗，叫豆豆。你摩挲着照片，想起那个纸箱、那八年晨昏、那个月亮很圆的晚上。窗外的晚风，忽然变得很温柔。",
+    "choices": [
+      {
+        "text": "把它的故事讲给孙辈听",
+        "effects": {
+          "social": 5,
+          "happiness": 4,
+          "gratitude": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "画一幅记忆里它奔跑的样子",
+        "effects": {
+          "art": 4,
+          "happiness": 3,
+          "memory": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把照片放回盒底，不再看了",
+        "effects": {
+          "happiness": -3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "pet_memory"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  }
+]

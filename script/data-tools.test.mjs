@@ -35,10 +35,12 @@ test('checkDistribution：检出超密度与欠密度年龄', () => {
   const sparse = [ev('a01', 30), ev('a02', 30)];
   const violations = checkDistribution(sparse);
   assert.ok(violations.some(v => v.includes('30 岁') && v.includes('过少')));
-  const dense = Array.from({ length: 13 }, (_, i) => ev(`c${i}`, 5));
+  const dense = Array.from({ length: 14 }, (_, i) => ev(`c${i}`, 5));
   assert.ok(checkDistribution(dense).some(v => v.includes('5 岁') && v.includes('过多')));
-  // 0-2 岁每岁 1 个不算过少
-  assert.equal(checkDistribution([ev('b01', 0)]).length, 0);
+  // 0-2 岁每岁 3 个不算过少（规则 3-5）
+  assert.equal(checkDistribution([ev('b01', 0), ev('b02', 0), ev('b03', 0)]).length, 0);
+  // 0-2 岁每岁 1 个算欠密度（低于 3）
+  assert.ok(checkDistribution([ev('b01', 0)]).some(v => v.includes('0 岁') && v.includes('3-5')));
 });
 
 test('checkFlagPairs：检出无产出者的条件 flag，not_flags 不算悬空', () => {

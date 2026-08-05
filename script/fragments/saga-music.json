@@ -1,0 +1,240 @@
+[
+  {
+    "id": "music_0001",
+    "age_range": [
+      8,
+      8
+    ],
+    "category": "creativity",
+    "title": "第一次摸琴",
+    "text": "商场角落的琴行里，一架钢琴盖着红布。店员掀开布，你踮起脚按下一个白键，「叮」的一声，像一滴水落进心里。你回头拽了拽妈妈的衣角，又怯怯地缩回手。那声音很小，可回家的路上，你的耳朵里一直有那一声「叮」在响。",
+    "choices": [
+      {
+        "text": "鼓起勇气求爸妈，报名学琴",
+        "effects": {
+          "music": 5,
+          "courage": 3,
+          "money": -5
+        },
+        "flags_add": [
+          "music_piano"
+        ]
+      },
+      {
+        "text": "攒零花钱买琴谱，自己跟着学",
+        "effects": {
+          "music": 3,
+          "learning": 4,
+          "saving": 3
+        },
+        "flags_add": [
+          "music_piano"
+        ]
+      },
+      {
+        "text": "摸着琴盖发了一会儿呆，放下手",
+        "effects": {
+          "curiosity": -3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "music_0002",
+    "age_range": [
+      16,
+      16
+    ],
+    "category": "personality",
+    "title": "校园乐队",
+    "text": "高二，班长在走廊里拦住你：「我们组了个乐队，主唱有了、鼓手有了，就差键盘手，你来不来？」你脑海里闪过八岁那年那一声「叮」。放学后你们在旧琴房排练，调子总跑，笑声比琴声还响。夕阳把琴房染成橘色，你忽然觉得，这就是青春吧。",
+    "choices": [
+      {
+        "text": "加入乐队，当键盘手",
+        "effects": {
+          "music": 5,
+          "social": 4,
+          "happiness": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "以学业为重，谢绝邀请",
+        "effects": {
+          "learning": 4,
+          "stability": 3,
+          "music": -3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "只在周末偷偷去排练",
+        "effects": {
+          "music": 3,
+          "fun": 3,
+          "anxiety": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "music_piano"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "music_0003",
+    "age_range": [
+      21,
+      21
+    ],
+    "category": "emotion",
+    "title": "放弃还是坚持",
+    "text": "毕业那年的春天，你坐在琴凳上，面前摊着两张纸：一张是音乐学院的复试通知，一张是老家国企的录用函。母亲在电话里说：「学琴是爱好，工作是饭碗。」你把琴盖合上又打开、打开又合上。琴房的灯，亮了整夜。",
+    "choices": [
+      {
+        "text": "把录用函叠好收进抽屉，去复试",
+        "effects": {
+          "music": 6,
+          "courage": 4,
+          "money": -4
+        },
+        "flags_add": [
+          "music_stick"
+        ]
+      },
+      {
+        "text": "回老家上班，把琴留在这里",
+        "effects": {
+          "stability": 5,
+          "money": 4,
+          "music": -4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "先去工作养活自己，琴也不丢",
+        "effects": {
+          "music": 3,
+          "stability": 3,
+          "planning": 3
+        },
+        "flags_add": [
+          "music_stick"
+        ]
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "music_piano"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "music_0004",
+    "age_range": [
+      35,
+      35
+    ],
+    "category": "emotion",
+    "title": "深夜的钢琴房",
+    "text": "凌晨一点，写字楼十二层的琴房里还亮着灯。你刚下班，手指却像被什么牵着，掀开琴盖，弹了一首十四年前的老曲子。隔壁加班的同事敲了敲门，靠在门框上听完，说：「你这琴声，比我们这层楼的加班费治愈。」你笑了笑，又弹了一遍。",
+    "choices": [
+      {
+        "text": "再忙也留一小时给琴",
+        "effects": {
+          "music": 4,
+          "persistence": 4,
+          "health": -3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把琴房钥匙送给琴行，教孩子们弹琴",
+        "effects": {
+          "empathy": 5,
+          "social": 3,
+          "music": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "合上琴盖，明天还要早起",
+        "effects": {
+          "stability": 3,
+          "music": -3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "music_stick"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "music_0005",
+    "age_range": [
+      70,
+      70
+    ],
+    "category": "creativity",
+    "title": "琴声里的前半生",
+    "text": "七十岁生日，你在养老院的旧钢琴前坐下。琴键黄了，音也不太准，但你一弹起来，满屋子的老人都安静了。曲终，前排的老太太问你：「这是什么曲子？」你说：「是一首叫《前半生》的曲子，我弹了五十多年，今天才弹完。」",
+    "choices": [
+      {
+        "text": "教孙辈们弹这首曲子",
+        "effects": {
+          "social": 4,
+          "music": 4,
+          "happiness": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "办一场家庭小音乐会，把家人都叫来",
+        "effects": {
+          "happiness": 6,
+          "family_relation": 4,
+          "music": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "一个人把当年的曲子，再弹一遍",
+        "effects": {
+          "emotion": 4,
+          "gratitude": 3,
+          "happiness": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "music_stick"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  }
+]

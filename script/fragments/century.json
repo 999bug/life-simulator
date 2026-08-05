@@ -1,0 +1,252 @@
+[
+  {
+    "id": "elder_0116",
+    "age_range": [
+      97,
+      97
+    ],
+    "category": "personality",
+    "title": "跨过百年",
+    "text": "你小时候家里点的是煤油灯，如今你教重孙在手机屏幕上轻轻一划，就能和万里外的人说话。街角的马车变成了地铁，平房变成了玻璃高楼。你坐在公园长椅上，看着眼前这陌生又熟悉的世界，忽然觉得，自己像一本书的最后一页，记着前面所有的章节。",
+    "choices": [
+      {
+        "text": "把这一百年的变化讲给年轻人听",
+        "effects": {
+          "experience": 3,
+          "communication": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "在新事物里认出旧日子的影子",
+        "effects": {
+          "memory": 2,
+          "happiness": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "安静地看完这场日落",
+        "effects": {
+          "emotion": 2,
+          "stability": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0117",
+    "age_range": [
+      99,
+      99
+    ],
+    "category": "personality",
+    "title": "旧友的最后告别",
+    "text": "邮差送来一封信，不是你等的那封回信，是老友家属代写的讣告。那个年轻时和你一起翻墙逃学、中年时陪你喝过闷酒的人，走了。你坐在窗前把信读了好几遍，纸上的字迹陌生又熟悉。你没有哭，只是把信折好放进贴身口袋，想替他多看看这人间。",
+    "choices": [
+      {
+        "text": "去送他最后一程，认真道别",
+        "effects": {
+          "gratitude": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把你们的故事讲给孙辈听",
+        "effects": {
+          "memory": 2,
+          "empathy": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "对着信纸，和他说了很久的话",
+        "effects": {
+          "emotion": 2,
+          "stability": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0118",
+    "age_range": [
+      100,
+      100
+    ],
+    "category": "family",
+    "title": "百岁宴",
+    "text": "一百岁生日，家里摆了整整八桌。重孙们在膝下钻来钻去，记者举着相机挤到最前面，问你长寿的秘诀。你想了想说：没什么诀窍，就是多活了些年头。邻居端来一碗亲手做的长寿面，满院子的人一起唱起生日歌。你跟着拍手，笑得脸上的皱纹都舒展开了。",
+    "choices": [
+      {
+        "text": "把祝福分给每一个孩子",
+        "effects": {
+          "family_relation": 2,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "对着镜头说了句心里话",
+        "effects": {
+          "confidence": 2,
+          "happiness": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "端起长寿面，敬满院子的人",
+        "effects": {
+          "social": 2,
+          "gratitude": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0119",
+    "age_range": [
+      101,
+      101
+    ],
+    "category": "hobby",
+    "title": "老手艺传人",
+    "text": "你这一辈子练就了一门手艺——编竹篮。村里的年轻人慕名来学，你教他劈篾、起底、收口，一遍不行就教三遍。他笨手笨脚的样子，像极了你年轻时第一次上手。收工那天，他举着一只歪歪扭扭的篮子向你炫耀。你摸了摸那篮子，说：挺好，比当年的我强。",
+    "choices": [
+      {
+        "text": "把压箱底的诀窍都教给他",
+        "effects": {
+          "patience": 2,
+          "empathy": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "边教边讲这门手艺的来历",
+        "effects": {
+          "experience": 2,
+          "social": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "看他编出第一只完整的篮子",
+        "effects": {
+          "happiness": 2,
+          "creativity": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0120",
+    "age_range": [
+      102,
+      102
+    ],
+    "category": "family",
+    "title": "给后辈留话",
+    "text": "你铺开信纸，想给刚会写自己名字的重孙写一封信。笔尖在纸上停了好久——这一百多年想说的话太多，落到纸上却好像只剩几句。你写下：好好吃饭，好好睡觉，做一个好人，遇事别怕。想了想，又在末尾添了一句：爷爷活到一百零二岁，是因为心里一直装着你们。",
+    "choices": [
+      {
+        "text": "把这一生的经历都写进去",
+        "effects": {
+          "experience": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "郑重写下：好好活，别怕",
+        "effects": {
+          "stability": 2,
+          "happiness": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把信压在枕头底下，等他自己来读",
+        "effects": {
+          "family_relation": 2,
+          "gratitude": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0121",
+    "age_range": [
+      103,
+      103
+    ],
+    "category": "personality",
+    "title": "世纪的回信",
+    "text": "有人问你要不要写回忆录，你摇摇头。这一生已经用一百零三个春秋写完了，不必再补一笔。你坐在窗前，给这漫长的世纪写最后一封回信：谢谢所有的相遇，原谅所有的不顺，这一趟人间，你来过，爱过，值得。落笔之后你轻轻合上信纸，窗外的阳光正好，像一百年前的那个下午。",
+    "choices": [
+      {
+        "text": "落款：一个走过了整个世纪的人",
+        "effects": {
+          "gratitude": 2,
+          "emotion": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把回信寄给一百年前的自己",
+        "effects": {
+          "memory": 2,
+          "happiness": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把信放在枕边，微笑着入睡",
+        "effects": {
+          "stability": 2,
+          "comfort": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  }
+]

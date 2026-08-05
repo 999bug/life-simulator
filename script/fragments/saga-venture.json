@@ -1,0 +1,248 @@
+[
+  {
+    "id": "venture_0001",
+    "age_range": [
+      24,
+      24
+    ],
+    "category": "career",
+    "title": "辞职创业",
+    "text": "你在工位上把辞职信打了又删、删了又打。同事劝你：房贷、社保、稳定的工资，丢了可就没了。可你脑子里全是那个想了三年的想法——它像团火，白天压着，夜里烧。窗外写字楼的灯一盏盏亮起，你忽然觉得，自己不能再等了。",
+    "choices": [
+      {
+        "text": "递上辞职信，把积蓄砸进去创业",
+        "effects": {
+          "money": -10,
+          "business": 6,
+          "ambition": 5,
+          "risk": 3
+        },
+        "flags_add": [
+          "venture"
+        ]
+      },
+      {
+        "text": "先不辞职，边上班边小规模试水",
+        "effects": {
+          "planning": 5,
+          "saving": 3,
+          "money": -3
+        },
+        "flags_add": [
+          "venture"
+        ]
+      },
+      {
+        "text": "撕了辞职信，安心上班",
+        "effects": {
+          "stability": 5,
+          "money": 3,
+          "ambition": -3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "venture_0002",
+    "age_range": [
+      28,
+      28
+    ],
+    "category": "finance",
+    "title": "融资失败",
+    "text": "投资人把你们的商业计划书翻了两遍，最后说了句「再打磨打磨」，把你送出办公室。你数了数账上的钱，只够撑四个月了。合伙人低着头不说话，一根接一根地抽烟。写字楼下的便利店亮着惨白的灯，你站在门口，第一次觉得夜风这么冷。",
+    "choices": [
+      {
+        "text": "咬着牙撑下去，四处找钱",
+        "effects": {
+          "persistence": 5,
+          "willpower": 4,
+          "money": -5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "砍掉一半业务，先活下来",
+        "effects": {
+          "adaptability": 5,
+          "saving": 4,
+          "happiness": -3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "消极躺平，任公司半死不活",
+        "effects": {
+          "money": -6,
+          "motivation": -3,
+          "stability": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "venture"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "venture_0003",
+    "age_range": [
+      33,
+      33
+    ],
+    "category": "career",
+    "title": "公司活了/关了",
+    "text": "第九个年头，结果终于摊在眼前：账上只剩三位数，还是营收翻了三倍，全看这一个冬天。你把合伙人们叫到一起，办公室的灯从下午亮到深夜。墙上的白板写满了数字和箭头，像一张命运的棋盘。凌晨三点，你放下了笔。",
+    "choices": [
+      {
+        "text": "迎来转机，公司活下来了",
+        "effects": {
+          "business": 6,
+          "money": 8,
+          "happiness": 8
+        },
+        "flags_add": [
+          "venture_out"
+        ]
+      },
+      {
+        "text": "回天乏术，亲手关掉公司",
+        "effects": {
+          "money": -8,
+          "adaptability": 4,
+          "stability": 3,
+          "happiness": -3
+        },
+        "flags_add": [
+          "venture_out"
+        ]
+      },
+      {
+        "text": "把公司转让给合伙人，抽身离开",
+        "effects": {
+          "money": 3,
+          "financial": 4,
+          "freedom": 3
+        },
+        "flags_add": [
+          "venture_out"
+        ]
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "venture"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "venture_0004",
+    "age_range": [
+      45,
+      45
+    ],
+    "category": "career",
+    "title": "行业寒冬",
+    "text": "行业寒潮来了，同行一家接一家地裁员、降薪。你看着当年的老部下收拾工位，心里不是滋味。董事会上吵成一团：收缩保命，还是转型搏一把？窗外北风卷着落叶，你想起二十一年前那个辞职的下午，和那团烧了很久的火。",
+    "choices": [
+      {
+        "text": "壮士断腕，收缩保命",
+        "effects": {
+          "competition": 4,
+          "money": -4,
+          "stability": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "押上家底，转型新赛道",
+        "effects": {
+          "innovation": 5,
+          "business": 5,
+          "risk": 4,
+          "money": -5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "躺平观望，等春天自己来",
+        "effects": {
+          "money": -6,
+          "motivation": -3,
+          "stability": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "venture_out"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "venture_0005",
+    "age_range": [
+      60,
+      60
+    ],
+    "category": "finance",
+    "title": "回望创业路",
+    "text": "六十岁生日，儿子问你：爸，当年辞职创业，后悔过吗？你端起茶杯想了想。那些彻夜不眠的会议室、追不到的融资、关掉的办公室，和最后活下来的那口气，忽然都变得很轻。你笑了笑：「后悔没早点想明白——人这一辈子，总得为自己烧过一回。」",
+    "choices": [
+      {
+        "text": "把创业这些年写成一本回忆录",
+        "effects": {
+          "creativity": 4,
+          "memory": 3,
+          "happiness": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "给年轻创业者当导师",
+        "effects": {
+          "leadership": 5,
+          "social": 4,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "庆幸当初选了这条最难的路",
+        "effects": {
+          "gratitude": 4,
+          "pride": 3,
+          "happiness": 4
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "venture_out"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  }
+]

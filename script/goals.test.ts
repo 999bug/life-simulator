@@ -89,9 +89,9 @@ test('checkGoal：自定义目标不干扰预设分支（旧字符串 goal 兼�
   assert.strictEqual(checkGoal('family', game({ flags: ['married', 'has_child'] }, { happiness: 75 }))!.achieved, true);
 });
 
-test('ACHIEVEMENTS：21 个定义齐全', () => {
-  assert.strictEqual(ACHIEVEMENTS.length, 21);
-  assert.strictEqual(new Set(ACHIEVEMENTS.map(a => a.id)).size, 21);
+test('ACHIEVEMENTS：28 个定义齐全', () => {
+  assert.strictEqual(ACHIEVEMENTS.length, 28);
+  assert.strictEqual(new Set(ACHIEVEMENTS.map(a => a.id)).size, 28);
 });
 
 test('checkAchievements：新增 8 个成就判定', () => {
@@ -101,6 +101,24 @@ test('checkAchievements：新增 8 个成就判定', () => {
   for (const id of ['top_score', 'genius', 'iron_body', 'rich_king', 'big_family', 'ultra_life', 'five_endings', 'ten_lives'] as const) {
     assert.ok(got.includes(id), `应包含 ${id}`);
   }
+});
+
+test('checkAchievements：铜银金分层新增 7 个成就判定', () => {
+  // 享年 82 / 财富 65 / 智力 72 / 评分 61（平均 (65+72+61×6)/8 ≈ 62.9）→ 仅触发铜档新成就
+  const bronze = game({ age: 82, attributes: { health: 61, intelligence: 72, wealth: 65, happiness: 61, social: 61, appearance: 61, luck: 61, morality: 61 } });
+  const gotBronze = checkAchievements({ game: bronze, completedLives: 1, wasLite: false, wasAuto: false, endingsCount: 3 });
+  for (const id of ['age_80', 'wealthy_60', 'bright_70', 'score_60', 'three_endings'] as const) {
+    assert.ok(gotBronze.includes(id), `应包含 ${id}`);
+  }
+  assert.ok(!gotBronze.includes('longevity'));
+  assert.ok(!gotBronze.includes('rich'));
+  assert.ok(!gotBronze.includes('ten_endings'));
+
+  // 评分 92+（全属性 92）且结局 10 种 → 金档 score_92 / ten_endings
+  const gold = game({ age: 70, attributes: { health: 92, intelligence: 92, wealth: 92, happiness: 92, social: 92, appearance: 92, luck: 92, morality: 92 } });
+  const gotGold = checkAchievements({ game: gold, completedLives: 1, wasLite: false, wasAuto: false, endingsCount: 10 });
+  assert.ok(gotGold.includes('score_92'));
+  assert.ok(gotGold.includes('ten_endings'));
 });
 
 test('checkAchievements：按状态判定全部满足项', () => {

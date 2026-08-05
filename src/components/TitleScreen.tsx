@@ -7,6 +7,7 @@ import { formatDate } from '../hooks/useGame';
 import GoalModal from './GoalModal';
 import ConfirmModal from './ConfirmModal';
 import AchievementsModal from './AchievementsModal';
+import CollectionModal from './CollectionModal';
 import StatsModal from './StatsModal';
 
 interface Props {
@@ -32,6 +33,7 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
   const [showGoal, setShowGoal] = useState(false);
   const [confirmCover, setConfirmCover] = useState(false);
   const [showAchievements, setShowAchievements] = useState(false);
+  const [showCollection, setShowCollection] = useState(false);
   const [showStats, setShowStats] = useState(false);
   /** 挑战开局（第 2 周目解锁）：属性整体下调 10 点 */
   const [challenge, setChallenge] = useState(false);
@@ -306,6 +308,14 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
         >
           🏆 成就
         </button>
+
+        {/* 图鉴入口：13 条结局路线收集 */}
+        <button
+          onClick={() => { sfx.select(); setShowCollection(true); }}
+          className="text-[12px] text-white/30 tracking-[3px] hover:text-[#c9a96e] transition-colors duration-200 font-sans"
+        >
+          📖 图鉴
+        </button>
       </div>
 
       {/* 目标选择模态（开始人生后弹出，确认目标后开局） */}
@@ -326,6 +336,11 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
       {/* 成就总览模态（🏆 入口弹出） */}
       {showAchievements && (
         <AchievementsModal unlocked={achievements.unlocked} onClose={() => setShowAchievements(false)} />
+      )}
+
+      {/* 人生图鉴模态（📖 入口弹出） */}
+      {showCollection && (
+        <CollectionModal endings={stats.endings} onClose={() => setShowCollection(false)} />
       )}
 
       {/* 生涯统计模态（📊 入口弹出） */}

@@ -101,7 +101,8 @@ export type AchievementId =
   | 'first_life' | 'longevity' | 'early_death' | 'rich' | 'scholar'
   | 'career' | 'traveler' | 'doctor' | 'balanced' | 'lite_clear' | 'auto_clear' | 'three_lives'
   | 'top_score' | 'genius' | 'iron_body' | 'rich_king' | 'big_family' | 'ultra_life' | 'five_endings' | 'ten_lives'
-  | 'challenger';
+  | 'challenger'
+  | 'age_80' | 'wealthy_60' | 'bright_70' | 'score_60' | 'score_92' | 'three_endings' | 'ten_endings';
 
 /** 游戏状态 */
 export interface GameState {

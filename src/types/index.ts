@@ -122,6 +122,8 @@ export interface GameState {
   snapshots?: AttrSnapshot[];
   /** 挑战开局（第 2 周目解锁：开局属性整体下调 10 点；旧存档无此字段） */
   challenge?: boolean;
+  /** 真实模式（第 2 周目解锁：选项只显示属性倾向箭头，隐藏精确数值；旧存档无此字段） */
+  realMode?: boolean;
   /** 属性传承（第 5 周目起：上一世最高 2 项属性各 +8；旧存档无此字段） */
   inherited?: boolean;
 }

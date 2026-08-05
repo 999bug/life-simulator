@@ -8,9 +8,11 @@ interface Props {
   visible: boolean;
   attributes: Attributes;
   age: number;
+  /** 真实模式：选项只显示属性倾向箭头（↑/↓，|v|≥8 双箭头），隐藏精确数值 */
+  realMode: boolean;
 }
 
-export default function ChoicePanel({ choices, onSelect, visible, attributes, age }: Props) {
+export default function ChoicePanel({ choices, onSelect, visible, attributes, age, realMode }: Props) {
   if (!visible || choices.length === 0) return null;
 
   return (
@@ -37,7 +39,7 @@ export default function ChoicePanel({ choices, onSelect, visible, attributes, ag
 
           {ch.outcomes.attr && Object.keys(ch.outcomes.attr).length > 0 && (
             <span className="text-[10px] text-white/40 tracking-wide whitespace-nowrap ml-3 shrink-0">
-              {colorEffects(effectsText(ch, attributes, age))}
+              {colorEffects(effectsText(ch, attributes, age, realMode))}
             </span>
           )}
         </button>
@@ -49,12 +51,23 @@ export default function ChoicePanel({ choices, onSelect, visible, attributes, ag
 /**
  * 生成实时效果展示串（按当前属性计算实际生效值，与引擎应用结果一致）。
  * 键序沿用转换器生成的 outcomes 顺序。
+ * 真实模式：只显示倾向箭头（单箭头 |v|<8，双箭头 |v|≥8），实际生效为 0 的属性不显示。
  */
-function effectsText(ch: Choice, attrs: Attributes, age: number): string {
+function effectsText(ch: Choice, attrs: Attributes, age: number, realMode: boolean): string {
   const attr = ch.outcomes.attr;
   return (Object.keys(attr) as AttributeKey[])
     .filter(k => attr[k] !== 0)
-    .map(k => `${ATTR_META[k].icon}${formatDelta(effectiveDelta(k, attr[k]!, attrs, age))}`)
+    .map(k => {
+      const v = effectiveDelta(k, attr[k]!, attrs, age);
+      if (realMode) {
+        if (v === 0) {
+          return '';
+        }
+        return `${ATTR_META[k].icon}${v > 0 ? (v >= 8 ? '↑↑' : '↑') : (v <= -8 ? '↓↓' : '↓')}`;
+      }
+      return `${ATTR_META[k].icon}${formatDelta(v)}`;
+    })
+    .filter(t => t !== '')
     .join(' ');
 }
 
@@ -65,6 +78,8 @@ function formatDelta(v: number): string {
 function colorEffects(effects: string) {
   return effects.split(' ').map((t, i) => {
     const key = `${t}-${i}`;
+    if (t.includes('↑')) return <span key={key} className="text-[#4ac9a0]">{t} </span>;
+    if (t.includes('↓')) return <span key={key} className="text-[#e85d75]">{t} </span>;
     if (t.startsWith('+')) return <span key={key} className="text-[#4ac9a0]">{t} </span>;
     if (t.startsWith('-')) return <span key={key} className="text-[#e85d75]">{t} </span>;
     return <span key={key}>{t} </span>;

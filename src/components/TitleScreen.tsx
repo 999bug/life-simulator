@@ -10,7 +10,7 @@ import AchievementsModal from './AchievementsModal';
 import StatsModal from './StatsModal';
 
 interface Props {
-  onStart: (gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | CustomGoal | null, challenge: boolean) => void;
+  onStart: (gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | CustomGoal | null, challenge: boolean, realMode: boolean) => void;
   onAutoStart: (gender: 'male' | 'female', name: string) => void;
   /** 每日挑战：随机性别/名字 + 今日固定种子开局（手动播放） */
   onDailyStart: () => void;
@@ -35,6 +35,8 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
   const [showStats, setShowStats] = useState(false);
   /** 挑战开局（第 2 周目解锁）：属性整体下调 10 点 */
   const [challenge, setChallenge] = useState(false);
+  /** 真实模式（第 2 周目解锁）：选项只显示属性倾向箭头，隐藏精确数值 */
+  const [realMode, setRealMode] = useState(false);
   /** 当前是第几周目（累计完成局数 + 1） */
   const round = stats.totalLives + 1;
   /** 今日是否已有每日挑战记录（跨天不展示昨日最佳） */
@@ -60,12 +62,12 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
     if (!gender) return;
     setShowGoal(false);
     const finalName = name.trim() || (gender === 'male' ? '小明' : '小美');
-    onStart(gender, finalName, paceMode, typeSpeed, goal, challenge);
+    onStart(gender, finalName, paceMode, typeSpeed, goal, challenge, realMode);
   };
 
   return (
-    <div className="w-full h-full bg-[radial-gradient(ellipse_at_center,#1a1a30_0%,#0a0a14_70%)]
-      flex flex-col items-center justify-center gap-5 relative overflow-hidden">
+    // 背景透明：径向渐变由 App 外层全屏铺设，任何窗口尺寸下都无舞台矩形边界
+    <div className="w-full h-full flex flex-col items-center justify-center gap-5 relative overflow-hidden">
 
       {/* 光晕动画 */}
       <div className="absolute w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(201,169,110,0.06)_0%,transparent_60%)]
@@ -216,7 +218,7 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
         </div>
       </div>
 
-      {/* 周目解锁：挑战开局（第 2 周目）+ 命运事件（第 3 周目） */}
+      {/* 周目解锁：挑战开局 + 真实模式（第 2 周目）+ 命运事件（第 3 周目） */}
       {round >= 2 && (
         <div className="z-10 flex items-center gap-3 animate-[fadeIn_2.1s_ease]">
           <button
@@ -227,6 +229,15 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
                 : 'border-white/15 text-white/35 bg-white/[0.03] hover:border-[#e8a05d]/50 hover:text-[#e8a05d]'}`}
           >
             ⚔️ 挑战开局{challenge ? '：属性 -10' : ''}
+          </button>
+          <button
+            onClick={() => { sfx.select(); setRealMode(v => !v); }}
+            className={`px-4 py-1.5 rounded-full text-[11px] tracking-[2px] border transition-all duration-200 font-sans
+              ${realMode
+                ? 'border-[#b57edc] text-[#b57edc] bg-[#b57edc]/10 shadow-[0_0_14px_rgba(181,126,220,0.2)]'
+                : 'border-white/15 text-white/35 bg-white/[0.03] hover:border-[#b57edc]/50 hover:text-[#b57edc]'}`}
+          >
+            🎭 真实模式{realMode ? '：隐藏数值' : ''}
           </button>
           {round >= 3 && (
             <span className="text-[10px] text-white/30 tracking-[2px]">

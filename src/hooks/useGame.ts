@@ -180,7 +180,7 @@ export function updateDailyBest(prev: DailyStore, today: string, score: number, 
 
 // ============ Action 类型 ============
 export type Action =
-  | { type: 'START_GAME'; gender: 'male' | 'female'; name: string; paceMode: PaceMode; typeSpeed: TypeSpeed; goal: GoalKey | CustomGoal | null; challenge: boolean; seed?: number; isDaily?: boolean }
+  | { type: 'START_GAME'; gender: 'male' | 'female'; name: string; paceMode: PaceMode; typeSpeed: TypeSpeed; goal: GoalKey | CustomGoal | null; challenge: boolean; realMode?: boolean; seed?: number; isDaily?: boolean }
   | { type: 'START_AUTO_GAME'; gender: 'male' | 'female'; name: string }
   | { type: 'RESTART' }
   | { type: 'MAKE_CHOICE'; choice: Choice; eventId: string }
@@ -314,6 +314,8 @@ interface StartParams {
   typeSpeed: TypeSpeed;
   goal: GoalKey | CustomGoal | null;
   challenge: boolean;
+  /** 真实模式（第 2 周目解锁）：选项隐藏精确数值，只显示属性倾向 */
+  realMode?: boolean;
   /** 洗牌种子；缺省随机生成 */
   seed?: number;
   /** 快速模拟：自动随机选择快速走完一生 */
@@ -339,6 +341,8 @@ function startNewGame(state: RuntimeState, p: StartParams): RuntimeState {
   if (game.challenge) {
     game.attributes = applyChallenge(game.attributes);
   }
+  // 真实模式（第 2 周目解锁）：选项只显示属性倾向箭头
+  game.realMode = p.realMode ?? false;
   const shuffleSeed = p.seed ?? Math.floor(Math.random() * 2 ** 31);
   // 快速模拟用精简档（每岁 1-2 个）；手动模式按所选密度档过滤
   const shuffledEvents = shuffleEvents(filterEvents(EVENTS, p.paceMode, shuffleSeed), shuffleSeed);
@@ -389,6 +393,7 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         typeSpeed: action.typeSpeed,
         goal: action.goal,
         challenge: action.challenge,
+        realMode: action.realMode ?? false,
         seed: action.seed,
         autoPlay: false,
         isDaily: action.isDaily,
@@ -415,6 +420,7 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         typeSpeed: state.typeSpeed,
         goal: state.game.goal,
         challenge: state.game.challenge ?? false,
+        realMode: state.game.realMode ?? false,
         seed: state.isDaily ? state.shuffleSeed : undefined,
         autoPlay: false,
         isDaily: state.isDaily,
@@ -758,8 +764,8 @@ export function useGame() {
     return () => clearTimeout(timer);
   }, [rt]);
 
-  const startGame = useCallback((gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | CustomGoal | null, challenge: boolean = false) => {
-    dispatch({ type: 'START_GAME', gender, name, paceMode, typeSpeed, goal, challenge });
+  const startGame = useCallback((gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | CustomGoal | null, challenge: boolean = false, realMode: boolean = false) => {
+    dispatch({ type: 'START_GAME', gender, name, paceMode, typeSpeed, goal, challenge, realMode });
   }, []);
 
   const startAutoGame = useCallback((gender: 'male' | 'female', name: string) => {

@@ -142,6 +142,7 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
           visible={showChoices && !autoPlay}
           attributes={game.attributes}
           age={game.age}
+          realMode={game.realMode ?? false}
         />
       </div>
 

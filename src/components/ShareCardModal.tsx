@@ -98,11 +98,14 @@ export default function ShareCardModal({ game, verdictTitle, onClose }: Props) {
       ctx.restore();
     }
 
-    // 底部水印
+    // 底部 CTA：传播钩子 + 产品名（引导看到卡片的人也来活一次）
     ctx.textAlign = 'center';
+    ctx.fillStyle = 'rgba(201,169,110,0.75)';
+    ctx.font = `300 19px ${F}`;
+    ctx.fillText('如果重来一次，你会怎么选？', CARD_W / 2, CARD_H - 44);
     ctx.fillStyle = 'rgba(255,255,255,0.2)';
-    ctx.font = `300 16px ${F}`;
-    ctx.fillText('由人生模拟器生成', CARD_W / 2, CARD_H - 22);
+    ctx.font = `300 14px ${F}`;
+    ctx.fillText('人生模拟器 · 文字人生模拟游戏', CARD_W / 2, CARD_H - 18);
   }, [game, verdictTitle]);
 
   const handleDownload = () => {

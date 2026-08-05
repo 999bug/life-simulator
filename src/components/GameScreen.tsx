@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import type { AttributeKey, Choice, GameState, LifeEvent, TypeSpeed } from '../types';
 import { STAGE_META } from '../engine/state';
-import { sfx } from '../utils/sound';
+import { sfx, startBgm, stopBgm } from '../utils/sound';
 import SceneArea, { ATTR_TINT } from './SceneArea';
 import StatusBar from './StatusBar';
 import DialogBox from './DialogBox';
@@ -78,6 +78,12 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
       return;
     }
     sfx.stage();
+  }, [game.stage]);
+
+  // 阶段 BGM：进入/切换阶段时换对应音阶循环，组件卸载（结算/回标题）停止
+  useEffect(() => {
+    startBgm(game.stage);
+    return () => stopBgm();
   }, [game.stage]);
 
   // 反馈页面

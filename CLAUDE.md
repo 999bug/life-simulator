@@ -58,7 +58,7 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 - conditions 不满足的事件静默跳过；flags 累积在 `game.flags`（不重复）；历史 `history` 含 `flags?` 字段（生涯年表里程碑标记，旧存档兼容）
 - 死亡判定：健康归零或超过 `calcMaxAge`；死因记录在 `game.deathCause`（health 耗尽 / lifespan 寿终），结算页展示临终叙事
 - `MAKE_CHOICE` 预载下一事件（gameOver 时判定成就/统计），`CONTINUE` 只清反馈；反馈页正向收益距年龄上限 15 点内标注「（距上限 X 点）」
-- **音效**：`src/utils/sound.ts` 用 Web Audio 合成轻量 UI 音效（点击/选择/打字/推进/落幕/成就琶音/阶段过渡），无外部资源，浏览器不可用时静默降级；`setMuted` 供快速模拟模式静音高频交互音
+- **音效/BGM**：`src/utils/sound.ts` 用 Web Audio 合成轻量 UI 音效（点击/选择/打字/推进/落幕/成就琶音/阶段过渡），无外部资源，浏览器不可用时静默降级；`setMuted` 供快速模拟模式静音高频交互音。**阶段 BGM**：`startBgm(stage)`/`stopBgm()`——7 阶段各一组五声音阶慢速琶音循环（BGM_PATTERNS，慢起音 pad 包络，音量低于交互音效；婴儿八音盒→晚年宁静），GameScreen 随 stage 切换、卸载停止
 - **成长曲线**：`GameState.snapshots`（可选，`AttrSnapshot[]`）每岁属性快照——`appendSnapshot`（state.ts）进入新岁或终局记录、同岁内不重复、同岁终局替换该岁条目；开局记首事件年龄，旧存档无字段从读档岁重建；结算页 GrowthChart canvas 绘制（x 0→享年、y 0-100、末端圆点 + HTML 图例带终值）
 - **快速模拟**：标题页「⚡ 快速模拟」以随机性别/名字开局（`START_AUTO_GAME`），**用精简档抽样（每岁 1-2 个，一局约 30 秒）**；自动模式每 220ms 随机选择推进、跳过打字机（DialogBox `instant`）与选择面板，直到结算；重新开始或读档自动退出自动模式
 - **每日挑战**：标题页「📅 每日挑战」以日期确定性种子（`dateToSeed`，YYYYMMDD → number）开局，同一天全局同一局；手动播放、无目标/无挑战、不写存档槽（saveState guard 含 isDaily）；入口旁展示「今日最佳 评分/享年」（`life-sim-daily`）
@@ -72,7 +72,7 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 - **DialogBox**：打字机效果（速度档位 + 点击跳过）+ 「▼ 点击继续」；事件标题显示为「标题」
 - **ChoicePanel**：选项按钮（`button.group` class，effects 展示串由转换器生成）
 - **TitleScreen**：名字/性别 + **节奏档位（沉浸/精简）+ 打字速度 + 3 存档卡片 + 目标选择模态（GoalModal，含「🎯 自定义目标」勾选属性+滑杆设目标值 + 家族继承提示）+ 成就（AchievementsModal 铜/银/金分层）/人生图鉴（CollectionModal 13 结局路线收集，数据取自 stats.endings）/家族族谱（FamilyModal 跨世代收藏）/生涯统计（StatsModal）入口 + 快捷入口行（⚡ 快速模拟/📅 每日挑战/📊 生涯/🏆 成就/📖 图鉴/🌳 家族）**——720px 高度余量极小（约 1px），改动必须回归检查
-- **SummaryScreen**：结算页（享年 + 结局 + 评分 + 属性 + **成长曲线（GrowthChart canvas 8 维随年龄折线图，图例悬停临时聚焦/点击固定聚焦单条曲线，其余淡化）+ 人生大事记完整时间线（里程碑 ⭐）+ 目标达成度 + 新解锁成就 + 本可发生而未触发 + 分享卡片（ShareCardModal canvas PNG，含迷你成长曲线）+ 传记导出**）
+- **SummaryScreen**：结算页（享年 + 结局 + 评分 + 属性 + **成长曲线（GrowthChart canvas 8 维随年龄折线图，图例悬停临时聚焦/点击固定聚焦单条曲线，其余淡化）+ 人生大事记完整时间线（里程碑 ⭐）+ 目标达成度 + 新解锁成就 + 本可发生而未触发 + 分享卡片（ShareCardModal canvas PNG，含迷你成长曲线 + 底部传播 CTA「如果重来一次，你会怎么选？」）+ 传记导出**）
 - **SceneArea/SceneDecor/CategoryDecor**：场景背景 = 阶段渐变（STAGE_BG）+ 阶段 SVG 装饰（SceneDecor）+ **事件分类场景**（CategoryDecor，11 分类各一组 SVG 元素：家庭→沙发、事业→写字楼、健康→医疗十字、教育→黑板、友谊→咖啡桌、爱情→爱心、科技→屏幕电路、金融→金币折线、爱好→调色板吉他、运动→跑道篮筐、个性→对话气泡星）+ **选项属性色调响应**（GameScreen 选选项后按效果主属性叠加底部光晕，8 属性→色：health 绿/intelligence 蓝/wealth 金/happiness 橙/social 青/appearance 粉/luck 紫/morality 米白；继续后还原）
 - **App**：移动端视口等比缩放（scale = min(vw/960, vh/720)，<1 才缩放）
 

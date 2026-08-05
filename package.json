@@ -8,6 +8,7 @@
     "build": "tsc && vite build",
     "build:events": "node script/convert-events.mjs",
     "test": "node --test \"script/*.test.mjs\" && node --experimental-strip-types --test script/engine-state.test.ts script/pace-mode.test.ts script/goals.test.ts script/save.test.ts script/verdict.test.ts script/use-game.test.ts",
+    "test:ui": "vitest run",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -16,14 +17,20 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.3",
     "@types/react": "^18.3.0",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.0",
     "autoprefixer": "^10.4.19",
+    "jsdom": "^30.0.1",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.5.0",
     "vite": "^5.4.0",
-    "vite-plugin-singlefile": "^2.3.3"
+    "vite-plugin-pwa": "^1.3.0",
+    "vite-plugin-singlefile": "^2.3.3",
+    "vitest": "^4.1.10"
   }
 }

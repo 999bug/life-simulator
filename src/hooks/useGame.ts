@@ -340,7 +340,7 @@ function startNewGame(state: RuntimeState, p: StartParams): RuntimeState {
     game.attributes = applyChallenge(game.attributes);
   }
   const shuffleSeed = p.seed ?? Math.floor(Math.random() * 2 ** 31);
-  // 快速模拟固定全量事件；手动模式按所选密度档过滤
+  // 快速模拟用精简档（每岁 1-2 个）；手动模式按所选密度档过滤
   const shuffledEvents = shuffleEvents(filterEvents(EVENTS, p.paceMode, shuffleSeed), shuffleSeed);
   const firstScan = findNextEvent(game, -1, shuffledEvents);
   const first = firstScan.event;
@@ -395,11 +395,11 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
       });
 
     case 'START_AUTO_GAME':
-      // 快速模拟：固定全量事件 + 中速 + 无目标（开局参数全部固定）
+      // 快速模拟：精简档抽样（每岁 1-2 个）+ 中速 + 无目标（开局参数全部固定）
       return startNewGame(state, {
         gender: action.gender,
         name: action.name,
-        paceMode: 'full',
+        paceMode: 'lite',
         typeSpeed: 'normal',
         goal: null,
         challenge: false,

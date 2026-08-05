@@ -50,7 +50,7 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 `useReducer` 驱动游戏循环，核心机制：
 - **线性播放**：`findNextEvent` 从当前 index+1 线性扫描第一个 conditions 满足的事件，**同时收集条件不满足的跳过事件**（`skippedEvents`，结算页「本可发生而未触发」展示）；**年龄由事件自身驱动**（同一岁的多个事件连续触发）
 - **同岁组洗牌（重玩性）**：开局随机种子对同岁事件洗牌（`shuffleEvents`，含 flag 依赖修正——消费事件排在产出者之后），同种子可复现；种子随存档保存
-- **节奏档位**：密度（沉浸全量 / 精简每岁 2-3 个，`filterEvents` 主线优先抽样 + flag 闭包）开局选定；打字速度（慢/中/快）游戏内实时切换（DialogBox speedRef，不重启打字机）；点击跳过打字
+- **节奏档位**：密度（沉浸全量 / 精简每岁 1-2 个，`filterEvents` 主线优先抽样 + flag 闭包，`liteTarget`：0-2 岁全保留、3-12 岁 2 个、13+ 岁 1 个）开局选定；打字速度（慢/中/快）游戏内实时切换（DialogBox speedRef，不重启打字机）；点击跳过打字
 - **存档 v2**：`life-sim-saves-v2` = 3 槽位 + active（`src/engine/save.ts`：SavesV2/migrateLegacySave 旧版自动迁移/isValidSaveData 内容校验）；标题页 3 卡片点击继续、开始新局覆盖确认；**快速模拟不写槽**（autoPlay guard）；RESET 保留槽位（回标题不丢档）
 - **目标/成就/统计**：`goal` 入 GameState（预设 key 或自定义 `CustomGoal {attrs}`——GoalModal 勾选属性+滑杆设目标值，结算逐项达标即达成）；成就存 `life-sim-achievements`（unlocked/completedLives/endings）；统计存 `life-sim-stats`（totalLives/bestScore/totalAge/endings 分布 + lastEndAttrs 终局属性，传承加成用，旧存档缺失无加成）；每日挑战存 `life-sim-daily`（date/bestScore/bestAge，仅当日更新最佳）；结算时经 `achievementPending` 标志一次性持久化（读档恢复不重复计数）
 - conditions 不满足的事件静默跳过；flags 累积在 `game.flags`（不重复）；历史 `history` 含 `flags?` 字段（生涯年表里程碑标记，旧存档兼容）
@@ -58,7 +58,7 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 - `MAKE_CHOICE` 预载下一事件（gameOver 时判定成就/统计），`CONTINUE` 只清反馈；反馈页正向收益距年龄上限 15 点内标注「（距上限 X 点）」
 - **音效**：`src/utils/sound.ts` 用 Web Audio 合成轻量 UI 音效（点击/选择/打字/推进/落幕/成就琶音/阶段过渡），无外部资源，浏览器不可用时静默降级；`setMuted` 供快速模拟模式静音高频交互音
 - **成长曲线**：`GameState.snapshots`（可选，`AttrSnapshot[]`）每岁属性快照——`appendSnapshot`（state.ts）进入新岁或终局记录、同岁内不重复、同岁终局替换该岁条目；开局记首事件年龄，旧存档无字段从读档岁重建；结算页 GrowthChart canvas 绘制（x 0→享年、y 0-100、末端圆点 + HTML 图例带终值）
-- **快速模拟**：标题页「⚡ 快速模拟」以随机性别/名字开局（`START_AUTO_GAME`），自动模式每 220ms 随机选择推进、跳过打字机（DialogBox `instant`）与选择面板，直到结算；重新开始或读档自动退出自动模式
+- **快速模拟**：标题页「⚡ 快速模拟」以随机性别/名字开局（`START_AUTO_GAME`），**用精简档抽样（每岁 1-2 个，一局约 30 秒）**；自动模式每 220ms 随机选择推进、跳过打字机（DialogBox `instant`）与选择面板，直到结算；重新开始或读档自动退出自动模式
 - **每日挑战**：标题页「📅 每日挑战」以日期确定性种子（`dateToSeed`，YYYYMMDD → number）开局，同一天全局同一局；手动播放、无目标/无挑战、不写存档槽（saveState guard 含 isDaily）；入口旁展示「今日最佳 评分/享年」（`life-sim-daily`）
 - **局中重开**：GameScreen ✕ 确认弹窗第三选项「🔄 重新开始本局」（`RESTART` action 复用 startNewGame，同设置新随机种子；每日挑战局重开保持固定种子）；快速模拟不显示
 - **周目解锁**：按 `stats.totalLives + 1` 计算周目——第 2 周目起标题页解锁「⚔️ 挑战开局」（`GameState.challenge`，开局属性 `applyChallenge` 整体 -10，结算评分 ≥70 解锁「破局者」成就）；第 3 周目起抽取**命运事件**（`pickFateEvent(seed)` 从 `RARE_EVENT_IDS` 15 个精选事件按种子抽 1，确定性可存档还原），该事件触发时效果 ×1.5（`scaleOutcomes`）、游戏内显示「⚡ 命运事件」角标；第 4 周目起解锁**传承加成**（结算把终局属性写入 `stats.lastEndAttrs`，开局 `applyInheritance` 取最高 2 项 ≥50 的属性各 +8、上限 100，与挑战 -10 独立叠加，结算页标注「🧬 传承」）；第 5 周目起**双命运事件**（`pickFateEvents(seed, count)` 抽 2 个，`RuntimeState.fateEventIds` 数组，单抽与双抽同种子同源）

@@ -74,10 +74,10 @@ test('START_GAME：初始快照 + 事件预载 + 参数生效', () => {
   assert.strictEqual(rt.game.snapshots![0].attrs.health, 65);
 });
 
-test('START_AUTO_GAME：固定全量 + 中速 + 无目标', () => {
+test('START_AUTO_GAME：精简档 + 中速 + 无目标', () => {
   const rt = reducer(createInitialRuntime(), { type: 'START_AUTO_GAME', gender: 'female', name: '小美' });
   assert.strictEqual(rt.autoPlay, true);
-  assert.strictEqual(rt.paceMode, 'full');
+  assert.strictEqual(rt.paceMode, 'lite');
   assert.strictEqual(rt.typeSpeed, 'normal');
   assert.strictEqual(rt.game.goal, null);
 });

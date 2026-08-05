@@ -193,7 +193,7 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
           </button>
         </div>
         <p className="text-[10px] text-white/30 tracking-[2px]">
-          {paceMode === 'lite' ? '每岁约 2-3 个选择 · 一局约 1 小时' : '全部事件 · 一局 1.5-3 小时'}
+          {paceMode === 'lite' ? '每岁约 1-2 个选择 · 一局约 15 分钟' : '全部事件 · 一局 1.5-3 小时'}
         </p>
       </div>
 

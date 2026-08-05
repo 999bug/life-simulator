@@ -41,8 +41,8 @@ test('filterEvents：lite 每岁密度接近目标上限（闭包允许小幅突
       byAge.set(e.age, (byAge.get(e.age) ?? 0) + 1);
     }
     for (const [age, n] of byAge) {
-      // 目标：0-2 全保留；3-12 岁 3 个；13+ 岁 2 个。flag 闭包补回产出者允许 +3 溢出
-      const cap = age <= 2 ? Infinity : (age <= 12 ? 3 : 2) + 3;
+      // 目标：0-2 全保留；3-12 岁 2 个；13+ 岁 1 个。flag 闭包补回产出者允许 +3 溢出
+      const cap = age <= 2 ? Infinity : (age <= 12 ? 2 : 1) + 3;
       assert.ok(n <= cap, `seed ${seed} ${age} 岁 ${n} 个超过上限 ${cap}`);
     }
   }
@@ -78,11 +78,11 @@ test('filterEvents：lite flag 闭包（消费事件的产出者在子集内）'
   }
 });
 
-test('filterEvents：lite 总量约 200（抽样正常）', () => {
-  // 实测 200-214（50 seed 扫描），下限 150 保留余量防抽样故障
+test('filterEvents：lite 总量约 130（抽样正常）', () => {
+  // 实测 120-140（50 seed 扫描，每岁 1-2 个 + flag 闭包），下限 90 保留余量防抽样故障
   const lite = filterEvents(EVENTS, 'lite', 7);
   assert.ok(lite.length < EVENTS.length, 'lite 应少于全量');
-  assert.ok(lite.length >= 150, `lite 过少: ${lite.length}`);
+  assert.ok(lite.length >= 90, `lite 过少: ${lite.length}`);
 });
 
 test('filterEvents：不同 seed 结果不同（重玩性）', () => {

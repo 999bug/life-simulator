@@ -100,16 +100,16 @@ export function isMainlineEvent(id: string): boolean {
 }
 
 /**
- * 精简模式每岁目标密度：0-2 岁全保留；3-12 岁 3 个；13 岁以上 2 个。
+ * 精简模式每岁目标密度：0-2 岁全保留；3-12 岁 2 个；13 岁以上 1 个。
  */
 function liteTarget(age: number): number {
   if (age <= 2) {
     return Infinity;
   }
   if (age <= 12) {
-    return 3;
+    return 2;
   }
-  return 2;
+  return 1;
 }
 
 /**

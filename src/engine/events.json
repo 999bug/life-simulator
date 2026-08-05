@@ -1377,50 +1377,6 @@
     ]
   },
   {
-    "id": "primary_0002",
-    "stage": "childhood",
-    "age": 7,
-    "title": "班主任第一次评价",
-    "text": "开学没多久，班主任就开始逐个观察新生的表现。上课时她总在教室后面走动，记着每个人的发言和作业。这天放学，她把你叫住，说了几句评价的话。你没想到，老师的眼睛居然这么尖——连你上课走神的那几次都看在眼里。",
-    "choices": [
-      {
-        "text": "积极表现自己",
-        "effects": "👥+15 🎨+15",
-        "outcomes": {
-          "attr": {
-            "appearance": 15,
-            "social": 15
-          },
-          "flags": [
-            "teacher_attention"
-          ]
-        }
-      },
-      {
-        "text": "低调学习",
-        "effects": "🧠+20",
-        "outcomes": {
-          "attr": {
-            "intelligence": 20
-          }
-        }
-      },
-      {
-        "text": "经常违反规则",
-        "effects": "😊+10 ⚖️-10",
-        "outcomes": {
-          "attr": {
-            "happiness": 10,
-            "morality": -10
-          },
-          "flags": [
-            "trouble_student"
-          ]
-        }
-      }
-    ]
-  },
-  {
     "id": "primary_0003",
     "stage": "childhood",
     "age": 7,
@@ -1458,46 +1414,6 @@
           "flags": [
             "class_rival"
           ]
-        }
-      }
-    ]
-  },
-  {
-    "id": "primary_0004",
-    "stage": "childhood",
-    "age": 7,
-    "title": "第一次语文考试",
-    "text": "小学的第一次语文考试，试卷发下来，你从头到尾读了一遍，心里没底。听写、组词、造句，每一题都小心翼翼。成绩出来那天，你看着卷子上的分数，说不清是松了口气，还是有点失落。",
-    "choices": [
-      {
-        "text": "成绩优秀",
-        "effects": "🧠+15 🎨+20",
-        "outcomes": {
-          "attr": {
-            "appearance": 20,
-            "intelligence": 15
-          },
-          "flags": [
-            "language_strength"
-          ]
-        }
-      },
-      {
-        "text": "成绩普通",
-        "effects": "⚖️+10",
-        "outcomes": {
-          "attr": {
-            "morality": 10
-          }
-        }
-      },
-      {
-        "text": "成绩较差",
-        "effects": "💪+15",
-        "outcomes": {
-          "attr": {
-            "health": 15
-          }
         }
       }
     ]
@@ -1672,46 +1588,6 @@
     ]
   },
   {
-    "id": "primary_0018",
-    "stage": "childhood",
-    "age": 7,
-    "title": "第一次面对失败",
-    "text": "你参加的比赛没有达到预期，成绩出来那天，你低着头不敢看任何人。回家的路上，你一遍遍回想自己哪里没做好。晚上躺在床上，你翻来覆去睡不着，最后想明白了一件事：输一次，不代表输一辈子。",
-    "choices": [
-      {
-        "text": "分析原因重新开始",
-        "effects": "💪+20 ⚖️+15",
-        "outcomes": {
-          "attr": {
-            "health": 20,
-            "morality": 15
-          },
-          "flags": [
-            "failure_growth"
-          ]
-        }
-      },
-      {
-        "text": "暂时放松",
-        "effects": "😊+10",
-        "outcomes": {
-          "attr": {
-            "happiness": 10
-          }
-        }
-      },
-      {
-        "text": "认为自己不行",
-        "effects": "🎨-10",
-        "outcomes": {
-          "attr": {
-            "appearance": -10
-          }
-        }
-      }
-    ]
-  },
-  {
     "id": "primary_0021",
     "stage": "childhood",
     "age": 7,
@@ -1745,45 +1621,6 @@
         "outcomes": {
           "attr": {
             "morality": 15
-          }
-        }
-      }
-    ]
-  },
-  {
-    "id": "primary_0033",
-    "stage": "childhood",
-    "age": 7,
-    "title": "体育老师发现潜力",
-    "text": "体育课上跑步测试，你跑完一圈，体育老师叫住了你，盯着你的步子看了半天：「你腿长、步子稳，有点天赋。」他说要带你去校队试试。你没想到，自己普普通通的跑步，居然会被人注意到。",
-    "choices": [
-      {
-        "text": "加入校队训练",
-        "effects": "💪+20",
-        "outcomes": {
-          "attr": {
-            "health": 20
-          },
-          "flags": [
-            "school_team"
-          ]
-        }
-      },
-      {
-        "text": "保持普通锻炼",
-        "effects": "💪+10",
-        "outcomes": {
-          "attr": {
-            "health": 10
-          }
-        }
-      },
-      {
-        "text": "专注文化课",
-        "effects": "🧠+10",
-        "outcomes": {
-          "attr": {
-            "intelligence": 10
           }
         }
       }
@@ -2044,46 +1881,6 @@
     ]
   },
   {
-    "id": "primary_0050",
-    "stage": "childhood",
-    "age": 8,
-    "title": "参加校园表演",
-    "text": "学校要办文艺汇演，每个班都要出节目。老师问谁想上台表演，教室里安静了一瞬。你在台下看着那些举手的人，心里有点羡慕。直到老师点到你，问你愿不愿意负责点别的——你忽然发现，参与的方式不止一种。",
-    "choices": [
-      {
-        "text": "成为表演者",
-        "effects": "🎨+20",
-        "outcomes": {
-          "attr": {
-            "appearance": 20
-          },
-          "flags": [
-            "performer"
-          ]
-        }
-      },
-      {
-        "text": "负责幕后工作",
-        "effects": "👥+15 ⚖️+15",
-        "outcomes": {
-          "attr": {
-            "social": 15,
-            "morality": 15
-          }
-        }
-      },
-      {
-        "text": "拒绝参加",
-        "effects": "👥-10",
-        "outcomes": {
-          "attr": {
-            "social": -10
-          }
-        }
-      }
-    ]
-  },
-  {
     "id": "primary_0051",
     "stage": "childhood",
     "age": 8,
@@ -2195,131 +1992,6 @@
             "intelligence": 10,
             "social": -5
           }
-        }
-      }
-    ]
-  },
-  {
-    "id": "primary_0059",
-    "stage": "childhood",
-    "age": 8,
-    "title": "第一次组织班级活动",
-    "text": "老师让你负责一次班级活动，从准备材料到分配任务，都要你拿主意。你第一次发现，原来组织一件事这么麻烦：有人不配合，有人嫌你啰嗦。但活动办完那天，看着全班玩得开心，你心里比谁都高兴。",
-    "choices": [
-      {
-        "text": "认真规划",
-        "effects": "🧠+15 👥+20",
-        "outcomes": {
-          "attr": {
-            "social": 20,
-            "intelligence": 15
-          },
-          "flags": [
-            "organizer"
-          ]
-        }
-      },
-      {
-        "text": "依靠同学帮助",
-        "effects": "👥+20",
-        "outcomes": {
-          "attr": {
-            "social": 20
-          }
-        }
-      },
-      {
-        "text": "觉得麻烦",
-        "effects": "⚖️-5",
-        "outcomes": {
-          "attr": {
-            "morality": -5
-          }
-        }
-      }
-    ]
-  },
-  {
-    "id": "primary_0061",
-    "stage": "childhood",
-    "age": 8,
-    "title": "参加奥数兴趣班",
-    "text": "父母给你报了奥数兴趣班，周六早上要早起上课。第一节课，你看着满黑板没见过的符号，脑袋发懵。老师讲题的时候，你听了个半懂。下课回家的路上，你翻着笔记，忽然发现有一道题，自己居然会做了。",
-    "choices": [
-      {
-        "text": "坚持学习",
-        "effects": "🧠+20",
-        "outcomes": {
-          "attr": {
-            "intelligence": 20
-          },
-          "flags": [
-            "math_competitor"
-          ]
-        }
-      },
-      {
-        "text": "尝试一段时间",
-        "effects": "🧠+10",
-        "outcomes": {
-          "attr": {
-            "intelligence": 10
-          }
-        }
-      },
-      {
-        "text": "选择其他方向",
-        "effects": "😊+15",
-        "outcomes": {
-          "attr": {
-            "happiness": 15
-          }
-        }
-      }
-    ]
-  },
-  {
-    "id": "primary_0070",
-    "stage": "childhood",
-    "age": 8,
-    "title": "二年级结束",
-    "text": "二年级结束了。你已经能自己整理书包、按时交作业，有了固定的朋友和喜欢做的事。老师在评语里说你进步很大，你用一学期的时间，把一年级的那个你，甩在了身后。",
-    "choices": [
-      {
-        "text": "强化学习路线",
-        "effects": "🧠+20 ⚖️+20",
-        "outcomes": {
-          "attr": {
-            "intelligence": 20,
-            "morality": 20
-          },
-          "flags": [
-            "academic_route"
-          ]
-        }
-      },
-      {
-        "text": "强化兴趣路线",
-        "effects": "🧠+20",
-        "outcomes": {
-          "attr": {
-            "intelligence": 20
-          },
-          "flags": [
-            "talent_route"
-          ]
-        }
-      },
-      {
-        "text": "强化社交路线",
-        "effects": "👥+20",
-        "outcomes": {
-          "attr": {
-            "social": 20
-          },
-          "flags": [
-            "social_route"
-          ]
         }
       }
     ]
@@ -2458,46 +2130,6 @@
     ]
   },
   {
-    "id": "primary_0074",
-    "stage": "childhood",
-    "age": 9,
-    "title": "老师重点培养",
-    "text": "老师开始格外关注你，下课单独给你讲题，还塞给你几本课外书。你说不出为什么，但能感觉到老师对你抱有期待。那些多出来的作业和练习，有时候让你觉得累，有时候又让你觉得自己在变厉害。",
-    "choices": [
-      {
-        "text": "抓住机会提升",
-        "effects": "🧠+20 👥+15",
-        "outcomes": {
-          "attr": {
-            "intelligence": 20,
-            "social": 15
-          },
-          "flags": [
-            "teacher_protege"
-          ]
-        }
-      },
-      {
-        "text": "保持普通发展",
-        "effects": "😊+10",
-        "outcomes": {
-          "attr": {
-            "happiness": 10
-          }
-        }
-      },
-      {
-        "text": "拒绝额外任务",
-        "effects": "😊+10",
-        "outcomes": {
-          "attr": {
-            "happiness": 10
-          }
-        }
-      }
-    ]
-  },
-  {
     "id": "primary_0075",
     "stage": "childhood",
     "age": 9,
@@ -2577,46 +2209,6 @@
     ]
   },
   {
-    "id": "primary_0077",
-    "stage": "childhood",
-    "age": 9,
-    "title": "第一次经历明显失败",
-    "text": "你认真准备了很久的一场比赛，最后输得很彻底。成绩出来那天，你把自己关在房间里，谁也不想见。你想不通自己哪里做得不够。过了很久，你才肯承认：有些事，不是努力了就一定有结果。但这个道理，你不想这么早学会。",
-    "choices": [
-      {
-        "text": "总结经验重新开始",
-        "effects": "💪+20 ⚖️+20",
-        "outcomes": {
-          "attr": {
-            "health": 20,
-            "morality": 20
-          },
-          "flags": [
-            "failure_recovery"
-          ]
-        }
-      },
-      {
-        "text": "暂时放弃目标",
-        "effects": "😊+10",
-        "outcomes": {
-          "attr": {
-            "happiness": 10
-          }
-        }
-      },
-      {
-        "text": "责怪外部因素",
-        "effects": "⚖️-10",
-        "outcomes": {
-          "attr": {
-            "morality": -10
-          }
-        }
-      }
-    ]
-  },
-  {
     "id": "primary_0078",
     "stage": "childhood",
     "age": 9,
@@ -2689,46 +2281,6 @@
         "outcomes": {
           "attr": {
             "intelligence": 10
-          }
-        }
-      }
-    ]
-  },
-  {
-    "id": "primary_0083",
-    "stage": "childhood",
-    "age": 9,
-    "title": "父母教育方式改变",
-    "text": "上了三年级，父母忽然开始管得严了：作业要检查、睡觉要准时、电视要限时。你从前习惯了宽松的日子，一下子不适应。晚饭桌上，你小声抗议了一句，父母的脸色变得严肃起来。家里气氛变了。",
-    "choices": [
-      {
-        "text": "接受严格管理",
-        "effects": "⚖️+20",
-        "outcomes": {
-          "attr": {
-            "morality": 20
-          },
-          "flags": [
-            "strict_training"
-          ]
-        }
-      },
-      {
-        "text": "争取更多自主权",
-        "effects": "🧠+20 👥+10",
-        "outcomes": {
-          "attr": {
-            "intelligence": 20,
-            "social": 10
-          }
-        }
-      },
-      {
-        "text": "产生抵触",
-        "effects": "👥-10",
-        "outcomes": {
-          "attr": {
-            "social": -10
           }
         }
       }
@@ -2821,51 +2373,6 @@
     ]
   },
   {
-    "id": "primary_0100",
-    "stage": "childhood",
-    "age": 9,
-    "title": "小学三年级结束",
-    "text": "三年级结束了，你越来越清楚自己喜欢什么、擅长什么，也慢慢摸清了该怎么和同学相处。你的人生，开始有了方向感。虽然还说不清未来的路具体长什么样，但你已经不再是什么都不懂的小孩了。",
-    "choices": [
-      {
-        "text": "成为优秀学生",
-        "effects": "🧠+20",
-        "outcomes": {
-          "attr": {
-            "intelligence": 20
-          },
-          "flags": [
-            "academic_identity"
-          ]
-        }
-      },
-      {
-        "text": "成为特长学生",
-        "effects": "🧠+20",
-        "outcomes": {
-          "attr": {
-            "intelligence": 20
-          },
-          "flags": [
-            "talent_identity"
-          ]
-        }
-      },
-      {
-        "text": "成为影响型学生",
-        "effects": "👥+20",
-        "outcomes": {
-          "attr": {
-            "social": 20
-          },
-          "flags": [
-            "leader_identity"
-          ]
-        }
-      }
-    ]
-  },
-  {
     "id": "child_07",
     "stage": "childhood",
     "age": 9,
@@ -2951,46 +2458,6 @@
     ]
   },
   {
-    "id": "primary_0106",
-    "stage": "childhood",
-    "age": 10,
-    "title": "老师安排重要任务",
-    "text": "老师把一件重要的班级任务交给你，还当众宣布了。你接过任务单，觉得肩上沉甸甸的。有人不服气，小声说凭什么是他。你听见了，没吭声。你心里暗暗发誓：这件事，一定要办好。",
-    "choices": [
-      {
-        "text": "承担责任",
-        "effects": "👥+20 ⚖️+20",
-        "outcomes": {
-          "attr": {
-            "social": 20,
-            "morality": 20
-          },
-          "flags": [
-            "responsible_student"
-          ]
-        }
-      },
-      {
-        "text": "和同学共同完成",
-        "effects": "👥+20",
-        "outcomes": {
-          "attr": {
-            "social": 20
-          }
-        }
-      },
-      {
-        "text": "拒绝任务",
-        "effects": "😊+10",
-        "outcomes": {
-          "attr": {
-            "happiness": 10
-          }
-        }
-      }
-    ]
-  },
-  {
     "id": "primary_0109",
     "stage": "childhood",
     "age": 10,
@@ -3024,45 +2491,6 @@
         "outcomes": {
           "attr": {
             "happiness": 10
-          }
-        }
-      }
-    ]
-  },
-  {
-    "id": "primary_0115",
-    "stage": "childhood",
-    "age": 10,
-    "title": "建立自己的学习体系",
-    "text": "你开始总结自己的学习方法：哪些内容要背、哪些要理解、哪些要反复练习。你翻出一个新本子，把每天要做的事一条条列下来。以前你靠临时抱佛脚，现在你决定，试试按计划走。",
-    "choices": [
-      {
-        "text": "建立知识框架",
-        "effects": "🧠+20",
-        "outcomes": {
-          "attr": {
-            "intelligence": 20
-          },
-          "flags": [
-            "systematic_learner"
-          ]
-        }
-      },
-      {
-        "text": "依靠大量练习",
-        "effects": "⚖️+20",
-        "outcomes": {
-          "attr": {
-            "morality": 20
-          }
-        }
-      },
-      {
-        "text": "随意学习",
-        "effects": "🧠+10",
-        "outcomes": {
-          "attr": {
-            "intelligence": 10
           }
         }
       }
@@ -3266,88 +2694,6 @@
     ]
   },
   {
-    "id": "primary_0129",
-    "stage": "childhood",
-    "age": 10,
-    "title": "进入学校重点培养名单",
-    "text": "学校的重点培养名单贴出来了，你的名字在上面。老师把你叫去，说学校会给你们加课、加训练，但也意味着更多的压力和期待。你看着名单上自己的名字，觉得那个字好像变重了。",
-    "choices": [
-      {
-        "text": "接受挑战",
-        "effects": "🧠+20 😊-10",
-        "outcomes": {
-          "attr": {
-            "intelligence": 20,
-            "happiness": -10
-          },
-          "flags": [
-            "elite_training"
-          ]
-        }
-      },
-      {
-        "text": "保持正常节奏",
-        "effects": "😊+15",
-        "outcomes": {
-          "attr": {
-            "happiness": 15
-          }
-        }
-      },
-      {
-        "text": "拒绝额外培养",
-        "effects": "😊+15",
-        "outcomes": {
-          "attr": {
-            "happiness": 15
-          }
-        }
-      }
-    ]
-  },
-  {
-    "id": "primary_0135",
-    "stage": "childhood",
-    "age": 10,
-    "title": "体育和学习的选择",
-    "text": "训练时间越来越长，和作业、补课撞了车。体育老师说你练得不错，再进一步就能出成绩；爸妈则盯着你下滑的分数皱眉。你夹在操场和书桌之间，第一次体会什么叫两难。",
-    "choices": [
-      {
-        "text": "坚持体育训练",
-        "effects": "💪+20",
-        "outcomes": {
-          "attr": {
-            "health": 20
-          },
-          "flags": [
-            "sports_focus"
-          ]
-        }
-      },
-      {
-        "text": "优先学习",
-        "effects": "🧠+20",
-        "outcomes": {
-          "attr": {
-            "intelligence": 20
-          },
-          "flags": [
-            "study_focus"
-          ]
-        }
-      },
-      {
-        "text": "寻找平衡",
-        "effects": "😊+20",
-        "outcomes": {
-          "attr": {
-            "happiness": 20
-          }
-        }
-      }
-    ]
-  },
-  {
     "id": "child_08",
     "stage": "childhood",
     "age": 10,
@@ -3490,85 +2836,6 @@
     ]
   },
   {
-    "id": "primary_0150",
-    "stage": "childhood",
-    "age": 11,
-    "title": "竞选高年级干部",
-    "text": "高年级要换届选干部了，你被提了名。竞选那天，要上台发言，你站在讲台边，手心里全是汗。台下的同学在等着你开口。你深吸一口气，走到讲台中央——话到嘴边，你忽然发现自己不知道要说什么了。",
-    "choices": [
-      {
-        "text": "竞选负责人",
-        "effects": "👥+20 🎨+15",
-        "outcomes": {
-          "attr": {
-            "social": 20,
-            "appearance": 15
-          },
-          "flags": [
-            "student_leader"
-          ]
-        }
-      },
-      {
-        "text": "担任普通成员",
-        "effects": "👥+20",
-        "outcomes": {
-          "attr": {
-            "social": 20
-          }
-        }
-      },
-      {
-        "text": "不参与",
-        "effects": "🧠+10",
-        "outcomes": {
-          "attr": {
-            "intelligence": 10
-          }
-        }
-      }
-    ]
-  },
-  {
-    "id": "primary_0152",
-    "stage": "childhood",
-    "age": 11,
-    "title": "第一次参与简单商业活动",
-    "text": "你把自己做的东西拿到学校门口卖，定价、找零、跟人讨价还价，一整套流程都是现学的。有同学说小小年纪就想赚钱，你也不反驳。你只是想看看，自己动手做的东西，到底值多少钱。",
-    "choices": [
-      {
-        "text": "认真研究市场",
-        "effects": "💰+20",
-        "outcomes": {
-          "attr": {
-            "wealth": 20
-          },
-          "flags": [
-            "young_entrepreneur"
-          ]
-        }
-      },
-      {
-        "text": "只是体验",
-        "effects": "🧠+15",
-        "outcomes": {
-          "attr": {
-            "intelligence": 15
-          }
-        }
-      },
-      {
-        "text": "觉得麻烦",
-        "effects": "😊+10",
-        "outcomes": {
-          "attr": {
-            "happiness": 10
-          }
-        }
-      }
-    ]
-  },
-  {
     "id": "primary_0155",
     "stage": "childhood",
     "age": 11,
@@ -3643,46 +2910,6 @@
         "outcomes": {
           "attr": {
             "happiness": 15
-          }
-        }
-      }
-    ]
-  },
-  {
-    "id": "primary_0171",
-    "stage": "childhood",
-    "age": 11,
-    "title": "开始准备升学考试",
-    "text": "黑板上多了个倒计时，写着距离毕业考试还有多少天。课间，同学还在打闹，你坐在座位上，看着黑板上的数字一天天变小。你翻出课本，忽然意识到，这次考试，可能会决定你去哪所初中。",
-    "choices": [
-      {
-        "text": "制定详细复习计划",
-        "effects": "🧠+20 ⚖️+15",
-        "outcomes": {
-          "attr": {
-            "intelligence": 20,
-            "morality": 15
-          },
-          "flags": [
-            "exam_preparation"
-          ]
-        }
-      },
-      {
-        "text": "跟随学校安排",
-        "effects": "😊+15",
-        "outcomes": {
-          "attr": {
-            "happiness": 15
-          }
-        }
-      },
-      {
-        "text": "认为还有时间",
-        "effects": "😊+5",
-        "outcomes": {
-          "attr": {
-            "happiness": 5
           }
         }
       }
@@ -3886,46 +3113,6 @@
     }
   },
   {
-    "id": "primary_0181",
-    "stage": "teen",
-    "age": 12,
-    "title": "进入小学最后一年",
-    "text": "六年级，小学的最后一年。课表上的复习课多了，操场上的自由活动少了。同学们私下里都在讨论要去哪所初中，有人胸有成竹，有人忐忑不安。你坐在教室里，看着窗外的操场，知道这样的日子，过一天就少一天。",
-    "choices": [
-      {
-        "text": "全力冲刺未来",
-        "effects": "🧠+20 ⚖️+20",
-        "outcomes": {
-          "attr": {
-            "intelligence": 20,
-            "morality": 20
-          },
-          "flags": [
-            "final_year_focus"
-          ]
-        }
-      },
-      {
-        "text": "保持平稳成长",
-        "effects": "😊+20",
-        "outcomes": {
-          "attr": {
-            "happiness": 20
-          }
-        }
-      },
-      {
-        "text": "享受最后的小学生活",
-        "effects": "😊+20",
-        "outcomes": {
-          "attr": {
-            "happiness": 20
-          }
-        }
-      }
-    ]
-  },
-  {
     "id": "primary_0182",
     "stage": "teen",
     "age": 12,
@@ -3956,46 +3143,6 @@
         "outcomes": {
           "attr": {
             "appearance": -10
-          }
-        }
-      }
-    ]
-  },
-  {
-    "id": "primary_0184",
-    "stage": "teen",
-    "age": 12,
-    "title": "进入小升初备考阶段",
-    "text": "升学考试成了全家的头等大事，父母连饭桌上都在聊题。你书包里的卷子摞得越来越高，错题本写满了一本又一本。夜深了，你台灯还亮着。你揉了揉眼睛，看了一眼墙上的倒计时，又低下了头。",
-    "choices": [
-      {
-        "text": "制定严格计划",
-        "effects": "🧠+20 ⚖️+20",
-        "outcomes": {
-          "attr": {
-            "intelligence": 20,
-            "morality": 20
-          },
-          "flags": [
-            "middle_exam_ready"
-          ]
-        }
-      },
-      {
-        "text": "保持正常学习",
-        "effects": "😊+20",
-        "outcomes": {
-          "attr": {
-            "happiness": 20
-          }
-        }
-      },
-      {
-        "text": "压力过大",
-        "effects": "💪-10",
-        "outcomes": {
-          "attr": {
-            "health": -10
           }
         }
       }
@@ -4036,46 +3183,6 @@
         "outcomes": {
           "attr": {
             "intelligence": 15
-          }
-        }
-      }
-    ]
-  },
-  {
-    "id": "primary_0187",
-    "stage": "teen",
-    "age": 12,
-    "title": "发现自己的核心优势",
-    "text": "这些年坚持的东西，让你和大多数人不一样了。老师说这叫优势，你不太懂这个词，但你能感觉到：做这件事的时候，你比别人轻松，也比别人快乐。也许，这就是属于你的那条路。",
-    "choices": [
-      {
-        "text": "继续强化优势",
-        "effects": "🧠+20 🎨+20",
-        "outcomes": {
-          "attr": {
-            "intelligence": 20,
-            "appearance": 20
-          },
-          "flags": [
-            "core_ability"
-          ]
-        }
-      },
-      {
-        "text": "补足弱项",
-        "effects": "😊+20",
-        "outcomes": {
-          "attr": {
-            "happiness": 20
-          }
-        }
-      },
-      {
-        "text": "保持现状",
-        "effects": "😊+15",
-        "outcomes": {
-          "attr": {
-            "happiness": 15
           }
         }
       }
@@ -4235,53 +3342,6 @@
           "attr": {
             "health": 20
           }
-        }
-      }
-    ]
-  },
-  {
-    "id": "primary_0200",
-    "stage": "teen",
-    "age": 12,
-    "title": "小学六年人生总结",
-    "text": "六年小学，像一场漫长的成长课。你学会了加减乘除，也学会了面对输赢；交到了朋友，也懂得了告别。走出校门那天，你回头看了看教学楼，你的基础人格，已经在这些年里悄悄成形。",
-    "choices": [
-      {
-        "text": "学业路线",
-        "effects": "🧠+20 ⚖️+20",
-        "outcomes": {
-          "attr": {
-            "intelligence": 20,
-            "morality": 20
-          },
-          "flags": [
-            "academic_personality"
-          ]
-        }
-      },
-      {
-        "text": "兴趣路线",
-        "effects": "🧠+20",
-        "outcomes": {
-          "attr": {
-            "intelligence": 20
-          },
-          "flags": [
-            "talent_personality"
-          ]
-        }
-      },
-      {
-        "text": "社交领导路线",
-        "effects": "👥+20 🎨+20",
-        "outcomes": {
-          "attr": {
-            "social": 20,
-            "appearance": 20
-          },
-          "flags": [
-            "leader_personality"
-          ]
         }
       }
     ]
@@ -23320,6 +22380,50 @@
     "conditions": {}
   },
   {
+    "id": "elder_0135",
+    "stage": "elder",
+    "age": 96,
+    "title": "百岁的序曲",
+    "text": "社区工作人员登门，说要给百岁老人做生日登记。你数了数日历，再过一年，你就要跨过一百岁这道门槛了。工作人员问你有什么心愿，你想了想说，想再看看年轻时走过的老街。她认真记下来，说到时候帮你安排。送走她，你翻出旧相册，一页一页，都是这九十六年的光景。",
+    "choices": [
+      {
+        "text": "郑重写下心愿，等待百岁那天",
+        "effects": "😊+2 ⚖️+2",
+        "outcomes": {
+          "attr": {
+            "happiness": 2,
+            "morality": 2
+          }
+        }
+      },
+      {
+        "text": "把旧相册从头翻到尾",
+        "effects": "🧠+2 😊+1",
+        "outcomes": {
+          "attr": {
+            "intelligence": 2,
+            "happiness": 1
+          }
+        }
+      },
+      {
+        "text": "笑着说：活到这把岁数，心愿早不重要了",
+        "effects": "😊+3",
+        "outcomes": {
+          "attr": {
+            "happiness": 3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "elder_0130",
     "stage": "elder",
     "age": 97,
@@ -23348,6 +22452,50 @@
       },
       {
         "text": "安静地看完这场日落",
+        "effects": "😊+3",
+        "outcomes": {
+          "attr": {
+            "happiness": 3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "elder_0136",
+    "stage": "elder",
+    "age": 98,
+    "title": "跨过百年的春天",
+    "text": "这是你百岁后的第一个春天。院子里那棵老槐树又抽了新芽，重孙蹲在树下数蚂蚁，数着数着就跑来问你：太爷爷，你一百年都看到了什么呀？你眯着眼想了想——看到了冬去春来一百回，看到了送走的人越来越多，也看到了树下的孩子换了一茬又一茬。春风暖洋洋的，你摸了摸重孙的头。",
+    "choices": [
+      {
+        "text": "把一百个春天的故事讲给重孙听",
+        "effects": "🧠+2 👥+2",
+        "outcomes": {
+          "attr": {
+            "intelligence": 2,
+            "social": 2
+          }
+        }
+      },
+      {
+        "text": "在树下坐一整个下午，看蚂蚁搬家",
+        "effects": "😊+2 ⚖️+1",
+        "outcomes": {
+          "attr": {
+            "happiness": 2,
+            "morality": 1
+          }
+        }
+      },
+      {
+        "text": "让重孙替你把花种撒满院子",
         "effects": "😊+3",
         "outcomes": {
           "attr": {

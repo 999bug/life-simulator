@@ -248,5 +248,89 @@
       "min_attrs": {},
       "max_attrs": {}
     }
+  },
+  {
+    "id": "elder_0135",
+    "age_range": [
+      96,
+      96
+    ],
+    "category": "family",
+    "title": "百岁的序曲",
+    "text": "社区工作人员登门，说要给百岁老人做生日登记。你数了数日历，再过一年，你就要跨过一百岁这道门槛了。工作人员问你有什么心愿，你想了想说，想再看看年轻时走过的老街。她认真记下来，说到时候帮你安排。送走她，你翻出旧相册，一页一页，都是这九十六年的光景。",
+    "choices": [
+      {
+        "text": "郑重写下心愿，等待百岁那天",
+        "effects": {
+          "happiness": 2,
+          "gratitude": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把旧相册从头翻到尾",
+        "effects": {
+          "memory": 2,
+          "emotion": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "笑着说：活到这把岁数，心愿早不重要了",
+        "effects": {
+          "stability": 2,
+          "comfort": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0136",
+    "age_range": [
+      98,
+      98
+    ],
+    "category": "personality",
+    "title": "跨过百年的春天",
+    "text": "这是你百岁后的第一个春天。院子里那棵老槐树又抽了新芽，重孙蹲在树下数蚂蚁，数着数着就跑来问你：太爷爷，你一百年都看到了什么呀？你眯着眼想了想——看到了冬去春来一百回，看到了送走的人越来越多，也看到了树下的孩子换了一茬又一茬。春风暖洋洋的，你摸了摸重孙的头。",
+    "choices": [
+      {
+        "text": "把一百个春天的故事讲给重孙听",
+        "effects": {
+          "experience": 2,
+          "family_relation": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "在树下坐一整个下午，看蚂蚁搬家",
+        "effects": {
+          "happiness": 2,
+          "patience": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "让重孙替你把花种撒满院子",
+        "effects": {
+          "happiness": 1,
+          "comfort": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   }
 ]

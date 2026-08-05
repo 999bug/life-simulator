@@ -192,6 +192,7 @@ export function convertEvent(raw) {
     age: raw.age_range[0],
     title: raw.title,
     text: raw.text,
+    category: raw.category,
     choices: raw.choices.map(c => {
       const attr = mapEffects(c.effects ?? {}, raw.id);
       const choice = { text: c.text, effects: toEffectsString(attr), outcomes: { attr } };

@@ -78,7 +78,7 @@ test('convertAll 检测重复 id', () => {
 test('完整事件形状（无 effects/flags 的叙事选项）', () => {
   const e = convertEvent({ ...base, id: 'birth_01', age_range: [0, 1], choices: [{ text: '……', effects: {}, flags_add: [] }] });
   assert.deepEqual(e, {
-    id: 'birth_01', stage: 'infant', age: 0, title: '测试事件', text: '测试文本',
+    id: 'birth_01', stage: 'infant', age: 0, title: '测试事件', text: '测试文本', category: 'learning',
     choices: [{ text: '……', effects: '', outcomes: { attr: {} } }],
   });
 });

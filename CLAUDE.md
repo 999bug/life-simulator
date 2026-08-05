@@ -43,7 +43,7 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 - **state.ts**：属性/阶段元数据（ATTR_META、STAGE_META）与状态纯函数（ageCap 年龄锚点上限、effectiveDelta 收益折算、applyOutcomes 属性钳位 0-100、calcMaxAge 动态寿命、applyElderDecay 65 岁起衰减、checkDeath、calcScore）。**年龄锚点成长上限 `CAP_ANCHORS`**（如智力 7:55→18:85→30:92，锚点间线性插值）：正向收益距当前年龄上限 15 点内线性递减且不越过上限，负向全额；老年衰减下限 1（运气再好每事件也掉 1 点）。初始属性刻意偏低（健康 65/智力 25）。选项展示用 effectiveDelta 实时计算，与引擎一致。**动态寿命**：基础 68 + 平均属性/100×35（封顶 103，均衡属性 ≥77 可达 95 岁——91-95 岁事件设计为高玩可达内容）
 - **goals.ts / achievements.ts / verdict.ts**：人生目标判定（6 预设 checkGoal）、成就判定（20 个 checkAchievements）、结局 key 纯函数（verdictKey，13 路线 flag + 5 档分数兜底）
 - **events.ts**：加载 events.json 为 `LifeEvent[]`（含 filterEvents 精简模式抽样 + shuffleEvents 同岁组洗牌，共用种子确定性重建）
-- **events.json**：生成物（camelCase 引擎格式：`age`/`outcomes.attr`/`outcomes.flags`/`conditions.hasFlags`），**勿手改**
+- **events.json**：生成物（camelCase 引擎格式：`age`/`category`/`outcomes.attr`/`outcomes.flags`/`conditions.hasFlags`），**勿手改**
 
 ### 运行时（src/hooks/useGame.ts）
 
@@ -71,7 +71,7 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 - **ChoicePanel**：选项按钮（`button.group` class，effects 展示串由转换器生成）
 - **TitleScreen**：名字/性别 + **节奏档位（沉浸/精简）+ 打字速度 + 3 存档卡片 + 目标选择模态（GoalModal，含「🎯 自定义目标」勾选属性+滑杆设目标值）+ 成就（AchievementsModal）/生涯统计（StatsModal）入口 + 快捷入口行（⚡ 快速模拟/📅 每日挑战/📊 生涯/🏆 成就）**——720px 高度余量极小（约 1px），改动必须回归检查
 - **SummaryScreen**：结算页（享年 + 结局 + 评分 + 属性 + **成长曲线（GrowthChart canvas 8 维随年龄折线图）+ 人生大事记完整时间线（里程碑 ⭐）+ 目标达成度 + 新解锁成就 + 本可发生而未触发 + 分享卡片（ShareCardModal canvas PNG，含迷你成长曲线）+ 传记导出**）
-- **SceneArea/SceneDecor**：按阶段/年龄渲染的场景背景
+- **SceneArea/SceneDecor/CategoryDecor**：场景背景 = 阶段渐变（STAGE_BG）+ 阶段 SVG 装饰（SceneDecor）+ **事件分类场景**（CategoryDecor，11 分类各一组 SVG 元素：家庭→沙发、事业→写字楼、健康→医疗十字、教育→黑板、友谊→咖啡桌、爱情→爱心、科技→屏幕电路、金融→金币折线、爱好→调色板吉他、运动→跑道篮筐、个性→对话气泡星）+ **选项属性色调响应**（GameScreen 选选项后按效果主属性叠加底部光晕，8 属性→色：health 绿/intelligence 蓝/wealth 金/happiness 橙/social 青/appearance 粉/luck 紫/morality 米白；继续后还原）
 - **App**：移动端视口等比缩放（scale = min(vw/960, vh/720)，<1 才缩放）
 
 ## 事件数据格式

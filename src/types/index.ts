@@ -67,6 +67,9 @@ export interface EventCondition {
   maxAttrs?: Partial<Attributes>;
 }
 
+/** 事件分类（数据层 category，驱动分类场景背景） */
+export type EventCategory = 'family' | 'career' | 'health' | 'friend' | 'education' | 'personality' | 'technology' | 'love' | 'finance' | 'hobby' | 'sports';
+
 /** 事件定义 */
 export interface LifeEvent {
   id: string;
@@ -75,6 +78,8 @@ export interface LifeEvent {
   /** 事件标题（如「第一次养宠物」） */
   title?: string;
   text: string;
+  /** 事件分类（驱动分类场景背景） */
+  category: EventCategory;
   choices: Choice[];
   /** 触发条件（不满足则跳过） */
   conditions?: EventCondition;

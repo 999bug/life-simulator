@@ -1,12 +1,26 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import type { Choice, GameState, LifeEvent, TypeSpeed } from '../types';
+import type { AttributeKey, Choice, GameState, LifeEvent, TypeSpeed } from '../types';
 import { STAGE_META } from '../engine/state';
 import { sfx } from '../utils/sound';
-import SceneArea from './SceneArea';
+import SceneArea, { ATTR_TINT } from './SceneArea';
 import StatusBar from './StatusBar';
 import DialogBox from './DialogBox';
 import ChoicePanel from './ChoicePanel';
 import ConfirmModal from './ConfirmModal';
+
+/** 选项效果主属性（绝对值最大）→ 背景色调，让每个选项的选择有视觉反馈 */
+function pickAttrTint(choice: Choice): string | null {
+  const attr = choice.outcomes.attr ?? {};
+  let best: AttributeKey | null = null;
+  let bestAbs = 0;
+  for (const [k, v] of Object.entries(attr) as [AttributeKey, number][]) {
+    if (Math.abs(v) > bestAbs) {
+      bestAbs = Math.abs(v);
+      best = k;
+    }
+  }
+  return best ? ATTR_TINT[best] : null;
+}
 
 interface Props {
   game: GameState;
@@ -33,6 +47,20 @@ const SPEED_OPTIONS: Array<{ value: TypeSpeed; label: string }> = [
 export default function GameScreen({ game, currentEvent, feedback, autoPlay, typeSpeed, fateEventIds, onTypeSpeedChange, onChoice, onContinue, onExit, onRestart }: Props) {
   const [showChoices, setShowChoices] = useState(false);
   const [showExit, setShowExit] = useState(false);
+  // 最近选择选项的主属性色调（反馈页期间叠加在场景上，继续后清除）
+  const [tint, setTint] = useState<string | null>(null);
+
+  // 选择选项：记录主属性色调（视觉反馈）
+  const handleChoice = useCallback((choice: Choice) => {
+    setTint(pickAttrTint(choice));
+    onChoice(choice);
+  }, [onChoice]);
+
+  // 继续：清除色调，回到事件场景
+  const handleContinue = useCallback(() => {
+    setTint(null);
+    onContinue();
+  }, [onContinue]);
 
   const handleDialogComplete = useCallback(() => {
     if (currentEvent && currentEvent.choices.length === 1 && currentEvent.choices[0].text === '……') {
@@ -57,12 +85,12 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
     const stageMeta = STAGE_META[game.stage];
     return (
       <div className="w-full h-full relative">
-        <SceneArea stage={game.stage} age={game.age} gender={game.gender} stageLabel={stageMeta.label} />
+        <SceneArea stage={game.stage} age={game.age} gender={game.gender} stageLabel={stageMeta.label} category={currentEvent?.category ?? null} tint={tint} />
         <StatusBar attributes={game.attributes} age={game.age} />
         <div
           className="absolute bottom-0 left-0 right-0 bg-gradient-to-b from-black/92 to-black/97
             backdrop-blur-xl border-t border-white/5 cursor-pointer z-10"
-          onClick={() => { sfx.advance(); onContinue(); }}
+          onClick={() => { sfx.advance(); handleContinue(); }}
         >
           <div className="px-7 py-5 text-center">
             <div className="text-lg text-[#c9a96e] whitespace-pre-line leading-relaxed">{feedback}</div>
@@ -87,7 +115,7 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
   return (
     <div className="w-full h-full relative">
       {/* 场景 */}
-      <SceneArea stage={game.stage} age={game.age} gender={game.gender} stageLabel={stageMeta.label} />
+      <SceneArea stage={game.stage} age={game.age} gender={game.gender} stageLabel={stageMeta.label} category={currentEvent?.category ?? null} tint={tint} />
 
       {/* 状态栏 — 绝对定位，场景中部偏上（底部区域限高 45% 后不重叠） */}
       <div className="absolute top-[42%] left-0 right-0 z-10">
@@ -106,11 +134,11 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
           instant={autoPlay}
           typeSpeed={typeSpeed}
           onComplete={handleDialogComplete}
-          onAutoContinue={isAuto ? () => onChoice(currentEvent.choices[0]) : undefined}
+          onAutoContinue={isAuto ? () => handleChoice(currentEvent.choices[0]) : undefined}
         />
         <ChoicePanel
           choices={currentEvent.choices}
-          onSelect={onChoice}
+          onSelect={handleChoice}
           visible={showChoices && !autoPlay}
           attributes={game.attributes}
           age={game.age}

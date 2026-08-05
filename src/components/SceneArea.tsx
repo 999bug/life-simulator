@@ -1,11 +1,28 @@
-import type { LifeStage } from '../types';
+import type { AttributeKey, EventCategory, LifeStage } from '../types';
 import SceneDecor from './SceneDecor';
+import CategoryDecor from './CategoryDecor';
+
+/** 选项效果主属性 → 背景色调（选择后短暂叠加，属性响应） */
+export const ATTR_TINT: Record<AttributeKey, string> = {
+  health: '#4ade80',
+  intelligence: '#60a5fa',
+  wealth: '#fbbf24',
+  happiness: '#fb923c',
+  social: '#22d3ee',
+  appearance: '#f472b6',
+  luck: '#a78bfa',
+  morality: '#e2e8f0',
+};
 
 interface Props {
   stage: LifeStage;
   age: number;
   gender: 'male' | 'female';
   stageLabel: string;
+  /** 事件分类（驱动分类场景装饰） */
+  category?: EventCategory | null;
+  /** 选项效果主属性色调（选择后短暂叠加） */
+  tint?: string | null;
 }
 
 const STAGE_BG: Record<LifeStage, string> = {
@@ -18,11 +35,20 @@ const STAGE_BG: Record<LifeStage, string> = {
   elder: 'bg-gradient-to-b from-[#f6ad55] via-[#fbd38d]/60 to-[#fefcbf]/40',
 };
 
-export default function SceneArea({ stage, age, gender, stageLabel }: Props) {
+export default function SceneArea({ stage, age, gender, stageLabel, category = null, tint = null }: Props) {
   return (
     <div className={`absolute inset-0 h-[55%] overflow-hidden transition-all duration-1000 ${STAGE_BG[stage]}`}>
-      {/* SVG 场景装饰 */}
+      {/* 阶段场景装饰 */}
       <SceneDecor stage={stage} />
+
+      {/* 事件分类场景（叠加在阶段场景上，如教室/办公室/医院） */}
+      <CategoryDecor category={category} />
+
+      {/* 选项属性色调响应（选择后底部暖光，反馈消失后还原） */}
+      {tint && (
+        <div className="absolute inset-0 transition-all duration-700"
+          style={{ background: `radial-gradient(circle at 50% 85%, ${tint}30, transparent 70%)` }} />
+      )}
 
       {/* 年龄标识 */}
       <div className="absolute top-5 left-6 z-10

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { sfx } from '../utils/sound';
-import type { AchievementId, CustomGoal, GoalKey, PaceMode, TypeSpeed } from '../types';
+import type { AchievementId, CustomGoal, FamilyMember, GoalKey, PaceMode, TypeSpeed } from '../types';
 import type { SavesV2 } from '../engine/save';
 import type { DailyStore, StatsStore } from '../hooks/useGame';
 import { formatDate } from '../hooks/useGame';
@@ -8,6 +8,7 @@ import GoalModal from './GoalModal';
 import ConfirmModal from './ConfirmModal';
 import AchievementsModal from './AchievementsModal';
 import CollectionModal from './CollectionModal';
+import FamilyModal from './FamilyModal';
 import StatsModal from './StatsModal';
 
 interface Props {
@@ -23,9 +24,11 @@ interface Props {
   stats: StatsStore;
   /** 每日挑战记录（入口旁展示今日最佳） */
   daily: DailyStore;
+  /** 家族族谱（标题页族谱入口 + 开局继承提示） */
+  family: FamilyMember[];
 }
 
-export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves, onContinue, achievements, stats, daily }: Props) {
+export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves, onContinue, achievements, stats, daily, family }: Props) {
   const [gender, setGender] = useState<'male' | 'female' | null>(null);
   const [name, setName] = useState('');
   const [paceMode, setPaceMode] = useState<PaceMode>('full');
@@ -34,6 +37,7 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
   const [confirmCover, setConfirmCover] = useState(false);
   const [showAchievements, setShowAchievements] = useState(false);
   const [showCollection, setShowCollection] = useState(false);
+  const [showFamily, setShowFamily] = useState(false);
   const [showStats, setShowStats] = useState(false);
   /** 挑战开局（第 2 周目解锁）：属性整体下调 10 点 */
   const [challenge, setChallenge] = useState(false);
@@ -316,11 +320,19 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
         >
           📖 图鉴
         </button>
+
+        {/* 家族入口：族谱跨世代收藏 */}
+        <button
+          onClick={() => { sfx.select(); setShowFamily(true); }}
+          className="text-[12px] text-white/30 tracking-[3px] hover:text-[#c9a96e] transition-colors duration-200 font-sans"
+        >
+          🌳 家族
+        </button>
       </div>
 
       {/* 目标选择模态（开始人生后弹出，确认目标后开局） */}
       {showGoal && (
-        <GoalModal onSelect={handleGoalSelect} onCancel={() => setShowGoal(false)} />
+        <GoalModal onSelect={handleGoalSelect} onCancel={() => setShowGoal(false)} latestMember={family[family.length - 1]} />
       )}
 
       {/* 覆盖确认（选中槽已有存档时弹出） */}
@@ -341,6 +353,11 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
       {/* 人生图鉴模态（📖 入口弹出） */}
       {showCollection && (
         <CollectionModal endings={stats.endings} onClose={() => setShowCollection(false)} />
+      )}
+
+      {/* 家族族谱模态（🌳 入口弹出） */}
+      {showFamily && (
+        <FamilyModal family={family} onClose={() => setShowFamily(false)} />
       )}
 
       {/* 生涯统计模态（📊 入口弹出） */}

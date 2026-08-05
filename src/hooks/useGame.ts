@@ -1,8 +1,9 @@
 import { useReducer, useCallback, useEffect } from 'react';
-import type { AchievementId, AttributeKey, Attributes, Choice, CustomGoal, DeathCause, GameState, GoalKey, LifeEvent, PaceMode, TypeSpeed } from '../types/index.ts';
+import type { AchievementId, AttributeKey, Attributes, Choice, CustomGoal, DeathCause, FamilyMember, GameState, GoalKey, LifeEvent, PaceMode, TypeSpeed } from '../types/index.ts';
 import { emptySaves, isValidSaveData, migrateLegacySave, SLOT_COUNT, type SavesV2 } from '../engine/save.ts';
 import { checkAchievements } from '../engine/achievements.ts';
 import { verdictKey } from '../engine/verdict.ts';
+import { appendFamilyMember, loadFamily, saveFamily } from '../engine/family.ts';
 import {
   createInitialState,
   applyOutcomes,
@@ -190,7 +191,8 @@ export type Action =
   | { type: 'CONTINUE_GAME'; slot: number }
   | { type: 'HYDRATE_SAVES'; saves: SavesV2; achievements: AchievementStore }
   | { type: 'ACHIEVEMENTS_PERSISTED' }
-  | { type: 'DAILY_UPDATED'; daily: DailyStore };
+  | { type: 'DAILY_UPDATED'; daily: DailyStore }
+  | { type: 'FAMILY_UPDATED'; family: FamilyMember[] };
 
 // ============ 运行时状态（不参与 React 渲染）============
 export interface RuntimeState {
@@ -230,6 +232,8 @@ export interface RuntimeState {
   isDaily: boolean;
   /** 每日挑战记录（今日最佳；标题页展示） */
   daily: DailyStore;
+  /** 家族族谱（跨周目；结算时正常局追加一代，快速模拟/每日挑战不写入） */
+  family: FamilyMember[];
 }
 
 // ============ 存档 ============
@@ -379,6 +383,7 @@ function startNewGame(state: RuntimeState, p: StartParams): RuntimeState {
     fateEventIds: fateEvents.map(e => e.id),
     isDaily: p.isDaily ?? false,
     daily: state.daily,
+    family: state.family,
   };
 }
 
@@ -544,6 +549,7 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         fateEventIds: state.fateEventIds,
         isDaily: state.isDaily,
         daily: state.daily,
+        family: state.family,
       };
     }
 
@@ -603,6 +609,7 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         fateEventIds: saved.fateEventIds ?? (saved.fateEventId ? [saved.fateEventId] : []),
         isDaily: false,
         daily: state.daily,
+        family: state.family,
       };
     }
 
@@ -618,6 +625,10 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
     case 'DAILY_UPDATED':
       // 每日挑战最佳已写入 localStorage，更新运行时记录（标题页展示）
       return { ...state, daily: action.daily };
+
+    case 'FAMILY_UPDATED':
+      // 族谱已写入 localStorage，更新运行时族谱（标题页族谱展示）
+      return { ...state, family: action.family };
 
     default:
       return state;
@@ -693,6 +704,8 @@ export function createInitialRuntime(): RuntimeState {
     isDaily: false,
     // 每日挑战记录初始同步读取
     daily: loadDaily(),
+    // 族谱同样初始同步读取
+    family: loadFamily(),
   };
 }
 
@@ -738,6 +751,12 @@ export function useGame() {
       const nextDaily = updateDailyBest(rt.daily, formatDate(new Date()), score, rt.game.age);
       saveDaily(nextDaily);
       dispatch({ type: 'DAILY_UPDATED', daily: nextDaily });
+    }
+    // 正常局（非快速模拟/每日挑战）：本局角色写入族谱，世代 = 族谱长度 + 1
+    if (!rt.isDaily && !rt.autoPlay) {
+      const nextFamily = appendFamilyMember(rt.family, rt.game, formatDate(new Date()));
+      saveFamily(nextFamily);
+      dispatch({ type: 'FAMILY_UPDATED', family: nextFamily });
     }
     dispatch({ type: 'ACHIEVEMENTS_PERSISTED' });
   }, [rt.achievementPending]);
@@ -827,6 +846,7 @@ export function useGame() {
     fateEventIds: rt.fateEventIds,
     isDaily: rt.isDaily,
     daily: rt.daily,
+    family: rt.family,
     startGame,
     startAutoGame,
     startDailyGame,

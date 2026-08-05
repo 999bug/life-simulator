@@ -145,5 +145,23 @@ export interface StageMeta {
 /** 节奏档位：事件密度（沉浸全量 / 精简抽样） */
 export type PaceMode = 'full' | 'lite';
 
+/** 家族成员：一局正常人生（非快速模拟/每日挑战）结算后写入族谱 */
+export interface FamilyMember {
+  name: string;
+  gender: 'male' | 'female';
+  /** 世代（1 起，线性追加：每一局正常人生是上一代的子女） */
+  generation: number;
+  /** 享年 */
+  age: number;
+  /** 综合评分 */
+  score: number;
+  /** 结局路线 key（verdictKey，展示时查 VERDICT_META） */
+  verdict: string;
+  /** 终局属性（家族传承叙事展示用） */
+  attrs: Attributes;
+  /** 完成日期 YYYYMMDD */
+  date: string;
+}
+
 /** 打字机速度档 */
 export type TypeSpeed = 'slow' | 'normal' | 'fast';

@@ -1,0 +1,54 @@
+import type { FamilyMember } from '../types';
+import { VERDICT_META } from '../engine/verdict';
+
+interface Props {
+  family: FamilyMember[];
+  onClose: () => void;
+}
+
+/** 结局 key → 展示标题（分数档结局无图鉴条目，兜底文案） */
+function verdictTitle(key: string): string {
+  return VERDICT_META[key]?.title ?? '平凡的一生';
+}
+
+/** 家族族谱模态（标题页入口）：最新一代在上，世代线性向下追溯 */
+export default function FamilyModal({ family, onClose }: Props) {
+  const latest = family[family.length - 1];
+  return (
+    <div className="absolute inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center" onClick={onClose}>
+      <div className="w-[480px] max-h-[520px] overflow-y-auto rounded-2xl border border-white/10 bg-[#15152a] p-6 flex flex-col gap-3" onClick={e => e.stopPropagation()}>
+        <h3 className="text-center text-[18px] tracking-[6px] text-[#c9a96e]">
+          家族族谱{latest ? ` · 第 ${latest.generation} 代` : ''}
+        </h3>
+        {family.length === 0 ? (
+          <p className="text-center text-[12px] text-white/35 leading-relaxed py-6">
+            族谱还是空白。<br />走完一生，你就成为这个家族的第一代。
+          </p>
+        ) : (
+          // 最新一代在上：世代越深（越早）颜色越淡
+          [...family].reverse().map(m => (
+            <div key={m.generation} className="flex items-center gap-3 p-3 rounded-lg border border-[#c9a96e]/20 bg-[#c9a96e]/5" style={{ opacity: Math.max(0.45, 1 - (latest!.generation - m.generation) * 0.08) }}>
+              <span className="text-[16px] leading-none">{m.gender === 'male' ? '👨' : '👩'}</span>
+              <div className="flex-1">
+                <div className="text-[13px] text-[#c9a96e]">
+                  第 {m.generation} 代 · {m.name}
+                </div>
+                <div className="text-[11px] text-white/35 mt-0.5 leading-relaxed">
+                  享年 {m.age} · 评分 {m.score} · {verdictTitle(m.verdict)}
+                </div>
+              </div>
+              <span className="text-[10px] text-white/25 tracking-[1px]">{m.date.slice(0, 4)}</span>
+            </div>
+          ))
+        )}
+        <button
+          onClick={onClose}
+          className="px-8 py-2.5 rounded-[30px] text-[13px] tracking-[3px] border font-sans mx-auto mt-1
+            border-white/15 text-white/40 hover:border-[#c9a96e]/50 hover:text-[#c9a96e]"
+        >
+          关闭
+        </button>
+      </div>
+    </div>
+  );
+}

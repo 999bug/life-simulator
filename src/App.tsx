@@ -6,7 +6,7 @@ import GameScreen from './components/GameScreen';
 import SummaryScreen from './components/SummaryScreen';
 
 export default function App() {
-  const { game, currentEvent, feedback, skippedEvents, autoPlay, typeSpeed, saves, achievements, stats, newAchievements, fateEventIds, daily, startGame, startAutoGame, startDailyGame, restart, makeChoice, continue: continue_, continueGame, reset, setTypeSpeed } = useGame();
+  const { game, currentEvent, feedback, skippedEvents, autoPlay, typeSpeed, saves, achievements, stats, newAchievements, fateEventIds, daily, family, startGame, startAutoGame, startDailyGame, restart, makeChoice, continue: continue_, continueGame, reset, setTypeSpeed } = useGame();
 
   // 移动端适配：视口小于舞台逻辑尺寸时等比缩放（960×720 逻辑尺寸不变）
   const [scale, setScale] = useState(1);
@@ -51,7 +51,7 @@ export default function App() {
         // 舞台固定 960×720：scale 公式以此逻辑尺寸为前提，流式尺寸会导致小窗口下二次缩小并裁切内容
         <div className="w-[960px] h-[720px] relative overflow-hidden text-white" style={{ transform: `scale(${scale})` }}>
           {game.phase === 'title' && (
-            <TitleScreen onStart={startGame} onAutoStart={startAutoGame} onDailyStart={startDailyGame} saves={saves} onContinue={continueGame} achievements={achievements} stats={stats} daily={daily} />
+            <TitleScreen onStart={startGame} onAutoStart={startAutoGame} onDailyStart={startDailyGame} saves={saves} onContinue={continueGame} achievements={achievements} stats={stats} daily={daily} family={family} />
           )}
           {game.phase === 'playing' && (
             <GameScreen

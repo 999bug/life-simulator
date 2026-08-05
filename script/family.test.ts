@@ -1,0 +1,57 @@
+/**
+ * family.ts 纯函数测试：族谱追加世代递增、字段完整、容量裁剪。
+ * 运行：node --experimental-strip-types --test script/family.test.ts
+ */
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { appendFamilyMember, FAMILY_MAX } from '../src/engine/family.ts';
+import type { FamilyMember, GameState } from '../src/types/index.ts';
+
+/** 构造最小终局状态 */
+function game(over: Partial<GameState>): GameState {
+  return {
+    gender: 'male', name: '小明', age: 80, stage: 'elder', stageIdx: 6,
+    attributes: { health: 60, intelligence: 70, wealth: 50, happiness: 65, social: 55, appearance: 45, luck: 50, morality: 60 },
+    flags: [], history: [], phase: 'summary', deathCause: 'lifespan', goal: null,
+    ...over,
+  };
+}
+
+test('appendFamilyMember：空族谱追加为第 1 代，字段完整', () => {
+  const g = game({ name: '张一', flags: ['doctor'] });
+  const family = appendFamilyMember([], g, '20260805');
+  assert.strictEqual(family.length, 1);
+  const m = family[0];
+  assert.strictEqual(m.generation, 1);
+  assert.strictEqual(m.name, '张一');
+  assert.strictEqual(m.age, 80);
+  assert.strictEqual(m.verdict, 'doctor');
+  assert.strictEqual(m.date, '20260805');
+  assert.strictEqual(typeof m.score, 'number');
+  assert.deepStrictEqual(m.attrs, g.attributes);
+});
+
+test('appendFamilyMember：世代线性递增，结局路线正确记录', () => {
+  let family: FamilyMember[] = [];
+  family = appendFamilyMember(family, game({ name: '一代', flags: ['startup_success'] }), '20260801');
+  family = appendFamilyMember(family, game({ name: '二代', flags: [] }), '20260802');
+  family = appendFamilyMember(family, game({ name: '三代', flags: ['went_to_college'] }), '20260803');
+  assert.deepStrictEqual(family.map(m => m.generation), [1, 2, 3]);
+  assert.strictEqual(family[0].verdict, 'startup_success');
+  assert.strictEqual(family[1].verdict.startsWith('score:'), true);
+  assert.strictEqual(family[2].verdict, 'went_to_college');
+});
+
+test('appendFamilyMember：超出容量裁掉最老世代，世代号保留原值', () => {
+  let family: FamilyMember[] = [];
+  for (let i = 0; i < FAMILY_MAX; i++) {
+    family = appendFamilyMember(family, game({ name: `第${i + 1}代` }), '20260805');
+  }
+  assert.strictEqual(family.length, FAMILY_MAX);
+  family = appendFamilyMember(family, game({ name: '溢出代' }), '20260806');
+  assert.strictEqual(family.length, FAMILY_MAX);
+  // 最老的第 1 代被裁掉，首部为第 2 代，末尾为新成员
+  assert.strictEqual(family[0].name, '第2代');
+  assert.strictEqual(family[0].generation, 2);
+  assert.strictEqual(family[family.length - 1].name, '溢出代');
+});

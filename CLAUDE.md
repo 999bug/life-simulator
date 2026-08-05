@@ -13,7 +13,7 @@ npm run dev            # vite dev server（端口 5173）
 npm run build          # tsc && vite build（生产构建）
 npm run build:events   # 重新生成 src/engine/events.json（数据改动后必须跑）
 node --test "script/*.test.mjs"   # 数据工具测试（30 个，glob 必须带引号，裸目录形式在本机报错）
-node --experimental-strip-types --test script/engine-state.test.ts script/pace-mode.test.ts script/goals.test.ts script/save.test.ts script/use-game.test.ts script/gameplay.test.ts script/verdict.test.ts   # 引擎/档位/目标/存档/玩法测试（87 个，Node 22 直接跑 TS）
+node --experimental-strip-types --test script/engine-state.test.ts script/pace-mode.test.ts script/goals.test.ts script/save.test.ts script/use-game.test.ts script/gameplay.test.ts script/verdict.test.ts script/family.test.ts   # 引擎/档位/目标/存档/玩法/族谱测试（91 个，Node 22 直接跑 TS）
 npm run test:ui   # UI 组件测试（vitest + Testing Library，18 个）
 node script/stats.mjs   # 事件数据看板（密度/分类/flag 配对/空缺报告）
 ```
@@ -54,6 +54,7 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 - **节奏档位**：密度（沉浸全量 / 精简每岁 1-2 个，`filterEvents` 主线优先抽样 + flag 闭包，`liteTarget`：0-2 岁全保留、3-12 岁 2 个、13+ 岁 1 个）开局选定；打字速度（慢/中/快）游戏内实时切换（DialogBox speedRef，不重启打字机）；点击跳过打字
 - **存档 v2**：`life-sim-saves-v2` = 3 槽位 + active（`src/engine/save.ts`：SavesV2/migrateLegacySave 旧版自动迁移/isValidSaveData 内容校验）；标题页 3 卡片点击继续、开始新局覆盖确认；**快速模拟不写槽**（autoPlay guard）；RESET 保留槽位（回标题不丢档）
 - **目标/成就/统计**：`goal` 入 GameState（预设 key 或自定义 `CustomGoal {attrs}`——GoalModal 勾选属性+滑杆设目标值，结算逐项达标即达成）；成就存 `life-sim-achievements`（unlocked/completedLives/endings）；统计存 `life-sim-stats`（totalLives/bestScore/totalAge/endings 分布 + lastEndAttrs 终局属性，传承加成用，旧存档缺失无加成）；每日挑战存 `life-sim-daily`（date/bestScore/bestAge，仅当日更新最佳）；结算时经 `achievementPending` 标志一次性持久化（读档恢复不重复计数）
+- **家族族谱**：`life-sim-family` = FamilyMember[]（`src/engine/family.ts`：loadFamily/saveFamily/appendFamilyMember 纯函数，容量 100 裁最老）。正常局（非快速模拟/每日挑战）结算追加一代（世代 = 族谱长度 + 1，记录享年/评分/结局 key/终局属性/日期）；标题页 FamilyModal 展示（最新在上、越早越淡）；GoalModal 开局提示「你将作为第 N+1 代出生」
 - conditions 不满足的事件静默跳过；flags 累积在 `game.flags`（不重复）；历史 `history` 含 `flags?` 字段（生涯年表里程碑标记，旧存档兼容）
 - 死亡判定：健康归零或超过 `calcMaxAge`；死因记录在 `game.deathCause`（health 耗尽 / lifespan 寿终），结算页展示临终叙事
 - `MAKE_CHOICE` 预载下一事件（gameOver 时判定成就/统计），`CONTINUE` 只清反馈；反馈页正向收益距年龄上限 15 点内标注「（距上限 X 点）」
@@ -70,7 +71,7 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 - **GameScreen**：场景 + 数值栏 + 底部对话框区。**数值栏在 `top-[42%]`，底部区 `max-h-[45%] overflow-y-auto`（含 `pb-9` 防速度按钮遮挡）——两者位置耦合，改动需保持不重叠**；右上角 ✕ 确认弹窗三选项（取消/🔄 重新开始本局/确定回标题，存档保留；快速模拟不显示重开）
 - **DialogBox**：打字机效果（速度档位 + 点击跳过）+ 「▼ 点击继续」；事件标题显示为「标题」
 - **ChoicePanel**：选项按钮（`button.group` class，effects 展示串由转换器生成）
-- **TitleScreen**：名字/性别 + **节奏档位（沉浸/精简）+ 打字速度 + 3 存档卡片 + 目标选择模态（GoalModal，含「🎯 自定义目标」勾选属性+滑杆设目标值）+ 成就（AchievementsModal 铜/银/金分层）/人生图鉴（CollectionModal 13 结局路线收集，数据取自 stats.endings）/生涯统计（StatsModal）入口 + 快捷入口行（⚡ 快速模拟/📅 每日挑战/📊 生涯/🏆 成就/📖 图鉴）**——720px 高度余量极小（约 1px），改动必须回归检查
+- **TitleScreen**：名字/性别 + **节奏档位（沉浸/精简）+ 打字速度 + 3 存档卡片 + 目标选择模态（GoalModal，含「🎯 自定义目标」勾选属性+滑杆设目标值 + 家族继承提示）+ 成就（AchievementsModal 铜/银/金分层）/人生图鉴（CollectionModal 13 结局路线收集，数据取自 stats.endings）/家族族谱（FamilyModal 跨世代收藏）/生涯统计（StatsModal）入口 + 快捷入口行（⚡ 快速模拟/📅 每日挑战/📊 生涯/🏆 成就/📖 图鉴/🌳 家族）**——720px 高度余量极小（约 1px），改动必须回归检查
 - **SummaryScreen**：结算页（享年 + 结局 + 评分 + 属性 + **成长曲线（GrowthChart canvas 8 维随年龄折线图，图例悬停临时聚焦/点击固定聚焦单条曲线，其余淡化）+ 人生大事记完整时间线（里程碑 ⭐）+ 目标达成度 + 新解锁成就 + 本可发生而未触发 + 分享卡片（ShareCardModal canvas PNG，含迷你成长曲线）+ 传记导出**）
 - **SceneArea/SceneDecor/CategoryDecor**：场景背景 = 阶段渐变（STAGE_BG）+ 阶段 SVG 装饰（SceneDecor）+ **事件分类场景**（CategoryDecor，11 分类各一组 SVG 元素：家庭→沙发、事业→写字楼、健康→医疗十字、教育→黑板、友谊→咖啡桌、爱情→爱心、科技→屏幕电路、金融→金币折线、爱好→调色板吉他、运动→跑道篮筐、个性→对话气泡星）+ **选项属性色调响应**（GameScreen 选选项后按效果主属性叠加底部光晕，8 属性→色：health 绿/intelligence 蓝/wealth 金/happiness 橙/social 青/appearance 粉/luck 紫/morality 米白；继续后还原）
 - **App**：移动端视口等比缩放（scale = min(vw/960, vh/720)，<1 才缩放）

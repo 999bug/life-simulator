@@ -1,12 +1,15 @@
 import { useState } from 'react';
-import type { AttributeKey, Attributes, CustomGoal, GoalKey } from '../types';
+import type { AttributeKey, Attributes, CustomGoal, FamilyMember, GoalKey } from '../types';
 import { GOALS } from '../engine/goals';
 import { ATTR_META } from '../engine/state';
+import { VERDICT_META } from '../engine/verdict';
 import { sfx } from '../utils/sound';
 
 interface Props {
   onSelect: (goal: GoalKey | CustomGoal | null) => void;
   onCancel: () => void;
+  /** 族谱最新一代（有则展示「你将作为下一代出生」继承提示） */
+  latestMember?: FamilyMember;
 }
 
 /** 自定义目标：最多勾选属性数 */
@@ -15,7 +18,7 @@ const CUSTOM_MAX_ATTRS = 3;
 const CUSTOM_DEFAULT_TARGET = 60;
 
 /** 目标选择模态：开局选择人生目标（无目标或自定义属性目标亦可） */
-export default function GoalModal({ onSelect, onCancel }: Props) {
+export default function GoalModal({ onSelect, onCancel, latestMember }: Props) {
   const [selected, setSelected] = useState<GoalKey | null>(null);
   const [showCustom, setShowCustom] = useState(false);
   /** 自定义目标勾选的属性 */
@@ -122,6 +125,12 @@ export default function GoalModal({ onSelect, onCancel }: Props) {
         flex flex-col gap-4" onClick={e => e.stopPropagation()}>
         <h3 className="text-center text-[18px] tracking-[6px] text-[#c9a96e]">选择你的人生目标</h3>
         <p className="text-center text-[11px] text-white/40 tracking-[2px]">目标影响结算评价，也可以无目的地活一次</p>
+        {/* 家族继承提示：族谱非空时，本局作为下一代出生 */}
+        {latestMember && (
+          <p className="text-center text-[11px] text-[#c9a96e]/70 tracking-[1px] -mt-1">
+            🌳 你将作为家族第 {latestMember.generation + 1} 代出生——上一世 {latestMember.name}（{VERDICT_META[latestMember.verdict]?.title ?? '平凡的一生'}）
+          </p>
+        )}
         <div className="grid grid-cols-2 gap-3">
           {GOALS.map(g => (
             <button

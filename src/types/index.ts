@@ -86,6 +86,11 @@ export type DeathCause = 'health' | 'lifespan';
 /** 人生目标 */
 export type GoalKey = 'wealth' | 'travel' | 'academic' | 'doctor' | 'family' | 'stable';
 
+/** 自定义目标：指定若干属性目标值，逐项达成即达成（空 attrs 视为达成） */
+export interface CustomGoal {
+  attrs: Partial<Attributes>;
+}
+
 /** 成就 id */
 export type AchievementId =
   | 'first_life' | 'longevity' | 'early_death' | 'rich' | 'scholar'
@@ -106,12 +111,14 @@ export interface GameState {
   phase: GamePhase;
   /** 死因：健康归零 / 寿终正寝（存活时为空） */
   deathCause: DeathCause | null;
-  /** 人生目标（开局选定，无目标为 null） */
-  goal: GoalKey | null;
+  /** 人生目标（开局选定：预设 key 或自定义属性目标；无目标为 null） */
+  goal: GoalKey | CustomGoal | null;
   /** 每岁属性快照（结算页成长曲线用；旧存档无此字段，从读档岁起重建） */
   snapshots?: AttrSnapshot[];
   /** 挑战开局（第 2 周目解锁：开局属性整体下调 10 点；旧存档无此字段） */
   challenge?: boolean;
+  /** 属性传承（第 5 周目起：上一世最高 2 项属性各 +8；旧存档无此字段） */
+  inherited?: boolean;
 }
 
 /** 属性元数据 */

@@ -174,6 +174,7 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       <p className="text-sm text-white/40 tracking-[4px]">
         {game.gender === 'male' ? '♂' : '♀'} {game.name} · 享年 {game.age} 岁
         {game.challenge && <span className="text-[#e8a05d] ml-2">⚔️ 挑战人生</span>}
+        {game.inherited && <span className="text-[#c9a96e] ml-2">🧬 传承</span>}
       </p>
       <h2 className="text-[34px] font-extralight tracking-[10px] text-[#c9a96e] animate-[fadeInDown_0.8s_ease]">
         {title}
@@ -197,11 +198,14 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
           <span className="text-lg leading-none mt-0.5">{goal.achieved ? '✅' : '🎯'}</span>
           <div>
             <div className={`text-[13px] ${goal.achieved ? 'text-[#c9a96e]' : 'text-white/60'}`}>
-              {GOALS.find(g => g.key === game.goal)?.name ?? '人生目标'}
+              {typeof game.goal === 'string'
+                ? GOALS.find(g => g.key === game.goal)?.name ?? '人生目标'
+                : '🎯 自定义目标'}
               <span className="ml-2 text-[11px] tracking-[2px] text-white/35">
                 {goal.achieved ? '已达成' : '未达成'}
               </span>
             </div>
+            {/* 自定义目标：detail 为「属性名 实际值/目标值」逐项展示 */}
             <div className="text-[11px] text-white/40 mt-0.5 leading-relaxed">{goal.detail}</div>
           </div>
         </div>

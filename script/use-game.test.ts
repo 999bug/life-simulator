@@ -161,6 +161,29 @@ test('RESET：回标题且保留存档槽位', () => {
   assert.strictEqual(reset.autoPlay, false);
 });
 
+test('RESTART：局中重开沿用角色/设置/目标/挑战，换新种子重新开局', () => {
+  const base = createInitialRuntime();
+  const rt = reducer({ ...base, stats: { ...base.stats, totalLives: 2 } }, {
+    type: 'START_GAME', gender: 'female', name: '小美', paceMode: 'lite', typeSpeed: 'slow', goal: 'family', challenge: true,
+  });
+  const restart = reducer(rt, { type: 'RESTART' });
+  assert.strictEqual(restart.game.phase, 'playing');
+  assert.strictEqual(restart.game.gender, 'female');
+  assert.strictEqual(restart.game.name, '小美');
+  assert.strictEqual(restart.game.goal, 'family');
+  assert.strictEqual(restart.game.challenge, true);
+  assert.strictEqual(restart.paceMode, 'lite');
+  assert.strictEqual(restart.typeSpeed, 'slow');
+  assert.strictEqual(restart.autoPlay, false);
+  // 年龄由首事件驱动
+  assert.strictEqual(restart.game.age, restart.currentEvent!.age);
+  // 换新随机种子（同岁组顺序不同）
+  assert.notStrictEqual(restart.shuffleSeed, rt.shuffleSeed);
+  // 初始快照：首事件年龄 + 继承开局属性
+  assert.strictEqual(restart.game.snapshots!.length, 1);
+  assert.strictEqual(restart.game.snapshots![0].attrs.health, 55); // 挑战开局 65-10
+});
+
 test('CONTINUE_GAME：旧档字段兜底（paceMode/typeSpeed/deathCause/snapshots）', () => {
   const base = createInitialRuntime();
   const saved = {
@@ -212,19 +235,19 @@ test('START_GAME：周目门控——第 1 局无命运事件，第 3 局起抽�
   const round1 = reducer({ ...base, stats: { ...base.stats, totalLives: 0 } }, {
     type: 'START_GAME', gender: 'male', name: '小明', paceMode: 'full', typeSpeed: 'normal', goal: null, challenge: false,
   });
-  assert.strictEqual(round1.fateEventId, null);
-  // 第 3 局（totalLives=2）：抽取命运事件
+  assert.strictEqual(round1.fateEventIds.length, 0);
+  // 第 3 局（totalLives=2）：抽取 1 个命运事件
   const round3 = reducer({ ...base, stats: { ...base.stats, totalLives: 2 } }, {
     type: 'START_GAME', gender: 'male', name: '小明', paceMode: 'full', typeSpeed: 'normal', goal: null, challenge: false,
   });
-  assert.ok(round3.fateEventId, '第 3 局应抽取命运事件');
+  assert.strictEqual(round3.fateEventIds.length, 1, '第 3 局应抽取 1 个命运事件');
 });
 
 test('MAKE_CHOICE：命运事件效果放大 ×1.5，普通事件不受影响', () => {
   const base = createInitialRuntime();
   // 构造命运事件流：年轻 1 岁事件（+5 智力）+ 普通 2 岁事件
   const base2 = mkState([evt('young_02', 19, { intelligence: 10 }), evt('birth_02', 1, { happiness: 4 })]);
-  let rt = { ...base2, stats: { ...base2.stats, totalLives: 2 }, fateEventId: 'young_02' };
+  let rt = { ...base2, stats: { ...base2.stats, totalLives: 2 }, fateEventIds: ['young_02'] };
   // 命运事件：智力 25 + round(10×1.5)=15 → 40
   rt = choose(rt);
   assert.strictEqual(rt.game.attributes.intelligence, 40);

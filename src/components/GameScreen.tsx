@@ -14,12 +14,14 @@ interface Props {
   feedback: string | null;
   autoPlay: boolean;
   typeSpeed: TypeSpeed;
-  /** 本局命运事件 id（第 3 周目解锁：该事件效果 ×1.5，展示角标） */
-  fateEventId: string | null;
+  /** 本局命运事件 id 列表（第 3 周目起 1 个、第 5 周目起 2 个：效果 ×1.5，展示角标） */
+  fateEventIds: string[];
   onTypeSpeedChange: (s: TypeSpeed) => void;
   onChoice: (choice: Choice) => void;
   onContinue: () => void;
   onExit: () => void;
+  /** 局中重开：沿用本局角色与设置换新种子重开 */
+  onRestart: () => void;
 }
 
 const SPEED_OPTIONS: Array<{ value: TypeSpeed; label: string }> = [
@@ -28,7 +30,7 @@ const SPEED_OPTIONS: Array<{ value: TypeSpeed; label: string }> = [
   { value: 'fast', label: '快' },
 ];
 
-export default function GameScreen({ game, currentEvent, feedback, autoPlay, typeSpeed, fateEventId, onTypeSpeedChange, onChoice, onContinue, onExit }: Props) {
+export default function GameScreen({ game, currentEvent, feedback, autoPlay, typeSpeed, fateEventIds, onTypeSpeedChange, onChoice, onContinue, onExit, onRestart }: Props) {
   const [showChoices, setShowChoices] = useState(false);
   const [showExit, setShowExit] = useState(false);
 
@@ -133,14 +135,14 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
       </div>
 
       {/* 命运事件角标（第 3 周目解锁：效果 ×1.5） */}
-      {fateEventId && currentEvent.id === fateEventId && (
+      {fateEventIds.includes(currentEvent.id) && (
         <div className="absolute top-2 left-2 z-20 px-3 py-1.5 rounded-full border border-[#e8c95d]/40 bg-[#e8c95d]/10
           text-[#e8c95d] text-[11px] tracking-[2px] animate-pulse">
           ⚡ 命运事件 · 效果 ×1.5
         </div>
       )}
 
-      {/* 中途退出：回标题（存档保留在槽中） */}
+      {/* 中途退出：回标题（存档保留在槽中）；快速模拟为临时局不提供重开 */}
       <button
         onClick={() => { sfx.select(); setShowExit(true); }}
         title="退出本局"
@@ -154,6 +156,10 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
         <ConfirmModal
           title="放弃本局"
           desc="将回到标题页，本局进度会保留在存档槽中。确定放弃吗？"
+          extra={autoPlay ? undefined : {
+            label: '🔄 重新开始本局',
+            onExtra: () => { setShowExit(false); onRestart(); },
+          }}
           onConfirm={() => { setShowExit(false); onExit(); }}
           onCancel={() => setShowExit(false)}
         />

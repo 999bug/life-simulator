@@ -1,4 +1,5 @@
-import type { GameState, GoalKey } from '../types';
+import type { AttributeKey, CustomGoal, GameState, GoalKey } from '../types';
+import { ATTR_META } from './state.ts';
 
 /** 目标达成检查结果 */
 export interface GoalResult {
@@ -28,17 +29,29 @@ export const GOALS: GoalDef[] = [
 /**
  * 检查目标达成情况。
  *
- * @param goal 目标 key（null = 无目标）
+ * @param goal 目标（null = 无目标；预设 key；CustomGoal = 自定义属性目标）
  * @param game 结算时的游戏状态
  * @returns 无目标返回 null；否则返回达成与否与描述
  */
-export function checkGoal(goal: GoalKey | null, game: GameState): GoalResult | null {
+export function checkGoal(goal: GoalKey | CustomGoal | null, game: GameState): GoalResult | null {
   if (!goal) {
     return null;
   }
   const { attributes, flags } = game;
   const has = (...fs: string[]) => fs.some(f => flags.includes(f));
   const detail = (achieved: boolean, text: string): GoalResult => ({ achieved, detail: text });
+
+  // 自定义目标：逐属性实际值 >= 目标值全部达标即达成，detail 展示「属性名 实际值/目标值」
+  if (typeof goal !== 'string') {
+    const entries = Object.entries(goal.attrs) as [AttributeKey, number][];
+    if (entries.length === 0) {
+      return detail(true, '未设置目标值');
+    }
+    const summary = entries
+      .map(([k, v]) => `${ATTR_META[k].name} ${attributes[k] ?? 0}/${v}`)
+      .join(' · ');
+    return detail(entries.every(([k, v]) => (attributes[k] ?? 0) >= v), summary);
+  }
 
   switch (goal) {
     case 'wealth':

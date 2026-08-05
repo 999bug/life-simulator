@@ -201,6 +201,13 @@ export const RARE_EVENT_IDS = [
   'adult_57', 'adult_80', 'elder_09',
 ];
 
+/** 命运事件池：从全量事件库解析（池内事件缺失时跳过） */
+function fatePool(): LifeEvent[] {
+  return RARE_EVENT_IDS
+    .map(id => EVENTS.find(e => e.id === id))
+    .filter((e): e is LifeEvent => e !== undefined);
+}
+
 /**
  * 按种子从命运事件池抽 1 个（确定性，存档可还原）。
  *
@@ -208,14 +215,39 @@ export const RARE_EVENT_IDS = [
  * @returns 抽中的命运事件；池内事件不在全量事件库时返回 null
  */
 export function pickFateEvent(seed: number): LifeEvent | null {
-  const rng = mulberry32(seed);
-  const pool = RARE_EVENT_IDS
-    .map(id => EVENTS.find(e => e.id === id))
-    .filter((e): e is LifeEvent => e !== undefined);
+  const pool = fatePool();
   if (pool.length === 0) {
     return null;
   }
+  const rng = mulberry32(seed);
   return pool[Math.floor(rng() * pool.length)];
+}
+
+/**
+ * 按种子从命运事件池抽 count 个不重复（确定性，存档可还原）。
+ * 第一个抽取与 pickFateEvent 同源（同一 rng 序列），旧种子行为不变。
+ *
+ * @param seed 洗牌种子（与 shuffleEvents 共用，保证读档可重建）
+ * @param count 抽取数量（超过池大小时取满池）
+ * @returns 抽中的命运事件数组；池内事件不在全量事件库时返回空数组
+ */
+export function pickFateEvents(seed: number, count: number): LifeEvent[] {
+  const pool = fatePool();
+  if (pool.length === 0) {
+    return [];
+  }
+  const rng = mulberry32(seed);
+  const picked: LifeEvent[] = [];
+  const used = new Set<LifeEvent>();
+  // 去重抽取，循环上限防极端情况死循环
+  while (picked.length < count && used.size < pool.length) {
+    const e = pool[Math.floor(rng() * pool.length)];
+    if (!used.has(e)) {
+      used.add(e);
+      picked.push(e);
+    }
+  }
+  return picked;
 }
 
 export default EVENTS;

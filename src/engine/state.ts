@@ -205,6 +205,36 @@ export function applyChallenge(attrs: Attributes): Attributes {
   return out;
 }
 
+/** 传承加成：单项属性 +8 */
+const INHERIT_BONUS = 8;
+/** 传承门槛：上一世终局属性 ≥50 才继承 */
+const INHERIT_THRESHOLD = 50;
+/** 传承继承项数上限（取最高 2 项） */
+const INHERIT_MAX = 2;
+
+/**
+ * 属性传承：上一世终局属性取值最高的 2 项（值 ≥50 才继承）各 +8，上限 100。
+ * 与挑战开局独立叠加：开局先 applyInheritance（+8）再 applyChallenge（-10），互不抵消语义。
+ *
+ * @param attrs 初始属性表
+ * @param lastEndAttrs 上一世终局属性（旧存档缺失 = 无加成）
+ * @returns 传承后的属性表（无记录或无 ≥50 项时原样返回）
+ */
+export function applyInheritance(attrs: Attributes, lastEndAttrs?: Partial<Attributes>): Attributes {
+  if (!lastEndAttrs) {
+    return attrs;
+  }
+  const out = { ...attrs };
+  const top = (Object.entries(lastEndAttrs) as [AttributeKey, number][])
+    .filter(([, v]) => v >= INHERIT_THRESHOLD)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, INHERIT_MAX);
+  for (const [k] of top) {
+    out[k] = Math.min(100, out[k] + INHERIT_BONUS);
+  }
+  return out;
+}
+
 /**
  * 命运事件效果放大：每键 × factor 后四舍五入。
  *

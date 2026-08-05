@@ -1,25 +1,30 @@
 import { useState } from 'react';
 import { sfx } from '../utils/sound';
-import type { AchievementId, GoalKey, PaceMode, TypeSpeed } from '../types';
+import type { AchievementId, CustomGoal, GoalKey, PaceMode, TypeSpeed } from '../types';
 import type { SavesV2 } from '../engine/save';
-import type { StatsStore } from '../hooks/useGame';
+import type { DailyStore, StatsStore } from '../hooks/useGame';
+import { formatDate } from '../hooks/useGame';
 import GoalModal from './GoalModal';
 import ConfirmModal from './ConfirmModal';
 import AchievementsModal from './AchievementsModal';
 import StatsModal from './StatsModal';
 
 interface Props {
-  onStart: (gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | null, challenge: boolean) => void;
+  onStart: (gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | CustomGoal | null, challenge: boolean) => void;
   onAutoStart: (gender: 'male' | 'female', name: string) => void;
+  /** 每日挑战：随机性别/名字 + 今日固定种子开局（手动播放） */
+  onDailyStart: () => void;
   saves: SavesV2;
   onContinue: (slot: number) => void;
   /** 跨周目成就存储（标题页成就总览展示） */
   achievements: { unlocked: AchievementId[]; completedLives: number };
   /** 跨周目生涯统计（标题页生涯总览展示） */
   stats: StatsStore;
+  /** 每日挑战记录（入口旁展示今日最佳） */
+  daily: DailyStore;
 }
 
-export default function TitleScreen({ onStart, onAutoStart, saves, onContinue, achievements, stats }: Props) {
+export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves, onContinue, achievements, stats, daily }: Props) {
   const [gender, setGender] = useState<'male' | 'female' | null>(null);
   const [name, setName] = useState('');
   const [paceMode, setPaceMode] = useState<PaceMode>('full');
@@ -32,6 +37,8 @@ export default function TitleScreen({ onStart, onAutoStart, saves, onContinue, a
   const [challenge, setChallenge] = useState(false);
   /** 当前是第几周目（累计完成局数 + 1） */
   const round = stats.totalLives + 1;
+  /** 今日是否已有每日挑战记录（跨天不展示昨日最佳） */
+  const hasTodayBest = daily.date === formatDate(new Date()) && (daily.bestScore > 0 || daily.bestAge > 0);
 
   const handleStart = () => {
     if (!gender) return;
@@ -49,7 +56,7 @@ export default function TitleScreen({ onStart, onAutoStart, saves, onContinue, a
     setShowGoal(true);
   };
 
-  const handleGoalSelect = (goal: GoalKey | null) => {
+  const handleGoalSelect = (goal: GoalKey | CustomGoal | null) => {
     if (!gender) return;
     setShowGoal(false);
     const finalName = name.trim() || (gender === 'male' ? '小明' : '小美');
@@ -242,7 +249,7 @@ export default function TitleScreen({ onStart, onAutoStart, saves, onContinue, a
         开 始 人 生
       </button>
 
-      {/* 快捷入口：快速模拟（随机性别与名字自动走完一生）+ 成就总览 */}
+      {/* 快捷入口：快速模拟（随机性别与名字自动走完一生）+ 每日挑战 + 生涯/成就总览 */}
       <div className="z-10 flex items-center gap-4">
         <button
           onClick={() => {
@@ -256,6 +263,22 @@ export default function TitleScreen({ onStart, onAutoStart, saves, onContinue, a
         >
           ⚡ 快速模拟
         </button>
+
+        {/* 每日挑战：今日固定种子开局（同日同序列），结算记录今日最佳 */}
+        <button
+          onClick={() => { sfx.select(); onDailyStart(); }}
+          className="px-10 py-2 rounded-[30px] text-[13px] tracking-[4px] transition-all duration-300 border font-sans
+            border-white/15 text-white/35 bg-transparent
+            hover:border-[#e8c95d]/50 hover:text-[#e8c95d] hover:bg-[#e8c95d]/5 cursor-pointer"
+        >
+          📅 每日挑战
+        </button>
+
+        {hasTodayBest && (
+          <span className="text-[10px] text-white/30 tracking-[1px] whitespace-nowrap">
+            今日最佳 评分 {daily.bestScore} / 享年 {daily.bestAge}
+          </span>
+        )}
 
         {/* 生涯入口 */}
         <button

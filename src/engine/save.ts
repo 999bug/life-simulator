@@ -11,6 +11,8 @@ export interface SaveData {
   typeSpeed?: 'slow' | 'normal' | 'fast';
   /** 本局命运事件 id（第 3 周目解锁，读档还原；旧档无此字段） */
   fateEventId?: string | null;
+  /** 本局命运事件 id 列表（第 5 周目起 2 个；旧档无此字段，读档回退单元素） */
+  fateEventIds?: string[];
 }
 
 /** v2 存档：active 槽 + 3 槽位 */

@@ -7,7 +7,7 @@ import { test } from 'node:test';
 import assert from 'node:assert';
 import { checkGoal, GOALS } from '../src/engine/goals.ts';
 import { checkAchievements, ACHIEVEMENTS } from '../src/engine/achievements.ts';
-import type { GameState, GoalKey, Attributes } from '../src/types/index.ts';
+import type { CustomGoal, GameState, GoalKey, Attributes } from '../src/types/index.ts';
 
 /** 构造测试用游戏状态 */
 function game(overrides: Partial<GameState> = {}, attrs: Partial<Attributes> = {}): GameState {
@@ -65,6 +65,28 @@ test('checkGoal：无目标返回 null；未达成含差距提示', () => {
   const r = checkGoal('wealth', game({}, { wealth: 65 }))!;
   assert.strictEqual(r.achieved, false);
   assert.match(r.detail, /65/);
+});
+
+test('checkGoal：自定义目标——全部达标/部分达标/空 attrs', () => {
+  const custom: CustomGoal = { attrs: { wealth: 80, intelligence: 70 } };
+  // 全部达标
+  const full = checkGoal(custom, game({}, { wealth: 85, intelligence: 75 }))!;
+  assert.strictEqual(full.achieved, true);
+  assert.match(full.detail, /财富 85\/80/);
+  assert.match(full.detail, /智力 75\/70/);
+  // 部分达标（财富达标、智力未达标）
+  const partial = checkGoal(custom, game({}, { wealth: 85, intelligence: 60 }))!;
+  assert.strictEqual(partial.achieved, false);
+  assert.match(partial.detail, /智力 60\/70/);
+  // 空 attrs 视为达成
+  const empty = checkGoal({ attrs: {} }, game())!;
+  assert.strictEqual(empty.achieved, true);
+});
+
+test('checkGoal：自定义目标不干扰预设分支（旧字符串 goal 兼容）', () => {
+  assert.strictEqual(checkGoal('wealth', game({}, { wealth: 85 }))!.achieved, true);
+  assert.strictEqual(checkGoal('wealth', game({}, { wealth: 50 }))!.achieved, false);
+  assert.strictEqual(checkGoal('family', game({ flags: ['married', 'has_child'] }, { happiness: 75 }))!.achieved, true);
 });
 
 test('ACHIEVEMENTS：21 个定义齐全', () => {

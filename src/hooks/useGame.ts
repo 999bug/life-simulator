@@ -1,5 +1,5 @@
 import { useReducer, useCallback, useEffect } from 'react';
-import type { AchievementId, AttributeKey, Attributes, Choice, DeathCause, GameState, GoalKey, LifeEvent, PaceMode, TypeSpeed } from '../types/index.ts';
+import type { AchievementId, AttributeKey, Attributes, Choice, CustomGoal, DeathCause, GameState, GoalKey, LifeEvent, PaceMode, TypeSpeed } from '../types/index.ts';
 import { emptySaves, isValidSaveData, migrateLegacySave, SLOT_COUNT, type SavesV2 } from '../engine/save.ts';
 import { checkAchievements } from '../engine/achievements.ts';
 import { verdictKey } from '../engine/verdict.ts';
@@ -16,10 +16,11 @@ import {
   ensureInt,
   appendSnapshot,
   applyChallenge,
+  applyInheritance,
   scaleOutcomes,
   STAGE_ORDER,
 } from '../engine/state.ts';
-import EVENTS, { filterEvents, shuffleEvents, pickFateEvent } from '../engine/events.ts';
+import EVENTS, { filterEvents, shuffleEvents, pickFateEvents } from '../engine/events.ts';
 
 // ============ 成就存储 ============
 
@@ -71,6 +72,8 @@ export interface StatsStore {
   bestScore: number;
   totalAge: number;
   endings: Record<string, number>;
+  /** 上一世终局属性（第 5 周目起开局传承；旧存档缺失 = 无加成） */
+  lastEndAttrs?: Partial<Attributes>;
 }
 
 /** 读取生涯统计；数据损坏或存储不可用时返回空结构 */
@@ -98,17 +101,96 @@ function saveStats(stats: StatsStore): void {
   }
 }
 
+// ============ 每日挑战存储 ============
+
+/** 每日挑战存储 key */
+const DAILY_KEY = 'life-sim-daily';
+
+/** 每日挑战存储结构（date 为 YYYYMMDD，仅记录当日最佳） */
+export interface DailyStore {
+  date: string;
+  bestScore: number;
+  bestAge: number;
+}
+
+/** 日期 → YYYYMMDD 字符串（每日挑战种子与最佳记录共用） */
+export function formatDate(d: Date): string {
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${d.getFullYear()}${month}${day}`;
+}
+
+/**
+ * 日期字符串 → 确定性种子（逐字符 `(acc * 31 + code) >>> 0`）。
+ * 同一天种子相同（每日挑战固定事件序列），不同日期种子不同。
+ */
+export function dateToSeed(dateStr: string): number {
+  let acc = 0;
+  for (let i = 0; i < dateStr.length; i++) {
+    acc = (acc * 31 + dateStr.charCodeAt(i)) >>> 0;
+  }
+  return acc;
+}
+
+/** 读取每日挑战存储；数据损坏或存储不可用时返回空结构 */
+function loadDaily(): DailyStore {
+  try {
+    const raw = localStorage.getItem(DAILY_KEY);
+    if (raw) {
+      const data = JSON.parse(raw) as DailyStore;
+      if (data && typeof data.date === 'string') {
+        return {
+          date: data.date,
+          bestScore: typeof data.bestScore === 'number' ? data.bestScore : 0,
+          bestAge: typeof data.bestAge === 'number' ? data.bestAge : 0,
+        };
+      }
+    }
+  } catch {
+    // 忽略损坏数据
+  }
+  return { date: '', bestScore: 0, bestAge: 0 };
+}
+
+/** 持久化每日挑战存储；存储不可用时静默降级 */
+function saveDaily(store: DailyStore): void {
+  try {
+    localStorage.setItem(DAILY_KEY, JSON.stringify(store));
+  } catch {
+    // 存储不可用静默降级
+  }
+}
+
+/**
+ * 结算时更新今日最佳（纯函数）。
+ * 仅当已有记录日期为今日时取 max 更新；跨天或今日首局以本局成绩初始化今日记录。
+ *
+ * @param prev 现有每日记录
+ * @param today 今日日期（YYYYMMDD）
+ * @param score 本局综合评分
+ * @param age 本局享年
+ * @returns 更新后的每日记录
+ */
+export function updateDailyBest(prev: DailyStore, today: string, score: number, age: number): DailyStore {
+  if (prev.date === today) {
+    return { date: today, bestScore: Math.max(prev.bestScore, score), bestAge: Math.max(prev.bestAge, age) };
+  }
+  return { date: today, bestScore: score, bestAge: age };
+}
+
 // ============ Action 类型 ============
 export type Action =
-  | { type: 'START_GAME'; gender: 'male' | 'female'; name: string; paceMode: PaceMode; typeSpeed: TypeSpeed; goal: GoalKey | null; challenge: boolean }
+  | { type: 'START_GAME'; gender: 'male' | 'female'; name: string; paceMode: PaceMode; typeSpeed: TypeSpeed; goal: GoalKey | CustomGoal | null; challenge: boolean; seed?: number; isDaily?: boolean }
   | { type: 'START_AUTO_GAME'; gender: 'male' | 'female'; name: string }
+  | { type: 'RESTART' }
   | { type: 'MAKE_CHOICE'; choice: Choice; eventId: string }
   | { type: 'CONTINUE' }
   | { type: 'SET_TYPE_SPEED'; typeSpeed: TypeSpeed }
   | { type: 'RESET' }
   | { type: 'CONTINUE_GAME'; slot: number }
   | { type: 'HYDRATE_SAVES'; saves: SavesV2; achievements: AchievementStore }
-  | { type: 'ACHIEVEMENTS_PERSISTED' };
+  | { type: 'ACHIEVEMENTS_PERSISTED' }
+  | { type: 'DAILY_UPDATED'; daily: DailyStore };
 
 // ============ 运行时状态（不参与 React 渲染）============
 export interface RuntimeState {
@@ -142,8 +224,12 @@ export interface RuntimeState {
   pendingLives: number;
   /** 本局结算的结局 key（verdictKey，待写入存储） */
   pendingEndingKey: string;
-  /** 本局命运事件 id（第 3 周目解锁：该事件效果 ×1.5；存档还原） */
-  fateEventId: string | null;
+  /** 本局命运事件 id 列表（第 3 周目起 1 个，第 5 周目起 2 个：该事件效果 ×1.5；存档还原） */
+  fateEventIds: string[];
+  /** 每日挑战局：固定种子（同日同序列）+ 不写存档槽（结算仅更新今日最佳） */
+  isDaily: boolean;
+  /** 每日挑战记录（今日最佳；标题页展示） */
+  daily: DailyStore;
 }
 
 // ============ 存档 ============
@@ -195,8 +281,8 @@ function saveSaves(saves: SavesV2): boolean {
 
 /** 持久化当前状态到 active 槽；标题页状态（新游戏未开始）时不写不删 */
 function saveState(rt: RuntimeState): void {
-  // 快速模拟为临时局：不写入存档槽位（避免静默覆盖正式存档）
-  if (rt.autoPlay) {
+  // 快速模拟与每日挑战为临时局：不写入存档槽位（避免静默覆盖正式存档）
+  if (rt.autoPlay || rt.isDaily) {
     return;
   }
   if (!rt.game || rt.game.phase === 'title') {
@@ -211,66 +297,134 @@ function saveState(rt: RuntimeState): void {
     shuffleSeed: rt.shuffleSeed,
     paceMode: rt.paceMode,
     typeSpeed: rt.typeSpeed,
-    fateEventId: rt.fateEventId,
+    // 双命运事件（第 5 周目）：写新字段；旧字段保留第一个用于旧版读档兜底
+    fateEventIds: rt.fateEventIds,
+    fateEventId: rt.fateEventIds[0] ?? null,
   };
   saveSaves(saves);
+}
+
+// ============ 开局初始化（START_GAME / START_AUTO_GAME / RESTART 共用）============
+
+/** 开局参数 */
+interface StartParams {
+  gender: 'male' | 'female';
+  name: string;
+  paceMode: PaceMode;
+  typeSpeed: TypeSpeed;
+  goal: GoalKey | CustomGoal | null;
+  challenge: boolean;
+  /** 洗牌种子；缺省随机生成 */
+  seed?: number;
+  /** 快速模拟：自动随机选择快速走完一生 */
+  autoPlay: boolean;
+  /** 每日挑战局：固定种子（同日同序列）+ 不写存档槽 */
+  isDaily?: boolean;
+}
+
+/**
+ * 开局初始化：新状态 + 洗牌 + 首事件预载 + 命运事件抽取。
+ * 新一局随机种子洗牌，同岁组顺序每局不同（重玩性）。
+ */
+function startNewGame(state: RuntimeState, p: StartParams): RuntimeState {
+  const game = createInitialState(p.gender, p.name);
+  game.goal = p.goal;
+  // 属性传承（第 5 周目起）：上一世终局最高 2 项属性各 +8（先继承）
+  if (state.stats.lastEndAttrs) {
+    game.attributes = applyInheritance(game.attributes, state.stats.lastEndAttrs);
+    game.inherited = true;
+  }
+  // 挑战开局（第 2 周目解锁）：属性整体下调 10 点（与传承独立叠加，后挑战）
+  game.challenge = p.challenge;
+  if (game.challenge) {
+    game.attributes = applyChallenge(game.attributes);
+  }
+  const shuffleSeed = p.seed ?? Math.floor(Math.random() * 2 ** 31);
+  // 快速模拟固定全量事件；手动模式按所选密度档过滤
+  const shuffledEvents = shuffleEvents(filterEvents(EVENTS, p.paceMode, shuffleSeed), shuffleSeed);
+  const firstScan = findNextEvent(game, -1, shuffledEvents);
+  const first = firstScan.event;
+  if (first) {
+    game.age = first.age;
+    game.stage = getStageForAge(first.age);
+    game.stageIdx = STAGE_ORDER.indexOf(game.stage);
+    // 初始快照：首事件年龄 + 开局属性（成长曲线起点）
+    game.snapshots = appendSnapshot(undefined, game.age, game.attributes, false);
+  }
+  // 第 3 周目起（累计完成 ≥ 2 局）：抽 1 个本局命运事件；第 5 周目起（累计 ≥ 4 局）：抽 2 个（效果 ×1.5）
+  const fateCount = state.stats.totalLives >= 4 ? 2 : 1;
+  const fateEvents = state.stats.totalLives >= 2 ? pickFateEvents(shuffleSeed, fateCount) : [];
+  return {
+    game,
+    currentEvent: first,
+    feedback: null,
+    eventIndex: first ? shuffledEvents.indexOf(first) : 0,
+    shuffledEvents,
+    skippedEvents: firstScan.skipped,
+    shuffleSeed,
+    autoPlay: p.autoPlay,
+    paceMode: p.paceMode,
+    typeSpeed: p.typeSpeed,
+    saves: state.saves,
+    achievements: state.achievements,
+    stats: state.stats,
+    achievementPending: false,
+    pendingNewIds: [],
+    pendingLives: 0,
+    pendingEndingKey: '',
+    fateEventIds: fateEvents.map(e => e.id),
+    isDaily: p.isDaily ?? false,
+    daily: state.daily,
+  };
 }
 
 // ============ Reducer ============
 export function reducer(state: RuntimeState, action: Action): RuntimeState {
   switch (action.type) {
     case 'START_GAME':
-    case 'START_AUTO_GAME': {
-      const game = createInitialState(action.gender, action.name);
-      // 人生目标仅手动开局可选；快速模拟无目标
-      game.goal = action.type === 'START_GAME' ? action.goal : null;
-      // 挑战开局（第 2 周目解锁）：属性整体下调 10 点，仅手动开局可选
-      game.challenge = action.type === 'START_GAME' && action.challenge;
-      if (game.challenge) {
-        game.attributes = applyChallenge(game.attributes);
-      }
-      // 新一局：随机种子洗牌，同岁组顺序每局不同（重玩性）
-      const shuffleSeed = Math.floor(Math.random() * 2 ** 31);
-      // 快速模拟固定全量事件；手动模式按所选密度档过滤
-      const paceMode = action.type === 'START_AUTO_GAME' ? 'full' : action.paceMode;
-      const shuffledEvents = shuffleEvents(filterEvents(EVENTS, paceMode, shuffleSeed), shuffleSeed);
-      const firstScan = findNextEvent(game, -1, shuffledEvents);
-      const first = firstScan.event;
-      if (first) {
-        game.age = first.age;
-        game.stage = getStageForAge(first.age);
-        game.stageIdx = STAGE_ORDER.indexOf(game.stage);
-        // 初始快照：首事件年龄 + 开局属性（成长曲线起点）
-        game.snapshots = appendSnapshot(undefined, game.age, game.attributes, false);
-      }
-      // 第 3 周目起（累计完成 ≥ 2 局）：从命运事件池抽 1 个本局命运事件（效果 ×1.5）
-      const fateEvent = state.stats.totalLives >= 2 ? pickFateEvent(shuffleSeed) : null;
-      return {
-        game,
-        currentEvent: first,
-        feedback: null,
-        eventIndex: first ? shuffledEvents.indexOf(first) : 0,
-        shuffledEvents,
-        skippedEvents: firstScan.skipped,
-        shuffleSeed,
-        autoPlay: action.type === 'START_AUTO_GAME',
-        paceMode,
-        typeSpeed: action.type === 'START_AUTO_GAME' ? 'normal' : action.typeSpeed,
-        saves: state.saves,
-        achievements: state.achievements,
-        stats: state.stats,
-        achievementPending: false,
-        pendingNewIds: [],
-        pendingLives: 0,
-        pendingEndingKey: '',
-        fateEventId: fateEvent?.id ?? null,
-      };
+      return startNewGame(state, {
+        gender: action.gender,
+        name: action.name,
+        paceMode: action.paceMode,
+        typeSpeed: action.typeSpeed,
+        goal: action.goal,
+        challenge: action.challenge,
+        seed: action.seed,
+        autoPlay: false,
+        isDaily: action.isDaily,
+      });
+
+    case 'START_AUTO_GAME':
+      // 快速模拟：固定全量事件 + 中速 + 无目标（开局参数全部固定）
+      return startNewGame(state, {
+        gender: action.gender,
+        name: action.name,
+        paceMode: 'full',
+        typeSpeed: 'normal',
+        goal: null,
+        challenge: false,
+        autoPlay: true,
+      });
+
+    case 'RESTART': {
+      // 局中重开：沿用本局角色与设置，换新随机种子洗牌（每日挑战局保持固定种子，同日重试同一序列）
+      return startNewGame(state, {
+        gender: state.game.gender,
+        name: state.game.name,
+        paceMode: state.paceMode,
+        typeSpeed: state.typeSpeed,
+        goal: state.game.goal,
+        challenge: state.game.challenge ?? false,
+        seed: state.isDaily ? state.shuffleSeed : undefined,
+        autoPlay: false,
+        isDaily: state.isDaily,
+      });
     }
 
     case 'MAKE_CHOICE': {
       const { choice, eventId } = action;
       // 命运事件（第 3 周目解锁）：该事件所有选项效果 ×1.5
-      const out = state.fateEventId === eventId
+      const out = state.fateEventIds.includes(eventId)
         ? scaleOutcomes(choice.outcomes, FATE_MULTIPLIER)
         : choice.outcomes;
 
@@ -381,7 +535,9 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         pendingNewIds: newIds,
         pendingLives: gameOver ? state.achievements.completedLives + 1 : 0,
         pendingEndingKey: endingKey,
-        fateEventId: state.fateEventId,
+        fateEventIds: state.fateEventIds,
+        isDaily: state.isDaily,
+        daily: state.daily,
       };
     }
 
@@ -437,8 +593,10 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         pendingNewIds: [],
         pendingLives: 0,
         pendingEndingKey: '',
-        // 旧档无命运事件字段，显式兜底
-        fateEventId: saved.fateEventId ?? null,
+        // 旧档无命运事件字段，显式兜底（新档读 fateEventIds，旧档回退单元素）
+        fateEventIds: saved.fateEventIds ?? (saved.fateEventId ? [saved.fateEventId] : []),
+        isDaily: false,
+        daily: state.daily,
       };
     }
 
@@ -450,6 +608,10 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
       // 成就已写入 localStorage，清除 pending 标志；pendingNewIds 保留到下一局开始（结算页持续展示新解锁）
       return { ...state, achievementPending: false, pendingLives: 0, pendingEndingKey: '' };
     }
+
+    case 'DAILY_UPDATED':
+      // 每日挑战最佳已写入 localStorage，更新运行时记录（标题页展示）
+      return { ...state, daily: action.daily };
 
     default:
       return state;
@@ -521,7 +683,10 @@ export function createInitialRuntime(): RuntimeState {
     pendingNewIds: [],
     pendingLives: 0,
     pendingEndingKey: '',
-    fateEventId: null,
+    fateEventIds: [],
+    isDaily: false,
+    // 每日挑战记录初始同步读取
+    daily: loadDaily(),
   };
 }
 
@@ -559,7 +724,15 @@ export function useGame() {
       bestScore: Math.max(rt.stats.bestScore, score),
       totalAge: rt.stats.totalAge + rt.game.age,
       endings: { ...rt.stats.endings, [rt.pendingEndingKey]: (rt.stats.endings[rt.pendingEndingKey] ?? 0) + 1 },
+      // 上一世终局属性：下一局开局传承（最高 2 项 ≥50 各 +8）
+      lastEndAttrs: rt.game.attributes,
     });
+    // 每日挑战局：结算仅更新今日最佳（跨天则以本局初始化今日记录）
+    if (rt.isDaily) {
+      const nextDaily = updateDailyBest(rt.daily, formatDate(new Date()), score, rt.game.age);
+      saveDaily(nextDaily);
+      dispatch({ type: 'DAILY_UPDATED', daily: nextDaily });
+    }
     dispatch({ type: 'ACHIEVEMENTS_PERSISTED' });
   }, [rt.achievementPending]);
 
@@ -585,12 +758,32 @@ export function useGame() {
     return () => clearTimeout(timer);
   }, [rt]);
 
-  const startGame = useCallback((gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | null, challenge: boolean = false) => {
+  const startGame = useCallback((gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | CustomGoal | null, challenge: boolean = false) => {
     dispatch({ type: 'START_GAME', gender, name, paceMode, typeSpeed, goal, challenge });
   }, []);
 
   const startAutoGame = useCallback((gender: 'male' | 'female', name: string) => {
     dispatch({ type: 'START_AUTO_GAME', gender, name });
+  }, []);
+
+  // 每日挑战：随机性别/名字 + 固定种子（今日日期哈希）手动开局，不写存档槽
+  const startDailyGame = useCallback(() => {
+    const gender = Math.random() < 0.5 ? 'male' : 'female';
+    dispatch({
+      type: 'START_GAME',
+      gender,
+      name: gender === 'male' ? '小明' : '小美',
+      paceMode: 'full',
+      typeSpeed: 'normal',
+      goal: null,
+      challenge: false,
+      seed: dateToSeed(formatDate(new Date())),
+      isDaily: true,
+    });
+  }, []);
+
+  const restart = useCallback(() => {
+    dispatch({ type: 'RESTART' });
   }, []);
 
   const makeChoice = useCallback((choice: Choice) => {
@@ -625,9 +818,13 @@ export function useGame() {
     achievements: rt.achievements,
     stats: rt.stats,
     newAchievements: rt.pendingNewIds,
-    fateEventId: rt.fateEventId,
+    fateEventIds: rt.fateEventIds,
+    isDaily: rt.isDaily,
+    daily: rt.daily,
     startGame,
     startAutoGame,
+    startDailyGame,
+    restart,
     makeChoice,
     continue: continue_,
     continueGame,

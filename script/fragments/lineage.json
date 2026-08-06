@@ -128,5 +128,83 @@
       { "text": "偷偷给自己也定了三条家规", "effects": { "responsibility": 2, "planning": 1 }, "flags_add": [] }
     ],
     "conditions": { "has_flags": ["parent_military_flag"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "lineage_0011",
+    "age_range": [11, 11],
+    "category": "education",
+    "title": "书房里的名校校徽",
+    "text": "家里书柜最上层摆着一枚校徽，擦得一尘不染。那是长辈当年读过的大学，全国数一数二。长辈很少提当年多风光，只说：「那四年，教会我怎么把书读进去。」你踮起脚看了很久，暗暗记下了校徽上的名字。",
+    "choices": [
+      { "text": "问长辈：要考多少分才能戴上它", "effects": { "intelligence": 3, "ambition": 2 }, "flags_add": [] },
+      { "text": "把校徽的名字写进自己的愿望清单", "effects": { "ambition": 3, "discipline": 1 }, "flags_add": [] },
+      { "text": "觉得压力好大，还是先去玩一会儿", "effects": { "happiness": 2, "pressure": -2 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["parent_top_university"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "lineage_0012",
+    "age_range": [12, 12],
+    "category": "education",
+    "title": "家里的第一张文凭",
+    "text": "搬家整理旧物，你翻出一张压箱底的毕业证书——家里第一代大学生的文凭。长辈说，当年全村就出了这一个大学生，报到那天全村的乡亲送到村口。你摸着那张泛黄的纸，第一次觉得「上大学」三个字是有分量的。",
+    "choices": [
+      { "text": "问长辈当年是怎么苦读出来的", "effects": { "intelligence": 2, "persistence": 2 }, "flags_add": [] },
+      { "text": "暗下决心：家里第二张文凭由我来拿", "effects": { "ambition": 3, "self_reliance": 1 }, "flags_add": [] },
+      { "text": "把文凭小心放回原处，像放回一件传家宝", "effects": { "gratitude": 2, "emotion": 1 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["parent_went_to_college"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "lineage_0013",
+    "age_range": [12, 12],
+    "category": "education",
+    "title": "复读那一年的照片",
+    "text": "相册最深处夹着一张旧照片：年轻时的长辈站在复读班教室门口，眼神倔强。长辈说，第一次高考落榜，是村里第一个选择复读的人，那一年所有人都在看笑话。第二年，长辈把录取通知书拍在了那些人面前。",
+    "choices": [
+      { "text": "问长辈：那一年是怎么熬过来的", "effects": { "persistence": 3, "resilience": 2 }, "flags_add": [] },
+      { "text": "把照片里的眼神记在心里", "effects": { "willpower": 2, "self_reliance": 2 }, "flags_add": [] },
+      { "text": "心想：原来大人也失败过啊", "effects": { "emotion": 2, "empathy": 1 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["parent_retake"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "lineage_0014",
+    "age_range": [13, 13],
+    "category": "health",
+    "title": "饭桌上的从医争论",
+    "text": "饭桌上聊起将来的志向，你说想学医。当医生的长辈放下筷子，说了半宿这一行的苦：值班、考核、连轴转。最后却话锋一转：「但你要是真想，我不拦你——救人的感觉，什么都换不来。」",
+    "choices": [
+      { "text": "更坚定了：苦我也要学", "effects": { "ambition": 3, "intelligence": 2 }, "flags_add": [] },
+      { "text": "有点犹豫，先把生物学好再说", "effects": { "intelligence": 2, "caution": 2 }, "flags_add": [] },
+      { "text": "被吓住了，还是想点别的出路吧", "effects": { "independence": 2, "happiness": 1 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["parent_doctor"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "lineage_0015",
+    "age_range": [15, 15],
+    "category": "finance",
+    "title": "五百块的创业实验",
+    "text": "长辈给了你五百块：「不是零花钱，是启动资金。一个学期，让钱生钱，亏了算我的。」你盘点了自己会做的事，在学校跳蚤市场摆了个小摊。第一个月过去，你盯着记账本第一次明白什么叫「成本」。",
+    "choices": [
+      { "text": "薄利多销，先把摊子做稳", "effects": { "money_management": 3, "intelligence": 2 }, "flags_add": [] },
+      { "text": "咬牙囤一批热门货搏一把", "effects": { "money": 3, "risk": 2 }, "flags_add": [] },
+      { "text": "算了算太累，把钱还回去专心学习", "effects": { "learning": 3, "intelligence": 1 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["parent_startup_success"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "lineage_0016",
+    "age_range": [17, 17],
+    "category": "personality",
+    "title": "高考后的那张车票",
+    "text": "高考最后一科结束，长辈递给你一张火车票：「走一遍我当年走过的那段路，自己一个人。」你背着包站在月台上，手心全是汗。列车启动的那一刻，你忽然明白，这不只是一趟旅行，是长辈给你上的最后一课。",
+    "choices": [
+      { "text": "一路记录见闻，写下自己的旅行日志", "effects": { "intelligence": 2, "independence": 3 }, "flags_add": [] },
+      { "text": "在青旅和天南海北的人聊天", "effects": { "social": 3, "courage": 2 }, "flags_add": [] },
+      { "text": "站在长辈拍过照的地方，拍同一张照片", "effects": { "emotion": 2, "gratitude": 2 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["parent_world_traveler"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
   }
 ]

@@ -27,7 +27,10 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      # 事件数据 public/events.json 已入库，无需重新生成；仅构建
+      # 事件数据 public/events.json 已入库，无需重新生成
+      # 引擎/数据工具测试（node:test）+ UI 测试（vitest）：回归防线，失败即中止部署
+      - run: npm test
+      - run: npx vitest run
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:

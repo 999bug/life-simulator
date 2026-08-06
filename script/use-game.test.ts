@@ -189,6 +189,34 @@ test('RESTART：局中重开沿用角色/设置/目标/挑战，换新种子重�
   assert.strictEqual(restart.game.snapshots![0].attrs.health, 55); // 挑战开局 65-10
 });
 
+test('种子挑战：START_GAME 传 seed 锁定种子，同种子两次开局事件序列相同', () => {
+  const base = createInitialRuntime();
+  const start = (seed?: number) => reducer(base, {
+    type: 'START_GAME', gender: 'male', name: '小明', paceMode: 'full', typeSpeed: 'normal', goal: null, challenge: false, seed,
+  });
+  const a = start(123456789);
+  const b = start(123456789);
+  // 锁定种子并标记种子挑战局
+  assert.strictEqual(a.shuffleSeed, 123456789);
+  assert.strictEqual(a.seedChallenge, true);
+  // 同种子 → 同事件序列（好友比分的基础）
+  assert.deepStrictEqual(a.shuffledEvents.map(e => e.id), b.shuffledEvents.map(e => e.id));
+  // 不传 seed → 非种子挑战局
+  assert.strictEqual(start(undefined).seedChallenge, false);
+});
+
+test('种子挑战：RESTART 重开保持锁定种子（与每日挑战同规则）', () => {
+  const base = createInitialRuntime();
+  const rt = reducer(base, {
+    type: 'START_GAME', gender: 'male', name: '小明', paceMode: 'full', typeSpeed: 'normal', goal: null, challenge: false, seed: 987654321,
+  });
+  const restart = reducer(rt, { type: 'RESTART' });
+  assert.strictEqual(restart.shuffleSeed, 987654321);
+  assert.strictEqual(restart.seedChallenge, true);
+  // 事件序列与重开前一致
+  assert.deepStrictEqual(restart.shuffledEvents.map(e => e.id), rt.shuffledEvents.map(e => e.id));
+});
+
 test('CONTINUE_GAME：旧档字段兜底（paceMode/typeSpeed/deathCause/snapshots）', () => {
   const base = createInitialRuntime();
   const saved = {

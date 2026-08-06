@@ -63,6 +63,7 @@ script/chiled.json ──convert-events.mjs──▶ public/events.json
 - **成长曲线**：`GameState.snapshots`（可选，`AttrSnapshot[]`）每岁属性快照——`appendSnapshot`（state.ts）进入新岁或终局记录、同岁内不重复、同岁终局替换该岁条目；开局记首事件年龄，旧存档无字段从读档岁重建；结算页 GrowthChart canvas 绘制（x 0→享年、y 0-100、末端圆点 + HTML 图例带终值）
 - **快速模拟**：标题页「⚡ 快速模拟」以随机性别/名字开局（`START_AUTO_GAME`），**用精简档抽样（每岁 1-2 个，一局约 30 秒）**；自动模式每 220ms 随机选择推进、跳过打字机（DialogBox `instant`）与选择面板，直到结算；重新开始或读档自动退出自动模式
 - **每日挑战**：标题页「📅 每日挑战」以日期确定性种子（`dateToSeed`，YYYYMMDD → number）开局，同一天全局同一局；手动播放、无目标/无挑战、不写存档槽（saveState guard 含 isDaily）；入口旁展示「今日最佳 评分/享年」（`life-sim-daily`）
+- **种子挑战**：标题页「🔑 种子」输入好友的种子码开局（SeedModal 纯数字校验，< 2^31）——同种子同事件序列（shuffleSeed 确定性洗牌），纯前端好友比分。`RuntimeState.seedChallenge` 标记，局中重开保持该种子（与每日挑战同规则）；种子锁定一次性（回标题后需重新输入）；分享卡片底部展示种子码「🔑 种子 N · 输入同一数字，挑战我走过的这一生」
 - **局中重开**：GameScreen ✕ 确认弹窗第三选项「🔄 重新开始本局」（`RESTART` action 复用 startNewGame，同设置新随机种子；每日挑战局重开保持固定种子）；快速模拟不显示
 - **周目解锁**：按 `stats.totalLives + 1` 计算周目——第 2 周目起标题页解锁「⚔️ 挑战开局」（`GameState.challenge`，开局属性 `applyChallenge` 整体 -10，结算评分 ≥70 解锁「破局者」成就）与「🎭 真实模式」（`GameState.realMode`，ChoicePanel 选项只显示属性倾向箭头 ↑/↓（\|v\|≥8 双箭头、effectiveDelta 为 0 不显示），隐藏精确数值，反馈页仍显示精确变化作事后学习）；第 3 周目起抽取**命运事件**（`pickFateEvent(seed)` 从 `RARE_EVENT_IDS` 15 个精选事件按种子抽 1，确定性可存档还原），该事件触发时效果 ×1.5（`scaleOutcomes`）、游戏内显示「⚡ 命运事件」角标；第 4 周目起解锁**传承加成**（结算把终局属性写入 `stats.lastEndAttrs`，开局 `applyInheritance` 取最高 2 项 ≥50 的属性各 +8、上限 100，与挑战 -10 独立叠加，结算页标注「🧬 传承」）；第 5 周目起**双命运事件**（`pickFateEvents(seed, count)` 抽 2 个，`RuntimeState.fateEventIds` 数组，单抽与双抽同种子同源）
 - **传记导出**：结算页「📜 导出人生传记」——`src/utils/biography.ts` 的 `buildBiographyMarkdown` 生成叙事 markdown（大事记按岁分组 + 事件标题 + 里程碑 ⭐ + 最终属性表），`downloadText` 触发下载
@@ -73,7 +74,7 @@ script/chiled.json ──convert-events.mjs──▶ public/events.json
 - **DialogBox**：打字机效果（速度档位 + 点击跳过）+ 「▼ 点击继续」；事件标题显示为「标题」
 - **ChoicePanel**：选项按钮（`button.group` class，effects 展示串由转换器生成）
 - **TitleScreen**：名字/性别 + **节奏档位（沉浸/精简）+ 打字速度 + 3 存档卡片 + 目标选择模态（GoalModal，含「🎯 自定义目标」勾选属性+滑杆设目标值 + 家族继承提示）+ 成就（AchievementsModal 铜/银/金分层）/人生图鉴（CollectionModal 13 结局路线收集，数据取自 stats.endings）/家族族谱（FamilyModal 跨世代收藏）/生涯统计（StatsModal）入口 + 快捷入口行（⚡ 快速模拟/📅 每日挑战/📊 生涯/🏆 成就/📖 图鉴/🌳 家族，flex-wrap 窄屏换行）**。布局：不动层（光晕/粒子）+ 滚动层（内容 `my-auto` 居中——不溢出居中、溢出可滚动，杜绝 justify-center 对称裁切）；模态放滚动层外
-- **SummaryScreen**：结算页（享年 + 结局 + 评分 + 属性 + **成长曲线（GrowthChart canvas 8 维随年龄折线图，图例悬停临时聚焦/点击固定聚焦单条曲线，其余淡化）+ 人生大事记完整时间线（里程碑 ⭐）+ 目标达成度 + 新解锁成就 + 本可发生而未触发 + 分享卡片（ShareCardModal canvas PNG，含迷你成长曲线 + 名字行世代数「· 第 N 代」（App 按族谱最新一代传入，快速模拟/每日挑战不显示）+ 底部传播 CTA「如果重来一次，你会怎么选？」）+ 传记导出**）
+- **SummaryScreen**：结算页（享年 + 结局 + 评分 + 属性 + **成长曲线（GrowthChart canvas 8 维随年龄折线图，图例悬停临时聚焦/点击固定聚焦单条曲线，其余淡化）+ 人生大事记完整时间线（里程碑 ⭐）+ 目标达成度 + 新解锁成就 + 本可发生而未触发 + 分享卡片（ShareCardModal canvas PNG，含迷你成长曲线 + 名字行世代数「· 第 N 代」（App 按族谱最新一代传入，快速模拟/每日挑战不显示）+ 底部种子码 + 传播 CTA「如果重来一次，你会怎么选？」）+ 传记导出**）
 - **SceneArea/SceneDecor/CategoryDecor**：场景背景 = 阶段渐变（STAGE_BG）+ 阶段 SVG 装饰（SceneDecor）+ **事件分类场景**（CategoryDecor，11 分类各一组 SVG 元素：家庭→沙发、事业→写字楼、健康→医疗十字、教育→黑板、友谊→咖啡桌、爱情→爱心、科技→屏幕电路、金融→金币折线、爱好→调色板吉他、运动→跑道篮筐、个性→对话气泡星）+ **选项属性色调响应**（GameScreen 选选项后按效果主属性叠加底部光晕，8 属性→色：health 绿/intelligence 蓝/wealth 金/happiness 橙/social 青/appearance 粉/luck 紫/morality 米白；继续后还原）
 - **App**：标题/结算页全屏渲染（脱离舞台框）；仅对局（GameScreen）保留 960×720 舞台，移动端视口等比缩放（scale = min(vw/960, vh/720)，<1 才缩放）
 

@@ -230,6 +230,8 @@ export interface RuntimeState {
   fateEventIds: string[];
   /** 每日挑战局：固定种子（同日同序列）+ 不写存档槽（结算仅更新今日最佳） */
   isDaily: boolean;
+  /** 种子挑战局：玩家输入分享的种子码开局（同种子同事件序列），局中重开保持该种子 */
+  seedChallenge: boolean;
   /** 每日挑战记录（今日最佳；标题页展示） */
   daily: DailyStore;
   /** 家族族谱（跨周目；结算时正常局追加一代，快速模拟/每日挑战不写入） */
@@ -387,6 +389,8 @@ function startNewGame(state: RuntimeState, p: StartParams): RuntimeState {
     pendingEndingKey: '',
     fateEventIds: fateEvents.map(e => e.id),
     isDaily: p.isDaily ?? false,
+    // 种子挑战局：玩家输入了种子码且非每日挑战（重开保持种子）
+    seedChallenge: p.seed != null && !p.isDaily,
     daily: state.daily,
     family: state.family,
   };
@@ -431,7 +435,7 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         goal: state.game.goal,
         challenge: state.game.challenge ?? false,
         realMode: state.game.realMode ?? false,
-        seed: state.isDaily ? state.shuffleSeed : undefined,
+        seed: (state.isDaily || state.seedChallenge) ? state.shuffleSeed : undefined,
         autoPlay: false,
         isDaily: state.isDaily,
       });
@@ -553,6 +557,7 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         pendingEndingKey: endingKey,
         fateEventIds: state.fateEventIds,
         isDaily: state.isDaily,
+        seedChallenge: state.seedChallenge,
         daily: state.daily,
         family: state.family,
       };
@@ -613,6 +618,7 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         // 旧档无命运事件字段，显式兜底（新档读 fateEventIds，旧档回退单元素）
         fateEventIds: saved.fateEventIds ?? (saved.fateEventId ? [saved.fateEventId] : []),
         isDaily: false,
+        seedChallenge: false,
         daily: state.daily,
         family: state.family,
       };
@@ -707,6 +713,7 @@ export function createInitialRuntime(): RuntimeState {
     pendingEndingKey: '',
     fateEventIds: [],
     isDaily: false,
+    seedChallenge: false,
     // 每日挑战记录初始同步读取
     daily: loadDaily(),
     // 族谱同样初始同步读取
@@ -788,8 +795,8 @@ export function useGame() {
     return () => clearTimeout(timer);
   }, [rt]);
 
-  const startGame = useCallback((gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | CustomGoal | null, challenge: boolean = false, realMode: boolean = false) => {
-    dispatch({ type: 'START_GAME', gender, name, paceMode, typeSpeed, goal, challenge, realMode });
+  const startGame = useCallback((gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | CustomGoal | null, challenge: boolean = false, realMode: boolean = false, seed?: number | null) => {
+    dispatch({ type: 'START_GAME', gender, name, paceMode, typeSpeed, goal, challenge, realMode, seed: seed ?? undefined });
   }, []);
 
   const startAutoGame = useCallback((gender: 'male' | 'female', name: string) => {
@@ -850,6 +857,7 @@ export function useGame() {
     newAchievements: rt.pendingNewIds,
     fateEventIds: rt.fateEventIds,
     isDaily: rt.isDaily,
+    shuffleSeed: rt.shuffleSeed,
     daily: rt.daily,
     family: rt.family,
     startGame,

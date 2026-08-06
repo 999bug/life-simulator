@@ -10,9 +10,10 @@ import AchievementsModal from './AchievementsModal';
 import CollectionModal from './CollectionModal';
 import FamilyModal from './FamilyModal';
 import StatsModal from './StatsModal';
+import SeedModal from './SeedModal';
 
 interface Props {
-  onStart: (gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | CustomGoal | null, challenge: boolean, realMode: boolean) => void;
+  onStart: (gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | CustomGoal | null, challenge: boolean, realMode: boolean, seed?: number | null) => void;
   onAutoStart: (gender: 'male' | 'female', name: string) => void;
   /** 每日挑战：随机性别/名字 + 今日固定种子开局（手动播放） */
   onDailyStart: () => void;
@@ -39,6 +40,9 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
   const [showCollection, setShowCollection] = useState(false);
   const [showFamily, setShowFamily] = useState(false);
   const [showStats, setShowStats] = useState(false);
+  /** 种子挑战：锁定的好友种子码（null = 随机种子） */
+  const [seed, setSeed] = useState<number | null>(null);
+  const [showSeed, setShowSeed] = useState(false);
   /** 挑战开局（第 2 周目解锁）：属性整体下调 10 点 */
   const [challenge, setChallenge] = useState(false);
   /** 真实模式（第 2 周目解锁）：选项只显示属性倾向箭头，隐藏精确数值 */
@@ -68,7 +72,7 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
     if (!gender) return;
     setShowGoal(false);
     const finalName = name.trim() || (gender === 'male' ? '小明' : '小美');
-    onStart(gender, finalName, paceMode, typeSpeed, goal, challenge, realMode);
+    onStart(gender, finalName, paceMode, typeSpeed, goal, challenge, realMode, seed);
   };
 
   return (
@@ -333,6 +337,15 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
         >
           🌳 家族
         </button>
+
+        {/* 种子挑战入口：输入好友的种子码玩同一事件序列 */}
+        <button
+          onClick={() => { sfx.select(); setShowSeed(true); }}
+          className={`text-[12px] tracking-[3px] transition-colors duration-200 font-sans
+            ${seed != null ? 'text-[#c9a96e]' : 'text-white/30 hover:text-[#c9a96e]'}`}
+        >
+          {seed != null ? `🔑 ${seed}` : '🔑 种子'}
+        </button>
       </div>
 
       </div>
@@ -371,6 +384,14 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
       {/* 生涯统计模态（📊 入口弹出） */}
       {showStats && (
         <StatsModal stats={stats} onClose={() => setShowStats(false)} />
+      )}
+
+      {/* 种子挑战输入模态（🔑 入口弹出） */}
+      {showSeed && (
+        <SeedModal
+          onConfirm={s => { setSeed(s); setShowSeed(false); }}
+          onCancel={() => setShowSeed(false)}
+        />
       )}
     </div>
   );

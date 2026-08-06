@@ -292,10 +292,18 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
         ))}
       </div>
 
-      {/* 新解锁成就 */}
+      {/* 新解锁成就（附分享入口：成就瞬间是分享欲峰值） */}
       {newAchievements.length > 0 && (
         <div className="w-full max-w-[720px] animate-[fadeIn_1.6s_ease]">
-          <h3 className="text-[13px] tracking-[4px] text-[#c9a96e] mb-2.5 font-normal">🏆 新解锁成就</h3>
+          <div className="flex items-center justify-between mb-2.5">
+            <h3 className="text-[13px] tracking-[4px] text-[#c9a96e] font-normal">🏆 新解锁成就</h3>
+            <button
+              onClick={() => setShowShare(true)}
+              className="text-[11px] tracking-[2px] text-white/40 hover:text-[#c9a96e] transition-colors font-sans"
+            >
+              🎴 分享这一刻 ›
+            </button>
+          </div>
           <div className="flex flex-wrap gap-2">
             {newAchievements.map(id => {
               const a = ACHIEVEMENTS.find(x => x.id === id)!;

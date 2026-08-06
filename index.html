@@ -7,7 +7,21 @@
     <title>人生模拟器 - Life Simulator</title>
   </head>
   <body class="bg-black">
-    <div id="root"></div>
+    <!-- 加载中占位：React 挂载（loadEvents 就绪后）即替换；避免首次访问白屏 -->
+    <div id="root">
+      <div style="width:100vw;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;background:radial-gradient(ellipse at center,#1a1a30 0%,#0a0a14 70%);color:#fff;font-family:'PingFang SC','Microsoft YaHei',sans-serif">
+        <p style="margin:0;color:#c9a96e;font-size:22px;letter-spacing:8px">人生模拟器</p>
+        <p style="margin:0;color:rgba(255,255,255,0.4);font-size:11px;letter-spacing:4px">L I F E · S I M U L A T O R</p>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <span style="width:8px;height:8px;border-radius:50%;background:#c9a96e;opacity:0.9;animation:lsPulse 1.2s infinite ease-in-out"></span>
+          <span style="width:8px;height:8px;border-radius:50%;background:#c9a96e;opacity:0.5;animation:lsPulse 1.2s 0.2s infinite ease-in-out"></span>
+          <span style="width:8px;height:8px;border-radius:50%;background:#c9a96e;opacity:0.25;animation:lsPulse 1.2s 0.4s infinite ease-in-out"></span>
+        </div>
+        <style>
+          @keyframes lsPulse { 0%,100% { transform: scale(1); opacity: 0.9; } 50% { transform: scale(1.6); opacity: 0.3; } }
+        </style>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

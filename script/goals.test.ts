@@ -89,9 +89,9 @@ test('checkGoal：自定义目标不干扰预设分支（旧字符串 goal 兼�
   assert.strictEqual(checkGoal('family', game({ flags: ['married', 'has_child'] }, { happiness: 75 }))!.achieved, true);
 });
 
-test('ACHIEVEMENTS：28 个定义齐全', () => {
-  assert.strictEqual(ACHIEVEMENTS.length, 28);
-  assert.strictEqual(new Set(ACHIEVEMENTS.map(a => a.id)).size, 28);
+test('ACHIEVEMENTS：30 个定义齐全', () => {
+  assert.strictEqual(ACHIEVEMENTS.length, 30);
+  assert.strictEqual(new Set(ACHIEVEMENTS.map(a => a.id)).size, 30);
 });
 
 test('checkAchievements：新增 8 个成就判定', () => {
@@ -150,4 +150,18 @@ test('checkAchievements：挑战开局 70 分以上解锁破局者', () => {
   // 非挑战局高分不解锁
   const noChallenge = { ...high, game: game({}, { health: 75, intelligence: 75, wealth: 75, happiness: 75, social: 75, appearance: 75, luck: 75, morality: 75 }) };
   assert.ok(!checkAchievements(noChallenge).includes('challenger'));
+});
+
+test('checkAchievements：连续挑战成就（3 天银 / 7 天金）', () => {
+  const g = game({ age: 50, attributes: { health: 50, intelligence: 50, wealth: 50, happiness: 50, social: 50, appearance: 50, luck: 50, morality: 50 } });
+  const base = { game: g, completedLives: 1, wasLite: false, wasAuto: false, endingsCount: 1 };
+  const day2 = checkAchievements({ ...base, dailyStreak: 2 });
+  assert.ok(!day2.includes('daily_streak_3'));
+  assert.ok(!day2.includes('daily_streak_7'));
+  const day3 = checkAchievements({ ...base, dailyStreak: 3 });
+  assert.ok(day3.includes('daily_streak_3'));
+  assert.ok(!day3.includes('daily_streak_7'));
+  const day7 = checkAchievements({ ...base, dailyStreak: 7 });
+  assert.ok(day7.includes('daily_streak_3'));
+  assert.ok(day7.includes('daily_streak_7'));
 });

@@ -846,7 +846,7 @@ export function useGame() {
       track({ type: 'game_abandon', ts: Date.now(), age: rt.game.age });
     }
     dispatch({ type: 'RESET' });
-  }, [rt.game.phase]);
+  }, [rt.game.phase, rt.game.age]);
 
   const continueGame = useCallback((slot: number) => {
     dispatch({ type: 'CONTINUE_GAME', slot });

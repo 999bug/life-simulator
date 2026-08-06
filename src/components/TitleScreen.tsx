@@ -11,6 +11,8 @@ import CollectionModal from './CollectionModal';
 import FamilyModal from './FamilyModal';
 import StatsModal from './StatsModal';
 import SeedModal from './SeedModal';
+import SummaryScreen from './SummaryScreen';
+import { recapGame } from '../engine/family';
 
 interface Props {
   onStart: (gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | CustomGoal | null, challenge: boolean, realMode: boolean, seed?: number | null) => void;
@@ -40,6 +42,8 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
   const [showCollection, setShowCollection] = useState(false);
   const [showFamily, setShowFamily] = useState(false);
   const [showStats, setShowStats] = useState(false);
+  /** 回看中的族谱世代（点「每一世」/族谱行打开只读结算页） */
+  const [recap, setRecap] = useState<FamilyMember | null>(null);
   /** 种子挑战：锁定的好友种子码（null = 随机种子） */
   const [seed, setSeed] = useState<number | null>(null);
   const [showSeed, setShowSeed] = useState(false);
@@ -376,14 +380,27 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
         <CollectionModal endings={stats.endings} onClose={() => setShowCollection(false)} />
       )}
 
-      {/* 家族族谱模态（🌳 入口弹出） */}
+      {/* 家族族谱模态（🌳 入口弹出）；有回顾数据的代可点击回看结算页 */}
       {showFamily && (
-        <FamilyModal family={family} onClose={() => setShowFamily(false)} />
+        <FamilyModal family={family} onRecap={setRecap} onClose={() => setShowFamily(false)} />
       )}
 
-      {/* 生涯统计模态（📊 入口弹出） */}
+      {/* 生涯统计模态（📊 入口弹出，含「每一世」回看列表） */}
       {showStats && (
-        <StatsModal stats={stats} onClose={() => setShowStats(false)} />
+        <StatsModal stats={stats} family={family} onRecap={setRecap} onClose={() => setShowStats(false)} />
+      )}
+
+      {/* 世代结算回看：复用 SummaryScreen 只读渲染（z-60 盖在统计/族谱模态之上） */}
+      {recap?.detail && (
+        <div className="absolute inset-0 z-[60]">
+          <SummaryScreen
+            game={recapGame(recap)!}
+            onRestart={() => setRecap(null)}
+            newAchievements={[]}
+            skippedTitles={recap.detail.skippedTitles}
+            generation={recap.generation}
+          />
+        </div>
       )}
 
       {/* 种子挑战输入模态（🔑 入口弹出） */}

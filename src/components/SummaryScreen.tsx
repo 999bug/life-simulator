@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { AchievementId, GameState, LifeEvent } from '../types';
+import type { AchievementId, GameState } from '../types';
 import { ATTR_META, calcScore } from '../engine/state';
 import { GOALS, checkGoal } from '../engine/goals';
 import { ACHIEVEMENTS } from '../engine/achievements';
@@ -13,9 +13,9 @@ interface Props {
   onRestart: () => void;
   /** 本局新解锁成就（useGame 传入，不进 GameState） */
   newAchievements: AchievementId[];
-  /** 本局因条件未满足而被跳过的事件（展示「本可发生而未触发」） */
-  skippedEvents: LifeEvent[];
-  /** 本局所属世代（族谱最新一代；空族谱/快速模拟/每日挑战为 null，不展示） */
+  /** 本局因条件未满足而被跳过的事件标题（去重后；展示「本可发生而未触发」） */
+  skippedTitles: string[];
+  /** 本局所属世代（族谱最新一代；空族谱为 null 不展示） */
   generation?: number | null;
   /** 本局洗牌种子（分享卡片展示种子码，好友可挑战同一序列） */
   seed?: number;
@@ -161,7 +161,7 @@ function getVerdict(game: GameState): Verdict {
 /** 里程碑 flag：命中则时间线高亮 */
 const MILESTONE_FLAGS = ['went_to_college', 'grad_school', 'top_university', 'married', 'has_child', 'doctor', 'startup_success', 'civil_servant', 'world_traveler', 'athlete_pro', 'military_flag', 'skilled_worker', 'tech_career', 'retired'];
 
-export default function SummaryScreen({ game, onRestart, newAchievements, skippedEvents, generation, seed }: Props) {
+export default function SummaryScreen({ game, onRestart, newAchievements, skippedTitles, generation, seed }: Props) {
   const score = calcScore(game.attributes);
   const { title, desc } = getVerdict(game);
   const goal = checkGoal(game.goal, game);
@@ -274,18 +274,18 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       )}
 
       {/* 本可发生而未触发的事件（条件未满足被跳过） */}
-      {skippedEvents.length > 0 && (
+      {skippedTitles.length > 0 && (
         <div className="w-full max-w-[720px] animate-[fadeIn_1.5s_ease]">
           <h3 className="text-[13px] tracking-[4px] text-[#c9a96e] mb-2.5 font-normal">👻 本可发生而未触发</h3>
-          <p className="text-[11px] text-white/35 mb-2">这一生有 {skippedEvents.length} 个事件因条件未满足而未曾发生：</p>
+          <p className="text-[11px] text-white/35 mb-2">这一生有 {skippedTitles.length} 个事件因条件未满足而未曾发生：</p>
           <div className="flex flex-wrap gap-2">
-            {[...new Set(skippedEvents.map(e => e.title ?? e.id))].slice(0, 10).map(t => (
+            {skippedTitles.slice(0, 10).map(t => (
               <span key={t} className="px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.06] text-[11px] text-white/40">
                 {t}
               </span>
             ))}
-            {new Set(skippedEvents.map(e => e.title ?? e.id)).size > 10 && (
-              <span className="px-3 py-1.5 text-[11px] text-white/25">等 {new Set(skippedEvents.map(e => e.title ?? e.id)).size - 10} 个……</span>
+            {skippedTitles.length > 10 && (
+              <span className="px-3 py-1.5 text-[11px] text-white/25">等 {skippedTitles.length - 10} 个……</span>
             )}
           </div>
         </div>

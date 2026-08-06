@@ -1,10 +1,10 @@
 /**
- * family.ts 纯函数测试：族谱追加世代递增、字段完整、容量裁剪。
+ * family.ts 纯函数测试：族谱追加世代递增、字段完整、容量裁剪、回顾数据挂载/裁剪、结算页重建。
  * 运行：node --experimental-strip-types --test script/family.test.ts
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { appendFamilyMember, parentFlag, FAMILY_MAX } from '../src/engine/family.ts';
+import { appendFamilyMember, parentFlag, recapGame, FAMILY_MAX, FAMILY_DETAIL_MAX } from '../src/engine/family.ts';
 import type { FamilyMember, GameState } from '../src/types/index.ts';
 
 /** 构造最小终局状态 */
@@ -93,4 +93,45 @@ test('parentFlag：快速模拟代不参与传承，向上取最近手玩局', (
   // 每日挑战是手玩局 → 正常参与传承
   const daily = appendFamilyMember([], game({ flags: ['athlete_pro'] }), '20260803', { daily: true });
   assert.strictEqual(parentFlag(daily), 'parent_athlete_pro');
+});
+
+test('appendFamilyMember：新代携带完整回顾数据，超出最近代数的裁剪 detail', () => {
+  const g = game({
+    name: '回顾',
+    history: [{ age: 7, stage: 'childhood', eventId: 'a_01', choiceIndex: 0, text: '选择' }],
+    snapshots: [{ age: 7, attrs: { health: 65, intelligence: 25, wealth: 20, happiness: 60, social: 25, appearance: 45, luck: 50, morality: 45 } }],
+  });
+  let family: FamilyMember[] = [];
+  for (let i = 0; i < FAMILY_DETAIL_MAX + 2; i++) {
+    family = appendFamilyMember(family, { ...g, name: `第${i + 1}代` }, '20260805', { skippedTitles: ['未触发甲'] });
+  }
+  // 全部成员都在（摘要行不裁）
+  assert.strictEqual(family.length, FAMILY_DETAIL_MAX + 2);
+  // 最早 2 代 detail 被裁剪，其余保留
+  assert.strictEqual(family[0].detail, undefined);
+  assert.strictEqual(family[1].detail, undefined);
+  const latest = family[family.length - 1];
+  assert.strictEqual(latest.detail!.history.length, 1);
+  assert.strictEqual(latest.detail!.snapshots!.length, 1);
+  assert.deepStrictEqual(latest.detail!.skippedTitles, ['未触发甲']);
+});
+
+test('recapGame：从族谱记录重建只读终局状态，无 detail 返回 null', () => {
+  const g = game({
+    name: '张三', age: 88, flags: ['doctor'], goal: 'wealth', challenge: true,
+    history: [{ age: 7, stage: 'childhood', eventId: 'a_01', choiceIndex: 0, text: '选择' }],
+  });
+  const family = appendFamilyMember([], g, '20260805');
+  const rg = recapGame(family[0])!;
+  assert.strictEqual(rg.name, '张三');
+  assert.strictEqual(rg.age, 88);
+  assert.strictEqual(rg.phase, 'summary');
+  assert.strictEqual(rg.stage, 'elder');
+  assert.deepStrictEqual(rg.flags, ['doctor']);
+  assert.strictEqual(rg.goal, 'wealth');
+  assert.strictEqual(rg.challenge, true);
+  assert.strictEqual(rg.history.length, 1);
+  assert.deepStrictEqual(rg.attributes, g.attributes);
+  // 无 detail → null
+  assert.strictEqual(recapGame({ ...family[0], detail: undefined }), null);
 });

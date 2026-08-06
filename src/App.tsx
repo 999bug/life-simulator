@@ -54,7 +54,7 @@ export default function App() {
             game={game}
             onRestart={reset}
             newAchievements={newAchievements}
-            skippedEvents={skippedEvents}
+            skippedTitles={[...new Set(skippedEvents.map(e => e.title ?? e.id))]}
             generation={family.length > 0 ? family[family.length - 1].generation : null}
             seed={shuffleSeed}
           />

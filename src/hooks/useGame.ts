@@ -764,8 +764,9 @@ export function useGame() {
       saveDaily(nextDaily);
       dispatch({ type: 'DAILY_UPDATED', daily: nextDaily });
     }
-    // 每一生都入族谱（世代 = 族谱长度 + 1）；快速模拟/每日挑战带标记（auto 代不参与传承）
-    const nextFamily = appendFamilyMember(rt.family, rt.game, formatDate(new Date()), { auto: rt.autoPlay, daily: rt.isDaily });
+    // 每一生都入族谱（世代 = 族谱长度 + 1）；快速模拟/每日挑战带标记（auto 代不参与传承）；附带回顾数据供结算页回看
+    const skippedTitles = [...new Set(rt.skippedEvents.map(e => e.title ?? e.id))];
+    const nextFamily = appendFamilyMember(rt.family, rt.game, formatDate(new Date()), { auto: rt.autoPlay, daily: rt.isDaily, skippedTitles });
     saveFamily(nextFamily);
     dispatch({ type: 'FAMILY_UPDATED', family: nextFamily });
     dispatch({ type: 'ACHIEVEMENTS_PERSISTED' });

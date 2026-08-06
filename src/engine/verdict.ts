@@ -35,6 +35,20 @@ export const VERDICT_META: Record<string, VerdictRoute> = Object.fromEntries(
   VERDICT_ROUTES.map(r => [r.key, r]),
 );
 
+/** 分数档结局 key → 标题（与 SummaryScreen.scoreVerdict 分档一致；族谱/生涯统计展示用） */
+export const SCORE_VERDICT_TITLES: Record<string, string> = {
+  'score:75+': '辉煌的一生',
+  'score:60+': '充实的一生',
+  'score:45+': '平凡的一生',
+  'score:30+': '坎坷的一生',
+  'score:low': '艰难的一生',
+};
+
+/** 结局 key → 展示标题：路线查图鉴表，分数档查分档表 */
+export function verdictTitle(key: string): string {
+  return VERDICT_META[key]?.title ?? SCORE_VERDICT_TITLES[key] ?? '平凡的一生';
+}
+
 /**
  * 结局判定 key：路线 flag 优先，无则按分数档。
  * 与 SummaryScreen.getVerdict 的判定顺序一致（仅取 key，不含文案）。

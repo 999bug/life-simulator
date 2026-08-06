@@ -165,6 +165,28 @@ export interface FamilyMember {
   auto?: boolean;
   /** 每日挑战局（手玩但固定种子，仅展示标记用） */
   daily?: boolean;
+  /** 完整回顾数据（结算页回看用；仅最近若干代保留，老代裁剪以控 localStorage 体积） */
+  detail?: LifeDetail;
+}
+
+/** 一生的完整回顾数据：重建只读结算页所需的全部字段 */
+export interface LifeDetail {
+  /** 人生大事记（每次选择的记录） */
+  history: ChoiceRecord[];
+  /** 每岁属性快照（成长曲线；旧存档局可能缺失） */
+  snapshots?: AttrSnapshot[];
+  /** 终局 flag 集合（结局判定重放） */
+  flags: string[];
+  /** 人生目标（达成度展示） */
+  goal: GoalKey | CustomGoal | null;
+  /** 死因（临终叙事） */
+  deathCause: DeathCause | null;
+  /** 挑战开局标记 */
+  challenge?: boolean;
+  /** 传承加成标记 */
+  inherited?: boolean;
+  /** 本可发生而未触发的事件标题（去重后截断存储） */
+  skippedTitles: string[];
 }
 
 /** 打字机速度档 */

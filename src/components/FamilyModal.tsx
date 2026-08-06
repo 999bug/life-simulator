@@ -1,18 +1,15 @@
 import type { FamilyMember } from '../types';
-import { VERDICT_META } from '../engine/verdict';
+import { verdictTitle } from '../engine/verdict';
 
 interface Props {
   family: FamilyMember[];
+  /** 点击某一代回看其结算页（仅有完整回顾数据的代可点击；不传则纯展示） */
+  onRecap?: (member: FamilyMember) => void;
   onClose: () => void;
 }
 
-/** 结局 key → 展示标题（分数档结局无图鉴条目，兜底文案） */
-function verdictTitle(key: string): string {
-  return VERDICT_META[key]?.title ?? '平凡的一生';
-}
-
-/** 家族族谱模态（标题页入口）：最新一代在上，世代线性向下追溯 */
-export default function FamilyModal({ family, onClose }: Props) {
+/** 家族族谱模态（标题页入口）：最新一代在上，世代线性向下追溯；有回顾数据的代可点击回看结算页 */
+export default function FamilyModal({ family, onRecap, onClose }: Props) {
   const latest = family[family.length - 1];
   return (
     <div className="absolute inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center" onClick={onClose}>
@@ -26,22 +23,36 @@ export default function FamilyModal({ family, onClose }: Props) {
           </p>
         ) : (
           // 最新一代在上：世代越深（越早）颜色越淡
-          [...family].reverse().map(m => (
-            <div key={m.generation} className="flex items-center gap-3 p-3 rounded-lg border border-[#c9a96e]/20 bg-[#c9a96e]/5" style={{ opacity: Math.max(0.45, 1 - (latest!.generation - m.generation) * 0.08) }}>
-              <span className="text-[16px] leading-none">{m.gender === 'male' ? '👨' : '👩'}</span>
-              <div className="flex-1">
-                <div className="text-[13px] text-[#c9a96e]">
-                  第 {m.generation} 代 · {m.name}
-                  {m.auto && <span className="ml-1.5 text-[10px] text-white/35" title="快速模拟：随机选择的一生，不参与传承">⚡</span>}
-                  {m.daily && <span className="ml-1.5 text-[10px] text-white/35" title="每日挑战：固定种子的一生">📅</span>}
+          [...family].reverse().map(m => {
+            const row = (
+              <>
+                <span className="text-[16px] leading-none">{m.gender === 'male' ? '👨' : '👩'}</span>
+                <div className="flex-1">
+                  <div className="text-[13px] text-[#c9a96e]">
+                    第 {m.generation} 代 · {m.name}
+                    {m.auto && <span className="ml-1.5 text-[10px] text-white/35" title="快速模拟：随机选择的一生，不参与传承">⚡</span>}
+                    {m.daily && <span className="ml-1.5 text-[10px] text-white/35" title="每日挑战：固定种子的一生">📅</span>}
+                  </div>
+                  <div className="text-[11px] text-white/35 mt-0.5 leading-relaxed">
+                    享年 {m.age} · 评分 {m.score} · {verdictTitle(m.verdict)}
+                  </div>
                 </div>
-                <div className="text-[11px] text-white/35 mt-0.5 leading-relaxed">
-                  享年 {m.age} · 评分 {m.score} · {verdictTitle(m.verdict)}
-                </div>
+                <span className="text-[10px] text-white/25 tracking-[1px]">{m.date.slice(0, 4)}</span>
+              </>
+            );
+            const cls = "flex items-center gap-3 p-3 rounded-lg border border-[#c9a96e]/20 bg-[#c9a96e]/5 w-full text-left font-sans";
+            const style = { opacity: Math.max(0.45, 1 - (latest!.generation - m.generation) * 0.08) };
+            // 有完整回顾数据的代可点击回看结算页
+            return onRecap && m.detail ? (
+              <button key={m.generation} onClick={() => onRecap(m)} className={`${cls} hover:border-[#c9a96e]/50 hover:bg-[#c9a96e]/10 transition-all duration-200 cursor-pointer`} style={style}>
+                {row}
+              </button>
+            ) : (
+              <div key={m.generation} className={cls} style={style}>
+                {row}
               </div>
-              <span className="text-[10px] text-white/25 tracking-[1px]">{m.date.slice(0, 4)}</span>
-            </div>
-          ))
+            );
+          })
         )}
         <button
           onClick={onClose}

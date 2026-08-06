@@ -3,7 +3,7 @@ import type { AchievementId, AttributeKey, Attributes, Choice, CustomGoal, Death
 import { emptySaves, isValidSaveData, migrateLegacySave, SLOT_COUNT, type SavesV2 } from '../engine/save.ts';
 import { checkAchievements } from '../engine/achievements.ts';
 import { verdictKey } from '../engine/verdict.ts';
-import { appendFamilyMember, loadFamily, saveFamily } from '../engine/family.ts';
+import { appendFamilyMember, loadFamily, parentFlag, saveFamily } from '../engine/family.ts';
 import {
   createInitialState,
   applyOutcomes,
@@ -347,6 +347,11 @@ function startNewGame(state: RuntimeState, p: StartParams): RuntimeState {
   }
   // 真实模式（第 2 周目解锁）：选项只显示属性倾向箭头
   game.realMode = p.realMode ?? false;
+  // 跨代继承：族谱非空时按上一代结局路线注入 parent_ flag（童年继承事件消费）
+  const pf = parentFlag(state.family);
+  if (pf) {
+    game.flags.push(pf);
+  }
   const shuffleSeed = p.seed ?? Math.floor(Math.random() * 2 ** 31);
   // 快速模拟用精简档（每岁 1-2 个）；手动模式按所选密度档过滤
   const shuffledEvents = shuffleEvents(filterEvents(EVENTS, p.paceMode, shuffleSeed), shuffleSeed);

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-人生模拟器：React 18 + TypeScript + Vite + Tailwind 的文字人生模拟游戏。纯前端、无后端，游戏内容由 JSON 事件数据驱动。事件数据源 `script/chiled.json`（592 个事件：523 原始 + 片段合入，其中 4 位模拟事件经 keep-list 精选 219 个）经转换器生成引擎格式 `src/engine/events.json`（共 592 个事件），运行时同岁组内按种子洗牌后线性播放。PWA 可安装离线。
+人生模拟器：React 18 + TypeScript + Vite + Tailwind 的文字人生模拟游戏。纯前端、无后端，游戏内容由 JSON 事件数据驱动。事件数据源 `script/chiled.json`（602 个事件：523 原始 + 片段合入，其中 4 位模拟事件经 keep-list 精选 229 个）经转换器生成引擎格式 `src/engine/events.json`（共 602 个事件），运行时同岁组内按种子洗牌后线性播放。PWA 可安装离线。
 
 ## 常用命令
 
@@ -30,7 +30,7 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 
 - **chiled.json**：事件数据源（snake_case 原始格式：`age_range`/`flags_add`/`has_flags`/`min_attrs`）。**所有事件改动都改这里，不手改 events.json**
 - **convert-events.mjs**：唯一转换器。`ATTR_MAP`（107 键）把 chiled 属性名映射到 8 大引擎属性；`INVERSE` 集合内的键是负向维度（取反求和，如 `pressure:+8` → happiness:-8）；未映射键 fail-fast 抛错；**事件 id 校验**（2 位主线/4 位模拟，其他抛错）。`ATTR_ORDER`/`STAGE_RANGES` 需与 `src/engine/state.ts` 的 `ATTR_META`/`STAGE_META` 手动同步
-- **prune-events.mjs**：精选工具。事件 id 规则：**2 位数字后缀 = 原始主线事件（如 child_01），一字不改、永远保留；4 位数字后缀 = 模拟事件（如 child_0017），只能被精选删除、不能改内容**。`keep-list.json` 记录保留清单（审计用，当前 219 条 = 全部保留的模拟事件；新增模拟事件后需同步追加，否则 prune 会被过滤）。运行方式：`node script/prune-events.mjs script/keep-list.json`（写回 chiled.json，含 gap_year 补丁）
+- **prune-events.mjs**：精选工具。事件 id 规则：**2 位数字后缀 = 原始主线事件（如 child_01），一字不改、永远保留；4 位数字后缀 = 模拟事件（如 child_0017），只能被精选删除、不能改内容**。`keep-list.json` 记录保留清单（审计用，当前 229 条 = 全部保留的模拟事件；新增模拟事件后需同步追加，否则 prune 会被过滤）。运行方式：`node script/prune-events.mjs script/keep-list.json`（写回 chiled.json，含 gap_year 补丁）
 - **merge-fragments.mjs**：合并 chiled.json + `script/fragments/` 片段，跑三重校验：convertAll fail-fast + 每岁密度（0-2 岁 3-5 个、3-12 岁 5-13 个、13-75 岁 3-8 个）+ flag 生产/消费配对（has_flags 引用的 flag 必须有产出者，not_flags 不算悬空）。**幂等**：片段中已合并的 id 自动跳过，片段文件保留在 fragments/ 目录可重复运行
 - **clamp-effects.mjs**：效果值钳位工具。4 位模拟事件的效果按转换后属性值等比例压缩到 ±3~±20 声明范围内（多键求和超范围时压缩该属性所有来源键）；2 位主线一字不改。幂等，效果值调整后用它 + build:events
 - **rebalance-effects.mjs**：抉择质量改造（2026-08 P0-1）。声明式 REBALANCE 表给 3-12 岁 21 个全正模拟事件的高收益选项加代价维度（压力/金钱/社交/幸福，与叙事匹配），「设置为目标值」语义幂等。2 位主线不动。运行后接 build:events
@@ -54,7 +54,7 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 - **节奏档位**：密度（沉浸全量 / 精简每岁 1-2 个，`filterEvents` 主线优先抽样 + flag 闭包，`liteTarget`：0-2 岁全保留、3-12 岁 2 个、13+ 岁 1 个）开局选定；打字速度（慢/中/快）游戏内实时切换（DialogBox speedRef，不重启打字机）；点击跳过打字
 - **存档 v2**：`life-sim-saves-v2` = 3 槽位 + active（`src/engine/save.ts`：SavesV2/migrateLegacySave 旧版自动迁移/isValidSaveData 内容校验）；标题页 3 卡片点击继续、开始新局覆盖确认；**快速模拟不写槽**（autoPlay guard）；RESET 保留槽位（回标题不丢档）
 - **目标/成就/统计**：`goal` 入 GameState（预设 key 或自定义 `CustomGoal {attrs}`——GoalModal 勾选属性+滑杆设目标值，结算逐项达标即达成）；成就存 `life-sim-achievements`（unlocked/completedLives/endings）；统计存 `life-sim-stats`（totalLives/bestScore/totalAge/endings 分布 + lastEndAttrs 终局属性，传承加成用，旧存档缺失无加成）；每日挑战存 `life-sim-daily`（date/bestScore/bestAge，仅当日更新最佳）；结算时经 `achievementPending` 标志一次性持久化（读档恢复不重复计数）
-- **家族族谱**：`life-sim-family` = FamilyMember[]（`src/engine/family.ts`：loadFamily/saveFamily/appendFamilyMember 纯函数，容量 100 裁最老）。正常局（非快速模拟/每日挑战）结算追加一代（世代 = 族谱长度 + 1，记录享年/评分/结局 key/终局属性/日期）；标题页 FamilyModal 展示（最新在上、越早越淡）；GoalModal 开局提示「你将作为第 N+1 代出生」
+- **家族族谱**：`life-sim-family` = FamilyMember[]（`src/engine/family.ts`：loadFamily/saveFamily/appendFamilyMember 纯函数，容量 100 裁最老）。正常局（非快速模拟/每日挑战）结算追加一代（世代 = 族谱长度 + 1，记录享年/评分/结局 key/终局属性/日期）；标题页 FamilyModal 展示（最新在上、越早越淡）；GoalModal 开局提示「你将作为第 N+1 代出生」。**跨代继承**：开局按上一代结局路线注入 `parent_<verdictKey>` flag（`parentFlag`，分数档结局不注入），fragments/lineage.json 10 个童年继承事件消费（6-10 岁）；`parent_` 前缀 flag 无事件产出者，merge 配对校验与 lite 闭包测试均豁免
 - conditions 不满足的事件静默跳过；flags 累积在 `game.flags`（不重复）；历史 `history` 含 `flags?` 字段（生涯年表里程碑标记，旧存档兼容）
 - 死亡判定：健康归零或超过 `calcMaxAge`；死因记录在 `game.deathCause`（health 耗尽 / lifespan 寿终），结算页展示临终叙事
 - `MAKE_CHOICE` 预载下一事件（gameOver 时判定成就/统计），`CONTINUE` 只清反馈；反馈页正向收益距年龄上限 15 点内标注「（距上限 X 点）」

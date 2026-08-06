@@ -53,6 +53,14 @@ test('checkFlagPairs：检出无产出者的条件 flag，not_flags 不算悬空
   assert.deepEqual(checkFlagPairs(ok), []);
 });
 
+test('checkFlagPairs：parent_ 前缀为跨代注入 flag，豁免配对校验', () => {
+  const lineage = [{ ...ev('a01', 7), conditions: { has_flags: ['parent_doctor'] } }];
+  assert.deepEqual(checkFlagPairs(lineage), []);
+  // 拼错的非前缀 flag 仍会被检出
+  const typo = [{ ...ev('a02', 7), conditions: { has_flags: ['parentt_doctor'] } }];
+  assert.deepEqual(checkFlagPairs(typo), ['parentt_doctor']);
+});
+
 test('事件 id 规则校验：2 位主线与 4 位模拟通过，其他抛错', () => {
   assert.strictEqual(isValidEventId('child_01'), true);
   assert.strictEqual(isValidEventId('child_0017'), true);

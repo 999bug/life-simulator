@@ -1,6 +1,6 @@
 import type { FamilyMember, GameState } from '../types';
 import { calcScore } from './state.ts';
-import { verdictKey } from './verdict.ts';
+import { VERDICT_META, verdictKey } from './verdict.ts';
 
 /** 族谱存储 key（跨周目） */
 export const FAMILY_KEY = 'life-sim-family';
@@ -60,4 +60,22 @@ export function appendFamilyMember(family: FamilyMember[], game: GameState, date
     date,
   };
   return [...family, member].slice(-FAMILY_MAX);
+}
+
+/** 跨代继承 flag 前缀（数据管线 merge-fragments 对此前缀豁免配对校验） */
+export const PARENT_FLAG_PREFIX = 'parent_';
+
+/**
+ * 上一代结局路线 → 下一代开局注入的传承 flag。
+ * 仅 13 条结局路线有职业语义；分数档结局（score:*）不注入。
+ *
+ * @param family 现有族谱
+ * @returns 传承 flag（如 parent_doctor），族谱为空或分数档结局时为 null
+ */
+export function parentFlag(family: FamilyMember[]): string | null {
+  const latest = family[family.length - 1];
+  if (!latest || !VERDICT_META[latest.verdict]) {
+    return null;
+  }
+  return PARENT_FLAG_PREFIX + latest.verdict;
 }

@@ -4,7 +4,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { appendFamilyMember, FAMILY_MAX } from '../src/engine/family.ts';
+import { appendFamilyMember, parentFlag, FAMILY_MAX } from '../src/engine/family.ts';
 import type { FamilyMember, GameState } from '../src/types/index.ts';
 
 /** 构造最小终局状态 */
@@ -54,4 +54,17 @@ test('appendFamilyMember：超出容量裁掉最老世代，世代号保留原�
   assert.strictEqual(family[0].name, '第2代');
   assert.strictEqual(family[0].generation, 2);
   assert.strictEqual(family[family.length - 1].name, '溢出代');
+});
+
+test('parentFlag：路线结局注入 parent_ flag，分数档/空族谱不注入', () => {
+  assert.strictEqual(parentFlag([]), null);
+  const doctor = appendFamilyMember([], game({ flags: ['doctor'] }), '20260805');
+  assert.strictEqual(parentFlag(doctor), 'parent_doctor');
+  // 分数档结局（无路线 flag）不注入
+  const plain = appendFamilyMember([], game({ flags: [] }), '20260805');
+  assert.strictEqual(parentFlag(plain), null);
+  // 取族谱末尾（最新一代）
+  let family = appendFamilyMember([], game({ flags: ['civil_servant'] }), '20260801');
+  family = appendFamilyMember(family, game({ flags: ['athlete_pro'] }), '20260802');
+  assert.strictEqual(parentFlag(family), 'parent_athlete_pro');
 });

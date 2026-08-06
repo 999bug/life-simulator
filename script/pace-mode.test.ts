@@ -72,6 +72,10 @@ test('filterEvents：lite flag 闭包（消费事件的产出者在子集内）'
   const ids = new Set(lite.map(e => e.id));
   for (const e of lite) {
     for (const f of e.conditions?.hasFlags ?? []) {
+      // parent_ 前缀为开局跨代注入 flag，无事件产出者，豁免闭包检查
+      if (f.startsWith('parent_')) {
+        continue;
+      }
       const ps = (producers.get(f) ?? []).filter(p => p !== e);
       assert.ok(ps.some(p => ids.has(p.id)), `${e.id} 需要的 flag ${f} 无产出者在子集内`);
     }

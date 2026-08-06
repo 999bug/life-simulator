@@ -5,6 +5,7 @@ import { convertAll } from './convert-events.mjs';
 /**
  * 合并基础数据与生成片段：跳过已在基础数据中的 id（幂等），按 age_range 升序排序。
  * 片段文件在合并后保留在 fragments/ 目录，重复运行不会产生重复事件。
+ * 跨代继承 flag（parent_ 前缀）由开局按族谱注入，不经事件产出，豁免配对校验。
  *
  * @param base chiled.json 事件数组
  * @param fragments 片段数组的数组
@@ -48,8 +49,12 @@ export function checkDistribution(events) {
   return violations;
 }
 
+/** 外部注入 flag 前缀：跨代继承 flag（parent_*）由开局按族谱注入，不由事件产出，豁免配对校验 */
+export const EXTERNAL_FLAG_PREFIX = 'parent_';
+
 /**
  * flag 生产/消费配对校验：has_flags 引用的 flag 必须有事件产出；not_flags 不算悬空。
+ * parent_ 前缀为开局外部注入（跨代继承），豁免校验。
  *
  * @returns 悬空 flag 数组，空数组表示通过
  */
@@ -65,7 +70,7 @@ export function checkFlagPairs(events) {
   const orphans = new Set();
   for (const e of events) {
     for (const f of e.conditions?.has_flags ?? []) {
-      if (!producers.has(f)) {
+      if (!f.startsWith(EXTERNAL_FLAG_PREFIX) && !producers.has(f)) {
         orphans.add(f);
       }
     }

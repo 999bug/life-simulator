@@ -1210,6 +1210,50 @@
     }
   },
   {
+    "id": "lineage_0003",
+    "age_range": [
+      6,
+      6
+    ],
+    "category": "personality",
+    "title": "地图上的红线",
+    "text": "家里墙上挂着一张世界地图，上面用红笔画满了弯弯曲曲的线——那是长辈年轻时走过的路。每晚睡前，长辈都会指着地图讲一个地方：撒哈拉的星星、北欧的极光、南美的瀑布。你听着听着，睡着了都在赶路。",
+    "choices": [
+      {
+        "text": "指着地图最远的角落：以后我要去这里",
+        "effects": {
+          "ambition": 2,
+          "curiosity": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把每个故事都记在小本子上",
+        "effects": {
+          "memory": 2,
+          "intelligence": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "问：路上有没有想家呀",
+        "effects": {
+          "empathy": 2,
+          "emotion": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "parent_world_traveler"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
     "id": "child_04",
     "age_range": [
       6,
@@ -1525,6 +1569,94 @@
         ]
       }
     ]
+  },
+  {
+    "id": "lineage_0001",
+    "age_range": [
+      7,
+      7
+    ],
+    "category": "health",
+    "title": "家里的白大褂",
+    "text": "家里衣柜里挂着一件白大褂，那是长辈吃饭的家伙。今天你发烧，长辈用你的玩具听诊器一边给你检查一边讲故事，你忽然觉得，能把病痛赶走的人，是这个世界上最厉害的人。",
+    "choices": [
+      {
+        "text": "戴上玩具听诊器，给全家玩偶挨个看病",
+        "effects": {
+          "health": 2,
+          "empathy": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "缠着问：怎么才能当医生呀",
+        "effects": {
+          "intelligence": 2,
+          "curiosity": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "乖乖把药吃了，不让医生操心",
+        "effects": {
+          "discipline": 2,
+          "health": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "parent_doctor"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "lineage_0006",
+    "age_range": [
+      7,
+      7
+    ],
+    "category": "hobby",
+    "title": "画室里的午后",
+    "text": "周末的画室全是颜料味。长辈在画布前一站就是一下午，你搬个小板凳坐在旁边看。偶尔长辈把笔递给你：「来，这一笔你来。」你屏住呼吸画下去，歪歪扭扭的一笔，长辈却说：「好极了。」",
+    "choices": [
+      {
+        "text": "接过笔，大胆地画下去",
+        "effects": {
+          "creativity": 3,
+          "confidence": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "问长辈：怎么才能画得这么好",
+        "effects": {
+          "art": 2,
+          "curiosity": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把今天这幅画偷偷藏进自己书包",
+        "effects": {
+          "happiness": 2,
+          "emotion": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "parent_artist"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "child_05",
@@ -1860,6 +1992,94 @@
     }
   },
   {
+    "id": "lineage_0005",
+    "age_range": [
+      8,
+      8
+    ],
+    "category": "health",
+    "title": "陪长辈晨跑",
+    "text": "每天天不亮，长辈就把你从被窝里捞出来去晨跑。你跑得气喘吁吁，长辈却呼吸均匀——那是职业运动员刻进骨子里的习惯。跑到第三圈，你忽然发现自己跟上了节奏。",
+    "choices": [
+      {
+        "text": "咬牙跟上，一步都不落下",
+        "effects": {
+          "health": 3,
+          "persistence": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "问长辈当年比赛的故事",
+        "effects": {
+          "curiosity": 2,
+          "family_relation": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "跑完自己去加练了一组跳远",
+        "effects": {
+          "sports": 2,
+          "ambition": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "parent_athlete_pro"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "lineage_0010",
+    "age_range": [
+      8,
+      8
+    ],
+    "category": "personality",
+    "title": "豆腐块被子",
+    "text": "家里规矩严：被子要叠成方方正正的豆腐块，东西用完必须归位。那是长辈从部队带回来的习惯。今天你的被子终于叠出了棱角，长辈检查时在床头站了很久，郑重地说了句：「合格。」",
+    "choices": [
+      {
+        "text": "明天还要叠得更方正",
+        "effects": {
+          "discipline": 3,
+          "self_control": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "问长辈部队里的故事",
+        "effects": {
+          "curiosity": 2,
+          "family_relation": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "偷偷给自己也定了三条家规",
+        "effects": {
+          "responsibility": 2,
+          "planning": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "parent_military_flag"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
     "id": "child_06",
     "age_range": [
       8,
@@ -2148,6 +2368,137 @@
     ]
   },
   {
+    "id": "lineage_0002",
+    "age_range": [
+      9,
+      9
+    ],
+    "category": "career",
+    "title": "周末去公司",
+    "text": "周末长辈带你去公司加班。会议室的白板上画满了你看不懂的箭头和数字，叔叔阿姨们讨论得热火朝天。回家的路上你问：「开公司难吗？」长辈笑了笑：「难，但有意思。」",
+    "choices": [
+      {
+        "text": "在白板角落画下自己的「商业计划」",
+        "effects": {
+          "ambition": 2,
+          "creativity": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "认真观察大人是怎么开会的",
+        "effects": {
+          "intelligence": 2,
+          "communication": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "只想知道公司的零食柜在哪",
+        "effects": {
+          "happiness": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "parent_startup_success"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "lineage_0008",
+    "age_range": [
+      9,
+      9
+    ],
+    "category": "personality",
+    "title": "长辈的工具箱",
+    "text": "家里什么东西坏了，长辈从不找人修——拉开那只铁皮工具箱，扳手、刨子、墨斗一应俱全。今天家里椅子腿松了，长辈手把手教你上榫、敲实、打磨。修好那一刻，你坐在椅子上晃了晃，稳稳的。",
+    "choices": [
+      {
+        "text": "把每件工具的名字都记下来",
+        "effects": {
+          "skill": 2,
+          "memory": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "抢着干下一个修理活",
+        "effects": {
+          "action": 2,
+          "confidence": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "问长辈：手艺是怎么练出来的",
+        "effects": {
+          "curiosity": 2,
+          "patience": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "parent_skilled_worker"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "lineage_0009",
+    "age_range": [
+      9,
+      9
+    ],
+    "category": "technology",
+    "title": "长辈的旧电脑",
+    "text": "长辈把一台退役的旧电脑拆给你看：主板、内存、硬盘，一样一样指给你认。黑色的屏幕上敲几行字，风扇就呼呼转起来。你觉得这堆铁块里藏着一个新世界。",
+    "choices": [
+      {
+        "text": "缠着要学敲那几行「咒语」",
+        "effects": {
+          "intelligence": 3,
+          "curiosity": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把拆下来的零件摆了一桌子研究",
+        "effects": {
+          "engineering": 2,
+          "focus": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "问：电脑能打游戏吗",
+        "effects": {
+          "gaming": 2,
+          "happiness": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "parent_tech_career"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
     "id": "child_07",
     "age_range": [
       9,
@@ -2427,6 +2778,94 @@
         }
       }
     ]
+  },
+  {
+    "id": "lineage_0004",
+    "age_range": [
+      10,
+      10
+    ],
+    "category": "education",
+    "title": "书房里的那盏灯",
+    "text": "家里书房有一盏灯，每晚都亮到很晚。长辈在灯下看文献、写论文，你趴在旁边写作业。遇到不会的题，长辈从不直接给答案，总是反问一句：「你是怎么想的？」",
+    "choices": [
+      {
+        "text": "学着自己查资料找答案",
+        "effects": {
+          "intelligence": 3,
+          "self_reliance": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "问长辈：读书读到你这个程度是什么感觉",
+        "effects": {
+          "curiosity": 2,
+          "intelligence": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "暗暗发誓：以后我的书房也要有这样一盏灯",
+        "effects": {
+          "ambition": 2,
+          "discipline": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "parent_grad_school"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "lineage_0007",
+    "age_range": [
+      10,
+      10
+    ],
+    "category": "personality",
+    "title": "长辈的笔记本",
+    "text": "长辈有个用了十几年的笔记本，密密麻麻记着每家每户的事：谁家的低保该办了，哪条巷子的路灯坏了。你翻着翻着问：「这些小事也要记吗？」长辈说：「对他们是小事，对过日子是大事。」",
+    "choices": [
+      {
+        "text": "学着备一个自己的小本子",
+        "effects": {
+          "responsibility": 2,
+          "discipline": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "问：帮了这么多人，开心吗",
+        "effects": {
+          "empathy": 2,
+          "curiosity": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "觉得无聊，还是动画片好看",
+        "effects": {
+          "happiness": 1,
+          "entertainment": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "parent_civil_servant"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "child_08",

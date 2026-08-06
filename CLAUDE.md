@@ -11,6 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```bash
 npm run dev            # vite dev server（端口 5173）
 npm run build          # tsc && vite build（生产构建）
+npm run preview        # 本地预览构建产物；dist/ 须经 HTTP 访问（preview 或部署上线），直接双击 index.html（file:// 协议）会被浏览器禁止 fetch events.json，报「事件数据加载失败」
 npm run build:events   # 重新生成 public/events.json（数据改动后必须跑）
 node --test "script/*.test.mjs"   # 数据工具测试（31 个，glob 必须带引号，裸目录形式在本机报错）
 node --experimental-strip-types --test script/engine-state.test.ts script/pace-mode.test.ts script/goals.test.ts script/save.test.ts script/use-game.test.ts script/gameplay.test.ts script/verdict.test.ts script/family.test.ts   # 引擎/档位/目标/存档/玩法/族谱测试（92 个，Node 22 直接跑 TS）
@@ -55,6 +56,7 @@ script/chiled.json ──convert-events.mjs──▶ public/events.json
 - **节奏档位**：密度（沉浸全量 / 精简每岁 1-2 个，`filterEvents` 主线优先抽样 + flag 闭包，`liteTarget`：0-2 岁全保留、3-12 岁 2 个、13+ 岁 1 个）开局选定；打字速度（慢/中/快）游戏内实时切换（DialogBox speedRef，不重启打字机）；点击跳过打字
 - **存档 v2**：`life-sim-saves-v2` = 3 槽位 + active（`src/engine/save.ts`：SavesV2/migrateLegacySave 旧版自动迁移/isValidSaveData 内容校验）；标题页 3 卡片点击继续、开始新局覆盖确认；**快速模拟不写槽**（autoPlay guard）；RESET 保留槽位（回标题不丢档）
 - **目标/成就/统计**：`goal` 入 GameState（预设 key 或自定义 `CustomGoal {attrs}`——GoalModal 勾选属性+滑杆设目标值，结算逐项达标即达成）；成就存 `life-sim-achievements`（unlocked/completedLives/endings）；统计存 `life-sim-stats`（totalLives/bestScore/totalAge/endings 分布 + lastEndAttrs 终局属性，传承加成用，旧存档缺失无加成）；每日挑战存 `life-sim-daily`（date/bestScore/bestAge，仅当日更新最佳）；结算时经 `achievementPending` 标志一次性持久化（读档恢复不重复计数）
+- **本地埋点**：`life-sim-analytics-events`（原始事件流，截断 300 条）+ `life-sim-analytics-daily`（按日聚合，无限累积）；采集开局/结算/放弃/阶段/功能使用 5 类事件，标题页「📊 数据」面板查看 + 导出 JSON，不收集个人信息
 - **家族族谱**：`life-sim-family` = FamilyMember[]（`src/engine/family.ts`：loadFamily/saveFamily/appendFamilyMember 纯函数，容量 100 裁最老）。**每一生结算都入谱**（世代 = 族谱长度 + 1，记录享年/评分/结局 key/终局属性/日期；快速模拟局标 `auto: true` ⚡、每日挑战局标 `daily: true` 📅）；标题页 FamilyModal 展示（最新在上、越早越淡）；GoalModal 开局提示「你将作为第 N+1 代出生」。**结算回看**：新代携带 `detail`（history/snapshots/flags/goal/deathCause/skippedTitles≤20），仅最近 15 代保留（`FAMILY_DETAIL_MAX`，约 1MB，更老代裁为摘要行）；`recapGame(member)` 重建只读 GameState，StatsModal「每一世」列表与 FamilyModal 行点击打开 SummaryScreen 只读回看（z-60 覆盖层，分享卡片/传记导出可用）；**跨代继承**：开局按上一代结局路线注入 `parent_<verdictKey>` flag（`parentFlag`——**跳过 auto 代向上取最近手玩局**，分数档结局不注入），fragments/lineage.json 16 个继承事件消费（6-17 岁：童年 10 个 + 少年段 6 个，覆盖全 13 条结局路线含学历向 top_university/went_to_college/retake）；`parent_` 前缀 flag 无事件产出者，merge 配对校验与 lite 闭包测试均豁免
 - conditions 不满足的事件静默跳过；flags 累积在 `game.flags`（不重复）；历史 `history` 含 `flags?` 字段（生涯年表里程碑标记，旧存档兼容）
 - 死亡判定：健康归零或超过 `calcMaxAge`；死因记录在 `game.deathCause`（health 耗尽 / lifespan 寿终），结算页展示临终叙事

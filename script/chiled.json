@@ -8813,7 +8813,8 @@
         "text": "试水基金定投",
         "effects": {
           "money": 14,
-          "luck": 3
+          "luck": 3,
+          "anxiety": 4
         },
         "flags_add": []
       },
@@ -10998,7 +10999,8 @@
         "text": "跳槽去拿高薪",
         "effects": {
           "money": 18,
-          "luck": 2
+          "luck": 2,
+          "risk": 3
         },
         "flags_add": []
       },
@@ -12382,7 +12384,8 @@
         "text": "继续持有，等更大回报",
         "effects": {
           "money": 16,
-          "luck": 3
+          "luck": 3,
+          "anxiety": 4
         },
         "flags_add": []
       },
@@ -14071,7 +14074,8 @@
         "text": "立即开始执行规划",
         "effects": {
           "money": 10,
-          "happiness": 2
+          "happiness": 2,
+          "pressure": 4
         },
         "flags_add": []
       },
@@ -16118,7 +16122,8 @@
         "text": "卖掉换核心地段",
         "effects": {
           "money": 18,
-          "luck": 2
+          "luck": 2,
+          "risk": 3
         },
         "flags_add": []
       },

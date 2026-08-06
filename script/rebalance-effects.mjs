@@ -38,6 +38,12 @@ const REBALANCE = {
   primary_0186: { 0: { happiness: -4 } },  // 异地友情：维系辛苦
   primary_0190: { 0: { happiness: -4 } },  // 压抑心动：把喜欢压心底
   primary_0196: { 0: { pressure: 4 } },    // 进重点初中：新环境全是高手
+  // 18-60 岁财务线白赚事件（2026-08 扩展）：最高收益选项带刺，形成真实权衡
+  wealth_0026: { 1: { anxiety: 4 } },      // 试水基金定投：行情波动睡不好
+  wealth_0032: { 1: { risk: 3 } },         // 跳槽拿高薪：新环境未知风险
+  wealth_0036: { 1: { anxiety: 4 } },      // 继续持有等更大回报：贪心焦虑
+  wealth_0041: { 0: { pressure: 4 } },     // 立即执行财务规划：自律约束的压力
+  wealth_0047: { 1: { risk: 3 } },         // 卖掉换核心地段：置换踏空的未知
 };
 
 const events = JSON.parse(readFileSync(new URL('./chiled.json', import.meta.url), 'utf8'));

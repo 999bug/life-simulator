@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { sfx } from '../utils/sound';
+import { track } from '../utils/analytics';
 import type { AchievementId, CustomGoal, FamilyMember, GoalKey, PaceMode, TypeSpeed } from '../types';
 import type { SavesV2 } from '../engine/save';
 import type { DailyStore, StatsStore } from '../hooks/useGame';
@@ -304,6 +305,8 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
         <button
           onClick={() => {
             sfx.select();
+            // 埋点：快速模拟入口
+            track({ type: 'feature_use', ts: Date.now(), feature: 'quick_sim' });
             const gender = Math.random() < 0.5 ? 'male' : 'female';
             onAutoStart(gender, gender === 'male' ? '小明' : '小美');
           }}
@@ -316,7 +319,12 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
 
         {/* 每日挑战：今日固定种子开局（同日同序列），结算记录今日最佳 */}
         <button
-          onClick={() => { sfx.select(); onDailyStart(); }}
+          onClick={() => {
+            sfx.select();
+            // 埋点：每日挑战入口
+            track({ type: 'feature_use', ts: Date.now(), feature: 'daily' });
+            onDailyStart();
+          }}
           className="px-10 py-2 rounded-[30px] text-[13px] tracking-[4px] transition-all duration-300 border font-sans
             border-white/15 text-white/35 bg-transparent
             hover:border-[#e8c95d]/50 hover:text-[#e8c95d] hover:bg-[#e8c95d]/5 cursor-pointer"
@@ -332,7 +340,12 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
 
         {/* 生涯入口 */}
         <button
-          onClick={() => { sfx.select(); setShowStats(true); }}
+          onClick={() => {
+            sfx.select();
+            // 埋点：生涯入口
+            track({ type: 'feature_use', ts: Date.now(), feature: 'stats' });
+            setShowStats(true);
+          }}
           className="text-[12px] text-white/30 tracking-[3px] hover:text-[#c9a96e] transition-colors duration-200 font-sans"
         >
           📊 生涯
@@ -340,7 +353,12 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
 
         {/* 成就入口 */}
         <button
-          onClick={() => { sfx.select(); setShowAchievements(true); }}
+          onClick={() => {
+            sfx.select();
+            // 埋点：成就入口
+            track({ type: 'feature_use', ts: Date.now(), feature: 'achievements' });
+            setShowAchievements(true);
+          }}
           className="text-[12px] text-white/30 tracking-[3px] hover:text-[#c9a96e] transition-colors duration-200 font-sans"
         >
           🏆 成就
@@ -348,7 +366,12 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
 
         {/* 图鉴入口：13 条结局路线收集 */}
         <button
-          onClick={() => { sfx.select(); setShowCollection(true); }}
+          onClick={() => {
+            sfx.select();
+            // 埋点：图鉴入口
+            track({ type: 'feature_use', ts: Date.now(), feature: 'collection' });
+            setShowCollection(true);
+          }}
           className="text-[12px] text-white/30 tracking-[3px] hover:text-[#c9a96e] transition-colors duration-200 font-sans"
         >
           📖 图鉴
@@ -356,7 +379,12 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
 
         {/* 家族入口：族谱跨世代收藏 */}
         <button
-          onClick={() => { sfx.select(); setShowFamily(true); }}
+          onClick={() => {
+            sfx.select();
+            // 埋点：家族入口
+            track({ type: 'feature_use', ts: Date.now(), feature: 'family' });
+            setShowFamily(true);
+          }}
           className="text-[12px] text-white/30 tracking-[3px] hover:text-[#c9a96e] transition-colors duration-200 font-sans"
         >
           🌳 家族
@@ -364,7 +392,12 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
 
         {/* 玩法说明入口（首次进入会自动弹出一次） */}
         <button
-          onClick={() => { sfx.select(); setShowGuide(true); }}
+          onClick={() => {
+            sfx.select();
+            // 埋点：玩法入口
+            track({ type: 'feature_use', ts: Date.now(), feature: 'guide' });
+            setShowGuide(true);
+          }}
           className="text-[12px] text-white/30 tracking-[3px] hover:text-[#c9a96e] transition-colors duration-200 font-sans"
         >
           ❓ 玩法
@@ -372,7 +405,12 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
 
         {/* 种子挑战入口：输入好友的种子码玩同一事件序列 */}
         <button
-          onClick={() => { sfx.select(); setShowSeed(true); }}
+          onClick={() => {
+            sfx.select();
+            // 埋点：种子挑战入口
+            track({ type: 'feature_use', ts: Date.now(), feature: 'seed' });
+            setShowSeed(true);
+          }}
           className={`text-[12px] tracking-[3px] transition-colors duration-200 font-sans
             ${seed != null ? 'text-[#c9a96e]' : 'text-white/30 hover:text-[#c9a96e]'}`}
         >

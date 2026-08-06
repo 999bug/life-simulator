@@ -22,6 +22,7 @@ import {
   STAGE_ORDER,
 } from '../engine/state.ts';
 import { EVENTS, filterEvents, shuffleEvents, pickFateEvents } from '../engine/events.ts';
+import { track } from '../utils/analytics';
 
 // ============ 成就存储 ============
 
@@ -758,6 +759,8 @@ export function useGame() {
       // 上一世终局属性：下一局开局传承（最高 2 项 ≥50 各 +8）
       lastEndAttrs: rt.game.attributes,
     });
+    // 埋点：结算（与成就/统计同一时机，pending 标志保证不重复）
+    track({ type: 'game_finish', ts: Date.now(), score, age: rt.game.age, endingKey: rt.pendingEndingKey });
     // 每日挑战局：结算仅更新今日最佳（跨天则以本局初始化今日记录）
     if (rt.isDaily) {
       const nextDaily = updateDailyBest(rt.daily, formatDate(new Date()), score, rt.game.age);
@@ -795,16 +798,22 @@ export function useGame() {
   }, [rt]);
 
   const startGame = useCallback((gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | CustomGoal | null, challenge: boolean = false, realMode: boolean = false, seed?: number | null) => {
+    // 埋点：开局（种子挑战 variant=seed，普通开局 variant=normal）
+    track({ type: 'game_start', ts: Date.now(), variant: seed != null ? 'seed' : 'normal', pace: paceMode, challenge });
     dispatch({ type: 'START_GAME', gender, name, paceMode, typeSpeed, goal, challenge, realMode, seed: seed ?? undefined });
   }, []);
 
   const startAutoGame = useCallback((gender: 'male' | 'female', name: string) => {
+    // 埋点：快速模拟开局
+    track({ type: 'game_start', ts: Date.now(), variant: 'auto', pace: 'lite', challenge: false });
     dispatch({ type: 'START_AUTO_GAME', gender, name });
   }, []);
 
   // 每日挑战：随机性别/名字 + 固定种子（今日日期哈希）手动开局，不写存档槽
   const startDailyGame = useCallback(() => {
     const gender = Math.random() < 0.5 ? 'male' : 'female';
+    // 埋点：每日挑战开局
+    track({ type: 'game_start', ts: Date.now(), variant: 'daily', pace: 'full', challenge: false });
     dispatch({
       type: 'START_GAME',
       gender,
@@ -832,8 +841,12 @@ export function useGame() {
   }, []);
 
   const reset = useCallback(() => {
+    // 埋点：中途放弃（未到结算回标题 = 流失点；结算后回标题 phase 已是 summary，不误记）
+    if (rt.game.phase !== 'summary') {
+      track({ type: 'game_abandon', ts: Date.now(), age: rt.game.age });
+    }
     dispatch({ type: 'RESET' });
-  }, []);
+  }, [rt.game.phase]);
 
   const continueGame = useCallback((slot: number) => {
     dispatch({ type: 'CONTINUE_GAME', slot });

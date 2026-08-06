@@ -9,7 +9,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert';
 import { readFileSync } from 'node:fs';
-import { reducer, createInitialRuntime, trackAbandonIfPlaying, updateDailyHistory, recordSeedScore, loadDailyHistory, saveDailyHistory, loadSeedScores, saveSeedScores } from '../src/hooks/useGame.ts';
+import { reducer, createInitialRuntime, trackAbandonIfPlaying, updateDailyHistory, recordSeedScore, loadDailyHistory, saveDailyHistory, loadSeedScores, saveSeedScores, updateDailyStreak, loadDailyStreak, saveDailyStreak } from '../src/hooks/useGame.ts';
 import { getStageForAge, STAGE_ORDER } from '../src/engine/state.ts';
 import { setEvents } from '../src/engine/events.ts';
 import { loadAnalytics } from '../src/utils/analytics.ts';
@@ -352,4 +352,32 @@ test('挑战历史存储往返（内存桩）', () => {
   storage.clear();
   assert.deepStrictEqual(loadDailyHistory(), {});
   assert.deepStrictEqual(loadSeedScores(), {});
+});
+
+// ============ 连续打卡（每日挑战日活钩子）============
+
+test('updateDailyStreak：昨天打卡连续 +1，今天重复不变，断档重来', () => {
+  // 已知日期：20260806 的昨天 = 20260805
+  const first = updateDailyStreak({ date: '', count: 0 }, '20260806');
+  assert.deepStrictEqual(first, { date: '20260806', count: 1 });
+  // 今天重复：不变
+  const sameDay = updateDailyStreak(first, '20260806');
+  assert.deepStrictEqual(sameDay, { date: '20260806', count: 1 });
+  // 昨天打过：+1
+  const nextDay = updateDailyStreak(first, '20260807');
+  assert.deepStrictEqual(nextDay, { date: '20260807', count: 2 });
+  // 断档（前天及更早）：重来
+  const broken = updateDailyStreak(nextDay, '20260810');
+  assert.deepStrictEqual(broken, { date: '20260810', count: 1 });
+  // 跨月边界：20260901 的昨天 = 20260831
+  const monthEdge = updateDailyStreak({ date: '20260831', count: 5 }, '20260901');
+  assert.deepStrictEqual(monthEdge, { date: '20260901', count: 6 });
+});
+
+test('连续打卡存储往返（内存桩）', () => {
+  storage.clear();
+  saveDailyStreak({ date: '20260806', count: 3 });
+  assert.deepStrictEqual(loadDailyStreak(), { date: '20260806', count: 3 });
+  storage.clear();
+  assert.deepStrictEqual(loadDailyStreak(), { date: '', count: 0 });
 });

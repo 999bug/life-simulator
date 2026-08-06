@@ -201,6 +201,7 @@ export type Action =
   | { type: 'ACHIEVEMENTS_PERSISTED' }
   | { type: 'DAILY_UPDATED'; daily: DailyStore }
   | { type: 'DAILY_HISTORY_UPDATED'; dailyHistory: DailyHistory }
+  | { type: 'DAILY_STREAK_UPDATED'; dailyStreak: DailyStreak }
   | { type: 'SEED_SCORES_UPDATED'; seedScores: SeedScores }
   | { type: 'FAMILY_UPDATED'; family: FamilyMember[] };
 
@@ -246,6 +247,8 @@ export interface RuntimeState {
   daily: DailyStore;
   /** 每日挑战历史（按天最佳；StatsModal 周视图展示） */
   dailyHistory: DailyHistory;
+  /** 每日挑战连续打卡（连续 3/7 天成就） */
+  dailyStreak: DailyStreak;
   /** 种子挑战本地比分（SeedModal 展示） */
   seedScores: SeedScores;
   /** 家族族谱（跨周目；结算时正常局追加一代，快速模拟/每日挑战不写入） */
@@ -357,6 +360,58 @@ export function saveDailyHistory(store: DailyHistory): void {
   } catch {
     // 存储不可用静默降级
   }
+}
+
+/** 每日挑战连续打卡存储 key */
+const DAILY_STREAK_KEY = 'life-sim-daily-streak';
+
+/** 每日挑战连续打卡记录（date = 最近打卡日，count = 连续天数） */
+export interface DailyStreak {
+  date: string;
+  count: number;
+}
+
+/** 读取连续打卡记录；数据损坏或存储不可用时返回空结构 */
+export function loadDailyStreak(): DailyStreak {
+  try {
+    const raw = localStorage.getItem(DAILY_STREAK_KEY);
+    if (raw) {
+      const data = JSON.parse(raw) as DailyStreak;
+      if (data && typeof data.date === 'string' && typeof data.count === 'number') {
+        return data;
+      }
+    }
+  } catch {
+    // 忽略损坏数据
+  }
+  return { date: '', count: 0 };
+}
+
+/** 持久化连续打卡记录；存储不可用时静默降级 */
+export function saveDailyStreak(store: DailyStreak): void {
+  try {
+    localStorage.setItem(DAILY_STREAK_KEY, JSON.stringify(store));
+  } catch {
+    // 存储不可用静默降级
+  }
+}
+
+/**
+ * 推进连续打卡：昨天打过 → 连续 +1；今天重复 → 不变；断档（前天及更早）→ 重新开始。
+ * 纯函数，确定性可测试。
+ */
+export function updateDailyStreak(prev: DailyStreak, today: string): DailyStreak {
+  if (prev.date === today) {
+    return prev;
+  }
+  // 昨天（YYYYMMDD 解析 → 本地时区回退一天）
+  const todayDate = new Date(Number(today.slice(0, 4)), Number(today.slice(4, 6)) - 1, Number(today.slice(6, 8)));
+  todayDate.setDate(todayDate.getDate() - 1);
+  const prevDay = formatDate(todayDate);
+  if (prev.date === prevDay) {
+    return { date: today, count: prev.count + 1 };
+  }
+  return { date: today, count: 1 };
 }
 
 /** 追加当日记录：同天只保留最佳（更高评分；平局保留先达者） */
@@ -499,6 +554,7 @@ function startNewGame(state: RuntimeState, p: StartParams): RuntimeState {
     isDaily: p.isDaily ?? false,
     // 挑战历史跨局保留（不随开局重置）
     dailyHistory: state.dailyHistory,
+    dailyStreak: state.dailyStreak,
     seedScores: state.seedScores,
     // 种子挑战局：玩家输入了种子码且非每日挑战（重开保持种子）
     seedChallenge: p.seed != null && !p.isDaily,
@@ -635,6 +691,10 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
 
       // 本局结算的结局 key（verdictKey 纯函数判定：路线 flag 优先，无则按分数档）
       const endingKey = gameOver ? verdictKey(game) : '';
+      // 连续打卡：仅每日挑战局推进（判定与持久化同源，当天确定性一致）；普通局沿用当前值
+      const dailyStreak = state.isDaily
+        ? updateDailyStreak(state.dailyStreak, formatDate(new Date())).count
+        : state.dailyStreak.count;
 
       // 进入结算：判定本局新解锁成就（纯计算，持久化由 effect 完成）
       const newIds = gameOver
@@ -645,6 +705,7 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
             wasAuto: state.autoPlay,
             // 累计结局数（含本局）：已有集合 + 本局结局若为新则 +1
             endingsCount: state.achievements.endings.length + (state.achievements.endings.includes(endingKey) ? 0 : 1),
+            dailyStreak,
           }).filter(id => !state.achievements.unlocked.includes(id))
         : [];
 
@@ -669,6 +730,7 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         fateEventIds: state.fateEventIds,
         isDaily: state.isDaily,
         dailyHistory: state.dailyHistory,
+    dailyStreak: state.dailyStreak,
         seedScores: state.seedScores,
         seedChallenge: state.seedChallenge,
         daily: state.daily,
@@ -734,6 +796,7 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         seedChallenge: false,
         daily: state.daily,
         dailyHistory: state.dailyHistory,
+    dailyStreak: state.dailyStreak,
         seedScores: state.seedScores,
         family: state.family,
       };
@@ -755,6 +818,10 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
     case 'DAILY_HISTORY_UPDATED':
       // 每日挑战历史已写入 localStorage，更新运行时记录（StatsModal 周视图）
       return { ...state, dailyHistory: action.dailyHistory };
+
+    case 'DAILY_STREAK_UPDATED':
+      // 连续打卡已写入 localStorage，更新运行时记录（成就判定用）
+      return { ...state, dailyStreak: action.dailyStreak };
 
     case 'SEED_SCORES_UPDATED':
       // 种子比分已写入 localStorage，更新运行时记录（SeedModal 展示）
@@ -841,6 +908,7 @@ export function createInitialRuntime(): RuntimeState {
     daily: loadDaily(),
     // 挑战历史同样初始同步读取
     dailyHistory: loadDailyHistory(),
+    dailyStreak: loadDailyStreak(),
     seedScores: loadSeedScores(),
     // 族谱同样初始同步读取
     family: loadFamily(),
@@ -895,6 +963,10 @@ export function useGame() {
       const nextHistory = updateDailyHistory(rt.dailyHistory, today, score, rt.game.age);
       saveDailyHistory(nextHistory);
       dispatch({ type: 'DAILY_HISTORY_UPDATED', dailyHistory: nextHistory });
+      // 连续打卡推进（昨天打过 +1，今天重复不变，断档重来）
+      const nextStreak = updateDailyStreak(rt.dailyStreak, today);
+      saveDailyStreak(nextStreak);
+      dispatch({ type: 'DAILY_STREAK_UPDATED', dailyStreak: nextStreak });
     }
     // 种子挑战局：记录该种子本地比分（最佳评分 + 享年 + 游玩次数）
     if (rt.seedChallenge && rt.shuffleSeed != null) {

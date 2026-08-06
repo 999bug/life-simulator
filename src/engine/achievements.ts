@@ -38,6 +38,9 @@ export const ACHIEVEMENTS: AchievementDef[] = [
   { id: 'doctor', icon: '⚕️', name: '白衣天使', desc: '成为医生', tier: 2 },
   { id: 'three_lives', icon: '🔁', name: '三局人生', desc: '累计完成三局人生', tier: 2 },
   { id: 'five_endings', icon: '📚', name: '阅尽千帆', desc: '累计达成 5 种不同结局', tier: 2 },
+  // 连续挑战：日活钩子（每日挑战跨天连续）
+  { id: 'daily_streak_3', icon: '🔥', name: '三日不辍', desc: '连续 3 天完成每日挑战', tier: 2 },
+  { id: 'daily_streak_7', icon: '⚡', name: '雷打不动', desc: '连续 7 天完成每日挑战', tier: 3 },
   // 金档：高玩极限目标
   { id: 'ultra_life', icon: '🌅', name: '期颐之年', desc: '享年达到 95 岁', tier: 3 },
   { id: 'rich_king', icon: '👑', name: '富可敌国', desc: '财富达到 95', tier: 3 },
@@ -59,6 +62,8 @@ export interface AchievementCheckInput {
   wasAuto: boolean;
   /** 累计达成结局数（含本局） */
   endingsCount: number;
+  /** 每日挑战连续天数（含本局；普通局不推进） */
+  dailyStreak: number;
 }
 
 /** 判定当前状态满足的所有成就（含已解锁的，去重由调用方处理） */
@@ -96,5 +101,8 @@ export function checkAchievements(input: AchievementCheckInput): AchievementId[]
   if (input.endingsCount >= 5) { ids.add('five_endings'); }
   if (input.endingsCount >= 10) { ids.add('ten_endings'); }
   if (game.challenge && calcScore(attributes) >= 70) { ids.add('challenger'); }
+  // 连续挑战（日活钩子）：连续 3/7 天完成每日挑战
+  if (input.dailyStreak >= 3) { ids.add('daily_streak_3'); }
+  if (input.dailyStreak >= 7) { ids.add('daily_streak_7'); }
   return [...ids];
 }

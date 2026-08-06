@@ -70,13 +70,13 @@ script/chiled.json ──convert-events.mjs──▶ public/events.json
 
 ### UI（src/components/）
 
-- **GameScreen**：场景 + 数值栏 + 底部对话框区。**数值栏在 `top-[42%]`，底部区 `max-h-[45%] overflow-y-auto`（含 `pb-9` 防速度按钮遮挡）——两者位置耦合，改动需保持不重叠**；右上角 ✕ 确认弹窗三选项（取消/🔄 重新开始本局/确定回标题，存档保留；快速模拟不显示重开）
+- **GameScreen**：全屏流式布局（脱离 960×720 舞台）。场景 h-[55%] + 底部区 max-h-[45%] 恰好互补；**数值栏锚定场景区底缘（h-[55%] 容器内 flex 到底）——与底部区结构性不重叠，改动需保持此关系**；大屏限宽居中：数值栏网格 max-w-960、对话/选项/反馈内容 max-w-860；底部区含 `pb-9` 防速度按钮遮挡；右上角 ✕ 确认弹窗三选项（取消/🔄 重新开始本局/确定回标题，存档保留；快速模拟不显示重开）
 - **DialogBox**：打字机效果（速度档位 + 点击跳过）+ 「▼ 点击继续」；事件标题显示为「标题」
 - **ChoicePanel**：选项按钮（`button.group` class，effects 展示串由转换器生成）
 - **TitleScreen**：名字/性别 + **节奏档位（沉浸/精简）+ 打字速度 + 3 存档卡片 + 目标选择模态（GoalModal，含「🎯 自定义目标」勾选属性+滑杆设目标值 + 家族继承提示）+ 成就（AchievementsModal 铜/银/金分层）/人生图鉴（CollectionModal 13 结局路线收集，数据取自 stats.endings）/家族族谱（FamilyModal 跨世代收藏）/生涯统计（StatsModal）入口 + 快捷入口行（⚡ 快速模拟/📅 每日挑战/📊 生涯/🏆 成就/📖 图鉴/🌳 家族，flex-wrap 窄屏换行）**。布局：不动层（光晕/粒子）+ 滚动层（内容 `my-auto` 居中——不溢出居中、溢出可滚动，杜绝 justify-center 对称裁切）；模态放滚动层外
 - **SummaryScreen**：结算页（享年 + 结局 + 评分 + 属性 + **成长曲线（GrowthChart canvas 8 维随年龄折线图，图例悬停临时聚焦/点击固定聚焦单条曲线，其余淡化）+ 人生大事记完整时间线（里程碑 ⭐）+ 目标达成度 + 新解锁成就 + 本可发生而未触发 + 分享卡片（ShareCardModal canvas PNG，含迷你成长曲线 + 名字行世代数「· 第 N 代」（App 按族谱最新一代传入，快速模拟/每日挑战不显示）+ 底部种子码 + 传播 CTA「如果重来一次，你会怎么选？」）+ 传记导出**）
 - **SceneArea/SceneDecor/CategoryDecor**：场景背景 = 阶段渐变（STAGE_BG）+ 阶段 SVG 装饰（SceneDecor）+ **事件分类场景**（CategoryDecor，11 分类各一组 SVG 元素：家庭→沙发、事业→写字楼、健康→医疗十字、教育→黑板、友谊→咖啡桌、爱情→爱心、科技→屏幕电路、金融→金币折线、爱好→调色板吉他、运动→跑道篮筐、个性→对话气泡星）+ **选项属性色调响应**（GameScreen 选选项后按效果主属性叠加底部光晕，8 属性→色：health 绿/intelligence 蓝/wealth 金/happiness 橙/social 青/appearance 粉/luck 紫/morality 米白；继续后还原）
-- **App**：标题/结算页全屏渲染（脱离舞台框）；仅对局（GameScreen）保留 960×720 舞台，移动端视口等比缩放（scale = min(vw/960, vh/720)，<1 才缩放）
+- **App**：三个阶段（标题/对局/结算）均全屏流式渲染，无舞台框无缩放；窄屏由各组件响应式适配（StatusBar grid-cols-2→sm:4、SceneArea 人物 SVG 随场景高度等比缩放上限 280px）
 
 ## 事件数据格式
 

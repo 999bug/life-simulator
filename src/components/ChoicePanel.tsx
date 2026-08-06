@@ -16,7 +16,7 @@ export default function ChoicePanel({ choices, onSelect, visible, attributes, ag
   if (!visible || choices.length === 0) return null;
 
   return (
-    <div className="px-7 pb-5 flex flex-col gap-2">
+    <div className="px-7 pb-5 flex flex-col gap-2 max-w-[860px] mx-auto">
       {choices.map((ch, idx) => (
         <button
           key={idx}

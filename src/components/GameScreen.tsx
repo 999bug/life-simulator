@@ -98,7 +98,7 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
             backdrop-blur-xl border-t border-white/5 cursor-pointer z-10"
           onClick={() => { sfx.advance(); handleContinue(); }}
         >
-          <div className="px-7 py-5 text-center">
+          <div className="px-7 py-5 text-center max-w-[860px] mx-auto">
             <div className="text-lg text-[#c9a96e] whitespace-pre-line leading-relaxed">{feedback}</div>
             <div className="text-[11px] text-white/30 mt-3 animate-pulse">▼ 点击继续</div>
           </div>
@@ -123,12 +123,12 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
       {/* 场景 */}
       <SceneArea stage={game.stage} age={game.age} gender={game.gender} stageLabel={stageMeta.label} category={currentEvent?.category ?? null} tint={tint} />
 
-      {/* 状态栏 — 绝对定位，场景中部偏上（底部区域限高 45% 后不重叠） */}
-      <div className="absolute top-[42%] left-0 right-0 z-10">
+      {/* 状态栏 — 锚定场景区（h-[55%]）底缘：底部区域限高 45% 恰好互补，任何视口高度下都不重叠 */}
+      <div className="absolute top-0 left-0 right-0 h-[55%] z-10 flex flex-col justify-end">
         <StatusBar attributes={game.attributes} age={game.age} />
       </div>
 
-      {/* 底部区域：对话框 + 选项（限高 45%，不遮挡 top-[55%] 的数值栏） */}
+      {/* 底部区域：对话框 + 选项（限高 45%，与场景区互补） */}
       <div className="absolute bottom-0 left-0 right-0 z-10 max-h-[45%] overflow-y-auto pb-9">
         <DialogBox
           text={currentEvent.text}

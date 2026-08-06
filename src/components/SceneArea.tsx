@@ -72,9 +72,10 @@ export default function SceneArea({ stage, age, gender, stageLabel, category = n
 
 function Character({ stage }: { stage: LifeStage }) {
   const svg = getCharacterSVG(stage);
+  // 高度跟随场景区（上限 280px 保持原尺寸），矮屏（横屏手机）等比缩小不露顶
   return (
-    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none">
-      <svg width="120" height="280" viewBox="0 0 120 280" className="transition-all duration-700">
+    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full flex items-end pointer-events-none">
+      <svg viewBox="0 0 120 280" className="h-full max-h-[280px] w-auto transition-all duration-700">
         {svg}
       </svg>
     </div>

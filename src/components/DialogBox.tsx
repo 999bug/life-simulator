@@ -100,7 +100,7 @@ export default function DialogBox({ text, name, age, stage, title, onComplete, o
         ${autoAdvance && done ? 'cursor-pointer' : ''}`}
       onClick={handleClick}
     >
-      <div className="px-7 py-4 min-h-[80px]">
+      <div className="px-7 py-4 min-h-[80px] max-w-[860px] mx-auto">
         {/* 元信息 */}
         <div className="flex gap-5 mb-2 text-[10px] text-white/40 tracking-wider">
           <span className="text-[#c9a96e] font-semibold">{name}</span>

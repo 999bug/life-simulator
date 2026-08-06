@@ -4,13 +4,15 @@
  * 运行：node --experimental-strip-types --test script/use-game.test.ts
  * 说明：reducer 为纯函数（localStorage 读写仅发生在 createInitialRuntime/effect，
  * node 下 localStorage 未定义由 try/catch 兜底为空结构），可用自制事件数组做确定性断言。
+ * 埋点断言处安装内存 localStorage 桩（track() 写存储；其余路径空存储 = 与未定义等价）。
  */
 import { test } from 'node:test';
 import assert from 'node:assert';
 import { readFileSync } from 'node:fs';
-import { reducer, createInitialRuntime } from '../src/hooks/useGame.ts';
+import { reducer, createInitialRuntime, trackAbandonIfPlaying } from '../src/hooks/useGame.ts';
 import { getStageForAge, STAGE_ORDER } from '../src/engine/state.ts';
 import { setEvents } from '../src/engine/events.ts';
+import { loadAnalytics } from '../src/utils/analytics.ts';
 import type { Attributes, LifeEvent, RuntimeState } from '../src/types/index.ts';
 
 // 事件数据运行时拆分后，node 测试无 fetch，直接读 public/events.json 注入
@@ -18,6 +20,17 @@ setEvents(JSON.parse(readFileSync(new URL('../public/events.json', import.meta.u
 
 // RuntimeState 从 useGame 导出，此处类型引用
 import type { RuntimeState as Rt } from '../src/hooks/useGame.ts';
+
+// localStorage 内存桩：node 22 无 Web Storage，track() 写存储需桩才能断言（读缺失 = null，与未定义时 try/catch 兜底等价）
+const storage = new Map<string, string>();
+globalThis.localStorage = {
+  getItem: (k: string) => storage.get(k) ?? null,
+  setItem: (k: string, v: string) => { storage.set(k, v); },
+  removeItem: (k: string) => { storage.delete(k); },
+  clear: () => storage.clear(),
+  key: (i: number) => Array.from(storage.keys())[i] ?? null,
+  get length() { return storage.size; },
+} as unknown as Storage;
 
 /** 构造测试事件 */
 function evt(
@@ -287,4 +300,16 @@ test('MAKE_CHOICE：命运事件效果放大 ×1.5，普通事件不受影响', 
   // 普通事件：幸福 60 + 4 → 64
   rt = choose(rt);
   assert.strictEqual(rt.game.attributes.happiness, 64);
+});
+
+test('trackAbandonIfPlaying：进行中回标题记 game_abandon，结算后（summary）不误记', () => {
+  storage.clear();
+  // 模拟进行中的一局（phase=playing）：回标题 → 记中途放弃
+  trackAbandonIfPlaying('playing', 30);
+  // 模拟结算页回标题（phase=summary）：不误记放弃
+  trackAbandonIfPlaying('summary', 60);
+  const { events } = loadAnalytics();
+  const abandons = events.filter(e => e.type === 'game_abandon');
+  assert.strictEqual(abandons.length, 1, '仅进行中放弃记 1 条，结算后回标题不误记');
+  assert.strictEqual((abandons[0] as { age: number }).age, 30);
 });

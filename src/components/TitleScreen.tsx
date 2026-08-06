@@ -88,11 +88,15 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
       setConfirmCover(true);
       return;
     }
+    // 埋点：自定义目标模态打开
+    track({ type: 'feature_use', ts: Date.now(), feature: 'goal' });
     setShowGoal(true);
   };
 
   const handleCoverConfirm = () => {
     setConfirmCover(false);
+    // 埋点：自定义目标模态打开（覆盖确认后进入）
+    track({ type: 'feature_use', ts: Date.now(), feature: 'goal' });
     setShowGoal(true);
   };
 

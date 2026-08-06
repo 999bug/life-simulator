@@ -6,6 +6,7 @@ import { ACHIEVEMENTS } from '../engine/achievements';
 import ShareCardModal from './ShareCardModal';
 import GrowthChart from './GrowthChart';
 import { buildBiographyMarkdown, downloadText } from '../utils/biography';
+import { track } from '../utils/analytics';
 import { VERDICT_META } from '../engine/verdict';
 
 interface Props {
@@ -292,7 +293,11 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       )}
 
       <button
-        onClick={() => setShowShare(true)}
+        onClick={() => {
+          // 埋点：分享卡片打开
+          track({ type: 'feature_use', ts: Date.now(), feature: 'share_card' });
+          setShowShare(true);
+        }}
         className="px-9 py-3 border border-[#c9a96e]/50 rounded-2xl bg-transparent
           text-sm text-[#c9a96e] tracking-[4px] font-sans
           hover:bg-[#c9a96e]/10 hover:shadow-[0_4px_20px_rgba(201,169,110,0.3)]
@@ -302,7 +307,11 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       </button>
 
       <button
-        onClick={() => downloadText(`${game.name}-人生传记.md`, buildBiographyMarkdown(game, title, score))}
+        onClick={() => {
+          // 埋点：传记导出
+          track({ type: 'feature_use', ts: Date.now(), feature: 'biography' });
+          downloadText(`${game.name}-人生传记.md`, buildBiographyMarkdown(game, title, score));
+        }}
         className="px-9 py-3 border border-white/20 rounded-2xl bg-transparent
           text-sm text-white/50 tracking-[4px] font-sans
           hover:border-[#c9a96e] hover:text-[#c9a96e] hover:shadow-[0_4px_20px_rgba(201,169,110,0.3)]

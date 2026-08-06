@@ -57,15 +57,33 @@ function readJSON<T>(key: string): T | null {
 }
 
 /**
- * 读取原始事件流与按日聚合（损坏数据降级为空结构）。
+ * 逐条校验日聚合形状：损坏条目（null/数字/字符串/缺字段）丢弃，防面板 sumDaily 崩溃。
+ */
+function isDailyAggEntry(v: unknown): v is DailyAgg {
+  if (typeof v !== 'object' || v === null || Array.isArray(v)) {
+    return false;
+  }
+  const agg = v as DailyAgg;
+  return typeof agg.starts === 'number'
+    && typeof agg.finishes === 'number'
+    && typeof agg.abandons === 'number'
+    && typeof agg.ageSum === 'number'
+    && typeof agg.endings === 'object' && agg.endings !== null && !Array.isArray(agg.endings)
+    && typeof agg.variants === 'object' && agg.variants !== null && !Array.isArray(agg.variants)
+    && typeof agg.features === 'object' && agg.features !== null && !Array.isArray(agg.features);
+}
+
+/**
+ * 读取原始事件流与按日聚合（损坏数据降级为空结构；日聚合逐条过滤畸形条目）。
  */
 export function loadAnalytics(): { events: AnalyticsEvent[]; daily: Record<string, DailyAgg> } {
   const events = readJSON<AnalyticsEvent[]>(EVENTS_KEY);
   const daily = readJSON<Record<string, DailyAgg>>(DAILY_KEY);
+  // 数组也是 object，需排除（损坏 JSON 可能解析为 []）；逐条过滤畸形条目
+  const validDaily = daily && typeof daily === 'object' && !Array.isArray(daily) ? daily : {};
   return {
     events: Array.isArray(events) ? events : [],
-    // 数组也是 object，需排除（损坏 JSON 可能解析为 []）
-    daily: daily && typeof daily === 'object' && !Array.isArray(daily) ? daily : {},
+    daily: Object.fromEntries(Object.entries(validDaily).filter(([, v]) => isDailyAggEntry(v))),
   };
 }
 

@@ -1,5 +1,5 @@
 import { useReducer, useCallback, useEffect } from 'react';
-import type { AchievementId, AttributeKey, Attributes, Choice, CustomGoal, DeathCause, FamilyMember, GameState, GoalKey, LifeEvent, PaceMode, TypeSpeed } from '../types/index.ts';
+import type { AchievementId, AttributeKey, Attributes, Choice, CustomGoal, DeathCause, FamilyMember, GamePhase, GameState, GoalKey, LifeEvent, PaceMode, TypeSpeed } from '../types/index.ts';
 import { emptySaves, isValidSaveData, migrateLegacySave, SLOT_COUNT, type SavesV2 } from '../engine/save.ts';
 import { checkAchievements } from '../engine/achievements.ts';
 import { verdictKey } from '../engine/verdict.ts';
@@ -22,7 +22,14 @@ import {
   STAGE_ORDER,
 } from '../engine/state.ts';
 import { EVENTS, filterEvents, shuffleEvents, pickFateEvents } from '../engine/events.ts';
-import { track } from '../utils/analytics';
+import { track } from '../utils/analytics.ts';
+
+/** 中途放弃埋点：结算后回标题（phase 已为 summary）不误记，其余情况记放弃 */
+export function trackAbandonIfPlaying(phase: GamePhase, age: number): void {
+  if (phase !== 'summary') {
+    track({ type: 'game_abandon', ts: Date.now(), age });
+  }
+}
 
 // ============ 成就存储 ============
 
@@ -842,9 +849,7 @@ export function useGame() {
 
   const reset = useCallback(() => {
     // 埋点：中途放弃（未到结算回标题 = 流失点；结算后回标题 phase 已是 summary，不误记）
-    if (rt.game.phase !== 'summary') {
-      track({ type: 'game_abandon', ts: Date.now(), age: rt.game.age });
-    }
+    trackAbandonIfPlaying(rt.game.phase, rt.game.age);
     dispatch({ type: 'RESET' });
   }, [rt.game.phase, rt.game.age]);
 

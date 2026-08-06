@@ -61,7 +61,7 @@ type DailyAgg = {
 | `game_start` | TitleScreen 各开局处理函数（开始人生 / ⚡ 快速模拟 / 📅 每日 / 🔑 种子） | variant/pace/challenge 在调用处已知 |
 | `game_finish` | `useGame` 的 `achievementPending` useEffect，与 `saveStats` 同一时机 | 结算统计写库时一并埋点，不重复计数 |
 | `game_abandon` | GameScreen 回标题处理处（RESET 前），`gameOver === false` 时记 | 中途放弃即流失 |
-| `stage_reach` | GameScreen 渲染层 watch `game.stage` 变化（进入游戏后首次不记） | 阶段切换 |
+| `stage_reach` | GameScreen 渲染层 watch `game.stage` 变化（进入游戏后首次不记）。（实现：首次进入也记录——标记到达，StrictMode 下 dev 双跑会记 2 条，生产无影响） | 阶段切换 |
 | `feature_use` | 标题页各入口 + 结算页分享卡片打开/传记导出 | 功能使用热度 |
 
 ## 数据面板

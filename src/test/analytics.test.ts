@@ -40,13 +40,24 @@ describe('analytics track', () => {
     expect(daily[today].features.share_card).toBe(2);
   });
 
-  it('事件流超过 300 条裁掉最旧', () => {
-    for (let i = 0; i < 305; i++) {
-      track({ type: 'feature_use', ts: Date.now(), feature: 'guide' });
+  it('事件流超过 300 条裁掉最旧，日聚合不截断', () => {
+    // 第一条用特征事件（旧 ts + 独立 feature），其后 304 条 guide 事件
+    const firstTs = 1700000000000;
+    track({ type: 'feature_use', ts: firstTs, feature: 'seed' });
+    let lastTs = 0;
+    for (let i = 1; i <= 304; i++) {
+      lastTs = firstTs + i;
+      track({ type: 'feature_use', ts: lastTs, feature: 'guide' });
     }
-    const { events } = loadAnalytics();
+    const { events, daily } = loadAnalytics();
     expect(events.length).toBe(300);
-    // 事件流只保留 300 条；日聚合按天归并，不截断
+    // 被裁的是最旧的 5 条：首条 seed 事件已不在，最后一条仍保留
+    expect(events.some(e => e.type === 'feature_use' && e.feature === 'seed' && e.ts === firstTs)).toBe(false);
+    expect(events.some(e => e.type === 'feature_use' && e.ts === lastTs)).toBe(true);
+    // 日聚合按天归并不截断：guide 累计 304 次，且被裁的 seed 事件也仍在日聚合中
+    const today = Object.keys(daily)[0];
+    expect(daily[today].features.guide).toBe(304);
+    expect(daily[today].features.seed).toBe(1);
   });
 
   it('跨天事件分属不同聚合条目', () => {
@@ -63,6 +74,19 @@ describe('analytics track', () => {
     const { events, daily } = loadAnalytics();
     expect(events).toEqual([]);
     expect(daily).toEqual({});
+  });
+
+  it('日聚合含畸形条目时逐条过滤（面板 sumDaily 不崩溃）', () => {
+    localStorage.setItem(DAILY_KEY, JSON.stringify({
+      '20260806': { starts: 1, finishes: 0, abandons: 0, ageSum: 0, endings: {}, variants: {}, features: {} },
+      '20260805': null,
+      '20260804': 42,
+      '20260803': 'oops',
+      '20260802': [1, 2],
+      '20260801': { starts: 1, endings: null, variants: {}, features: {} },
+    }));
+    const { daily } = loadAnalytics();
+    expect(Object.keys(daily)).toEqual(['20260806']);
   });
 
   it('导出载荷含事件流与日聚合', () => {

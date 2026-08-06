@@ -161,6 +161,10 @@ export interface FamilyMember {
   attrs: Attributes;
   /** 完成日期 YYYYMMDD */
   date: string;
+  /** 快速模拟局（随机选择的人生：入谱留痕但不参与传承，旧记录无此字段视为手玩局） */
+  auto?: boolean;
+  /** 每日挑战局（手玩但固定种子，仅展示标记用） */
+  daily?: boolean;
 }
 
 /** 打字机速度档 */

@@ -32,6 +32,8 @@ export default function FamilyModal({ family, onClose }: Props) {
               <div className="flex-1">
                 <div className="text-[13px] text-[#c9a96e]">
                   第 {m.generation} 代 · {m.name}
+                  {m.auto && <span className="ml-1.5 text-[10px] text-white/35" title="快速模拟：随机选择的一生，不参与传承">⚡</span>}
+                  {m.daily && <span className="ml-1.5 text-[10px] text-white/35" title="每日挑战：固定种子的一生">📅</span>}
                 </div>
                 <div className="text-[11px] text-white/35 mt-0.5 leading-relaxed">
                   享年 {m.age} · 评分 {m.score} · {verdictTitle(m.verdict)}

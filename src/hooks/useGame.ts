@@ -764,12 +764,10 @@ export function useGame() {
       saveDaily(nextDaily);
       dispatch({ type: 'DAILY_UPDATED', daily: nextDaily });
     }
-    // 正常局（非快速模拟/每日挑战）：本局角色写入族谱，世代 = 族谱长度 + 1
-    if (!rt.isDaily && !rt.autoPlay) {
-      const nextFamily = appendFamilyMember(rt.family, rt.game, formatDate(new Date()));
-      saveFamily(nextFamily);
-      dispatch({ type: 'FAMILY_UPDATED', family: nextFamily });
-    }
+    // 每一生都入族谱（世代 = 族谱长度 + 1）；快速模拟/每日挑战带标记（auto 代不参与传承）
+    const nextFamily = appendFamilyMember(rt.family, rt.game, formatDate(new Date()), { auto: rt.autoPlay, daily: rt.isDaily });
+    saveFamily(nextFamily);
+    dispatch({ type: 'FAMILY_UPDATED', family: nextFamily });
     dispatch({ type: 'ACHIEVEMENTS_PERSISTED' });
   }, [rt.achievementPending]);
 

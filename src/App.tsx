@@ -6,7 +6,7 @@ import GameScreen from './components/GameScreen';
 import SummaryScreen from './components/SummaryScreen';
 
 export default function App() {
-  const { game, currentEvent, feedback, skippedEvents, autoPlay, typeSpeed, saves, achievements, stats, newAchievements, fateEventIds, daily, family, isDaily, shuffleSeed, startGame, startAutoGame, startDailyGame, restart, makeChoice, continue: continue_, continueGame, reset, setTypeSpeed } = useGame();
+  const { game, currentEvent, feedback, skippedEvents, autoPlay, typeSpeed, saves, achievements, stats, newAchievements, fateEventIds, daily, family, shuffleSeed, startGame, startAutoGame, startDailyGame, restart, makeChoice, continue: continue_, continueGame, reset, setTypeSpeed } = useGame();
 
   // 快速模拟模式静音高频交互音；结算页恢复（保留落幕音）
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function App() {
             onRestart={reset}
             newAchievements={newAchievements}
             skippedEvents={skippedEvents}
-            generation={!autoPlay && !isDaily && family.length > 0 ? family[family.length - 1].generation : null}
+            generation={family.length > 0 ? family[family.length - 1].generation : null}
             seed={shuffleSeed}
           />
         )}

@@ -41,14 +41,16 @@ export function saveFamily(family: FamilyMember[]): void {
 
 /**
  * 结算时把本局角色追加到族谱末尾，世代 = 族谱长度 + 1（线性家族）。
- * 超出容量时裁掉最老世代（世代号保留历史原值，不重排）。
+ * 所有走完的一生都入谱（含快速模拟/每日挑战，带标记）；超出容量时裁掉最老世代
+ * （世代号保留历史原值，不重排）。
  *
  * @param family 现有族谱
  * @param game 本局终局状态
  * @param date 完成日期 YYYYMMDD
+ * @param meta 局型标记（auto 快速模拟 / daily 每日挑战）
  * @returns 追加后的新族谱
  */
-export function appendFamilyMember(family: FamilyMember[], game: GameState, date: string): FamilyMember[] {
+export function appendFamilyMember(family: FamilyMember[], game: GameState, date: string, meta?: { auto?: boolean; daily?: boolean }): FamilyMember[] {
   const member: FamilyMember = {
     name: game.name,
     gender: game.gender,
@@ -58,6 +60,8 @@ export function appendFamilyMember(family: FamilyMember[], game: GameState, date
     verdict: verdictKey(game),
     attrs: { ...game.attributes },
     date,
+    ...(meta?.auto ? { auto: true } : {}),
+    ...(meta?.daily ? { daily: true } : {}),
   };
   return [...family, member].slice(-FAMILY_MAX);
 }
@@ -68,12 +72,13 @@ export const PARENT_FLAG_PREFIX = 'parent_';
 /**
  * 上一代结局路线 → 下一代开局注入的传承 flag。
  * 仅 13 条结局路线有职业语义；分数档结局（score:*）不注入。
+ * 快速模拟代（随机选择的人生）不参与传承，向上取最近一代手玩局。
  *
  * @param family 现有族谱
- * @returns 传承 flag（如 parent_doctor），族谱为空或分数档结局时为 null
+ * @returns 传承 flag（如 parent_doctor），族谱为空或最近手玩局为分数档结局时为 null
  */
 export function parentFlag(family: FamilyMember[]): string | null {
-  const latest = family[family.length - 1];
+  const latest = [...family].reverse().find(m => !m.auto);
   if (!latest || !VERDICT_META[latest.verdict]) {
     return null;
   }

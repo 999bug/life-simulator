@@ -68,3 +68,29 @@ test('parentFlag：路线结局注入 parent_ flag，分数档/空族谱不注�
   family = appendFamilyMember(family, game({ flags: ['athlete_pro'] }), '20260802');
   assert.strictEqual(parentFlag(family), 'parent_athlete_pro');
 });
+
+test('appendFamilyMember：快速模拟/每日挑战局带标记入谱', () => {
+  let family: FamilyMember[] = [];
+  family = appendFamilyMember(family, game({ name: '手玩' }), '20260805');
+  family = appendFamilyMember(family, game({ name: '自动' }), '20260805', { auto: true });
+  family = appendFamilyMember(family, game({ name: '每日' }), '20260805', { daily: true });
+  assert.strictEqual(family[0].auto, undefined);
+  assert.strictEqual(family[1].auto, true);
+  assert.strictEqual(family[2].daily, true);
+  // 世代照常递增
+  assert.deepStrictEqual(family.map(m => m.generation), [1, 2, 3]);
+});
+
+test('parentFlag：快速模拟代不参与传承，向上取最近手玩局', () => {
+  let family = appendFamilyMember([], game({ flags: ['doctor'] }), '20260801');
+  // 最新一代是快速模拟（startup_success）→ 跳过，取上一代的 doctor
+  family = appendFamilyMember(family, game({ flags: ['startup_success'] }), '20260802', { auto: true });
+  assert.strictEqual(parentFlag(family), 'parent_doctor');
+  // 手玩局为分数档、自动局为路线结局 → 仍不注入（手玩代无路线）
+  let family2 = appendFamilyMember([], game({ flags: [] }), '20260801');
+  family2 = appendFamilyMember(family2, game({ flags: ['doctor'] }), '20260802', { auto: true });
+  assert.strictEqual(parentFlag(family2), null);
+  // 每日挑战是手玩局 → 正常参与传承
+  const daily = appendFamilyMember([], game({ flags: ['athlete_pro'] }), '20260803', { daily: true });
+  assert.strictEqual(parentFlag(daily), 'parent_athlete_pro');
+});

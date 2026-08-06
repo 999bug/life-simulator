@@ -1,0 +1,41 @@
+[
+  {
+    "id": "route_0001",
+    "age_range": [12, 12],
+    "category": "sports",
+    "title": "体育特长的分岔口",
+    "text": "体育老师把你叫到办公室：「市里体校来挑人了，你的底子，去试一把可能有戏。」同桌说练体育没前途，爸妈说你自己拿主意。窗外操场上的哨声穿过窗户，你手里捏着那张报名表，纸边都攥皱了。",
+    "choices": [
+      { "text": "我要走体育这条路，交表！", "effects": { "sports": 6, "ambition": 4, "courage": 3 }, "flags_add": ["athlete_path", "sports_talent"] },
+      { "text": "体育当爱好，先把学习抓起来", "effects": { "learning": 5, "discipline": 2 }, "flags_add": [] },
+      { "text": "犹豫不决，先回家问问爸妈", "effects": { "happiness": 2, "family_relation": 2 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "route_0002",
+    "age_range": [53, 53],
+    "category": "career",
+    "title": "中年考编",
+    "text": "公司裁员的名单在群里传了一整天，你盯着那个红头文件看了很久。老同学发来消息：「市里事业单位今年招人，35 岁以下是硬杠杠，你……过了没？」你算了一下自己的生日，还有三个月。书桌上摊着已经翻旧了的行测教材。",
+    "choices": [
+      { "text": "最后一次机会，拼了！", "effects": { "discipline": 5, "focus": 3, "pressure": 4 }, "flags_add": ["civil_servant"] },
+      { "text": "稳住现在的工作，求稳为上", "effects": { "stability": 5, "comfort": 3 }, "flags_add": [] },
+      { "text": "趁裁员潮拿赔偿，另谋出路", "effects": { "money": 6, "independence": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "route_0003",
+    "age_range": [54, 54],
+    "category": "career",
+    "title": "把爱好变成手艺",
+    "text": "朋友说你现在的手艺比街上老师傅还细：「不如辞了职，开个自己的铺子？」你摸了摸那些磨亮的工具，又看看抽屉里的工资条。四十多岁从头开始，说出去可能被笑话，可你每次做完一件东西，那种踏实是真的。",
+    "choices": [
+      { "text": "拜师精进，把手艺做到能安身立命", "effects": { "skill": 6, "persistence": 4 }, "flags_add": ["skilled_worker"] },
+      { "text": "继续当爱好，别拿它当饭吃", "effects": { "happiness": 4, "comfort": 2 }, "flags_add": [] },
+      { "text": "盘算半年，还是先攒够本钱再说", "effects": { "money": 3, "planning": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["rediscovered_hobby"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  }
+]

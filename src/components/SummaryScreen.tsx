@@ -22,6 +22,8 @@ interface Props {
   seed?: number;
   /** 已收集结局路线 key（生涯统计，驱动「下一站」线索与通关成就） */
   collectedEndings?: string[];
+  /** 每日挑战局（分享卡片 CTA 切换「今日战绩」文案） */
+  isDaily?: boolean;
 }
 
 interface Verdict {
@@ -164,7 +166,7 @@ function getVerdict(game: GameState): Verdict {
 /** 里程碑 flag：命中则时间线高亮 */
 const MILESTONE_FLAGS = ['went_to_college', 'grad_school', 'top_university', 'married', 'has_child', 'doctor', 'startup_success', 'civil_servant', 'world_traveler', 'athlete_pro', 'military_flag', 'skilled_worker', 'tech_career', 'retired'];
 
-export default function SummaryScreen({ game, onRestart, newAchievements, skippedTitles, generation, seed, collectedEndings = [] }: Props) {
+export default function SummaryScreen({ game, onRestart, newAchievements, skippedTitles, generation, seed, collectedEndings = [], isDaily = false }: Props) {
   const score = calcScore(game.attributes);
   const { title, desc } = getVerdict(game);
   const goal = checkGoal(game.goal, game);
@@ -364,7 +366,16 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       </button>
 
       {showShare && (
-        <ShareCardModal game={game} verdictTitle={title} generation={generation} seed={seed} onClose={() => setShowShare(false)} />
+        <ShareCardModal
+          game={game}
+          verdictTitle={title}
+          endingKey={verdictKey(game)}
+          collectionDone={collectedEndings.filter(k => VERDICT_META[k]).length}
+          isDaily={isDaily}
+          generation={generation}
+          seed={seed}
+          onClose={() => setShowShare(false)}
+        />
       )}
     </div>
   );

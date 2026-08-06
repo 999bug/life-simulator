@@ -49,7 +49,7 @@ export default function GoalModal({ onSelect, onCancel, latestMember }: Props) {
   if (showCustom) {
     return (
       <div className="absolute inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center" onClick={onCancel}>
-        <div className="w-[560px] max-h-[520px] overflow-y-auto rounded-2xl border border-white/10 bg-[#15152a] p-6
+        <div className="w-[560px] max-w-[92vw] max-h-[min(520px,86vh)] overflow-y-auto rounded-2xl border border-white/10 bg-[#15152a] p-6
           flex flex-col gap-4" onClick={e => e.stopPropagation()}>
           <h3 className="text-center text-[18px] tracking-[6px] text-[#c9a96e]">自定义目标</h3>
           <p className="text-center text-[11px] text-white/40 tracking-[2px]">
@@ -121,7 +121,7 @@ export default function GoalModal({ onSelect, onCancel, latestMember }: Props) {
 
   return (
     <div className="absolute inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center" onClick={onCancel}>
-      <div className="w-[560px] max-h-[520px] overflow-y-auto rounded-2xl border border-white/10 bg-[#15152a] p-6
+      <div className="w-[560px] max-w-[92vw] max-h-[min(520px,86vh)] overflow-y-auto rounded-2xl border border-white/10 bg-[#15152a] p-6
         flex flex-col gap-4" onClick={e => e.stopPropagation()}>
         <h3 className="text-center text-[18px] tracking-[6px] text-[#c9a96e]">选择你的人生目标</h3>
         <p className="text-center text-[11px] text-white/40 tracking-[2px]">目标影响结算评价，也可以无目的地活一次</p>

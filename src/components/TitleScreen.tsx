@@ -12,7 +12,11 @@ import FamilyModal from './FamilyModal';
 import StatsModal from './StatsModal';
 import SeedModal from './SeedModal';
 import SummaryScreen from './SummaryScreen';
+import GuideModal from './GuideModal';
 import { recapGame } from '../engine/family';
+
+/** 玩法说明首访标记（localStorage key；不存在则首进自动弹出） */
+const GUIDE_SEEN_KEY = 'life-sim-guide-seen';
 
 interface Props {
   onStart: (gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | CustomGoal | null, challenge: boolean, realMode: boolean, seed?: number | null) => void;
@@ -44,6 +48,22 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
   const [showStats, setShowStats] = useState(false);
   /** 回看中的族谱世代（点「每一世」/族谱行打开只读结算页） */
   const [recap, setRecap] = useState<FamilyMember | null>(null);
+  /** 玩法说明：首次进入自动弹出（localStorage 无标记时） */
+  const [showGuide, setShowGuide] = useState(() => {
+    try {
+      return !localStorage.getItem(GUIDE_SEEN_KEY);
+    } catch {
+      return false;
+    }
+  });
+  const closeGuide = () => {
+    setShowGuide(false);
+    try {
+      localStorage.setItem(GUIDE_SEEN_KEY, '1');
+    } catch {
+      // 存储不可用时忽略（下次进入仍会弹出）
+    }
+  };
   /** 种子挑战：锁定的好友种子码（null = 随机种子） */
   const [seed, setSeed] = useState<number | null>(null);
   const [showSeed, setShowSeed] = useState(false);
@@ -342,6 +362,14 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
           🌳 家族
         </button>
 
+        {/* 玩法说明入口（首次进入会自动弹出一次） */}
+        <button
+          onClick={() => { sfx.select(); setShowGuide(true); }}
+          className="text-[12px] text-white/30 tracking-[3px] hover:text-[#c9a96e] transition-colors duration-200 font-sans"
+        >
+          ❓ 玩法
+        </button>
+
         {/* 种子挑战入口：输入好友的种子码玩同一事件序列 */}
         <button
           onClick={() => { sfx.select(); setShowSeed(true); }}
@@ -409,6 +437,11 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
           onConfirm={s => { setSeed(s); setShowSeed(false); }}
           onCancel={() => setShowSeed(false)}
         />
+      )}
+
+      {/* 玩法说明模态（❓ 入口 / 首次进入自动弹出） */}
+      {showGuide && (
+        <GuideModal onClose={closeGuide} />
       )}
     </div>
   );

@@ -13,7 +13,7 @@ export default function FamilyModal({ family, onRecap, onClose }: Props) {
   const latest = family[family.length - 1];
   return (
     <div className="absolute inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center" onClick={onClose}>
-      <div className="w-[480px] max-h-[520px] overflow-y-auto rounded-2xl border border-white/10 bg-[#15152a] p-6 flex flex-col gap-3" onClick={e => e.stopPropagation()}>
+      <div className="w-[480px] max-w-[92vw] max-h-[min(520px,86vh)] overflow-y-auto rounded-2xl border border-white/10 bg-[#15152a] p-6 flex flex-col gap-3" onClick={e => e.stopPropagation()}>
         <h3 className="text-center text-[18px] tracking-[6px] text-[#c9a96e]">
           家族族谱{latest ? ` · 第 ${latest.generation} 代` : ''}
         </h3>

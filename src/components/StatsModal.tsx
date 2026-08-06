@@ -17,7 +17,7 @@ export default function StatsModal({ stats, family, onRecap, onClose }: Props) {
   const endings = Object.entries(stats.endings).sort((a, b) => b[1] - a[1]);
   return (
     <div className="absolute inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center" onClick={onClose}>
-      <div className="w-[440px] max-h-[520px] overflow-y-auto rounded-2xl border border-white/10 bg-[#15152a] p-6 flex flex-col gap-4" onClick={e => e.stopPropagation()}>
+      <div className="w-[440px] max-w-[92vw] max-h-[min(520px,86vh)] overflow-y-auto rounded-2xl border border-white/10 bg-[#15152a] p-6 flex flex-col gap-4" onClick={e => e.stopPropagation()}>
         <h3 className="text-center text-[18px] tracking-[6px] text-[#c9a96e]">📊 生涯统计</h3>
         <div className="grid grid-cols-3 gap-3">
           <div className="text-center p-3 bg-white/[0.03] rounded-lg border border-white/[0.06]">

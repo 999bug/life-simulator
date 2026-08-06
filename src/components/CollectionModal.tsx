@@ -11,7 +11,7 @@ export default function CollectionModal({ endings, onClose }: Props) {
   const done = VERDICT_ROUTES.filter(r => (endings[r.key] ?? 0) > 0).length;
   return (
     <div className="absolute inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center" onClick={onClose}>
-      <div className="w-[480px] max-h-[520px] overflow-y-auto rounded-2xl border border-white/10 bg-[#15152a] p-6 flex flex-col gap-3" onClick={e => e.stopPropagation()}>
+      <div className="w-[480px] max-w-[92vw] max-h-[min(520px,86vh)] overflow-y-auto rounded-2xl border border-white/10 bg-[#15152a] p-6 flex flex-col gap-3" onClick={e => e.stopPropagation()}>
         <h3 className="text-center text-[18px] tracking-[6px] text-[#c9a96e]">人生图鉴 · {done}/{VERDICT_ROUTES.length}</h3>
         <p className="text-center text-[11px] text-white/30 tracking-[1px]">每一条路线，都是一种活法</p>
         {VERDICT_ROUTES.map(r => {

@@ -6,7 +6,7 @@ import GameScreen from './components/GameScreen';
 import SummaryScreen from './components/SummaryScreen';
 
 export default function App() {
-  const { game, currentEvent, feedback, skippedEvents, autoPlay, typeSpeed, saves, achievements, stats, newAchievements, fateEventIds, daily, family, startGame, startAutoGame, startDailyGame, restart, makeChoice, continue: continue_, continueGame, reset, setTypeSpeed } = useGame();
+  const { game, currentEvent, feedback, skippedEvents, autoPlay, typeSpeed, saves, achievements, stats, newAchievements, fateEventIds, daily, family, isDaily, startGame, startAutoGame, startDailyGame, restart, makeChoice, continue: continue_, continueGame, reset, setTypeSpeed } = useGame();
 
   // 移动端适配：视口小于舞台逻辑尺寸时等比缩放（960×720 逻辑尺寸不变）
   const [scale, setScale] = useState(1);
@@ -45,7 +45,13 @@ export default function App() {
       {game.phase === 'summary' ? (
         // 结算页全屏：脱离 960×720 舞台框（无圆角/阴影/缩放），大屏下用满屏幕
         <div className="w-full h-full text-white">
-          <SummaryScreen game={game} onRestart={reset} newAchievements={newAchievements} skippedEvents={skippedEvents} />
+          <SummaryScreen
+            game={game}
+            onRestart={reset}
+            newAchievements={newAchievements}
+            skippedEvents={skippedEvents}
+            generation={!autoPlay && !isDaily && family.length > 0 ? family[family.length - 1].generation : null}
+          />
         </div>
       ) : (
         // 舞台固定 960×720：scale 公式以此逻辑尺寸为前提，流式尺寸会导致小窗口下二次缩小并裁切内容

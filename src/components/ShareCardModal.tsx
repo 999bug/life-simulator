@@ -9,6 +9,8 @@ interface Props {
   game: GameState;
   /** 结局标题（SummaryScreen 的 getVerdict 结果，如「辉煌的一生」） */
   verdictTitle: string;
+  /** 本局所属世代（族谱非空时传入，卡片上展示「第 N 代人生」） */
+  generation?: number | null;
   onClose: () => void;
 }
 
@@ -20,7 +22,7 @@ const CARD_H = 540;
 const CHART = { x: 570, y: 130, w: 340, h: 280 };
 
 /** 人生总结分享卡片：canvas 绘制，支持下载 PNG */
-export default function ShareCardModal({ game, verdictTitle, onClose }: Props) {
+export default function ShareCardModal({ game, verdictTitle, generation, onClose }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -51,7 +53,7 @@ export default function ShareCardModal({ game, verdictTitle, onClose }: Props) {
     ctx.fillText('人生模拟器', 60, 84);
     ctx.font = `300 24px ${F}`;
     ctx.fillStyle = 'rgba(255,255,255,0.5)';
-    ctx.fillText(`${game.gender === 'male' ? '♂' : '♀'} ${game.name} · 享年 ${game.age} 岁`, 60, 122);
+    ctx.fillText(`${game.gender === 'male' ? '♂' : '♀'} ${game.name} · 享年 ${game.age} 岁${generation != null ? ` · 第 ${generation} 代` : ''}`, 60, 122);
 
     // 结局标题
     ctx.fillStyle = '#e8e8e8';

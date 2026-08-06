@@ -15,6 +15,8 @@ interface Props {
   newAchievements: AchievementId[];
   /** 本局因条件未满足而被跳过的事件（展示「本可发生而未触发」） */
   skippedEvents: LifeEvent[];
+  /** 本局所属世代（族谱最新一代；空族谱/快速模拟/每日挑战为 null，不展示） */
+  generation?: number | null;
 }
 
 interface Verdict {
@@ -157,7 +159,7 @@ function getVerdict(game: GameState): Verdict {
 /** 里程碑 flag：命中则时间线高亮 */
 const MILESTONE_FLAGS = ['went_to_college', 'grad_school', 'top_university', 'married', 'has_child', 'doctor', 'startup_success', 'civil_servant', 'world_traveler', 'athlete_pro', 'military_flag', 'skilled_worker', 'tech_career', 'retired'];
 
-export default function SummaryScreen({ game, onRestart, newAchievements, skippedEvents }: Props) {
+export default function SummaryScreen({ game, onRestart, newAchievements, skippedEvents, generation }: Props) {
   const score = calcScore(game.attributes);
   const { title, desc } = getVerdict(game);
   const goal = checkGoal(game.goal, game);
@@ -318,7 +320,7 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       </button>
 
       {showShare && (
-        <ShareCardModal game={game} verdictTitle={title} onClose={() => setShowShare(false)} />
+        <ShareCardModal game={game} verdictTitle={title} generation={generation} onClose={() => setShowShare(false)} />
       )}
     </div>
   );

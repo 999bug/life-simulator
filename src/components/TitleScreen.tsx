@@ -73,7 +73,8 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
 
   return (
     // 背景透明：径向渐变由 App 外层全屏铺设，任何窗口尺寸下都无舞台矩形边界
-    <div className="w-full h-full flex flex-col items-center justify-center gap-5 relative overflow-hidden">
+    // 双层结构：不动层（光晕/粒子）+ 滚动层（内容 my-auto 居中——不溢出时居中，溢出时从顶部可滚动，杜绝 justify-center 对称裁切）
+    <div className="w-full h-full relative overflow-hidden">
 
       {/* 光晕动画 */}
       <div className="absolute w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(201,169,110,0.06)_0%,transparent_60%)]
@@ -96,6 +97,10 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
           />
         ))}
       </div>
+
+      {/* 滚动层：my-auto 替代 justify-center（flex 居中溢出时会裁掉顶部且不可滚动） */}
+      <div className="h-full overflow-y-auto flex flex-col">
+      <div className="m-auto flex flex-col items-center gap-4 py-3">
 
       {/* 标题 */}
       <h1 className="text-[36px] sm:text-[52px] font-extralight tracking-[10px] sm:tracking-[14px] text-[#c9a96e]
@@ -266,8 +271,8 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
         开 始 人 生
       </button>
 
-      {/* 快捷入口：快速模拟（随机性别与名字自动走完一生）+ 每日挑战 + 生涯/成就总览 */}
-      <div className="z-10 flex items-center gap-4">
+      {/* 快捷入口：快速模拟（随机性别与名字自动走完一生）+ 每日挑战 + 生涯/成就总览；flex-wrap 适配窄屏换行 */}
+      <div className="z-10 flex items-center justify-center flex-wrap gap-x-4 gap-y-2 max-w-full px-4">
         <button
           onClick={() => {
             sfx.select();
@@ -330,7 +335,10 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
         </button>
       </div>
 
-      {/* 目标选择模态（开始人生后弹出，确认目标后开局） */}
+      </div>
+      </div>
+
+      {/* 目标选择模态（开始人生后弹出，确认目标后开局）；模态放滚动层外，防未来包含块变化导致错位 */}
       {showGoal && (
         <GoalModal onSelect={handleGoalSelect} onCancel={() => setShowGoal(false)} latestMember={family[family.length - 1]} />
       )}

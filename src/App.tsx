@@ -42,38 +42,38 @@ export default function App() {
   return (
     // 全屏径向渐变背景（与标题页同源），标题/对局阶段背景连续无边界
     <div className="w-screen h-screen flex justify-center items-center bg-[radial-gradient(ellipse_at_center,#1a1a30_0%,#0a0a14_70%)] overflow-hidden">
-      {game.phase === 'summary' ? (
-        // 结算页全屏：脱离 960×720 舞台框（无圆角/阴影/缩放），大屏下用满屏幕
+      {game.phase !== 'playing' ? (
+        // 标题/结算页全屏：脱离 960×720 舞台框（无圆角/阴影/缩放），大屏小屏都用满视口（内部弹性布局+滚动兜底）
         <div className="w-full h-full text-white">
-          <SummaryScreen
-            game={game}
-            onRestart={reset}
-            newAchievements={newAchievements}
-            skippedEvents={skippedEvents}
-            generation={!autoPlay && !isDaily && family.length > 0 ? family[family.length - 1].generation : null}
-          />
-        </div>
-      ) : (
-        // 舞台固定 960×720：scale 公式以此逻辑尺寸为前提，流式尺寸会导致小窗口下二次缩小并裁切内容
-        <div className="w-[960px] h-[720px] relative overflow-hidden text-white" style={{ transform: `scale(${scale})` }}>
           {game.phase === 'title' && (
             <TitleScreen onStart={startGame} onAutoStart={startAutoGame} onDailyStart={startDailyGame} saves={saves} onContinue={continueGame} achievements={achievements} stats={stats} daily={daily} family={family} />
           )}
-          {game.phase === 'playing' && (
-            <GameScreen
+          {game.phase === 'summary' && (
+            <SummaryScreen
               game={game}
-              currentEvent={currentEvent}
-              feedback={feedback}
-              autoPlay={autoPlay}
-              typeSpeed={typeSpeed}
-              fateEventIds={fateEventIds}
-              onTypeSpeedChange={setTypeSpeed}
-              onChoice={makeChoice}
-              onContinue={continue_}
-              onExit={reset}
-              onRestart={restart}
+              onRestart={reset}
+              newAchievements={newAchievements}
+              skippedEvents={skippedEvents}
+              generation={!autoPlay && !isDaily && family.length > 0 ? family[family.length - 1].generation : null}
             />
           )}
+        </div>
+      ) : (
+        // 对局舞台固定 960×720：scale 公式以此逻辑尺寸为前提，流式尺寸会导致小窗口下二次缩小并裁切内容
+        <div className="w-[960px] h-[720px] relative overflow-hidden text-white" style={{ transform: `scale(${scale})` }}>
+          <GameScreen
+            game={game}
+            currentEvent={currentEvent}
+            feedback={feedback}
+            autoPlay={autoPlay}
+            typeSpeed={typeSpeed}
+            fateEventIds={fateEventIds}
+            onTypeSpeedChange={setTypeSpeed}
+            onChoice={makeChoice}
+            onContinue={continue_}
+            onExit={reset}
+            onRestart={restart}
+          />
         </div>
       )}
     </div>

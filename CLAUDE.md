@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-人生模拟器：React 18 + TypeScript + Vite + Tailwind 的文字人生模拟游戏。纯前端、无后端，游戏内容由 JSON 事件数据驱动。事件数据源 `script/chiled.json`（608 个事件：523 原始 + 片段合入，其中 4 位模拟事件经 keep-list 精选 235 个）经转换器生成引擎格式 `src/engine/events.json`（共 608 个事件），运行时同岁组内按种子洗牌后线性播放。PWA 可安装离线。
+人生模拟器：React 18 + TypeScript + Vite + Tailwind 的文字人生模拟游戏。纯前端、无后端，游戏内容由 JSON 事件数据驱动。事件数据源 `script/chiled.json`（633 个事件：523 原始 + 片段合入，其中 4 位模拟事件经 keep-list 精选 260 个）经转换器生成引擎格式 `src/engine/events.json`（共 633 个事件），运行时同岁组内按种子洗牌后线性播放。PWA 可安装离线。
 
 ## 常用命令
 
@@ -16,6 +16,7 @@ node --test "script/*.test.mjs"   # 数据工具测试（31 个，glob 必须带
 node --experimental-strip-types --test script/engine-state.test.ts script/pace-mode.test.ts script/goals.test.ts script/save.test.ts script/use-game.test.ts script/gameplay.test.ts script/verdict.test.ts script/family.test.ts   # 引擎/档位/目标/存档/玩法/族谱测试（92 个，Node 22 直接跑 TS）
 npm run test:ui   # UI 组件测试（vitest + Testing Library，18 个）
 node script/stats.mjs   # 事件数据看板（密度/分类/flag 配对/空缺报告）
+node --experimental-strip-types script/sim-balance.ts 500   # 全属性平衡审计（500 局随机模拟：归零率/享年/结局分布，忠实复刻 MAKE_CHOICE 流程）
 ```
 
 ## 架构
@@ -30,11 +31,11 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 
 - **chiled.json**：事件数据源（snake_case 原始格式：`age_range`/`flags_add`/`has_flags`/`min_attrs`）。**所有事件改动都改这里，不手改 events.json**
 - **convert-events.mjs**：唯一转换器。`ATTR_MAP`（107 键）把 chiled 属性名映射到 8 大引擎属性；`INVERSE` 集合内的键是负向维度（取反求和，如 `pressure:+8` → happiness:-8）；未映射键 fail-fast 抛错；**事件 id 校验**（2 位主线/4 位模拟，其他抛错）。`ATTR_ORDER`/`STAGE_RANGES` 需与 `src/engine/state.ts` 的 `ATTR_META`/`STAGE_META` 手动同步
-- **prune-events.mjs**：精选工具。事件 id 规则：**2 位数字后缀 = 原始主线事件（如 child_01），一字不改、永远保留；4 位数字后缀 = 模拟事件（如 child_0017），只能被精选删除、不能改内容**。`keep-list.json` 记录保留清单（审计用，当前 235 条 = 全部保留的模拟事件；新增模拟事件后需同步追加，否则 prune 会被过滤）。运行方式：`node script/prune-events.mjs script/keep-list.json`（写回 chiled.json，含 gap_year 补丁）
+- **prune-events.mjs**：精选工具。事件 id 规则：**2 位数字后缀 = 原始主线事件（如 child_01），一字不改、永远保留；4 位数字后缀 = 模拟事件（如 child_0017），只能被精选删除、不能改内容**。`keep-list.json` 记录保留清单（审计用，当前 260 条 = 全部保留的模拟事件；新增模拟事件后需同步追加，否则 prune 会被过滤）。运行方式：`node script/prune-events.mjs script/keep-list.json`（写回 chiled.json，含 gap_year 补丁）
 - **merge-fragments.mjs**：合并 chiled.json + `script/fragments/` 片段，跑三重校验：convertAll fail-fast + 每岁密度（0-2 岁 3-5 个、3-12 岁 5-13 个、13-75 岁 3-8 个）+ flag 生产/消费配对（has_flags 引用的 flag 必须有产出者，not_flags 不算悬空）。**幂等**：片段中已合并的 id 自动跳过，片段文件保留在 fragments/ 目录可重复运行
 - **clamp-effects.mjs**：效果值钳位工具。4 位模拟事件的效果按转换后属性值等比例压缩到 ±3~±20 声明范围内（多键求和超范围时压缩该属性所有来源键）；2 位主线一字不改。幂等，效果值调整后用它 + build:events
 - **rebalance-effects.mjs**：抉择质量改造（2026-08 P0-1）。声明式 REBALANCE 表给 3-12 岁 21 个全正模拟事件的高收益选项加代价维度（压力/金钱/社交/幸福，与叙事匹配），「设置为目标值」语义幂等。2 位主线不动。运行后接 build:events
-- **stats.mjs**：事件数据看板——每岁密度（0-103）/分类分布/flag 生产-消费配对与悬空引用/效果值范围/2 位 vs 4 位 id 统计/96+ 岁空缺报告，统计逻辑纯函数可测试
+- **stats.mjs**：事件数据看板——每岁密度（0-103）/分类分布/flag 生产-消费配对与悬空引用/效果值范围/2 位 vs 4 位 id 统计/96+ 岁空缺报告，统计逻辑纯函数可测试。**悬空口径**：含合法项（被结局 verdictKey/成就/目标消费的 flag、parent_ 前缀注入 flag），审计「真死 flag」需额外排除 src/engine 的引用
 - **gen-icons.mjs**：PWA 图标生成（Node 内置 zlib 手写 PNG 编码器，192/512 主色图标到 public/）
 
 事件/效果改动一律走 chiled.json + convert/prune/merge/clamp 管线，不手改 events.json（见「约定」章节）
@@ -71,10 +72,10 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 - **GameScreen**：场景 + 数值栏 + 底部对话框区。**数值栏在 `top-[42%]`，底部区 `max-h-[45%] overflow-y-auto`（含 `pb-9` 防速度按钮遮挡）——两者位置耦合，改动需保持不重叠**；右上角 ✕ 确认弹窗三选项（取消/🔄 重新开始本局/确定回标题，存档保留；快速模拟不显示重开）
 - **DialogBox**：打字机效果（速度档位 + 点击跳过）+ 「▼ 点击继续」；事件标题显示为「标题」
 - **ChoicePanel**：选项按钮（`button.group` class，effects 展示串由转换器生成）
-- **TitleScreen**：名字/性别 + **节奏档位（沉浸/精简）+ 打字速度 + 3 存档卡片 + 目标选择模态（GoalModal，含「🎯 自定义目标」勾选属性+滑杆设目标值 + 家族继承提示）+ 成就（AchievementsModal 铜/银/金分层）/人生图鉴（CollectionModal 13 结局路线收集，数据取自 stats.endings）/家族族谱（FamilyModal 跨世代收藏）/生涯统计（StatsModal）入口 + 快捷入口行（⚡ 快速模拟/📅 每日挑战/📊 生涯/🏆 成就/📖 图鉴/🌳 家族）**——720px 高度余量极小（约 1px），改动必须回归检查
+- **TitleScreen**：名字/性别 + **节奏档位（沉浸/精简）+ 打字速度 + 3 存档卡片 + 目标选择模态（GoalModal，含「🎯 自定义目标」勾选属性+滑杆设目标值 + 家族继承提示）+ 成就（AchievementsModal 铜/银/金分层）/人生图鉴（CollectionModal 13 结局路线收集，数据取自 stats.endings）/家族族谱（FamilyModal 跨世代收藏）/生涯统计（StatsModal）入口 + 快捷入口行（⚡ 快速模拟/📅 每日挑战/📊 生涯/🏆 成就/📖 图鉴/🌳 家族，flex-wrap 窄屏换行）**。布局：不动层（光晕/粒子）+ 滚动层（内容 `my-auto` 居中——不溢出居中、溢出可滚动，杜绝 justify-center 对称裁切）；模态放滚动层外
 - **SummaryScreen**：结算页（享年 + 结局 + 评分 + 属性 + **成长曲线（GrowthChart canvas 8 维随年龄折线图，图例悬停临时聚焦/点击固定聚焦单条曲线，其余淡化）+ 人生大事记完整时间线（里程碑 ⭐）+ 目标达成度 + 新解锁成就 + 本可发生而未触发 + 分享卡片（ShareCardModal canvas PNG，含迷你成长曲线 + 名字行世代数「· 第 N 代」（App 按族谱最新一代传入，快速模拟/每日挑战不显示）+ 底部传播 CTA「如果重来一次，你会怎么选？」）+ 传记导出**）
 - **SceneArea/SceneDecor/CategoryDecor**：场景背景 = 阶段渐变（STAGE_BG）+ 阶段 SVG 装饰（SceneDecor）+ **事件分类场景**（CategoryDecor，11 分类各一组 SVG 元素：家庭→沙发、事业→写字楼、健康→医疗十字、教育→黑板、友谊→咖啡桌、爱情→爱心、科技→屏幕电路、金融→金币折线、爱好→调色板吉他、运动→跑道篮筐、个性→对话气泡星）+ **选项属性色调响应**（GameScreen 选选项后按效果主属性叠加底部光晕，8 属性→色：health 绿/intelligence 蓝/wealth 金/happiness 橙/social 青/appearance 粉/luck 紫/morality 米白；继续后还原）
-- **App**：移动端视口等比缩放（scale = min(vw/960, vh/720)，<1 才缩放）
+- **App**：标题/结算页全屏渲染（脱离舞台框）；仅对局（GameScreen）保留 960×720 舞台，移动端视口等比缩放（scale = min(vw/960, vh/720)，<1 才缩放）
 
 ## 事件数据格式
 

@@ -9,7 +9,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert';
 import { readFileSync } from 'node:fs';
-import { reducer, createInitialRuntime, trackAbandonIfPlaying, updateDailyHistory, recordSeedScore, loadDailyHistory, saveDailyHistory, loadSeedScores, saveSeedScores, updateDailyStreak, loadDailyStreak, saveDailyStreak } from '../src/hooks/useGame.ts';
+import { reducer, createInitialRuntime, saveState, trackAbandonIfPlaying, updateDailyHistory, recordSeedScore, loadDailyHistory, saveDailyHistory, loadSeedScores, saveSeedScores, updateDailyStreak, loadDailyStreak, saveDailyStreak } from '../src/hooks/useGame.ts';
 import { getStageForAge, STAGE_ORDER } from '../src/engine/state.ts';
 import { setEvents } from '../src/engine/events.ts';
 import { loadAnalytics } from '../src/utils/analytics.ts';
@@ -403,4 +403,39 @@ test('REINCARNATE：取「初始+终局」均值重新投胎（保底初始）+ 
   // 不叠加挑战/传承标记
   assert.strictEqual(re.game.challenge, undefined);
   assert.strictEqual(re.game.inherited, undefined);
+});
+
+// ============ 存档状态同步（中途回标题存档卡显示）============
+
+test('saveState：对局中写入并返回新 saves，内容未变返回 null（防循环）', () => {
+  storage.clear();
+  const rt = mkState([evt('a_01', 7, { happiness: 1 })]);
+  // 对局中（playing）：写入并返回新 saves
+  const next = saveState(rt);
+  assert.ok(next, '应返回更新后的 saves');
+  assert.strictEqual(next.slots[next.active]?.game.age, 7);
+  assert.ok(next !== rt.saves, '应为新对象（触发状态更新）');
+  // 内容未变：返回 null（SAVES_UPDATED 同步后的 effect 重跑不循环）
+  const again = saveState({ ...rt, saves: next });
+  assert.strictEqual(again, null);
+});
+
+test('saveState：标题页/快速模拟/每日挑战不写库', () => {
+  storage.clear();
+  const base = createInitialRuntime();
+  // 标题页 phase
+  assert.strictEqual(saveState(base), null);
+  // 快速模拟局
+  const auto = { ...base, autoPlay: true, game: { ...base.game, phase: 'playing' as const } };
+  assert.strictEqual(saveState(auto), null);
+  // 每日挑战局
+  const daily = { ...base, isDaily: true, game: { ...base.game, phase: 'playing' as const } };
+  assert.strictEqual(saveState(daily), null);
+});
+
+test('SAVES_UPDATED：同步存档回运行时状态', () => {
+  const rt = mkState([evt('a_01', 7, {})]);
+  const next = saveState(rt)!;
+  const updated = reducer(createInitialRuntime(), { type: 'SAVES_UPDATED', saves: next });
+  assert.strictEqual(updated.saves.slots[updated.saves.active]?.game.age, 7);
 });

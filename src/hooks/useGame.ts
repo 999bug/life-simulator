@@ -199,6 +199,7 @@ export type Action =
   | { type: 'RESET' }
   | { type: 'CONTINUE_GAME'; slot: number }
   | { type: 'HYDRATE_SAVES'; saves: SavesV2; achievements: AchievementStore }
+  | { type: 'SAVES_UPDATED'; saves: SavesV2 }
   | { type: 'ACHIEVEMENTS_PERSISTED' }
   | { type: 'DAILY_UPDATED'; daily: DailyStore }
   | { type: 'DAILY_HISTORY_UPDATED'; dailyHistory: DailyHistory }
@@ -304,13 +305,19 @@ function saveSaves(saves: SavesV2): boolean {
 }
 
 /** 持久化当前状态到 active 槽；标题页状态（新游戏未开始）时不写不删 */
-function saveState(rt: RuntimeState): void {
+/**
+ * 持久化当前状态到 active 槽；标题页状态（新游戏未开始）时不写不删。
+ * 返回更新后的 saves（供调用方同步回运行时状态——否则中途回标题时
+ * rt.saves 停留在挂载时快照，存档卡不显示且覆盖确认不弹，存在丢档风险）。
+ * 内容未变（SAVES_UPDATED 后的重跑）返回 null，避免写库与 dispatch 循环。
+ */
+export function saveState(rt: RuntimeState): SavesV2 | null {
   // 快速模拟与每日挑战为临时局：不写入存档槽位（避免静默覆盖正式存档）
   if (rt.autoPlay || rt.isDaily) {
-    return;
+    return null;
   }
   if (!rt.game || rt.game.phase === 'title') {
-    return;
+    return null;
   }
   const saves = { ...rt.saves, slots: [...rt.saves.slots] };
   saves.slots[saves.active] = {
@@ -325,7 +332,11 @@ function saveState(rt: RuntimeState): void {
     fateEventIds: rt.fateEventIds,
     fateEventId: rt.fateEventIds[0] ?? null,
   };
-  saveSaves(saves);
+  // 内容未变则跳过写库（防 SAVES_UPDATED 同步后的 effect 重跑循环）
+  if (JSON.stringify(saves) === JSON.stringify(rt.saves)) {
+    return null;
+  }
+  return saveSaves(saves) ? saves : null;
 }
 
 // ============ 挑战历史存储（每日周视图 + 种子比分）============
@@ -830,6 +841,10 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
       };
     }
 
+    case 'SAVES_UPDATED':
+      // 存档已写入 localStorage，同步回运行时（标题页存档卡与覆盖确认读此状态）
+      return { ...state, saves: action.saves };
+
     case 'HYDRATE_SAVES':
       // 存档与成就存储一并水合（成就跨周目，从 localStorage 载入）
       return { ...state, saves: action.saves, achievements: action.achievements };
@@ -1010,9 +1025,13 @@ export function useGame() {
     dispatch({ type: 'ACHIEVEMENTS_PERSISTED' });
   }, [rt.achievementPending]);
 
-  // 每次状态变化后持久化到 active 槽（标题页不写不删，保留存档供刷新后继续）
+  // 每次状态变化后持久化到 active 槽（标题页不写不删，保留存档供刷新后继续）；
+  // 写入成功后同步回运行时状态（中途回标题时存档卡/覆盖确认读最新存档）
   useEffect(() => {
-    saveState(rt);
+    const next = saveState(rt);
+    if (next) {
+      dispatch({ type: 'SAVES_UPDATED', saves: next });
+    }
   }, [rt]);
 
   // 快速模拟：自动随机选择并推进，直到结算

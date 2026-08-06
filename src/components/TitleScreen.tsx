@@ -16,6 +16,7 @@ import SummaryScreen from './SummaryScreen';
 import GuideModal from './GuideModal';
 import AnalyticsModal from './AnalyticsModal';
 import { recapGame } from '../engine/family';
+import { VERDICT_ROUTES } from '../engine/verdict';
 
 /** 玩法说明首访标记（localStorage key；不存在则首进自动弹出） */
 const GUIDE_SEEN_KEY = 'life-sim-guide-seen';
@@ -79,6 +80,8 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
   const round = stats.totalLives + 1;
   /** 今日是否已有每日挑战记录（跨天不展示昨日最佳） */
   const hasTodayBest = daily.date === formatDate(new Date()) && (daily.bestScore > 0 || daily.bestAge > 0);
+  /** 图鉴收集进度（标题页入口实时可见，驱动收集欲） */
+  const collectionDone = VERDICT_ROUTES.filter(r => (stats.endings[r.key] ?? 0) > 0).length;
 
   const handleStart = () => {
     if (!gender) return;
@@ -382,6 +385,7 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
           className="text-[12px] text-white/30 tracking-[3px] hover:text-[#c9a96e] transition-colors duration-200 font-sans"
         >
           📖 图鉴
+          <span className="ml-1 text-[10px] text-[#c9a96e]/70">{collectionDone}/13</span>
         </button>
 
         {/* 家族入口：族谱跨世代收藏 */}

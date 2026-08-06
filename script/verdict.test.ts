@@ -5,7 +5,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert';
-import { verdictKey } from '../src/engine/verdict.ts';
+import { verdictKey, nextRouteToExplore, VERDICT_ROUTES } from '../src/engine/verdict.ts';
 import type { GameState, Attributes } from '../src/types/index.ts';
 
 /** 构造测试用游戏状态；attrs 全属性同值（分数即该值） */
@@ -62,4 +62,44 @@ test('verdictKey：分数档边界（75/60/45/30 临界）', () => {
   assert.strictEqual(verdictKey(game([], 59)), 'score:45+');
   assert.strictEqual(verdictKey(game([], 44)), 'score:30+');
   assert.strictEqual(verdictKey(game([], 0)), 'score:low');
+});
+
+// ============ 下一站线索（留存钩子：nextRouteToExplore）============
+
+test('nextRouteToExplore：返回当前结局之后的第一条未收集路线', () => {
+  const collected = new Set(['startup_success', 'world_traveler']);
+  const next = nextRouteToExplore('world_traveler', collected);
+  assert.strictEqual(next?.key, 'grad_school');
+});
+
+test('nextRouteToExplore：未收集的当前路线本身也可被选中（分数档兜底场景）', () => {
+  // 分数档 key 不在表内：从第一条开始找未收集
+  const collected = new Set(['startup_success']);
+  const next = nextRouteToExplore('score:60+', collected);
+  assert.strictEqual(next?.key, 'world_traveler');
+});
+
+test('nextRouteToExplore：循环滚动——前面全收集时滚到后段未收集路线', () => {
+  const collected = new Set(VERDICT_ROUTES.map(r => r.key).filter(k => k !== 'civil_servant'));
+  // 当前路线已收集，从之后循环：只有 civil_servant 未收集（滚到表尾）
+  const next = nextRouteToExplore('startup_success', collected);
+  assert.strictEqual(next?.key, 'civil_servant');
+});
+
+test('nextRouteToExplore：跳过当前路线自身（不重复提示刚走完的路）', () => {
+  const collected = new Set(['startup_success', 'world_traveler']);
+  // 当前路线未收集（异常输入）也绝不提示自己
+  const next = nextRouteToExplore('startup_success', collected);
+  assert.strictEqual(next?.key, 'grad_school');
+});
+
+test('nextRouteToExplore：全部收集返回 null', () => {
+  const collected = new Set(VERDICT_ROUTES.map(r => r.key));
+  assert.strictEqual(nextRouteToExplore('startup_success', collected), null);
+});
+
+test('nextRouteToExplore：当前路线已收集时跳过后面的已收集路线', () => {
+  const collected = new Set(['startup_success', 'world_traveler', 'grad_school']);
+  const next = nextRouteToExplore('startup_success', collected);
+  assert.strictEqual(next?.key, 'top_university');
 });

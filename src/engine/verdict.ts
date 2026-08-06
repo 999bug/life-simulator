@@ -35,6 +35,33 @@ export const VERDICT_META: Record<string, VerdictRoute> = Object.fromEntries(
   VERDICT_ROUTES.map(r => [r.key, r]),
 );
 
+/**
+ * 结算页「下一站」：从当前结局之后循环找第一条未收集路线（收集欲驱动重玩）。
+ * 当前结局刚结算必然已收集，起点跳过自身；分数档结局（key 不在图鉴表）从第一条开始；
+ * 全部收集返回 null（通关文案由调用方展示）。
+ *
+ * @param currentKey 本局结局 key（verdictKey 输出）
+ * @param collected 已收集路线 key 集合
+ * @returns 下一条未收集路线；全收集返回 null
+ */
+export function nextRouteToExplore(currentKey: string, collected: ReadonlySet<string>): VerdictRoute | null {
+  if (VERDICT_ROUTES.every(r => collected.has(r.key))) {
+    return null;
+  }
+  const idx = VERDICT_ROUTES.findIndex(r => r.key === currentKey);
+  // 起点：当前之后一条（跳过自己）；分数档从第一条开始
+  const start = idx < 0 ? 0 : (idx + 1) % VERDICT_ROUTES.length;
+  // 步数：路线结局查 len-1 条（不含自己）；分数档查全 13 条
+  const steps = idx < 0 ? VERDICT_ROUTES.length : VERDICT_ROUTES.length - 1;
+  for (let i = 0; i < steps; i++) {
+    const r = VERDICT_ROUTES[(start + i) % VERDICT_ROUTES.length];
+    if (!collected.has(r.key)) {
+      return r;
+    }
+  }
+  return null;
+}
+
 /** 分数档结局 key → 标题（与 SummaryScreen.scoreVerdict 分档一致；族谱/生涯统计展示用） */
 export const SCORE_VERDICT_TITLES: Record<string, string> = {
   'score:75+': '辉煌的一生',

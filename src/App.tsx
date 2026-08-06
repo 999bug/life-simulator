@@ -57,6 +57,7 @@ export default function App() {
             skippedTitles={[...new Set(skippedEvents.map(e => e.title ?? e.id))]}
             generation={family.length > 0 ? family[family.length - 1].generation : null}
             seed={shuffleSeed}
+            collectedEndings={Object.keys(stats.endings)}
           />
         )}
       </div>

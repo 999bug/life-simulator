@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import type { AchievementId, GameState } from '../types';
 import { ATTR_META, calcScore } from '../engine/state';
 import { GOALS, checkGoal } from '../engine/goals';
@@ -7,7 +7,7 @@ import ShareCardModal from './ShareCardModal';
 import GrowthChart from './GrowthChart';
 import { buildBiographyMarkdown, downloadText } from '../utils/biography';
 import { track } from '../utils/analytics';
-import { VERDICT_META } from '../engine/verdict';
+import { VERDICT_META, nextRouteToExplore, verdictKey } from '../engine/verdict';
 
 interface Props {
   game: GameState;
@@ -20,6 +20,8 @@ interface Props {
   generation?: number | null;
   /** 本局洗牌种子（分享卡片展示种子码，好友可挑战同一序列） */
   seed?: number;
+  /** 已收集结局路线 key（生涯统计，驱动「下一站」线索与通关成就） */
+  collectedEndings?: string[];
 }
 
 interface Verdict {
@@ -162,10 +164,16 @@ function getVerdict(game: GameState): Verdict {
 /** 里程碑 flag：命中则时间线高亮 */
 const MILESTONE_FLAGS = ['went_to_college', 'grad_school', 'top_university', 'married', 'has_child', 'doctor', 'startup_success', 'civil_servant', 'world_traveler', 'athlete_pro', 'military_flag', 'skilled_worker', 'tech_career', 'retired'];
 
-export default function SummaryScreen({ game, onRestart, newAchievements, skippedTitles, generation, seed }: Props) {
+export default function SummaryScreen({ game, onRestart, newAchievements, skippedTitles, generation, seed, collectedEndings = [] }: Props) {
   const score = calcScore(game.attributes);
   const { title, desc } = getVerdict(game);
   const goal = checkGoal(game.goal, game);
+  // 「下一站」：本局结算后（当前结局已计入收集）提示下一条未走过的路线；全收集显示通关文案
+  const nextRoute = useMemo(
+    () => nextRouteToExplore(verdictKey(game), new Set(collectedEndings)),
+    [game, collectedEndings],
+  );
+  const allCollected = collectedEndings.length > 0 && nextRoute === null;
   // 完整时间线：全部选择 + 里程碑标记（旧存档无 flags 字段 → 无标记，正常显示）
   const milestoneHistory = game.history.map(h => ({
     ...h,
@@ -188,6 +196,31 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       <p className="text-sm text-white/40 text-center max-w-[400px] leading-relaxed animate-[fadeIn_1.2s_ease]">
         {desc}
       </p>
+
+      {/* 下一站：还没走的人生（留存钩子——收集欲驱动重玩；全收集显示通关成就） */}
+      {nextRoute && (
+        <div className="flex items-start gap-3 max-w-[560px] px-5 py-3.5 bg-[#c9a96e]/5 border border-[#c9a96e]/20 rounded-xl
+          animate-[fadeIn_1.5s_ease]">
+          <span className="text-lg leading-none mt-0.5">🧭</span>
+          <div>
+            <div className="text-[11px] text-white/40 tracking-[2px]">下一站 · 还没走的人生</div>
+            <div className="text-[13px] text-[#c9a96e] mt-1">
+              {nextRoute.icon} {nextRoute.title}
+              <span className="text-[11px] text-white/50 ml-2">—— {nextRoute.hint}</span>
+            </div>
+          </div>
+        </div>
+      )}
+      {allCollected && (
+        <div className="flex items-start gap-3 max-w-[560px] px-5 py-3.5 bg-[#c9a96e]/5 border border-[#c9a96e]/20 rounded-xl
+          animate-[fadeIn_1.5s_ease]">
+          <span className="text-lg leading-none mt-0.5">🏆</span>
+          <div>
+            <div className="text-[11px] text-white/40 tracking-[2px]">人生图鉴 · 全收集</div>
+            <div className="text-[13px] text-[#c9a96e] mt-1">13 条人生路线已全部走过</div>
+          </div>
+        </div>
+      )}
 
       {/* 死因与临终叙事 */}
       <div className="flex items-start gap-3 max-w-[560px] px-5 py-3.5 bg-white/[0.03] border border-white/[0.06] rounded-xl

@@ -24,6 +24,10 @@ interface Props {
   collectedEndings?: string[];
   /** 每日挑战局（分享卡片 CTA 切换「今日战绩」文案） */
   isDaily?: boolean;
+  /** 累计完成局数（周目判定：第 6 周目起显示「人生重开」） */
+  totalLives?: number;
+  /** 人生重开（第 6 周目起）：携半身属性重新投胎 */
+  onReincarnate?: () => void;
 }
 
 interface Verdict {
@@ -166,7 +170,7 @@ function getVerdict(game: GameState): Verdict {
 /** 里程碑 flag：命中则时间线高亮 */
 const MILESTONE_FLAGS = ['went_to_college', 'grad_school', 'top_university', 'married', 'has_child', 'doctor', 'startup_success', 'civil_servant', 'world_traveler', 'athlete_pro', 'military_flag', 'skilled_worker', 'tech_career', 'retired'];
 
-export default function SummaryScreen({ game, onRestart, newAchievements, skippedTitles, generation, seed, collectedEndings = [], isDaily = false }: Props) {
+export default function SummaryScreen({ game, onRestart, newAchievements, skippedTitles, generation, seed, collectedEndings = [], isDaily = false, totalLives = 0, onReincarnate }: Props) {
   const score = calcScore(game.attributes);
   const { title, desc } = getVerdict(game);
   const goal = checkGoal(game.goal, game);
@@ -191,6 +195,7 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
         {game.gender === 'male' ? '♂' : '♀'} {game.name} · 享年 {game.age} 岁
         {game.challenge && <span className="text-[#e8a05d] ml-2">⚔️ 挑战人生</span>}
         {game.inherited && <span className="text-[#c9a96e] ml-2">🧬 传承</span>}
+        {game.reincarnated && <span className="text-[#8fb8e8] ml-2">🔄 轮回</span>}
       </p>
       <h2 className="text-[34px] font-extralight tracking-[10px] text-[#c9a96e] animate-[fadeInDown_0.8s_ease]">
         {title}
@@ -372,6 +377,20 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       >
         回到标题
       </button>
+
+      {/* 人生重开（第 6 周目起）：携半身属性重新投胎——同一角色的另一种活法 */}
+      {totalLives >= 5 && !game.reincarnated && onReincarnate && (
+        <button
+          onClick={onReincarnate}
+          className="px-9 py-3 border rounded-2xl bg-transparent
+            text-sm text-[#8fb8e8]/70 tracking-[4px] font-sans
+            border-[#8fb8e8]/25
+            hover:border-[#8fb8e8] hover:text-[#8fb8e8] hover:shadow-[0_4px_20px_rgba(143,184,232,0.3)]
+            transition-all duration-300 mt-2"
+        >
+          🔄 人生重开
+        </button>
+      )}
 
       {showShare && (
         <ShareCardModal

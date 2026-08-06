@@ -191,6 +191,7 @@ export function updateDailyBest(prev: DailyStore, today: string, score: number, 
 export type Action =
   | { type: 'START_GAME'; gender: 'male' | 'female'; name: string; paceMode: PaceMode; typeSpeed: TypeSpeed; goal: GoalKey | CustomGoal | null; challenge: boolean; realMode?: boolean; seed?: number; isDaily?: boolean }
   | { type: 'START_AUTO_GAME'; gender: 'male' | 'female'; name: string }
+  | { type: 'REINCARNATE' }
   | { type: 'RESTART' }
   | { type: 'MAKE_CHOICE'; choice: Choice; eventId: string }
   | { type: 'CONTINUE' }
@@ -491,6 +492,8 @@ interface StartParams {
   autoPlay: boolean;
   /** 每日挑战局：固定种子（同日同序列）+ 不写存档槽 */
   isDaily?: boolean;
+  /** 人生重开（第 6 周目起）：以本局终局属性的一半重新投胎 */
+  reincarnateFrom?: Attributes;
 }
 
 /**
@@ -500,15 +503,25 @@ interface StartParams {
 function startNewGame(state: RuntimeState, p: StartParams): RuntimeState {
   const game = createInitialState(p.gender, p.name);
   game.goal = p.goal;
-  // 属性传承（第 5 周目起）：上一世终局最高 2 项属性各 +8（先继承）
-  if (state.stats.lastEndAttrs) {
-    game.attributes = applyInheritance(game.attributes, state.stats.lastEndAttrs);
-    game.inherited = true;
-  }
-  // 挑战开局（第 2 周目解锁）：属性整体下调 10 点（与传承独立叠加，后挑战）
-  game.challenge = p.challenge;
-  if (game.challenge) {
-    game.attributes = applyChallenge(game.attributes);
+  // 人生重开（第 6 周目起）：取「初始 + 终局」均值重新投胎（每项保底初始值——活得好才增益，不拖累；不叠加传承/挑战）
+  if (p.reincarnateFrom) {
+    const attrs = { ...game.attributes };
+    for (const k of Object.keys(attrs) as AttributeKey[]) {
+      attrs[k] = Math.max(attrs[k], Math.round((attrs[k] + p.reincarnateFrom[k]) / 2));
+    }
+    game.attributes = attrs;
+    game.reincarnated = true;
+  } else {
+    // 属性传承（第 5 周目起）：上一世终局最高 2 项属性各 +8（先继承）
+    if (state.stats.lastEndAttrs) {
+      game.attributes = applyInheritance(game.attributes, state.stats.lastEndAttrs);
+      game.inherited = true;
+    }
+    // 挑战开局（第 2 周目解锁）：属性整体下调 10 点（与传承独立叠加，后挑战）
+    game.challenge = p.challenge;
+    if (game.challenge) {
+      game.attributes = applyChallenge(game.attributes);
+    }
   }
   // 真实模式（第 2 周目解锁）：选项只显示属性倾向箭头
   game.realMode = p.realMode ?? false;
@@ -591,6 +604,21 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         challenge: false,
         autoPlay: true,
       });
+
+    case 'REINCARNATE': {
+      // 人生重开（第 6 周目起）：以本局终局属性的一半重新投胎（保底初始值，不叠加传承/挑战）
+      return startNewGame(state, {
+        gender: state.game.gender,
+        name: state.game.name,
+        paceMode: state.paceMode,
+        typeSpeed: state.typeSpeed,
+        goal: null,
+        challenge: false,
+        seed: undefined,
+        autoPlay: false,
+        reincarnateFrom: state.game.attributes,
+      });
+    }
 
     case 'RESTART': {
       // 局中重开：沿用本局角色与设置，换新随机种子洗牌（每日挑战局保持固定种子，同日重试同一序列）
@@ -1038,6 +1066,11 @@ export function useGame() {
     dispatch({ type: 'RESTART' });
   }, []);
 
+  // 人生重开（第 6 周目起）：结算页携半身属性重新投胎
+  const reincarnate = useCallback(() => {
+    dispatch({ type: 'REINCARNATE' });
+  }, []);
+
   const makeChoice = useCallback((choice: Choice) => {
     if (!rt.currentEvent) return;
     dispatch({ type: 'MAKE_CHOICE', choice, eventId: rt.currentEvent.id });
@@ -1083,6 +1116,7 @@ export function useGame() {
     startAutoGame,
     startDailyGame,
     restart,
+    reincarnate,
     makeChoice,
     continue: continue_,
     continueGame,

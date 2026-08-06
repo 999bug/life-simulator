@@ -381,3 +381,26 @@ test('连续打卡存储往返（内存桩）', () => {
   storage.clear();
   assert.deepStrictEqual(loadDailyStreak(), { date: '', count: 0 });
 });
+
+// ============ 人生重开（第 6 周目）============
+
+test('REINCARNATE：取「初始+终局」均值重新投胎（保底初始）+ 轮回标记', () => {
+  let rt = mkState([evt('a_01', 7, {})]);
+  // 造一个终局属性偏高的状态（高分项与低分项并存）
+  rt = { ...rt, game: { ...rt.game, attributes: { health: 80, intelligence: 60, wealth: 40, happiness: 70, social: 50, appearance: 30, luck: 20, morality: 10 }, phase: 'summary' } };
+  const re = reducer(rt, { type: 'REINCARNATE' });
+  assert.strictEqual(re.game.phase, 'playing');
+  assert.strictEqual(re.game.reincarnated, true);
+  // 均值：health (65+80)/2=73、intelligence (25+60)/2=43、wealth (20+40)/2=30、happiness (60+70)/2=65
+  assert.strictEqual(re.game.attributes.health, 73);
+  assert.strictEqual(re.game.attributes.intelligence, 43);
+  assert.strictEqual(re.game.attributes.wealth, 30);
+  assert.strictEqual(re.game.attributes.happiness, 65);
+  // 低分项保底初始：appearance 38→45、luck 35→50、morality 28→45
+  assert.strictEqual(re.game.attributes.appearance, 45);
+  assert.strictEqual(re.game.attributes.luck, 50);
+  assert.strictEqual(re.game.attributes.morality, 45);
+  // 不叠加挑战/传承标记
+  assert.strictEqual(re.game.challenge, undefined);
+  assert.strictEqual(re.game.inherited, undefined);
+});

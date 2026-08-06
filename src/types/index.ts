@@ -128,6 +128,8 @@ export interface GameState {
   realMode?: boolean;
   /** 属性传承（第 5 周目起：上一世最高 2 项属性各 +8；旧存档无此字段） */
   inherited?: boolean;
+  /** 人生重开（第 6 周目起：结算页可携半身属性重新投胎；旧存档无此字段） */
+  reincarnated?: boolean;
 }
 
 /** 属性元数据 */

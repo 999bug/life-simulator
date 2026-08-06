@@ -7,7 +7,7 @@ import SummaryScreen from './components/SummaryScreen';
 import InstallPrompt from './components/InstallPrompt';
 
 export default function App() {
-  const { game, currentEvent, feedback, skippedEvents, autoPlay, typeSpeed, saves, achievements, stats, newAchievements, fateEventIds, isDaily, daily, dailyHistory, seedScores, family, shuffleSeed, startGame, startAutoGame, startDailyGame, restart, makeChoice, continue: continue_, continueGame, reset, setTypeSpeed } = useGame();
+  const { game, currentEvent, feedback, skippedEvents, autoPlay, typeSpeed, saves, achievements, stats, newAchievements, fateEventIds, isDaily, daily, dailyHistory, seedScores, family, shuffleSeed, startGame, startAutoGame, startDailyGame, restart, reincarnate, makeChoice, continue: continue_, continueGame, reset, setTypeSpeed } = useGame();
 
   // 快速模拟模式静音高频交互音；结算页恢复（保留落幕音）
   useEffect(() => {
@@ -64,6 +64,8 @@ export default function App() {
             seed={shuffleSeed}
             collectedEndings={Object.keys(stats.endings)}
             isDaily={isDaily}
+            totalLives={stats.totalLives}
+            onReincarnate={reincarnate}
           />
         )}
       </div>

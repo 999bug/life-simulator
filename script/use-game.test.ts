@@ -9,7 +9,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert';
 import { readFileSync } from 'node:fs';
-import { reducer, createInitialRuntime, trackAbandonIfPlaying } from '../src/hooks/useGame.ts';
+import { reducer, createInitialRuntime, trackAbandonIfPlaying, updateDailyHistory, recordSeedScore, loadDailyHistory, saveDailyHistory, loadSeedScores, saveSeedScores } from '../src/hooks/useGame.ts';
 import { getStageForAge, STAGE_ORDER } from '../src/engine/state.ts';
 import { setEvents } from '../src/engine/events.ts';
 import { loadAnalytics } from '../src/utils/analytics.ts';
@@ -312,4 +312,44 @@ test('trackAbandonIfPlaying：进行中回标题记 game_abandon，结算后（s
   const abandons = events.filter(e => e.type === 'game_abandon');
   assert.strictEqual(abandons.length, 1, '仅进行中放弃记 1 条，结算后回标题不误记');
   assert.strictEqual((abandons[0] as { age: number }).age, 30);
+});
+
+// ============ 挑战历史（每日周视图 + 种子比分）============
+
+test('updateDailyHistory：同天更高分覆盖、低分保留、跨天新增', () => {
+  const base = { '20260806': { score: 60, age: 50 } };
+  const higher = updateDailyHistory(base, '20260806', 75, 70);
+  assert.strictEqual(higher['20260806'].score, 75);
+  assert.strictEqual(higher['20260806'].age, 70);
+  const lower = updateDailyHistory(higher, '20260806', 55, 30);
+  assert.strictEqual(lower['20260806'].score, 75);
+  const nextDay = updateDailyHistory(lower, '20260807', 66, 60);
+  assert.deepStrictEqual(nextDay['20260807'], { score: 66, age: 60 });
+  assert.strictEqual(nextDay['20260806'].score, 75);
+});
+
+test('recordSeedScore：首次/复玩/最佳更新', () => {
+  const first = recordSeedScore({}, '12345', 66, 60);
+  assert.deepStrictEqual(first['12345'], { bestScore: 66, bestAge: 60, plays: 1 });
+  const again = recordSeedScore(first, '12345', 70, 80);
+  assert.deepStrictEqual(again['12345'], { bestScore: 70, bestAge: 80, plays: 2 });
+  const lower = recordSeedScore(again, '12345', 40, 20);
+  assert.strictEqual(lower['12345'].bestScore, 70);
+  assert.strictEqual(lower['12345'].bestAge, 80);
+  assert.strictEqual(lower['12345'].plays, 3);
+  const otherSeed = recordSeedScore(lower, '99999', 88, 90);
+  assert.deepStrictEqual(otherSeed['99999'], { bestScore: 88, bestAge: 90, plays: 1 });
+  assert.strictEqual(otherSeed['12345'].plays, 3);
+});
+
+test('挑战历史存储往返（内存桩）', () => {
+  storage.clear();
+  const store = { '20260806': { score: 66, age: 60 } };
+  saveDailyHistory(store);
+  assert.deepStrictEqual(loadDailyHistory(), store);
+  saveSeedScores({ '12345': { bestScore: 70, bestAge: 80, plays: 2 } });
+  assert.deepStrictEqual(loadSeedScores(), { '12345': { bestScore: 70, bestAge: 80, plays: 2 } });
+  storage.clear();
+  assert.deepStrictEqual(loadDailyHistory(), {});
+  assert.deepStrictEqual(loadSeedScores(), {});
 });

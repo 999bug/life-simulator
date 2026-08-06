@@ -200,6 +200,8 @@ export type Action =
   | { type: 'HYDRATE_SAVES'; saves: SavesV2; achievements: AchievementStore }
   | { type: 'ACHIEVEMENTS_PERSISTED' }
   | { type: 'DAILY_UPDATED'; daily: DailyStore }
+  | { type: 'DAILY_HISTORY_UPDATED'; dailyHistory: DailyHistory }
+  | { type: 'SEED_SCORES_UPDATED'; seedScores: SeedScores }
   | { type: 'FAMILY_UPDATED'; family: FamilyMember[] };
 
 // ============ 运行时状态（不参与 React 渲染）============
@@ -242,6 +244,10 @@ export interface RuntimeState {
   seedChallenge: boolean;
   /** 每日挑战记录（今日最佳；标题页展示） */
   daily: DailyStore;
+  /** 每日挑战历史（按天最佳；StatsModal 周视图展示） */
+  dailyHistory: DailyHistory;
+  /** 种子挑战本地比分（SeedModal 展示） */
+  seedScores: SeedScores;
   /** 家族族谱（跨周目；结算时正常局追加一代，快速模拟/每日挑战不写入） */
   family: FamilyMember[];
 }
@@ -316,6 +322,100 @@ function saveState(rt: RuntimeState): void {
     fateEventId: rt.fateEventIds[0] ?? null,
   };
   saveSaves(saves);
+}
+
+// ============ 挑战历史存储（每日周视图 + 种子比分）============
+
+/** 每日挑战历史存储 key */
+const DAILY_HISTORY_KEY = 'life-sim-daily-history';
+
+/** 每日挑战历史：YYYYMMDD → 当日最佳（玩过的天才有记录，同天覆盖） */
+export interface DailyHistory {
+  [date: string]: { score: number; age: number };
+}
+
+/** 读取每日挑战历史；数据损坏或存储不可用时返回空结构 */
+export function loadDailyHistory(): DailyHistory {
+  try {
+    const raw = localStorage.getItem(DAILY_HISTORY_KEY);
+    if (raw) {
+      const data = JSON.parse(raw) as DailyHistory;
+      if (data && typeof data === 'object' && !Array.isArray(data)) {
+        return data;
+      }
+    }
+  } catch {
+    // 忽略损坏数据
+  }
+  return {};
+}
+
+/** 持久化每日挑战历史；存储不可用时静默降级 */
+export function saveDailyHistory(store: DailyHistory): void {
+  try {
+    localStorage.setItem(DAILY_HISTORY_KEY, JSON.stringify(store));
+  } catch {
+    // 存储不可用静默降级
+  }
+}
+
+/** 追加当日记录：同天只保留最佳（更高评分；平局保留先达者） */
+export function updateDailyHistory(prev: DailyHistory, today: string, score: number, age: number): DailyHistory {
+  const existing = prev[today];
+  if (existing && existing.score >= score) {
+    return prev;
+  }
+  return { ...prev, [today]: { score, age } };
+}
+
+/** 种子挑战比分存储 key */
+const SEED_SCORES_KEY = 'life-sim-seed-scores';
+
+/** 种子挑战本地比分：种子 → 最佳评分/享年/游玩次数 */
+export interface SeedScores {
+  [seed: string]: { bestScore: number; bestAge: number; plays: number };
+}
+
+/** 读取种子比分；数据损坏或存储不可用时返回空结构 */
+export function loadSeedScores(): SeedScores {
+  try {
+    const raw = localStorage.getItem(SEED_SCORES_KEY);
+    if (raw) {
+      const data = JSON.parse(raw) as SeedScores;
+      if (data && typeof data === 'object' && !Array.isArray(data)) {
+        return data;
+      }
+    }
+  } catch {
+    // 忽略损坏数据
+  }
+  return {};
+}
+
+/** 持久化种子比分；存储不可用时静默降级 */
+export function saveSeedScores(store: SeedScores): void {
+  try {
+    localStorage.setItem(SEED_SCORES_KEY, JSON.stringify(store));
+  } catch {
+    // 存储不可用静默降级
+  }
+}
+
+/** 记录一局种子挑战：首次 plays=1；复玩 plays+1 且 best 取更高评分（平局保留先达者享年） */
+export function recordSeedScore(prev: SeedScores, seed: string, score: number, age: number): SeedScores {
+  const existing = prev[seed];
+  if (!existing) {
+    return { ...prev, [seed]: { bestScore: score, bestAge: age, plays: 1 } };
+  }
+  const better = score > existing.bestScore;
+  return {
+    ...prev,
+    [seed]: {
+      bestScore: Math.max(existing.bestScore, score),
+      bestAge: better ? age : existing.bestAge,
+      plays: existing.plays + 1,
+    },
+  };
 }
 
 // ============ 开局初始化（START_GAME / START_AUTO_GAME / RESTART 共用）============
@@ -397,6 +497,9 @@ function startNewGame(state: RuntimeState, p: StartParams): RuntimeState {
     pendingEndingKey: '',
     fateEventIds: fateEvents.map(e => e.id),
     isDaily: p.isDaily ?? false,
+    // 挑战历史跨局保留（不随开局重置）
+    dailyHistory: state.dailyHistory,
+    seedScores: state.seedScores,
     // 种子挑战局：玩家输入了种子码且非每日挑战（重开保持种子）
     seedChallenge: p.seed != null && !p.isDaily,
     daily: state.daily,
@@ -565,6 +668,8 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         pendingEndingKey: endingKey,
         fateEventIds: state.fateEventIds,
         isDaily: state.isDaily,
+        dailyHistory: state.dailyHistory,
+        seedScores: state.seedScores,
         seedChallenge: state.seedChallenge,
         daily: state.daily,
         family: state.family,
@@ -628,6 +733,8 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         isDaily: false,
         seedChallenge: false,
         daily: state.daily,
+        dailyHistory: state.dailyHistory,
+        seedScores: state.seedScores,
         family: state.family,
       };
     }
@@ -644,6 +751,14 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
     case 'DAILY_UPDATED':
       // 每日挑战最佳已写入 localStorage，更新运行时记录（标题页展示）
       return { ...state, daily: action.daily };
+
+    case 'DAILY_HISTORY_UPDATED':
+      // 每日挑战历史已写入 localStorage，更新运行时记录（StatsModal 周视图）
+      return { ...state, dailyHistory: action.dailyHistory };
+
+    case 'SEED_SCORES_UPDATED':
+      // 种子比分已写入 localStorage，更新运行时记录（SeedModal 展示）
+      return { ...state, seedScores: action.seedScores };
 
     case 'FAMILY_UPDATED':
       // 族谱已写入 localStorage，更新运行时族谱（标题页族谱展示）
@@ -724,6 +839,9 @@ export function createInitialRuntime(): RuntimeState {
     seedChallenge: false,
     // 每日挑战记录初始同步读取
     daily: loadDaily(),
+    // 挑战历史同样初始同步读取
+    dailyHistory: loadDailyHistory(),
+    seedScores: loadSeedScores(),
     // 族谱同样初始同步读取
     family: loadFamily(),
   };
@@ -768,11 +886,21 @@ export function useGame() {
     });
     // 埋点：结算（与成就/统计同一时机，pending 标志保证不重复）
     track({ type: 'game_finish', ts: Date.now(), score, age: rt.game.age, endingKey: rt.pendingEndingKey });
-    // 每日挑战局：结算仅更新今日最佳（跨天则以本局初始化今日记录）
+    // 每日挑战局：结算更新今日最佳（跨天则以本局初始化今日记录）+ 追加当日历史（同天保留最佳）
     if (rt.isDaily) {
-      const nextDaily = updateDailyBest(rt.daily, formatDate(new Date()), score, rt.game.age);
+      const today = formatDate(new Date());
+      const nextDaily = updateDailyBest(rt.daily, today, score, rt.game.age);
       saveDaily(nextDaily);
       dispatch({ type: 'DAILY_UPDATED', daily: nextDaily });
+      const nextHistory = updateDailyHistory(rt.dailyHistory, today, score, rt.game.age);
+      saveDailyHistory(nextHistory);
+      dispatch({ type: 'DAILY_HISTORY_UPDATED', dailyHistory: nextHistory });
+    }
+    // 种子挑战局：记录该种子本地比分（最佳评分 + 享年 + 游玩次数）
+    if (rt.seedChallenge && rt.shuffleSeed != null) {
+      const nextScores = recordSeedScore(rt.seedScores, String(rt.shuffleSeed), score, rt.game.age);
+      saveSeedScores(nextScores);
+      dispatch({ type: 'SEED_SCORES_UPDATED', seedScores: nextScores });
     }
     // 每一生都入族谱（世代 = 族谱长度 + 1）；快速模拟/每日挑战带标记（auto 代不参与传承）；附带回顾数据供结算页回看
     const skippedTitles = [...new Set(rt.skippedEvents.map(e => e.title ?? e.id))];
@@ -876,6 +1004,8 @@ export function useGame() {
     isDaily: rt.isDaily,
     shuffleSeed: rt.shuffleSeed,
     daily: rt.daily,
+    dailyHistory: rt.dailyHistory,
+    seedScores: rt.seedScores,
     family: rt.family,
     startGame,
     startAutoGame,

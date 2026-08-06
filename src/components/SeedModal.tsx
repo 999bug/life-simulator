@@ -1,9 +1,12 @@
 import { useState } from 'react';
+import type { SeedScores } from '../hooks/useGame';
 
 interface Props {
   /** 确认锁定种子（null = 清除锁定） */
   onConfirm: (seed: number | null) => void;
   onCancel: () => void;
+  /** 种子挑战本地比分（输入种子码时展示该种子的最佳成绩） */
+  scores?: SeedScores;
 }
 
 /** 种子上限（洗牌种子为 2^31 内整数） */
@@ -13,9 +16,12 @@ const SEED_MAX = 2 ** 31;
  * 种子挑战输入模态：输入好友分享卡片上的种子码，玩同一序列的人生比分。
  * 纯数字校验，空输入视为清除锁定。
  */
-export default function SeedModal({ onConfirm, onCancel }: Props) {
+export default function SeedModal({ onConfirm, onCancel, scores = {} }: Props) {
   const [value, setValue] = useState('');
   const [error, setError] = useState('');
+  // 输入有效种子码时展示该种子的本地最佳成绩（同种子同事件序列，好友比分）
+  const validSeed = /^\d+$/.test(value.trim()) && Number(value.trim()) < 2 ** 31 ? value.trim() : '';
+  const score = validSeed ? scores[validSeed] : undefined;
 
   const handleConfirm = () => {
     const trimmed = value.trim();
@@ -59,6 +65,11 @@ export default function SeedModal({ onConfirm, onCancel }: Props) {
             transition-all duration-300 font-sans"
         />
         {error && <p className="text-[11px] text-[#e8a05d] tracking-[1px] text-center">{error}</p>}
+        {score && !error && (
+          <p className="text-[11px] text-[#c9a96e] tracking-[1px] text-center">
+            该种子：最佳评分 {score.bestScore} · 享年 {score.bestAge} · 玩过 {score.plays} 次
+          </p>
+        )}
         <div className="flex gap-3 justify-center">
           <button
             onClick={onCancel}

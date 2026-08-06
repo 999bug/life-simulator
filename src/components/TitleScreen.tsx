@@ -3,7 +3,7 @@ import { sfx } from '../utils/sound';
 import { track } from '../utils/analytics';
 import type { AchievementId, CustomGoal, FamilyMember, GoalKey, PaceMode, TypeSpeed } from '../types';
 import type { SavesV2 } from '../engine/save';
-import type { DailyStore, StatsStore } from '../hooks/useGame';
+import type { DailyHistory, DailyStore, SeedScores, StatsStore } from '../hooks/useGame';
 import { formatDate } from '../hooks/useGame';
 import GoalModal from './GoalModal';
 import ConfirmModal from './ConfirmModal';
@@ -34,11 +34,15 @@ interface Props {
   stats: StatsStore;
   /** 每日挑战记录（入口旁展示今日最佳） */
   daily: DailyStore;
+  /** 每日挑战历史（StatsModal 周视图） */
+  dailyHistory: DailyHistory;
+  /** 种子挑战本地比分（SeedModal 展示） */
+  seedScores: SeedScores;
   /** 家族族谱（标题页族谱入口 + 开局继承提示） */
   family: FamilyMember[];
 }
 
-export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves, onContinue, achievements, stats, daily, family }: Props) {
+export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves, onContinue, achievements, stats, daily, dailyHistory, seedScores, family }: Props) {
   const [gender, setGender] = useState<'male' | 'female' | null>(null);
   const [name, setName] = useState('');
   const [paceMode, setPaceMode] = useState<PaceMode>('full');
@@ -475,7 +479,7 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
 
       {/* 生涯统计模态（📊 入口弹出，含「每一世」回看列表） */}
       {showStats && (
-        <StatsModal stats={stats} family={family} onRecap={setRecap} onClose={() => setShowStats(false)} />
+        <StatsModal stats={stats} family={family} dailyHistory={dailyHistory} onRecap={setRecap} onClose={() => setShowStats(false)} />
       )}
 
       {/* 世代结算回看：复用 SummaryScreen 只读渲染（z-60 盖在统计/族谱模态之上） */}
@@ -496,6 +500,7 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
         <SeedModal
           onConfirm={s => { setSeed(s); setShowSeed(false); }}
           onCancel={() => setShowSeed(false)}
+          scores={seedScores}
         />
       )}
 

@@ -1,20 +1,41 @@
 import type { FamilyMember } from '../types';
-import type { StatsStore } from '../hooks/useGame';
+import type { DailyHistory, StatsStore } from '../hooks/useGame';
 import { verdictTitle } from '../engine/verdict';
 
 interface Props {
   stats: StatsStore;
   /** 族谱（「每一世」回看列表数据源） */
   family: FamilyMember[];
+  /** 每日挑战历史（近 7 天周视图） */
+  dailyHistory?: DailyHistory;
   /** 点击某一代回看其结算页（仅有完整回顾数据的代可点击） */
   onRecap: (member: FamilyMember) => void;
   onClose: () => void;
 }
 
-/** 生涯统计模态：总局数/最佳评分/平均寿命/结局分布 + 每一世回看列表 */
-export default function StatsModal({ stats, family, onRecap, onClose }: Props) {
+/** 最近 N 天日期序列（YYYYMMDD，含今天，升序） */
+function lastDays(n: number): string[] {
+  const days: string[] = [];
+  for (let i = n - 1; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    days.push(`${d.getFullYear()}${month}${day}`);
+  }
+  return days;
+}
+
+/** 日期（YYYYMMDD）→ MM-DD 短格式 */
+function shortDate(date: string): string {
+  return `${date.slice(4, 6)}-${date.slice(6, 8)}`;
+}
+
+/** 生涯统计模态：总局数/最佳评分/平均寿命/结局分布 + 每一世回看列表 + 每日挑战周视图 */
+export default function StatsModal({ stats, family, dailyHistory = {}, onRecap, onClose }: Props) {
   const avgAge = stats.totalLives > 0 ? Math.round(stats.totalAge / stats.totalLives) : 0;
   const endings = Object.entries(stats.endings).sort((a, b) => b[1] - a[1]);
+  const week = lastDays(7);
   return (
     <div className="absolute inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center" onClick={onClose}>
       <div className="w-[440px] max-w-[92vw] max-h-[min(520px,86vh)] overflow-y-auto rounded-2xl border border-white/10 bg-[#15152a] p-6 flex flex-col gap-4" onClick={e => e.stopPropagation()}>
@@ -60,6 +81,29 @@ export default function StatsModal({ stats, family, onRecap, onClose }: Props) {
             <p className="text-[10px] text-white/25 mt-1.5">点击回看该世结算页；仅最近 15 世保留完整回顾</p>
           </div>
         )}
+        {/* 每日挑战 · 近 7 天（挑战变成习惯：每天同一天全世界同一局） */}
+        <div>
+          <h4 className="text-[12px] tracking-[3px] text-white/50 mb-2">📅 每日挑战 · 近 7 天</h4>
+          {week.every(d => !dailyHistory[d]) ? (
+            <p className="text-[11px] text-white/30">还没有玩过每日挑战</p>
+          ) : (
+            <div className="flex flex-col gap-1">
+              {week.map(d => {
+                const rec = dailyHistory[d];
+                return (
+                  <div key={d} className={`flex justify-between text-[12px] py-1 border-b border-white/[0.04] ${rec ? '' : 'opacity-40'}`}>
+                    <span className="text-white/50">{shortDate(d)}</span>
+                    {rec ? (
+                      <span className="text-[#c9a96e]">评分 {rec.score} · 享年 {rec.age}</span>
+                    ) : (
+                      <span className="text-white/25">未挑战</span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
         <div>
           <h4 className="text-[12px] tracking-[3px] text-white/50 mb-2">结局分布</h4>
           {endings.length === 0 ? (

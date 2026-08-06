@@ -10,9 +10,13 @@ export default defineConfig({
     VitePWA({
       // prompt 模式：新版本就绪由 ReloadPrompt 弹条让玩家自选刷新时机（autoUpdate 会在游戏进行中无感刷新导致丢局）
       registerType: 'prompt',
+      // injectManifest 手写 SW（generateSW 在本项目 singlefile 构建下 precache 失效，见 src/service-worker.ts 头部说明）
+      strategies: 'injectManifest',
+      srcDir: 'src',
+      filename: 'service-worker.ts',
       // 事件数据（public/events.json）纳入 precache，保障离线首启可用
-      workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,png,ico,json,webmanifest}'],
+      injectManifest: {
+        globPatterns: ['**/*.{html,json,png,webmanifest}'],
       },
       manifest: {
         name: '人生模拟器',

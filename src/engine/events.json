@@ -12972,6 +12972,52 @@
     }
   },
   {
+    "id": "echo_0020",
+    "stage": "adult",
+    "age": 36,
+    "title": "被安排的相亲",
+    "text": "母亲发来第八条语音，中心思想只有一个：这周六的相亲必须去。对方是中学老师，据说「稳重、有房、无不良嗜好」。你盯着天花板想，自己现在的生活到底有什么不好。",
+    "category": "love",
+    "choices": [
+      {
+        "text": "去吧，给彼此一个机会",
+        "effects": "👥+3",
+        "outcomes": {
+          "attr": {
+            "social": 3
+          }
+        }
+      },
+      {
+        "text": "去，但只是为了让妈安心",
+        "effects": "👥+1",
+        "outcomes": {
+          "attr": {
+            "social": 1
+          }
+        }
+      },
+      {
+        "text": "明确拒绝：我的婚事我做主",
+        "effects": "😊+4 👥-2",
+        "outcomes": {
+          "attr": {
+            "happiness": 4,
+            "social": -2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [
+        "married"
+      ],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "adult_44",
     "stage": "adult",
     "age": 37,
@@ -13200,6 +13246,54 @@
       "minAttrs": {
         "health": 31
       },
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "echo_0021",
+    "stage": "adult",
+    "age": 37,
+    "title": "婚姻的第七年",
+    "text": "结婚第七年，你们的话越来越少。晚饭时各自刷着手机，电视的声音填满了屋子。睡前你看着身边熟睡的人，忽然想不起上次好好聊天是什么时候。",
+    "category": "love",
+    "choices": [
+      {
+        "text": "周末约一次二人旅行，重新点火",
+        "effects": "💰-3 😊+5 👥+4",
+        "outcomes": {
+          "attr": {
+            "happiness": 5,
+            "social": 4,
+            "wealth": -3
+          }
+        }
+      },
+      {
+        "text": "今晚就放下手机好好谈谈",
+        "effects": "😊+3 👥+7",
+        "outcomes": {
+          "attr": {
+            "social": 7,
+            "happiness": 3
+          }
+        }
+      },
+      {
+        "text": "婚姻不都这样，凑合过",
+        "effects": "😊-1",
+        "outcomes": {
+          "attr": {
+            "happiness": -1
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "married"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
       "maxAttrs": {}
     }
   },
@@ -13918,6 +14012,53 @@
     }
   },
   {
+    "id": "echo_0003",
+    "stage": "adult",
+    "age": 39,
+    "title": "同学会上的那个人",
+    "text": "同学会上，坐在你斜对面的还是那个人。敬酒时你们碰了杯，谁都没提当年图书馆后面的那句告白。散场时下起小雨，你们在门口站了一会儿，像站在二十年前的屋檐下。",
+    "category": "love",
+    "choices": [
+      {
+        "text": "加个微信，以后常联系",
+        "effects": "😊+6 👥+4",
+        "outcomes": {
+          "attr": {
+            "social": 4,
+            "happiness": 6
+          }
+        }
+      },
+      {
+        "text": "敬往事一杯酒，各自回家",
+        "effects": "🧠+3 😊+4",
+        "outcomes": {
+          "attr": {
+            "happiness": 4,
+            "intelligence": 3
+          }
+        }
+      },
+      {
+        "text": "第二天约出来单独吃了顿饭",
+        "effects": "😊+2",
+        "outcomes": {
+          "attr": {
+            "happiness": 2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "college_romance"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "adult_57",
     "stage": "adult",
     "age": 40,
@@ -14554,6 +14695,55 @@
     }
   },
   {
+    "id": "echo_0005",
+    "stage": "adult",
+    "age": 41,
+    "title": "和孩子的开黑之夜",
+    "text": "孩子放学回来神神秘秘地说：我们班都在玩这个游戏，你肯定不行。你默默拿出手机，登上那个十年前的账号。那晚的语音频道里，孩子扯着嗓子喊了一晚上「大佬」。",
+    "category": "technology",
+    "choices": [
+      {
+        "text": "认真carry，让孩子见识见识",
+        "effects": "😊+8 👥+4",
+        "outcomes": {
+          "attr": {
+            "happiness": 8,
+            "social": 4
+          }
+        }
+      },
+      {
+        "text": "故意放水，让孩子赢个痛快",
+        "effects": "😊+3 👥+5",
+        "outcomes": {
+          "attr": {
+            "social": 5,
+            "happiness": 3
+          }
+        }
+      },
+      {
+        "text": "趁机约法三章：写完作业才能玩",
+        "effects": "👥+2 ⚖️+4",
+        "outcomes": {
+          "attr": {
+            "morality": 4,
+            "social": 2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "gamer",
+        "has_child"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "adult_66",
     "stage": "adult",
     "age": 42,
@@ -14818,6 +15008,54 @@
     "conditions": {
       "hasFlags": [
         "gray_deal"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "echo_0015",
+    "stage": "adult",
+    "age": 42,
+    "title": "业余马拉松",
+    "text": "体检报告上的脂肪肝让你下了决心。翻出三十多年前校运会的号码布，你报了个半程马拉松。训练第一天跑八百米就喘成了风箱，但冲线那天，你在终点哭得像个孩子。",
+    "category": "sports",
+    "choices": [
+      {
+        "text": "科学训练，认真备战",
+        "effects": "💪+10 💰-2",
+        "outcomes": {
+          "attr": {
+            "health": 10,
+            "wealth": -2
+          }
+        }
+      },
+      {
+        "text": "重在参与，跑完就行",
+        "effects": "💪+4 😊+3",
+        "outcomes": {
+          "attr": {
+            "health": 4,
+            "happiness": 3
+          }
+        }
+      },
+      {
+        "text": "报完名就后悔了",
+        "effects": "😊+2 ⚖️-3",
+        "outcomes": {
+          "attr": {
+            "morality": -3,
+            "happiness": 2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "athlete_candidate"
       ],
       "notFlags": [],
       "minAttrs": {},
@@ -15126,6 +15364,60 @@
     }
   },
   {
+    "id": "echo_0002",
+    "stage": "adult",
+    "age": 43,
+    "title": "第二次创业",
+    "text": "老朋友拿来一份商业计划书，说就缺你这样的合伙人。上一次创业失败的债你早还清了，疤还在。饭桌上他说得眉飞色舞，你捏着茶杯没说话——心里那团灰，好像又热了一点。",
+    "category": "career",
+    "choices": [
+      {
+        "text": "把积蓄押进去再来一次，这一次你做成了",
+        "effects": "🧠+6 💰-10 😊-8",
+        "outcomes": {
+          "attr": {
+            "wealth": -10,
+            "intelligence": 6,
+            "happiness": -8
+          },
+          "flags": [
+            "startup_success"
+          ]
+        }
+      },
+      {
+        "text": "入一股小的，只出经验不出大钱",
+        "effects": "🧠+4 💰+4 😊-2",
+        "outcomes": {
+          "attr": {
+            "wealth": 4,
+            "intelligence": 4,
+            "happiness": -2
+          }
+        }
+      },
+      {
+        "text": "笑着摇头：我劝你也别干",
+        "effects": "😊+4",
+        "outcomes": {
+          "attr": {
+            "happiness": 4
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "startup_fail"
+      ],
+      "notFlags": [],
+      "minAttrs": {
+        "wealth": 30
+      },
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "adult_75",
     "stage": "adult",
     "age": 44,
@@ -15330,6 +15622,52 @@
           "attr": {
             "wealth": -15,
             "happiness": -4
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "echo_0023",
+    "stage": "adult",
+    "age": 44,
+    "title": "初恋的婚礼请柬",
+    "text": "一张烫金请柬躺在信箱里——初恋要结婚了。你们已经十五年没有联系。你捏着请柬站在楼道里，想起十七岁那年的单车后座，和那句没能说出口的话。",
+    "category": "love",
+    "choices": [
+      {
+        "text": "大方出席，送上祝福",
+        "effects": "🧠+4 😊+5",
+        "outcomes": {
+          "attr": {
+            "intelligence": 4,
+            "happiness": 5
+          }
+        }
+      },
+      {
+        "text": "随个份子，人就不去了",
+        "effects": "💰-2 😊+3 ⚖️-2",
+        "outcomes": {
+          "attr": {
+            "wealth": -2,
+            "happiness": 3,
+            "morality": -2
+          }
+        }
+      },
+      {
+        "text": "把请柬收进抽屉最底层",
+        "effects": "😊+4",
+        "outcomes": {
+          "attr": {
+            "happiness": 4
           }
         }
       }
@@ -15615,6 +15953,57 @@
     }
   },
   {
+    "id": "echo_0001",
+    "stage": "adult",
+    "age": 45,
+    "title": "重拾画笔",
+    "text": "整理储物间，你翻出小学时得奖的那幅画——纸都黄了，画里的太阳还是那么圆。你忽然想起自己有多久没画过了。晚上路过文具店，你鬼使神差地走进去，抱出一套颜料和一摞画布。",
+    "category": "hobby",
+    "choices": [
+      {
+        "text": "报个成人班认真捡起来，作品慢慢有人买了",
+        "effects": "💰-4 😊+4 🎨+6",
+        "outcomes": {
+          "attr": {
+            "appearance": 6,
+            "happiness": 4,
+            "wealth": -4
+          },
+          "flags": [
+            "artist_life"
+          ]
+        }
+      },
+      {
+        "text": "周末在家画着玩，图个心静",
+        "effects": "😊+5 🎨+4",
+        "outcomes": {
+          "attr": {
+            "appearance": 4,
+            "happiness": 5
+          }
+        }
+      },
+      {
+        "text": "算了，都这把年纪了",
+        "effects": "😊+2",
+        "outcomes": {
+          "attr": {
+            "happiness": 2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "art_dream"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "adult_83",
     "stage": "adult",
     "age": 46,
@@ -15873,6 +16262,54 @@
     "conditions": {
       "hasFlags": [
         "hospitalized"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "echo_0014",
+    "stage": "adult",
+    "age": 46,
+    "title": "副业转正",
+    "text": "做了三年的副业，这个月收入第一次超过了工资。你盯着两条银行到账短信看了很久。当年同事笑你「瞎折腾」，现在他们想跟你取经。辞不辞职，是个问题。",
+    "category": "career",
+    "choices": [
+      {
+        "text": "辞职，全身心干自己的",
+        "effects": "💰+8",
+        "outcomes": {
+          "attr": {
+            "wealth": 8
+          }
+        }
+      },
+      {
+        "text": "两手抓，累就累点",
+        "effects": "💪-2 💰+5 ⚖️+3",
+        "outcomes": {
+          "attr": {
+            "wealth": 5,
+            "health": -2,
+            "morality": 3
+          }
+        }
+      },
+      {
+        "text": "稳住，副业只是补贴",
+        "effects": "💰+3 😊+3",
+        "outcomes": {
+          "attr": {
+            "wealth": 3,
+            "happiness": 3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "side_hustle"
       ],
       "notFlags": [],
       "minAttrs": {},
@@ -16242,6 +16679,55 @@
     }
   },
   {
+    "id": "echo_0011",
+    "stage": "adult",
+    "age": 47,
+    "title": "老友的深夜来电",
+    "text": "凌晨一点，老友打来电话，支支吾吾半天：生意周转不开，想借二十万，年底就还。你们认识三十五年了，他从没开过这个口。电话那头安静得能听见他的呼吸。",
+    "category": "friend",
+    "choices": [
+      {
+        "text": "二话不说转了账",
+        "effects": "💰-12 👥+9",
+        "outcomes": {
+          "attr": {
+            "wealth": -12,
+            "social": 9
+          }
+        }
+      },
+      {
+        "text": "借五万，写个借条",
+        "effects": "🧠+2 💰-5 👥+3",
+        "outcomes": {
+          "attr": {
+            "wealth": -5,
+            "social": 3,
+            "intelligence": 2
+          }
+        }
+      },
+      {
+        "text": "婉拒：成年人的友情经不起钱",
+        "effects": "🧠+3 👥-3",
+        "outcomes": {
+          "attr": {
+            "social": -3,
+            "intelligence": 3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "deep_friendship"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "adult_92",
     "stage": "adult",
     "age": 48,
@@ -16452,6 +16938,53 @@
       "hasFlags": [
         "investor_sharp"
       ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "echo_0024",
+    "stage": "adult",
+    "age": 48,
+    "title": "让钱也上个班",
+    "text": "同事神秘兮兮地说他去年理财收益顶半年工资。你回家盘了盘存款：躺在活期里的钱，利息还不够交物业费。这个年纪，是时候让钱也上个班了。",
+    "category": "finance",
+    "choices": [
+      {
+        "text": "稳健配置，债基为主",
+        "effects": "🧠+2 💰+9",
+        "outcomes": {
+          "attr": {
+            "wealth": 9,
+            "intelligence": 2
+          }
+        }
+      },
+      {
+        "text": "高风险高回报，搏一把",
+        "effects": "💰+8 😊-3 🍀+4",
+        "outcomes": {
+          "attr": {
+            "wealth": 8,
+            "luck": 4,
+            "happiness": -3
+          }
+        }
+      },
+      {
+        "text": "不懂不碰，存定期",
+        "effects": "💰+4 😊+3",
+        "outcomes": {
+          "attr": {
+            "wealth": 4,
+            "happiness": 3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
       "notFlags": [],
       "minAttrs": {},
       "maxAttrs": {}
@@ -16720,6 +17253,106 @@
       "hasFlags": [
         "married"
       ]
+    }
+  },
+  {
+    "id": "echo_0008",
+    "stage": "adult",
+    "age": 49,
+    "title": "迟到的远行",
+    "text": "年假批下来的那天，你盯着订票网站看了很久。十八岁那年你说要去看世界，后来世界变成了两点一线。你深吸一口气，按下支付键——去一个名字都不会念的地方。",
+    "category": "hobby",
+    "choices": [
+      {
+        "text": "一个人背包走，住青旅",
+        "effects": "💰-4 😊+10",
+        "outcomes": {
+          "attr": {
+            "happiness": 10,
+            "wealth": -4
+          }
+        }
+      },
+      {
+        "text": "约上老同学组团自驾",
+        "effects": "💰-3 😊+4 👥+4",
+        "outcomes": {
+          "attr": {
+            "social": 4,
+            "happiness": 4,
+            "wealth": -3
+          }
+        }
+      },
+      {
+        "text": "算了退了吧，家里走不开",
+        "effects": "😊-2 ⚖️+3",
+        "outcomes": {
+          "attr": {
+            "morality": 3,
+            "happiness": -2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "wanderlust"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "echo_0022",
+    "stage": "middle_age",
+    "age": 50,
+    "title": "空巢后的二人世界",
+    "text": "孩子去外地上大学后，家里突然安静得可怕。冰箱里的菜总是做多，餐桌对面空了。老伴把孩子的房间收拾了一遍又一遍。周六早上，你推了推老花镜：「要不，咱俩出去走走？」",
+    "category": "love",
+    "choices": [
+      {
+        "text": "和老伴报个旅行团",
+        "effects": "💰-3 😊+5 👥+4",
+        "outcomes": {
+          "attr": {
+            "happiness": 5,
+            "social": 4,
+            "wealth": -3
+          }
+        }
+      },
+      {
+        "text": "培养共同爱好，一起跳广场舞",
+        "effects": "💪+3 😊+2 👥+4",
+        "outcomes": {
+          "attr": {
+            "social": 4,
+            "health": 3,
+            "happiness": 2
+          }
+        }
+      },
+      {
+        "text": "各找各的乐子",
+        "effects": "😊+3 👥-1",
+        "outcomes": {
+          "attr": {
+            "happiness": 3,
+            "social": -1
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "married",
+        "has_child"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
     }
   },
   {
@@ -16999,6 +17632,56 @@
         }
       }
     ]
+  },
+  {
+    "id": "echo_0009",
+    "stage": "middle_age",
+    "age": 51,
+    "title": "父母的老房子",
+    "text": "老家的房子要拆迁了。你请假回去收拾，在柜顶摸到一个铁皮盒——里面是你从小到大的奖状，按年份码得整整齐齐。母亲的眼睛已经看不太清了，还在厨房给你擀面条。",
+    "category": "family",
+    "choices": [
+      {
+        "text": "把父母接来同住",
+        "effects": "💰-3 😊+3 👥+5",
+        "outcomes": {
+          "attr": {
+            "social": 5,
+            "wealth": -3,
+            "happiness": 3
+          }
+        }
+      },
+      {
+        "text": "用补偿款给他们换套电梯房",
+        "effects": "💰-5 👥+4 ⚖️+3",
+        "outcomes": {
+          "attr": {
+            "wealth": -5,
+            "social": 4,
+            "morality": 3
+          }
+        }
+      },
+      {
+        "text": "多回去看看就是孝顺",
+        "effects": "😊+2 👥+2",
+        "outcomes": {
+          "attr": {
+            "social": 2,
+            "happiness": 2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "filial"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
   },
   {
     "id": "mid_13",
@@ -17308,6 +17991,54 @@
     "conditions": {
       "hasFlags": [
         "bucket_list"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "echo_0012",
+    "stage": "middle_age",
+    "age": 52,
+    "title": "老同学的理财局",
+    "text": "多年不联系的老同学突然组局，酒过三巡开始讲一个「内部项目」：年化百分之三十，名额有限。满桌人都在掏手机转账，他拍着你的肩膀说，咱俩这关系我才告诉你。",
+    "category": "finance",
+    "choices": [
+      {
+        "text": "想起年轻时吃过的亏，笑着摆手",
+        "effects": "🧠+7 💰+3",
+        "outcomes": {
+          "attr": {
+            "intelligence": 7,
+            "wealth": 3
+          }
+        }
+      },
+      {
+        "text": "小投一万试试水",
+        "effects": "💰-4 🍀+2",
+        "outcomes": {
+          "attr": {
+            "wealth": -4,
+            "luck": 2
+          }
+        }
+      },
+      {
+        "text": "重仓！机不可失",
+        "effects": "💰-12 ⚖️-5",
+        "outcomes": {
+          "attr": {
+            "wealth": -12,
+            "morality": -5
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "too_trusting"
       ],
       "notFlags": [],
       "minAttrs": {},
@@ -17902,6 +18633,55 @@
     "conditions": {
       "hasFlags": [
         "gray_redeem"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "echo_0010",
+    "stage": "middle_age",
+    "age": 54,
+    "title": "社区乐队的第一场演出",
+    "text": "社区活动中心招乐队，你抱着落灰的吉他去了。排练房里都是和你差不多年纪的人：贝斯手是退休会计，鼓手是中学门卫。第一次合奏响起时，你手指生了，心却活了。",
+    "category": "hobby",
+    "choices": [
+      {
+        "text": "每晚排练，冲年底的汇报演出",
+        "effects": "👥+4 🎨+6 ⚖️+3",
+        "outcomes": {
+          "attr": {
+            "appearance": 6,
+            "social": 4,
+            "morality": 3
+          }
+        }
+      },
+      {
+        "text": "随缘参与，开心就好",
+        "effects": "😊+4 🎨+3",
+        "outcomes": {
+          "attr": {
+            "happiness": 4,
+            "appearance": 3
+          }
+        }
+      },
+      {
+        "text": "上台太紧张，还是算了",
+        "effects": "😊+2 ⚖️-2",
+        "outcomes": {
+          "attr": {
+            "morality": -2,
+            "happiness": 2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "music_skill"
       ],
       "notFlags": [],
       "minAttrs": {},
@@ -18722,6 +19502,52 @@
     ]
   },
   {
+    "id": "echo_0004",
+    "stage": "middle_age",
+    "age": 57,
+    "title": "老伙计",
+    "text": "陪了你十几年的老伙计近来总是睡着。你把它的小毯子洗了又晒，它勉力睁开眼看了你一下。宠物医院的医生说，到时候了。回家的路上你抱着它，它轻得像一捧云。",
+    "category": "family",
+    "choices": [
+      {
+        "text": "请一天假，在家陪它最后一程",
+        "effects": "😊-1 ⚖️+4",
+        "outcomes": {
+          "attr": {
+            "happiness": -1,
+            "morality": 4
+          }
+        }
+      },
+      {
+        "text": "给它办一个小小的告别仪式",
+        "effects": "😊+2",
+        "outcomes": {
+          "attr": {
+            "happiness": 2
+          }
+        }
+      },
+      {
+        "text": "不敢想，先带它回家再说",
+        "effects": "⚖️-3",
+        "outcomes": {
+          "attr": {
+            "morality": -3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "has_pet"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "mid_43",
     "stage": "middle_age",
     "age": 57,
@@ -18936,6 +19762,54 @@
         }
       }
     ]
+  },
+  {
+    "id": "echo_0006",
+    "stage": "middle_age",
+    "age": 58,
+    "title": "泛黄的日记本",
+    "text": "搬家前的最后一个纸箱里，躺着十几本日记。你盘腿坐在地板上翻开最早那本：「今天老师表扬了我。」你笑出了声，又不知怎么眼眶一热。四十多年，一页一页，都是你。",
+    "category": "hobby",
+    "choices": [
+      {
+        "text": "从今天起重新写日记",
+        "effects": "🧠+3 😊+4 ⚖️+2",
+        "outcomes": {
+          "attr": {
+            "happiness": 4,
+            "intelligence": 3,
+            "morality": 2
+          }
+        }
+      },
+      {
+        "text": "把最有趣的几页拍给儿女看",
+        "effects": "😊+3 👥+4",
+        "outcomes": {
+          "attr": {
+            "social": 4,
+            "happiness": 3
+          }
+        }
+      },
+      {
+        "text": "合上收好，继续打包",
+        "effects": "😊+3",
+        "outcomes": {
+          "attr": {
+            "happiness": 3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "diary_writer"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
   },
   {
     "id": "mid_05",
@@ -19210,6 +20084,56 @@
       "maxAttrs": {
         "health": 45
       }
+    }
+  },
+  {
+    "id": "echo_0013",
+    "stage": "middle_age",
+    "age": 59,
+    "title": "孩子带对象回家",
+    "text": "孩子打电话说要带对象回来吃饭，你提前三天开始准备菜单。门铃响的时候，你在围裙上擦了擦手才去开门。看着孩子紧张又期待的样子，你想起自己第一次见家长的那个下午。",
+    "category": "family",
+    "choices": [
+      {
+        "text": "做一大桌子菜，热情但不过分",
+        "effects": "😊+6 👥+5",
+        "outcomes": {
+          "attr": {
+            "social": 5,
+            "happiness": 6
+          }
+        }
+      },
+      {
+        "text": "偷偷给孩子使眼色：这孩子不错",
+        "effects": "😊+4 👥+4",
+        "outcomes": {
+          "attr": {
+            "social": 4,
+            "happiness": 4
+          }
+        }
+      },
+      {
+        "text": "忍不住盘问户口和房车",
+        "effects": "😊-3 👥-2 ⚖️+2",
+        "outcomes": {
+          "attr": {
+            "happiness": -3,
+            "social": -2,
+            "morality": 2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "good_parent",
+        "has_child"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
     }
   },
   {
@@ -19823,6 +20747,55 @@
     }
   },
   {
+    "id": "echo_0017",
+    "stage": "middle_age",
+    "age": 61,
+    "title": "阳台上的小森林",
+    "text": "退休后的第一个春天，你往阳台搬回了第一盆茉莉。后来是薄荷、月季、多肉，再后来是整架子的绿萝。清晨浇水的半小时，成了你一天里最安静的时刻。",
+    "category": "hobby",
+    "choices": [
+      {
+        "text": "研究配土施肥，搞成专业阳台",
+        "effects": "🧠+4 💰-2 😊+4",
+        "outcomes": {
+          "attr": {
+            "intelligence": 4,
+            "happiness": 4,
+            "wealth": -2
+          }
+        }
+      },
+      {
+        "text": "拍下生长日记发到网上",
+        "effects": "🧠+2 😊+3 👥+4",
+        "outcomes": {
+          "attr": {
+            "social": 4,
+            "happiness": 3,
+            "intelligence": 2
+          }
+        }
+      },
+      {
+        "text": "浇浇水就好，别太费心",
+        "effects": "😊+5",
+        "outcomes": {
+          "attr": {
+            "happiness": 5
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "nature_interest"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "mid_60",
     "stage": "middle_age",
     "age": 61,
@@ -20406,6 +21379,54 @@
     }
   },
   {
+    "id": "echo_0016",
+    "stage": "middle_age",
+    "age": 63,
+    "title": "当年的举手之劳",
+    "text": "小区门口新开的水果店老板总给你抹零。今天他忽然说：您还记得吗，当年您给过一个外地小孩一碗面。你愣了半天。他说那碗面他记了三十年，店开在这儿，就是想碰碰运气。",
+    "category": "personality",
+    "choices": [
+      {
+        "text": "眼眶一热：以后水果都在你这买",
+        "effects": "💰-1 😊+5 ⚖️+5",
+        "outcomes": {
+          "attr": {
+            "morality": 5,
+            "happiness": 5,
+            "wealth": -1
+          }
+        }
+      },
+      {
+        "text": "回家把这事讲给全家听",
+        "effects": "😊+6 👥+3",
+        "outcomes": {
+          "attr": {
+            "social": 3,
+            "happiness": 6
+          }
+        }
+      },
+      {
+        "text": "摆摆手说小事一桩",
+        "effects": "😊+6",
+        "outcomes": {
+          "attr": {
+            "happiness": 6
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "kind_heart"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "mid_68",
     "stage": "middle_age",
     "age": 63,
@@ -20617,6 +21638,55 @@
       "maxAttrs": {
         "wealth": 25
       }
+    }
+  },
+  {
+    "id": "echo_0018",
+    "stage": "middle_age",
+    "age": 64,
+    "title": "退休后的志愿队",
+    "text": "社区招募银发志愿者，你第一个报了名。穿上红马甲站在路口的那天，有个小姑娘脆生生地向你问好。你忽然发现，被需要的感觉，是退休工资买不来的。",
+    "category": "personality",
+    "choices": [
+      {
+        "text": "每周三天，风雨无阻",
+        "effects": "😊+3 👥+4 ⚖️+5",
+        "outcomes": {
+          "attr": {
+            "morality": 5,
+            "social": 4,
+            "happiness": 3
+          }
+        }
+      },
+      {
+        "text": "发挥余热，带队组织活动",
+        "effects": "💪-1 👥+8",
+        "outcomes": {
+          "attr": {
+            "social": 8,
+            "health": -1
+          }
+        }
+      },
+      {
+        "text": "量力而行，别累着",
+        "effects": "😊+3 👥+3",
+        "outcomes": {
+          "attr": {
+            "social": 3,
+            "happiness": 3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "volunteer_spirit"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
     }
   },
   {
@@ -21336,6 +22406,55 @@
     }
   },
   {
+    "id": "echo_0019",
+    "stage": "elder",
+    "age": 66,
+    "title": "再婚后的磨合",
+    "text": "黄昏恋领证一年了。两家的儿女、两套生活习惯、两本各有各的账。昨晚为了先浇哪盆花这种小事，你们拌了嘴。夜里你翻来覆去，想着要不要先开口。",
+    "category": "love",
+    "choices": [
+      {
+        "text": "先低头，这个年纪了不置气",
+        "effects": "😊+4 👥+2 ⚖️+4",
+        "outcomes": {
+          "attr": {
+            "morality": 4,
+            "happiness": 4,
+            "social": 2
+          }
+        }
+      },
+      {
+        "text": "约法三章，把规矩说清楚",
+        "effects": "😊+3 👥+4",
+        "outcomes": {
+          "attr": {
+            "social": 4,
+            "happiness": 3
+          }
+        }
+      },
+      {
+        "text": "各过各的，互不干涉",
+        "effects": "😊+3 👥-2",
+        "outcomes": {
+          "attr": {
+            "happiness": 3,
+            "social": -2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "second_marriage"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "elder_19",
     "stage": "elder",
     "age": 67,
@@ -21951,6 +23070,55 @@
       "hasFlags": [
         "married"
       ]
+    }
+  },
+  {
+    "id": "echo_0007",
+    "stage": "elder",
+    "age": 69,
+    "title": "晨练队的约定",
+    "text": "自从体检报告亮红灯，你把烟灰缸收了，酒柜上了锁。小区晨练队的王师傅天天在楼下喊你。今天你也换上运动鞋下了楼，他愣了一下，笑着往旁边挪了个位置。",
+    "category": "health",
+    "choices": [
+      {
+        "text": "跟着队伍打太极，一天不落",
+        "effects": "💪+6 👥+2 ⚖️+4",
+        "outcomes": {
+          "attr": {
+            "health": 6,
+            "morality": 4,
+            "social": 2
+          }
+        }
+      },
+      {
+        "text": "先从快走开始，量力而行",
+        "effects": "💪+4 🧠+2",
+        "outcomes": {
+          "attr": {
+            "health": 4,
+            "intelligence": 2
+          }
+        }
+      },
+      {
+        "text": "三天打鱼两天晒网",
+        "effects": "💪+1 ⚖️-3",
+        "outcomes": {
+          "attr": {
+            "health": 1,
+            "morality": -3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "regret_health"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
     }
   },
   {
@@ -22666,6 +23834,55 @@
       "hasFlags": [
         "family_reconciled"
       ]
+    }
+  },
+  {
+    "id": "echo_0025",
+    "stage": "elder",
+    "age": 72,
+    "title": "金婚",
+    "text": "今天是你们结婚五十周年。孩子们张罗着补拍婚纱照，化妆师给你整理衣领时，老伴在旁边看得直乐。快门响起的瞬间，他悄悄握住了你的手——和五十年前一样，手心全是汗。",
+    "category": "love",
+    "choices": [
+      {
+        "text": "敬这一路的风风雨雨",
+        "effects": "😊+6 👥+3 ⚖️+4",
+        "outcomes": {
+          "attr": {
+            "happiness": 6,
+            "morality": 4,
+            "social": 3
+          }
+        }
+      },
+      {
+        "text": "把老照片做成相册送给老伴",
+        "effects": "💰-1 😊+4 👥+4",
+        "outcomes": {
+          "attr": {
+            "happiness": 4,
+            "social": 4,
+            "wealth": -1
+          }
+        }
+      },
+      {
+        "text": "平平淡淡才是真，在家下碗面",
+        "effects": "😊+7",
+        "outcomes": {
+          "attr": {
+            "happiness": 7
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [
+        "married"
+      ],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
     }
   },
   {

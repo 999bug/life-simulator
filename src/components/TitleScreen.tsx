@@ -14,6 +14,7 @@ import StatsModal from './StatsModal';
 import SeedModal from './SeedModal';
 import SummaryScreen from './SummaryScreen';
 import GuideModal from './GuideModal';
+import AnalyticsModal from './AnalyticsModal';
 import { recapGame } from '../engine/family';
 
 /** 玩法说明首访标记（localStorage key；不存在则首进自动弹出） */
@@ -68,6 +69,8 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
   /** 种子挑战：锁定的好友种子码（null = 随机种子） */
   const [seed, setSeed] = useState<number | null>(null);
   const [showSeed, setShowSeed] = useState(false);
+  /** 数据面板（📊 数据入口弹出） */
+  const [showAnalytics, setShowAnalytics] = useState(false);
   /** 挑战开局（第 2 周目解锁）：属性整体下调 10 点 */
   const [challenge, setChallenge] = useState(false);
   /** 真实模式（第 2 周目解锁）：选项只显示属性倾向箭头，隐藏精确数值 */
@@ -416,6 +419,17 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
         >
           {seed != null ? `🔑 ${seed}` : '🔑 种子'}
         </button>
+
+        {/* 数据面板入口：埋点数据看板与导出（按计划刻意不埋点自身——与其余快捷入口不同） */}
+        <button
+          onClick={() => {
+            sfx.select();
+            setShowAnalytics(true);
+          }}
+          className="text-[12px] text-white/30 tracking-[3px] hover:text-[#c9a96e] transition-colors duration-200 font-sans"
+        >
+          📊 数据
+        </button>
       </div>
 
       </div>
@@ -480,6 +494,11 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
       {/* 玩法说明模态（❓ 入口 / 首次进入自动弹出） */}
       {showGuide && (
         <GuideModal onClose={closeGuide} />
+      )}
+
+      {/* 数据面板模态（📊 数据入口弹出） */}
+      {showAnalytics && (
+        <AnalyticsModal onClose={() => setShowAnalytics(false)} />
       )}
     </div>
   );

@@ -8,7 +8,12 @@ export default defineConfig({
     react(),
     viteSingleFile(),
     VitePWA({
-      registerType: 'autoUpdate',
+      // prompt 模式：新版本就绪由 ReloadPrompt 弹条让玩家自选刷新时机（autoUpdate 会在游戏进行中无感刷新导致丢局）
+      registerType: 'prompt',
+      // 事件数据（public/events.json）纳入 precache，保障离线首启可用
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,svg,png,ico,json,webmanifest}'],
+      },
       manifest: {
         name: '人生模拟器',
         short_name: '人生模拟',

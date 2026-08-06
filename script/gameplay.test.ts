@@ -5,11 +5,15 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert';
+import { readFileSync } from 'node:fs';
 import { dateToSeed, formatDate, updateDailyBest, reducer, createInitialRuntime } from '../src/hooks/useGame.ts';
 import { applyInheritance } from '../src/engine/state.ts';
-import { pickFateEvents, pickFateEvent } from '../src/engine/events.ts';
+import { pickFateEvents, pickFateEvent, setEvents } from '../src/engine/events.ts';
 import type { Attributes, DailyStore } from '../src/types/index.ts';
 import type { RuntimeState as Rt } from '../src/hooks/useGame.ts';
+
+// 事件数据运行时拆分后，node 测试无 fetch，直接读 public/events.json 注入
+setEvents(JSON.parse(readFileSync(new URL('../public/events.json', import.meta.url), 'utf8')));
 
 // ============ T7 每日挑战 ============
 

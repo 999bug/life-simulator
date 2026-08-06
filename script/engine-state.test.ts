@@ -6,10 +6,14 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert';
+import { readFileSync } from 'node:fs';
 import { ageCap, appendSnapshot, applyChallenge, applyElderDecay, applyOutcomes, calcMaxAge, effectiveDelta, scaleOutcomes } from '../src/engine/state.ts';
 import { pickFateEvent } from '../src/engine/events.ts';
-import EVENTS, { shuffleEvents } from '../src/engine/events.ts';
+import { EVENTS, setEvents, shuffleEvents } from '../src/engine/events.ts';
 import type { Attributes } from '../src/types/index.ts';
+
+// 事件数据运行时拆分后，node 测试无 fetch，直接读 public/events.json 注入
+setEvents(JSON.parse(readFileSync(new URL('../public/events.json', import.meta.url), 'utf8')));
 
 /** 构造测试用属性表 */
 function attrs(overrides: Partial<Attributes> = {}): Attributes {

@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest';
+import { readFileSync } from 'node:fs';
 import { buildBiographyMarkdown } from '../utils/biography';
+import { setEvents } from '../engine/events';
 import type { GameState } from '../types';
+
+// 事件数据运行时拆分后，测试直接读 public/events.json 注入（vitest cwd = 项目根）
+setEvents(JSON.parse(readFileSync('public/events.json', 'utf8')));
 
 /** 最小游戏状态 fixture：0 岁出生 + 3 岁幼儿园（带里程碑 flag） */
 function makeGame(overrides: Partial<GameState> = {}): GameState {

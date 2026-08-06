@@ -32,15 +32,15 @@ npm run dev        # 启动开发服务器（端口 5173）
 | 命令 | 作用 |
 |---|---|
 | `npm run dev` | 启动开发服务器（Vite，热更新） |
-| `npm run build` | 生产构建，产出**单文件** `dist/index.html`（JS/CSS/数据全内联，可双击运行） |
+| `npm run build` | 生产构建：JS/CSS 内联单文件 `dist/index.html`（事件数据独立为 `dist/events.json`，SW 预缓存离线可用） |
 | `npm run preview` | 预览生产构建产物 |
-| `npm run build:events` | 从 `script/chiled.json` 重新生成 `src/engine/events.json` |
+| `npm run build:events` | 从 `script/chiled.json` 重新生成 `public/events.json` |
 | `node --test "script/*.test.mjs"` | 运行数据工具测试（19 个用例） |
 | `node --experimental-strip-types --test script/engine-state.test.ts` | 运行引擎测试（18 个用例，Node 22 直接跑 TS） |
 
 ## 游戏数据
 
-事件数据源在 `script/chiled.json`（508 个事件，snake_case 原始格式），修改后运行 `npm run build:events` 生成引擎使用的 `src/engine/events.json`（**请勿手改生成文件**）。
+事件数据源在 `script/chiled.json`（633 个事件，snake_case 原始格式），修改后运行 `npm run build:events` 生成引擎使用的 `public/events.json`（**请勿手改生成文件**）。
 
 - 事件 id 规则：2 位数字后缀为原始主线事件（一字不改），4 位数字后缀为模拟事件（精选删除/效果钳位）
 - effects 属性键需在 `script/convert-events.mjs` 的 ATTR_MAP 内（未映射键会转换报错）

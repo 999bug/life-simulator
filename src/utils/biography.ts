@@ -1,6 +1,6 @@
 import type { GameState } from '../types';
 import { ATTR_META } from '../engine/state';
-import EVENTS from '../engine/events';
+import { EVENTS } from '../engine/events';
 
 /** 里程碑 flag（与结算页时间线一致） */
 const MILESTONE_FLAGS = ['went_to_college', 'grad_school', 'top_university', 'married', 'has_child', 'doctor', 'startup_success', 'civil_servant', 'world_traveler', 'athlete_pro', 'military_flag', 'skilled_worker', 'tech_career', 'retired'];

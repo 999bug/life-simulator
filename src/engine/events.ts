@@ -1,16 +1,39 @@
 import type { LifeEvent, PaceMode } from '../types';
-import eventsJson from './events.json' with { type: 'json' };
 
 /**
- * 全部人生事件。
- * 由 script/convert-events.mjs 从 script/chiled.json 生成，数据请勿手改；
- * 修改事件请编辑 script/chiled.json 后运行 npm run build:events。
+ * 全部人生事件（运行时异步加载，见 loadEvents）。
+ * 数据由 script/convert-events.mjs 从 script/chiled.json 生成到 public/events.json，
+ * 请勿手改；修改事件请编辑 script/chiled.json 后运行 npm run build:events。
+ *
+ * 拆分运行时的原因：633 个事件约 586KB，内联进单文件 bundle 会拖慢首屏解析；
+ * public/ 独立文件由 SW precache 保障离线可用，且数据与代码可独立缓存。
  *
  * 播放机制：
  * - 线性按数组顺序推进，conditions 不满足的事件跳过
  * - 年龄由事件自身 age 驱动（同一岁的多个事件连续触发）
  */
-const EVENTS = eventsJson as unknown as LifeEvent[];
+// named export 是 live binding：loadEvents/setEvents 赋值后 import 方可见新值
+export let EVENTS: LifeEvent[] = [];
+
+/** 测试/脚本注入事件数据（node 环境无 fetch，直接读 public/events.json 注入） */
+export function setEvents(list: LifeEvent[]): void {
+  EVENTS = list;
+}
+
+/**
+ * 运行时加载事件数据（应用入口 await 后才 render）。
+ * 幂等：已加载/已注入时直接返回。
+ */
+export async function loadEvents(): Promise<LifeEvent[]> {
+  if (EVENTS.length === 0) {
+    const res = await fetch('events.json');
+    if (!res.ok) {
+      throw new Error(`Failed to load events.json: HTTP ${res.status}`);
+    }
+    setEvents(await res.json() as LifeEvent[]);
+  }
+  return EVENTS;
+}
 
 /** mulberry32 伪随机数生成器：同一种子产生相同洗牌结果（存档恢复用） */
 function mulberry32(seed: number): () => number {
@@ -249,5 +272,3 @@ export function pickFateEvents(seed: number, count: number): LifeEvent[] {
   }
   return picked;
 }
-
-export default EVENTS;

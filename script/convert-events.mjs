@@ -228,12 +228,14 @@ export function convertAll(rawEvents) {
 function main() {
   const raw = JSON.parse(readFileSync(new URL('./chiled.json', import.meta.url), 'utf8'));
   const events = convertAll(raw);
-  writeFileSync(new URL('../src/engine/events.json', import.meta.url), JSON.stringify(events, null, 2), 'utf8');
+  // 产物输出到 public/：运行时 fetch 加载（避免 586KB 数据内联进单文件 bundle），SW precache 保离线
+  // 无缩进压缩输出（运行时数据无需人类可读）
+  writeFileSync(new URL('../public/events.json', import.meta.url), JSON.stringify(events), 'utf8');
   const byStage = {};
   for (const e of events) {
     byStage[e.stage] = (byStage[e.stage] ?? 0) + 1;
   }
-  console.log(`✅ 转换 ${events.length} 个事件 → src/engine/events.json`);
+  console.log(`✅ 转换 ${events.length} 个事件 → public/events.json`);
   console.log('stage 分布:', JSON.stringify(byStage));
 }
 

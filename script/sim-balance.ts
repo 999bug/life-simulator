@@ -9,9 +9,13 @@
  * 输出：8 属性归零率（曾触 0 / 终局为 0）/中位数、享年分布与早死率、结局路线分布。
  * 运行：node --experimental-strip-types script/sim-balance.ts [局数]
  */
-import EVENTS, { shuffleEvents, filterEvents } from '../src/engine/events.ts';
+import { readFileSync } from 'node:fs';
+import { EVENTS, setEvents, shuffleEvents, filterEvents } from '../src/engine/events.ts';
 import { applyOutcomes, applyElderDecay, calcMaxAge, checkDeath, createInitialState } from '../src/engine/state.ts';
 import { verdictKey } from '../src/engine/verdict.ts';
+
+// 事件数据运行时拆分后，node 环境无 fetch，直接读 public/events.json 注入
+setEvents(JSON.parse(readFileSync(new URL('../public/events.json', import.meta.url), 'utf8')));
 
 /** mulberry32（与引擎同算法）：选项随机与洗牌随机分离，互不干扰 */
 function mulberry32(seed: number): () => number {

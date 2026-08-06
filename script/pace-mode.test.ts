@@ -5,9 +5,13 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert';
+import { readFileSync } from 'node:fs';
 import { TYPE_SPEED_RANGES } from '../src/engine/state.ts';
-import EVENTS, { filterEvents, isMainlineEvent } from '../src/engine/events.ts';
+import { EVENTS, setEvents, filterEvents, isMainlineEvent } from '../src/engine/events.ts';
 import type { LifeEvent } from '../src/types/index.ts';
+
+// 事件数据运行时拆分后，node 测试无 fetch，直接读 public/events.json 注入
+setEvents(JSON.parse(readFileSync(new URL('../public/events.json', import.meta.url), 'utf8')));
 
 test('TYPE_SPEED_RANGES：三档齐全且范围合法', () => {
   assert.deepStrictEqual(Object.keys(TYPE_SPEED_RANGES), ['slow', 'normal', 'fast']);

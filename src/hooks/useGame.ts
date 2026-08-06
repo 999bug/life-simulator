@@ -21,7 +21,7 @@ import {
   scaleOutcomes,
   STAGE_ORDER,
 } from '../engine/state.ts';
-import EVENTS, { filterEvents, shuffleEvents, pickFateEvents } from '../engine/events.ts';
+import { EVENTS, filterEvents, shuffleEvents, pickFateEvents } from '../engine/events.ts';
 
 // ============ 成就存储 ============
 

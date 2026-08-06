@@ -4,14 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-人生模拟器：React 18 + TypeScript + Vite + Tailwind 的文字人生模拟游戏。纯前端、无后端，游戏内容由 JSON 事件数据驱动。事件数据源 `script/chiled.json`（633 个事件：523 原始 + 片段合入，其中 4 位模拟事件经 keep-list 精选 260 个）经转换器生成引擎格式 `src/engine/events.json`（共 633 个事件），运行时同岁组内按种子洗牌后线性播放。PWA 可安装离线。
+人生模拟器：React 18 + TypeScript + Vite + Tailwind 的文字人生模拟游戏。纯前端、无后端，游戏内容由 JSON 事件数据驱动。事件数据源 `script/chiled.json`（633 个事件：523 原始 + 片段合入，其中 4 位模拟事件经 keep-list 精选 260 个）经转换器生成引擎格式 `public/events.json`（共 633 个事件，运行时 fetch 加载 + SW precache 离线可用），运行时同岁组内按种子洗牌后线性播放。PWA 可安装离线。
 
 ## 常用命令
 
 ```bash
 npm run dev            # vite dev server（端口 5173）
 npm run build          # tsc && vite build（生产构建）
-npm run build:events   # 重新生成 src/engine/events.json（数据改动后必须跑）
+npm run build:events   # 重新生成 public/events.json（数据改动后必须跑）
 node --test "script/*.test.mjs"   # 数据工具测试（31 个，glob 必须带引号，裸目录形式在本机报错）
 node --experimental-strip-types --test script/engine-state.test.ts script/pace-mode.test.ts script/goals.test.ts script/save.test.ts script/use-game.test.ts script/gameplay.test.ts script/verdict.test.ts script/family.test.ts   # 引擎/档位/目标/存档/玩法/族谱测试（92 个，Node 22 直接跑 TS）
 npm run test:ui   # UI 组件测试（vitest + Testing Library，18 个）
@@ -24,13 +24,13 @@ node --experimental-strip-types script/sim-balance.ts 500   # 全属性平衡审
 ### 数据管道（script/）— 纯数据工程，不改引擎
 
 ```
-script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
+script/chiled.json ──convert-events.mjs──▶ public/events.json
         ▲
         └──prune-events.mjs（精选过滤）/ merge-fragments.mjs（片段合并+三重校验）
 ```
 
 - **chiled.json**：事件数据源（snake_case 原始格式：`age_range`/`flags_add`/`has_flags`/`min_attrs`）。**所有事件改动都改这里，不手改 events.json**
-- **convert-events.mjs**：唯一转换器。`ATTR_MAP`（107 键）把 chiled 属性名映射到 8 大引擎属性；`INVERSE` 集合内的键是负向维度（取反求和，如 `pressure:+8` → happiness:-8）；未映射键 fail-fast 抛错；**事件 id 校验**（2 位主线/4 位模拟，其他抛错）。`ATTR_ORDER`/`STAGE_RANGES` 需与 `src/engine/state.ts` 的 `ATTR_META`/`STAGE_META` 手动同步
+- **convert-events.mjs**：唯一转换器。`ATTR_MAP`（107 键）把 chiled 属性名映射到 8 大引擎属性；`INVERSE` 集合内的键是负向维度（取反求和，如 `pressure:+8` → happiness:-8）；未映射键 fail-fast 抛错；**事件 id 校验**（2 位主线/4 位模拟，其他抛错）。`ATTR_ORDER`/`STAGE_RANGES` 需与 `src/engine/state.ts` 的 `ATTR_META`/`STAGE_META` 手动同步。**产物为 `public/events.json`**（无缩进压缩输出）：运行时 fetch 加载（避免 586KB 数据内联进单文件 bundle，首屏 HTML 584KB→302KB），SW precache 保离线
 - **prune-events.mjs**：精选工具。事件 id 规则：**2 位数字后缀 = 原始主线事件（如 child_01），一字不改、永远保留；4 位数字后缀 = 模拟事件（如 child_0017），只能被精选删除、不能改内容**。`keep-list.json` 记录保留清单（审计用，当前 260 条 = 全部保留的模拟事件；新增模拟事件后需同步追加，否则 prune 会被过滤）。运行方式：`node script/prune-events.mjs script/keep-list.json`（写回 chiled.json，含 gap_year 补丁）
 - **merge-fragments.mjs**：合并 chiled.json + `script/fragments/` 片段，跑三重校验：convertAll fail-fast + 每岁密度（0-2 岁 3-5 个、3-12 岁 5-13 个、13-75 岁 3-8 个）+ flag 生产/消费配对（has_flags 引用的 flag 必须有产出者，not_flags 不算悬空）。**幂等**：片段中已合并的 id 自动跳过，片段文件保留在 fragments/ 目录可重复运行
 - **clamp-effects.mjs**：效果值钳位工具。4 位模拟事件的效果按转换后属性值等比例压缩到 ±3~±20 声明范围内（多键求和超范围时压缩该属性所有来源键）；2 位主线一字不改。幂等，效果值调整后用它 + build:events
@@ -44,8 +44,8 @@ script/chiled.json ──convert-events.mjs──▶ src/engine/events.json
 
 - **state.ts**：属性/阶段元数据（ATTR_META、STAGE_META）与状态纯函数（ageCap 年龄锚点上限、effectiveDelta 收益折算、applyOutcomes 属性钳位 0-100、calcMaxAge 动态寿命、applyElderDecay 65 岁起衰减、checkDeath、calcScore）。**年龄锚点成长上限 `CAP_ANCHORS`**（如智力 7:55→18:85→30:92，锚点间线性插值）：正向收益距当前年龄上限 15 点内线性递减且不越过上限，负向全额；老年衰减下限 1（运气再好每事件也掉 1 点）。初始属性刻意偏低（健康 65/智力 25）。选项展示用 effectiveDelta 实时计算，与引擎一致。**动态寿命**：基础 68 + 平均属性/100×35（封顶 103，均衡属性 ≥77 可达 95 岁——91-95 岁事件设计为高玩可达内容）
 - **goals.ts / achievements.ts / verdict.ts**：人生目标判定（6 预设 checkGoal）、成就判定（28 个 checkAchievements，铜/银/金三档 tier 仅展示分组）、结局 key 纯函数（verdictKey，13 路线 flag + 5 档分数兜底；VERDICT_ROUTES 图鉴元数据表，SummaryScreen 结局标题同表查取）
-- **events.ts**：加载 events.json 为 `LifeEvent[]`（含 filterEvents 精简模式抽样 + shuffleEvents 同岁组洗牌，共用种子确定性重建）
-- **events.json**：生成物（camelCase 引擎格式：`age`/`category`/`outcomes.attr`/`outcomes.flags`/`conditions.hasFlags`），**勿手改**
+- **events.ts**：事件注册表——`EVENTS` 为 live binding（named export），`loadEvents()` 运行时 fetch `public/events.json`（main.tsx 入口 await 后才挂载 React，失败有静态兜底 DOM）；node 测试用 `setEvents(readFileSync('public/events.json'))` 注入。含 filterEvents 精简模式抽样 + shuffleEvents 同岁组洗牌（共用种子确定性重建）
+- **public/events.json**：生成物（camelCase 引擎格式：`age`/`category`/`outcomes.attr`/`outcomes.flags`/`conditions.hasFlags`），**勿手改**
 
 ### 运行时（src/hooks/useGame.ts）
 

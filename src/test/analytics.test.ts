@@ -21,6 +21,15 @@ describe('analytics track', () => {
     expect(daily[today].endings.top_university).toBe(2);
   });
 
+  it('中途放弃累加 abandons 并写入事件流', () => {
+    const ts = Date.now();
+    track({ type: 'game_abandon', ts, age: 30 });
+    const { events, daily } = loadAnalytics();
+    const today = Object.keys(daily)[0];
+    expect(daily[today].abandons).toBe(1);
+    expect(events).toContainEqual({ type: 'game_abandon', ts, age: 30 });
+  });
+
   it('变体与功能计数各自累加', () => {
     track({ type: 'game_start', ts: Date.now(), variant: 'daily', pace: 'lite', challenge: false });
     track({ type: 'feature_use', ts: Date.now(), feature: 'share_card' });

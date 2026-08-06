@@ -1,0 +1,197 @@
+[
+  {
+    "id": "tech_0001",
+    "age_range": [8, 8],
+    "category": "technology",
+    "title": "小小遥控车",
+    "text": "爸爸带回来一辆红色的遥控车，电池装进底盘的瞬间，车轮在茶几上嗡嗡空转。你第一次握住那只塑料遥控器，把油门推到底，车子一头撞上沙发腿，翻了个四脚朝天。爸爸没生气，蹲下来教你看清方向再松一点油门。你忽然发现，连玩具也有它的脾气——你按哪个键，它就走哪条路。",
+    "choices": [
+      { "text": "我蹲下来研究遥控器上每个键的用处", "effects": { "curiosity": 5, "technology": 4 }, "flags_add": ["technology_path"] },
+      { "text": "我猛按油门，让它在客厅横冲直撞", "effects": { "fun": 5, "happiness": 3 }, "flags_add": [] },
+      { "text": "我把车翻回来，拉着爸爸一起拆开看", "effects": { "family_relation": 4, "learning": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "tech_0002",
+    "age_range": [9, 9],
+    "category": "technology",
+    "title": "家庭新电脑",
+    "text": "妈妈把一台笨重的台式机搬进书房，屏幕亮起的蓝色欢迎界面让你愣在原地。开机要等上两分钟，鼠标还是带小圆球的机械鼠标，可当你第一次用「画图」程序画出歪歪扭扭的太阳时，你觉得这比任何玩具都神奇。电脑里藏着一个新的世界，你踮着脚，等它慢慢打开。",
+    "choices": [
+      { "text": "我照着书上的教程，一个键一个键地学打字", "effects": { "learning": 5, "technology": 4, "patience": 3 }, "flags_add": ["coding_early"] },
+      { "text": "我天天守着屏幕打游戏，连饭都顾不上吃", "effects": { "gaming": 5, "fun": 3 }, "flags_add": [] },
+      { "text": "我缠着爸爸问电脑为什么会听话", "effects": { "curiosity": 5, "family_relation": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "tech_0003",
+    "age_range": [10, 10],
+    "category": "technology",
+    "title": "拆开的闹钟",
+    "text": "客厅的老式闹钟不走了，妈妈说要扔掉。你趁她转身，偷偷把螺丝刀插进后盖，咔嗒一声，齿轮和弹簧散了一桌。你看着那些亮晶晶的小零件，心跳得飞快——原来时间是由这么多小东西一起转出来的。你抹了把汗，努力回忆它原本的样子，把它们一个个摆回桌面。",
+    "choices": [
+      { "text": "我按记忆把零件一件件装回去，闹钟真的响了", "effects": { "logic": 5, "patience": 4, "technology": 3 }, "flags_add": ["tech_savvy"] },
+      { "text": "装不回去，我把零件藏进铁盒当宝贝", "effects": { "curiosity": 4, "happiness": 3 }, "flags_add": [] },
+      { "text": "我拉上爸爸一起修，他不会，我们就翻书", "effects": { "family_relation": 4, "problem_solving": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "tech_0004",
+    "age_range": [44, 44],
+    "category": "technology",
+    "title": "系统大升级",
+    "text": "单位通知，下月起报销、排班、交接全部搬进新的办公系统。你对着满屏陌生的界面有点紧张——隔壁年轻人十分钟搞定的事，你点了半天，还把一张报销单填错了格。科长在群里@所有人交表，你盯着屏幕，觉得这台电脑像个不肯讲理的陌生人。",
+    "choices": [
+      { "text": "我放下脸面请教年轻人，把步骤记在本子上", "effects": { "learning": 5, "skill": 4, "teamwork": 3 }, "flags_add": [] },
+      { "text": "我熬了两个晚上硬啃，头发掉了好几根", "effects": { "problem_solving": 5, "pressure": 3 }, "flags_add": [] },
+      { "text": "凭着我从小摆弄键盘的底子，我很快摸透了门道，还整理了操作指南发在群里", "effects": { "technology": 6, "leadership": 4 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["coding_early"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "tech_0005",
+    "age_range": [49, 49],
+    "category": "technology",
+    "title": "屏幕里的会",
+    "text": "公司推行远程办公，你在家装好摄像头，第一次对着镜头开会。屏幕里的小格子挤满同事的脸，轮到你发言时，你听见自己的声音被话筒放大，带着陌生的回音。散会后你发现掌心全是汗——隔着屏幕，反而更怕说错话。女儿从门缝探进头，朝镜头里的同事们挥了挥手。",
+    "choices": [
+      { "text": "我提前写好发言稿，对着镜子练了三遍", "effects": { "planning": 5, "confidence": 4 }, "flags_add": [] },
+      { "text": "我硬着头皮即兴发言，说岔了就用笑话圆场", "effects": { "courage": 4, "social": 3 }, "flags_add": [] },
+      { "text": "凭着跟机器打了一辈子交道的直觉，我很快适应了镜头，越讲越稳", "effects": { "technology": 5, "confidence": 4 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["technology_path"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "tech_0006",
+    "age_range": [55, 55],
+    "category": "technology",
+    "title": "厨房短视频",
+    "text": "女儿教你拍短视频，说「你烧的菜有人爱看」。你半信半疑，把镜头架在灶台边，手忙脚乱录了三遍：第一遍忘了开火，第二遍油烟糊了镜头，第三遍总算录完。你看着视频里自己笨拙的样子，笑得直不起腰。视频发出去的那晚，你每隔几分钟就点开手机，看那颗小爱心有没有多一个。",
+    "choices": [
+      { "text": "我把做菜拆成步骤，认真研究怎么拍得清楚好看", "effects": { "creativity": 5, "technology": 4 }, "flags_add": ["content_creator"] },
+      { "text": "我陷在点赞和评论里，觉都睡不踏实", "effects": { "gaming": 4, "anxiety": 3 }, "flags_add": [] },
+      { "text": "我拉上老同事一起拍，图个热闹", "effects": { "social": 4, "fun": 3, "happiness": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "tech_0007",
+    "age_range": [58, 58],
+    "category": "technology",
+    "title": "会听话的灯",
+    "text": "儿子给家里装了一整套智能家居：语音开灯、扫地机器人、自动窗帘。你对着天花板喊了一声「开灯」，客厅的灯应声亮起；再喊一声「关灯」，世界暗下来。你乐此不疲，把每个房间的灯都试了一遍。儿子在旁边笑：「妈，你像在指挥一支军队。」",
+    "choices": [
+      { "text": "我把每个设备的功能都摸了一遍，还列了张使用清单", "effects": { "learning": 5, "technology": 4 }, "flags_add": [] },
+      { "text": "我把扫地机器人当宠物，天天和它说话", "effects": { "fun": 5, "happiness": 3 }, "flags_add": [] },
+      { "text": "凭着几十年摆弄电器的底子，我很快成了全楼的智能家居顾问", "effects": { "technology": 6, "confidence": 4, "pride": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["tech_savvy"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "tech_0008",
+    "age_range": [59, 59],
+    "category": "technology",
+    "title": "第一次网购",
+    "text": "老花镜架在鼻梁上，你对着手机里的商品详情页，第一次把一箱「买三送一」的纸巾加进购物车。你反复核对地址，手指悬在「提交订单」上不敢按——怕输错一个数字，钱就飞到别人兜里。半小时后，订单显示「已发货」，你像收到一封久违的信，心里涌上一点小小的兴奋。",
+    "choices": [
+      { "text": "我对照步骤一步步来，把流程截图存进相册", "effects": { "learning": 5, "caution": 3 }, "flags_add": [] },
+      { "text": "我一高兴下了好几单，收货时才后悔买多了", "effects": { "impulse": 4, "money": -4, "fun": 3 }, "flags_add": [] },
+      { "text": "从小动手摸索的习惯派上了用场，我很快玩转了网购，还帮邻居一起拼单", "effects": { "technology": 5, "social": 4, "confidence": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["technology_path"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "tech_0009",
+    "age_range": [64, 64],
+    "category": "technology",
+    "title": "手机拍晚霞",
+    "text": "退休后你学会了用手机拍照，才发现晚霞原来有这么多颜色：先是金，再是橘，最后化成一抹紫。你把照片发进家庭群，儿子回了三个赞，女儿说「爸你拍得真好看」。从那以后，你的相册里装满了云、猫和楼下卖豆腐的老张。你忽然明白，技术不是用来追赶的，是用来留住日子的。",
+    "choices": [
+      { "text": "我认真研究构图和光线，拍出了一组小区四季组图", "effects": { "art": 5, "creativity": 4, "observation": 3 }, "flags_add": [] },
+      { "text": "我随手拍随手发，被夸一句就开心一整天", "effects": { "happiness": 5, "social": 3 }, "flags_add": [] },
+      { "text": "做菜视频攒下的镜头感派上了用场，我把四季组图做成合集，在家族群里小火了一把", "effects": { "pride": 4, "creativity": 4, "technology": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["content_creator"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "tech_0010",
+    "age_range": [68, 68],
+    "category": "technology",
+    "title": "学用手机",
+    "text": "孙女把一部智能手机塞进你手里：「奶奶，用它就能随时看到我。」屏幕亮起，你的指尖有点抖——这比当年那台收音机复杂一万倍。孙女把字体调大，一笔一画教你存号码、发语音。你说：「这机器认得你，不认得我。」孙女说：「它认得愿意学的人。」你戴上老花镜，把第一步认认真真记进本子。",
+    "choices": [
+      { "text": "我每天练一小时，把常用功能一个个记牢", "effects": { "learning": 5, "technology": 5, "patience": 3 }, "flags_add": [] },
+      { "text": "我学不会就上火，把手机丢在沙发上生闷气", "effects": { "anger": 4, "impulse": 3 }, "flags_add": [] },
+      { "text": "凭着拆了半辈子机器的底气，我学得飞快，转头还能教邻居张婶", "effects": { "technology": 6, "confidence": 4, "pride": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["tech_savvy"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "tech_0011",
+    "age_range": [72, 72],
+    "category": "technology",
+    "title": "屏幕里的家",
+    "text": "中秋夜，你守在手机前，等着那个绿色的「视频通话」按钮亮起来。接通的一瞬，大洋彼岸的女儿和外孙挤进屏幕，小外孙奶声奶气地喊：「外婆！你看我的新积木！」你笑着应声，眼角却有点湿——从前一封信要走一个月，如今一张脸，隔着一块屏幕就团圆了。",
+    "choices": [
+      { "text": "我定了每周固定时间视频，还学会了截屏存照片", "effects": { "family_relation": 6, "happiness": 4, "technology": 3 }, "flags_add": [] },
+      { "text": "我怕拨错号码，总是等他们打过来", "effects": { "avoidance": 3, "dependence": 3 }, "flags_add": [] },
+      { "text": "我研究出了美颜功能，全家都说我变年轻了", "effects": { "fun": 4, "happiness": 4, "confidence": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "tech_0012",
+    "age_range": [78, 78],
+    "category": "technology",
+    "title": "手机挂号",
+    "text": "凌晨四点去医院排队挂号的日子，你记了大半辈子。如今儿子教你用手机挂号，你对着屏幕上的科室列表，比挑菜还仔细。第一次预约成功，你收到一条短信，像攥到一张电影票。第二天你背着手去取号，窗口的大夫都认识你：「王老师，今天怎么来得这么从容？」你扬了扬手机，腰杆直了几分。",
+    "choices": [
+      { "text": "我把挂号和缴费的流程都记进小本子，转手教给老伴", "effects": { "learning": 5, "technology": 4, "confidence": 3 }, "flags_add": [] },
+      { "text": "我在屏幕上点来点去，差点挂错科室", "effects": { "anxiety": 4, "caution": 3 }, "flags_add": [] },
+      { "text": "我趁热打铁学会了线上复诊，还帮同病房的老伙计下载了医院 App", "effects": { "technology": 5, "social": 4, "pride": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["technology_path"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "tech_0013",
+    "age_range": [82, 82],
+    "category": "technology",
+    "title": "楼下的快递",
+    "text": "学会网购后，楼下的驿站几乎成了你的第二个书房：书、药、孙女说好吃的那种麦片，你都自己下单。快递小哥老远就喊：「奶奶，今天又来件儿啦！」你拆纸箱的手有点抖，心里却踏实——你还能自己照顾自己，还能用这小小的屏幕，把日子一样样买齐。",
+    "choices": [
+      { "text": "我学会了比价和看评论，买的东西件件实用", "effects": { "money_management": 5, "technology": 4, "independence": 3 }, "flags_add": [] },
+      { "text": "我一时贪便宜囤了一堆，用不上的只能送人", "effects": { "impulse": 4, "money": -4 }, "flags_add": [] },
+      { "text": "我把收货地址背得滚瓜烂熟，还替腿脚不便的邻居代收代拿", "effects": { "social": 4, "trust": 3, "happiness": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "tech_0014",
+    "age_range": [88, 88],
+    "category": "technology",
+    "title": "翻拍老照片",
+    "text": "整理旧物时，你翻出一本泛黄的相册，照片里的人笑着，身后是黑白的世界。你戴上老花镜，用手机一张张翻拍，存进「家庭相册」文件夹。孙女说：「奶奶，我把它做成电子相册，配上音乐。」几天后，那段视频在家族群里传开，远方的亲戚纷纷冒出来认人：「这是外婆吗？她年轻时真好看。」",
+    "choices": [
+      { "text": "我按年代给照片排好序，给每张都写了备注", "effects": { "memory": 5, "family_relation": 4, "technology": 3 }, "flags_add": [] },
+      { "text": "我对着照片看了很久，想起很多人、很多事", "effects": { "happiness": 4, "empathy": 3, "interest": 3 }, "flags_add": [] },
+      { "text": "凭着一双拍过晚霞的手，我配上自己写的旁白，把相册剪成一部家族纪录片", "effects": { "creativity": 5, "pride": 4, "art": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["content_creator"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "tech_0015",
+    "age_range": [92, 92],
+    "category": "technology",
+    "title": "答话的盒子",
+    "text": "你腿脚不便，儿子送来一个会答话的小盒子。你试探着说「放首歌」，屋里真的响起年轻时的旋律。你天天和它说话：问天气，问时间，问它「我是不是该吃药了」。它从不嫌你重复。有一天你问：「人老了，是不是就没用了？」它答不上来，只说：「我不太懂，但我一直在。」你笑出声，抬手拍了拍它，像拍一个老朋友。",
+    "choices": [
+      { "text": "我把它当老伙计，每天聊几句，还学会了用它叫儿子来帮忙", "effects": { "technology": 5, "happiness": 4, "security": 3 }, "flags_add": ["ai_interest"] },
+      { "text": "我怕说错话闹笑话，只敢远远看着它", "effects": { "avoidance": 3, "dependence": 3 }, "flags_add": [] },
+      { "text": "九岁那年敲下的第一个字母，原来都是为今天准备的", "effects": { "pride": 5, "technology": 4, "maturity": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["coding_early"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  }
+]

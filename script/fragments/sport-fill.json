@@ -1,0 +1,778 @@
+[
+  {
+    "id": "sport_0001",
+    "age_range": [
+      3,
+      3
+    ],
+    "category": "sports",
+    "title": "学滑板车",
+    "text": "三岁生日这天，你收到一辆红色滑板车。小区广场上，你扶着车把，小短腿够不到地面，只能一只脚踩着踏板、一只脚蹬地。刚蹬出两步，车身一歪，你连人带车摔在水泥地上，膝盖火辣辣的疼。眼泪在眼眶里打转，你抬头看向远处的妈妈，她正张开手臂等你爬起来。",
+    "choices": [
+      {
+        "text": "咬咬牙自己爬起来，扶好车把继续蹬",
+        "effects": {
+          "sports": 5,
+          "persistence": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "委屈地喊妈妈，伸着手要抱抱",
+        "effects": {
+          "comfort": 3,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "不玩了，跑去坐旁边的摇摇车",
+        "effects": {
+          "entertainment": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "sport_0002",
+    "age_range": [
+      4,
+      4
+    ],
+    "category": "sports",
+    "title": "初学游泳",
+    "text": "妈妈给你报了游泳班。更衣室里换上小泳衣，你跟着教练走到池边，消毒水的味道扑面而来，水面上浮着蓝色浮板。教练让你下水，你的脚刚碰到水面，凉意顺着脚尖窜上来，你一把抓住池边的扶手不肯松手。旁边的小朋友已经套着泳圈扑腾开了，水花溅到你的脸上。",
+    "choices": [
+      {
+        "text": "闭紧眼睛深吸一口气，让教练把你抱进水里",
+        "effects": {
+          "sports": 5,
+          "courage": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "趴在池边看别人游，先记住动作再说",
+        "effects": {
+          "observation": 3,
+          "patience": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "套上泳圈，牵着教练的手一步一步蹭进水里",
+        "effects": {
+          "sports": 3,
+          "safety_awareness": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "sport_0003",
+    "age_range": [
+      5,
+      5
+    ],
+    "category": "sports",
+    "title": "爸爸的皮球",
+    "text": "爸爸下班带回一只蓝色皮球，在楼下空地教你拍。他示范了两下，球弹起来又稳稳落回手里。轮到你，皮球又滑又弹，拍一下就跑了，你追着球满场跑，一次也没连拍超过三下。爸爸蹲下来，把着你的手说：「手要像粘住球一样，轻轻往下按，别急。」",
+    "choices": [
+      {
+        "text": "照着爸爸说的练了一下午，终于连拍了十下",
+        "effects": {
+          "sports": 5,
+          "persistence": 3,
+          "skill": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "让爸爸拍，你在旁边数数，偷偷学他的动作",
+        "effects": {
+          "observation": 3,
+          "learning": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "拍累了，跟爸爸去小卖部买冰棍",
+        "effects": {
+          "fun": 3,
+          "happiness": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "sport_0004",
+    "age_range": [
+      6,
+      6
+    ],
+    "category": "sports",
+    "title": "第一次跳绳",
+    "text": "幼儿园大班要学跳绳，每人发一根绿色塑料绳。别的小朋友已经能连着跳好几个了，你把绳子抡过头顶，落下时却总绊住脚，跳了两下，小腿被抽出一道红印。你噘着嘴把绳子丢在地上。老师捡起来递给你：「看着老师的脚，绳子到脚下再起跳。」",
+    "choices": [
+      {
+        "text": "捡起绳子，跟着老师喊的节奏一下一下慢慢跳",
+        "effects": {
+          "sports": 4,
+          "learning": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "请老师放学后单独教自己，练到天黑才回家",
+        "effects": {
+          "sports": 5,
+          "courage": 3,
+          "willpower": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "不想跳了，跑去玩滑梯",
+        "effects": {
+          "fun": 3,
+          "entertainment": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "sport_0005",
+    "age_range": [
+      7,
+      7
+    ],
+    "category": "sports",
+    "title": "小小运动会",
+    "text": "幼儿园办亲子运动会，你被选上参加五十米跑。发令前你蹲在起跑线上，手心全是汗，旁边大班的哥哥比你高半个头。哨声一响，你拼命迈开腿，跑到一半岔了气，嗓子眼发苦，眼看着要落到最后。场边传来小朋友们喊你名字的声音，你攥紧小拳头，咬牙往前冲。",
+    "choices": [
+      {
+        "text": "咬着牙冲过终点，虽然没名次，但跑完了全程",
+        "effects": {
+          "sports": 4,
+          "pride": 3,
+          "resilience": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "中途停下来大口喘气，慢慢走完了剩下的路",
+        "effects": {
+          "resilience": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "一跑完就扑进妈妈怀里，痛痛快快哭了一场",
+        "effects": {
+          "comfort": 3,
+          "happiness": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "sport_0006",
+    "age_range": [
+      13,
+      13
+    ],
+    "category": "sports",
+    "title": "校队选拔日",
+    "text": "体育老师说，市里初中生运动会下个月举行，校田径队要补两名队员。你从小就爱跑，却没正经上过场。选拔那天，操场上站了一排人，老师捏着秒表喊你的名字。阳光把跑道晒得发烫，你听见自己的心跳。跑完四百米，你扶着膝盖直喘气，老师看了看成绩单，又看了看你。",
+    "choices": [
+      {
+        "text": "上前一步：「老师，让我再跑一次，这次肯定更快！」",
+        "effects": {
+          "sports": 5,
+          "ambition": 3,
+          "courage": 3
+        },
+        "flags_add": [
+          "athlete"
+        ]
+      },
+      {
+        "text": "退回队伍里，安静等老师念成绩",
+        "effects": {
+          "patience": 3,
+          "observation": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "觉得自己没戏，盘算着还是算了，明年再说",
+        "effects": {
+          "avoidance": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "sport_0007",
+    "age_range": [
+      45,
+      45
+    ],
+    "category": "sports",
+    "title": "周末球局",
+    "text": "老同学拉你进了周末篮球群，每周六上午体育馆见。你上一次打球还是大学时代，如今跑两步就喘。第一节下来，你双手撑着膝盖，汗滴在木地板上，腰背隐隐发酸。老同学把球传过来：「别停，慢慢来，咱几个四十多的人，图的就是出出汗。」球在手里，熟悉又陌生。",
+    "choices": [
+      {
+        "text": "接住球，调整呼吸，重新跑了起来",
+        "effects": {
+          "sports": 5,
+          "health": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "下场坐到板凳上喝水，和场边的兄弟聊天",
+        "effects": {
+          "social": 3,
+          "comfort": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "硬撑着打完全场，晚上腰疼得直不起身",
+        "effects": {
+          "sports": 4,
+          "pressure": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "athlete"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "sport_0008",
+    "age_range": [
+      48,
+      48
+    ],
+    "category": "sports",
+    "title": "中年健身卡",
+    "text": "体检报告上「体脂偏高」的箭头刺眼。周末你路过新开的健身房，前台热情介绍办卡优惠，三年卡打七折。你站在门口，看着跑步机上大汗淋漓的人，低头又看了看自己的肚子，心里犹豫。钱包里那张体检单沉甸甸的，仿佛在提醒你什么。",
+    "choices": [
+      {
+        "text": "咬咬牙办了三年卡，请了私教从基础练起",
+        "effects": {
+          "sports": 5,
+          "money": -5,
+          "discipline": 3
+        },
+        "flags_add": [
+          "fitness_journey"
+        ]
+      },
+      {
+        "text": "先买十次体验卡，能坚持再说",
+        "effects": {
+          "sports": 3,
+          "money": -3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "不办卡，回家买了瑜伽垫，跟着视频在家练",
+        "effects": {
+          "sports": 3,
+          "self_reliance": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "sport_0009",
+    "age_range": [
+      51,
+      51
+    ],
+    "category": "sports",
+    "title": "环城骑行",
+    "text": "公司的年轻人组了骑行队，周末环城骑六十公里。你年轻时骑过二八大杠，如今看他们一身专业装备，心里发怵。那天清晨六点，你在集合点推着车，坐垫还没捂热，队伍已经冲出去一截。坡道一个接一个，你的腿像灌了铅，喘气声粗得吓人。",
+    "choices": [
+      {
+        "text": "咬紧牙关贴住队尾，硬是骑完了全程",
+        "effects": {
+          "sports": 5,
+          "persistence": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "骑到一半折返，去公园里慢骑了一圈",
+        "effects": {
+          "sports": 3,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "半路停下来推着车走，吹着晨风看风景",
+        "effects": {
+          "freedom": 3,
+          "happiness": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "sport_0010",
+    "age_range": [
+      56,
+      56
+    ],
+    "category": "sports",
+    "title": "第一个半马",
+    "text": "健身房的跑友撺掇你报名下个月的半程马拉松。你练了半年，最长跑过十五公里。比赛那天起点人山人海，发令枪响，你被人群裹着向前。十五公里处，小腿开始抽筋，每跑一步都是煎熬。路边志愿者递来水，喇叭里的加油声热情响亮，终点拱门还远远立着。",
+    "choices": [
+      {
+        "text": "停下来拉伸，调整呼吸，再一步一步跑向终点",
+        "effects": {
+          "sports": 5,
+          "resilience": 3,
+          "persistence": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "放慢速度，走完最后三公里也要完赛",
+        "effects": {
+          "sports": 3,
+          "pride": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "决定不勉强自己，停下来等收容车",
+        "effects": {
+          "safety_awareness": 3,
+          "health": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "fitness_journey"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "sport_0011",
+    "age_range": [
+      67,
+      67
+    ],
+    "category": "sports",
+    "title": "清晨太极",
+    "text": "退休后你起得早，公园柳树下总有一群老人在打太极。那天你坐在长椅上看，领头的老人穿白色绸衫，动作慢得像在推水。打完一套，他冲你笑了笑：「老哥，过来学两式，腰腿都活络。」你站起来学着他的样子抬手，胳膊却僵得像根棍子，自己也忍不住笑了。",
+    "choices": [
+      {
+        "text": "站到队伍末尾，跟着老人一招一式慢慢学",
+        "effects": {
+          "sports": 4,
+          "patience": 3
+        },
+        "flags_add": [
+          "martial_arts"
+        ]
+      },
+      {
+        "text": "摆手说改天再学，坐回长椅接着看",
+        "effects": {
+          "observation": 3,
+          "entertainment": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "回家查了太极教学视频，决定明天带保温杯正式报到",
+        "effects": {
+          "sports": 3,
+          "learning": 3,
+          "discipline": 3
+        },
+        "flags_add": [
+          "martial_arts"
+        ]
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "sport_0012",
+    "age_range": [
+      71,
+      71
+    ],
+    "category": "sports",
+    "title": "河边晨练",
+    "text": "你养成了六点起床晨练的习惯，绕着小区旁的河边走三圈，路上总能碰见同楼的老王。他快走，你慢走，慢慢就走到了一起。前几天他老伴住院，你连着三天没见他，河边的风忽然冷清了许多。第四天，那个熟悉的身影又出现了，他朝你摆摆手：「走，今天多走一圈。」",
+    "choices": [
+      {
+        "text": "陪老王多走了一圈，听他聊老伴的病情",
+        "effects": {
+          "social": 4,
+          "empathy": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "今天想走快些，一个人走完三圈",
+        "effects": {
+          "sports": 3,
+          "health": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "提议以后改去公园晨练，人多热闹",
+        "effects": {
+          "social": 3,
+          "teamwork": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "sport_0013",
+    "age_range": [
+      77,
+      77
+    ],
+    "category": "sports",
+    "title": "学打门球",
+    "text": "社区的老年门球队招人，队长是个满头银发的老太太，嗓门洪亮：「咱队平均七十五，不跑不跳，动脑子。」你跟着她来到门球场，地上摆着红白小球，木槌敲上去，球滚过铁门。你学了半天，球总不听使唤，偏出门框。老太太拍拍你的肩：「瞄准，别使劲，心稳手就稳。」",
+    "choices": [
+      {
+        "text": "虚心跟老队长学，练了一下午找手感",
+        "effects": {
+          "sports": 4,
+          "patience": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "坐场边看他们打，输赢无所谓，热闹就好",
+        "effects": {
+          "fun": 3,
+          "entertainment": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "买了一套自己的球杆，正式加入球队",
+        "effects": {
+          "sports": 5,
+          "social": 3,
+          "money": -3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "sport_0014",
+    "age_range": [
+      80,
+      80
+    ],
+    "category": "sports",
+    "title": "高龄健身操",
+    "text": "电视里放着老年健身操，主持人说八十岁也能练。你半信半疑地站起来，跟着抬胳膊、伸腿，动作慢得像放慢镜头。做到第三个动作，膝盖「咔」地响了一声，你赶紧扶着桌子站定。窗外，楼下广场上有人正打太极，动作行云流水。你扶着腰，慢慢直起身来。",
+    "choices": [
+      {
+        "text": "量力而行，把动作放得更慢，只做自己做得到的",
+        "effects": {
+          "health": 4,
+          "safety_awareness": 3,
+          "sports": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "戴上老花镜，认真记下主持人讲的每个要领",
+        "effects": {
+          "learning": 3,
+          "observation": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "报名社区的老年健身班，跟老师同学一起练",
+        "effects": {
+          "sports": 4,
+          "courage": 3,
+          "social": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "sport_0015",
+    "age_range": [
+      83,
+      83
+    ],
+    "category": "sports",
+    "title": "黄昏散步",
+    "text": "你每天傍晚在小区里散步，从东门走到西门，再走回来。腿脚不如从前，走一会儿就要在长椅上歇歇。长椅边总有孩子在踢球，一只球滚到你脚边，五六岁的小男孩跑过来，气喘吁吁地望着你。你撑着扶手想弯腰去捡，膝盖弯到一半就僵住了。",
+    "choices": [
+      {
+        "text": "笑着让男孩自己来捡球，夸他踢得真好",
+        "effects": {
+          "happiness": 3,
+          "social": 3,
+          "empathy": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "慢慢弯下腰，把球捡起来递给他",
+        "effects": {
+          "health": 3,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "靠在椅背上，看着孩子们踢球，想起自己的童年",
+        "effects": {
+          "entertainment": 3,
+          "happiness": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "sport_0016",
+    "age_range": [
+      85,
+      85
+    ],
+    "category": "sports",
+    "title": "与身体和解",
+    "text": "医生建议你把每日活动量减半，说膝盖已经不堪重负。你年轻时最讨厌「慢慢来」三个字，如今却要学着接受。清晨你不再急着出门，坐在窗前看楼下的年轻人跑步经过，想起自己也曾这样跑过。午饭后，你拄着拐杖在楼下慢慢走了一圈，阳光晒得后背发暖。",
+    "choices": [
+      {
+        "text": "听医生的话，把运动改成每天楼下走两圈",
+        "effects": {
+          "health": 4,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "拄着拐杖去公园看人打太极，听听热闹",
+        "effects": {
+          "entertainment": 3,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "不服老，想偷偷再试一次当年那套动作",
+        "effects": {
+          "risk": 3,
+          "sports": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "sport_0017",
+    "age_range": [
+      87,
+      87
+    ],
+    "category": "sports",
+    "title": "看孙子比赛",
+    "text": "孙子学校开运动会，特意打电话让你去看他的四百米跑。你坐在观众席上，看他站上起跑线，腿细细的，像当年的你一样紧张。发令枪响，他跑得不快，落在中游。你攥紧拐杖，在心里喊他的名字。他冲过终点，径直朝你跑来，脸涨得通红：「爷爷，我跑完了！」",
+    "choices": [
+      {
+        "text": "起身给他一个大大的拥抱，连声说「跑得真好」",
+        "effects": {
+          "happiness": 4,
+          "family_relation": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "拉着他的手，比划着教他起跑姿势，说明年能更快",
+        "effects": {
+          "family_relation": 3,
+          "sports": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "笑着看他去领奖，自己在座位上慢慢鼓掌",
+        "effects": {
+          "happiness": 3,
+          "pride": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "sport_0018",
+    "age_range": [
+      89,
+      89
+    ],
+    "category": "sports",
+    "title": "最后的散步",
+    "text": "天气很好，阳光把窗台晒得暖洋洋。护工问你今天还去不去楼下散步，你说去。你扶着墙慢慢下楼，走得很慢，但每一步都很稳。楼下的老邻居坐在花坛边晒太阳，看见你，冲你招招手。你在他旁边坐下，说今天就走这一圈，太阳这么好，多坐一会儿。风很轻，月季开得正好。",
+    "choices": [
+      {
+        "text": "坐下陪老邻居晒太阳，享受这一刻的宁静",
+        "effects": {
+          "happiness": 4,
+          "comfort": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "坚持把这一圈走完，再回楼上休息",
+        "effects": {
+          "health": 3,
+          "persistence": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "走完一圈，回来时给花坛浇了浇水",
+        "effects": {
+          "health": 3,
+          "happiness": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  }
+]

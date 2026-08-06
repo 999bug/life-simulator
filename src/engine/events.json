@@ -24962,6 +24962,51 @@
     }
   },
   {
+    "id": "elder_0137",
+    "stage": "elder",
+    "age": 91,
+    "title": "清晨的太极队",
+    "text": "公园里那支太极队，你是年纪最大的队员。每天清晨你拄着拐杖准时到，站在队尾慢慢起势、云手、收势。年轻人动作标准，却都没有你这份雷打不动的笃定。队长说，只要你站在那儿，这支队伍就有了魂。",
+    "category": "health",
+    "choices": [
+      {
+        "text": "明天还来，一天都不落",
+        "effects": "💪+3 ⚖️+2",
+        "outcomes": {
+          "attr": {
+            "health": 3,
+            "morality": 2
+          }
+        }
+      },
+      {
+        "text": "教新来的年轻人站桩",
+        "effects": "🧠+2 👥+2",
+        "outcomes": {
+          "attr": {
+            "intelligence": 2,
+            "social": 2
+          }
+        }
+      },
+      {
+        "text": "练完坐在长椅上晒太阳",
+        "effects": "😊+3",
+        "outcomes": {
+          "attr": {
+            "happiness": 3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "elder_0111",
     "stage": "elder",
     "age": 91,
@@ -25026,6 +25071,51 @@
         "outcomes": {
           "attr": {
             "happiness": 2
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "elder_0138",
+    "stage": "elder",
+    "age": 92,
+    "title": "收音机里的老歌",
+    "text": "午后拧开那台老收音机，咿咿呀呀的戏曲频道正放着你年轻时最爱的那一出。你闭上眼跟着哼，一字不落。儿孙们嫌它吵，只有你知道，这吱吱啦啦的调子里，藏着你的一整个青春。",
+    "category": "personality",
+    "choices": [
+      {
+        "text": "跟着哼完这一整出",
+        "effects": "🧠+2 😊+2",
+        "outcomes": {
+          "attr": {
+            "intelligence": 2,
+            "happiness": 2
+          }
+        }
+      },
+      {
+        "text": "给孙辈讲讲这出戏的来历",
+        "effects": "🧠+2 👥+1",
+        "outcomes": {
+          "attr": {
+            "intelligence": 2,
+            "social": 1
+          }
+        }
+      },
+      {
+        "text": "把收音机音量调小，独自慢慢听",
+        "effects": "😊+3",
+        "outcomes": {
+          "attr": {
+            "happiness": 3
           }
         }
       }
@@ -25112,6 +25202,52 @@
     }
   },
   {
+    "id": "elder_0139",
+    "stage": "elder",
+    "age": 93,
+    "title": "教重孙下象棋",
+    "text": "重孙放暑假，缠着你学下象棋。你摆开那副磨得发亮的老棋盘，从「马走日、象走田」教起。小家伙输了三局还不服气，你故意让了他一个车，看他眉开眼笑的样子，想起七十年前教你下棋的那个人。",
+    "category": "family",
+    "choices": [
+      {
+        "text": "认真教他：下棋先学做人",
+        "effects": "👥+2 ⚖️+2",
+        "outcomes": {
+          "attr": {
+            "social": 2,
+            "morality": 2
+          }
+        }
+      },
+      {
+        "text": "再让一局，看他高兴就好",
+        "effects": "😊+2 👥+1",
+        "outcomes": {
+          "attr": {
+            "happiness": 2,
+            "social": 1
+          }
+        }
+      },
+      {
+        "text": "讲讲当年教你下棋的那个人的故事",
+        "effects": "🧠+2 ⚖️+1",
+        "outcomes": {
+          "attr": {
+            "intelligence": 2,
+            "morality": 1
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "elder_0113",
     "stage": "elder",
     "age": 93,
@@ -25174,6 +25310,51 @@
         "effects": "😊+1",
         "outcomes": {
           "attr": {
+            "happiness": 1
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "elder_0140",
+    "stage": "elder",
+    "age": 94,
+    "title": "缝了一辈子的针脚",
+    "text": "重孙的外套蹭破了个口子，孩子说扔掉买新的，你戴上老花镜，穿针引线，几分钟就补得整整齐齐。针脚还是那么密、那么匀——这是困难年代练下的手艺，一辈子都没丢。重孙举着衣服看了半天，说太奶奶真厉害。",
+    "category": "personality",
+    "choices": [
+      {
+        "text": "得意地再检查一遍针脚",
+        "effects": "😊+3",
+        "outcomes": {
+          "attr": {
+            "happiness": 3
+          }
+        }
+      },
+      {
+        "text": "教重孙认针线：东西坏了，能修就别扔",
+        "effects": "🧠+2 👥+1",
+        "outcomes": {
+          "attr": {
+            "intelligence": 2,
+            "social": 1
+          }
+        }
+      },
+      {
+        "text": "想起年轻时为一家人缝补的那些夜晚",
+        "effects": "🧠+2 😊+1",
+        "outcomes": {
+          "attr": {
+            "intelligence": 2,
             "happiness": 1
           }
         }
@@ -25263,6 +25444,52 @@
     }
   },
   {
+    "id": "elder_0141",
+    "stage": "elder",
+    "age": 95,
+    "title": "社区送来的寿桃",
+    "text": "九十五岁寿辰这天，社区工作人员提着寿桃和贺卡上门，说你是整个街道最年长的老人。闪光灯咔嚓一声，你和寿桃合了影。卡片上写着「期颐之年，福寿安康」，你让孙子把它端端正正摆在客厅最显眼的地方。",
+    "category": "family",
+    "choices": [
+      {
+        "text": "把寿桃分给围观的邻居孩子们",
+        "effects": "😊+2 👥+2",
+        "outcomes": {
+          "attr": {
+            "social": 2,
+            "happiness": 2
+          }
+        }
+      },
+      {
+        "text": "拉着工作人员聊了很久的家常",
+        "effects": "😊+1 👥+2",
+        "outcomes": {
+          "attr": {
+            "social": 2,
+            "happiness": 1
+          }
+        }
+      },
+      {
+        "text": "捧着贺卡，看了又看",
+        "effects": "😊+1 ⚖️+2",
+        "outcomes": {
+          "attr": {
+            "morality": 2,
+            "happiness": 1
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "elder_0115",
     "stage": "elder",
     "age": 95,
@@ -25338,6 +25565,52 @@
     }
   },
   {
+    "id": "elder_0142",
+    "stage": "elder",
+    "age": 96,
+    "title": "老房子的拆迁通知",
+    "text": "住了大半辈子的老街要拆迁了，红纸通知贴在巷口。你让孙子推着轮椅，回去看了最后一眼：堂屋的门槛、院里的枣树、墙上的身高刻痕，都还在。工人问你有什么要留下的，你摸了摸门框，说，就让我再坐一会儿。",
+    "category": "personality",
+    "choices": [
+      {
+        "text": "在堂屋门槛上再坐一会儿",
+        "effects": "🧠+3 😊+1",
+        "outcomes": {
+          "attr": {
+            "intelligence": 3,
+            "happiness": 1
+          }
+        }
+      },
+      {
+        "text": "折一枝枣树枝，带到新家去",
+        "effects": "😊+1 ⚖️+2",
+        "outcomes": {
+          "attr": {
+            "morality": 2,
+            "happiness": 1
+          }
+        }
+      },
+      {
+        "text": "和老邻居们在巷口合了张影",
+        "effects": "🧠+1 👥+2",
+        "outcomes": {
+          "attr": {
+            "social": 2,
+            "intelligence": 1
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "elder_0130",
     "stage": "elder",
     "age": 97,
@@ -25371,6 +25644,52 @@
         "outcomes": {
           "attr": {
             "happiness": 3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "elder_0143",
+    "stage": "elder",
+    "age": 97,
+    "title": "一个世纪的物价",
+    "text": "重孙问：「太爷爷，你们那时候一分钱能买什么？」你掰着手指头算：一分钱两块糖，一毛钱一斤米，一块钱能下馆子。小家伙瞪圆了眼睛。你笑着说，别光羡慕，那时候一分钱也难得挣呢。",
+    "category": "personality",
+    "choices": [
+      {
+        "text": "给他讲讲挣工分的年月",
+        "effects": "🧠+2 👥+1",
+        "outcomes": {
+          "attr": {
+            "intelligence": 2,
+            "social": 1
+          }
+        }
+      },
+      {
+        "text": "从抽屉深处摸出一枚老分币送他",
+        "effects": "😊+1 👥+2",
+        "outcomes": {
+          "attr": {
+            "social": 2,
+            "happiness": 1
+          }
+        }
+      },
+      {
+        "text": "感慨一句：日子真是越过越好了",
+        "effects": "😊+1 ⚖️+2",
+        "outcomes": {
+          "attr": {
+            "morality": 2,
+            "happiness": 1
           }
         }
       }
@@ -25428,6 +25747,52 @@
     }
   },
   {
+    "id": "elder_0144",
+    "stage": "elder",
+    "age": 98,
+    "title": "高龄津贴又涨了",
+    "text": "社区打电话来，说百岁左右老人的高龄津贴又上调了，让你去按个手印。你笑着说，多活一年多领一年，这买卖划算。按完手印，工作人员扶着你慢慢走出门，一路上遇到的人都笑着喊你「老寿星」。",
+    "category": "health",
+    "choices": [
+      {
+        "text": "把津贴攒进给重孙的红包匣子",
+        "effects": "💰+3 👥+1",
+        "outcomes": {
+          "attr": {
+            "wealth": 3,
+            "social": 1
+          }
+        }
+      },
+      {
+        "text": "请街坊老伙计们吃顿好的",
+        "effects": "💰-2 😊+2 👥+3",
+        "outcomes": {
+          "attr": {
+            "wealth": -2,
+            "social": 3,
+            "happiness": 2
+          }
+        }
+      },
+      {
+        "text": "笑呵呵地应下每一声「老寿星」",
+        "effects": "😊+3",
+        "outcomes": {
+          "attr": {
+            "happiness": 3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "elder_0131",
     "stage": "elder",
     "age": 99,
@@ -25456,6 +25821,51 @@
       },
       {
         "text": "对着信纸，和他说了很久的话",
+        "effects": "😊+3",
+        "outcomes": {
+          "attr": {
+            "happiness": 3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "elder_0145",
+    "stage": "elder",
+    "age": 99,
+    "title": "窗台上的兰花开了",
+    "text": "养了十几年的那盆兰花，今年春天又开了。你每天早上第一件事，就是挪着步子到窗台边看一眼。花瓣不多，只两三朵，但干干净净的，像你这个年纪的日子——简单，清净，有自己的香气。",
+    "category": "hobby",
+    "choices": [
+      {
+        "text": "给兰花换个向阳的位置",
+        "effects": "😊+2 ⚖️+2",
+        "outcomes": {
+          "attr": {
+            "morality": 2,
+            "happiness": 2
+          }
+        }
+      },
+      {
+        "text": "让孙子拍下来，发给远方的孩子们看",
+        "effects": "😊+1 👥+2",
+        "outcomes": {
+          "attr": {
+            "social": 2,
+            "happiness": 1
+          }
+        }
+      },
+      {
+        "text": "搬把椅子坐在花旁边，陪它一下午",
         "effects": "😊+3",
         "outcomes": {
           "attr": {
@@ -25518,6 +25928,96 @@
     }
   },
   {
+    "id": "elder_0146",
+    "stage": "elder",
+    "age": 100,
+    "title": "百岁直播间的孩子们",
+    "text": "孙女给你开了场直播，镜头那边一下子涌进来几千人。弹幕刷得飞快：「爷爷好」「沾沾寿气」。你看不太清字，就让孙女念给你听，听到好玩的就呵呵笑。下播前你对着镜头挥挥手说：孩子们，好好吃饭，好好睡觉。",
+    "category": "personality",
+    "choices": [
+      {
+        "text": "对着镜头讲一段百年前的童年",
+        "effects": "🧠+3 👥+2",
+        "outcomes": {
+          "attr": {
+            "intelligence": 3,
+            "social": 2
+          }
+        }
+      },
+      {
+        "text": "学着比了个年轻人教的手势",
+        "effects": "😊+2 🎨+1",
+        "outcomes": {
+          "attr": {
+            "happiness": 2,
+            "appearance": 1
+          }
+        }
+      },
+      {
+        "text": "叮嘱镜头前的孩子们早点休息",
+        "effects": "⚖️+3",
+        "outcomes": {
+          "attr": {
+            "morality": 3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "elder_0147",
+    "stage": "elder",
+    "age": 100,
+    "title": "五世同堂的全家福",
+    "text": "百岁这年，最小的玄孙满月了。拍全家福那天，五代人站了满满一院子：你坐在正中间的藤椅上，怀里抱着襁褓中的玄孙。摄影师喊「看这里」，快门按下的那一刻，你忽然明白，所谓香火绵延，就是这个样子。",
+    "category": "family",
+    "choices": [
+      {
+        "text": "把照片摆在床头，每天看一遍",
+        "effects": "😊+2 👥+3",
+        "outcomes": {
+          "attr": {
+            "social": 3,
+            "happiness": 2
+          }
+        }
+      },
+      {
+        "text": "给玄孙戴上你珍藏的长命锁",
+        "effects": "👥+2 ⚖️+2",
+        "outcomes": {
+          "attr": {
+            "social": 2,
+            "morality": 2
+          }
+        }
+      },
+      {
+        "text": "对着满院子人说了声：都好好的",
+        "effects": "😊+4",
+        "outcomes": {
+          "attr": {
+            "happiness": 4
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "elder_0133",
     "stage": "elder",
     "age": 101,
@@ -25551,6 +26051,51 @@
           "attr": {
             "happiness": 2,
             "intelligence": 1
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "elder_0148",
+    "stage": "elder",
+    "age": 101,
+    "title": "学会视频通话",
+    "text": "一百零一岁，你让重孙教你用智能手机视频通话。教了整整一个星期，终于自己拨通了远方孙女的电话。屏幕里她的脸清晰得像坐在对面，你举着手机给全家人演示了一遍又一遍，像个考了一百分的孩子。",
+    "category": "personality",
+    "choices": [
+      {
+        "text": "把常联系的人都视频了一遍",
+        "effects": "😊+2 👥+2",
+        "outcomes": {
+          "attr": {
+            "social": 2,
+            "happiness": 2
+          }
+        }
+      },
+      {
+        "text": "让重孙再教你怎么发语音",
+        "effects": "🧠+2 ⚖️+1",
+        "outcomes": {
+          "attr": {
+            "intelligence": 2,
+            "morality": 1
+          }
+        }
+      },
+      {
+        "text": "得意地说：活到老，学到老",
+        "effects": "😊+3",
+        "outcomes": {
+          "attr": {
+            "happiness": 3
           }
         }
       }
@@ -25607,6 +26152,51 @@
     }
   },
   {
+    "id": "elder_0149",
+    "stage": "elder",
+    "age": 102,
+    "title": "写给一百年后的信",
+    "text": "社区征集「时空胶囊」，请居民给一百年后的人写句话。你戴上老花镜，一笔一画地写：二零二几年，有个一百零二岁的老人，吃过糠咽过菜，也过上了想都不敢想的好日子。希望你们那时候，日子更好。信封封好，投进那只铁盒子里。",
+    "category": "personality",
+    "choices": [
+      {
+        "text": "在信里讲讲这一百年的变化",
+        "effects": "🧠+2 ⚖️+2",
+        "outcomes": {
+          "attr": {
+            "intelligence": 2,
+            "morality": 2
+          }
+        }
+      },
+      {
+        "text": "只写一句：好好活，日子会更好",
+        "effects": "😊+3",
+        "outcomes": {
+          "attr": {
+            "happiness": 3
+          }
+        }
+      },
+      {
+        "text": "附上一张五世同堂的全家福复印件",
+        "effects": "😊+1 👥+2",
+        "outcomes": {
+          "attr": {
+            "social": 2,
+            "happiness": 1
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
     "id": "elder_0121",
     "stage": "elder",
     "age": 103,
@@ -25636,6 +26226,51 @@
       },
       {
         "text": "把信放在枕边，微笑着入睡",
+        "effects": "😊+3",
+        "outcomes": {
+          "attr": {
+            "happiness": 3
+          }
+        }
+      }
+    ],
+    "conditions": {
+      "hasFlags": [],
+      "notFlags": [],
+      "minAttrs": {},
+      "maxAttrs": {}
+    }
+  },
+  {
+    "id": "elder_0150",
+    "stage": "elder",
+    "age": 103,
+    "title": "树荫下的团圆饭",
+    "text": "这一年中秋，儿孙们从天南海北赶回来，在院子里的老树下摆了一桌团圆饭。你坐在上首，看着四世同堂的一大家子人热热闹闹地碰杯。月光落在碗里，你夹了一筷子最爱吃的菜，慢慢地嚼，觉得这一百零三年，值了。",
+    "category": "family",
+    "choices": [
+      {
+        "text": "举杯敬了全家人一杯",
+        "effects": "👥+2 ⚖️+2",
+        "outcomes": {
+          "attr": {
+            "social": 2,
+            "morality": 2
+          }
+        }
+      },
+      {
+        "text": "给每个孩子都夹了一筷子菜",
+        "effects": "😊+1 ⚖️+2",
+        "outcomes": {
+          "attr": {
+            "morality": 2,
+            "happiness": 1
+          }
+        }
+      },
+      {
+        "text": "看着满院儿孙，悄悄红了眼眶",
         "effects": "😊+3",
         "outcomes": {
           "attr": {

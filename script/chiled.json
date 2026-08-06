@@ -27942,6 +27942,48 @@
     }
   },
   {
+    "id": "elder_0151",
+    "age_range": [
+      96,
+      96
+    ],
+    "category": "health",
+    "title": "体检报告单",
+    "text": "家庭医生带着体检报告上门。血压、心率、骨密度，一页页翻过去，医生扶了扶眼镜：各项指标比很多六十岁的人还稳。你眯着眼看了看报告单，忽然笑了——九十多年了，第一次觉得活得这么值。",
+    "choices": [
+      {
+        "text": "把报告单看了又看，说要裱起来",
+        "effects": {
+          "health": 4,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "按报告上的建议，认认真真喝养生粥",
+        "effects": {
+          "health": 5,
+          "resilience": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "收起报告单，打算给重孙们看看",
+        "effects": {
+          "pride": 4,
+          "family_relation": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
     "id": "elder_0130",
     "age_range": [
       97,
@@ -28014,6 +28056,48 @@
         "effects": {
           "gratitude": 2,
           "stability": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0152",
+    "age_range": [
+      97,
+      97
+    ],
+    "category": "family",
+    "title": "曾孙学步",
+    "text": "重孙扶着沙发边沿，摇摇晃晃迈出人生第一步。全家人都屏住呼吸，只有你笑了：你见过多少人学走路，从自己的孩子，到孩子的孩子。小家伙扑进你怀里，你忽然想起，很多年前，也有人这样张开手臂接过你。",
+    "choices": [
+      {
+        "text": "蹲下来，张开手臂接住他",
+        "effects": {
+          "family_relation": 4,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "扶着他的小手，耐心走完整个客厅",
+        "effects": {
+          "patience": 4,
+          "family_relation": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "看着这一幕，轻轻说：路就是这样走出来的",
+        "effects": {
+          "emotion": 3,
+          "memory": 3
         },
         "flags_add": []
       }
@@ -28111,6 +28195,48 @@
     }
   },
   {
+    "id": "elder_0153",
+    "age_range": [
+      98,
+      98
+    ],
+    "category": "hobby",
+    "title": "童年课本",
+    "text": "整理旧物时，翻出快九十年前的小学课本。书页泛黄，页角卷起，扉页上歪歪扭扭写着自己的名字，某个插图上还用铅笔画了个圈。你戴上老花镜，一页一页慢慢翻，像翻一部老相册，纸页的沙沙声里，都是小时候的风。",
+    "choices": [
+      {
+        "text": "把当年背过的课文再背一遍",
+        "effects": {
+          "memory": 4,
+          "curiosity": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "指着插图，给重孙讲当年的教室",
+        "effects": {
+          "experience": 3,
+          "communication": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "合上课本，摩挲着扉页上自己的名字",
+        "effects": {
+          "emotion": 3,
+          "gratitude": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
     "id": "elder_0131",
     "age_range": [
       99,
@@ -28182,6 +28308,48 @@
         "effects": {
           "comfort": 2,
           "emotion": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0154",
+    "age_range": [
+      99,
+      99
+    ],
+    "category": "technology",
+    "title": "视频麻将局",
+    "text": "老朋友群里发起视频麻将，四个九十多岁的人隔着屏幕凑成一桌。有人把手机架在药盒上，有人找半天才找到「听」字键。牌局稀稀拉拉，输赢谁也没当真，倒是笑声没断过。散场时约好：下周同一时间，还是这桌。",
+    "choices": [
+      {
+        "text": "抢着当庄家，连赢三把才肯下桌",
+        "effects": {
+          "social": 3,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "趁洗牌的空当，挨个问问老伙计的近况",
+        "effects": {
+          "communication": 3,
+          "social": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "散场后把「听」字键画成图，发给看不清的老友",
+        "effects": {
+          "entertainment": 3,
+          "empathy": 2
         },
         "flags_add": []
       }
@@ -28320,6 +28488,48 @@
     }
   },
   {
+    "id": "elder_0155",
+    "age_range": [
+      100,
+      100
+    ],
+    "category": "personality",
+    "title": "生日愿望",
+    "text": "一百岁生日，蛋糕上的蜡烛多得数不清。全家人等你许愿，你闭上眼想了好久：小时候的愿望是一双新布鞋，青年时想进城，中年盼着孩子出息。如今想要的都得到了。你睁开眼，吹灭蜡烛——那就，再好好活一年吧。",
+    "choices": [
+      {
+        "text": "许愿：孩子们都平平安安的",
+        "effects": {
+          "empathy": 4,
+          "gratitude": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "吹灭蜡烛，把愿望大大方方说了出来",
+        "effects": {
+          "confidence": 3,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "闭眼的片刻，把这一生静静过了一遍",
+        "effects": {
+          "self_awareness": 4,
+          "emotion": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
     "id": "elder_0133",
     "age_range": [
       101,
@@ -28392,6 +28602,48 @@
         "effects": {
           "pride": 2,
           "happiness": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0156",
+    "age_range": [
+      101,
+      101
+    ],
+    "category": "social",
+    "title": "老友名单",
+    "text": "一年一度的老友聚会，名单上的名字又少了两个。你挨个打电话，接电话的声音越来越年轻——都是他们的儿孙。聚会上你一个人坐着，服务员问几位，你说：一位。顿了顿又补一句：不过我这边，故事管够。",
+    "choices": [
+      {
+        "text": "把老友的名字一个个写进本子，记下他们的故事",
+        "effects": {
+          "memory": 4,
+          "gratitude": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "给空着的位子也倒上茶，举杯敬了敬",
+        "effects": {
+          "gratitude": 4,
+          "emotion": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "和服务员讲起当年这桌人的趣事",
+        "effects": {
+          "social": 3,
+          "communication": 2
         },
         "flags_add": []
       }
@@ -28487,6 +28739,48 @@
     }
   },
   {
+    "id": "elder_0157",
+    "age_range": [
+      102,
+      102
+    ],
+    "category": "health",
+    "title": "养生笔记",
+    "text": "你戴上老花镜，翻开新买的本子，一笔一画写下养生秘诀：早睡早起，饭后百步，生气不超过三分钟，遇事先睡一觉。写得极慢，像当年在讲台上写板书。末了在扉页落笔：给孩子们的礼物，有效期一百年。",
+    "choices": [
+      {
+        "text": "把笔记按四季分章，写得工工整整",
+        "effects": {
+          "health": 4,
+          "patience": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "每一条后面都补上出处——都是亲身体会",
+        "effects": {
+          "experience": 4,
+          "knowledge": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "最后一页写上：最好的养生，是心里不搁事",
+        "effects": {
+          "self_awareness": 3,
+          "happiness": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
     "id": "elder_0121",
     "age_range": [
       103,
@@ -28559,6 +28853,48 @@
         "effects": {
           "emotion": 2,
           "happiness": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0158",
+    "age_range": [
+      103,
+      103
+    ],
+    "category": "personality",
+    "title": "愿望清单",
+    "text": "整理抽屉时，你找到一张压得发皱的纸——年轻时写下的愿望清单。当初觉得难如登天的事，回头看大多已经实现。你把它重新誊了一遍，划掉一行旧字，添上一行新的：想去的地方，趁早去。写完，搁下笔，轻轻笑了笑。",
+    "choices": [
+      {
+        "text": "把清单誊抄工整，每一行都标上实现的年份",
+        "effects": {
+          "memory": 4,
+          "self_awareness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "划掉一行：剩下的愿望，今天就开始做",
+        "effects": {
+          "courage": 3,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "在背面落笔：这一生，我没有遗憾",
+        "effects": {
+          "gratitude": 4,
+          "stability": 3
         },
         "flags_add": []
       }

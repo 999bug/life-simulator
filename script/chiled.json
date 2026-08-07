@@ -535,47 +535,6 @@
     ]
   },
   {
-    "id": "sport_0001",
-    "age_range": [
-      3,
-      3
-    ],
-    "category": "sports",
-    "title": "学滑板车",
-    "text": "三岁生日这天，你收到一辆红色滑板车。小区广场上，你扶着车把，小短腿够不到地面，只能一只脚踩着踏板、一只脚蹬地。刚蹬出两步，车身一歪，你连人带车摔在水泥地上，膝盖火辣辣的疼。眼泪在眼眶里打转，你抬头看向远处的妈妈，她正张开手臂等你爬起来。",
-    "choices": [
-      {
-        "text": "咬咬牙自己爬起来，扶好车把继续蹬",
-        "effects": {
-          "sports": 5,
-          "persistence": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "委屈地喊妈妈，伸着手要抱抱",
-        "effects": {
-          "comfort": 3,
-          "happiness": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "不玩了，跑去坐旁边的摇摇车",
-        "effects": {
-          "entertainment": 3
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "child_01",
     "age_range": [
       3,
@@ -653,48 +612,6 @@
         }
       }
     ]
-  },
-  {
-    "id": "sport_0002",
-    "age_range": [
-      4,
-      4
-    ],
-    "category": "sports",
-    "title": "初学游泳",
-    "text": "妈妈给你报了游泳班。更衣室里换上小泳衣，你跟着教练走到池边，消毒水的味道扑面而来，水面上浮着蓝色浮板。教练让你下水，你的脚刚碰到水面，凉意顺着脚尖窜上来，你一把抓住池边的扶手不肯松手。旁边的小朋友已经套着泳圈扑腾开了，水花溅到你的脸上。",
-    "choices": [
-      {
-        "text": "闭紧眼睛深吸一口气，让教练把你抱进水里",
-        "effects": {
-          "sports": 5,
-          "courage": 4
-        },
-        "flags_add": []
-      },
-      {
-        "text": "趴在池边看别人游，先记住动作再说",
-        "effects": {
-          "observation": 3,
-          "patience": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "套上泳圈，牵着教练的手一步一步蹭进水里",
-        "effects": {
-          "sports": 3,
-          "safety_awareness": 3
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
   },
   {
     "id": "child_02",
@@ -935,49 +852,6 @@
     }
   },
   {
-    "id": "sport_0003",
-    "age_range": [
-      5,
-      5
-    ],
-    "category": "sports",
-    "title": "爸爸的皮球",
-    "text": "爸爸下班带回一只蓝色皮球，在楼下空地教你拍。他示范了两下，球弹起来又稳稳落回手里。轮到你，皮球又滑又弹，拍一下就跑了，你追着球满场跑，一次也没连拍超过三下。爸爸蹲下来，把着你的手说：「手要像粘住球一样，轻轻往下按，别急。」",
-    "choices": [
-      {
-        "text": "照着爸爸说的练了一下午，终于连拍了十下",
-        "effects": {
-          "sports": 5,
-          "persistence": 3,
-          "skill": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "让爸爸拍，你在旁边数数，偷偷学他的动作",
-        "effects": {
-          "observation": 3,
-          "learning": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "拍累了，跟爸爸去小卖部买冰棍",
-        "effects": {
-          "fun": 3,
-          "happiness": 3
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "child_0019",
     "age_range": [
       5,
@@ -1091,44 +965,6 @@
     ]
   },
   {
-    "id": "child_0053",
-    "age_range": [
-      5,
-      6
-    ],
-    "category": "education",
-    "title": "小学报名",
-    "text": "九月一号，你牵着大人的手走进小学的校门。操场上全是陌生的面孔，教室里的课桌比幼儿园的高出一截。你在贴着自己名字的座位上坐下，环顾四周，心里又紧张又兴奋。从今天起，你就是一名小学生了。",
-    "choices": [
-      {
-        "text": "期待新生活",
-        "effects": {
-          "confidence": 15,
-          "curiosity": 10
-        },
-        "flags_add": [
-          "school_ready"
-        ]
-      },
-      {
-        "text": "担心无法适应",
-        "effects": {
-          "anxiety": 10,
-          "observation": 10
-        }
-      },
-      {
-        "text": "想快速证明自己",
-        "effects": {
-          "ambition": 15
-        },
-        "flags_add": [
-          "achievement_drive"
-        ]
-      }
-    ]
-  },
-  {
     "id": "child_03",
     "age_range": [
       5,
@@ -1213,44 +1049,6 @@
           "anxiety": 10,
           "pressure": 5
         }
-      }
-    ]
-  },
-  {
-    "id": "child_0082",
-    "age_range": [
-      6,
-      6
-    ],
-    "category": "career",
-    "title": "第一次考试成绩",
-    "text": "第一次正式考试，卷子发下来时你捏着笔，手心里全是汗。题目好像都见过，又好像都不太确定。成绩公布那天，老师一个个念分数，念到你的名字时停了一下。你听到那个数字，心里悬着的石头终于落了地。",
-    "choices": [
-      {
-        "text": "取得好成绩",
-        "effects": {
-          "confidence": 20,
-          "learning": 10,
-          "pressure": 5
-        },
-        "flags_add": [
-          "early_success"
-        ]
-      },
-      {
-        "text": "成绩普通继续努力",
-        "effects": {
-          "willpower": 15
-        }
-      },
-      {
-        "text": "成绩不理想",
-        "effects": {
-          "resilience": 15
-        },
-        "flags_add": [
-          "early_failure"
-        ]
       }
     ]
   },
@@ -1427,94 +1225,6 @@
     }
   },
   {
-    "id": "hobby_0002",
-    "age_range": [
-      6,
-      6
-    ],
-    "category": "hobby",
-    "title": "拆开的盒子",
-    "text": "爸爸的旧收音机坏了，正要扔进垃圾桶，你踮着脚说想看看里面。他把收音机拆开放在茶几上，你蹲在旁边，看那些花花绿绿的小零件和绕成圈的铜线，忍不住伸出手指碰了碰。收音机忽然「滋啦」响了一声，你吓得缩回手，又咯咯地笑起来。",
-    "choices": [
-      {
-        "text": "「为什么它会有声音呀？」爸爸讲了好久，你没全懂，却记住了很多新词",
-        "effects": {
-          "learning": 6,
-          "curiosity": 5,
-          "thinking": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "把拆下来的螺丝按大小排成一小队，数了一遍又一遍",
-        "effects": {
-          "observation": 5,
-          "focus": 4,
-          "patience": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "试着把零件装回去，虽然装不上了，但摆弄得很开心",
-        "effects": {
-          "imagination": 4,
-          "happiness": 4,
-          "independence": 3
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
-    "id": "sport_0004",
-    "age_range": [
-      6,
-      6
-    ],
-    "category": "sports",
-    "title": "第一次跳绳",
-    "text": "幼儿园大班要学跳绳，每人发一根绿色塑料绳。别的小朋友已经能连着跳好几个了，你把绳子抡过头顶，落下时却总绊住脚，跳了两下，小腿被抽出一道红印。你噘着嘴把绳子丢在地上。老师捡起来递给你：「看着老师的脚，绳子到脚下再起跳。」",
-    "choices": [
-      {
-        "text": "捡起绳子，跟着老师喊的节奏一下一下慢慢跳",
-        "effects": {
-          "sports": 4,
-          "learning": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "请老师放学后单独教自己，练到天黑才回家",
-        "effects": {
-          "sports": 5,
-          "courage": 3,
-          "willpower": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "不想跳了，跑去玩滑梯",
-        "effects": {
-          "fun": 3,
-          "entertainment": 3
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "child_04",
     "age_range": [
       6,
@@ -1604,41 +1314,6 @@
         "flags_add": [
           "class_rival"
         ]
-      }
-    ]
-  },
-  {
-    "id": "primary_0006",
-    "age_range": [
-      7,
-      7
-    ],
-    "category": "education",
-    "title": "第一次竞选班干部",
-    "text": "老师宣布要选小组长，几个同学立刻举起了手。你坐在座位上，心里痒痒的，却又不敢举手。你偷偷看了老师一眼，她正好也看过来，眼神里像是带着鼓励。你犹豫了：要不要站起来，试试看？",
-    "choices": [
-      {
-        "text": "主动参加竞选",
-        "effects": {
-          "leadership": 15,
-          "confidence": 15,
-          "pressure": 4
-        },
-        "flags_add": [
-          "leader_candidate"
-        ]
-      },
-      {
-        "text": "帮助别人竞选",
-        "effects": {
-          "teamwork": 15
-        }
-      },
-      {
-        "text": "不参与",
-        "effects": {
-          "independence": 10
-        }
       }
     ]
   },
@@ -1754,40 +1429,6 @@
         "flags_add": [
           "comeback_student"
         ]
-      }
-    ]
-  },
-  {
-    "id": "primary_0021",
-    "age_range": [
-      7,
-      7
-    ],
-    "category": "finance",
-    "title": "零花钱管理",
-    "text": "父母开始每周给你一点零花钱，说这是你的工资，自己安排。攥着那几张皱巴巴的纸币，你第一次觉得手里有了自己可以支配的钱。买零食、买玩具、还是存起来？你站在小卖部门口，犹豫了很久。",
-    "choices": [
-      {
-        "text": "记录花销",
-        "effects": {
-          "money_management": 20
-        },
-        "flags_add": [
-          "financial_awareness"
-        ]
-      },
-      {
-        "text": "马上消费",
-        "effects": {
-          "happiness": 10
-        }
-      },
-      {
-        "text": "全部存起来",
-        "effects": {
-          "discipline": 15,
-          "happiness": -4
-        }
       }
     ]
   },
@@ -1967,48 +1608,6 @@
     }
   },
   {
-    "id": "sport_0005",
-    "age_range": [
-      7,
-      7
-    ],
-    "category": "sports",
-    "title": "小小运动会",
-    "text": "幼儿园办亲子运动会，你被选上参加五十米跑。发令前你蹲在起跑线上，手心全是汗，旁边大班的哥哥比你高半个头。哨声一响，你拼命迈开腿，跑到一半岔了气，嗓子眼发苦，眼看着要落到最后。场边传来小朋友们喊你名字的声音，你攥紧小拳头，咬牙往前冲。",
-    "choices": [
-      {
-        "text": "咬着牙冲过终点，虽然没名次，但跑完了全程",
-        "effects": {
-          "sports": 4,
-          "pride": 3,
-          "resilience": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "中途停下来大口喘气，慢慢走完了剩下的路",
-        "effects": {
-          "resilience": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "一跑完就扑进妈妈怀里，痛痛快快哭了一场",
-        "effects": {
-          "comfort": 3,
-          "happiness": 3
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "child_05",
     "age_range": [
       7,
@@ -2084,41 +1683,6 @@
         "flags_add": [
           "friendly_rival"
         ]
-      }
-    ]
-  },
-  {
-    "id": "primary_0044",
-    "age_range": [
-      8,
-      8
-    ],
-    "category": "education",
-    "title": "老师推荐参加竞赛",
-    "text": "老师把你叫到办公室，说想推荐你去参加区里的竞赛。她看着你的作业本，说你底子不错，有潜力。你站在办公室里，又是高兴又是心虚——你觉得自己没那么厉害。但老师已经帮你把报名表填好了。",
-    "choices": [
-      {
-        "text": "接受训练",
-        "effects": {
-          "special_skill": 20,
-          "confidence": 15,
-          "pressure": 5
-        },
-        "flags_add": [
-          "competition_path"
-        ]
-      },
-      {
-        "text": "尝试但不过度投入",
-        "effects": {
-          "balance": 15
-        }
-      },
-      {
-        "text": "拒绝参加",
-        "effects": {
-          "pressure": -10
-        }
       }
     ]
   },
@@ -2222,74 +1786,6 @@
         "text": "完全依赖别人",
         "effects": {
           "independence": -5
-        }
-      }
-    ]
-  },
-  {
-    "id": "primary_0052",
-    "age_range": [
-      8,
-      8
-    ],
-    "category": "finance",
-    "title": "第一次存钱目标",
-    "text": "你看中了一个玩具，但价格不便宜。父母说想要就自己攒钱。你找来一个铁盒子，把零花钱一张一张放进去，在盒盖上写下目标金额。每次路过玩具店，你都隔着玻璃看一眼，然后攥紧口袋里的硬币，又攒下一点。",
-    "choices": [
-      {
-        "text": "制定储蓄计划",
-        "effects": {
-          "financial": 20,
-          "discipline": 10,
-          "happiness": -4
-        }
-      },
-      {
-        "text": "努力完成任务获得奖励",
-        "effects": {
-          "responsibility": 15
-        }
-      },
-      {
-        "text": "放弃计划",
-        "effects": {
-          "impulse": 10
-        }
-      }
-    ]
-  },
-  {
-    "id": "primary_0056",
-    "age_range": [
-      8,
-      8
-    ],
-    "category": "friend",
-    "title": "朋友邀请参加秘密基地",
-    "text": "放学后，几个同学神神秘秘地把你拉到操场角落的旧仓库后面。那里堆着废弃的课桌，被他们布置成了秘密基地。他们说：这是咱们的地方，只有自己人知道。你蹲在课桌后面，忽然觉得自己是这个组织的一员了。",
-    "choices": [
-      {
-        "text": "加入并维护友情",
-        "effects": {
-          "friendship": 11,
-          "trust": 9,
-          "anxiety": 3
-        },
-        "flags_add": [
-          "childhood_group"
-        ]
-      },
-      {
-        "text": "偶尔参与",
-        "effects": {
-          "social": 10
-        }
-      },
-      {
-        "text": "拒绝参加",
-        "effects": {
-          "independence": 10,
-          "friendship": -5
         }
       }
     ]
@@ -2514,74 +2010,6 @@
     ]
   },
   {
-    "id": "primary_0072",
-    "age_range": [
-      9,
-      9
-    ],
-    "category": "education",
-    "title": "第一次遇到学习瓶颈",
-    "text": "你发现以前管用的学习方法开始失灵了。以前背几遍就记住的内容，现在总在关键时刻想不起来。你翻着课本发了愁，第一次意识到：光靠死记硬背，好像不够了。也许，该换个法子试试。",
-    "choices": [
-      {
-        "text": "寻找新的学习方法",
-        "effects": {
-          "problem_solving": 11,
-          "learning": 9
-        },
-        "flags_add": [
-          "adaptive_learner"
-        ]
-      },
-      {
-        "text": "继续努力重复练习",
-        "effects": {
-          "discipline": 20
-        }
-      },
-      {
-        "text": "降低目标",
-        "effects": {
-          "pressure": -10
-        }
-      }
-    ]
-  },
-  {
-    "id": "primary_0075",
-    "age_range": [
-      9,
-      9
-    ],
-    "category": "friend",
-    "title": "好友遇到困难",
-    "text": "你的好朋友最近总是闷闷不乐，成绩也下滑了。你问他怎么了，他支支吾吾半天才说：家里出了一些事。你看着他发红的眼眶，不知道该说什么好。朋友遇到难处的时候，该怎么帮，你也是第一次遇到这种问题。",
-    "choices": [
-      {
-        "text": "帮助朋友",
-        "effects": {
-          "empathy": 20,
-          "friendship": 20
-        },
-        "flags_add": [
-          "reliable_friend"
-        ]
-      },
-      {
-        "text": "建议朋友自己解决",
-        "effects": {
-          "independence": 10
-        }
-      },
-      {
-        "text": "忽略问题",
-        "effects": {
-          "friendship": -10
-        }
-      }
-    ]
-  },
-  {
     "id": "primary_0076",
     "age_range": [
       9,
@@ -2680,41 +2108,6 @@
         "text": "放弃运动",
         "effects": {
           "learning": 10
-        }
-      }
-    ]
-  },
-  {
-    "id": "primary_0085",
-    "age_range": [
-      9,
-      9
-    ],
-    "category": "hobby",
-    "title": "兴趣成为特长",
-    "text": "你发现，自己一直坚持的那件事，开始变得不一样了。以前和你一起学的人，很多都慢慢放弃了，而你还在。老师说你做得比大多数人都好，建议你继续下去。你低头看着自己磨出茧的手指，心里忽然有了底气。",
-    "choices": [
-      {
-        "text": "投入更多时间",
-        "effects": {
-          "talent": 11,
-          "skill": 9,
-          "social": -3
-        },
-        "flags_add": [
-          "special_talent"
-        ]
-      },
-      {
-        "text": "保持兴趣即可",
-        "effects": {
-          "happiness": 15
-        }
-      },
-      {
-        "text": "转向其他方向",
-        "effects": {
-          "adaptability": 10
         }
       }
     ]
@@ -2978,42 +2371,6 @@
     ]
   },
   {
-    "id": "primary_0104",
-    "age_range": [
-      10,
-      10
-    ],
-    "category": "friend",
-    "title": "第一次校园矛盾",
-    "text": "你和同学因为一件小事吵了起来，越说越急，最后谁也不理谁。回到座位上，你气鼓鼓地坐了一下午。放学时，你看见他也在偷偷看你。你们都没说话，但你知道，这件事总要有人先开口。",
-    "choices": [
-      {
-        "text": "冷静沟通解决",
-        "effects": {
-          "communication": 20,
-          "maturity": 15,
-          "happiness": -3
-        },
-        "flags_add": [
-          "conflict_solver"
-        ]
-      },
-      {
-        "text": "强硬回应",
-        "effects": {
-          "courage": 15,
-          "conflict": 10
-        }
-      },
-      {
-        "text": "选择忍让",
-        "effects": {
-          "patience": 15
-        }
-      }
-    ]
-  },
-  {
     "id": "primary_0109",
     "age_range": [
       10,
@@ -3146,40 +2503,6 @@
         "text": "放弃转向其他方向",
         "effects": {
           "adaptability": 15
-        }
-      }
-    ]
-  },
-  {
-    "id": "primary_0120",
-    "age_range": [
-      10,
-      10
-    ],
-    "category": "technology",
-    "title": "第一次接触人工智能",
-    "text": "你在科技展上第一次听到人工智能这个词，展台上的机器人会对话、会下棋，还会模仿人的表情。你挤在人群里，盯着那台机器看了很久。你忽然觉得，书里说的未来，好像已经来了。",
-    "choices": [
-      {
-        "text": "产生探索兴趣",
-        "effects": {
-          "technology": 11,
-          "curiosity": 9
-        },
-        "flags_add": [
-          "ai_interest"
-        ]
-      },
-      {
-        "text": "简单了解",
-        "effects": {
-          "knowledge": 10
-        }
-      },
-      {
-        "text": "认为距离太远",
-        "effects": {
-          "interest": -5
         }
       }
     ]
@@ -3414,7 +2737,7 @@
     ],
     "category": "love",
     "title": "第一次出现喜欢的人",
-    "text": "你开始注意到一个人——他在人群里其实很普通，可你的目光总是忍不住跟着他转。上课时，你偷偷记下他喜欢的东西，又假装什么都没发生。你不太懂这种感觉是什么，只觉得心里多了件不能说的事。",
+    "text": "你开始注意到一个人——TA在人群里其实很普通，可你的目光总是忍不住跟着TA转。上课时，你偷偷记下TA喜欢的东西，又假装什么都没发生。你不太懂这种感觉是什么，只觉得心里多了件不能说的事。",
     "choices": [
       {
         "text": "把它转化为成长动力",
@@ -3436,41 +2759,6 @@
         "text": "隐藏自己的感觉",
         "effects": {
           "introversion": 10
-        }
-      }
-    ]
-  },
-  {
-    "id": "primary_0149",
-    "age_range": [
-      11,
-      11
-    ],
-    "category": "hobby",
-    "title": "兴趣是否继续坚持",
-    "text": "你坚持了几年的兴趣，终于到了选择的路口：继续往上走，就要走专业的路，意味着更苦更累；就此打住，就当个爱好。你翻着这些年攒下的奖状和照片，想了很久，不知道手里的这盏灯，该往哪里举。",
-    "choices": [
-      {
-        "text": "接受长期训练",
-        "effects": {
-          "skill": 20,
-          "discipline": 20,
-          "happiness": -5
-        },
-        "flags_add": [
-          "professional_training"
-        ]
-      },
-      {
-        "text": "保持业余兴趣",
-        "effects": {
-          "happiness": 20
-        }
-      },
-      {
-        "text": "选择新方向",
-        "effects": {
-          "adaptability": 20
         }
       }
     ]
@@ -3544,42 +2832,6 @@
     ]
   },
   {
-    "id": "primary_0173",
-    "age_range": [
-      11,
-      11
-    ],
-    "category": "friend",
-    "title": "朋友之间出现竞争",
-    "text": "你和最好的朋友，同时盯上了同一所初中的名额。成绩单上，你们的名次咬得很紧。你们不再像以前那样无话不谈，聊天时，偶尔会小心地避开考试这个词。你们都知道，这次考试之后，有些东西可能会变。",
-    "choices": [
-      {
-        "text": "互相帮助",
-        "effects": {
-          "friendship": 11,
-          "teamwork": 9
-        },
-        "flags_add": [
-          "study_partner"
-        ]
-      },
-      {
-        "text": "公平竞争",
-        "effects": {
-          "ambition": 20,
-          "competition": 15,
-          "friendship": -4
-        }
-      },
-      {
-        "text": "刻意避开比较",
-        "effects": {
-          "mental": 15
-        }
-      }
-    ]
-  },
-  {
     "id": "primary_0176",
     "age_range": [
       11,
@@ -3614,48 +2866,6 @@
         },
         "flags_add": [
           "helper_personality"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "primary_0180",
-    "age_range": [
-      11,
-      11
-    ],
-    "category": "personality",
-    "title": "小学五年级结束",
-    "text": "五年级结束了。你站在小学的尾巴上往回看，从一年级到五年级，你变了太多：个子高了，朋友多了，也学会了坚持和放弃。你已经开始想象初中的样子。剩下的这一年，你打算好好过。",
-    "choices": [
-      {
-        "text": "成为考试型人才",
-        "effects": {
-          "learning": 20,
-          "discipline": 20
-        },
-        "flags_add": [
-          "academic_route"
-        ]
-      },
-      {
-        "text": "成为兴趣型人才",
-        "effects": {
-          "skill": 11,
-          "creativity": 9
-        },
-        "flags_add": [
-          "talent_route"
-        ]
-      },
-      {
-        "text": "成为领导型人才",
-        "effects": {
-          "leadership": 11,
-          "social": 9
-        },
-        "flags_add": [
-          "leader_route"
         ]
       }
     ]
@@ -3752,47 +2962,6 @@
     }
   },
   {
-    "id": "love_0001",
-    "age_range": [
-      11,
-      11
-    ],
-    "category": "love",
-    "title": "橡皮的心事",
-    "text": "你的同桌有个小习惯：总把新橡皮切成两半，一半自己用，一半放在桌角。后来你发现，那块橡皮是给总忘记带文具的你备的。你开始悄悄留意他——他笑起来有酒窝，写字时会把刘海别到耳后。心里那点说不清的悸动，让课堂都变得漫长。",
-    "choices": [
-      {
-        "text": "把橡皮轻轻推回他那边，说了声「谢谢」",
-        "effects": {
-          "relationship": 5,
-          "courage": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "也学着他，把橡皮切成两半放在桌角",
-        "effects": {
-          "happiness": 4,
-          "fun": 2
-        },
-        "flags_add": []
-      },
-      {
-        "text": "假装没注意到，把自己的橡皮藏进笔袋",
-        "effects": {
-          "introversion": 4
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "child_09",
     "age_range": [
       11,
@@ -3854,37 +3023,6 @@
           "happiness": -3
         },
         "flags_add": []
-      }
-    ]
-  },
-  {
-    "id": "primary_0182",
-    "age_range": [
-      12,
-      12
-    ],
-    "category": "personality",
-    "title": "青春期开始",
-    "text": "你发现自己的身体在悄悄变化：个子抽条，声音变粗，镜子里的脸越来越陌生。班里同学也开始变得不一样。你对着镜子站了很久，说不上是慌张，还是期待——你正在变成另一个自己。",
-    "choices": [
-      {
-        "text": "主动了解变化",
-        "effects": {
-          "maturity": 11,
-          "self_awareness": 9
-        }
-      },
-      {
-        "text": "顺其自然",
-        "effects": {
-          "adaptability": 15
-        }
-      },
-      {
-        "text": "感到不适应",
-        "effects": {
-          "confidence": -10
-        }
       }
     ]
   },
@@ -3992,39 +3130,6 @@
     ]
   },
   {
-    "id": "primary_0190",
-    "age_range": [
-      12,
-      12
-    ],
-    "category": "love",
-    "title": "第一次理解喜欢和责任",
-    "text": "你开始明白，喜欢一个人不只是心里那点小鹿乱撞，还意味着在意、责任，和为对方着想。你想起课本上那句话：少年不识愁滋味。你摇了摇头，其实，识的。",
-    "choices": [
-      {
-        "text": "保持理性成长",
-        "effects": {
-          "maturity": 20,
-          "self_control": 20,
-          "happiness": -4
-        }
-      },
-      {
-        "text": "勇敢表达自己",
-        "effects": {
-          "courage": 11,
-          "confidence": 9
-        }
-      },
-      {
-        "text": "把注意力放回目标",
-        "effects": {
-          "focus": 20
-        }
-      }
-    ]
-  },
-  {
     "id": "primary_0196",
     "age_range": [
       12,
@@ -4062,48 +3167,6 @@
         "effects": {
           "resilience": 20
         }
-      }
-    ]
-  },
-  {
-    "id": "primary_0205",
-    "age_range": [
-      12,
-      12
-    ],
-    "category": "personality",
-    "title": "第一次思考人生方向",
-    "text": "躺在夏夜的草地上，你第一次认真想象十年后的自己：会做什么工作，会住在哪座城市，会和谁在一起。星空很亮，未来很远，你闭上眼睛，让那些想象一个个落地。有些愿望，可能真的会实现。",
-    "choices": [
-      {
-        "text": "成为专业人才",
-        "effects": {
-          "focus": 11,
-          "learning": 9
-        },
-        "flags_add": [
-          "professional_path"
-        ]
-      },
-      {
-        "text": "成为创业者",
-        "effects": {
-          "business": 20,
-          "leadership": 15
-        },
-        "flags_add": [
-          "entrepreneur_path"
-        ]
-      },
-      {
-        "text": "成为自由创造者",
-        "effects": {
-          "creativity": 12,
-          "independence": 8
-        },
-        "flags_add": [
-          "creator_path"
-        ]
       }
     ]
   },
@@ -4237,47 +3300,6 @@
       "has_flags": [
         "music_path"
       ],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
-    "id": "love_0002",
-    "age_range": [
-      12,
-      12
-    ],
-    "category": "love",
-    "title": "邻家的纸条",
-    "text": "邻居家比你大两岁的哥哥要搬去另一个城市了。搬家那天，他趁大人搬家具的工夫，往你手里塞了一张折得整整齐齐的纸条，上面画着一颗歪歪扭扭的心，还有一行小字：「你要好好长大。」你把它夹进了最喜欢的书里。",
-    "choices": [
-      {
-        "text": "追到楼道口大声喊：「我会给你写信的！」",
-        "effects": {
-          "courage": 5,
-          "friendship": 4
-        },
-        "flags_add": []
-      },
-      {
-        "text": "认真点头说「你也要好好的」，把纸条收好",
-        "effects": {
-          "stability": 4,
-          "relationship": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "心里酸酸的，话到嘴边又咽了回去",
-        "effects": {
-          "introversion": 4
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
       "not_flags": [],
       "min_attrs": {},
       "max_attrs": {}
@@ -5630,7 +4652,7 @@
         "first_love"
       ]
     },
-    "text": "十六岁，你和TA的事还是被班主任知道了。周一晨会，她当着全班说：「有些同学，心思不要用错地方。」放学后你们被分开谈话，TA低着头说：「要不……算了吧。」走廊里人来人往，你的眼眶一下就热了。",
+    "text": "十六岁，你和TA的事还是被班主任知道了。周一晨会，TA当着全班说：「有些同学，心思不要用错地方。」放学后你们被分开谈话，TA低着头说：「要不……算了吧。」走廊里人来人往，你的眼眶一下就热了。",
     "choices": [
       {
         "text": "「我不分手。恋爱和学习，可以都不耽误。」",
@@ -12857,7 +11879,7 @@
     "text": "结婚纪念日那天，你们谁也没提礼物的事。孩子睡着后，两个人坐在阳台上吹风，不知怎么就聊起刚认识时合吃一碗泡面的日子，聊到凌晨两点。你忽然意识到，这几年你们聊孩子、聊房贷、聊老人，却很久没这样，只聊彼此了。",
     "choices": [
       {
-        "text": "握住他的手：「谢谢你陪我走到今天」",
+        "text": "握住TA的手：「谢谢你陪我走到今天」",
         "effects": {
           "relationship": 6,
           "gratitude": 4
@@ -17061,10 +16083,10 @@
     ],
     "category": "love",
     "title": "重新约会",
-    "text": "孩子上了大学，家里忽然安静下来。周末他翻箱倒柜找出一张十年前的电影票根，在沙发边坐下，问你：「要不要再去电影院坐一次？」你站在镜子前，鬼使神差地理了理头发——像第一次约会那样，提前半小时就到了影院门口。",
+    "text": "孩子上了大学，家里忽然安静下来。周末TA翻箱倒柜找出一张十年前的电影票根，在沙发边坐下，问你：「要不要再去电影院坐一次？」你站在镜子前，鬼使神差地理了理头发——像第一次约会那样，提前半小时就到了影院门口。",
     "choices": [
       {
-        "text": "挽住他的手臂：「走，这次我要大桶爆米花」",
+        "text": "挽住TA的手臂：「走，这次我要大桶爆米花」",
         "effects": {
           "happiness": 5,
           "relationship": 5
@@ -17072,7 +16094,7 @@
         "flags_add": []
       },
       {
-        "text": "认真看着他：「好，我正好也有些话想跟你说」",
+        "text": "认真看着TA：「好，我正好也有些话想跟你说」",
         "effects": {
           "communication": 5,
           "relationship": 3
@@ -22948,7 +21970,7 @@
     ],
     "category": "love",
     "title": "遛狗的日子",
-    "text": "每天清晨，你带着大黄狗去河边遛弯，总能遇到他——他也养着一只柴犬。两只狗一见面就滚成一团，你们站在旁边，从天气聊到早餐，从早餐聊到各自的从前。某天他忽然说：「明天……还这个点来吗？」狗尾巴摇得比谁都欢。",
+    "text": "每天清晨，你带着大黄狗去河边遛弯，总能遇到TA——TA也养着一只柴犬。两只狗一见面就滚成一团，你们站在旁边，从天气聊到早餐，从早餐聊到各自的从前。某天TA忽然说：「明天……还这个点来吗？」狗尾巴摇得比谁都欢。",
     "choices": [
       {
         "text": "笑着应：「风雨无阻，我家狗都替你答应了」",
@@ -23744,7 +22766,7 @@
     ],
     "category": "love",
     "title": "金婚",
-    "text": "今天是你们结婚五十周年。孩子们张罗着补拍婚纱照，化妆师给你整理衣领时，老伴在旁边看得直乐。快门响起的瞬间，他悄悄握住了你的手——和五十年前一样，手心全是汗。",
+    "text": "今天是你们结婚五十周年。孩子们张罗着补拍婚纱照，化妆师给你整理衣领时，老伴在旁边看得直乐。快门响起的瞬间，TA悄悄握住了你的手——和五十年前一样，手心全是汗。",
     "choices": [
       {
         "text": "敬这一路的风风雨雨",
@@ -24070,10 +23092,10 @@
     ],
     "category": "love",
     "title": "病房晨光",
-    "text": "他在医院住了半个月，你每天坐三站公交去送汤。病床上的他瘦了一圈，却还有力气开玩笑：「你年轻时追我都没这么勤快。」你一边削苹果一边顶回去：「那时候你也没这么赖床。」阳光落在病床栏上，你们都笑了，谁也没提那个还没拆线的刀口。",
+    "text": "TA在医院住了半个月，你每天坐三站公交去送汤。病床上的TA瘦了一圈，却还有力气开玩笑：「你年轻时追我都没这么勤快。」你一边削苹果一边顶回去：「那时候你也没这么赖床。」阳光落在病床栏上，你们都笑了，谁也没提那个还没拆线的刀口。",
     "choices": [
       {
-        "text": "把削好的苹果递给他：「快点好起来，家里花还等你浇呢」",
+        "text": "把削好的苹果递给TA：「快点好起来，家里花还等你浇呢」",
         "effects": {
           "relationship": 5,
           "empathy": 4,
@@ -24082,7 +23104,7 @@
         "flags_add": []
       },
       {
-        "text": "夜里留在病房陪床，握着他的手睡了一宿",
+        "text": "夜里留在病房陪床，握着TA的手睡了一宿",
         "effects": {
           "loyalty": 4,
           "stability": 3
@@ -24324,10 +23346,10 @@
     ],
     "category": "love",
     "title": "金婚纪念",
-    "text": "金婚纪念日，儿孙们张罗了满满一桌。散席后，他忽然从贴身口袋里摸出一个小盒子——里面是五十年前他求婚时戴在你手上的那枚戒指，磨得锃亮。他说：「新的买不起，旧的舍不得换，你凑合再戴五十年？」你鼻尖一酸，把手伸了过去。",
+    "text": "金婚纪念日，儿孙们张罗了满满一桌。散席后，TA忽然从贴身口袋里摸出一个小盒子——里面是五十年前TA求婚时戴在你手上的那枚戒指，磨得锃亮。TA说：「新的买不起，旧的舍不得换，你凑合再戴五十年？」你鼻尖一酸，把手伸了过去。",
     "choices": [
       {
-        "text": "伸出手指让他戴上：「五十年哪够，我要六十年」",
+        "text": "伸出手指让TA戴上：「五十年哪够，我要六十年」",
         "effects": {
           "relationship": 6,
           "happiness": 5,
@@ -25388,10 +24410,10 @@
     ],
     "category": "love",
     "title": "窗台的四季",
-    "text": "窗台那排花盆是你们一起打理的——春天他播种，你浇水；秋天他搬盆，你剪枝。今年你腰不好，蹲不下去，他就把花全搬上窗台，每天拍照片给你看。他说：「种花这件事，一个人干叫活儿，两个人干叫过日子。」你坐在藤椅上，看他蹲在阳光里浇水，想起年轻时的他。",
+    "text": "窗台那排花盆是你们一起打理的——春天TA播种，你浇水；秋天TA搬盆，你剪枝。今年你腰不好，蹲不下去，TA就把花全搬上窗台，每天拍照片给你看。TA说：「种花这件事，一个人干叫活儿，两个人干叫过日子。」你坐在藤椅上，看TA蹲在阳光里浇水，想起年轻时的TA。",
     "choices": [
       {
-        "text": "挪到他身边，也拿起小水壶：「那我们一起过日子」",
+        "text": "挪到TA身边，也拿起小水壶：「那我们一起过日子」",
         "effects": {
           "relationship": 5,
           "happiness": 4
@@ -25399,7 +24421,7 @@
         "flags_add": []
       },
       {
-        "text": "让他把每种花的花期写在卡片上，贴满窗台",
+        "text": "让TA把每种花的花期写在卡片上，贴满窗台",
         "effects": {
           "observation": 4,
           "relationship": 3
@@ -25407,7 +24429,7 @@
         "flags_add": []
       },
       {
-        "text": "让他专心照料，自己坐在旁边看着就好",
+        "text": "让TA专心照料，自己坐在旁边看着就好",
         "effects": {
           "stability": 4,
           "happiness": 3
@@ -26290,7 +25312,7 @@
     ],
     "category": "love",
     "title": "泛黄的照片",
-    "text": "你从柜子深处翻出一本旧相册，第一张照片已经泛黄——那是你们刚认识那年春天拍的，你还记得那天他穿的灰外套。你戴上老花镜看了很久，他凑过来：「那时候我头发还挺多。」你笑出声，眼眶却有点热。日子一晃，照片里的人都白了头。",
+    "text": "你从柜子深处翻出一本旧相册，第一张照片已经泛黄——那是你们刚认识那年春天拍的，你还记得那天TA穿的灰外套。你戴上老花镜看了很久，TA凑过来：「那时候我头发还挺多。」你笑出声，眼眶却有点热。日子一晃，照片里的人都白了头。",
     "choices": [
       {
         "text": "把那张照片抽出来，郑重地放进新相册第一页",
@@ -27360,10 +26382,10 @@
     ],
     "category": "love",
     "title": "晨间的梳子",
-    "text": "你耳朵越来越背，他说话总要凑近些。可每天早晨，他依然会帮你梳头发，一下一下，像几十年前那样。镜子里的你们，皱纹叠着皱纹，他的手却还是稳稳的。他梳完，在你额头轻轻贴了一下：「今天也很好。」窗外，新一天的太阳正慢慢升起来。",
+    "text": "你耳朵越来越背，TA说话总要凑近些。可每天早晨，TA依然会帮你梳头发，一下一下，像几十年前那样。镜子里的你们，皱纹叠着皱纹，TA的手却还是稳稳的。TA梳完，在你额头轻轻贴了一下：「今天也很好。」窗外，新一天的太阳正慢慢升起来。",
     "choices": [
       {
-        "text": "握住他搭在肩上的手：「有你，每一天都很好」",
+        "text": "握住TA搭在肩上的手：「有你，每一天都很好」",
         "effects": {
           "relationship": 5,
           "happiness": 4,
@@ -27372,7 +26394,7 @@
         "flags_add": []
       },
       {
-        "text": "也拿起梳子，帮他理理所剩不多的白发",
+        "text": "也拿起梳子，帮TA理理所剩不多的白发",
         "effects": {
           "empathy": 5,
           "relationship": 4
@@ -27671,10 +26693,10 @@
     ],
     "category": "love",
     "title": "十指相扣",
-    "text": "你的身体一天比一天沉。那晚他坐到你床边，把你的手握进他掌心，十指相扣，像年轻时那样。他没说话，你也累了，只觉他的手很暖。你想起这辈子一起淋过的雨、吃过的面、走过的路，忽然觉得，这样走，也没什么可遗憾的了。",
+    "text": "你的身体一天比一天沉。那晚TA坐到你床边，把你的手握进TA掌心，十指相扣，像年轻时那样。TA没说话，你也累了，只觉TA的手很暖。你想起这辈子一起淋过的雨、吃过的面、走过的路，忽然觉得，这样走，也没什么可遗憾的了。",
     "choices": [
       {
-        "text": "用尽力气握了握他的手，轻声说：「这辈子，谢谢你」",
+        "text": "用尽力气握了握TA的手，轻声说：「这辈子，谢谢你」",
         "effects": {
           "relationship": 6,
           "gratitude": 5,
@@ -27683,7 +26705,7 @@
         "flags_add": []
       },
       {
-        "text": "安安静静躺着，听他讲你们年轻时的事，慢慢睡着",
+        "text": "安安静静躺着，听TA讲你们年轻时的事，慢慢睡着",
         "effects": {
           "stability": 6,
           "security": 4
@@ -27691,7 +26713,7 @@
         "flags_add": []
       },
       {
-        "text": "心里还有牵挂，问他：「下辈子……还能找到我吗」",
+        "text": "心里还有牵挂，问TA：「下辈子……还能找到我吗」",
         "effects": {
           "relationship": 5,
           "courage": 3
@@ -28000,48 +27022,6 @@
     "conditions": {}
   },
   {
-    "id": "elder_0135",
-    "age_range": [
-      96,
-      96
-    ],
-    "category": "family",
-    "title": "百岁的序曲",
-    "text": "社区工作人员登门，说要给百岁老人做生日登记。你数了数日历，再过一年，你就要跨过一百岁这道门槛了。工作人员问你有什么心愿，你想了想说，想再看看年轻时走过的老街。她认真记下来，说到时候帮你安排。送走她，你翻出旧相册，一页一页，都是这九十六年的光景。",
-    "choices": [
-      {
-        "text": "郑重写下心愿，等待百岁那天",
-        "effects": {
-          "happiness": 2,
-          "gratitude": 2
-        },
-        "flags_add": []
-      },
-      {
-        "text": "把旧相册从头翻到尾",
-        "effects": {
-          "memory": 2,
-          "emotion": 1
-        },
-        "flags_add": []
-      },
-      {
-        "text": "笑着说：活到这把岁数，心愿早不重要了",
-        "effects": {
-          "stability": 2,
-          "comfort": 1
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "elder_0142",
     "age_range": [
       96,
@@ -28114,6 +27094,48 @@
         "effects": {
           "pride": 4,
           "family_relation": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0135",
+    "age_range": [
+      96,
+      96
+    ],
+    "category": "family",
+    "title": "百岁的序曲",
+    "text": "社区工作人员登门，说要给百岁老人做生日登记。你数了数日历，再过一年，你就要跨过一百岁这道门槛了。工作人员问你有什么心愿，你想了想说，想再看看年轻时走过的老街。她认真记下来，说到时候帮你安排。送走她，你翻出旧相册，一页一页，都是这九十六年的光景。",
+    "choices": [
+      {
+        "text": "郑重写下心愿，等待百岁那天",
+        "effects": {
+          "happiness": 2,
+          "gratitude": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把旧相册从头翻到尾",
+        "effects": {
+          "memory": 2,
+          "emotion": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "笑着说：活到这把岁数，心愿早不重要了",
+        "effects": {
+          "stability": 2,
+          "comfort": 1
         },
         "flags_add": []
       }
@@ -28252,48 +27274,6 @@
     }
   },
   {
-    "id": "elder_0136",
-    "age_range": [
-      98,
-      98
-    ],
-    "category": "personality",
-    "title": "跨过百年的春天",
-    "text": "这是你百岁后的第一个春天。院子里那棵老槐树又抽了新芽，重孙蹲在树下数蚂蚁，数着数着就跑来问你：太爷爷，你一百年都看到了什么呀？你眯着眼想了想——看到了冬去春来一百回，看到了送走的人越来越多，也看到了树下的孩子换了一茬又一茬。春风暖洋洋的，你摸了摸重孙的头。",
-    "choices": [
-      {
-        "text": "把一百个春天的故事讲给重孙听",
-        "effects": {
-          "experience": 2,
-          "family_relation": 2
-        },
-        "flags_add": []
-      },
-      {
-        "text": "在树下坐一整个下午，看蚂蚁搬家",
-        "effects": {
-          "happiness": 2,
-          "patience": 1
-        },
-        "flags_add": []
-      },
-      {
-        "text": "让重孙替你把花种撒满院子",
-        "effects": {
-          "happiness": 1,
-          "comfort": 2
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "elder_0144",
     "age_range": [
       98,
@@ -28367,6 +27347,48 @@
         "effects": {
           "emotion": 3,
           "gratitude": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "elder_0136",
+    "age_range": [
+      98,
+      98
+    ],
+    "category": "personality",
+    "title": "跨过百年的春天",
+    "text": "这是你百岁后的第一个春天。院子里那棵老槐树又抽了新芽，重孙蹲在树下数蚂蚁，数着数着就跑来问你：太爷爷，你一百年都看到了什么呀？你眯着眼想了想——看到了冬去春来一百回，看到了送走的人越来越多，也看到了树下的孩子换了一茬又一茬。春风暖洋洋的，你摸了摸重孙的头。",
+    "choices": [
+      {
+        "text": "把一百个春天的故事讲给重孙听",
+        "effects": {
+          "experience": 2,
+          "family_relation": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "在树下坐一整个下午，看蚂蚁搬家",
+        "effects": {
+          "happiness": 2,
+          "patience": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "让重孙替你把花种撒满院子",
+        "effects": {
+          "happiness": 1,
+          "comfort": 2
         },
         "flags_add": []
       }

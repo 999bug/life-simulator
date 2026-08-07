@@ -1,452 +1,789 @@
 [
   {
     "id": "hobby_0001",
-    "age_range": [5, 5],
+    "age_range": [
+      5,
+      5
+    ],
     "category": "hobby",
     "title": "画一只太阳",
     "text": "幼儿园的绘画课上，老师发下一张白纸和一盒蜡笔。别的小朋友画完就跑去玩滑梯了，你却趴在桌上，把太阳涂成橘红色，又添上绿色的房子、蓝色的小狗。老师走过来看了看，说：「你画的小狗真神气。」你第一次觉得，自己好像真的画出了什么。",
     "choices": [
       {
         "text": "「那我再画一朵云送给你！」",
-        "effects": { "art": 8, "happiness": 4, "social": 3 },
-        "flags_add": ["artist_life"]
+        "effects": {
+          "art": 8,
+          "happiness": 4,
+          "social": 3
+        },
+        "flags_add": [
+          "artist_life"
+        ]
       },
       {
         "text": "认认真真地把每一片叶子都补上",
-        "effects": { "art": 5, "focus": 5, "creativity": 3 },
+        "effects": {
+          "art": 5,
+          "focus": 5,
+          "creativity": 3
+        },
         "flags_add": []
       },
       {
         "text": "画完卷起画纸，跑去和小朋友玩滑梯",
-        "effects": { "social": 6, "happiness": 4, "art": 3 },
+        "effects": {
+          "social": 6,
+          "happiness": 4,
+          "art": 3
+        },
         "flags_add": []
       }
     ],
-    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
-  },
-  {
-    "id": "hobby_0002",
-    "age_range": [6, 6],
-    "category": "hobby",
-    "title": "拆开的盒子",
-    "text": "爸爸的旧收音机坏了，正要扔进垃圾桶，你踮着脚说想看看里面。他把收音机拆开放在茶几上，你蹲在旁边，看那些花花绿绿的小零件和绕成圈的铜线，忍不住伸出手指碰了碰。收音机忽然「滋啦」响了一声，你吓得缩回手，又咯咯地笑起来。",
-    "choices": [
-      {
-        "text": "「为什么它会有声音呀？」爸爸讲了好久，你没全懂，却记住了很多新词",
-        "effects": { "learning": 6, "curiosity": 5, "thinking": 3 },
-        "flags_add": []
-      },
-      {
-        "text": "把拆下来的螺丝按大小排成一小队，数了一遍又一遍",
-        "effects": { "observation": 5, "focus": 4, "patience": 3 },
-        "flags_add": []
-      },
-      {
-        "text": "试着把零件装回去，虽然装不上了，但摆弄得很开心",
-        "effects": { "imagination": 4, "happiness": 4, "independence": 3 },
-        "flags_add": []
-      }
-    ],
-    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "hobby_0003",
-    "age_range": [7, 7],
+    "age_range": [
+      7,
+      7
+    ],
     "category": "hobby",
     "title": "竖笛第一声",
     "text": "音乐课上，老师教大家吹竖笛。你鼓起腮帮子使劲一吹，发出一声尖尖的怪响，全班都笑起来。老师没有生气，她握着你的小手，教你把指孔一个一个按住。放学的时候，你已经能吹出「小星星」的前两句了，一路上都在反复练习。",
     "choices": [
       {
         "text": "回家把「小星星」完整吹给妈妈听",
-        "effects": { "music": 7, "happiness": 4, "patience": 3 },
-        "flags_add": ["music_path"]
+        "effects": {
+          "music": 7,
+          "happiness": 4,
+          "patience": 3
+        },
+        "flags_add": [
+          "music_path"
+        ]
       },
       {
         "text": "缠着老师多学了一首新曲子",
-        "effects": { "music": 5, "learning": 4, "motivation": 3 },
+        "effects": {
+          "music": 5,
+          "learning": 4,
+          "motivation": 3
+        },
         "flags_add": []
       },
       {
         "text": "约同桌明天一起练习，互相听",
-        "effects": { "music": 4, "social": 5, "friendship": 3 },
+        "effects": {
+          "music": 4,
+          "social": 5,
+          "friendship": 3
+        },
         "flags_add": []
       }
     ],
-    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "hobby_0004",
-    "age_range": [11, 11],
+    "age_range": [
+      11,
+      11
+    ],
     "category": "hobby",
     "title": "黑板报画手",
     "text": "班级要办黑板报，文艺委员站在讲台上问谁会画画，你悄悄举起了手。放学后你一个人留在教室里，用彩色粉笔画出蓝天和操场，画到手指上全是粉笔灰。第二天一早，同学们围在黑板前夸好看，你假装不在意地摆摆手，心里却比考了满分还高兴。",
     "choices": [
       {
         "text": "主动把每个月黑板报的活儿都揽下来",
-        "effects": { "art": 7, "responsibility": 4, "confidence": 3 },
+        "effects": {
+          "art": 7,
+          "responsibility": 4,
+          "confidence": 3
+        },
         "flags_add": []
       },
       {
         "text": "偷偷报了校外的周末美术班，从素描学起",
-        "effects": { "art": 6, "skill": 4, "persistence": 3 },
+        "effects": {
+          "art": 6,
+          "skill": 4,
+          "persistence": 3
+        },
         "flags_add": []
       },
       {
         "text": "拉着好朋友一起画，教她怎么调出好看的颜色",
-        "effects": { "art": 5, "social": 4, "communication": 3 },
+        "effects": {
+          "art": 5,
+          "social": 4,
+          "communication": 3
+        },
         "flags_add": []
       }
     ],
-    "conditions": { "has_flags": ["artist_life"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [
+        "artist_life"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "hobby_0005",
-    "age_range": [12, 12],
+    "age_range": [
+      12,
+      12
+    ],
     "category": "hobby",
     "title": "午休的琴声",
     "text": "学校礼堂的旧钢琴蒙着一块厚布，你路过时掀开一角，按下一个琴键，琴声在空荡荡的礼堂里回荡了很久。音乐老师听见了，走过来说：「会弹琴的孩子，中午可以来这儿练。」从那以后，午休成了你一天里最安静、也最期待的时间。",
     "choices": [
       {
         "text": "每天中午雷打不动地去练琴",
-        "effects": { "music": 7, "discipline": 4, "patience": 3 },
+        "effects": {
+          "music": 7,
+          "discipline": 4,
+          "patience": 3
+        },
         "flags_add": []
       },
       {
         "text": "缠着老师学乐理，把五线谱抄满了一个本子",
-        "effects": { "music": 5, "knowledge": 4, "curiosity": 3 },
+        "effects": {
+          "music": 5,
+          "knowledge": 4,
+          "curiosity": 3
+        },
         "flags_add": []
       },
       {
         "text": "和隔壁班学琴的同学约好一起合奏",
-        "effects": { "music": 5, "social": 4, "teamwork": 3 },
+        "effects": {
+          "music": 5,
+          "social": 4,
+          "teamwork": 3
+        },
         "flags_add": []
       }
     ],
-    "conditions": { "has_flags": ["music_path"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [
+        "music_path"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "hobby_0006",
-    "age_range": [41, 41],
+    "age_range": [
+      41,
+      41
+    ],
     "category": "hobby",
     "title": "一只旧口琴",
     "text": "加班到深夜，你在储物间翻找旧文件，手指碰到了一个硬邦邦的盒子。打开一看，是学生时代那把口琴，铜绿爬满了琴身。你试着吹了一声，音已经不准了，可那声呜咽还是让你在原地站了很久。那首《送别》，你曾经能吹完整首。",
     "choices": [
       {
         "text": "送去修好，重新吹给家人听",
-        "effects": { "music": 6, "happiness": 4 },
-        "flags_add": ["rediscovered_hobby"]
+        "effects": {
+          "music": 6,
+          "happiness": 4
+        },
+        "flags_add": [
+          "rediscovered_hobby"
+        ]
       },
       {
         "text": "每天晚上吹一会儿，把当年的曲子一首首捡回来",
-        "effects": { "music": 5, "patience": 4, "comfort": 3 },
-        "flags_add": ["rediscovered_hobby"]
+        "effects": {
+          "music": 5,
+          "patience": 4,
+          "comfort": 3
+        },
+        "flags_add": [
+          "rediscovered_hobby"
+        ]
       },
       {
         "text": "把口琴擦干净，留给正在学乐器的孩子",
-        "effects": { "family_relation": 5, "happiness": 3, "music": 3 },
+        "effects": {
+          "family_relation": 5,
+          "happiness": 3,
+          "music": 3
+        },
         "flags_add": []
       }
     ],
-    "conditions": { "has_flags": ["music_path"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [
+        "music_path"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "hobby_0007",
-    "age_range": [43, 43],
+    "age_range": [
+      43,
+      43
+    ],
     "category": "hobby",
     "title": "河边的午后",
     "text": "同事老张拉你去河边钓鱼，你本想拒绝，那句「河边的风特别舒服」让你动了心。你笨手笨脚地甩竿，鱼线缠到了头顶的树枝上，老张笑得直不起腰。风从河面吹过来，你盯着浮漂发呆，忽然发现，自己很久没有这样什么都不想了。",
     "choices": [
       {
         "text": "跟着老张学抛竿、看水情，慢慢入了门",
-        "effects": { "patience": 6, "observation": 5, "skill": 3 },
+        "effects": {
+          "patience": 6,
+          "observation": 5,
+          "skill": 3
+        },
         "flags_add": []
       },
       {
         "text": "不带鱼竿，只在河边坐一下午",
-        "effects": { "happiness": 5, "balance": 4, "comfort": 3 },
+        "effects": {
+          "happiness": 5,
+          "balance": 4,
+          "comfort": 3
+        },
         "flags_add": []
       },
       {
         "text": "约上家人，把钓鱼变成周末的固定节目",
-        "effects": { "family_relation": 6, "happiness": 4, "fun": 3 },
+        "effects": {
+          "family_relation": 6,
+          "happiness": 4,
+          "fun": 3
+        },
         "flags_add": []
       }
     ],
-    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "hobby_0008",
-    "age_range": [45, 45],
+    "age_range": [
+      45,
+      45
+    ],
     "category": "hobby",
     "title": "周五合唱夜",
     "text": "隔壁写字楼里有个业余合唱团，每周五晚上排练。那天你加班路过，听见里面飘出来的歌声，在电梯口站了很久。团长看你感兴趣，递给你一张谱子：「试试低声部？」你捏着谱纸，心跳有点快——上一次认真开口唱歌，好像是很多年前的事了。",
     "choices": [
       {
         "text": "留下来试唱，正式加入了合唱团",
-        "effects": { "music": 6, "social": 5 },
-        "flags_add": ["rediscovered_hobby"]
+        "effects": {
+          "music": 6,
+          "social": 5
+        },
+        "flags_add": [
+          "rediscovered_hobby"
+        ]
       },
       {
         "text": "每周五来旁听，跟着小声哼",
-        "effects": { "music": 4, "happiness": 5, "fun": 3 },
+        "effects": {
+          "music": 4,
+          "happiness": 5,
+          "fun": 3
+        },
         "flags_add": []
       },
       {
         "text": "拉上爱人一起报名，成了团里的一对",
-        "effects": { "music": 4, "family_relation": 5, "happiness": 3 },
+        "effects": {
+          "music": 4,
+          "family_relation": 5,
+          "happiness": 3
+        },
         "flags_add": []
       }
     ],
-    "conditions": { "has_flags": ["music_path"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [
+        "music_path"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "hobby_0009",
-    "age_range": [49, 49],
+    "age_range": [
+      49,
+      49
+    ],
     "category": "hobby",
     "title": "烤糊的蛋糕",
     "text": "孩子生日的前夜，你心血来潮想做蛋糕。照着网上的教程打蛋、筛面粉，厨房被弄得一团糟，烤出来的蛋糕塌了半边，边缘还有点糊。可第二天早上，孩子看见桌上那个「塌蛋糕」，眼睛一下子亮了，说这是见过最特别的蛋糕。",
     "choices": [
       {
         "text": "从此认真学烘焙，蛋糕越做越像样",
-        "effects": { "skill": 6, "patience": 4, "fun": 3 },
+        "effects": {
+          "skill": 6,
+          "patience": 4,
+          "fun": 3
+        },
         "flags_add": []
       },
       {
         "text": "记下这次的教训，下次严格按克重来",
-        "effects": { "learning": 5, "thinking": 4, "observation": 3 },
+        "effects": {
+          "learning": 5,
+          "thinking": 4,
+          "observation": 3
+        },
         "flags_add": []
       },
       {
         "text": "和孩子一起做，让TA也来帮忙",
-        "effects": { "family_relation": 6, "fun": 4, "happiness": 3 },
+        "effects": {
+          "family_relation": 6,
+          "fun": 4,
+          "happiness": 3
+        },
         "flags_add": []
       }
     ],
-    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "hobby_0010",
-    "age_range": [51, 51],
+    "age_range": [
+      51,
+      51
+    ],
     "category": "hobby",
     "title": "木屑的香气",
     "text": "公司楼下新开了一家木工坊，玻璃橱窗里摆着木马、书架和小板凳。你下班路过，看老板刨木头看入了神，木屑卷着好看的弧线落下来。老板抬头招呼：「想试试不？」你戴上围裙，握刨子的手还有点生，刨出来的第一片木花却让你咧开了嘴。",
     "choices": [
       {
         "text": "每周来学一天，从做一把小凳子开始",
-        "effects": { "skill": 6, "patience": 4, "focus": 3 },
+        "effects": {
+          "skill": 6,
+          "patience": 4,
+          "focus": 3
+        },
         "flags_add": []
       },
       {
         "text": "买回一套工具，在家自学刨料开榫",
-        "effects": { "art": 5, "self_reliance": 4, "creativity": 3 },
+        "effects": {
+          "art": 5,
+          "self_reliance": 4,
+          "creativity": 3
+        },
         "flags_add": []
       },
       {
         "text": "想着给孙子做一辆木头小车，心里先美了起来",
-        "effects": { "family_relation": 5, "happiness": 4, "fun": 3 },
+        "effects": {
+          "family_relation": 5,
+          "happiness": 4,
+          "fun": 3
+        },
         "flags_add": []
       }
     ],
-    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "hobby_0011",
-    "age_range": [56, 56],
+    "age_range": [
+      56,
+      56
+    ],
     "category": "hobby",
     "title": "种一棵果树",
     "text": "搬家后的小院空荡荡的，你在墙角种下一棵石榴树苗。浇水、培土，日子一天天过去，它终于抽出第一片新叶。你蹲在地上拔草，膝盖沾了泥，心里却踏实得很。邻居隔着墙说：「你这院子，慢慢就有生气了。」你想，是啊，日子也要这样一点点种出来。",
     "choices": [
       {
         "text": "认真学修剪和施肥，把果树打理得壮壮实实",
-        "effects": { "skill": 5, "patience": 4, "observation": 3 },
-        "flags_add": ["gardener"]
+        "effects": {
+          "skill": 5,
+          "patience": 4,
+          "observation": 3
+        },
+        "flags_add": [
+          "gardener"
+        ]
       },
       {
         "text": "又添了几盆花，院子一天天热闹起来",
-        "effects": { "happiness": 5, "art": 3, "fun": 3 },
+        "effects": {
+          "happiness": 5,
+          "art": 3,
+          "fun": 3
+        },
         "flags_add": []
       },
       {
         "text": "拉着老伴一起打理，两人多了新话题",
-        "effects": { "family_relation": 5, "happiness": 4, "communication": 3 },
+        "effects": {
+          "family_relation": 5,
+          "happiness": 4,
+          "communication": 3
+        },
         "flags_add": []
       }
     ],
-    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "hobby_0012",
-    "age_range": [61, 61],
+    "age_range": [
+      61,
+      61
+    ],
     "category": "hobby",
     "title": "黄昏取景框",
     "text": "退休后的第一个月，你收到一台旧相机，是老同学寄来的，附了一张字条：「你年轻时爱摆弄这些，别搁下了。」你举着相机在小区里转，追着夕阳拍了几张。照片有点糊，可天边的云烧得通红，你在取景框里看了很久——很久没这么专注地看过天空了。",
     "choices": [
       {
         "text": "报了老年摄影班，从光圈快门学起",
-        "effects": { "skill": 6, "learning": 5, "motivation": 3 },
+        "effects": {
+          "skill": 6,
+          "learning": 5,
+          "motivation": 3
+        },
         "flags_add": []
       },
       {
         "text": "每天傍晚出门拍一张，记录退休后的日子",
-        "effects": { "happiness": 5, "observation": 4, "interest": 3 },
+        "effects": {
+          "happiness": 5,
+          "observation": 4,
+          "interest": 3
+        },
         "flags_add": []
       },
       {
         "text": "拉上老伴当模特，两个人互相拍着玩",
-        "effects": { "family_relation": 5, "fun": 4, "happiness": 3 },
+        "effects": {
+          "family_relation": 5,
+          "fun": 4,
+          "happiness": 3
+        },
         "flags_add": []
       }
     ],
-    "conditions": { "has_flags": ["rediscovered_hobby"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [
+        "rediscovered_hobby"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "hobby_0013",
-    "age_range": [67, 67],
+    "age_range": [
+      67,
+      67
+    ],
     "category": "hobby",
     "title": "午后读书会",
     "text": "社区图书馆新开了一个读书会，每周三下午活动。你第一次去，坐在角落里听别人讲书，有人讲《平凡的世界》，讲到一半自己先红了眼眶。主持人递过话筒：「您也来讲讲？」你接过话筒，手有点抖，讲起年轻时读的那本小说，讲着讲着，声音就稳了。",
     "choices": [
       {
         "text": "每周都去，认真准备每一次分享",
-        "effects": { "learning": 6, "growth": 4, "motivation": 3 },
+        "effects": {
+          "learning": 6,
+          "growth": 4,
+          "motivation": 3
+        },
         "flags_add": []
       },
       {
         "text": "把年轻时读过的书翻出来重读一遍",
-        "effects": { "creativity": 5, "happiness": 4, "memory": 3 },
+        "effects": {
+          "creativity": 5,
+          "happiness": 4,
+          "memory": 3
+        },
         "flags_add": []
       },
       {
         "text": "在读书会交了几个朋友，散会后一起去喝茶",
-        "effects": { "social": 5, "friendship": 4, "happiness": 3 },
+        "effects": {
+          "social": 5,
+          "friendship": 4,
+          "happiness": 3
+        },
         "flags_add": []
       }
     ],
-    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "hobby_0014",
-    "age_range": [71, 71],
+    "age_range": [
+      71,
+      71
+    ],
     "category": "hobby",
     "title": "楚河汉界",
     "text": "公园凉亭里总围着一圈人，你凑近一看，是两个老头在下象棋。观棋的人比下棋的还着急，你忍不住多嘴支了一招，被下棋的老头瞪了一眼，人群却笑成一片。第二天，你拎着一副棋也来了。从此凉亭的石桌上，多了一个你的位置。",
     "choices": [
       {
         "text": "潜心研究棋谱，成了凉亭里的常胜将军",
-        "effects": { "strategy": 6, "thinking": 5, "focus": 3 },
+        "effects": {
+          "strategy": 6,
+          "thinking": 5,
+          "focus": 3
+        },
         "flags_add": []
       },
       {
         "text": "输赢都不恼，就爱这份热闹",
-        "effects": { "happiness": 5, "social": 4, "patience": 3 },
+        "effects": {
+          "happiness": 5,
+          "social": 4,
+          "patience": 3
+        },
         "flags_add": []
       },
       {
         "text": "教会小孙子下棋，爷孙俩在树下对弈",
-        "effects": { "family_relation": 6, "fun": 4, "happiness": 3 },
+        "effects": {
+          "family_relation": 6,
+          "fun": 4,
+          "happiness": 3
+        },
         "flags_add": []
       }
     ],
-    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "hobby_0015",
-    "age_range": [77, 77],
+    "age_range": [
+      77,
+      77
+    ],
     "category": "hobby",
     "title": "果子红了",
     "text": "你年轻时种下的那棵石榴树已经比屋檐还高了，今年结的果子格外多。你搬来梯子摘石榴，老伴在下面扶着，嘴里念叨着「小心点儿」，手里的篮子却已经接住了三个。你把最大的一颗分给来串门的孩子，看他咬得满嘴汁水，比什么都甜。",
     "choices": [
       {
         "text": "把果子挨家分给邻居，和街坊们一起尝鲜",
-        "effects": { "social": 5, "happiness": 5, "gratitude": 3 },
+        "effects": {
+          "social": 5,
+          "happiness": 5,
+          "gratitude": 3
+        },
         "flags_add": []
       },
       {
         "text": "学着酿一坛石榴酒，封起来等冬天开",
-        "effects": { "skill": 4, "patience": 5, "fun": 3 },
+        "effects": {
+          "skill": 4,
+          "patience": 5,
+          "fun": 3
+        },
         "flags_add": []
       },
       {
         "text": "坐在树下剥石榴，慢慢地回味这些年",
-        "effects": { "happiness": 5, "comfort": 4, "self_awareness": 3 },
+        "effects": {
+          "happiness": 5,
+          "comfort": 4,
+          "self_awareness": 3
+        },
         "flags_add": []
       }
     ],
-    "conditions": { "has_flags": ["gardener"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [
+        "gardener"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "hobby_0016",
-    "age_range": [86, 86],
+    "age_range": [
+      86,
+      86
+    ],
     "category": "hobby",
     "title": "一针一线",
     "text": "重孙要满月了，你翻出年轻时用过的毛线针，想织一件小毛衣。针脚生疏了，拆了织、织了拆，坐在窗边的藤椅上，一坐就是一下午。阳光把毛线染成暖融融的颜色，你忽然想起，自己也是这样给孩子、给孙子一针一线织过来的。",
     "choices": [
       {
         "text": "慢慢织完这件小毛衣，寄给重孙",
-        "effects": { "family_relation": 6, "happiness": 4, "patience": 3 },
+        "effects": {
+          "family_relation": 6,
+          "happiness": 4,
+          "patience": 3
+        },
         "flags_add": []
       },
       {
         "text": "把老手艺捡起来，又织了好几件小帽小袜",
-        "effects": { "skill": 4, "fun": 4, "happiness": 3 },
+        "effects": {
+          "skill": 4,
+          "fun": 4,
+          "happiness": 3
+        },
         "flags_add": []
       },
       {
         "text": "手累了就歇一歇，看着窗外发一会儿呆",
-        "effects": { "happiness": 4, "comfort": 4, "balance": 3 },
+        "effects": {
+          "happiness": 4,
+          "comfort": 4,
+          "balance": 3
+        },
         "flags_add": []
       }
     ],
-    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "hobby_0017",
-    "age_range": [90, 90],
+    "age_range": [
+      90,
+      90
+    ],
     "category": "hobby",
     "title": "留声机旧歌",
     "text": "外孙搬来一台旧留声机，说是在旧货市场淘的，还配了几张老唱片。唱针落下，一首老歌缓缓响起，你跟着哼了几句，忽然想起年轻时的某个傍晚。外孙靠在沙发边，安静地听你讲那首歌的年代。窗外，是九十岁温柔的夕阳。",
     "choices": [
       {
         "text": "把年轻时喜欢的歌一首首讲给外孙听",
-        "effects": { "family_relation": 6, "happiness": 4, "gratitude": 3 },
+        "effects": {
+          "family_relation": 6,
+          "happiness": 4,
+          "gratitude": 3
+        },
         "flags_add": []
       },
       {
         "text": "学着摆弄留声机，研究它为什么会出声",
-        "effects": { "learning": 5, "curiosity": 4, "thinking": 3 },
+        "effects": {
+          "learning": 5,
+          "curiosity": 4,
+          "thinking": 3
+        },
         "flags_add": []
       },
       {
         "text": "和老伴一人一句地跟着哼，像年轻时那样",
-        "effects": { "happiness": 5, "family_relation": 4, "fun": 3 },
+        "effects": {
+          "happiness": 5,
+          "family_relation": 4,
+          "fun": 3
+        },
         "flags_add": []
       }
     ],
-    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "hobby_0018",
-    "age_range": [95, 95],
+    "age_range": [
+      95,
+      95
+    ],
     "category": "hobby",
     "title": "清晨的鸟鸣",
     "text": "你每天清晨坐在窗边，看阳台外的老樟树上落着几只麻雀。它们抖抖羽毛，歪着头看你。你数不清自己这样坐了多少个早晨了，可每次看到有新的鸟儿飞来，心里还是会轻轻一动。这扇窗就是你的画框，窗外的世界，每一天都不一样。",
     "choices": [
       {
         "text": "给常来的鸟儿都起了名字，记下它们每天到访的时间",
-        "effects": { "observation": 5, "patience": 4, "happiness": 3 },
+        "effects": {
+          "observation": 5,
+          "patience": 4,
+          "happiness": 3
+        },
         "flags_add": []
       },
       {
         "text": "把看到的鸟儿画在本子上，攒了一本翅膀的痕迹",
-        "effects": { "art": 5, "creativity": 4, "happiness": 3 },
+        "effects": {
+          "art": 5,
+          "creativity": 4,
+          "happiness": 3
+        },
         "flags_add": []
       },
       {
         "text": "就这样安静地坐着，什么都不做，也很好",
-        "effects": { "happiness": 4, "balance": 4, "comfort": 3 },
+        "effects": {
+          "happiness": 4,
+          "balance": 4,
+          "comfort": 3
+        },
         "flags_add": []
       }
     ],
-    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   }
 ]

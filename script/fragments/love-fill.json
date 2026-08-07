@@ -1,158 +1,427 @@
 [
   {
-    "id": "love_0001",
-    "age_range": [11, 11],
-    "category": "love",
-    "title": "橡皮的心事",
-    "text": "你的同桌有个小习惯：总把新橡皮切成两半，一半自己用，一半放在桌角。后来你发现，那块橡皮是给总忘记带文具的你备的。你开始悄悄留意他——他笑起来有酒窝，写字时会把刘海别到耳后。心里那点说不清的悸动，让课堂都变得漫长。",
-    "choices": [
-      { "text": "把橡皮轻轻推回他那边，说了声「谢谢」", "effects": { "relationship": 5, "courage": 3 }, "flags_add": [] },
-      { "text": "也学着他，把橡皮切成两半放在桌角", "effects": { "happiness": 4, "fun": 2 }, "flags_add": [] },
-      { "text": "假装没注意到，把自己的橡皮藏进笔袋", "effects": { "introversion": 4 }, "flags_add": [] }
-    ],
-    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
-  },
-  {
-    "id": "love_0002",
-    "age_range": [12, 12],
-    "category": "love",
-    "title": "邻家的纸条",
-    "text": "邻居家比你大两岁的哥哥要搬去另一个城市了。搬家那天，他趁大人搬家具的工夫，往你手里塞了一张折得整整齐齐的纸条，上面画着一颗歪歪扭扭的心，还有一行小字：「你要好好长大。」你把它夹进了最喜欢的书里。",
-    "choices": [
-      { "text": "追到楼道口大声喊：「我会给你写信的！」", "effects": { "courage": 5, "friendship": 4 }, "flags_add": [] },
-      { "text": "认真点头说「你也要好好的」，把纸条收好", "effects": { "stability": 4, "relationship": 3 }, "flags_add": [] },
-      { "text": "心里酸酸的，话到嘴边又咽了回去", "effects": { "introversion": 4 }, "flags_add": [] }
-    ],
-    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
-  },
-  {
     "id": "love_0003",
-    "age_range": [37, 37],
+    "age_range": [
+      37,
+      37
+    ],
     "category": "love",
     "title": "深夜长谈",
     "text": "结婚纪念日那天，你们谁也没提礼物的事。孩子睡着后，两个人坐在阳台上吹风，不知怎么就聊起刚认识时合吃一碗泡面的日子，聊到凌晨两点。你忽然意识到，这几年你们聊孩子、聊房贷、聊老人，却很久没这样，只聊彼此了。",
     "choices": [
-      { "text": "握住他的手：「谢谢你陪我走到今天」", "effects": { "relationship": 6, "gratitude": 4 }, "flags_add": [] },
-      { "text": "提议：以后每周留一晚，只属于我们俩", "effects": { "communication": 5, "planning": 3 }, "flags_add": [] },
-      { "text": "聊着聊着困了，各自回屋睡下", "effects": { "avoidance": 4 }, "flags_add": [] }
+      {
+        "text": "握住TA的手：「谢谢你陪我走到今天」",
+        "effects": {
+          "relationship": 6,
+          "gratitude": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "提议：以后每周留一晚，只属于我们俩",
+        "effects": {
+          "communication": 5,
+          "planning": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "聊着聊着困了，各自回屋睡下",
+        "effects": {
+          "avoidance": 4
+        },
+        "flags_add": []
+      }
     ],
-    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "love_0004",
-    "age_range": [50, 50],
+    "age_range": [
+      50,
+      50
+    ],
     "category": "love",
     "title": "重新约会",
-    "text": "孩子上了大学，家里忽然安静下来。周末他翻箱倒柜找出一张十年前的电影票根，在沙发边坐下，问你：「要不要再去电影院坐一次？」你站在镜子前，鬼使神差地理了理头发——像第一次约会那样，提前半小时就到了影院门口。",
+    "text": "孩子上了大学，家里忽然安静下来。周末TA翻箱倒柜找出一张十年前的电影票根，在沙发边坐下，问你：「要不要再去电影院坐一次？」你站在镜子前，鬼使神差地理了理头发——像第一次约会那样，提前半小时就到了影院门口。",
     "choices": [
-      { "text": "挽住他的手臂：「走，这次我要大桶爆米花」", "effects": { "happiness": 5, "relationship": 5 }, "flags_add": [] },
-      { "text": "认真看着他：「好，我正好也有些话想跟你说」", "effects": { "communication": 5, "relationship": 3 }, "flags_add": [] },
-      { "text": "有点不习惯这份安静，摆摆手说改天吧", "effects": { "avoidance": 4 }, "flags_add": [] }
+      {
+        "text": "挽住TA的手臂：「走，这次我要大桶爆米花」",
+        "effects": {
+          "happiness": 5,
+          "relationship": 5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "认真看着TA：「好，我正好也有些话想跟你说」",
+        "effects": {
+          "communication": 5,
+          "relationship": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "有点不习惯这份安静，摆摆手说改天吧",
+        "effects": {
+          "avoidance": 4
+        },
+        "flags_add": []
+      }
     ],
-    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "love_0005",
-    "age_range": [65, 65],
+    "age_range": [
+      65,
+      65
+    ],
     "category": "love",
     "title": "公园相亲角",
     "text": "老伴走后第三年，老邻居硬拉你去了公园的相亲角。老槐树下挂满手写的征婚启事，你站了十分钟，觉得自己荒唐透顶。正要走，一位穿灰外套的老人走过来，在树下站定，问：「你也一个人？要不，一起走走？」",
     "choices": [
-      { "text": "点点头：「好，那就在湖边走走」", "effects": { "courage": 6, "relationship": 4 }, "flags_add": [] },
-      { "text": "摆摆手：「不了，我一个人习惯了」", "effects": { "independence": 4, "stability": 3 }, "flags_add": [] },
-      { "text": "不置可否，却悄悄放慢了脚步", "effects": { "interest": 3, "relationship": 3 }, "flags_add": [] }
+      {
+        "text": "点点头：「好，那就在湖边走走」",
+        "effects": {
+          "courage": 6,
+          "relationship": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "摆摆手：「不了，我一个人习惯了」",
+        "effects": {
+          "independence": 4,
+          "stability": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "不置可否，却悄悄放慢了脚步",
+        "effects": {
+          "interest": 3,
+          "relationship": 3
+        },
+        "flags_add": []
+      }
     ],
-    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "love_0006",
-    "age_range": [69, 69],
+    "age_range": [
+      69,
+      69
+    ],
     "category": "love",
     "title": "遛狗的日子",
-    "text": "每天清晨，你带着大黄狗去河边遛弯，总能遇到他——他也养着一只柴犬。两只狗一见面就滚成一团，你们站在旁边，从天气聊到早餐，从早餐聊到各自的从前。某天他忽然说：「明天……还这个点来吗？」狗尾巴摇得比谁都欢。",
+    "text": "每天清晨，你带着大黄狗去河边遛弯，总能遇到TA——TA也养着一只柴犬。两只狗一见面就滚成一团，你们站在旁边，从天气聊到早餐，从早餐聊到各自的从前。某天TA忽然说：「明天……还这个点来吗？」狗尾巴摇得比谁都欢。",
     "choices": [
-      { "text": "笑着应：「风雨无阻，我家狗都替你答应了」", "effects": { "relationship": 5, "happiness": 4, "fun": 3 }, "flags_add": [] },
-      { "text": "认真地说：「好，我也想多听听你的故事」", "effects": { "communication": 5, "empathy": 3 }, "flags_add": [] },
-      { "text": "犹豫了一下，低头踢了踢石子：「到时候再说吧」", "effects": { "procrastination": 4 }, "flags_add": [] }
+      {
+        "text": "笑着应：「风雨无阻，我家狗都替你答应了」",
+        "effects": {
+          "relationship": 5,
+          "happiness": 4,
+          "fun": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "认真地说：「好，我也想多听听你的故事」",
+        "effects": {
+          "communication": 5,
+          "empathy": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "犹豫了一下，低头踢了踢石子：「到时候再说吧」",
+        "effects": {
+          "procrastination": 4
+        },
+        "flags_add": []
+      }
     ],
-    "conditions": { "has_flags": ["has_dog"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [
+        "has_dog"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "love_0007",
-    "age_range": [73, 73],
+    "age_range": [
+      73,
+      73
+    ],
     "category": "love",
     "title": "病房晨光",
-    "text": "他在医院住了半个月，你每天坐三站公交去送汤。病床上的他瘦了一圈，却还有力气开玩笑：「你年轻时追我都没这么勤快。」你一边削苹果一边顶回去：「那时候你也没这么赖床。」阳光落在病床栏上，你们都笑了，谁也没提那个还没拆线的刀口。",
+    "text": "TA在医院住了半个月，你每天坐三站公交去送汤。病床上的TA瘦了一圈，却还有力气开玩笑：「你年轻时追我都没这么勤快。」你一边削苹果一边顶回去：「那时候你也没这么赖床。」阳光落在病床栏上，你们都笑了，谁也没提那个还没拆线的刀口。",
     "choices": [
-      { "text": "把削好的苹果递给他：「快点好起来，家里花还等你浇呢」", "effects": { "relationship": 5, "empathy": 4, "responsibility": 3 }, "flags_add": [] },
-      { "text": "夜里留在病房陪床，握着他的手睡了一宿", "effects": { "loyalty": 4, "stability": 3 }, "flags_add": [] },
-      { "text": "回家休息一夜，第二天天没亮又赶到医院", "effects": { "self_control": 3, "health": 3 }, "flags_add": [] }
+      {
+        "text": "把削好的苹果递给TA：「快点好起来，家里花还等你浇呢」",
+        "effects": {
+          "relationship": 5,
+          "empathy": 4,
+          "responsibility": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "夜里留在病房陪床，握着TA的手睡了一宿",
+        "effects": {
+          "loyalty": 4,
+          "stability": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "回家休息一夜，第二天天没亮又赶到医院",
+        "effects": {
+          "self_control": 3,
+          "health": 3
+        },
+        "flags_add": []
+      }
     ],
-    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "love_0008",
-    "age_range": [74, 74],
+    "age_range": [
+      74,
+      74
+    ],
     "category": "love",
     "title": "金婚纪念",
-    "text": "金婚纪念日，儿孙们张罗了满满一桌。散席后，他忽然从贴身口袋里摸出一个小盒子——里面是五十年前他求婚时戴在你手上的那枚戒指，磨得锃亮。他说：「新的买不起，旧的舍不得换，你凑合再戴五十年？」你鼻尖一酸，把手伸了过去。",
+    "text": "金婚纪念日，儿孙们张罗了满满一桌。散席后，TA忽然从贴身口袋里摸出一个小盒子——里面是五十年前TA求婚时戴在你手上的那枚戒指，磨得锃亮。TA说：「新的买不起，旧的舍不得换，你凑合再戴五十年？」你鼻尖一酸，把手伸了过去。",
     "choices": [
-      { "text": "伸出手指让他戴上：「五十年哪够，我要六十年」", "effects": { "relationship": 6, "happiness": 5, "gratitude": 3 }, "flags_add": [] },
-      { "text": "把戒指小心收进贴身衣袋，什么都没说，只是笑了", "effects": { "stability": 5, "relationship": 4 }, "flags_add": [] },
-      { "text": "笑着岔开话题：「老都老了，还兴这个」", "effects": { "avoidance": 4 }, "flags_add": [] }
+      {
+        "text": "伸出手指让TA戴上：「五十年哪够，我要六十年」",
+        "effects": {
+          "relationship": 6,
+          "happiness": 5,
+          "gratitude": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把戒指小心收进贴身衣袋，什么都没说，只是笑了",
+        "effects": {
+          "stability": 5,
+          "relationship": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "笑着岔开话题：「老都老了，还兴这个」",
+        "effects": {
+          "avoidance": 4
+        },
+        "flags_add": []
+      }
     ],
-    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "love_0009",
-    "age_range": [79, 79],
+    "age_range": [
+      79,
+      79
+    ],
     "category": "love",
     "title": "窗台的四季",
-    "text": "窗台那排花盆是你们一起打理的——春天他播种，你浇水；秋天他搬盆，你剪枝。今年你腰不好，蹲不下去，他就把花全搬上窗台，每天拍照片给你看。他说：「种花这件事，一个人干叫活儿，两个人干叫过日子。」你坐在藤椅上，看他蹲在阳光里浇水，想起年轻时的他。",
+    "text": "窗台那排花盆是你们一起打理的——春天TA播种，你浇水；秋天TA搬盆，你剪枝。今年你腰不好，蹲不下去，TA就把花全搬上窗台，每天拍照片给你看。TA说：「种花这件事，一个人干叫活儿，两个人干叫过日子。」你坐在藤椅上，看TA蹲在阳光里浇水，想起年轻时的TA。",
     "choices": [
-      { "text": "挪到他身边，也拿起小水壶：「那我们一起过日子」", "effects": { "relationship": 5, "happiness": 4 }, "flags_add": [] },
-      { "text": "让他把每种花的花期写在卡片上，贴满窗台", "effects": { "observation": 4, "relationship": 3 }, "flags_add": [] },
-      { "text": "让他专心照料，自己坐在旁边看着就好", "effects": { "stability": 4, "happiness": 3 }, "flags_add": [] }
+      {
+        "text": "挪到TA身边，也拿起小水壶：「那我们一起过日子」",
+        "effects": {
+          "relationship": 5,
+          "happiness": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "让TA把每种花的花期写在卡片上，贴满窗台",
+        "effects": {
+          "observation": 4,
+          "relationship": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "让TA专心照料，自己坐在旁边看着就好",
+        "effects": {
+          "stability": 4,
+          "happiness": 3
+        },
+        "flags_add": []
+      }
     ],
-    "conditions": { "has_flags": ["gardener"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [
+        "gardener"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "love_0010",
-    "age_range": [84, 84],
+    "age_range": [
+      84,
+      84
+    ],
     "category": "love",
     "title": "泛黄的照片",
-    "text": "你从柜子深处翻出一本旧相册，第一张照片已经泛黄——那是你们刚认识那年春天拍的，你还记得那天他穿的灰外套。你戴上老花镜看了很久，他凑过来：「那时候我头发还挺多。」你笑出声，眼眶却有点热。日子一晃，照片里的人都白了头。",
+    "text": "你从柜子深处翻出一本旧相册，第一张照片已经泛黄——那是你们刚认识那年春天拍的，你还记得那天TA穿的灰外套。你戴上老花镜看了很久，TA凑过来：「那时候我头发还挺多。」你笑出声，眼眶却有点热。日子一晃，照片里的人都白了头。",
     "choices": [
-      { "text": "把那张照片抽出来，郑重地放进新相册第一页", "effects": { "relationship": 5, "memory": 4 }, "flags_add": [] },
-      { "text": "指着照片开玩笑：「那时候你可比现在瘦」", "effects": { "happiness": 5, "fun": 3 }, "flags_add": [] },
-      { "text": "看了很久，又把相册合上，轻轻放回原处", "effects": { "stability": 4, "emotion": 3 }, "flags_add": [] }
+      {
+        "text": "把那张照片抽出来，郑重地放进新相册第一页",
+        "effects": {
+          "relationship": 5,
+          "memory": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "指着照片开玩笑：「那时候你可比现在瘦」",
+        "effects": {
+          "happiness": 5,
+          "fun": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "看了很久，又把相册合上，轻轻放回原处",
+        "effects": {
+          "stability": 4,
+          "emotion": 3
+        },
+        "flags_add": []
+      }
     ],
-    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "love_0011",
-    "age_range": [91, 91],
+    "age_range": [
+      91,
+      91
+    ],
     "category": "love",
     "title": "晨间的梳子",
-    "text": "你耳朵越来越背，他说话总要凑近些。可每天早晨，他依然会帮你梳头发，一下一下，像几十年前那样。镜子里的你们，皱纹叠着皱纹，他的手却还是稳稳的。他梳完，在你额头轻轻贴了一下：「今天也很好。」窗外，新一天的太阳正慢慢升起来。",
+    "text": "你耳朵越来越背，TA说话总要凑近些。可每天早晨，TA依然会帮你梳头发，一下一下，像几十年前那样。镜子里的你们，皱纹叠着皱纹，TA的手却还是稳稳的。TA梳完，在你额头轻轻贴了一下：「今天也很好。」窗外，新一天的太阳正慢慢升起来。",
     "choices": [
-      { "text": "握住他搭在肩上的手：「有你，每一天都很好」", "effects": { "relationship": 5, "happiness": 4, "gratitude": 3 }, "flags_add": [] },
-      { "text": "也拿起梳子，帮他理理所剩不多的白发", "effects": { "empathy": 5, "relationship": 4 }, "flags_add": [] },
-      { "text": "对着镜子里的自己笑一笑，什么也没说", "effects": { "stability": 4, "happiness": 3 }, "flags_add": [] }
+      {
+        "text": "握住TA搭在肩上的手：「有你，每一天都很好」",
+        "effects": {
+          "relationship": 5,
+          "happiness": 4,
+          "gratitude": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "也拿起梳子，帮TA理理所剩不多的白发",
+        "effects": {
+          "empathy": 5,
+          "relationship": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "对着镜子里的自己笑一笑，什么也没说",
+        "effects": {
+          "stability": 4,
+          "happiness": 3
+        },
+        "flags_add": []
+      }
     ],
-    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   },
   {
     "id": "love_0012",
-    "age_range": [93, 93],
+    "age_range": [
+      93,
+      93
+    ],
     "category": "love",
     "title": "十指相扣",
-    "text": "你的身体一天比一天沉。那晚他坐到你床边，把你的手握进他掌心，十指相扣，像年轻时那样。他没说话，你也累了，只觉他的手很暖。你想起这辈子一起淋过的雨、吃过的面、走过的路，忽然觉得，这样走，也没什么可遗憾的了。",
+    "text": "你的身体一天比一天沉。那晚TA坐到你床边，把你的手握进TA掌心，十指相扣，像年轻时那样。TA没说话，你也累了，只觉TA的手很暖。你想起这辈子一起淋过的雨、吃过的面、走过的路，忽然觉得，这样走，也没什么可遗憾的了。",
     "choices": [
-      { "text": "用尽力气握了握他的手，轻声说：「这辈子，谢谢你」", "effects": { "relationship": 6, "gratitude": 5, "happiness": 3 }, "flags_add": [] },
-      { "text": "安安静静躺着，听他讲你们年轻时的事，慢慢睡着", "effects": { "stability": 6, "security": 4 }, "flags_add": [] },
-      { "text": "心里还有牵挂，问他：「下辈子……还能找到我吗」", "effects": { "relationship": 5, "courage": 3 }, "flags_add": [] }
+      {
+        "text": "用尽力气握了握TA的手，轻声说：「这辈子，谢谢你」",
+        "effects": {
+          "relationship": 6,
+          "gratitude": 5,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "安安静静躺着，听TA讲你们年轻时的事，慢慢睡着",
+        "effects": {
+          "stability": 6,
+          "security": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "心里还有牵挂，问TA：「下辈子……还能找到我吗」",
+        "effects": {
+          "relationship": 5,
+          "courage": 3
+        },
+        "flags_add": []
+      }
     ],
-    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
   }
 ]

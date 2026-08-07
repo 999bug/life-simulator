@@ -1,4 +1,4 @@
-import type { GameState } from '../types';
+import type { GameState, UndoEntry } from '../types';
 
 /** 单槽存档数据（与旧版 SaveData 结构一致） */
 export interface SaveData {
@@ -13,6 +13,10 @@ export interface SaveData {
   fateEventId?: string | null;
   /** 本局命运事件 id 列表（第 5 周目起 2 个；旧档无此字段，读档回退单元素） */
   fateEventIds?: string[];
+  /** 后悔栈（回退上一步/回退到某岁；旧档无此字段 = 空栈） */
+  undoStack?: UndoEntry[];
+  /** 伴侣互动下次触发年龄（旧档无此字段 = 99 未启用） */
+  companionNextAge?: number;
 }
 
 /** v2 存档：active 槽 + 3 槽位 */

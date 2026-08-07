@@ -23,7 +23,7 @@ function loadTheme(): Theme {
 }
 
 export default function App() {
-  const { game, currentEvent, feedback, skippedEvents, autoPlay, typeSpeed, saves, achievements, stats, newAchievements, fateEventIds, isDaily, isWeekly, weeklyGoal, daily, dailyHistory, weekly, seedScores, family, shuffleSeed, startGame, startAutoGame, startDailyGame, startWeeklyGame, restart, reincarnate, makeChoice, continue: continue_, continueGame, reset, setTypeSpeed } = useGame();
+  const { game, currentEvent, feedback, skippedEvents, autoPlay, typeSpeed, saves, achievements, stats, newAchievements, fateEventIds, isDaily, isWeekly, weeklyGoal, daily, dailyHistory, weekly, seedScores, family, shuffleSeed, startGame, startAutoGame, startDailyGame, startWeeklyGame, restart, reincarnate, makeChoice, undo, undoToAge, undoStack, continue: continue_, continueGame, reset, setTypeSpeed } = useGame();
 
   // 主题切换（纯黑/深空蓝；持久化到 localStorage）
   const [theme, setTheme] = useState<Theme>(loadTheme);
@@ -80,6 +80,9 @@ export default function App() {
             fateEventIds={fateEventIds}
             isWeekly={isWeekly}
             weeklyGoal={weeklyGoal}
+            undoStack={undoStack}
+            onUndo={undo}
+            onUndoToAge={undoToAge}
             onTypeSpeedChange={setTypeSpeed}
             onChoice={makeChoice}
             onContinue={continue_}

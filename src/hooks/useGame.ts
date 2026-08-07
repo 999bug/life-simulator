@@ -1,5 +1,5 @@
 import { useReducer, useCallback, useEffect } from 'react';
-import type { AchievementId, AttributeKey, Attributes, Choice, CustomGoal, DeathCause, FamilyMember, GamePhase, GameState, GoalKey, LifeEvent, PaceMode, TypeSpeed } from '../types/index.ts';
+import type { AchievementId, AttributeKey, Attributes, Choice, CustomGoal, DeathCause, FamilyMember, GamePhase, GameState, GoalKey, LifeEvent, PaceMode, TypeSpeed, UndoEntry } from '../types/index.ts';
 import { emptySaves, isValidSaveData, migrateLegacySave, SLOT_COUNT, type SavesV2 } from '../engine/save.ts';
 import { applyAchievementBonus, checkAchievements } from '../engine/achievements.ts';
 import { verdictKey } from '../engine/verdict.ts';
@@ -24,6 +24,7 @@ import {
   STAGE_ORDER,
 } from '../engine/state.ts';
 import { EVENTS, filterEvents, shuffleEvents, pickFateEvents } from '../engine/events.ts';
+import { buildCompanionEvent, COMPANION_DISABLED, COMPANION_END_AGE, COMPANION_INTERVAL, COMPANION_START_AGE, companionEnabled } from '../engine/companion.ts';
 import { track } from '../utils/analytics.ts';
 
 /** 中途放弃埋点：结算后回标题（phase 已为 summary）不误记，其余情况记放弃 */
@@ -189,6 +190,48 @@ export function updateDailyBest(prev: DailyStore, today: string, score: number, 
   return { date: today, bestScore: score, bestAge: age };
 }
 
+// ============ 后悔回退（undo）============
+
+/** 后悔栈上限：最多回退 5 步（体验与内存平衡） */
+export const UNDO_MAX = 5;
+
+/** 从栈中可回退的年龄列表（去重升序，供「回退到 N 岁」选择） */
+export function undoableAges(stack: UndoEntry[]): number[] {
+  return [...new Set(stack.map(e => e.game.age))].sort((a, b) => a - b);
+}
+
+/** 从栈顶往下找最近一个「年龄 ≤ 目标岁」的条目下标；找不到返回 -1 */
+export function findUndoEntry(stack: UndoEntry[], age: number): number {
+  for (let i = stack.length - 1; i >= 0; i--) {
+    if (stack[i].game.age <= age) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+/** 回退恢复快照：还原到指定条目（事件/反馈/跳过事件截断/伴侣互动进度） */
+function restoreUndo(state: RuntimeState, entry: UndoEntry): RuntimeState {
+  // 选择前的事件：伴侣互动不在事件数组中，按互动年龄重建
+  let currentEvent: LifeEvent | null = null;
+  if (entry.currentEventId) {
+    currentEvent = entry.currentEventId.startsWith('companion_')
+      ? buildCompanionEvent(entry.companionNextAge)
+      : state.shuffledEvents.find(e => e.id === entry.currentEventId) ?? null;
+  }
+  return {
+    ...state,
+    game: entry.game,
+    currentEvent,
+    feedback: entry.feedback,
+    eventIndex: entry.eventIndex,
+    skippedEvents: state.skippedEvents.slice(0, entry.skippedCount),
+    companionNextAge: entry.companionNextAge,
+    // 回退后栈顶即该条目的下一层（弹掉的条目已丢弃，不可再回退）
+    undoStack: state.undoStack.slice(0, state.undoStack.indexOf(entry)),
+  };
+}
+
 // ============ 每周挑战存储 ============
 
 /** 每周挑战存储 key */
@@ -266,6 +309,8 @@ export type Action =
   | { type: 'REINCARNATE' }
   | { type: 'RESTART' }
   | { type: 'MAKE_CHOICE'; choice: Choice; eventId: string }
+  | { type: 'UNDO' }
+  | { type: 'UNDO_TO_AGE'; age: number }
   | { type: 'CONTINUE' }
   | { type: 'SET_TYPE_SPEED'; typeSpeed: TypeSpeed }
   | { type: 'RESET' }
@@ -334,6 +379,10 @@ export interface RuntimeState {
   seedScores: SeedScores;
   /** 家族族谱（跨周目；结算时正常局追加一代，快速模拟/每日挑战不写入） */
   family: FamilyMember[];
+  /** 后悔栈：最近 N 步选择前的状态快照（回退上一步/回退到某岁；快速模拟不记录） */
+  undoStack: UndoEntry[];
+  /** 伴侣互动下次触发年龄（married 后每 4 岁一次；99 = 未启用） */
+  companionNextAge: number;
 }
 
 // ============ 存档 ============
@@ -410,6 +459,9 @@ export function saveState(rt: RuntimeState): SavesV2 | null {
     // 双命运事件（第 5 周目）：写新字段；旧字段保留第一个用于旧版读档兜底
     fateEventIds: rt.fateEventIds,
     fateEventId: rt.fateEventIds[0] ?? null,
+    // 后悔栈与伴侣互动进度：读档后可继续回退/继续伴侣互动（旧档无字段 = 空栈/未启用）
+    undoStack: rt.undoStack,
+    companionNextAge: rt.companionNextAge,
   };
   // 内容未变则跳过写库（防 SAVES_UPDATED 同步后的 effect 重跑循环）
   if (JSON.stringify(saves) === JSON.stringify(rt.saves)) {
@@ -689,6 +741,9 @@ function startNewGame(state: RuntimeState, p: StartParams): RuntimeState {
     seedChallenge: p.seed != null && !p.isDaily && !p.isWeekly,
     daily: state.daily,
     family: state.family,
+    // 新一局：后悔栈清空；伴侣互动未启用（married 后启用）
+    undoStack: [],
+    companionNextAge: COMPANION_DISABLED,
   };
 }
 
@@ -762,6 +817,18 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
 
     case 'MAKE_CHOICE': {
       const { choice, eventId } = action;
+      // 后悔栈：记录选择前状态（快速模拟不记录；最多保留 UNDO_MAX 步）
+      const undoStack = state.autoPlay
+        ? state.undoStack
+        : [...state.undoStack, {
+            game: state.game,
+            eventIndex: state.eventIndex,
+            feedback: state.feedback,
+            skippedCount: state.skippedEvents.length,
+            companionNextAge: state.companionNextAge,
+            currentEventId: state.currentEvent?.id ?? null,
+          }].slice(-UNDO_MAX);
+
       // 命运事件（第 3 周目解锁）：该事件所有选项效果 ×1.5
       const out = state.fateEventIds.includes(eventId)
         ? scaleOutcomes(choice.outcomes, FATE_MULTIPLIER)
@@ -780,8 +847,25 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
       const nextScan = findNextEvent({ ...state.game, attributes: attrs, flags }, state.eventIndex, state.shuffledEvents);
       const next = nextScan.event;
 
+      // 伴侣互动（婚后每 4 岁一次，25-61 岁）：到达互动年龄且本事件非伴侣互动 → 先播伴侣互动
+      // （不占事件数组位置：eventIndex 仍指正常事件流；下次选择从正常事件继续）
+      const playingCompanion = state.currentEvent?.id.startsWith('companion_') ?? false;
+      let companionNextAge = state.companionNextAge;
+      // 已婚启用：新获得 married flag 时初始化互动年龄（婚后第一个互动 25 岁起）
+      if (flags.includes('married') && !state.game.flags.includes('married')) {
+        companionNextAge = COMPANION_START_AGE;
+      }
+      let nextEvent = next;
+      if (next && !playingCompanion && companionEnabled(flags.includes('married'), companionNextAge) && next.age >= companionNextAge) {
+        // 到达互动年龄且本事件非伴侣互动 → 先播伴侣互动（互动选择完成后再推进下次互动年龄）
+        nextEvent = buildCompanionEvent(companionNextAge);
+      } else if (playingCompanion && companionNextAge <= COMPANION_END_AGE) {
+        // 伴侣互动选择完成：推进下次互动年龄（若已超龄则禁用）
+        companionNextAge = companionNextAge + COMPANION_INTERVAL;
+      }
+
       // 年龄由下一个事件驱动；没有下一个事件说明全部播完
-      const age = next ? next.age : state.game.age;
+      const age = nextEvent ? nextEvent.age : state.game.age;
       const stage = getStageForAge(age);
 
       // 老年衰减
@@ -863,9 +947,14 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
 
       return {
         game,
-        currentEvent: gameOver ? null : next,
+        currentEvent: gameOver ? null : nextEvent,
         feedback: fb,
-        eventIndex: next ? state.shuffledEvents.indexOf(next) : state.eventIndex,
+        // 伴侣互动不占事件数组位置：插入互动时 eventIndex 保持「插入点位置」（互动选择后
+        // 从插入点继续扫，不跳过下一个正常事件）；互动选择完成（nextEvent = 正常事件）时
+        // eventIndex 照常指向下一个正常事件
+        eventIndex: (nextEvent !== next)
+          ? state.eventIndex
+          : (next ? state.shuffledEvents.indexOf(next) : state.eventIndex),
         skippedEvents: [...state.skippedEvents, ...nextScan.skipped],
         shuffledEvents: state.shuffledEvents,
         shuffleSeed: state.shuffleSeed,
@@ -890,7 +979,26 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         seedChallenge: state.seedChallenge,
         daily: state.daily,
         family: state.family,
+        undoStack,
+        companionNextAge,
       };
+    }
+
+    case 'UNDO': {
+      // 后悔：回退上一步（栈空时原样返回）
+      if (state.undoStack.length === 0) {
+        return state;
+      }
+      return restoreUndo(state, state.undoStack[state.undoStack.length - 1]);
+    }
+
+    case 'UNDO_TO_AGE': {
+      // 后悔：回退到指定岁数（栈中最近一次 ≤ 目标岁的选择前状态）
+      const idx = findUndoEntry(state.undoStack, action.age);
+      if (idx < 0) {
+        return state;
+      }
+      return restoreUndo(state, state.undoStack[idx]);
     }
 
     case 'CONTINUE': {
@@ -921,8 +1029,12 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
       // 按存档种子还原本局事件顺序（旧版存档无种子则用默认顺序）
       const shuffleSeed = typeof saved.shuffleSeed === 'number' ? saved.shuffleSeed : 0;
       const shuffledEvents = shuffleEvents(filterEvents(EVENTS, paceMode, shuffleSeed), shuffleSeed);
+      // 伴侣互动事件不在事件数组中，按存档的互动年龄重建（旧档无字段 = 未启用）
+      const companionAge = typeof saved.companionNextAge === 'number' ? saved.companionNextAge : COMPANION_DISABLED;
       const currentEvent = saved.currentEventId
-        ? shuffledEvents.find(e => e.id === saved.currentEventId) ?? null
+        ? saved.currentEventId.startsWith('companion_')
+          ? (companionAge <= COMPANION_END_AGE ? buildCompanionEvent(companionAge) : null)
+          : shuffledEvents.find(e => e.id === saved.currentEventId) ?? null
         : null;
       const saves = { ...state.saves, active: slot, slots: [...state.saves.slots] };
       return {
@@ -957,6 +1069,9 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
     dailyStreak: state.dailyStreak,
         seedScores: state.seedScores,
         family: state.family,
+        // 后悔栈与伴侣互动进度随档恢复（旧档无字段 = 空栈/未启用）
+        undoStack: saved.undoStack ?? [],
+        companionNextAge: companionAge,
       };
     }
 
@@ -1082,6 +1197,9 @@ export function createInitialRuntime(): RuntimeState {
     seedScores: loadSeedScores(),
     // 族谱同样初始同步读取
     family: loadFamily(),
+    // 后悔栈与伴侣互动：初始为空/未启用
+    undoStack: [],
+    companionNextAge: COMPANION_DISABLED,
   };
 }
 
@@ -1247,6 +1365,16 @@ export function useGame() {
     dispatch({ type: 'MAKE_CHOICE', choice, eventId: rt.currentEvent.id });
   }, [rt.currentEvent]);
 
+  // 后悔：回退上一步（栈空时 UI 不显示按钮，此处防御性兜底）
+  const undo = useCallback(() => {
+    dispatch({ type: 'UNDO' });
+  }, []);
+
+  // 后悔：回退到指定岁数（栈中最近一次 ≤ 目标岁的选择前状态）
+  const undoToAge = useCallback((age: number) => {
+    dispatch({ type: 'UNDO_TO_AGE', age });
+  }, []);
+
   const continue_ = useCallback(() => {
     dispatch({ type: 'CONTINUE' });
   }, []);
@@ -1293,6 +1421,9 @@ export function useGame() {
     restart,
     reincarnate,
     makeChoice,
+    undo,
+    undoToAge,
+    undoStack: rt.undoStack,
     continue: continue_,
     continueGame,
     reset,

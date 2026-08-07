@@ -507,12 +507,12 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
       </div>
       </div>
 
-      {/* 开局构筑模态（天赋抽卡 + 属性分配；普通手动开局第一步）；模态放滚动层外 */}
+      {/* 开局构筑模态（天赋抽卡 + 属性分配；普通手动开局第一步）；「跳过构筑」= 无天赋无分配继续到目标选择 */}
       {showBuild && (
         <BuildModal
           inheritTalent={loadInheritTalent()}
           onConfirm={handleBuildConfirm}
-          onCancel={() => setShowBuild(false)}
+          onCancel={() => handleBuildConfirm([], {})}
         />
       )}
 

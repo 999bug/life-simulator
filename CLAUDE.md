@@ -14,8 +14,8 @@ npm run build          # tsc && vite build（生产构建）
 npm run preview        # 本地预览构建产物；dist/ 须经 HTTP 访问（preview 或部署上线），直接双击 index.html（file:// 协议）会被浏览器禁止 fetch events.json，报「事件数据加载失败」
 npm run build:events   # 重新生成 public/events.json（数据改动后必须跑）
 node --test "script/*.test.mjs"   # 数据工具测试（31 个，glob 必须带引号，裸目录形式在本机报错）
-node --experimental-strip-types --test script/engine-state.test.ts script/pace-mode.test.ts script/goals.test.ts script/save.test.ts script/use-game.test.ts script/gameplay.test.ts script/verdict.test.ts script/family.test.ts script/talents.test.ts script/life-systems.test.ts script/weekly.test.ts script/achievements.test.ts   # 引擎/档位/目标/存档/玩法/族谱/天赋/系统推导/周挑战/成就测试（152 个，Node 22 直接跑 TS；npm test 已含全部）
-npm run test:ui   # UI 组件测试（vitest + Testing Library，35 个）
+node --experimental-strip-types --test script/engine-state.test.ts script/pace-mode.test.ts script/goals.test.ts script/save.test.ts script/use-game.test.ts script/gameplay.test.ts script/verdict.test.ts script/family.test.ts script/talents.test.ts script/life-systems.test.ts script/weekly.test.ts script/achievements.test.ts script/undo.test.ts script/companion.test.ts   # 引擎/档位/目标/存档/玩法/族谱/天赋/系统推导/周挑战/成就/回退/伴侣测试（167 个，Node 22 直接跑 TS；npm test 已含全部）
+npm run test:ui   # UI 组件测试（vitest + Testing Library，46 个）
 node script/stats.mjs   # 事件数据看板（密度/分类/flag 配对/空缺报告）
 node --experimental-strip-types script/sim-balance.ts 500   # 全属性平衡审计（500 局随机模拟：归零率/享年/结局分布，忠实复刻 MAKE_CHOICE 流程）
 ```
@@ -46,6 +46,7 @@ script/chiled.json ──convert-events.mjs──▶ public/events.json
 - **state.ts**：属性/阶段元数据（ATTR_META、STAGE_META）与状态纯函数（ageCap 年龄锚点上限、effectiveDelta 收益折算、applyOutcomes 属性钳位 0-100、calcMaxAge 动态寿命、applyElderDecay 65 岁起衰减、checkDeath、calcScore）。**年龄锚点成长上限 `CAP_ANCHORS`**（如智力 7:55→18:85→30:92，锚点间线性插值）：正向收益距当前年龄上限 15 点内线性递减且不越过上限，负向全额；老年衰减下限 1（运气再好每事件也掉 1 点）。初始属性刻意偏低（健康 65/智力 25）。选项展示用 effectiveDelta 实时计算，与引擎一致。**动态寿命**：基础 68 + 平均属性/100×35（封顶 103，均衡属性 ≥77 可达 95 岁——91-95 岁事件设计为高玩可达内容）
 - **goals.ts / achievements.ts / verdict.ts**：人生目标判定（6 预设 checkGoal）、成就判定（34 个 checkAchievements，铜/银/金三档 tier 仅展示分组，4 个 hidden 隐藏成就解锁前只露问号；applyAchievementBonus 每解锁 10 成就开局全属性 +2 封顶 +6）、结局 key 纯函数（verdictKey，13 路线 flag + 5 档分数兜底；VERDICT_ROUTES 图鉴元数据表，SummaryScreen 结局标题同表查取）
 - **talents.ts**：天赋系统（20 个 4 级稀有度黑/蓝/紫/橙、互斥对、属性+点数效果；drawTalents 权重抽 10 选 3、applyTalents/applyAllocation 开局应用、talentConflict 互斥校验、loadInheritTalent/saveInheritTalent 跨世传承 localStorage）。**天赋效果只用属性不给 flag**（flag 会被结局判定消费破坏分布）
+- **undo/companion/retirement**：后悔回退（RuntimeState.undoStack ≤5 步快照：game/eventIndex/feedback/skippedCount/companionNextAge/currentEventId；UNDO 回退一步、UNDO_TO_AGE 回退到某岁，restoreUndo 重建当前事件——companion 事件不在事件数组需按互动年龄重建）；伴侣互动（companion.ts 题库 8 个 love 事件，married 后每 4 岁一次 25-61 岁插入播放流，**插入时 eventIndex 保持插入点、选择完成后才推进互动年龄**——双重推进/跳过正常事件是踩过的坑）；退休（retirement.ts：女性 55/男性 60 按性别推导，retired flag 优先）；称呼替换（utils/naming.ts：渲染层「你」→ 玩家名字，跳过 你们/你自己——纯展示不改数据）
 - **推导系统（纯函数，零存档字段）**：jobs.ts（flag→职业映射 + jobLevel 从业每 3 年 1 级）、npcs.ts（history 中 family/love/friend 分类事件正负选择 → 家人/伴侣/朋友关系值 0-100）、gaokao.ts（学业 flag → 高考结果回顾；事件链已完整，本函数只做展示）、assets.ts（投资链 flag 递进 + 财富档 → 资产组合）、weekly.ts（ISO 周号 weekOf/weekSeed → 每周挑战目标 pickWeeklyGoal + checkWeeklyGoal 终局判定）。**这些系统全部从 GameState 推导，旧存档与回看自动兼容**
 - **events.ts**：事件注册表——`EVENTS` 为 live binding（named export），`loadEvents()` 运行时 fetch `public/events.json`（main.tsx 入口 await 后才挂载 React，失败有静态兜底 DOM）；node 测试用 `setEvents(readFileSync('public/events.json'))` 注入。含 filterEvents 精简模式抽样 + shuffleEvents 同岁组洗牌（共用种子确定性重建）
 - **public/events.json**：生成物（camelCase 引擎格式：`age`/`category`/`outcomes.attr`/`outcomes.flags`/`conditions.hasFlags`），**勿手改**
@@ -77,8 +78,8 @@ script/chiled.json ──convert-events.mjs──▶ public/events.json
 ### UI（src/components/）
 
 - **GameScreen**：全屏流式布局（脱离 960×720 舞台）。场景 h-[55%] + 底部区 max-h-[45%] 恰好互补；**数值栏锚定场景区底缘（h-[55%] 容器内 flex 到底）——与底部区结构性不重叠，改动需保持此关系**；大屏限宽居中：数值栏网格 max-w-960、对话/选项/反馈内容 max-w-860；底部区含 `pb-9` 防速度按钮遮挡；右上角 ✕ 确认弹窗三选项（取消/🔄 重新开始本局/确定回标题，存档保留；快速模拟不显示重开）
-- **DialogBox**：打字机效果（速度档位 + 点击跳过）+ 「▼ 点击继续」；事件标题显示为「标题」
-- **ChoicePanel**：选项按钮（`button.group` class，effects 展示串由转换器生成）
+- **DialogBox**：打字机效果（速度档位 + 点击跳过）+ 「▼ 点击继续」；事件标题显示为「标题」；事件文本经 useName 称呼替换（「你」→ 名字）
+- **ChoicePanel**：选项按钮（`button.group` class）；**普通模式不显示效果数值**（2026-08 实测反馈：防按数值选择，选完反馈页显示精确变化），真实模式只显示 ↑/↓ 倾向箭头；选项文字 line-clamp-2 完整文本悬浮
 - **TitleScreen**：名字/性别 + **节奏档位（沉浸/精简）+ 打字速度 + 3 存档卡片 + 开局构筑（BuildModal 天赋抽卡 + 属性分配）+ 目标选择模态（GoalModal，含「🎯 自定义目标」勾选属性+滑杆设目标值 + 家族继承提示）+ 成就（AchievementsModal 铜/银/金分层 + 达成率进度条，隐藏成就 ❓）+ 人生图鉴（CollectionModal 13 结局路线收集，数据取自 stats.endings）/家族族谱（FamilyModal 跨世代收藏，行可点击回看）/生涯统计（StatsModal，含「每一世」回看列表）/玩法说明（GuideModal，首次进入自动弹出一次——`life-sim-guide-seen` 标记）入口 + 快捷入口行（⚡ 快速模拟/📅 每日挑战/🗓️ 每周挑战/📊 生涯/🏆 成就/📖 图鉴/🌳 家族/❓ 玩法/🔑 种子/🎨 主题，flex-wrap 窄屏换行）**。布局：不动层（光晕/粒子）+ 滚动层（内容 `my-auto` 居中——不溢出居中、溢出可滚动，杜绝 justify-center 对称裁切）；模态放滚动层外；**模态统一 `max-w-[92vw]` + `max-h-[min(520px,86vh)]` 防手机裁切**
 - **SummaryScreen**：结算页（享年 + 结局 + 评分 + 属性 + 职业/高考/天赋推导信息行 + 成长曲线 + 大事记 + 目标达成度 + 与身边人（npcs 三线关系值）+ 资产组合 + 天赋传承面板（本局天赋设传承）+ 新解锁成就 + 本可发生而未触发 + 分享卡片 + 传记导出 + **人生年鉴（AlmanacModal：评分/曲线/职业资产/家人/大事记速览，导出 markdown）** + 每周挑战达成展示）
 - **StatusBar/GameScreen**：属性网格上方职业/资产摘要行（jobStatus+assetStatus 推导 caption）；GameScreen 顶部每周挑战角标

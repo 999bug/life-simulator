@@ -201,3 +201,18 @@ export interface LifeDetail {
 
 /** 打字机速度档 */
 export type TypeSpeed = 'slow' | 'normal' | 'fast';
+
+/** 后悔栈条目：一次选择前的完整状态快照（GameState 不可变，引用直接复用） */
+export interface UndoEntry {
+  game: GameState;
+  /** 选择前的事件位置（恢复后 currentEvent = shuffledEvents[eventIndex]） */
+  eventIndex: number;
+  /** 选择前的反馈文本（事件页选择前恒为 null） */
+  feedback: string | null;
+  /** 选择前已跳过事件数（恢复时截断 skippedEvents） */
+  skippedCount: number;
+  /** 选择前的伴侣互动进度（回退后互动可重新触发） */
+  companionNextAge: number;
+  /** 选择前的事件 id（伴侣互动不在事件数组中，需按 id 重建） */
+  currentEventId: string | null;
+}

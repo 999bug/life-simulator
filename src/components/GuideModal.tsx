@@ -49,7 +49,7 @@ export default function GuideModal({ onClose }: Props) {
         <section>
           <h4 className="text-[13px] tracking-[3px] text-[#c9a96e] mb-1.5">🎯 选项怎么读</h4>
           <p className="text-[12px] text-white/55 leading-relaxed">
-            选项右侧的「💰+2 ⚖️-4」是这个选择对属性的影响：<span className="text-[#4ac9a0]">绿色为得</span>、<span className="text-[#e85d75]">红色为失</span>。有些选择还会埋下看不见的「标记」，在多年后开出回响事件。真实模式（多周目解锁）只显示 ↑/↓ 倾向箭头。
+            凭直觉选择就好——选项不显示数值，选完后的反馈页才告诉你这一选择带来的属性变化。有些选择还会埋下看不见的「标记」，在多年后开出回响事件。真实模式（多周目解锁）也只显示 ↑/↓ 倾向箭头。
           </p>
         </section>
 

@@ -181,8 +181,8 @@ function getVerdict(game: GameState): Verdict {
   return scoreVerdict(score);
 }
 
-/** 里程碑 flag：命中则时间线高亮（含职业 flag——职业入行即里程碑） */
-const MILESTONE_FLAGS = ['went_to_college', 'grad_school', 'top_university', 'married', 'has_child', 'doctor', 'startup_success', 'civil_servant', 'world_traveler', 'athlete_pro', 'military_flag', 'skilled_worker', 'tech_career', 'retired', ...JOB_MILESTONE_FLAGS];
+/** 里程碑 flag：命中则时间线高亮（含职业 flag——职业入行即里程碑）；关键抉择回顾共用 */
+export const MILESTONE_FLAGS = ['went_to_college', 'grad_school', 'top_university', 'married', 'has_child', 'doctor', 'startup_success', 'civil_servant', 'world_traveler', 'athlete_pro', 'military_flag', 'skilled_worker', 'tech_career', 'retired', ...JOB_MILESTONE_FLAGS];
 
 export default function SummaryScreen({ game, onRestart, newAchievements, skippedTitles, generation, seed, collectedEndings = [], isDaily = false, isWeekly = false, weeklyGoal, totalLives = 0, onReincarnate, inheritTalent = null }: Props) {
   const score = calcScore(game.attributes);

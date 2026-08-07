@@ -22,6 +22,8 @@ import AnalyticsModal from './AnalyticsModal';
 import { recapGame } from '../engine/family';
 import { VERDICT_ROUTES } from '../engine/verdict';
 import { loadInheritTalent } from '../engine/talents';
+import ChangelogModal from './ChangelogModal';
+import { CHANGELOG, LATEST_VERSION } from '../data/changelog';
 
 /** 玩法说明首访标记（localStorage key；不存在则首进自动弹出） */
 const GUIDE_SEEN_KEY = 'life-sim-guide-seen';
@@ -94,6 +96,8 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
   const [showSeed, setShowSeed] = useState(false);
   /** 数据面板（📊 数据入口弹出） */
   const [showAnalytics, setShowAnalytics] = useState(false);
+  /** 更新日志（🕓 入口 / 侧边栏「查看全部」弹出） */
+  const [showChangelog, setShowChangelog] = useState(false);
   /** 挑战开局（第 2 周目解锁）：属性整体下调 10 点 */
   const [challenge, setChallenge] = useState(false);
   /** 真实模式（第 2 周目解锁）：选项只显示属性倾向箭头，隐藏精确数值 */
@@ -166,6 +170,43 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
             }}
           />
         ))}
+      </div>
+
+      {/* 更新日志侧边栏（桌面端右缘固定，不随滚动层移动；最新 4 条 + 查看全部；窄屏隐藏由入口按钮承接） */}
+      <div className="hidden md:flex absolute right-3 top-1/2 -translate-y-1/2 z-10 w-[248px] max-h-[72vh]
+        flex-col rounded-xl border border-white/10 bg-[#15152a]/85 backdrop-blur-md p-3.5 gap-2.5">
+        <button
+          onClick={() => { sfx.select(); setShowChangelog(true); }}
+          className="flex items-baseline gap-2 hover:opacity-80 transition-opacity text-left"
+        >
+          <span className="text-[12px] tracking-[3px] text-[#c9a96e]">🕓 更新日志</span>
+          <span className="text-[9px] text-white/30">v{LATEST_VERSION} · 全部</span>
+        </button>
+        <div className="flex flex-col gap-2.5 overflow-y-auto pr-1">
+          {CHANGELOG.slice(0, 4).map(entry => (
+            <div key={entry.version} className="border-b border-white/[0.05] pb-2 last:border-0">
+              <div className="flex items-baseline gap-1.5">
+                <span className="text-[11px] font-semibold text-[#c9a96e]">v{entry.version}</span>
+                <span className="text-[9px] text-[#e8c95d]/60">{entry.title}</span>
+                <span className="text-[8px] text-white/20 ml-auto">{entry.date.slice(5)}</span>
+              </div>
+              <ul className="mt-1 flex flex-col gap-1">
+                {entry.items.slice(0, 3).map(item => (
+                  <li key={item} className="text-[10px] text-white/45 leading-relaxed list-none line-clamp-1">{item}</li>
+                ))}
+                {entry.items.length > 3 && (
+                  <li className="text-[9px] text-white/25 list-none">+{entry.items.length - 3} 条更多</li>
+                )}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <button
+          onClick={() => { sfx.select(); setShowChangelog(true); }}
+          className="text-[10px] tracking-[2px] text-white/35 hover:text-[#c9a96e] transition-colors text-center"
+        >
+          查看全部更新 ›
+        </button>
       </div>
 
       {/* 滚动层：my-auto 替代 justify-center（flex 居中溢出时会裁掉顶部且不可滚动） */}
@@ -502,6 +543,18 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
         >
           🎨 {theme === 'dark' ? '深空' : '墨黑'}
         </button>
+
+        {/* 更新日志入口（移动端/窄屏：侧边栏隐藏时的入口；也常驻可见版本号） */}
+        <button
+          onClick={() => {
+            sfx.select();
+            setShowChangelog(true);
+          }}
+          title="查看更新日志"
+          className="text-[12px] text-white/30 tracking-[3px] hover:text-[#c9a96e] transition-colors duration-200 font-sans"
+        >
+          🕓 v{LATEST_VERSION}
+        </button>
       </div>
 
       </div>
@@ -581,6 +634,11 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
       {/* 数据面板模态（📊 数据入口弹出） */}
       {showAnalytics && (
         <AnalyticsModal onClose={() => setShowAnalytics(false)} />
+      )}
+
+      {/* 更新日志模态（🕓 入口 / 侧边栏「查看全部」弹出） */}
+      {showChangelog && (
+        <ChangelogModal onClose={() => setShowChangelog(false)} />
       )}
     </div>
   );

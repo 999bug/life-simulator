@@ -28,6 +28,7 @@ npm run dev        # 启动开发服务器（端口 5173）
 - **🗓️ 每周挑战**：同一周同一局 + 一个每周目标（活到 80 岁/财富自由/学有所成…），通关即记录
 - **🔑 种子挑战**：输入好友分享的种子码，玩同一个事件序列——同样的牌，看谁打出更好的一生
 - **🎨 主题切换**：深空蓝 / 墨黑两种全局背景
+- **🕓 更新日志**：桌面右侧边栏常驻最新更新，移动端点「🕓 v0.4.0」查看全部——每次更新了什么一目了然
 - 有存档时标题页 3 张卡片**点击继续**接着玩
 
 ### 人生事件
@@ -75,7 +76,7 @@ npm run dev        # 启动开发服务器（端口 5173）
 | `npm run preview` | 预览生产构建产物 |
 | `npm run build:events` | 从 `script/chiled.json` 重新生成 `public/events.json` |
 | `npm test` | 数据工具 + 引擎测试（198 个用例） |
-| `npm run test:ui` | UI 组件测试（vitest，46 个用例） |
+| `npm run test:ui` | UI 组件测试（vitest，49 个用例） |
 | `node script/stats.mjs` | 事件数据看板（密度/分类/flag 配对/空缺报告） |
 | `node --experimental-strip-types script/sim-balance.ts 500` | 500 局平衡审计（属性归零率/享年/结局分布） |
 

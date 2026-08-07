@@ -56,9 +56,11 @@ interface Props {
   /** 全局主题（深空蓝/纯黑；切换按钮在快捷入口行） */
   theme: Theme;
   onToggleTheme: () => void;
+  /** 重置家族（清空族谱，家族底蕴归零；家族面板入口） */
+  onResetFamily: () => void;
 }
 
-export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeeklyStart, saves, onContinue, achievements, stats, daily, dailyHistory, weekly, weeklyGoal, seedScores, family, theme, onToggleTheme }: Props) {
+export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeeklyStart, saves, onContinue, achievements, stats, daily, dailyHistory, weekly, weeklyGoal, seedScores, family, theme, onToggleTheme, onResetFamily }: Props) {
   const [gender, setGender] = useState<'male' | 'female' | null>(null);
   const [name, setName] = useState('');
   const [paceMode, setPaceMode] = useState<PaceMode>('full');
@@ -596,7 +598,7 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
 
       {/* 家族族谱模态（🌳 入口弹出）；有回顾数据的代可点击回看结算页 */}
       {showFamily && (
-        <FamilyModal family={family} onRecap={setRecap} onClose={() => setShowFamily(false)} />
+        <FamilyModal family={family} onRecap={setRecap} onClose={() => setShowFamily(false)} onResetFamily={onResetFamily} />
       )}
 
       {/* 生涯统计模态（📊 入口弹出，含「每一世」回看列表） */}

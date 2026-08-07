@@ -335,6 +335,7 @@ export type Action =
   | { type: 'CONTINUE' }
   | { type: 'SET_TYPE_SPEED'; typeSpeed: TypeSpeed }
   | { type: 'RESET' }
+  | { type: 'RESET_FAMILY' }
   | { type: 'CONTINUE_GAME'; slot: number }
   | { type: 'HYDRATE_SAVES'; saves: SavesV2; achievements: AchievementStore }
   | { type: 'SAVES_UPDATED'; saves: SavesV2 }
@@ -1154,6 +1155,12 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
       return { ...rt, saves: state.saves };
     }
 
+    case 'RESET_FAMILY': {
+      // 重置家族：清空族谱（家族底蕴随之归零，下一世重新积累）
+      saveFamily([]);
+      return { ...state, family: [] };
+    }
+
     case 'CONTINUE_GAME': {
       // 从指定槽位恢复：标题页 → 存档中的游戏现场
       const { slot } = action;
@@ -1542,6 +1549,11 @@ export function useGame() {
     dispatch({ type: 'CONTINUE' });
   }, []);
 
+  // 重置家族：清空族谱（家族面板「重置家族」入口；家族底蕴随族谱归零）
+  const resetFamily = useCallback(() => {
+    dispatch({ type: 'RESET_FAMILY' });
+  }, []);
+
   const reset = useCallback(() => {
     // 埋点：中途放弃（未到结算回标题 = 流失点；结算后回标题 phase 已是 summary，不误记）
     trackAbandonIfPlaying(rt.game.phase, rt.game.age);
@@ -1593,6 +1605,7 @@ export function useGame() {
     continue: continue_,
     continueGame,
     reset,
+    resetFamily,
     setTypeSpeed,
   };
 }

@@ -1,17 +1,23 @@
+import { useState } from 'react';
 import type { AttributeKey, FamilyMember } from '../types';
 import { verdictTitle } from '../engine/verdict';
 import { ATTR_META } from '../engine/state';
 import { deriveLegacy, legacyBonuses, LEGACY_MIN_GENERATIONS } from '../engine/legacy';
+import { sfx } from '../utils/sound';
 
 interface Props {
   family: FamilyMember[];
   /** 点击某一代回看其结算页（仅有完整回顾数据的代可点击；不传则纯展示） */
   onRecap?: (member: FamilyMember) => void;
   onClose: () => void;
+  /** 重置家族（清空族谱，家族底蕴归零；带确认弹窗防误触） */
+  onResetFamily: () => void;
 }
 
 /** 家族族谱模态（标题页入口）：最新一代在上，世代线性向下追溯；有回顾数据的代可点击回看结算页 */
-export default function FamilyModal({ family, onRecap, onClose }: Props) {
+export default function FamilyModal({ family, onRecap, onClose, onResetFamily }: Props) {
+  // 重置家族确认弹窗（族谱清空不可恢复）
+  const [confirmReset, setConfirmReset] = useState(false);
   const latest = family[family.length - 1];
   // 家族底蕴（手玩代数 + 最近 5 代均值）：标题页实时推导，与开局应用同源
   const legacy = deriveLegacy(family);
@@ -76,13 +82,44 @@ export default function FamilyModal({ family, onRecap, onClose }: Props) {
             );
           })
         )}
-        <button
-          onClick={onClose}
-          className="px-8 py-2.5 rounded-[30px] text-[13px] tracking-[3px] border font-sans mx-auto mt-1
-            border-white/15 text-white/40 hover:border-[#c9a96e]/50 hover:text-[#c9a96e]"
-        >
-          关闭
-        </button>
+        <div className="flex items-center justify-center gap-2 mt-1">
+          {/* 重置家族：清空族谱（家族底蕴归零）——带确认弹窗防误触 */}
+          {family.length > 0 && !confirmReset && (
+            <button
+              onClick={() => { sfx.select(); setConfirmReset(true); }}
+              className="px-4 py-2.5 rounded-[30px] text-[11px] tracking-[2px] border font-sans
+                border-[#e85d75]/40 text-[#e85d75]/70 hover:border-[#e85d75] hover:text-[#e85d75] transition-all duration-200"
+            >
+              🗑️ 重置家族
+            </button>
+          )}
+          {confirmReset ? (
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] text-white/45">清空族谱且不可恢复？</span>
+              <button
+                onClick={() => { sfx.select(); onResetFamily(); setConfirmReset(false); onClose(); }}
+                className="px-4 py-2 rounded-[30px] text-[11px] tracking-[2px] border font-sans
+                  border-[#e85d75]/60 text-[#e85d75] bg-[#e85d75]/10 hover:bg-[#e85d75]/20"
+              >
+                确认重置
+              </button>
+              <button
+                onClick={() => { sfx.select(); setConfirmReset(false); }}
+                className="px-3 py-2 rounded-[30px] text-[11px] tracking-[2px] border font-sans border-white/15 text-white/40 hover:text-white/70"
+              >
+                取消
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={onClose}
+              className="px-8 py-2.5 rounded-[30px] text-[13px] tracking-[3px] border font-sans
+                border-white/15 text-white/40 hover:border-[#c9a96e]/50 hover:text-[#c9a96e]"
+            >
+              关闭
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

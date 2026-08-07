@@ -23,7 +23,7 @@ function loadTheme(): Theme {
 }
 
 export default function App() {
-  const { game, currentEvent, feedback, skippedEvents, autoPlay, introAuto, typeSpeed, saves, achievements, stats, newAchievements, fateEventIds, isDaily, isWeekly, weeklyGoal, daily, dailyHistory, weekly, seedScores, family, shuffleSeed, startGame, startAutoGame, startDailyGame, startWeeklyGame, restart, reincarnate, makeChoice, makeAction, skipIntro, undo, undoToAge, undoStack, continue: continue_, continueGame, reset, setTypeSpeed } = useGame();
+  const { game, currentEvent, feedback, skippedEvents, autoPlay, introAuto, typeSpeed, saves, achievements, stats, newAchievements, fateEventIds, isDaily, isWeekly, weeklyGoal, daily, dailyHistory, weekly, seedScores, family, shuffleSeed, startGame, startAutoGame, startDailyGame, startWeeklyGame, restart, reincarnate, makeChoice, makeAction, skipIntro, undo, undoToAge, undoStack, continue: continue_, continueGame, reset, resetFamily, setTypeSpeed } = useGame();
 
   // 主动行动：选择活动后触发引擎 MAKE_ACTION（结果由反馈页展示；不推进年龄、不进 history）
   const handleAction = useCallback((activityId: string) => {
@@ -70,7 +70,7 @@ export default function App() {
       <div className="w-full h-full text-white">
         {game.phase === 'title' && (
           <>
-            <TitleScreen onStart={startGame} onAutoStart={startAutoGame} onDailyStart={startDailyGame} onWeeklyStart={startWeeklyGame} saves={saves} onContinue={continueGame} achievements={achievements} stats={stats} daily={daily} dailyHistory={dailyHistory} weekly={weekly} weeklyGoal={weeklyGoal} seedScores={seedScores} family={family} theme={theme} onToggleTheme={toggleTheme} />
+            <TitleScreen onStart={startGame} onAutoStart={startAutoGame} onDailyStart={startDailyGame} onWeeklyStart={startWeeklyGame} saves={saves} onContinue={continueGame} achievements={achievements} stats={stats} daily={daily} dailyHistory={dailyHistory} weekly={weekly} weeklyGoal={weeklyGoal} seedScores={seedScores} family={family} theme={theme} onToggleTheme={toggleTheme} onResetFamily={resetFamily} />
             {/* PWA 安装引导（仅标题页；Android/Chrome 系首次访问展示一次） */}
             <InstallPrompt />
           </>

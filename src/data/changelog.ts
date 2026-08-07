@@ -15,6 +15,15 @@ export interface ChangelogEntry {
  */
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.11.0',
+    date: '2026-08-07',
+    title: '从入门到精通',
+    items: [
+      '🗺️ 路线图透明化：图鉴 16 条结局路线都写明了达成线索（已收集复盘你的路，未收集只露模糊提示不剧透）——想当医生？图鉴告诉你白衣之路怎么走',
+      '🎓 新手渐进引导：第一次见到性格徽章/打开行动面板/可用后悔时，各弹一条一次性小提示——系统再多也不迷路',
+    ],
+  },
+  {
     version: '0.10.0',
     date: '2026-08-07',
     title: '生活百味',

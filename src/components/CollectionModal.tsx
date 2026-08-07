@@ -6,7 +6,7 @@ interface Props {
   onClose: () => void;
 }
 
-/** 人生图鉴模态（标题页入口）：13 条结局路线收集册 */
+/** 人生图鉴模态（标题页入口）：16 条结局路线收集册 */
 export default function CollectionModal({ endings, onClose }: Props) {
   const done = VERDICT_ROUTES.filter(r => (endings[r.key] ?? 0) > 0).length;
   return (
@@ -26,6 +26,9 @@ export default function CollectionModal({ endings, onClose }: Props) {
                 </div>
                 <div className="text-[11px] text-white/30 mt-0.5 leading-relaxed">
                   {got ? `已达成 ${count} 次` : r.hint}
+                </div>
+                <div className="text-[10px] text-white/40 mt-0.5 leading-relaxed">
+                  {got ? r.clue : '解锁后可见达成之路'}
                 </div>
               </div>
               {got && <span className="text-[10px] text-[#c9a96e]/60 tracking-[1px]">已收集</span>}

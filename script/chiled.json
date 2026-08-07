@@ -554,6 +554,7 @@
   },
   {
     "id": "child_0103",
+    "persona": "p_buddy",
     "age_range": [
       3,
       3
@@ -1013,6 +1014,7 @@
   },
   {
     "id": "child_0042",
+    "persona": "p_mentor",
     "age_range": [
       5,
       6
@@ -1399,6 +1401,7 @@
   },
   {
     "id": "primary_0003",
+    "persona": "p_desk",
     "age_range": [
       7,
       7
@@ -1810,6 +1813,7 @@
   },
   {
     "id": "primary_0043",
+    "persona": "p_desk",
     "age_range": [
       8,
       8
@@ -2711,6 +2715,7 @@
   },
   {
     "id": "primary_0117",
+    "persona": "p_desk",
     "age_range": [
       10,
       10
@@ -2973,6 +2978,7 @@
   },
   {
     "id": "child_08",
+    "persona": "p_buddy",
     "age_range": [
       10,
       11
@@ -3037,6 +3043,7 @@
   },
   {
     "id": "primary_0146",
+    "persona": "p_crush",
     "age_range": [
       11,
       11
@@ -3370,6 +3377,7 @@
   },
   {
     "id": "primary_0186",
+    "persona": "p_buddy",
     "age_range": [
       12,
       12
@@ -4000,6 +4008,7 @@
   },
   {
     "id": "teen_08",
+    "persona": "p_buddy",
     "age_range": [
       13,
       14
@@ -4099,6 +4108,7 @@
   },
   {
     "id": "teen_10",
+    "persona": "p_sidekick",
     "age_range": [
       13,
       14
@@ -4349,6 +4359,7 @@
   },
   {
     "id": "teen_03",
+    "persona": "p_crush",
     "age_range": [
       14,
       15
@@ -4396,6 +4407,7 @@
   },
   {
     "id": "teen_04",
+    "persona": "p_crush",
     "age_range": [
       14,
       15
@@ -4431,6 +4443,7 @@
   },
   {
     "id": "teen_12",
+    "persona": "p_best",
     "age_range": [
       14,
       15
@@ -4472,6 +4485,7 @@
   },
   {
     "id": "teen_13",
+    "persona": "p_desk",
     "age_range": [
       14,
       15
@@ -4880,6 +4894,7 @@
   },
   {
     "id": "teen_16",
+    "persona": "p_crush",
     "age_range": [
       15,
       16
@@ -4930,6 +4945,7 @@
   },
   {
     "id": "teen_17",
+    "persona": "p_best",
     "age_range": [
       15,
       16
@@ -5533,6 +5549,7 @@
   },
   {
     "id": "teen_07",
+    "persona": "p_mentor",
     "age_range": [
       17,
       18
@@ -5641,6 +5658,7 @@
   },
   {
     "id": "teen_23",
+    "persona": "p_best",
     "age_range": [
       17,
       18
@@ -5991,6 +6009,7 @@
   },
   {
     "id": "young_19",
+    "persona": "p_best",
     "age_range": [
       18,
       19
@@ -6584,6 +6603,7 @@
   },
   {
     "id": "young_62",
+    "persona": "p_mentor",
     "age_range": [
       20,
       20
@@ -7202,6 +7222,7 @@
   },
   {
     "id": "young_29",
+    "persona": "p_sidekick",
     "age_range": [
       21,
       22
@@ -8666,6 +8687,7 @@
   },
   {
     "id": "young_0036",
+    "persona": "p_sidekick",
     "age_range": [
       25,
       25
@@ -11783,6 +11805,7 @@
   },
   {
     "id": "adult_26",
+    "persona": "p_mentor",
     "age_range": [
       33,
       33
@@ -13944,6 +13967,7 @@
   },
   {
     "id": "adult_50",
+    "persona": "p_sidekick",
     "age_range": [
       38,
       38
@@ -25178,6 +25202,49 @@
     }
   },
   {
+    "id": "egg_0001",
+    "age_range": [
+      66,
+      66
+    ],
+    "category": "friend",
+    "title": "广场舞 C 位之争",
+    "text": "小区广场舞团为 C 位的事闹得不可开交，不知怎么的，你被推举成了「编外顾问」。队形图昨晚改到第十一版，团长放话：再不定下来，集体改跳交谊舞。你捏着打印出来的站位表，恍惚觉得这是人生最后一次项目会。",
+    "choices": [
+      {
+        "text": "亲自下场示范——让阿姨们见识见识什么叫专业站姿",
+        "effects": {
+          "fun": 5,
+          "health": 4,
+          "social": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "连夜画一张 C 位轮值表——公平，是广场舞的底线",
+        "effects": {
+          "patience": 5,
+          "intelligence": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "当和事佬：挨个夸，夸到大家不好意思争为止",
+        "effects": {
+          "social": 6,
+          "happiness": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
     "id": "elder_19",
     "age_range": [
       67,
@@ -25776,6 +25843,49 @@
       "has_flags": [
         "tech_savvy"
       ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "egg_0002",
+    "age_range": [
+      68,
+      68
+    ],
+    "category": "friend",
+    "title": "老同学群里斗图",
+    "text": "沉寂多年的老同学群突然热闹起来——有人在斗图。你本只想围观，老张却甩出一张你的黑历史照片。你翻箱倒柜找出压箱底的老照片：烫坏的卷发、过时的喇叭裤。自己先笑了半天，然后默默保存图片，准备参战。",
+    "choices": [
+      {
+        "text": "精心挑一张压箱底照片——三十年磨一剑，就等今天",
+        "effects": {
+          "fun": 5,
+          "social": 4,
+          "memory": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "给照片编一句配文——照片是旧的，梗是新的",
+        "effects": {
+          "entertainment": 4,
+          "intelligence": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "潜水围观——笑到表情管理失控，也绝不出手",
+        "effects": {
+          "happiness": 5,
+          "patience": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
       "not_flags": [],
       "min_attrs": {},
       "max_attrs": {}
@@ -27449,6 +27559,48 @@
         "personality": [
           "rational"
         ]
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "egg_0003",
+    "age_range": [
+      73,
+      73
+    ],
+    "category": "finance",
+    "title": "彩票中了五块",
+    "text": "路过彩票店，你随手买了一张，没当回事。开奖那晚你戴上老花镜，把号码对了一遍又一遍——中了，整整五块！你认真研究了兑奖流程，又搜索「五块离头奖还有多远」。老伴笑你捡了芝麻，你说：梦想总要有的，万一呢。",
+    "choices": [
+      {
+        "text": "把五块再买一张——搏一搏，单车变摩托",
+        "effects": {
+          "fun": 5,
+          "money": -5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把五块存进存钱罐，当作人生第一桶金的起点",
+        "effects": {
+          "patience": 4,
+          "money": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "请老伴吃根冰棍——独乐乐不如众乐乐",
+        "effects": {
+          "happiness": 5,
+          "relationship": 4
+        },
+        "flags_add": []
       }
     ],
     "conditions": {

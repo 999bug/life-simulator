@@ -13,6 +13,7 @@ import { track } from '../utils/analytics';
 import { VERDICT_META, nextRouteToExplore, verdictKey } from '../engine/verdict';
 import { jobStatus, JOB_MILESTONE_FLAGS } from '../engine/jobs';
 import { npcBonds, BOND_META } from '../engine/npcs';
+import { personaBonds as derivePersonaBonds, personaRelationText, PERSONAS } from '../engine/personas';
 import { gaokaoResult } from '../engine/gaokao';
 import { assetStatus } from '../engine/assets';
 import { getTalent, saveInheritTalent, type TalentInherit } from '../engine/talents';
@@ -306,9 +307,15 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
   const score = calcScore(game.attributes);
   const { title, desc } = getVerdict(game);
   const goal = checkGoal(game.goal, game);
-  // 本局推导信息：职业 / 家人关系 / 高考结果 / 资产 / 性格画像（纯函数，旧存档兼容）
+  // 本局推导信息：职业 / 家人关系 / 高考结果 / 资产 / 性格画像 / 具体人物好感（纯函数，旧存档兼容）
   const job = jobStatus(game);
   const bonds = npcBonds(game);
+  // 具体人物好感度（6 位人生关键人物；只展示有互动记录的人物）
+  const personaBondMap = useMemo(() => derivePersonaBonds(game.history), [game.history]);
+  const activePersonas = useMemo(() => {
+    const seen = new Set(game.history.map(h => h.eventId));
+    return PERSONAS.filter(def => def.events.some(id => seen.has(id)));
+  }, [game.history]);
   const gaokao = gaokaoResult(game);
   const assets = assetStatus(game);
   const persona = derivePersona(game.history);
@@ -511,6 +518,33 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
           })}
         </div>
       </div>
+
+      {/* 人生过客（具体人物：好感度推导自本局该人物出场事件中的取舍；无互动记录不展示） */}
+      {activePersonas.length > 0 && (
+        <div className="w-full max-w-[720px] animate-[fadeInUp_1.15s_ease]">
+          <h3 className="text-[13px] tracking-[4px] text-[#c9a96e] mb-2.5 font-normal">🧑‍🤝‍🧑 人生过客</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            {activePersonas.map(def => {
+              const v = personaBondMap[def.id];
+              return (
+                <div key={def.id} className="flex items-center gap-2.5 rounded-md bg-white/5 px-2.5 py-2 text-[11px]"
+                  title={`${def.role} · 好感 ${v}`}>
+                  <span className="text-[15px] shrink-0" style={{ filter: 'drop-shadow(0 0 6px rgba(0,0,0,0.4))' }}>{def.icon}</span>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-baseline justify-between gap-1">
+                      <span className="text-white/85 truncate">{def.name}</span>
+                      <span className={`font-semibold shrink-0 ${v >= 80 ? 'text-[#5de8a0]' : v >= 60 ? 'text-white/90' : v >= 40 ? 'text-[#e8d25d]' : 'text-[#e87d75]'}`}>
+                        {v}
+                      </span>
+                    </div>
+                    <div className="text-white/40 truncate">{personaRelationText(v)}</div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* 性格画像（推导自本局全部选择：3 维 6 端累积；弱画像只显示概括句） */}
       <div className="w-full max-w-[720px] animate-[fadeInUp_1.2s_ease]">

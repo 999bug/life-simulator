@@ -195,6 +195,10 @@ function validateRaw(raw) {
       throw new Error(`invalid personality in event ${raw.id}: ${JSON.stringify(tags)}`);
     }
   }
+  // 人物标注：可选，必须为非空字符串（写错即抛错，防静默失效）
+  if (raw.persona !== undefined && (typeof raw.persona !== 'string' || raw.persona === '')) {
+    throw new Error(`invalid persona in event ${raw.id}: ${JSON.stringify(raw.persona)}`);
+  }
 }
 
 /**
@@ -230,6 +234,10 @@ export function convertEvent(raw) {
       return choice;
     }),
   };
+  // 人物标注透传（事件级：该事件是关于哪位人生关键人物的）
+  if (raw.persona) {
+    event.persona = raw.persona;
+  }
   const conditions = mapConditions(raw.conditions, raw.id);
   if (conditions) {
     event.conditions = conditions;

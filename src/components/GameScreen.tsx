@@ -22,6 +22,7 @@ import type { WeeklyGoal } from '../engine/weekly';
 import { EVENTS } from '../engine/events';
 import { derivePersona, PERSONA_META, traitForOutcome } from '../engine/personality';
 import { personaBonds } from '../engine/personas';
+import FirstTips, { requestTip } from './FirstTips';
 
 /** 选项效果主属性（绝对值最大）→ 背景色调，让每个选项的选择有视觉反馈 */
 function pickAttrTint(choice: Choice): string | null {
@@ -88,6 +89,10 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
   const [showPersona, setShowPersona] = useState(false);
   // 最近选择选项的主属性色调（反馈页期间叠加在场景上，继续后清除）
   const [tint, setTint] = useState<string | null>(null);
+  // 新手渐进提示：当前激活的提示位（null 无提示；首次遇到某系统时激活一次，见下方三个触发点）
+  const [activeTip, setActiveTip] = useState<string | null>(null);
+  // 后悔按钮「首次出现」标记（栈从空变非空只检测一次；requestTip 另有全局防重复）
+  const undoShownRef = useRef(false);
   // 职业/资产/退休摘要（状态栏一行展示；纯函数推导，无职业时为空）
   const statusCaption = useMemo(() => {
     const job = jobStatus(game);
@@ -120,6 +125,11 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
     const ch = ev?.choices[last.choiceIndex];
     return ch ? traitForOutcome(ch.outcomes.attr, ch.outcomes.flags, ch.outcomes.personality) : [];
   }, [game.history]);
+  // 当前事件选项是否含性格徽章（任一选项 traitForOutcome 非空；ChoicePanel 会渲染徽章）
+  const hasTraitBadges = useMemo(
+    () => currentEvent?.choices.some(ch => traitForOutcome(ch.outcomes.attr, ch.outcomes.flags, ch.outcomes.personality).length > 0) ?? false,
+    [currentEvent],
+  );
   // 性格画像：从选择历史推导（3 维 6 端累积；纯推导，undo/旧存档自动兼容）
   const persona = useMemo(() => derivePersona(game.history), [game.history]);
   // 已出场人物（好感 ≠ 50 = 在历史中互动过；requiresPersona 活动在 ActionModal 判定可用性）
@@ -182,6 +192,30 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
     startBgm(game.stage);
     return () => stopBgm();
   }, [game.stage]);
+
+  // 新手提示 1：首次见到性格徽章（选择面板可见且当前事件选项含徽章，非快速模拟）时引导一次
+  useEffect(() => {
+    if (showChoices && !autoPlay && hasTraitBadges && requestTip('persona_badge')) {
+      setActiveTip('persona_badge');
+    }
+  }, [showChoices, autoPlay, hasTraitBadges]);
+
+  // 新手提示 2：首次打开主动行动面板时引导一次
+  useEffect(() => {
+    if (showActions && !autoPlay && requestTip('actions')) {
+      setActiveTip('actions');
+    }
+  }, [showActions, autoPlay]);
+
+  // 新手提示 3：后悔按钮首次出现（栈非空且非快速模拟）时引导一次
+  useEffect(() => {
+    if (!autoPlay && undoStack.length > 0 && !undoShownRef.current) {
+      undoShownRef.current = true;
+      if (requestTip('undo')) {
+        setActiveTip('undo');
+      }
+    }
+  }, [autoPlay, undoStack.length]);
 
   // 反馈页面
   if (feedback) {
@@ -477,6 +511,9 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
           </button>
         </div>
       )}
+
+      {/* 新手渐进提示（底部居中胶囊，速度按钮上方；3 秒自动消失/点击关闭） */}
+      <FirstTips tip={activeTip} onClose={() => setActiveTip(null)} />
     </div>
   );
 }

@@ -11,7 +11,7 @@ export interface VerdictRoute {
 }
 
 /**
- * 14 条人生路线图鉴（按结局判定优先级排序）。
+ * 16 条人生路线图鉴（按结局判定优先级排序）。
  * title 与 SummaryScreen 结局页标题共用此表，避免两处文案漂移。
  */
 export const VERDICT_ROUTES: VerdictRoute[] = [
@@ -25,6 +25,9 @@ export const VERDICT_ROUTES: VerdictRoute[] = [
   { key: 'athlete_pro', icon: '🏅', title: '赛场传奇', hint: '走上职业运动员之路' },
   { key: 'artist', icon: '🎨', title: '艺术人生', hint: '把艺术热爱变成职业' },
   { key: 'tech_career', icon: '💻', title: '技术精英的一生', hint: '投身科技行业' },
+  // 灰色路线极端结局：比「铁窗人生」更显眼（越狱成功比坐牢更「高成就」），故排在 jailed 之前
+  { key: 'escaped', icon: '🏃', title: '亡命天涯', hint: '越狱成功，从此隐姓埋名' },
+  { key: 'gang_boss', icon: '👑', title: '黑道风云', hint: '江湖上留下你的名号' },
   { key: 'jailed', icon: '🔒', title: '铁窗人生', hint: '灰色生意东窗事发，高墙内度过人生' },
   { key: 'went_to_college', icon: '📚', title: '知识改变命运的一生', hint: '考上大学' },
   { key: 'skilled_worker', icon: '🔧', title: '匠心人生', hint: '学一门手艺安身' },
@@ -52,7 +55,7 @@ export function nextRouteToExplore(currentKey: string, collected: ReadonlySet<st
   const idx = VERDICT_ROUTES.findIndex(r => r.key === currentKey);
   // 起点：当前之后一条（跳过自己）；分数档从第一条开始
   const start = idx < 0 ? 0 : (idx + 1) % VERDICT_ROUTES.length;
-  // 步数：路线结局查 len-1 条（不含自己）；分数档查全 14 条
+  // 步数：路线结局查 len-1 条（不含自己）；分数档查全 16 条
   const steps = idx < 0 ? VERDICT_ROUTES.length : VERDICT_ROUTES.length - 1;
   for (let i = 0; i < steps; i++) {
     const r = VERDICT_ROUTES[(start + i) % VERDICT_ROUTES.length];
@@ -95,6 +98,8 @@ export function verdictKey(game: GameState): string {
     ['athlete_pro', ['athlete_pro']],
     ['artist', ['artist_pro', 'artist_life']],
     ['tech_career', ['tech_career']],
+    ['escaped', ['escaped']],
+    ['gang_boss', ['gang_boss']],
     ['jailed', ['jailed']],
     ['went_to_college', ['went_to_college']],
     ['skilled_worker', ['skilled_worker']],

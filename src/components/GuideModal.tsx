@@ -67,7 +67,7 @@ export default function GuideModal({ onClose }: Props) {
             <li>· 3 个自动存档槽，随时退出随时继续</li>
             <li>· 走完的每一生都写入家族族谱，下一代继承上一世的际遇</li>
             <li>· 多周目逐步解锁：挑战开局、真实模式、命运事件、传承加成</li>
-            <li>· 39 个成就、14 条结局路线图鉴等你收集</li>
+            <li>· 41 个成就、16 条结局路线图鉴等你收集</li>
           </ul>
         </section>
 

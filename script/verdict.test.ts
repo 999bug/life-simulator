@@ -1,5 +1,5 @@
 /**
- * 结局 key 判定引擎测试（verdictKey：14 路线 flag 优先 + 5 档分数兜底）。
+ * 结局 key 判定引擎测试（verdictKey：16 路线 flag 优先 + 5 档分数兜底）。
  *
  * 运行：node --experimental-strip-types --test script/verdict.test.ts
  */
@@ -18,7 +18,7 @@ function game(flags: string[], attrsVal: number = 50): GameState {
   };
 }
 
-test('verdictKey：14 条路线 flag 命中（单 flag）', () => {
+test('verdictKey：16 条路线 flag 命中（单 flag）', () => {
   assert.strictEqual(verdictKey(game(['startup_success'])), 'startup_success');
   assert.strictEqual(verdictKey(game(['world_traveler'])), 'world_traveler');
   assert.strictEqual(verdictKey(game(['grad_school'])), 'grad_school');
@@ -28,10 +28,24 @@ test('verdictKey：14 条路线 flag 命中（单 flag）', () => {
   assert.strictEqual(verdictKey(game(['military_flag'])), 'military_flag');
   assert.strictEqual(verdictKey(game(['athlete_pro'])), 'athlete_pro');
   assert.strictEqual(verdictKey(game(['tech_career'])), 'tech_career');
+  assert.strictEqual(verdictKey(game(['escaped'])), 'escaped');
+  assert.strictEqual(verdictKey(game(['gang_boss'])), 'gang_boss');
   assert.strictEqual(verdictKey(game(['jailed'])), 'jailed');
   assert.strictEqual(verdictKey(game(['went_to_college'])), 'went_to_college');
   assert.strictEqual(verdictKey(game(['skilled_worker'])), 'skilled_worker');
   assert.strictEqual(verdictKey(game(['civil_servant'])), 'civil_servant');
+});
+
+test('verdictKey：灰色路线极端结局优先于铁窗人生（escaped/gang_boss 排在 jailed 之前）', () => {
+  // 入狱 + 越狱成功 → 亡命天涯（越狱成功比坐牢更「高成就」）
+  assert.strictEqual(verdictKey(game(['jailed', 'escaped'])), 'escaped');
+  // 入狱 + 黑帮上位 → 黑道风云
+  assert.strictEqual(verdictKey(game(['jailed', 'gang_boss'])), 'gang_boss');
+  // 越狱成功 + 黑帮上位 → 亡命天涯（escaped 在 gang_boss 之前）
+  assert.strictEqual(verdictKey(game(['gang_boss', 'escaped'])), 'escaped');
+  // 高成就路线仍优先于灰色路线极端结局
+  assert.strictEqual(verdictKey(game(['startup_success', 'escaped'])), 'startup_success');
+  assert.strictEqual(verdictKey(game(['tech_career', 'gang_boss'])), 'tech_career');
 });
 
 test('verdictKey：入过狱即铁窗人生（jailed 判定，与是否出狱无关）', () => {

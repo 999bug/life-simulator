@@ -143,6 +143,24 @@ test('checkAchievements：改过自新（入狱出狱 + 道德幸福达标）', 
   assert.ok(!check(game({ flags: ['released'], attributes: attrs({ morality: 80, happiness: 80 }) })).includes('redeemed_life'));
 });
 
+test('checkAchievements：亡命天涯（越狱成功）', () => {
+  // 越狱成功 → 解锁
+  assert.ok(check(game({ flags: ['escaped'] })).includes('fugitive'));
+  // 仅入狱未越狱 → 不解锁
+  assert.ok(!check(game({ flags: ['jailed'] })).includes('fugitive'));
+  // 黑帮上位不触发本成就（防御性）
+  assert.ok(!check(game({ flags: ['gang_boss'] })).includes('fugitive'));
+});
+
+test('checkAchievements：黑道风云（黑帮上位）', () => {
+  // 黑帮上位 → 解锁
+  assert.ok(check(game({ flags: ['gang_boss'] })).includes('gang_lord'));
+  // 无 flag → 不解锁（防御性）
+  assert.ok(!check(game({ flags: [] })).includes('gang_lord'));
+  // 越狱成功不触发本成就（防御性）
+  assert.ok(!check(game({ flags: ['escaped'] })).includes('gang_lord'));
+});
+
 test('achievementBonusSteps：每 10 个 +1 步，封顶 3 步', () => {
   assert.strictEqual(achievementBonusSteps(0), 0);
   assert.strictEqual(achievementBonusSteps(9), 0);

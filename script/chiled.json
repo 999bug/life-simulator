@@ -10877,6 +10877,64 @@
     }
   },
   {
+    "id": "gang_0001",
+    "age_range": [
+      30,
+      30
+    ],
+    "category": "friend",
+    "title": "入伙",
+    "text": "夜市大排档，啤酒瓶堆了半桌，烤串的烟熏得霓虹灯发糊。灰色生意做了两年，道上的朋友越来越多。今天大哥亲自来请你喝酒，把一杯白酒推到你面前：「脑子活、手又快，跟着我干，一个月顶你摆一年摊。」他笑得和善，眼睛却像秤一样打量着你。",
+    "choices": [
+      {
+        "text": "端起那杯酒，认了这个大哥",
+        "effects": {
+          "social": 7,
+          "money": 8,
+          "empathy": -8
+        },
+        "flags_add": [
+          "gang_member"
+        ],
+        "personality": [
+          "adventurous"
+        ]
+      },
+      {
+        "text": "说自己上有老下有小，敬了酒，没接话",
+        "effects": {
+          "responsibility": 6,
+          "patience": 4
+        },
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
+      },
+      {
+        "text": "干了这杯，心里却盘算着：只赚快钱，不沾血",
+        "effects": {
+          "strategy": 6,
+          "risk": 6
+        },
+        "flags_add": [
+          "gang_member"
+        ],
+        "personality": [
+          "rational"
+        ]
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "gray_deal"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
     "id": "adult_01",
     "age_range": [
       30,
@@ -11393,6 +11451,54 @@
     }
   },
   {
+    "id": "gang_0002",
+    "age_range": [
+      31,
+      31
+    ],
+    "category": "career",
+    "title": "看场子",
+    "text": "你的第一件「差事」是看场子。凌晨两点的 KTV 门口，一辆面包车停了下来，下来四个人，手里都拎着家伙。大哥在电话里说：「别怂，站直了，出了事我兜着。」你摸了摸口袋里那把折叠刀，心跳如擂鼓。路灯下，向这边走来的脚步声越来越近。",
+    "choices": [
+      {
+        "text": "拎起酒瓶迎上去，气势不能输",
+        "effects": {
+          "courage": 7,
+          "risk": 6,
+          "happiness": -3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "打电话摇人，跟兄弟们前后包抄",
+        "effects": {
+          "social": 6,
+          "strategy": 5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "站在暗处先看动静，能不动手就不动手",
+        "effects": {
+          "self_control": 6,
+          "risk": -4
+        },
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "gang_member"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
     "id": "adult_22",
     "age_range": [
       32,
@@ -11744,6 +11850,55 @@
     "conditions": {
       "has_flags": [
         "gray_deal"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "gang_0003",
+    "age_range": [
+      32,
+      32
+    ],
+    "category": "finance",
+    "title": "收账",
+    "text": "大哥把一沓账单拍在桌上：「这条街的保护费，今天必须收齐。」你敲开第一家店，老板娘脸色煞白，从收银台里数出一把皱巴巴的票子。第二家，门帘一掀，后厨冲出来两个拎菜刀的汉子，堵在门口。街上的人都在看，没有人敢吱声。",
+    "choices": [
+      {
+        "text": "收钱走人，一句废话不多说",
+        "effects": {
+          "money": 8,
+          "empathy": -6,
+          "discipline": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "跟硬茬比划比划，今天必须立威",
+        "effects": {
+          "courage": 8,
+          "risk": 9,
+          "happiness": -5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把话带回去：这家老板说下个月补上",
+        "effects": {
+          "empathy": 6,
+          "money": -5
+        },
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "gang_member"
       ],
       "not_flags": [],
       "min_attrs": {},
@@ -12214,6 +12369,60 @@
     "conditions": {
       "has_flags": [
         "investor"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "gang_0004",
+    "age_range": [
+      33,
+      33
+    ],
+    "category": "career",
+    "title": "上位",
+    "text": "包厢里，大哥把一沓钱推到你面前，又推过来一杯酒：「这半年你办事利索，我看好你。以后这条线归你带，场子里的兄弟听你的。」旁边有人皮笑肉不笑：「哟，升得真快。」包厢的灯很亮，亮得看不清谁在笑，只有酒气一层层地漫上来。",
+    "choices": [
+      {
+        "text": "站起来敬大哥一杯，接下这条线",
+        "effects": {
+          "money": 12,
+          "social": 8,
+          "empathy": -10
+        },
+        "flags_add": [
+          "gang_boss"
+        ],
+        "personality": [
+          "selfish"
+        ]
+      },
+      {
+        "text": "谢过大哥，还是想跟在老哥身边再学两年",
+        "effects": {
+          "loyalty": 8,
+          "strategy": 4,
+          "money": -3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "借着酒劲推脱：我不是当头的料",
+        "effects": {
+          "patience": 5,
+          "social": -4
+        },
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "gang_member"
       ],
       "not_flags": [],
       "min_attrs": {},
@@ -14942,7 +15151,9 @@
           "risk": 6,
           "empathy": -6
         },
-        "flags_add": [],
+        "flags_add": [
+          "escape_plan"
+        ],
         "personality": [
           "selfish"
         ]
@@ -16256,6 +16467,65 @@
     }
   },
   {
+    "id": "pesc_0001",
+    "age_range": [
+      42,
+      42
+    ],
+    "category": "personality",
+    "title": "越狱计划",
+    "text": "雨下了整整三天，哨塔的探照灯像一只巨大的眼睛，扫过铁丝网时把水珠照得发亮。白天劳动时，你偷偷比划过东墙根那段锈蚀的铁丝网——老江湖说，管教每逢雨天都要去东边库房躲雨。夜里你躺在床上，把墙高、灯转一圈的时间、铁丝网的破口，在脑子里过了一遍又一遍，直到天亮。",
+    "choices": [
+      {
+        "text": "把磨尖的铁片和旧床单藏进被褥夹层，随时准备动手",
+        "effects": {
+          "strategy": 8,
+          "risk": 10,
+          "happiness": -5
+        },
+        "flags_add": [
+          "escape_attempt"
+        ],
+        "personality": [
+          "adventurous"
+        ]
+      },
+      {
+        "text": "摸清岗哨换班规律，在心里画下一张墙内地图",
+        "effects": {
+          "observation": 7,
+          "thinking": 6
+        },
+        "flags_add": [
+          "escape_attempt"
+        ],
+        "personality": [
+          "rational"
+        ]
+      },
+      {
+        "text": "算了。两年刑期，熬一熬也就过去了",
+        "effects": {
+          "patience": 6,
+          "happiness": -2
+        },
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "jailed",
+        "escape_plan"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
     "id": "adult_09",
     "age_range": [
       42,
@@ -17101,6 +17371,62 @@
     "conditions": {
       "has_flags": [
         "coding_early"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "pesc_0002",
+    "age_range": [
+      44,
+      44
+    ],
+    "category": "personality",
+    "title": "越狱之夜",
+    "text": "雨下到后半夜，正是动手的时候。铁丝网顶端的铁刺在探照灯扫过的一瞬泛出冷光，你数着秒——灯转过去，有整整四十七秒的黑暗。墙角堆着你备好的旧床单，后背全是冷汗，你听见自己的心跳声比雨声还响。墙的那一边，是黑沉沉、湿漉漉的自由。",
+    "choices": [
+      {
+        "text": "抓住那四十七秒的黑暗，把床单甩上铁丝网，翻过去",
+        "effects": {
+          "risk": 12,
+          "luck": 8,
+          "happiness": 8
+        },
+        "flags_add": [
+          "escaped"
+        ],
+        "personality": [
+          "adventurous"
+        ]
+      },
+      {
+        "text": "刚爬上墙头，探照灯就劈头盖脸照了过来——关禁闭，加刑两年",
+        "effects": {
+          "happiness": -12,
+          "risk": 6
+        },
+        "flags_add": [
+          "caught_again"
+        ]
+      },
+      {
+        "text": "最后一刻退缩了。你攥着床单蹲在墙根，把计划烂进肚子里",
+        "effects": {
+          "patience": 5,
+          "risk": -6
+        },
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "jailed",
+        "escape_attempt"
       ],
       "not_flags": [],
       "min_attrs": {},
@@ -17988,6 +18314,56 @@
     }
   },
   {
+    "id": "pesc_0003",
+    "age_range": [
+      46,
+      46
+    ],
+    "category": "career",
+    "title": "逃亡生活",
+    "text": "出逃后的日子像影子一样薄。你在城中村的出租屋里醒来，胡子留了起来，名字换过三个，白天不敢出门，晚上去菜市场后街帮人卸货。工头从不多问，这条街上的规矩就是谁也不问谁。只是每个深夜，你都会把那张假身份证拿出来看一遍——那是另一个人的名字了。",
+    "choices": [
+      {
+        "text": "改名换姓，租进城中村最乱的巷子，把自己沉进市井里",
+        "effects": {
+          "freedom": 8,
+          "independence": 6,
+          "happiness": -5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "连夜扒上一辆长途货车，往边境的方向跑",
+        "effects": {
+          "risk": 10,
+          "money": -8,
+          "happiness": -4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "实在忍不住，趁天黑悄悄回老家巷口看一眼",
+        "effects": {
+          "family_relation": 6,
+          "risk": 8,
+          "empathy": 4
+        },
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "escaped"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
     "id": "adult_11",
     "age_range": [
       46,
@@ -18798,6 +19174,56 @@
     }
   },
   {
+    "id": "pesc_0004",
+    "age_range": [
+      48,
+      48
+    ],
+    "category": "personality",
+    "title": "身份危机",
+    "text": "菜市场后街，一个收保护费的地头蛇忽然盯着你看了半天：「哥们儿，面熟啊。」你后背一凉——那是你入狱前打过照面的熟人。街角小饭馆的墙上，贴着你的照片，已经泛黄卷边了。天又下起雨，你低着头从他面前走过去，心跳得几乎要蹦出喉咙。",
+    "choices": [
+      {
+        "text": "连夜转移，把这一片扔在身后，永远不再回来",
+        "effects": {
+          "risk": 8,
+          "freedom": 5,
+          "happiness": -4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "去黑市打零工，换个没人认得你的圈子",
+        "effects": {
+          "money": 8,
+          "risk": 8,
+          "empathy": -5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "赌一把，联系当年最铁的旧友，试探口风",
+        "effects": {
+          "friendship": 6,
+          "risk": 10,
+          "empathy": 3
+        },
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "escaped"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
     "id": "adult_12",
     "age_range": [
       48,
@@ -19256,6 +19682,61 @@
     }
   },
   {
+    "id": "gang_0005",
+    "age_range": [
+      49,
+      49
+    ],
+    "category": "personality",
+    "title": "火并危机",
+    "text": "对家放话要端你的场子，警方的摸底风声也一天紧过一天。夜里你收到两条消息：一条是线人报信「明晚有行动」，一条是跟了你八年的小弟发来的——「大哥，我想回老家。」桌上那把砍刀，刀柄被旧茧磨出了包浆。你盯着刀身，灯光在上面滑过一道冷光。",
+    "choices": [
+      {
+        "text": "先下手为强，今晚就做掉对家的头目",
+        "effects": {
+          "risk": 14,
+          "empathy": -14,
+          "happiness": -8,
+          "money": 8
+        },
+        "flags_add": [
+          "jailed"
+        ],
+        "personality": [
+          "selfish"
+        ]
+      },
+      {
+        "text": "连夜把货和账本处理干净，金蝉脱壳",
+        "effects": {
+          "strategy": 10,
+          "freedom": 6,
+          "money": -8
+        },
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
+      },
+      {
+        "text": "稳住小弟，主动跟警方谈条件，换个干净身份",
+        "effects": {
+          "responsibility": 8,
+          "risk": 6
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "gang_member"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
     "id": "echo_0022",
     "age_range": [
       50,
@@ -19356,6 +19837,58 @@
     ],
     "conditions": {
       "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "pesc_0005",
+    "age_range": [
+      50,
+      50
+    ],
+    "category": "family",
+    "title": "逃亡终局",
+    "text": "五年了。你数着日子活，镜子里的脸陌生得连自己都不敢认。那天深夜，你收到一张照片：老家的巷子拆了一半，母亲坐在搬家三轮车上，头发全白了。你盯着照片看了一整夜。窗外路灯亮了又灭，你忽然明白，有些路，走出去就再也回不去了。",
+    "choices": [
+      {
+        "text": "彻底隐姓埋名，去一个人不认识的地方，过完余生",
+        "effects": {
+          "freedom": 8,
+          "stability": 6,
+          "happiness": -5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "回去自首。该还的，躲了五年也该还了",
+        "effects": {
+          "responsibility": 12,
+          "happiness": -8
+        },
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
+      },
+      {
+        "text": "再赌最后一次：换个身份，往最远的城市走",
+        "effects": {
+          "risk": 12,
+          "luck": 6,
+          "happiness": -3
+        },
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "escaped"
+      ],
       "not_flags": [],
       "min_attrs": {},
       "max_attrs": {}
@@ -19811,6 +20344,62 @@
     ],
     "conditions": {
       "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "gang_0006",
+    "age_range": [
+      51,
+      51
+    ],
+    "category": "personality",
+    "title": "金盆洗手",
+    "text": "五十岁生日，大哥在酒楼摆了两桌。酒过三巡，他看着你说：「干我们这行的，五十岁还能坐在这儿喝酒，是命硬。」窗外霓虹闪烁，你看着杯里的酒，想起这些年见过的那些人——有的进去了，有的再没出来，有的半夜跑路，老婆孩子都不要了。",
+    "choices": [
+      {
+        "text": "放下酒杯：「大哥，我想洗手了。」",
+        "effects": {
+          "responsibility": 10,
+          "happiness": 6,
+          "money": -8
+        },
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
+      },
+      {
+        "text": "继续干。江湖这条路，走到黑",
+        "effects": {
+          "money": 8,
+          "risk": 8,
+          "happiness": -4
+        },
+        "flags_add": [],
+        "personality": [
+          "selfish"
+        ]
+      },
+      {
+        "text": "最后干一票大的，干完就收手",
+        "effects": {
+          "money": 15,
+          "risk": 12,
+          "empathy": -10
+        },
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "gang_member"
+      ],
       "not_flags": [],
       "min_attrs": {},
       "max_attrs": {}

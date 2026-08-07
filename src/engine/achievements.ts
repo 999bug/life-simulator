@@ -18,7 +18,7 @@ export interface AchievementDef {
   hidden?: boolean;
 }
 
-/** 39 个跨周目成就（按铜→银→金排序，同档内按系列排列） */
+/** 41 个跨周目成就（按铜→银→金排序，同档内按系列排列） */
 export const ACHIEVEMENTS: AchievementDef[] = [
   // 铜档：入门与轻度目标
   { id: 'first_life', icon: '👶', name: '第一次人生', desc: '完整走完第一局人生', tier: 1 },
@@ -33,6 +33,8 @@ export const ACHIEVEMENTS: AchievementDef[] = [
   { id: 'vivid_persona', icon: '🎭', name: '性格鲜明', desc: '任一性格端达到 15 次', tier: 1 },
   { id: 'adventurous_persona', icon: '🏃', name: '冒险家的一生', desc: '冒险性格达到 12 次', tier: 1 },
   { id: 'redeemed_life', icon: '🌱', name: '改过自新', desc: '入狱后洗心革面，重新开始人生', tier: 1 },
+  { id: 'fugitive', icon: '🏃', name: '亡命天涯', desc: '越狱成功，从此隐姓埋名', tier: 1 },
+  { id: 'gang_lord', icon: '👑', name: '黑道风云', desc: '在帮派里上位，江湖留名', tier: 1 },
   // 银档：需要经营的中度目标
   { id: 'longevity', icon: '🎂', name: '长寿', desc: '享年达到 90 岁', tier: 2 },
   { id: 'rich', icon: '💎', name: '财富自由', desc: '财富达到 90', tier: 2 },
@@ -134,6 +136,9 @@ export function checkAchievements(input: AchievementCheckInput): AchievementId[]
   if (persona.altruistic >= 12) { ids.add('altruistic_persona'); }
   // 铁窗人生路线（2026-08 新增）：入狱后出狱且改过自新（终局道德与幸福达标）
   if (flags.includes('jailed') && flags.includes('released') && attributes.morality >= 60 && attributes.happiness >= 50) { ids.add('redeemed_life'); }
+  // 灰色路线极端结局（2026-08 新增）：越狱成功 / 黑帮上位
+  if (flags.includes('escaped')) { ids.add('fugitive'); }
+  if (flags.includes('gang_boss')) { ids.add('gang_lord'); }
   return [...ids];
 }
 

@@ -113,7 +113,7 @@ export type AchievementId =
   | 'daily_streak_3' | 'daily_streak_7'
   | 'gaokao_top' | 'family_harmony' | 'job_elite' | 'asset_owner'
   | 'vivid_persona' | 'hexagon_persona' | 'adventurous_persona' | 'altruistic_persona'
-  | 'redeemed_life';
+  | 'redeemed_life' | 'fugitive' | 'gang_lord';
 
 /** 游戏状态 */
 export interface GameState {

@@ -172,6 +172,18 @@ function getVerdict(game: GameState): Verdict {
       desc: `从刷题到写代码，你用技术改变了生活的轨迹。一个个深夜的项目、一次次的攻坚，最终都成了你简历上的注脚。${score >= 75 ? '技术改变命运，你做到了。' : '纵然疲惫，你依然站在浪潮之上。'}`,
     };
   }
+  if (has('escaped')) {
+    return {
+      title: VERDICT_META.escaped.title,
+      desc: `那一夜你翻过高墙，从此名字变成一串通缉编号。城中村的出租屋、货车的后斗、泛黄的寻人启事——你活成了另一个人。${score >= 75 ? '在没人认识的地方，你重新活出了自己。' : '风声鹤唳的岁月里，你始终没敢停下来。'}`,
+    };
+  }
+  if (has('gang_boss')) {
+    return {
+      title: VERDICT_META.gang_boss.title,
+      desc: `从街边看场子的马仔，到江湖上有人叫得出你名号。你摆过平、流过血、也被人敬过酒。${score >= 75 ? '你全身而退，江湖只剩你的传说。' : '坐上那个位子的代价，只有你自己清楚。'}`,
+    };
+  }
   if (has('jailed')) {
     return {
       title: VERDICT_META.jailed.title,
@@ -221,6 +233,8 @@ export function verdictBasis(game: GameState, score: number): string {
     ['athlete_pro', ['athlete_pro']],
     ['artist', ['artist_pro', 'artist_life']],
     ['tech_career', ['tech_career']],
+    ['escaped', ['escaped']],
+    ['gang_boss', ['gang_boss']],
     ['jailed', ['jailed']],
     ['went_to_college', ['went_to_college']],
     ['skilled_worker', ['skilled_worker']],
@@ -431,7 +445,7 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
           <span className="text-lg leading-none mt-0.5">🏆</span>
           <div>
             <div className="text-[11px] text-white/40 tracking-[2px]">人生图鉴 · 全收集</div>
-            <div className="text-[13px] text-[#c9a96e] mt-1">14 条人生路线已全部走过</div>
+            <div className="text-[13px] text-[#c9a96e] mt-1">16 条人生路线已全部走过</div>
           </div>
         </div>
       )}

@@ -1,0 +1,80 @@
+[
+  {
+    "id": "gang_0001",
+    "age_range": [30, 30],
+    "category": "friend",
+    "title": "入伙",
+    "text": "夜市大排档，啤酒瓶堆了半桌，烤串的烟熏得霓虹灯发糊。灰色生意做了两年，道上的朋友越来越多。今天大哥亲自来请你喝酒，把一杯白酒推到你面前：「脑子活、手又快，跟着我干，一个月顶你摆一年摊。」他笑得和善，眼睛却像秤一样打量着你。",
+    "choices": [
+      { "text": "端起那杯酒，认了这个大哥", "effects": { "social": 7, "money": 8, "empathy": -8 }, "flags_add": ["gang_member"], "personality": ["adventurous"] },
+      { "text": "说自己上有老下有小，敬了酒，没接话", "effects": { "responsibility": 6, "patience": 4 }, "flags_add": [], "personality": ["cautious"] },
+      { "text": "干了这杯，心里却盘算着：只赚快钱，不沾血", "effects": { "strategy": 6, "risk": 6 }, "flags_add": ["gang_member"], "personality": ["rational"] }
+    ],
+    "conditions": { "has_flags": ["gray_deal"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "gang_0002",
+    "age_range": [31, 31],
+    "category": "career",
+    "title": "看场子",
+    "text": "你的第一件「差事」是看场子。凌晨两点的 KTV 门口，一辆面包车停了下来，下来四个人，手里都拎着家伙。大哥在电话里说：「别怂，站直了，出了事我兜着。」你摸了摸口袋里那把折叠刀，心跳如擂鼓。路灯下，向这边走来的脚步声越来越近。",
+    "choices": [
+      { "text": "拎起酒瓶迎上去，气势不能输", "effects": { "courage": 7, "risk": 6, "happiness": -3 }, "flags_add": [] },
+      { "text": "打电话摇人，跟兄弟们前后包抄", "effects": { "social": 6, "strategy": 5 }, "flags_add": [] },
+      { "text": "站在暗处先看动静，能不动手就不动手", "effects": { "self_control": 6, "risk": -4 }, "flags_add": [], "personality": ["cautious"] }
+    ],
+    "conditions": { "has_flags": ["gang_member"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "gang_0003",
+    "age_range": [32, 32],
+    "category": "finance",
+    "title": "收账",
+    "text": "大哥把一沓账单拍在桌上：「这条街的保护费，今天必须收齐。」你敲开第一家店，老板娘脸色煞白，从收银台里数出一把皱巴巴的票子。第二家，门帘一掀，后厨冲出来两个拎菜刀的汉子，堵在门口。街上的人都在看，没有人敢吱声。",
+    "choices": [
+      { "text": "收钱走人，一句废话不多说", "effects": { "money": 8, "empathy": -6, "discipline": 4 }, "flags_add": [] },
+      { "text": "跟硬茬比划比划，今天必须立威", "effects": { "courage": 8, "risk": 9, "happiness": -5 }, "flags_add": [] },
+      { "text": "把话带回去：这家老板说下个月补上", "effects": { "empathy": 6, "money": -5 }, "flags_add": [], "personality": ["emotional"] }
+    ],
+    "conditions": { "has_flags": ["gang_member"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "gang_0004",
+    "age_range": [33, 33],
+    "category": "career",
+    "title": "上位",
+    "text": "包厢里，大哥把一沓钱推到你面前，又推过来一杯酒：「这半年你办事利索，我看好你。以后这条线归你带，场子里的兄弟听你的。」旁边有人皮笑肉不笑：「哟，升得真快。」包厢的灯很亮，亮得看不清谁在笑，只有酒气一层层地漫上来。",
+    "choices": [
+      { "text": "站起来敬大哥一杯，接下这条线", "effects": { "money": 12, "social": 8, "empathy": -10 }, "flags_add": ["gang_boss"], "personality": ["selfish"] },
+      { "text": "谢过大哥，还是想跟在老哥身边再学两年", "effects": { "loyalty": 8, "strategy": 4, "money": -3 }, "flags_add": [] },
+      { "text": "借着酒劲推脱：我不是当头的料", "effects": { "patience": 5, "social": -4 }, "flags_add": [], "personality": ["cautious"] }
+    ],
+    "conditions": { "has_flags": ["gang_member"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "gang_0005",
+    "age_range": [49, 49],
+    "category": "personality",
+    "title": "火并危机",
+    "text": "对家放话要端你的场子，警方的摸底风声也一天紧过一天。夜里你收到两条消息：一条是线人报信「明晚有行动」，一条是跟了你八年的小弟发来的——「大哥，我想回老家。」桌上那把砍刀，刀柄被旧茧磨出了包浆。你盯着刀身，灯光在上面滑过一道冷光。",
+    "choices": [
+      { "text": "先下手为强，今晚就做掉对家的头目", "effects": { "risk": 14, "empathy": -14, "happiness": -8, "money": 8 }, "flags_add": ["jailed"], "personality": ["selfish"] },
+      { "text": "连夜把货和账本处理干净，金蝉脱壳", "effects": { "strategy": 10, "freedom": 6, "money": -8 }, "flags_add": [], "personality": ["rational"] },
+      { "text": "稳住小弟，主动跟警方谈条件，换个干净身份", "effects": { "responsibility": 8, "risk": 6 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["gang_member"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "gang_0006",
+    "age_range": [51, 51],
+    "category": "personality",
+    "title": "金盆洗手",
+    "text": "五十岁生日，大哥在酒楼摆了两桌。酒过三巡，他看着你说：「干我们这行的，五十岁还能坐在这儿喝酒，是命硬。」窗外霓虹闪烁，你看着杯里的酒，想起这些年见过的那些人——有的进去了，有的再没出来，有的半夜跑路，老婆孩子都不要了。",
+    "choices": [
+      { "text": "放下酒杯：「大哥，我想洗手了。」", "effects": { "responsibility": 10, "happiness": 6, "money": -8 }, "flags_add": [], "personality": ["rational"] },
+      { "text": "继续干。江湖这条路，走到黑", "effects": { "money": 8, "risk": 8, "happiness": -4 }, "flags_add": [], "personality": ["selfish"] },
+      { "text": "最后干一票大的，干完就收手", "effects": { "money": 15, "risk": 12, "empathy": -10 }, "flags_add": [], "personality": ["adventurous"] }
+    ],
+    "conditions": { "has_flags": ["gang_member"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  }
+]

@@ -20,7 +20,7 @@ const ACTIVITY_GROUPS: Array<{ id: string; icon: string; title: string; activiti
   { id: 'body', icon: '🏋️', title: '身体', activities: ['fitness', 'health', 'walk_dog', 'doctor_visit', 'shape_up', 'beauty'] },
   { id: 'growth', icon: '📚', title: '成长', activities: ['study', 'skill_practice'] },
   { id: 'finance', icon: '💰', title: '财务', activities: ['work', 'invest', 'job_hunt', 'overtime', 'leave', 'promote'] },
-  { id: 'love', icon: '❤️', title: '情感', activities: ['social', 'blind_date', 'date_night', 'call_friend', 'visit_mentor', 'reconnect'] },
+  { id: 'love', icon: '❤️', title: '情感', activities: ['social', 'blind_date', 'date_night', 'call_friend', 'visit_mentor', 'reconnect', 'give_gift'] },
   { id: 'family', icon: '👨‍👩‍👧', title: '家庭', activities: ['parenting', 'family_call'] },
   { id: 'mind', icon: '🧘', title: '内心', activities: ['leisure', 'meditate'] },
   { id: 'online', icon: '📱', title: '网络', activities: ['post_social'] },
@@ -35,7 +35,7 @@ const ACTIVITY_TAGS: Record<string, AttributeKey> = {
   family_call: 'social', job_hunt: 'wealth', skill_practice: 'intelligence', meditate: 'happiness',
   overtime: 'wealth', leave: 'happiness', promote: 'wealth', doctor_visit: 'health',
   shape_up: 'appearance', beauty: 'appearance', call_friend: 'social', visit_mentor: 'social',
-  reconnect: 'happiness', post_social: 'happiness',
+  reconnect: 'happiness', post_social: 'happiness', give_gift: 'social',
 };
 
 /**

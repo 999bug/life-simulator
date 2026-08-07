@@ -300,6 +300,29 @@ export function checkDeath(age: number, health: number, maxAge: number): boolean
   return health <= 0 || age >= maxAge;
 }
 
+/**
+ * 致命 flag → 细分死因。
+ *
+ * 意外死亡事件（fragments/deaths.json）产出致命 flag + 健康大损，
+ * 死亡判定时该 flag 优先于「健康归零」通用死因，标记细分死因。
+ * 无致命 flag 返回 null（由调用方按健康/寿命兜底）。
+ *
+ * @param flags 当前 flag 集合
+ * @returns 细分死因；无匹配返回 null
+ */
+export function fatalCause(flags: string[]): 'accident' | 'illness' | 'overwork' | null {
+  if (flags.includes('fatal_accident')) {
+    return 'accident';
+  }
+  if (flags.includes('fatal_illness')) {
+    return 'illness';
+  }
+  if (flags.includes('fatal_overwork')) {
+    return 'overwork';
+  }
+  return null;
+}
+
 /** 计算综合评分 */
 export function calcScore(attrs: Attributes): number {
   const vals = Object.values(attrs);

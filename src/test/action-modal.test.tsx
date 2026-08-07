@@ -2,15 +2,15 @@ import { describe, expect, it, vi } from 'vitest';
 import { render, screen, fireEvent, within } from '@testing-library/react';
 import ActionModal from '../components/ActionModal';
 
-/** 26 个活动名（与引擎活动表 src/engine/activities.ts 一致：原 16 个 + 加班/请假/申请升职/就医检查/塑形/美容/找老朋友/拜访贵人/联系初恋/发动态） */
+/** 27 个活动名（与引擎活动表 src/engine/activities.ts 一致：原 16 个 + 加班/请假/申请升职/就医检查/塑形/美容/找老朋友/拜访贵人/联系初恋/发动态/送礼物） */
 const ACTIVITY_NAMES = [
   '健身', '学习', '打工', '社交', '体检', '休闲', '遛宠物', '犯罪',
   '投资理财', '相亲', '约会夜', '育儿陪伴', '问候家人', '投简历', '练手艺', '冥想静心',
-  '加班', '请假', '申请升职', '就医检查', '塑形', '美容', '找老朋友', '拜访贵人', '联系初恋', '发动态',
+  '加班', '请假', '申请升职', '就医检查', '塑形', '美容', '找老朋友', '拜访贵人', '联系初恋', '发动态', '送礼物',
 ];
 
 describe('ActionModal', () => {
-  it('活动列表渲染：26 个活动名称全部出现', () => {
+  it('活动列表渲染：27 个活动名称全部出现', () => {
     render(<ActionModal open onClose={vi.fn()} onAction={vi.fn()} age={30} flags={[]} actionsDone={[]} knownPersonas={[]} />);
     ACTIVITY_NAMES.forEach(name => {
       expect(screen.getByText(name)).toBeTruthy();
@@ -58,9 +58,12 @@ describe('ActionModal', () => {
 
   it('requiresPersona 未认识置灰：knownPersonas 为空时找老朋友显示「还没认识TA」', () => {
     render(<ActionModal open onClose={vi.fn()} onAction={vi.fn()} age={30} flags={[]} actionsDone={[]} knownPersonas={[]} />);
-    // 拜访贵人/联系初恋同样显示该文案，限定找老朋友按钮内断言
+    // 拜访贵人/联系初恋/送礼物同样显示该文案，限定找老朋友按钮内断言
     expect(within(screen.getByRole('button', { name: /找老朋友/ })).getByText('还没认识TA')).toBeTruthy();
     expect((screen.getByRole('button', { name: /找老朋友/ }) as HTMLButtonElement).disabled).toBe(true);
+    // 送礼物需任一人物出场，同样置灰
+    expect(within(screen.getByRole('button', { name: /送礼物/ })).getByText('还没认识TA')).toBeTruthy();
+    expect((screen.getByRole('button', { name: /送礼物/ }) as HTMLButtonElement).disabled).toBe(true);
   });
 
   it('requiresPersona 任一人物出场即可用：认识挚友后可找老朋友', () => {
@@ -70,6 +73,9 @@ describe('ActionModal', () => {
     // 拜访贵人需要另一位人物（p_mentor），仍未认识置灰
     expect(within(screen.getByRole('button', { name: /拜访贵人/ })).getByText('还没认识TA')).toBeTruthy();
     expect((screen.getByRole('button', { name: /拜访贵人/ }) as HTMLButtonElement).disabled).toBe(true);
+    // 送礼物任意人物出场即可：认识挚友后可用
+    expect(within(screen.getByRole('button', { name: /送礼物/ })).queryByText('还没认识TA')).toBeNull();
+    expect((screen.getByRole('button', { name: /送礼物/ }) as HTMLButtonElement).disabled).toBe(false);
   });
 
   it('已做过的活动置灰「已做过」，未做过的仍可用', () => {

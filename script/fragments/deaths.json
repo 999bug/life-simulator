@@ -1,0 +1,228 @@
+[
+  {
+    "id": "death_0001",
+    "age_range": [
+      21,
+      21
+    ],
+    "category": "health",
+    "title": "深夜煤气泄漏",
+    "text": "租住的旧小区管道老化，深夜你被一股刺鼻的气味呛醒。煤气在房间里越积越浓，你昏昏沉沉地爬起来，天花板的灯都在晃动。是走，是留，这个念头在你脑子里转得比什么都快。",
+    "choices": [
+      {
+        "text": "立刻开窗通风，冲到楼下报警",
+        "effects": {
+          "health": -15,
+          "luck": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "先关煤气总阀，再看看情况",
+        "effects": {
+          "health": -30,
+          "happiness": -5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "太困了，翻个身继续睡",
+        "effects": {
+          "health": -100
+        },
+        "flags_add": [
+          "fatal_accident"
+        ]
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {
+        "luck": 75
+      }
+    }
+  },
+  {
+    "id": "death_0002",
+    "age_range": [
+      25,
+      25
+    ],
+    "category": "health",
+    "title": "高空坠物",
+    "text": "路过写字楼下的施工围挡时，一阵大风刮过，你听见头顶传来金属的尖啸。一块松脱的广告牌连带着支架，正在直直地往下坠。只有两三秒的时间做出反应。",
+    "choices": [
+      {
+        "text": "一步蹿进旁边的门廊",
+        "effects": {
+          "health": -10,
+          "luck": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "加快脚步往前跑",
+        "effects": {
+          "health": -25,
+          "appearance": -3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "仰头想看个究竟",
+        "effects": {
+          "health": -100
+        },
+        "flags_add": [
+          "fatal_accident"
+        ]
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {
+        "luck": 75
+      }
+    }
+  },
+  {
+    "id": "death_0003",
+    "age_range": [
+      47,
+      47
+    ],
+    "category": "health",
+    "title": "突发心梗",
+    "text": "傍晚开完会，一阵剧烈的绞痛从胸口炸开，冷汗瞬间湿透了衬衫。你扶着墙慢慢蹲下去，手机就在口袋里，屏幕亮着。女儿的电话打进来，响了三声，又响了三声。",
+    "choices": [
+      {
+        "text": "想起体检时医生提醒过的胸痛信号，立即服下急救药躺平",
+        "effects": {
+          "health": -20,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "给女儿回电话，让她叫救护车",
+        "effects": {
+          "health": -40,
+          "family_relation": 5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "以为是胃病，喝口热水忍一忍",
+        "effects": {
+          "health": -100
+        },
+        "flags_add": [
+          "fatal_illness"
+        ]
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {
+        "health": 90
+      }
+    }
+  },
+  {
+    "id": "death_0004",
+    "age_range": [
+      53,
+      53
+    ],
+    "category": "health",
+    "title": "连续加班",
+    "text": "这已经是连续第三个通宵赶项目了。凌晨三点，你站起来想去接杯水，眼前一黑，胸口闷得像压了一块石板。手机屏幕还亮着，是甲方凌晨发来的修改意见。",
+    "choices": [
+      {
+        "text": "请假回家，睡个囫囵觉",
+        "effects": {
+          "health": -20,
+          "money": -5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "先歇半小时，缓过来再说",
+        "effects": {
+          "health": -35,
+          "happiness": -5
+        },
+        "flags_add": []
+      },
+      {
+        "text": "咬咬牙，把方案改完再说",
+        "effects": {
+          "health": -100,
+          "money": 10
+        },
+        "flags_add": [
+          "fatal_overwork"
+        ]
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {
+        "happiness": 85
+      }
+    }
+  },
+  {
+    "id": "death_0005",
+    "age_range": [
+      57,
+      57
+    ],
+    "category": "health",
+    "title": "深夜车祸",
+    "text": "出差回来已是深夜，你在高速上开着车，眼皮越来越沉。对向车道的一束远光灯刺过来，你猛地惊醒——一辆失控的货车正打着滑冲进你的车道。",
+    "choices": [
+      {
+        "text": "立刻变道避让",
+        "effects": {
+          "health": -15,
+          "luck": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "紧握方向盘，稳住别慌",
+        "effects": {
+          "health": -30,
+          "responsibility": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "困得睁不开眼，下意识猛踩油门",
+        "effects": {
+          "health": -100
+        },
+        "flags_add": [
+          "fatal_accident"
+        ]
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {
+        "luck": 75
+      }
+    }
+  }
+]

@@ -36,7 +36,7 @@ const CRIME_SUCCESS_VARIANTS = 3;
 /** 职业 flag 清单（与 src/engine/jobs.ts JOB_FLAG_MAP 同步；退休不算在职，由 requiresNot 排除） */
 const JOB_FLAGS = ['doctor', 'startup_success', 'civil_servant', 'tech_career', 'grad_school', 'research_path', 'artist_pro', 'artist_life', 'athlete_pro', 'sports_career', 'military_flag', 'skilled_worker'];
 
-/** 主动行为活动表（26 个：健身/学习/打工/社交/体检/休闲/遛宠/犯罪/投资/相亲/约会夜/育儿/问候家人/投简历/练手艺/冥想/加班/请假/申请升职/就医检查/塑形/美容/找老朋友/拜访贵人/联系初恋/发动态） */
+/** 主动行为活动表（27 个：健身/学习/打工/社交/体检/休闲/遛宠/犯罪/投资/相亲/约会夜/育儿/问候家人/投简历/练手艺/冥想/加班/请假/申请升职/就医检查/塑形/美容/找老朋友/拜访贵人/联系初恋/发动态/送礼物） */
 export const ACTIVITIES: Activity[] = [
   {
     id: 'fitness',
@@ -711,6 +711,33 @@ export const ACTIVITIES: Activity[] = [
       {
         text: '精心编辑的动态发出去，半小时过去，赞还是那两三个。你退出又点开，最后还是没舍得删。',
         attr: { happiness: -2, social: 1 },
+      },
+    ],
+  },
+  {
+    id: 'give_gift',
+    name: '送礼物',
+    icon: '🎁',
+    desc: '礼轻情意重，给重要的人挑件礼物',
+    minAge: 10,
+    // 任一人物出场即可（发小/同桌/初恋/挚友/贵人/损友——好感 ≠ 50 即认识）
+    requiresPersona: ['p_buddy', 'p_desk', 'p_crush', 'p_best', 'p_mentor', 'p_sidekick'],
+    results: [
+      {
+        text: '商场里挑了半个下午，你终于把那条围巾买了下来，包装纸缠了三层。拆开的那一刻，对方的眼睛亮了一下：你怎么知道我喜欢这个颜色。你笑着说随便挑的，心里却把下一件礼物记进了备忘录。',
+        attr: { social: 6, wealth: -3 },
+      },
+      {
+        text: '你按自己的眼光挑了件礼物，送出去的时候对方笑着收下了，只是笑意没到眼底。晚上你翻着聊天记录想了很久——下回，还是多留意TA真正想要什么吧。',
+        attr: { social: 3, wealth: -4 },
+      },
+      {
+        text: '趁对方去洗手间的工夫，你把小盒子悄悄塞进了TA的包里。第二天消息提示音响起：你怎么知道我喜欢这个！你盯着屏幕笑了一下午，也没舍得说破。',
+        attr: { social: 5, wealth: -4 },
+      },
+      {
+        text: '礼物挑得用心，对方拆开时笑得眼睛弯弯的。可月底账单发来，你还是对着那串数字吸了口凉气——肉疼归肉疼，这情谊，值。',
+        attr: { social: 4, wealth: -5 },
       },
     ],
   },

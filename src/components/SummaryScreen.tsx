@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import type { AchievementId, ChoiceRecord, GameState } from '../types';
+import type { AchievementId, ChoiceRecord, DeathCause, GameState } from '../types';
 import { ATTR_META, calcScore } from '../engine/state';
 import { GOALS, checkGoal } from '../engine/goals';
 import { ACHIEVEMENTS } from '../engine/achievements';
@@ -61,18 +61,35 @@ export interface EncounterData {
   missed: Array<{ trait: PersonaTrait; count: number; threshold: number }>;
 }
 
-/** 死因文案：说明此生如何落幕 */
-function deathText(cause: 'health' | 'lifespan' | null | undefined): { icon: string; text: string } {
-  if (cause === 'health') {
-    return {
-      icon: '🌙',
-      text: '你的身体终于支撑不住了。最后的时刻，你想起这一生走过的路——那些笑过、哭过、拼过的日子，都随着灯光一起熄灭了。',
-    };
+/** 死因文案：说明此生如何落幕（5 类死因 + 缺失兜底） */
+function deathText(cause: DeathCause | null | undefined): { icon: string; text: string } {
+  switch (cause) {
+    case 'accident':
+      return {
+        icon: '⚡',
+        text: '生命定格在意外降临的那一刻。没人预见到结局，就像没人能预见到明天——你这一生，结束得毫无预兆。',
+      };
+    case 'illness':
+      return {
+        icon: '🏥',
+        text: '病来如山倒。你没能等到下一个春天，病房的窗台上阳光依然很好，可你已经听不见窗外的鸟鸣了。',
+      };
+    case 'overwork':
+      return {
+        icon: '🌆',
+        text: '身体透支到了极限。你总说再忙完这一阵就好好休息，可这一次，没人给你兑现的机会了。',
+      };
+    case 'health':
+      return {
+        icon: '🌙',
+        text: '你的身体终于支撑不住了。最后的时刻，你想起这一生走过的路——那些笑过、哭过、拼过的日子，都随着灯光一起熄灭了。',
+      };
+    default:
+      return {
+        icon: '🕯️',
+        text: '在睡梦中，你安静地走完了这一生。家人说，你走得很平静，嘴角还带着一点笑意。这一生，落幕得刚刚好。',
+      };
   }
-  return {
-    icon: '🕯️',
-    text: '在睡梦中，你安静地走完了这一生。家人说，你走得很平静，嘴角还带着一点笑意。这一生，落幕得刚刚好。',
-  };
 }
 
 /** 按分数兜底的 5 档基础评价 */

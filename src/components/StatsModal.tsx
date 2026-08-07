@@ -2,6 +2,15 @@ import type { FamilyMember } from '../types';
 import type { DailyHistory, StatsStore } from '../hooks/useGame';
 import { verdictTitle } from '../engine/verdict';
 
+/** 死因中文标签（死法分布展示用） */
+const DEATH_LABELS: Record<string, string> = {
+  accident: '⚡ 意外身亡',
+  illness: '🏥 病逝',
+  overwork: '🌆 操劳过度',
+  health: '🌙 油尽灯枯',
+  lifespan: '🕯️ 寿终正寝',
+};
+
 interface Props {
   stats: StatsStore;
   /** 族谱（「每一世」回看列表数据源） */
@@ -126,6 +135,20 @@ export default function StatsModal({ stats, family, dailyHistory = {}, onRecap, 
             </div>
           )}
         </div>
+        {/* 死法分布（死法图鉴：这一世的 N 种走法；旧存档无 deaths 字段不显示） */}
+        {stats.deaths && Object.keys(stats.deaths).length > 0 && (
+          <div>
+            <h4 className="text-[12px] tracking-[3px] text-white/50 mb-2">💀 死法分布</h4>
+            <div className="flex flex-col gap-1.5">
+              {(Object.entries(stats.deaths) as Array<[string, number]>).map(([key, n]) => (
+                <div key={key} className="flex justify-between text-[12px] py-1 border-b border-white/[0.04]">
+                  <span className="text-white/50">{DEATH_LABELS[key] ?? key}</span>
+                  <span className="text-[#c9a96e]">{n} 次</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         <button onClick={onClose} className="px-8 py-2.5 rounded-[30px] text-[13px] tracking-[3px] border font-sans mx-auto border-white/15 text-white/40 hover:border-[#c9a96e]/50 hover:text-[#c9a96e]">关闭</button>
       </div>
     </div>

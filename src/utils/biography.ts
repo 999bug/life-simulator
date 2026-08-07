@@ -76,10 +76,17 @@ export function buildBiographyMarkdown(game: GameState, verdictTitle: string, sc
   }
   lines.push('');
 
-  // 死亡叙事
+  // 死亡叙事（五类死因：意外/疾病/操劳/健康归零/寿终）
   lines.push('## 🕯️ 尾声');
   lines.push('');
-  lines.push(game.deathCause === 'health' ? '身体终于支撑不住，这一生落幕了。' : '在睡梦中安静地走完了这一生。');
+  const deathLine = {
+    accident: '生命定格在意外降临的那一刻——这一生，结束得毫无预兆。',
+    illness: '病来如山倒。你没能等到下一个春天，病房窗台上的阳光依然很好。',
+    overwork: '身体透支到了极限。你总说再忙完这一阵就休息，可这一次没有机会了。',
+    health: '身体终于支撑不住，这一生落幕了。',
+    lifespan: '在睡梦中安静地走完了这一生。',
+  }[game.deathCause ?? 'lifespan'] ?? '在睡梦中安静地走完了这一生。';
+  lines.push(deathLine);
   lines.push('');
   lines.push('*由人生模拟器生成*');
 

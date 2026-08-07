@@ -23086,6 +23086,56 @@
     }
   },
   {
+    "id": "immi_0001",
+    "age_range": [
+      56,
+      56
+    ],
+    "category": "personality",
+    "title": "世界那么大",
+    "text": "某个寻常的晚上，你刷到老同学旅居海外的视频：窗外的海湾、面包房飘出的黄油香、听不懂却安安静静的日子。你关掉视频，对着阳台发了很久的呆。体检报告上写着「各项指标正常」，存折上那串数字你数了两遍——原来日子，还可以换一种过法。",
+    "choices": [
+      {
+        "text": "翻出存折看了看，给老同学发消息：帮我问问，那边怎么住",
+        "effects": {
+          "freedom": 8,
+          "money": -8,
+          "independence": 6
+        },
+        "flags_add": [
+          "immigrate_idea"
+        ]
+      },
+      {
+        "text": "把视频投到电视上，喊老伴过来一起看",
+        "effects": {
+          "family_relation": 6,
+          "happiness": 4,
+          "saving": 4
+        },
+        "flags_add": [
+          "immigrate_idea"
+        ]
+      },
+      {
+        "text": "关掉视频，把存折放回抽屉：这把年纪，别折腾了",
+        "effects": {
+          "stability": 5,
+          "money": 4
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {
+        "money": 40
+      },
+      "max_attrs": {}
+    }
+  },
+  {
     "id": "mid_04",
     "age_range": [
       56,
@@ -24428,6 +24478,51 @@
     }
   },
   {
+    "id": "immi_0002",
+    "age_range": [
+      59,
+      59
+    ],
+    "category": "education",
+    "title": "语言与签证",
+    "text": "老年大学的英语班坐得满满当当，你的同桌比你还大两岁，字典页脚都翻卷了。中介又来电话：公证书还差三份。夜里你坐在台灯下填表，灯光把签证照片里的自己照得一脸严肃，你盯着照片看了半天，忽然笑出声来。",
+    "choices": [
+      {
+        "text": "把磁带放进录音机：每天跟读三遍，学一年",
+        "effects": {
+          "language": 8,
+          "discipline": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把材料全丢给中介：花钱省心，这辈子也该省省力",
+        "effects": {
+          "money": -10,
+          "planning": 4,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "填到一半放下笔：出去了人生地不熟，何必呢",
+        "effects": {
+          "stability": 5,
+          "money": 4
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "immigrate_idea"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
     "id": "mid_52",
     "age_range": [
       59,
@@ -25224,6 +25319,55 @@
     }
   },
   {
+    "id": "immi_0003",
+    "age_range": [
+      61,
+      61
+    ],
+    "category": "personality",
+    "title": "远渡重洋",
+    "text": "登机口前，送行的孩子举着手机拍你，像拍一次出征。二十个小时后飞机穿过云层，舷窗外第一次出现完全陌生的海岸线。行李转盘哗啦作响，你推着两个大箱子站在机场大厅，广播里的话一句也听不懂——你却觉得，这一辈子值了。",
+    "choices": [
+      {
+        "text": "深吸一口气，大步走向出口：新生活，来了",
+        "effects": {
+          "independence": 8,
+          "freedom": 6,
+          "money": -8
+        },
+        "flags_add": [
+          "immigrated"
+        ]
+      },
+      {
+        "text": "先给家里打个电话报平安，声音有点抖",
+        "effects": {
+          "family_relation": 6,
+          "mental": 4
+        },
+        "flags_add": [
+          "immigrated"
+        ]
+      },
+      {
+        "text": "望着出口愣十分钟，又拖着箱子折回登机口",
+        "effects": {
+          "stability": 6,
+          "money": 6
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "immigrate_idea"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
     "id": "mid_60",
     "age_range": [
       61,
@@ -25988,6 +26132,52 @@
       "min_personality": {
         "selfish": 6
       }
+    }
+  },
+  {
+    "id": "immi_0004",
+    "age_range": [
+      63,
+      63
+    ],
+    "category": "friend",
+    "title": "异国他乡",
+    "text": "搬来两年，你学会了在菜市场只比划不说话，也习惯了下午四点面包房的香味。那天银行寄来一封信，密密麻麻的英文你看得手心冒汗。晚上在华人街饺子馆，老板拍了拍你的肩：「阿姨，有事儿招呼一声。」你低下头，眼眶忽然有点热。",
+    "choices": [
+      {
+        "text": "把信拍照发到华人互助群：原来大家都是这么过来的",
+        "effects": {
+          "social": 8,
+          "friendship": 4,
+          "happiness": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "报名当地语言班，从「你好」重新学起",
+        "effects": {
+          "language": 8,
+          "patience": 4,
+          "money": -4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "对着翻译软件憋了三个晚上，终于自己弄明白",
+        "effects": {
+          "independence": 6,
+          "anxiety": 5
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "immigrated"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
     }
   },
   {
@@ -27243,6 +27433,53 @@
     ],
     "conditions": {
       "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "immi_0005",
+    "age_range": [
+      66,
+      66
+    ],
+    "category": "family",
+    "title": "留下还是回去",
+    "text": "孙女视频电话响起来的时候，窗外异国的街灯正一盏盏亮起。屏幕里她举着新得的奖状喊你，背景是熟悉的客厅、老沙发、你挂了二十年的那幅画。挂掉电话，你拉开抽屉，里面躺着来时那张登机牌，折痕清晰得像昨天。",
+    "choices": [
+      {
+        "text": "把登机牌收进抽屉最深处：这儿，已经是家了",
+        "effects": {
+          "freedom": 6,
+          "independence": 6,
+          "family_relation": -4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "订下回国的机票：回去守着家人，这里就当一场好梦",
+        "effects": {
+          "family_relation": 8,
+          "happiness": 6,
+          "money": -6
+        },
+        "flags_add": []
+      },
+      {
+        "text": "两边都放不下，定下规矩：每年各住半年",
+        "effects": {
+          "planning": 6,
+          "balance": 4,
+          "money": -8
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "immigrated"
+      ],
       "not_flags": [],
       "min_attrs": {},
       "max_attrs": {}

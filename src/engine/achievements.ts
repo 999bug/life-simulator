@@ -18,7 +18,7 @@ export interface AchievementDef {
   hidden?: boolean;
 }
 
-/** 41 个跨周目成就（按铜→银→金排序，同档内按系列排列） */
+/** 42 个跨周目成就（按铜→银→金排序，同档内按系列排列） */
 export const ACHIEVEMENTS: AchievementDef[] = [
   // 铜档：入门与轻度目标
   { id: 'first_life', icon: '👶', name: '第一次人生', desc: '完整走完第一局人生', tier: 1 },
@@ -28,6 +28,7 @@ export const ACHIEVEMENTS: AchievementDef[] = [
   { id: 'score_60', icon: '🎖️', name: '小有成就', desc: '综合评分达到 60', tier: 1 },
   { id: 'three_endings', icon: '📖', name: '初识百态', desc: '累计达成 3 种不同结局', tier: 1 },
   { id: 'early_death', icon: '⏳', name: '英年早逝', desc: '40 岁前走完一生', tier: 1 },
+  { id: 'varied_deaths', icon: '💀', name: '花样作死', desc: '累计以 3 种不同方式结束人生', tier: 1 },
   { id: 'lite_clear', icon: '⚡', name: '精简通关', desc: '以精简模式走完一生', tier: 1 },
   { id: 'auto_clear', icon: '🤖', name: '命运旁观者', desc: '完成一局快速模拟', tier: 1 },
   { id: 'vivid_persona', icon: '🎭', name: '性格鲜明', desc: '任一性格端达到 15 次', tier: 1 },
@@ -81,6 +82,8 @@ export interface AchievementCheckInput {
   endingsCount: number;
   /** 每日挑战连续天数（含本局；普通局不推进） */
   dailyStreak: number;
+  /** 死法分布（跨局累计，含本局；旧存档缺失 = 无字段，「花样作死」判定用） */
+  deaths?: Record<string, number>;
 }
 
 /** 判定当前状态满足的所有成就（含已解锁的，去重由调用方处理） */
@@ -95,6 +98,8 @@ export function checkAchievements(input: AchievementCheckInput): AchievementId[]
   if (age >= 90) { ids.add('longevity'); }
   if (age >= 95) { ids.add('ultra_life'); }
   if (age < 40) { ids.add('early_death'); }
+  // 花样作死（2026-08 新增）：跨局累计 3 种以上不同死因（健康/寿终/意外/疾病/操劳）
+  if (Object.keys(input.deaths ?? {}).length >= 3) { ids.add('varied_deaths'); }
   if (attributes.wealth >= 60) { ids.add('wealthy_60'); }
   if (attributes.wealth >= 90) { ids.add('rich'); }
   if (attributes.wealth >= 95) { ids.add('rich_king'); }

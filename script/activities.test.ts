@@ -52,9 +52,9 @@ function mkPlaying(events: LifeEvent[], attrs: Partial<Attributes> = {}, history
 
 // ============ 活动表完整性 ============
 
-test('活动表：26 个活动、id 唯一、结果池 ≥3、属性键合法、minAge 与设计表一致', () => {
+test('活动表：27 个活动、id 唯一、结果池 ≥3、属性键合法、minAge 与设计表一致', () => {
   const ids = new Set(ACTIVITIES.map(a => a.id));
-  assert.strictEqual(ACTIVITIES.length, 26);
+  assert.strictEqual(ACTIVITIES.length, 27);
   assert.strictEqual(ids.size, ACTIVITIES.length, '活动 id 必须唯一');
   const attrKeys = Object.keys(ATTR_META);
   for (const a of ACTIVITIES) {
@@ -67,12 +67,12 @@ test('活动表：26 个活动、id 唯一、结果池 ≥3、属性键合法、
       }
     }
   }
-  // minAge 与设计表一致（6 岁起基础活动/8 岁冥想/10 岁社交·问候·练手艺·塑形·找老朋友/14 岁犯罪·发动态/16 岁打工·投简历·拜访贵人·联系初恋/18 岁体检·投资·相亲·约会夜·加班·请假·就医·美容/20 岁育儿/22 岁申请升职）
+  // minAge 与设计表一致（6 岁起基础活动/8 岁冥想/10 岁社交·问候·练手艺·塑形·找老朋友·送礼物/14 岁犯罪·发动态/16 岁打工·投简历·拜访贵人·联系初恋/18 岁体检·投资·相亲·约会夜·加班·请假·就医·美容/20 岁育儿/22 岁申请升职）
   const expected: Record<string, number> = {
     fitness: 6, study: 6, work: 16, social: 10, health: 18, leisure: 6, walk_dog: 6, crime: 14,
     invest: 18, blind_date: 18, date_night: 18, parenting: 20, family_call: 10, job_hunt: 16, skill_practice: 10, meditate: 8,
     overtime: 18, leave: 18, promote: 22, doctor_visit: 18, shape_up: 10, beauty: 18,
-    call_friend: 10, visit_mentor: 16, reconnect: 16, post_social: 14,
+    call_friend: 10, visit_mentor: 16, reconnect: 16, post_social: 14, give_gift: 10,
   };
   for (const a of ACTIVITIES) {
     assert.strictEqual(a.minAge, expected[a.id], `${a.id} minAge 应=${expected[a.id]}`);
@@ -177,7 +177,7 @@ test('SKIP_INTRO：每日挑战局不开幼儿期自动播放（公平同局）'
 
 // ============ 结果池随机抽取 ============
 
-test('pickActivityResult：返回结果池中一员（26 个活动各抽 50 次）', () => {
+test('pickActivityResult：返回结果池中一员（27 个活动各抽 50 次）', () => {
   for (const a of ACTIVITIES) {
     for (let i = 0; i < 50; i++) {
       const r = pickActivityResult(a);
@@ -251,10 +251,10 @@ test('MAKE_ACTION：requiresPersona 未出场拒绝；出场（历史有互动�
   const orig = EVENTS;
   try {
     setEvents([{ ...evt('p_meet', 12, { social: 5 }), persona: 'p_buddy' }] as LifeEvent[]);
-    // 18 岁：三个 requiresPersona 活动均过 minAge，排除年龄干扰
+    // 18 岁：四个 requiresPersona 活动均过 minAge，排除年龄干扰
     const base = mkPlaying([evt('a_01', 18, {})]);
-    // 未出场（空历史）：找老朋友/拜访贵人/联系初恋全部拒绝
-    for (const id of ['call_friend', 'visit_mentor', 'reconnect']) {
+    // 未出场（空历史）：找老朋友/拜访贵人/联系初恋/送礼物全部拒绝
+    for (const id of ['call_friend', 'visit_mentor', 'reconnect', 'give_gift']) {
       assert.strictEqual(reducer(base, { type: 'MAKE_ACTION', activityId: id }), base, `${id} 未认识人物应拒绝`);
     }
     // 出场：与该人物互动过（净收益 > 0 → 好感 55 ≠ 50）
@@ -265,6 +265,13 @@ test('MAKE_ACTION：requiresPersona 未出场拒绝；出场（历史有互动�
     const done = reducer(met, { type: 'MAKE_ACTION', activityId: 'call_friend' });
     assert.notStrictEqual(done, met, '认识发小后可找老朋友');
     assert.deepStrictEqual(done.game.actionsDone, ['call_friend']);
+    // 送礼物：任一人物出场即可（发小在 requiresPersona 列表内；先 CONTINUE 清反馈页）
+    const continued = reducer(done, { type: 'CONTINUE' });
+    const gift = reducer(continued, { type: 'MAKE_ACTION', activityId: 'give_gift' });
+    assert.notStrictEqual(gift, continued, '认识发小后可送礼物');
+    assert.deepStrictEqual(gift.game.actionsDone, ['call_friend', 'give_gift']);
+    // 25 + 找老朋友 4~6 + 送礼物 3~6 = 32~37
+    assert.ok(gift.game.attributes.social >= 32 && gift.game.attributes.social <= 37, `送礼物后 social 应为 32~37，实际 ${gift.game.attributes.social}`);
     // 只认识发小：拜访贵人（需 p_mentor）仍拒绝
     assert.strictEqual(reducer(met, { type: 'MAKE_ACTION', activityId: 'visit_mentor' }), met, '未认识贵人不可拜访');
   } finally {

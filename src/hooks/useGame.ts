@@ -22,6 +22,7 @@ import {
   applyChallenge,
   applyInheritance,
   scaleOutcomes,
+  fatalCause,
   STAGE_ORDER,
 } from '../engine/state.ts';
 import { EVENTS, filterEvents, shuffleEvents, pickFateEvents } from '../engine/events.ts';
@@ -90,6 +91,20 @@ export interface StatsStore {
   endings: Record<string, number>;
   /** 上一世终局属性（第 5 周目起开局传承；旧存档缺失 = 无加成） */
   lastEndAttrs?: Partial<Attributes>;
+  /** 死法分布：死因 key → 累计次数（旧存档缺失 = 无字段，「花样作死」成就判定用） */
+  deaths?: Record<string, number>;
+}
+
+/**
+ * 累计一局死因到死法分布（纯函数）。
+ *
+ * @param prev 现有死法分布（旧存档可能缺失）
+ * @param cause 本局死因（存活中局兜底为 lifespan）
+ * @returns 累计后的新分布
+ */
+export function accumulateDeaths(prev: Record<string, number> | undefined, cause: DeathCause): Record<string, number> {
+  const key = cause ?? 'lifespan';
+  return { ...(prev ?? {}), [key]: (prev?.[key] ?? 0) + 1 };
 }
 
 /** 读取生涯统计；数据损坏或存储不可用时返回空结构 */
@@ -896,9 +911,9 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
       const isDead = next !== null && checkDeath(age, attrs.health, maxAge);
       const gameOver = isDead || next === null;
 
-      // 死因：健康归零 → 耗尽；超过寿命或事件播完 → 寿终
+      // 死因：致命 flag 优先（意外死亡事件产出 → 细分死因）；健康归零 → 耗尽；超过寿命或事件播完 → 寿终
       const deathCause: DeathCause | null = isDead
-        ? (attrs.health <= 0 ? 'health' : 'lifespan')
+        ? (fatalCause(flags) ?? (attrs.health <= 0 ? 'health' : 'lifespan'))
         : (next === null ? 'lifespan' : null);
 
       // 记录历史
@@ -952,6 +967,8 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         : state.dailyStreak.count;
 
       // 进入结算：判定本局新解锁成就（纯计算，持久化由 effect 完成）
+      // 死法分布含本局：跨局累计 + 本局死因（「花样作死」需跨局 3 种死法）
+      const deaths = accumulateDeaths(state.stats.deaths, deathCause ?? 'lifespan');
       const newIds = gameOver
         ? checkAchievements({
             game,
@@ -961,6 +978,7 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
             // 累计结局数（含本局）：已有集合 + 本局结局若为新则 +1
             endingsCount: state.achievements.endings.length + (state.achievements.endings.includes(endingKey) ? 0 : 1),
             dailyStreak,
+            deaths,
           }).filter(id => !state.achievements.unlocked.includes(id))
         : [];
 
@@ -1372,6 +1390,8 @@ export function useGame() {
       endings: { ...rt.stats.endings, [rt.pendingEndingKey]: (rt.stats.endings[rt.pendingEndingKey] ?? 0) + 1 },
       // 上一世终局属性：下一局开局传承（最高 2 项 ≥50 各 +8）
       lastEndAttrs: rt.game.attributes,
+      // 死法分布：累计本局死因（死因缺失局兜底为 lifespan；旧存档无字段自动补齐）
+      deaths: accumulateDeaths(rt.stats.deaths, rt.game.deathCause ?? 'lifespan'),
     });
     // 埋点：结算（与成就/统计同一时机，pending 标志保证不重复）
     track({ type: 'game_finish', ts: Date.now(), score, age: rt.game.age, endingKey: rt.pendingEndingKey });

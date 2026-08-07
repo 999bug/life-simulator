@@ -92,8 +92,12 @@ export interface LifeEvent {
   conditions?: EventCondition;
 }
 
-/** 死因 */
-export type DeathCause = 'health' | 'lifespan';
+/**
+ * 死因。
+ * health 与 lifespan 为旧版两档（旧存档兼容），
+ * accident / illness / overwork 为细分死因（意外死亡事件产出致命 flag 后由引擎判定）。
+ */
+export type DeathCause = 'health' | 'lifespan' | 'accident' | 'illness' | 'overwork';
 
 /** 人生目标 */
 export type GoalKey = 'wealth' | 'travel' | 'academic' | 'doctor' | 'family' | 'stable';
@@ -113,7 +117,8 @@ export type AchievementId =
   | 'daily_streak_3' | 'daily_streak_7'
   | 'gaokao_top' | 'family_harmony' | 'job_elite' | 'asset_owner'
   | 'vivid_persona' | 'hexagon_persona' | 'adventurous_persona' | 'altruistic_persona'
-  | 'redeemed_life' | 'fugitive' | 'gang_lord';
+  | 'redeemed_life' | 'fugitive' | 'gang_lord'
+  | 'varied_deaths';
 
 /** 游戏状态 */
 export interface GameState {

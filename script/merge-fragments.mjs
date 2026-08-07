@@ -52,6 +52,9 @@ export function checkDistribution(events) {
 /** 外部注入 flag 前缀：跨代继承 flag（parent_*）由开局按族谱注入，不由事件产出，豁免配对校验 */
 export const EXTERNAL_FLAG_PREFIX = 'parent_';
 
+/** 引擎活动产出 flag：viral（发动态爆款）由主动行为系统的活动结果池产出，不在事件数据中，豁免配对校验 */
+export const EXTERNAL_FLAGS = ['viral'];
+
 /**
  * flag 生产/消费配对校验：has_flags 引用的 flag 必须有事件产出；not_flags 不算悬空。
  * parent_ 前缀为开局外部注入（跨代继承），豁免校验。
@@ -70,7 +73,7 @@ export function checkFlagPairs(events) {
   const orphans = new Set();
   for (const e of events) {
     for (const f of e.conditions?.has_flags ?? []) {
-      if (!f.startsWith(EXTERNAL_FLAG_PREFIX) && !producers.has(f)) {
+      if (!f.startsWith(EXTERNAL_FLAG_PREFIX) && !EXTERNAL_FLAGS.includes(f) && !producers.has(f)) {
         orphans.add(f);
       }
     }

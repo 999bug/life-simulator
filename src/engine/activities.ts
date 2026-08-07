@@ -19,6 +19,10 @@ export interface Activity {
   requires?: string[];
   /** flag 排除（任一存在则不可用；相亲要求未婚、投简历要求无职业） */
   requiresNot?: string[];
+  /** 人物要求（任一人物已出场即可用；出场 = 该人物在历史中互动过、好感 ≠ 50，见 personas.personaBonds） */
+  requiresPersona?: string[];
+  /** 活动级 flag 产出（每次执行追加、去重；与结果变体 flags 同机制，如犯罪被抓产出 jailed） */
+  flags?: string[];
   /** 结果池（常规活动 3-4 个变体随机抽取；犯罪为 3 类：成功变体 + 被抓 + 逃跑） */
   results: ActivityResult[];
 }
@@ -29,7 +33,10 @@ export const CRIME_ACTIVITY_ID = 'crime';
 /** 犯罪活动：结果池前部的成功变体数量（其余为被抓/逃跑，位置约定） */
 const CRIME_SUCCESS_VARIANTS = 3;
 
-/** 主动行为活动表（16 个：健身/学习/打工/社交/体检/休闲/遛宠/犯罪/投资/相亲/约会夜/育儿/问候家人/投简历/练手艺/冥想） */
+/** 职业 flag 清单（与 src/engine/jobs.ts JOB_FLAG_MAP 同步；退休不算在职，由 requiresNot 排除） */
+const JOB_FLAGS = ['doctor', 'startup_success', 'civil_servant', 'tech_career', 'grad_school', 'research_path', 'artist_pro', 'artist_life', 'athlete_pro', 'sports_career', 'military_flag', 'skilled_worker'];
+
+/** 主动行为活动表（26 个：健身/学习/打工/社交/体检/休闲/遛宠/犯罪/投资/相亲/约会夜/育儿/问候家人/投简历/练手艺/冥想/加班/请假/申请升职/就医检查/塑形/美容/找老朋友/拜访贵人/联系初恋/发动态） */
 export const ACTIVITIES: Activity[] = [
   {
     id: 'fitness',
@@ -438,6 +445,272 @@ export const ACTIVITIES: Activity[] = [
       {
         text: '湖边有张空长椅，你坐下来什么也不做。风从水面吹过来，时间好像也慢了一拍。',
         attr: { happiness: 5 },
+      },
+    ],
+  },
+  {
+    id: 'overtime',
+    name: '加班',
+    icon: '💼',
+    desc: '多干一点，工资单厚一点',
+    minAge: 18,
+    // 在职（任一职业 flag）；退休不算在职
+    requires: JOB_FLAGS,
+    requiresNot: ['retired'],
+    results: [
+      {
+        text: '项目上线前夜，办公室只剩你一个人。敲完最后一个提交，窗外天都亮了——项目顺利上线，绩效单上多了厚厚一笔。',
+        attr: { wealth: 9, health: -3 },
+      },
+      {
+        text: '周六的办公室空荡荡的。你把积压的报表一口气处理完，工资条上那串数字又往上跳了一格。',
+        attr: { wealth: 7, health: -2 },
+      },
+      {
+        text: '领导路过看到你在加班，拍了拍你肩膀：年轻人不错。月底绩效公布，你的名字排在前头。',
+        attr: { wealth: 6, health: -2 },
+      },
+      {
+        text: '连续加了三天班，眼皮快黏在一起了。你灌了第三杯咖啡，把最后一份材料交了上去——钱是赚到了，黑眼圈也是真的。',
+        attr: { wealth: 8, health: -3 },
+      },
+    ],
+  },
+  {
+    id: 'leave',
+    name: '请假',
+    icon: '🏖️',
+    desc: '歇口气，回来更能干',
+    minAge: 18,
+    // 在职（任一职业 flag）；退休不用请假
+    requires: JOB_FLAGS,
+    requiresNot: ['retired'],
+    results: [
+      {
+        text: '年假批下来的那天，你关了闹钟睡到自然醒。瘫在沙发上刷了一天剧，骨头缝里的疲惫都化了。',
+        attr: { happiness: 6, wealth: -3 },
+      },
+      {
+        text: '感冒了索性请了病假。被子裹成茧，睡到下午三点，才发消息跟领导说没事——其实是有事，睡得正香呢。',
+        attr: { happiness: 4, wealth: -2 },
+      },
+      {
+        text: '请了半天事假去办手续，来回跑了两趟总算办完。走出办事大厅，你给领导发了句谢谢，心里松快多了。',
+        attr: { happiness: 5, wealth: -2 },
+      },
+      {
+        text: '请假消息发出去，领导秒回：准了，好好休息。你看着手机愣了两秒——原来请假也可以这么顺利。',
+        attr: { happiness: 5, wealth: -3 },
+      },
+    ],
+  },
+  {
+    id: 'promote',
+    name: '申请升职',
+    icon: '🏆',
+    desc: '该争取的时候，别不好意思',
+    minAge: 22,
+    // 在职（任一职业 flag）；退休不参与晋升
+    requires: JOB_FLAGS,
+    requiresNot: ['retired'],
+    // 结果池前两档为成功（升职加薪）、后两档为失败（被拒，情绪回落）
+    results: [
+      {
+        text: '述职那天你准备得很足，数据、案例、复盘一气呵成。老板当场点头：这季度的晋升名单，加你一个。',
+        attr: { wealth: 10, happiness: 5 },
+      },
+      {
+        text: '领导听了你的申请，说了很多话，核心意思就一句：再沉淀沉淀。你点头微笑，回到工位默默更新了简历。',
+        attr: { happiness: -3 },
+      },
+      {
+        text: '竞聘演讲你排在最后一个。讲完，台下的掌声比前面都响。结果公布那天，你的名字赫然在列。',
+        attr: { wealth: 10, happiness: 5 },
+      },
+      {
+        text: '人事的回复很客气：这个岗位暂时没有空缺，你的努力我们都看到了。你盯着邮件看了很久，把它放进了收藏夹。',
+        attr: { happiness: -3 },
+      },
+    ],
+  },
+  {
+    id: 'doctor_visit',
+    name: '就医检查',
+    icon: '🩺',
+    desc: '小病拖不得，检查要趁早',
+    minAge: 18,
+    results: [
+      {
+        text: '医生开了三盒药，叮嘱你按时吃。缴费单上的数字让你肉疼，但病根除了，心里踏实。',
+        attr: { health: 3, wealth: -4 },
+      },
+      {
+        text: 'CT 报告出来前你紧张了一下午。医生说片子没问题，你差点在诊室里笑出声——这一趟花得值。',
+        attr: { health: 4, wealth: -5 },
+      },
+      {
+        text: '医生说胃有点老毛病，得养。你把这几个字记在手机备忘录里，决定从今晚起好好吃饭。',
+        attr: { health: 2, wealth: -6 },
+      },
+      {
+        text: '挂号、排队、等报告，一上午耗在医院。看完出来你只想感叹：健康这东西，真得趁早攒。',
+        attr: { health: 2, wealth: -4 },
+      },
+    ],
+  },
+  {
+    id: 'shape_up',
+    name: '塑形',
+    icon: '⚖️',
+    desc: '管住嘴，迈开腿',
+    minAge: 10,
+    results: [
+      {
+        text: '晚饭换了水煮菜，戒了奶茶两周。镜子里的脸轮廓清晰了些，你对着镜子多看了两眼。',
+        attr: { appearance: 4, health: 1 },
+      },
+      {
+        text: '跟着视频练了一个月核心，马甲线的影子终于冒头了。拍照打卡那天，评论区全是夸。',
+        attr: { appearance: 5, health: 2 },
+      },
+      {
+        text: '体重秤的数字终于动了。你光脚踩上去看了三遍，确认没看错，嘴角压都压不住。',
+        attr: { appearance: 3, health: 1 },
+      },
+      {
+        text: '坚持了半个月的减肥，一顿火锅回到解放前。你看着体重秤叹了口气，又点开了健身视频——明天再来。',
+        attr: { appearance: 3, health: 1 },
+      },
+    ],
+  },
+  {
+    id: 'beauty',
+    name: '美容',
+    icon: '✨',
+    desc: '收拾收拾，心情也跟着亮',
+    minAge: 18,
+    results: [
+      {
+        text: '新发型剪完，理发师说年轻了五岁。回家路上你走路都带风，连电梯里的镜子都多照了两下。',
+        attr: { appearance: 6, wealth: -6 },
+      },
+      {
+        text: '护肤全套安排上，面膜敷完脸水嫩得能掐出水。同事问你是不是偷偷做了什么，你笑而不语。',
+        attr: { appearance: 7, wealth: -8 },
+      },
+      {
+        text: '换了个新造型去聚会，老同学盯着你看了半天：你咋越来越年轻了？你心里美滋滋，这笔钱没白花。',
+        attr: { appearance: 7, wealth: -7 },
+      },
+      {
+        text: '医美顾问报了个价，你倒吸一口凉气，最后只掏钱做了个护理套餐。镜子前转了两圈，好像确实精神了点。',
+        attr: { appearance: 6, wealth: -9 },
+      },
+    ],
+  },
+  {
+    id: 'call_friend',
+    name: '找老朋友',
+    icon: '📞',
+    desc: '老朋友，越处越亲',
+    minAge: 10,
+    // 任一老友出场即可（发小/挚友/损友）
+    requiresPersona: ['p_best', 'p_buddy', 'p_sidekick'],
+    results: [
+      {
+        text: '约上老友吃了顿烧烤，聊起当年逃课翻墙的日子，笑得直拍桌子。散场时约好下个月还聚。',
+        attr: { social: 6, happiness: 2 },
+      },
+      {
+        text: '一个电话打过去，从下班聊到半夜。挂断时手机发烫，你发现这一晚上笑的声音比一周都多。',
+        attr: { social: 5, happiness: 2 },
+      },
+      {
+        text: '老友发来一串表情包，你回敬了一串。斗图斗了半小时，最后俩人笑到握不住手机。',
+        attr: { social: 4, happiness: 2 },
+      },
+      {
+        text: '约好的饭局，对方临时有事来不了。你一个人吃了那份双人套餐，拍了张照发过去：下次你请。',
+        attr: { social: 4, happiness: 2 },
+      },
+    ],
+  },
+  {
+    id: 'visit_mentor',
+    name: '拜访贵人',
+    icon: '🍵',
+    desc: '前辈一句话，少走十年弯路',
+    minAge: 16,
+    requiresPersona: ['p_mentor'],
+    results: [
+      {
+        text: '提着一袋水果登门拜访。老师傅听了你的近况，指点了两句，句句都在点子上。',
+        attr: { social: 4, intelligence: 2 },
+      },
+      {
+        text: '一壶茶泡了三泡。聊到夕阳西斜，他说：年轻人别急，路是一步一步走出来的。你把这句话记进了备忘录。',
+        attr: { social: 4, intelligence: 2 },
+      },
+      {
+        text: '老师傅一眼看出你的问题：心太急。他给你讲了自己当年的弯路，你听着听着，后背出了一层汗。',
+        attr: { social: 4, intelligence: 2 },
+      },
+      {
+        text: '这次拜访来得不巧，老师傅身体不适，只坐着喝了杯茶。你放下礼物告辞，心说改天再来。',
+        attr: { social: 4, intelligence: 2 },
+      },
+    ],
+  },
+  {
+    id: 'reconnect',
+    name: '联系初恋',
+    icon: '💌',
+    desc: '有些名字，总是会再想起',
+    minAge: 16,
+    requiresPersona: ['p_crush'],
+    results: [
+      {
+        text: '翻出那个许久没动的对话框，你打了删、删了打，最后还是发出去了：最近还好吗？屏幕亮起的那一刻，心跳漏了一拍。',
+        attr: { happiness: 5, social: 2 },
+      },
+      {
+        text: '翻到那年的合照，你们笑得没心没肺。你盯着看了很久，给照片存了个备份——青春这东西，看看就好。',
+        attr: { happiness: 4, social: 2 },
+      },
+      {
+        text: '她答应了见面。咖啡馆里你们聊了一下午，那些年的遗憾和误会，好像都在笑声里化了。',
+        attr: { happiness: 6, social: 2 },
+      },
+      {
+        text: '消息发过去，一整天都是已读不回。你盯着那个「已读」看了很久，最后删掉了对话框——有些故事，就留在那年吧。',
+        attr: { happiness: 4, social: 2 },
+      },
+    ],
+  },
+  {
+    id: 'post_social',
+    name: '发动态',
+    icon: '📱',
+    desc: '随手一记，也许就火了',
+    minAge: 14,
+    // 结果池第 1 个为爆款变体：产出 viral flag（消费事件见 fragments/eggs2.json，merge 配对校验由本产出者满足）
+    results: [
+      {
+        text: '随手发的那条动态爆了，转发和点赞蹭蹭往上涨。你看着粉丝数一路飙升，手都在抖——这下真成大V了。',
+        attr: { happiness: 6, social: 6 },
+        flags: ['viral'],
+      },
+      {
+        text: '本想抖个机灵，评论区却翻车了。你一条条看完那些评论，默默把动态设成了私密——网络有风险，发言需谨慎。',
+        attr: { happiness: -3, social: -2 },
+      },
+      {
+        text: '一条观点引来两拨人对线，你从旁观到下场，辩到半夜。吵完你关了手机，突然觉得有点空虚。',
+        attr: { happiness: -2, social: 3 },
+      },
+      {
+        text: '精心编辑的动态发出去，半小时过去，赞还是那两三个。你退出又点开，最后还是没舍得删。',
+        attr: { happiness: -2, social: 1 },
       },
     ],
   },

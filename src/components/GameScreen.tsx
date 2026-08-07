@@ -21,6 +21,7 @@ import type { UndoEntry } from '../types';
 import type { WeeklyGoal } from '../engine/weekly';
 import { EVENTS } from '../engine/events';
 import { derivePersona, PERSONA_META, traitForOutcome } from '../engine/personality';
+import { personaBonds } from '../engine/personas';
 
 /** 选项效果主属性（绝对值最大）→ 背景色调，让每个选项的选择有视觉反馈 */
 function pickAttrTint(choice: Choice): string | null {
@@ -121,6 +122,11 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
   }, [game.history]);
   // 性格画像：从选择历史推导（3 维 6 端累积；纯推导，undo/旧存档自动兼容）
   const persona = useMemo(() => derivePersona(game.history), [game.history]);
+  // 已出场人物（好感 ≠ 50 = 在历史中互动过；requiresPersona 活动在 ActionModal 判定可用性）
+  const knownPersonas = useMemo(() => {
+    const bonds = personaBonds(game.history);
+    return Object.entries(bonds).filter(([, v]) => v !== 50).map(([k]) => k);
+  }, [game.history]);
   // 人生目标（开局选定，null 无目标）：预设目标查定义表，达成判定由 checkGoal 提供
   const goalDef = useMemo(
     () => (typeof game.goal === 'string' ? GOALS.find(g => g.key === game.goal) ?? null : null),
@@ -452,6 +458,7 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
         age={game.age}
         flags={game.flags}
         actionsDone={actionsDone}
+        knownPersonas={knownPersonas}
       />
 
       {/* 幼儿期走过场：0-5 岁无需选择（幻灯片式点击翻阅，intraAuto），顶部角标 + 一键跳过 */}

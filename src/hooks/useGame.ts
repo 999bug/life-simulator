@@ -26,6 +26,7 @@ import {
 } from '../engine/state.ts';
 import { EVENTS, filterEvents, shuffleEvents, pickFateEvents } from '../engine/events.ts';
 import { derivePersona, meetsPersonality } from '../engine/personality.ts';
+import { personaBonds, type PersonaId } from '../engine/personas.ts';
 import { buildCompanionEvent, COMPANION_DISABLED, COMPANION_END_AGE, COMPANION_INTERVAL, COMPANION_START_AGE, companionEnabled } from '../engine/companion.ts';
 import { ACTIVITIES, pickActivityResult, rollCrime } from '../engine/activities.ts';
 import { track } from '../utils/analytics.ts';
@@ -1031,18 +1032,27 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
       if (activity.requiresNot && activity.requiresNot.some(f => state.game.flags.includes(f))) {
         return state;
       }
+      // requiresPersona：任一人物已出场（好感 ≠ 50，从历史纯推导）即可用
+      if (activity.requiresPersona && activity.requiresPersona.length > 0) {
+        const bonds = personaBonds(state.game.history);
+        if (!activity.requiresPersona.some(p => bonds[p as PersonaId] !== 50)) {
+          return state;
+        }
+      }
       // 结果：犯罪走专用分支（成功率 + 被抓/逃跑，即时操作不需要确定性）；其余从结果池随机
       const result = activity.id === 'crime'
         ? rollCrime(state.game.attributes.luck, state.game.attributes.intelligence, Math.random)
         : pickActivityResult(activity);
       // 属性应用（年龄决定成长上限；活动收益不享受天赋/传承等额外加成）
       const attrs = applyOutcomes(state.game.attributes, result, state.game.age);
-      // flags 追加（去重；犯罪被抓产出 jailed 接入铁窗路线）
+      // flags 追加（去重；活动级 flags 与结果变体 flags 同逻辑——犯罪被抓产出 jailed、发动态爆款产出 viral）
       const flags = [...state.game.flags];
-      if (result.flags) {
-        for (const f of result.flags) {
-          if (!flags.includes(f)) {
-            flags.push(f);
+      for (const fs of [activity.flags, result.flags]) {
+        if (fs) {
+          for (const f of fs) {
+            if (!flags.includes(f)) {
+              flags.push(f);
+            }
           }
         }
       }

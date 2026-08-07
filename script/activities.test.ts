@@ -10,7 +10,8 @@ import assert from 'node:assert';
 import { reducer, createInitialRuntime } from '../src/hooks/useGame.ts';
 import { getStageForAge, STAGE_ORDER, ATTR_META } from '../src/engine/state.ts';
 import { ACTIVITIES, crimeSuccessRate, pickActivityResult, rollCrime } from '../src/engine/activities.ts';
-import type { Attributes, LifeEvent, RuntimeState } from '../src/types/index.ts';
+import { EVENTS, setEvents } from '../src/engine/events.ts';
+import type { Attributes, ChoiceRecord, LifeEvent, RuntimeState } from '../src/types/index.ts';
 
 /** 构造测试事件 */
 function evt(
@@ -28,7 +29,7 @@ function evt(
 }
 
 /** 构造进行中的运行时状态（覆盖为自制事件数组；无 actionsThisAge = 旧存档兼容场景） */
-function mkPlaying(events: LifeEvent[], attrs: Partial<Attributes> = {}): RuntimeState {
+function mkPlaying(events: LifeEvent[], attrs: Partial<Attributes> = {}, history: ChoiceRecord[] = []): RuntimeState {
   const base = createInitialRuntime();
   const first = events[0];
   const attributes: Attributes = {
@@ -44,16 +45,16 @@ function mkPlaying(events: LifeEvent[], attrs: Partial<Attributes> = {}): Runtim
     game: {
       ...base.game,
       age: first.age, stage, stageIdx: STAGE_ORDER.indexOf(stage),
-      attributes, phase: 'playing',
+      attributes, phase: 'playing', history,
     },
   };
 }
 
 // ============ 活动表完整性 ============
 
-test('活动表：16 个活动、id 唯一、结果池 ≥3、属性键合法、minAge 与设计表一致', () => {
+test('活动表：26 个活动、id 唯一、结果池 ≥3、属性键合法、minAge 与设计表一致', () => {
   const ids = new Set(ACTIVITIES.map(a => a.id));
-  assert.strictEqual(ACTIVITIES.length, 16);
+  assert.strictEqual(ACTIVITIES.length, 26);
   assert.strictEqual(ids.size, ACTIVITIES.length, '活动 id 必须唯一');
   const attrKeys = Object.keys(ATTR_META);
   for (const a of ACTIVITIES) {
@@ -66,10 +67,12 @@ test('活动表：16 个活动、id 唯一、结果池 ≥3、属性键合法、
       }
     }
   }
-  // minAge 与设计表一致（6 岁起基础活动/8 岁冥想/10 岁社交·问候·练手艺/14 岁犯罪/16 岁打工·投简历/18 岁体检·投资·相亲·约会夜/20 岁育儿）
+  // minAge 与设计表一致（6 岁起基础活动/8 岁冥想/10 岁社交·问候·练手艺·塑形·找老朋友/14 岁犯罪·发动态/16 岁打工·投简历·拜访贵人·联系初恋/18 岁体检·投资·相亲·约会夜·加班·请假·就医·美容/20 岁育儿/22 岁申请升职）
   const expected: Record<string, number> = {
     fitness: 6, study: 6, work: 16, social: 10, health: 18, leisure: 6, walk_dog: 6, crime: 14,
     invest: 18, blind_date: 18, date_night: 18, parenting: 20, family_call: 10, job_hunt: 16, skill_practice: 10, meditate: 8,
+    overtime: 18, leave: 18, promote: 22, doctor_visit: 18, shape_up: 10, beauty: 18,
+    call_friend: 10, visit_mentor: 16, reconnect: 16, post_social: 14,
   };
   for (const a of ACTIVITIES) {
     assert.strictEqual(a.minAge, expected[a.id], `${a.id} minAge 应=${expected[a.id]}`);
@@ -174,7 +177,7 @@ test('SKIP_INTRO：每日挑战局不开幼儿期自动播放（公平同局）'
 
 // ============ 结果池随机抽取 ============
 
-test('pickActivityResult：返回结果池中一员（16 个活动各抽 50 次）', () => {
+test('pickActivityResult：返回结果池中一员（26 个活动各抽 50 次）', () => {
   for (const a of ACTIVITIES) {
     for (let i = 0; i < 50; i++) {
       const r = pickActivityResult(a);
@@ -240,6 +243,84 @@ test('MAKE_ACTION：requiresNot 拒绝（已婚相亲/有职业投简历；无�
   for (const f of ['doctor', 'tech_career', 'retired']) {
     const employed = { ...rt, game: { ...rt.game, flags: [f] } };
     assert.strictEqual(reducer(employed, { type: 'MAKE_ACTION', activityId: 'job_hunt' }), employed, `有 ${f} 不应投简历`);
+  }
+});
+
+test('MAKE_ACTION：requiresPersona 未出场拒绝；出场（历史有互动记录）可用', () => {
+  // personaBonds 从全局 EVENTS 查事件定义（persona 标注透传），注入自制人物事件后推导出场
+  const orig = EVENTS;
+  try {
+    setEvents([{ ...evt('p_meet', 12, { social: 5 }), persona: 'p_buddy' }] as LifeEvent[]);
+    // 18 岁：三个 requiresPersona 活动均过 minAge，排除年龄干扰
+    const base = mkPlaying([evt('a_01', 18, {})]);
+    // 未出场（空历史）：找老朋友/拜访贵人/联系初恋全部拒绝
+    for (const id of ['call_friend', 'visit_mentor', 'reconnect']) {
+      assert.strictEqual(reducer(base, { type: 'MAKE_ACTION', activityId: id }), base, `${id} 未认识人物应拒绝`);
+    }
+    // 出场：与该人物互动过（净收益 > 0 → 好感 55 ≠ 50）
+    const history: ChoiceRecord[] = [{
+      age: 12, stage: getStageForAge(12), eventId: 'p_meet', choiceIndex: 0, text: '选择',
+    }];
+    const met = { ...base, game: { ...base.game, history } };
+    const done = reducer(met, { type: 'MAKE_ACTION', activityId: 'call_friend' });
+    assert.notStrictEqual(done, met, '认识发小后可找老朋友');
+    assert.deepStrictEqual(done.game.actionsDone, ['call_friend']);
+    // 只认识发小：拜访贵人（需 p_mentor）仍拒绝
+    assert.strictEqual(reducer(met, { type: 'MAKE_ACTION', activityId: 'visit_mentor' }), met, '未认识贵人不可拜访');
+  } finally {
+    setEvents(orig);
+  }
+});
+
+test('MAKE_ACTION：overtime/leave 需职业 flag（retired 不算在职，拒绝）', () => {
+  const rt = mkPlaying([evt('a_01', 25, {})]);
+  assert.strictEqual(reducer(rt, { type: 'MAKE_ACTION', activityId: 'overtime' }), rt, '无职业不可加班');
+  assert.strictEqual(reducer(rt, { type: 'MAKE_ACTION', activityId: 'leave' }), rt, '无职业不可请假');
+  const employed = { ...rt, game: { ...rt.game, flags: ['doctor'] } };
+  assert.notStrictEqual(reducer(employed, { type: 'MAKE_ACTION', activityId: 'overtime' }), employed, '在职可加班');
+  assert.notStrictEqual(reducer(employed, { type: 'MAKE_ACTION', activityId: 'leave' }), employed, '在职可请假');
+  const retired = { ...rt, game: { ...rt.game, flags: ['doctor', 'retired'] } };
+  assert.strictEqual(reducer(retired, { type: 'MAKE_ACTION', activityId: 'overtime' }), retired, '退休不可加班');
+  assert.strictEqual(reducer(retired, { type: 'MAKE_ACTION', activityId: 'leave' }), retired, '退休不可请假');
+});
+
+test('MAKE_ACTION：promote 两档——成功加薪提情绪 / 失败情绪回落', () => {
+  const rt = mkPlaying([evt('a_01', 25, {})], { wealth: 50, happiness: 50 });
+  const employed = { ...rt, game: { ...rt.game, flags: ['tech_career'] } };
+  const orig = Math.random;
+  try {
+    // 结果池第 1 档 = 成功变体（wealth +10、happiness +5）
+    Math.random = () => 0;
+    const win = reducer(employed, { type: 'MAKE_ACTION', activityId: 'promote' });
+    assert.strictEqual(win.game.attributes.wealth, 60, '成功应加薪 +10');
+    assert.strictEqual(win.game.attributes.happiness, 55, '成功应提情绪 +5');
+    assert.ok(win.feedback!.length > 0);
+    // 结果池第 2 档 = 失败变体（happiness -3）
+    Math.random = () => 0.4;
+    const lose = reducer(employed, { type: 'MAKE_ACTION', activityId: 'promote' });
+    assert.strictEqual(lose.game.attributes.wealth, 50, '失败不加薪');
+    assert.strictEqual(lose.game.attributes.happiness, 47, '失败情绪 -3');
+  } finally {
+    Math.random = orig;
+  }
+});
+
+test('MAKE_ACTION：post_social 爆款变体产出 viral flag（结果池含 flags 变体）', () => {
+  const rt = mkPlaying([evt('a_01', 14, {})]);
+  const orig = Math.random;
+  try {
+    // 结果池第 1 档 = 爆款变体（flags: [viral]，happiness +6、social +6）
+    Math.random = () => 0;
+    const viral = reducer(rt, { type: 'MAKE_ACTION', activityId: 'post_social' });
+    assert.ok(viral.game.flags.includes('viral'), '爆款应产出 viral flag');
+    assert.strictEqual(viral.game.attributes.happiness, 66);
+    assert.strictEqual(viral.game.attributes.social, 31);
+    // 非爆款变体不产出 viral
+    Math.random = () => 0.4;
+    const normal = reducer(rt, { type: 'MAKE_ACTION', activityId: 'post_social' });
+    assert.ok(!normal.game.flags.includes('viral'), '普通变体不应产出 viral flag');
+  } finally {
+    Math.random = orig;
   }
 });
 

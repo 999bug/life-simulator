@@ -146,12 +146,18 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
   }, [onContinue]);
 
   const handleDialogComplete = useCallback(() => {
+    if (introAuto && currentEvent && currentEvent.choices.length > 0) {
+      // 幼儿期走过场（幻灯片式）：不显示选择面板，自动随机选——玩家只点击翻页，无需做选择
+      const ch = currentEvent.choices[Math.floor(Math.random() * currentEvent.choices.length)];
+      onChoice(ch);
+      return;
+    }
     if (currentEvent && currentEvent.choices.length === 1 && currentEvent.choices[0].text === '……') {
       // 纯叙事事件，不显示选择面板，直接等用户点击
     } else {
       setShowChoices(true);
     }
-  }, [currentEvent]);
+  }, [currentEvent, introAuto, onChoice]);
 
   // 阶段切换音（跳过首次渲染，只在实际切换阶段时播放）
   const firstStageRef = useRef(true);
@@ -214,7 +220,8 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
   }
 
   const stageMeta = STAGE_META[game.stage];
-  const isAuto = currentEvent.choices.length === 1 && currentEvent.choices[0].text === '……';
+  // 幻灯片式推进：纯叙事事件或幼儿期（无需选择，看完点「▼ 点击继续」翻页）
+  const isAuto = (currentEvent.choices.length === 1 && currentEvent.choices[0].text === '……') || introAuto;
 
   return (
     <div className="w-full h-full relative">
@@ -253,7 +260,7 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
           instant={autoPlay}
           typeSpeed={typeSpeed}
           onComplete={handleDialogComplete}
-          onAutoContinue={isAuto ? () => handleChoice(currentEvent.choices[0]) : undefined}
+          onAutoContinue={isAuto ? () => (introAuto ? handleDialogComplete() : handleChoice(currentEvent.choices[0])) : undefined}
         />
         <ChoicePanel
           choices={currentEvent.choices}
@@ -447,11 +454,11 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
         actionsDone={actionsDone}
       />
 
-      {/* 幼儿期走过场：0-5 岁自动播放（intraAuto），顶部角标 + 一键跳过 */}
+      {/* 幼儿期走过场：0-5 岁无需选择（幻灯片式点击翻阅，intraAuto），顶部角标 + 一键跳过 */}
       {introAuto && (
         <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
           <span className="px-3 py-1 rounded-full border border-[#c9a96e]/30 bg-black/50 text-[11px] text-[#c9a96e]">
-            👶 幼儿期 · 自动播放
+            👶 幼儿期 · 无需选择
           </span>
           <button
             onClick={() => { sfx.select(); onSkipIntro(); }}

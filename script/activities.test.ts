@@ -138,15 +138,15 @@ test('SKIP_INTRO：普通局 0 岁自动播放开启，快进到 6 岁并交还�
   ];
   const base = createInitialRuntime();
   const rt = reducer(base, { type: 'START_GAME', gender: 'male', name: '小明', paceMode: 'full', typeSpeed: 'normal', goal: null });
-  // 普通手动局 0 岁：幼儿期自动播放开启（introAuto 标记）
+  // 普通手动局 0 岁：幼儿期幻灯片标记开启（introAuto；autoPlay 仅快速模拟为 true）
   assert.strictEqual(rt.introAuto, true);
-  assert.strictEqual(rt.autoPlay, true);
+  assert.strictEqual(rt.autoPlay, false);
   // 覆盖事件流（自制数组）
   const setup = { ...rt, shuffledEvents: events, currentEvent: events[0], eventIndex: 0 };
   const skipped = reducer(setup, { type: 'SKIP_INTRO' });
   assert.strictEqual(skipped.game.age, 6, '应推进到 6 岁');
-  assert.strictEqual(skipped.introAuto, false, '走过场标记清除');
-  assert.strictEqual(skipped.autoPlay, false, '交还玩家控制');
+  assert.strictEqual(skipped.introAuto, false, '幻灯片标记清除');
+  assert.strictEqual(skipped.autoPlay, false, '保持手动');
   assert.ok(skipped.game.attributes.health >= 65, '自动选择应积累了属性');
   // 非幼儿期局 SKIP_INTRO 原样返回
   const manual = { ...setup, introAuto: false, autoPlay: false };

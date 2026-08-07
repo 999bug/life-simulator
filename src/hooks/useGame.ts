@@ -728,8 +728,9 @@ function startNewGame(state: RuntimeState, p: StartParams): RuntimeState {
     shuffledEvents,
     skippedEvents: firstScan.skipped,
     shuffleSeed,
-    // 幼儿期走过场：普通手动局 0-5 岁自动播放（introAuto 标记，6 岁起交还玩家）；快速模拟局全自动无标记
-    autoPlay: p.autoPlay || introEligible,
+    // 幼儿期走过场：普通手动局 0-5 岁不弹选择面板（introAuto 标记，幻灯片式自主点击翻页，6 岁起交还玩家）；
+    // autoPlay 仅快速模拟为 true——幼儿期由 GameScreen 点击推进（onChoice 自动随机选），不做全自动播放
+    autoPlay: p.autoPlay,
     introAuto: !p.autoPlay && introEligible,
     paceMode: p.paceMode,
     typeSpeed: p.typeSpeed,
@@ -830,8 +831,8 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
 
     case 'MAKE_CHOICE': {
       const { choice, eventId } = action;
-      // 后悔栈：记录选择前状态（快速模拟不记录；最多保留 UNDO_MAX 步）
-      const undoStack = state.autoPlay
+      // 后悔栈：记录选择前状态（快速模拟与幼儿期自动选择不记录——玩家未亲自做选择；最多保留 UNDO_MAX 步）
+      const undoStack = state.autoPlay || state.introAuto
         ? state.undoStack
         : [...state.undoStack, {
             game: state.game,
@@ -971,8 +972,8 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         skippedEvents: [...state.skippedEvents, ...nextScan.skipped],
         shuffledEvents: state.shuffledEvents,
         shuffleSeed: state.shuffleSeed,
-        // 幼儿期走过场：到 6 岁自动交还玩家控制（快速模拟局 introAuto 无标记，保持全自动）
-        autoPlay: state.autoPlay && !(state.introAuto && age >= 6),
+        // 幼儿期走过场：到 6 岁清除标记（自动选择期间不记录 undo）
+        autoPlay: state.autoPlay,
         introAuto: state.introAuto && age < 6,
         paceMode: state.paceMode,
         typeSpeed: state.typeSpeed,

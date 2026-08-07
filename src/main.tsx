@@ -17,14 +17,25 @@ function renderLoadError(root: HTMLElement) {
   title.textContent = '事件数据加载失败';
 
   const desc = document.createElement('p');
-  desc.style.cssText = 'color:rgba(255,255,255,0.5);font-size:13px;letter-spacing:2px;';
-  desc.textContent = '请检查网络连接后刷新重试';
+  desc.style.cssText = 'color:rgba(255,255,255,0.5);font-size:13px;letter-spacing:2px;text-align:center;padding:0 24px;';
+  // file:// 直开时 fetch 被浏览器禁止，提示正确用法；HTTP 下提示网络问题
+  const isFileProtocol = location.protocol === 'file:';
+  desc.textContent = isFileProtocol
+    ? '直接双击打开本地文件时，浏览器禁止读取数据文件。\n请在项目目录运行 npm run preview（或部署上线）后访问。'
+    : '请检查网络连接后刷新重试';
 
   const btn = document.createElement('button');
   btn.style.cssText = 'padding:10px 32px;border-radius:30px;border:none;cursor:pointer;'
     + 'background:linear-gradient(to right,#c9a96e,#a88b4e);color:#1a1a2e;font-weight:bold;letter-spacing:3px;';
-  btn.textContent = '刷 新';
-  btn.addEventListener('click', () => location.reload());
+  // file:// 下刷新无效，按钮改为收起提示（恢复默认页面）
+  btn.textContent = isFileProtocol ? '知道了' : '刷 新';
+  btn.addEventListener('click', () => {
+    if (isFileProtocol) {
+      root.replaceChildren();
+      return;
+    }
+    location.reload();
+  });
 
   wrap.append(title, desc, btn);
   root.replaceChildren(wrap);

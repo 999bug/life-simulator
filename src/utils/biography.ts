@@ -21,6 +21,12 @@ export function buildBiographyMarkdown(game: GameState, verdictTitle: string, sc
   lines.push(`# ${game.name}的一生`);
   lines.push('');
   lines.push(`> ${genderIcon} ${game.name} · 享年 ${game.age} 岁 · 结局：${verdictTitle} · 综合评分：${score}`);
+  // 性格注脚：画像成形（总分 ≥ 2）才写入开场白，与结算页展示规则一致
+  const persona = derivePersona(game.history);
+  const personaTotal = Object.values(persona).reduce((s, n) => s + n, 0);
+  if (personaTotal >= 2) {
+    lines.push(`> 这一生，${personaSummary(persona)}。`);
+  }
   lines.push('');
 
   // 人生大事记：按年龄分组（年份 → 事件列表）
@@ -48,8 +54,7 @@ export function buildBiographyMarkdown(game: GameState, verdictTitle: string, sc
     }
   }
 
-  // 性格画像（推导自本局全部选择：概括句 + 命中的性格端与次数）
-  const persona = derivePersona(game.history);
+  // 性格画像（推导自本局全部选择：概括句 + 命中的性格端与次数；persona 已在开场白处计算）
   lines.push('## 🧭 性格画像');
   lines.push('');
   lines.push(`> ${personaSummary(persona)}`);

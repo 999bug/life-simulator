@@ -13,6 +13,7 @@ import { readFileSync } from 'node:fs';
 import { EVENTS, setEvents, shuffleEvents, filterEvents } from '../src/engine/events.ts';
 import { applyOutcomes, applyElderDecay, calcMaxAge, checkDeath, createInitialState } from '../src/engine/state.ts';
 import { verdictKey } from '../src/engine/verdict.ts';
+import { derivePersona, meetsPersonality } from '../src/engine/personality.ts';
 
 // 事件数据运行时拆分后，node 环境无 fetch，直接读 public/events.json 注入
 setEvents(JSON.parse(readFileSync(new URL('../public/events.json', import.meta.url), 'utf8')));
@@ -29,8 +30,8 @@ function mulberry32(seed: number): () => number {
   };
 }
 
-/** checkConditions 的就地复刻（与 useGame.ts 一致：hasFlags/notFlags/minAttrs/maxAttrs） */
-function checkConditions(e: any, flags: string[], attrs: Record<string, number>): boolean {
+/** checkConditions 的就地复刻（与 useGame.ts 一致：hasFlags/notFlags/minAttrs/maxAttrs/minPersonality） */
+function checkConditions(e: any, flags: string[], attrs: Record<string, number>, history: any[]): boolean {
   const c = e.conditions;
   if (!c) {
     return true;
@@ -55,6 +56,9 @@ function checkConditions(e: any, flags: string[], attrs: Record<string, number>)
       return false;
     }
   }
+  if (c.minPersonality && !meetsPersonality(derivePersona(history), c.minPersonality)) {
+    return false;
+  }
   return true;
 }
 
@@ -73,6 +77,8 @@ function playOne(seed: number): GameResult {
   const game = createInitialState('male', '模拟');
   let attrs = game.attributes;
   let flags: string[] = [];
+  // 选择历史（性格条件推导用；只记录反查所需的 eventId/choiceIndex）
+  const history: Array<{ eventId: string; choiceIndex: number }> = [];
   const events = shuffleEvents(filterEvents(EVENTS, 'full', seed), seed);
   const rng = mulberry32(seed ^ 0x9e3779b9);
   const minAttrs: Record<string, number> = { ...attrs };
@@ -82,7 +88,7 @@ function playOne(seed: number): GameResult {
   // 首事件
   let next = null;
   for (let i = 0; i < events.length; i++) {
-    if (checkConditions(events[i], flags, attrs)) {
+    if (checkConditions(events[i], flags, attrs, history)) {
       next = events[i];
       idx = i;
       break;
@@ -94,6 +100,7 @@ function playOne(seed: number): GameResult {
     const cur = next;
     age = cur.age;
     const choice = cur.choices[Math.floor(rng() * cur.choices.length)];
+    history.push({ eventId: cur.id, choiceIndex: cur.choices.indexOf(choice) });
     attrs = applyOutcomes(attrs, choice.outcomes, age);
     for (const f of choice.outcomes.flags ?? []) {
       if (!flags.includes(f)) {
@@ -103,7 +110,7 @@ function playOne(seed: number): GameResult {
     // 找下一事件
     let nxt = null;
     for (let i = idx + 1; i < events.length; i++) {
-      if (checkConditions(events[i], flags, attrs)) {
+      if (checkConditions(events[i], flags, attrs, history)) {
         nxt = events[i];
         idx = i;
         break;

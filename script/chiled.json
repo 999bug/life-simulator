@@ -21525,6 +21525,52 @@
     }
   },
   {
+    "id": "pers_0001",
+    "age_range": [
+      57,
+      57
+    ],
+    "category": "personality",
+    "title": "说走就走",
+    "text": "某个普通的工作日，日光灯在头顶嗡嗡作响。你盯着改了第七遍的方案，忽然觉得每一秒都在生锈。窗外有鸟飞过，你冒出一个念头：如果现在站起来，订一张最近发车的火车票，会怎么样？手机屏幕亮了又暗，你的心跳却一下比一下响。",
+    "choices": [
+      {
+        "text": "合上电脑，查最近一班火车的时刻表——今天就走",
+        "effects": {
+          "courage": 6,
+          "happiness": 4,
+          "money": -4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "先保存好方案，等周末再去近郊走走",
+        "effects": {
+          "discipline": 3,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "收拾行李时给家里留了张字条：我出去走走，别担心",
+        "effects": {
+          "courage": 4,
+          "family_relation": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {},
+      "min_personality": {
+        "adventurous": 6
+      }
+    }
+  },
+  {
     "id": "mid_43",
     "age_range": [
       57,
@@ -21858,6 +21904,51 @@
       "not_flags": [],
       "min_attrs": {},
       "max_attrs": {}
+    }
+  },
+  {
+    "id": "pers_0002",
+    "age_range": [
+      58,
+      58
+    ],
+    "category": "personality",
+    "title": "被一首老歌击中",
+    "text": "下班路上，街角小店突然放起一首老歌。旋律响起的瞬间，你像被什么撞了一下，停在原地。那是你很多年前单曲循环的歌，久到你已经忘了自己会为它停下脚步。路灯下人来人往，你的眼眶毫无预兆地热了。",
+    "choices": [
+      {
+        "text": "站在原地把歌听完，任眼泪掉下来",
+        "effects": {
+          "emotion": 6,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把手机声音调大盖过去，快步走回家",
+        "effects": {
+          "discipline": 4,
+          "intelligence": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "掏出手机给久未联系的那个人发了条消息：刚听到那首歌了",
+        "effects": {
+          "social": 5,
+          "emotion": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {},
+      "min_personality": {
+        "emotional": 6
+      }
     }
   },
   {
@@ -22264,6 +22355,51 @@
     }
   },
   {
+    "id": "pers_0003",
+    "age_range": [
+      59,
+      59
+    ],
+    "category": "personality",
+    "title": "深夜复盘",
+    "text": "凌晨一点，你翻来覆去睡不着，索性坐起来。白天的情绪像退潮一样干涸，脑子反而清晰得可怕。你把这几年的选择一件件摆上桌：去了哪里、放弃了什么、当时为什么。每个决定放到今天看，竟然都有迹可循。你打开备忘录，写下：第一、第二、第三。",
+    "choices": [
+      {
+        "text": "逐条写下每个选择的利弊，推演另一种可能的结局",
+        "effects": {
+          "intelligence": 6,
+          "self_reliance": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "借着清醒，给明天的自己定下一条可衡量的规矩",
+        "effects": {
+          "ambition": 4,
+          "discipline": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "合上手机：分析得再清楚，天亮前也得睡觉",
+        "effects": {
+          "health": 3,
+          "happiness": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {},
+      "min_personality": {
+        "rational": 6
+      }
+    }
+  },
+  {
     "id": "mid_52",
     "age_range": [
       59,
@@ -22539,6 +22675,51 @@
       "not_flags": [],
       "min_attrs": {},
       "max_attrs": {}
+    }
+  },
+  {
+    "id": "pers_0004",
+    "age_range": [
+      60,
+      60
+    ],
+    "category": "personality",
+    "title": "被需要的时刻",
+    "text": "地铁口，一位拎着大包小包的老太太拦住你，急切地问某个小区怎么走，方言味很重。你低头看了看表，再不走就要迟到了。可她望着你，眼神像在望一根救命稻草。风把她的白发吹乱了一缕，她顾不上拂开。",
+    "choices": [
+      {
+        "text": "接过她一只包：我送您过去，迟到就迟到吧",
+        "effects": {
+          "empathy": 6,
+          "responsibility": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "打开手机查好路线，一步步讲给她听，再目送她走远",
+        "effects": {
+          "empathy": 5,
+          "intelligence": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "匆匆指了个方向，转身快步走进地铁口",
+        "effects": {
+          "money": 4,
+          "ambition": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {},
+      "min_personality": {
+        "altruistic": 6
+      }
     }
   },
   {
@@ -23310,6 +23491,51 @@
     }
   },
   {
+    "id": "pers_0005",
+    "age_range": [
+      62,
+      62
+    ],
+    "category": "career",
+    "title": "变故前的直觉",
+    "text": "新来的合伙人画了一张很大的饼，会议室里人人热血沸腾。散会回到工位，你关上门，把那张饼在心里拆了一遍：资金从哪来、客户在哪、退路是什么。说不上哪里不对，可后背一直发凉。第二天上班，你把抽屉里的旧简历翻了出来。",
+    "choices": [
+      {
+        "text": "不动声色地查账、查合同、查担保人，把底摸清再说",
+        "effects": {
+          "intelligence": 6,
+          "responsibility": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "约老同事吃顿饭，把圈里的风声问了个遍",
+        "effects": {
+          "social": 5,
+          "discipline": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "说服自己别多心，跟着大家冲一次",
+        "effects": {
+          "courage": 5,
+          "ambition": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {},
+      "min_personality": {
+        "cautious": 6
+      }
+    }
+  },
+  {
     "id": "mid_07",
     "age_range": [
       62,
@@ -23688,6 +23914,52 @@
       "not_flags": [],
       "min_attrs": {},
       "max_attrs": {}
+    }
+  },
+  {
+    "id": "pers_0006",
+    "age_range": [
+      63,
+      63
+    ],
+    "category": "career",
+    "title": "到手的机会",
+    "text": "同组的同事休了假，她跟了大半年的项目落到你头上。客户只见过你一面，却对你的方案赞不绝口。领导拍着你的肩膀：「这单要是成了，今年评优稳了。」没有人提起她的名字。你低头看了看方案，封面署名栏还空着。",
+    "choices": [
+      {
+        "text": "署上自己的名字——机会不抓住，就是别人的",
+        "effects": {
+          "money": 6,
+          "ambition": 5,
+          "impulse": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "署上两个人的名字：她跟了大半，我补完剩下",
+        "effects": {
+          "responsibility": 5,
+          "social": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "先不动封面，等把项目做成了，再谈功劳怎么分",
+        "effects": {
+          "responsibility": 4,
+          "discipline": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {},
+      "min_personality": {
+        "selfish": 6
+      }
     }
   },
   {

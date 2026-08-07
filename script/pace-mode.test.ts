@@ -98,3 +98,26 @@ test('filterEvents：不同 seed 结果不同（重玩性）', () => {
   const b = filterEvents(EVENTS, 'lite', 2).map(e => e.id).join(',');
   assert.notStrictEqual(a, b);
 });
+
+test('filterEvents：lite 模式性格事件优先保留（条件触发彩蛋不参与抽样淘汰）', () => {
+  // 注入含性格事件的迷你数据集，测完恢复真实数据
+  const saved = EVENTS;
+  const mini: LifeEvent[] = [
+    { id: 'pers_0001', stage: 'young_adult', age: 25, category: 'personality', title: 't', text: 'x',
+      choices: [{ text: 'a', effects: '', outcomes: { attr: { happiness: 5 } } }],
+      conditions: { minPersonality: { adventurous: 6 } } },
+    { id: 'young_9901', stage: 'young_adult', age: 25, category: 'career', title: 't2', text: 'x2',
+      choices: [{ text: 'b', effects: '', outcomes: { attr: { wealth: 5 } } }] },
+    { id: 'young_9902', stage: 'young_adult', age: 25, category: 'career', title: 't3', text: 'x3',
+      choices: [{ text: 'c', effects: '', outcomes: { attr: { wealth: 5 } } }] },
+    { id: 'young_9903', stage: 'young_adult', age: 25, category: 'career', title: 't4', text: 'x4',
+      choices: [{ text: 'd', effects: '', outcomes: { attr: { wealth: 5 } } }] },
+  ];
+  try {
+    setEvents(mini);
+    const lite = filterEvents(EVENTS, 'lite', 1);
+    assert.ok(lite.some(e => e.id === 'pers_0001'), '性格事件应优先保留');
+  } finally {
+    setEvents(saved);
+  }
+});

@@ -192,6 +192,16 @@ const PERSONA_DIMENSIONS: Array<[PersonaTrait, PersonaTrait]> = [
   ['selfish', 'altruistic'],
 ];
 
+/** 性格注脚：Top1 端的一句话人生注脚（结局描述下展示，弱画像不显示） */
+const PERSONA_NOTES: Record<PersonaTrait, string> = {
+  rational: '你习惯先把每一步算清楚——幸运的是，人生没有辜负你的计算。',
+  emotional: '你的心总是先于理智抵达——那些热泪与冲动，正是你活过的证据。',
+  adventurous: '你是个敢赌的人——回头看，那些险路都成了风景。',
+  cautious: '你走得稳，一生少了很多风雨，也错过了不少彩虹。',
+  selfish: '你始终清醒地爱着自己——这一生，你少受了许多委屈。',
+  altruistic: '你把手里的光分给了很多人——最后，光也照亮了你自己的路。',
+};
+
 export default function SummaryScreen({ game, onRestart, newAchievements, skippedTitles, generation, seed, collectedEndings = [], isDaily = false, isWeekly = false, weeklyGoal, totalLives = 0, onReincarnate, inheritTalent = null }: Props) {
   const score = calcScore(game.attributes);
   const { title, desc } = getVerdict(game);
@@ -202,6 +212,11 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
   const gaokao = gaokaoResult(game);
   const assets = assetStatus(game);
   const persona = derivePersona(game.history);
+  // 性格注脚数据：Top1 端 + 总分（总分 < 2 视为画像未成形，不展示）
+  const personaTotal = Object.values(persona).reduce((s, n) => s + n, 0);
+  const personaTop = (Object.keys(PERSONA_META) as PersonaTrait[])
+    .filter(t => persona[t] > 0)
+    .sort((a, b) => persona[b] - persona[a])[0];
   // 「下一站」：本局结算后（当前结局已计入收集）提示下一条未走过的路线；全收集显示通关文案
   const nextRoute = useMemo(
     () => nextRouteToExplore(verdictKey(game), new Set(collectedEndings)),
@@ -265,6 +280,12 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       <p className="text-sm text-white/40 text-center max-w-[400px] leading-relaxed animate-[fadeIn_1.2s_ease]">
         {desc}
       </p>
+      {/* 性格注脚：Top1 端的一句话（弱画像不显示，低调不抢戏） */}
+      {personaTotal >= 2 && personaTop && (
+        <p className="text-[12px] text-white/50 italic text-center animate-[fadeIn_1.3s_ease]">
+          {PERSONA_NOTES[personaTop]}
+        </p>
+      )}
 
       {/* 下一站：还没走的人生（留存钩子——收集欲驱动重玩；全收集显示通关成就） */}
       {nextRoute && (

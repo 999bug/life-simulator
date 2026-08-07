@@ -146,6 +146,17 @@ function mapConditions(conditions, eventId) {
       out[destKey][target] = value;
     }
   }
+  // 性格最低要求透传（键必须为性格端白名单，值 ≥1，写错即抛错）
+  const mp = conditions.min_personality;
+  if (mp) {
+    out.minPersonality = {};
+    for (const [key, value] of Object.entries(mp)) {
+      if (!PERSONA_TRAITS.includes(key) || typeof value !== 'number' || value < 1) {
+        throw new Error(`invalid min_personality in event ${eventId}: ${key}=${value}`);
+      }
+      out.minPersonality[key] = value;
+    }
+  }
   return out;
 }
 

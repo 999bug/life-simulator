@@ -172,16 +172,18 @@ export function filterEvents(events: LifeEvent[], mode: PaceMode, seed: number):
     byAge.set(e.age, list);
   }
 
-  // 1. 每岁：主线优先 + 模拟事件按种子抽样补足目标密度
+  // 1. 每岁：性格事件优先保留（条件触发彩蛋，不满足条件即跳过，不占播放密度）
+  //    + 主线优先 + 模拟事件按种子抽样补足目标密度
   const selected = new Set<LifeEvent>();
   for (const age of [...byAge.keys()].sort((a, b) => a - b)) {
     const group = byAge.get(age)!;
     const target = liteTarget(age);
+    const personality = group.filter(e => e.conditions?.minPersonality);
     const mainline = group.filter(e => isMainlineEvent(e.id));
-    const sims = group.filter(e => !isMainlineEvent(e.id));
+    const sims = group.filter(e => !isMainlineEvent(e.id) && !e.conditions?.minPersonality);
     const keptMain = mainline.length <= target ? mainline : pickShuffled(mainline, target, rng);
     const keptSim = pickShuffled(sims, target - keptMain.length, rng);
-    for (const e of [...keptMain, ...keptSim]) {
+    for (const e of [...personality, ...keptMain, ...keptSim]) {
       selected.add(e);
     }
   }

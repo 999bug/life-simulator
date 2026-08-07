@@ -57,6 +57,9 @@ export interface ChoiceOutcome {
   personality?: string[];
 }
 
+/** 性格端（personality.ts 重新导出；6 端 = 3 维对立） */
+export type PersonaTrait = 'rational' | 'emotional' | 'adventurous' | 'cautious' | 'selfish' | 'altruistic';
+
 /** 事件触发条件 */
 export interface EventCondition {
   /** 必须拥有的标记 */
@@ -67,6 +70,8 @@ export interface EventCondition {
   minAttrs?: Partial<Attributes>;
   /** 属性最高限制 */
   maxAttrs?: Partial<Attributes>;
+  /** 性格最低要求（键为性格端，值为累计次数；从 history 纯推导，旧存档自动兼容） */
+  minPersonality?: Partial<Record<PersonaTrait, number>>;
 }
 
 /** 事件分类（数据层 category，驱动分类场景背景） */

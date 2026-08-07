@@ -255,13 +255,13 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
         </div>
       )}
 
-      {/* 后悔回退（快速模拟不显示）：回退上一步 / 回退到某岁 */}
+      {/* 后悔回退（快速模拟不显示）：回退上一步 / 回退到某岁（半透明深底胶囊，场景光晕下也清晰可见） */}
       {!autoPlay && undoStack.length > 0 && (
         <button
           onClick={() => { sfx.select(); setShowUndo(true); }}
           title="后悔回退"
-          className="absolute top-2 right-11 z-20 px-3 h-8 rounded-full border border-white/15 text-white/40 text-[12px]
-            hover:border-[#5de8a0]/60 hover:text-[#5de8a0] transition-all duration-200 font-sans"
+          className="absolute top-2 right-11 z-20 px-3 h-8 rounded-full border border-white/25 bg-black/40 text-white/80 text-[12px]
+            hover:border-[#5de8a0]/80 hover:text-[#5de8a0] transition-all duration-200 font-sans"
         >
           ↩️ 后悔
         </button>
@@ -272,10 +272,10 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
         <button
           onClick={() => { sfx.select(); setShowKeyChoices(true); }}
           title="关键抉择"
-          className="absolute top-2 right-[92px] z-20 px-3 h-8 rounded-full border border-white/15 text-white/40 text-[12px]
-            hover:border-[#c9a96e]/60 hover:text-[#c9a96e] transition-all duration-200 font-sans"
+          className="absolute top-2 right-[92px] z-20 px-3 h-8 rounded-full border border-white/25 bg-black/40 text-white/80 text-[12px]
+            hover:border-[#c9a96e]/80 hover:text-[#c9a96e] transition-all duration-200 font-sans"
         >
-          📌
+          📌 抉择
         </button>
       )}
 
@@ -283,8 +283,8 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
       <button
         onClick={() => { sfx.select(); setShowExit(true); }}
         title="退出本局"
-        className="absolute top-2 right-2 z-20 w-8 h-8 rounded-full border border-white/15 text-white/40
-          hover:border-[#e85d75] hover:text-[#e85d75] transition-all duration-200 font-sans text-[13px]"
+        className="absolute top-2 right-2 z-20 w-9 h-9 rounded-full border border-white/25 bg-black/40 text-white/80
+          hover:border-[#e85d75] hover:text-[#e85d75] transition-all duration-200 font-sans text-[14px]"
       >
         ✕
       </button>

@@ -4,7 +4,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { traitForOutcome, derivePersona, personaSummary, EMPTY_PERSONA } from '../src/engine/personality.ts';
+import { traitForOutcome, derivePersona, personaSummary, meetsPersonality, EMPTY_PERSONA } from '../src/engine/personality.ts';
 import { setEvents } from '../src/engine/events.ts';
 import type { ChoiceRecord, LifeEvent } from '../src/types/index.ts';
 
@@ -127,6 +127,19 @@ test('derivePersona：choiceIndex 越界跳过', () => {
 
 test('derivePersona：空历史返回全 0', () => {
   assert.deepStrictEqual(derivePersona([]), EMPTY_PERSONA);
+});
+
+// ============ meetsPersonality：性格条件 ============
+
+test('meetsPersonality：全部达标才满足，空条件恒满足', () => {
+  const p = { ...EMPTY_PERSONA, adventurous: 6, rational: 3 };
+  assert.strictEqual(meetsPersonality(p, { adventurous: 6 }), true);
+  assert.strictEqual(meetsPersonality(p, { adventurous: 7 }), false);
+  assert.strictEqual(meetsPersonality(p, { adventurous: 6, rational: 3 }), true);
+  assert.strictEqual(meetsPersonality(p, { adventurous: 6, rational: 4 }), false);
+  assert.strictEqual(meetsPersonality(p, {}), true);
+  // 未涉及的端按 0 计
+  assert.strictEqual(meetsPersonality(p, { altruistic: 1 }), false);
 });
 
 // ============ personaSummary：概括句 ============

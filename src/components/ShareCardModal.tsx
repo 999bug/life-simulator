@@ -4,6 +4,7 @@ import { ATTR_META, calcScore } from '../engine/state';
 import { checkGoal } from '../engine/goals';
 import { GOALS } from '../engine/goals';
 import { VERDICT_META } from '../engine/verdict';
+import { derivePersona, personaSummary } from '../engine/personality';
 import { drawGrowthChart } from './GrowthChart';
 
 interface Props {
@@ -94,6 +95,16 @@ export default function ShareCardModal({ game, verdictTitle, endingKey, collecti
       ctx.textAlign = 'left';
       ctx.fillStyle = goalResult?.achieved ? '#5de8a0' : 'rgba(255,255,255,0.6)';
       ctx.fillText(`${goalDef.icon} 目标「${goalDef.name}」${goalResult?.achieved ? '已达成' : '未达成'}`, 60, 356);
+    }
+
+    // 性格概括：画像成形（总分 ≥ 2）才绘制；目标行存在时空隙小，性格行下移贴中
+    const persona = derivePersona(game.history);
+    const personaTotal = Object.values(persona).reduce((s, n) => s + n, 0);
+    if (personaTotal >= 2) {
+      ctx.font = `300 15px ${F}`;
+      ctx.textAlign = 'left';
+      ctx.fillStyle = 'rgba(255,255,255,0.5)';
+      ctx.fillText(`🧭 ${personaSummary(persona)}`, 60, goalDef ? 376 : 354);
     }
 
     // 8 属性（两行四列，紧凑）

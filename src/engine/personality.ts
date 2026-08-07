@@ -1,8 +1,8 @@
-import type { Attributes, ChoiceRecord } from '../types';
+import type { Attributes, ChoiceRecord, PersonaTrait } from '../types';
 import { EVENTS } from './events.ts';
 
-/** 性格端（3 维 6 端：思维模式 / 风险偏好 / 价值取向） */
-export type PersonaTrait = 'rational' | 'emotional' | 'adventurous' | 'cautious' | 'selfish' | 'altruistic';
+/** 性格端（3 维 6 端：思维模式 / 风险偏好 / 价值取向；类型定义在 types，此处重新导出） */
+export type { PersonaTrait } from '../types';
 
 /** 性格画像：各端累积次数（每次命中选择 +1，纯推导） */
 export type PersonaState = Record<PersonaTrait, number>;
@@ -145,6 +145,23 @@ export function traitForOutcome(attr: Partial<Attributes>, flags: string[] = [],
     traits.add('altruistic');
   }
   return [...traits];
+}
+
+/**
+ * 性格条件是否满足（minPersonality 键值对逐一比较，任一不足即不满足）。
+ * 供事件触发条件检查与模拟脚本共用；纯函数可测试。
+ *
+ * @param persona 当前性格画像
+ * @param min 性格最低要求（键为性格端，值为累计次数）
+ * @returns 全部达标返回 true
+ */
+export function meetsPersonality(persona: PersonaState, min: Partial<Record<PersonaTrait, number>>): boolean {
+  for (const [t, v] of Object.entries(min) as [PersonaTrait, number][]) {
+    if ((persona[t] ?? 0) < v) {
+      return false;
+    }
+  }
+  return true;
 }
 
 /**

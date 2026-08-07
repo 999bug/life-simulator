@@ -24,6 +24,7 @@ import {
   STAGE_ORDER,
 } from '../engine/state.ts';
 import { EVENTS, filterEvents, shuffleEvents, pickFateEvents } from '../engine/events.ts';
+import { derivePersona, meetsPersonality } from '../engine/personality.ts';
 import { buildCompanionEvent, COMPANION_DISABLED, COMPANION_END_AGE, COMPANION_INTERVAL, COMPANION_START_AGE, companionEnabled } from '../engine/companion.ts';
 import { track } from '../utils/analytics.ts';
 
@@ -1154,6 +1155,12 @@ function checkConditions(e: LifeEvent, game: GameState): boolean {
   if (c.maxAttrs) {
     for (const [k, v] of Object.entries(c.maxAttrs) as [AttributeKey, number][]) {
       if ((game.attributes[k] ?? 0) > v) return false;
+    }
+  }
+  // 性格条件：从 history 纯推导（仅带该条件的事件才计算，性能无感）
+  if (c.minPersonality) {
+    if (!meetsPersonality(derivePersona(game.history), c.minPersonality)) {
+      return false;
     }
   }
   return true;

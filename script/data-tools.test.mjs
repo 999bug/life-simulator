@@ -81,6 +81,22 @@ test('convertAll：选项手工性格标注透传到 outcomes.personality', () =
   assert.equal(ev.choices[1].outcomes.personality, undefined);
 });
 
+test('convertAll：min_personality 条件透传与非法值抛错', () => {
+  const raw = [{
+    id: 'pers_0001', age_range: [25, 25], category: 'personality', title: 't', text: 'x',
+    choices: [{ text: 'a', effects: { happiness: 1 } }],
+    conditions: { has_flags: [], not_flags: [], min_attrs: {}, max_attrs: {}, min_personality: { adventurous: 6 } },
+  }];
+  const [ev] = convertAll(raw);
+  assert.deepEqual(ev.conditions.minPersonality, { adventurous: 6 });
+  // 非法性格端抛错
+  const badTrait = [{ ...raw[0], conditions: { min_personality: { brave: 6 } } }];
+  assert.throws(() => convertAll(badTrait), /invalid min_personality/);
+  // 非法值（<1）抛错
+  const badVal = [{ ...raw[0], conditions: { min_personality: { adventurous: 0 } } }];
+  assert.throws(() => convertAll(badVal), /invalid min_personality/);
+});
+
 test('convertAll：性格标注非法值抛错（fail fast）', () => {
   const bad = [{
     id: 'child_0019', age_range: [4, 6], category: 'hobby', title: 't', text: 'x',

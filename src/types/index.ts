@@ -103,7 +103,8 @@ export type AchievementId =
   | 'top_score' | 'genius' | 'iron_body' | 'rich_king' | 'big_family' | 'ultra_life' | 'five_endings' | 'ten_lives'
   | 'challenger'
   | 'age_80' | 'wealthy_60' | 'bright_70' | 'score_60' | 'score_92' | 'three_endings' | 'ten_endings'
-  | 'daily_streak_3' | 'daily_streak_7';
+  | 'daily_streak_3' | 'daily_streak_7'
+  | 'gaokao_top' | 'family_harmony' | 'job_elite' | 'asset_owner';
 
 /** 游戏状态 */
 export interface GameState {
@@ -130,6 +131,12 @@ export interface GameState {
   inherited?: boolean;
   /** 人生重开（第 6 周目起：结算页可携半身属性重新投胎；旧存档无此字段） */
   reincarnated?: boolean;
+  /** 本局天赋（开局构筑抽取，结算页可设为传承；旧存档无此字段 = 无天赋） */
+  talents?: string[];
+  /** 开局属性点分配（开局构筑 12 点 + 天赋点数；局中重开保留出生配置；旧存档无此字段） */
+  allocated?: Partial<Attributes>;
+  /** 成就加成（每解锁 10 成就开局全属性 +2；旧存档无此字段） */
+  allocBonus?: boolean;
 }
 
 /** 属性元数据 */

@@ -1,13 +1,42 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useGame } from './hooks/useGame';
 import { sfx, setMuted } from './utils/sound';
 import TitleScreen from './components/TitleScreen';
 import GameScreen from './components/GameScreen';
 import SummaryScreen from './components/SummaryScreen';
 import InstallPrompt from './components/InstallPrompt';
+import { loadInheritTalent } from './engine/talents';
+
+/** 主题（全局）：深空蓝（默认）/ 纯黑 */
+export type Theme = 'dark' | 'black';
+
+/** 主题存储 key */
+const THEME_KEY = 'life-sim-theme';
+
+/** 读取主题；存储不可用时回退深空蓝 */
+function loadTheme(): Theme {
+  try {
+    return localStorage.getItem(THEME_KEY) === 'black' ? 'black' : 'dark';
+  } catch {
+    return 'dark';
+  }
+}
 
 export default function App() {
-  const { game, currentEvent, feedback, skippedEvents, autoPlay, typeSpeed, saves, achievements, stats, newAchievements, fateEventIds, isDaily, daily, dailyHistory, seedScores, family, shuffleSeed, startGame, startAutoGame, startDailyGame, restart, reincarnate, makeChoice, continue: continue_, continueGame, reset, setTypeSpeed } = useGame();
+  const { game, currentEvent, feedback, skippedEvents, autoPlay, typeSpeed, saves, achievements, stats, newAchievements, fateEventIds, isDaily, isWeekly, weeklyGoal, daily, dailyHistory, weekly, seedScores, family, shuffleSeed, startGame, startAutoGame, startDailyGame, startWeeklyGame, restart, reincarnate, makeChoice, continue: continue_, continueGame, reset, setTypeSpeed } = useGame();
+
+  // 主题切换（纯黑/深空蓝；持久化到 localStorage）
+  const [theme, setTheme] = useState<Theme>(loadTheme);
+  const toggleTheme = () => {
+    sfx.select();
+    const next = theme === 'dark' ? 'black' : 'dark';
+    setTheme(next);
+    try {
+      localStorage.setItem(THEME_KEY, next);
+    } catch {
+      // 存储不可用静默降级
+    }
+  };
 
   // 快速模拟模式静音高频交互音；结算页恢复（保留落幕音）
   useEffect(() => {
@@ -29,12 +58,14 @@ export default function App() {
   }, [game.phase, newAchievements.length]);
 
   return (
-    // 全屏径向渐变背景；三个阶段均为全屏流式布局（无舞台框/缩放），窄屏由各自组件响应式适配
-    <div className="w-screen h-screen flex justify-center items-center bg-[radial-gradient(ellipse_at_center,#1a1a30_0%,#0a0a14_70%)] overflow-hidden">
+    // 全屏径向渐变背景（主题可切换：深空蓝 / 纯黑）；三个阶段均为全屏流式布局（无舞台框/缩放），窄屏由各自组件响应式适配
+    <div className={`w-screen h-screen flex justify-center items-center overflow-hidden ${theme === 'dark'
+      ? 'bg-[radial-gradient(ellipse_at_center,#1a1a30_0%,#0a0a14_70%)]'
+      : 'bg-[radial-gradient(ellipse_at_center,#1a1a1a_0%,#000000_70%)]'}`}>
       <div className="w-full h-full text-white">
         {game.phase === 'title' && (
           <>
-            <TitleScreen onStart={startGame} onAutoStart={startAutoGame} onDailyStart={startDailyGame} saves={saves} onContinue={continueGame} achievements={achievements} stats={stats} daily={daily} dailyHistory={dailyHistory} seedScores={seedScores} family={family} />
+            <TitleScreen onStart={startGame} onAutoStart={startAutoGame} onDailyStart={startDailyGame} onWeeklyStart={startWeeklyGame} saves={saves} onContinue={continueGame} achievements={achievements} stats={stats} daily={daily} dailyHistory={dailyHistory} weekly={weekly} weeklyGoal={weeklyGoal} seedScores={seedScores} family={family} theme={theme} onToggleTheme={toggleTheme} />
             {/* PWA 安装引导（仅标题页；Android/Chrome 系首次访问展示一次） */}
             <InstallPrompt />
           </>
@@ -47,6 +78,8 @@ export default function App() {
             autoPlay={autoPlay}
             typeSpeed={typeSpeed}
             fateEventIds={fateEventIds}
+            isWeekly={isWeekly}
+            weeklyGoal={weeklyGoal}
             onTypeSpeedChange={setTypeSpeed}
             onChoice={makeChoice}
             onContinue={continue_}
@@ -64,8 +97,11 @@ export default function App() {
             seed={shuffleSeed}
             collectedEndings={Object.keys(stats.endings)}
             isDaily={isDaily}
+            isWeekly={isWeekly}
+            weeklyGoal={weeklyGoal}
             totalLives={stats.totalLives}
             onReincarnate={reincarnate}
+            inheritTalent={loadInheritTalent()}
           />
         )}
       </div>

@@ -1,9 +1,11 @@
 import { useReducer, useCallback, useEffect } from 'react';
 import type { AchievementId, AttributeKey, Attributes, Choice, CustomGoal, DeathCause, FamilyMember, GamePhase, GameState, GoalKey, LifeEvent, PaceMode, TypeSpeed } from '../types/index.ts';
 import { emptySaves, isValidSaveData, migrateLegacySave, SLOT_COUNT, type SavesV2 } from '../engine/save.ts';
-import { checkAchievements } from '../engine/achievements.ts';
+import { applyAchievementBonus, checkAchievements } from '../engine/achievements.ts';
 import { verdictKey } from '../engine/verdict.ts';
 import { appendFamilyMember, loadFamily, parentFlag, saveFamily } from '../engine/family.ts';
+import { applyAllocation, applyTalents } from '../engine/talents.ts';
+import { checkWeeklyGoal, pickWeeklyGoal, weekOf, weekSeed, type WeeklyGoal } from '../engine/weekly.ts';
 import {
   createInitialState,
   applyOutcomes,
@@ -187,9 +189,79 @@ export function updateDailyBest(prev: DailyStore, today: string, score: number, 
   return { date: today, bestScore: score, bestAge: age };
 }
 
+// ============ 每周挑战存储 ============
+
+/** 每周挑战存储 key */
+const WEEKLY_KEY = 'life-sim-weekly';
+
+/** 每周挑战存储结构（week 为 ISO 周标识，仅记录当周最佳） */
+export interface WeeklyStore {
+  week: string;
+  /** 本周目标 key（展示「本周挑战：xxx」） */
+  goalKey: string;
+  bestScore: number;
+  bestAge: number;
+  /** 本周是否已通关（达成目标；同周复玩可刷新最佳） */
+  cleared: boolean;
+}
+
+/** 读取每周挑战存储；数据损坏或存储不可用时返回空结构 */
+function loadWeekly(): WeeklyStore {
+  try {
+    const raw = localStorage.getItem(WEEKLY_KEY);
+    if (raw) {
+      const data = JSON.parse(raw) as WeeklyStore;
+      if (data && typeof data.week === 'string' && typeof data.goalKey === 'string') {
+        return {
+          week: data.week,
+          goalKey: data.goalKey,
+          bestScore: typeof data.bestScore === 'number' ? data.bestScore : 0,
+          bestAge: typeof data.bestAge === 'number' ? data.bestAge : 0,
+          cleared: Boolean(data.cleared),
+        };
+      }
+    }
+  } catch {
+    // 忽略损坏数据
+  }
+  return { week: '', goalKey: '', bestScore: 0, bestAge: 0, cleared: false };
+}
+
+/** 持久化每周挑战存储；存储不可用时静默降级 */
+function saveWeekly(store: WeeklyStore): void {
+  try {
+    localStorage.setItem(WEEKLY_KEY, JSON.stringify(store));
+  } catch {
+    // 存储不可用静默降级
+  }
+}
+
+/**
+ * 结算时更新当周记录（纯函数）。
+ * 跨周或本周首局以本局成绩初始化当周记录；同周取 max，通关标记只升不降。
+ *
+ * @param prev 现有每周记录
+ * @param week 本周标识（ISO 周号）
+ * @param score 本局综合评分
+ * @param age 本局享年
+ * @param cleared 本局是否达成周目标
+ * @returns 更新后的每周记录
+ */
+export function updateWeeklyBest(prev: WeeklyStore, week: string, score: number, age: number, cleared: boolean): WeeklyStore {
+  if (prev.week === week) {
+    return {
+      ...prev,
+      bestScore: Math.max(prev.bestScore, score),
+      bestAge: Math.max(prev.bestAge, age),
+      cleared: prev.cleared || cleared,
+    };
+  }
+  return { week, goalKey: pickWeeklyGoal(week).key, bestScore: score, bestAge: age, cleared };
+}
+
 // ============ Action 类型 ============
 export type Action =
-  | { type: 'START_GAME'; gender: 'male' | 'female'; name: string; paceMode: PaceMode; typeSpeed: TypeSpeed; goal: GoalKey | CustomGoal | null; challenge: boolean; realMode?: boolean; seed?: number; isDaily?: boolean }
+  | { type: 'START_GAME'; gender: 'male' | 'female'; name: string; paceMode: PaceMode; typeSpeed: TypeSpeed; goal: GoalKey | CustomGoal | null; challenge: boolean; realMode?: boolean; seed?: number; isDaily?: boolean; isWeekly?: boolean; talents?: string[]; alloc?: Partial<Attributes> }
   | { type: 'START_AUTO_GAME'; gender: 'male' | 'female'; name: string }
   | { type: 'REINCARNATE' }
   | { type: 'RESTART' }
@@ -205,7 +277,8 @@ export type Action =
   | { type: 'DAILY_HISTORY_UPDATED'; dailyHistory: DailyHistory }
   | { type: 'DAILY_STREAK_UPDATED'; dailyStreak: DailyStreak }
   | { type: 'SEED_SCORES_UPDATED'; seedScores: SeedScores }
-  | { type: 'FAMILY_UPDATED'; family: FamilyMember[] };
+  | { type: 'FAMILY_UPDATED'; family: FamilyMember[] }
+  | { type: 'WEEKLY_UPDATED'; weekly: WeeklyStore };
 
 // ============ 运行时状态（不参与 React 渲染）============
 export interface RuntimeState {
@@ -243,6 +316,10 @@ export interface RuntimeState {
   fateEventIds: string[];
   /** 每日挑战局：固定种子（同日同序列）+ 不写存档槽（结算仅更新今日最佳） */
   isDaily: boolean;
+  /** 每周挑战局：固定种子（同周同序列 + 本周目标）+ 不写存档槽 */
+  isWeekly: boolean;
+  /** 本周挑战目标（开局时按周种子确定；结算判定通关） */
+  weeklyGoal: WeeklyGoal;
   /** 种子挑战局：玩家输入分享的种子码开局（同种子同事件序列），局中重开保持该种子 */
   seedChallenge: boolean;
   /** 每日挑战记录（今日最佳；标题页展示） */
@@ -251,6 +328,8 @@ export interface RuntimeState {
   dailyHistory: DailyHistory;
   /** 每日挑战连续打卡（连续 3/7 天成就） */
   dailyStreak: DailyStreak;
+  /** 每周挑战记录（当周最佳；标题页展示） */
+  weekly: WeeklyStore;
   /** 种子挑战本地比分（SeedModal 展示） */
   seedScores: SeedScores;
   /** 家族族谱（跨周目；结算时正常局追加一代，快速模拟/每日挑战不写入） */
@@ -312,8 +391,8 @@ function saveSaves(saves: SavesV2): boolean {
  * 内容未变（SAVES_UPDATED 后的重跑）返回 null，避免写库与 dispatch 循环。
  */
 export function saveState(rt: RuntimeState): SavesV2 | null {
-  // 快速模拟与每日挑战为临时局：不写入存档槽位（避免静默覆盖正式存档）
-  if (rt.autoPlay || rt.isDaily) {
+  // 快速模拟/每日挑战/每周挑战为临时局：不写入存档槽位（避免静默覆盖正式存档）
+  if (rt.autoPlay || rt.isDaily || rt.isWeekly) {
     return null;
   }
   if (!rt.game || rt.game.phase === 'title') {
@@ -503,6 +582,12 @@ interface StartParams {
   autoPlay: boolean;
   /** 每日挑战局：固定种子（同日同序列）+ 不写存档槽 */
   isDaily?: boolean;
+  /** 每周挑战局：固定种子（同周同序列 + 本周目标）+ 不写存档槽 */
+  isWeekly?: boolean;
+  /** 本局天赋（开局构筑抽取；局中重开/人生重开保留） */
+  talents?: string[];
+  /** 开局属性点分配（开局构筑；局中重开/人生重开保留出生配置） */
+  alloc?: Partial<Attributes>;
   /** 人生重开（第 6 周目起）：以本局终局属性的一半重新投胎 */
   reincarnateFrom?: Attributes;
 }
@@ -514,6 +599,16 @@ interface StartParams {
 function startNewGame(state: RuntimeState, p: StartParams): RuntimeState {
   const game = createInitialState(p.gender, p.name);
   game.goal = p.goal;
+  // 开局构筑：天赋属性（先天基因）→ 属性点分配（出生配置），叠加在初始属性上
+  const talents = p.talents ?? [];
+  if (talents.length > 0) {
+    game.attributes = applyTalents(game.attributes, talents);
+    game.talents = talents;
+  }
+  if (p.alloc && Object.keys(p.alloc).length > 0) {
+    game.attributes = applyAllocation(game.attributes, p.alloc);
+    game.allocated = p.alloc;
+  }
   // 人生重开（第 6 周目起）：取「初始 + 终局」均值重新投胎（每项保底初始值——活得好才增益，不拖累；不叠加传承/挑战）
   if (p.reincarnateFrom) {
     const attrs = { ...game.attributes };
@@ -523,6 +618,12 @@ function startNewGame(state: RuntimeState, p: StartParams): RuntimeState {
     game.attributes = attrs;
     game.reincarnated = true;
   } else {
+    // 成就加成：每解锁 10 成就开局全属性 +2（祖辈的成就照亮下一代）
+    const steps = Math.floor(state.achievements.unlocked.length / 10);
+    if (steps > 0) {
+      game.attributes = applyAchievementBonus(game.attributes, state.achievements.unlocked.length);
+      game.allocBonus = true;
+    }
     // 属性传承（第 5 周目起）：上一世终局最高 2 项属性各 +8（先继承）
     if (state.stats.lastEndAttrs) {
       game.attributes = applyInheritance(game.attributes, state.stats.lastEndAttrs);
@@ -576,12 +677,16 @@ function startNewGame(state: RuntimeState, p: StartParams): RuntimeState {
     pendingEndingKey: '',
     fateEventIds: fateEvents.map(e => e.id),
     isDaily: p.isDaily ?? false,
+    // 每周挑战局：本周目标由周种子确定（同周全局同一目标）
+    isWeekly: p.isWeekly ?? false,
+    weeklyGoal: pickWeeklyGoal(weekOf(new Date())),
     // 挑战历史跨局保留（不随开局重置）
     dailyHistory: state.dailyHistory,
     dailyStreak: state.dailyStreak,
+    weekly: state.weekly,
     seedScores: state.seedScores,
     // 种子挑战局：玩家输入了种子码且非每日挑战（重开保持种子）
-    seedChallenge: p.seed != null && !p.isDaily,
+    seedChallenge: p.seed != null && !p.isDaily && !p.isWeekly,
     daily: state.daily,
     family: state.family,
   };
@@ -602,6 +707,9 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         seed: action.seed,
         autoPlay: false,
         isDaily: action.isDaily,
+        isWeekly: action.isWeekly,
+        talents: action.talents,
+        alloc: action.alloc,
       });
 
     case 'START_AUTO_GAME':
@@ -617,7 +725,7 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
       });
 
     case 'REINCARNATE': {
-      // 人生重开（第 6 周目起）：以本局终局属性的一半重新投胎（保底初始值，不叠加传承/挑战）
+      // 人生重开（第 6 周目起）：以本局终局属性的一半重新投胎（保底初始值，不叠加传承/挑战）；天赋与出生配置随魂魄保留
       return startNewGame(state, {
         gender: state.game.gender,
         name: state.game.name,
@@ -627,12 +735,14 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         challenge: false,
         seed: undefined,
         autoPlay: false,
+        talents: state.game.talents,
+        alloc: state.game.allocated,
         reincarnateFrom: state.game.attributes,
       });
     }
 
     case 'RESTART': {
-      // 局中重开：沿用本局角色与设置，换新随机种子洗牌（每日挑战局保持固定种子，同日重试同一序列）
+      // 局中重开：沿用本局角色与设置（含开局构筑），换新随机种子洗牌（每日/每周挑战局保持固定种子，同日/同周重试同一序列）
       return startNewGame(state, {
         gender: state.game.gender,
         name: state.game.name,
@@ -641,9 +751,12 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         goal: state.game.goal,
         challenge: state.game.challenge ?? false,
         realMode: state.game.realMode ?? false,
-        seed: (state.isDaily || state.seedChallenge) ? state.shuffleSeed : undefined,
+        seed: (state.isDaily || state.isWeekly || state.seedChallenge) ? state.shuffleSeed : undefined,
         autoPlay: false,
         isDaily: state.isDaily,
+        isWeekly: state.isWeekly,
+        talents: state.game.talents,
+        alloc: state.game.allocated,
       });
     }
 
@@ -768,6 +881,9 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         pendingEndingKey: endingKey,
         fateEventIds: state.fateEventIds,
         isDaily: state.isDaily,
+        isWeekly: state.isWeekly,
+        weeklyGoal: state.weeklyGoal,
+        weekly: state.weekly,
         dailyHistory: state.dailyHistory,
     dailyStreak: state.dailyStreak,
         seedScores: state.seedScores,
@@ -832,6 +948,9 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         // 旧档无命运事件字段，显式兜底（新档读 fateEventIds，旧档回退单元素）
         fateEventIds: saved.fateEventIds ?? (saved.fateEventId ? [saved.fateEventId] : []),
         isDaily: false,
+        isWeekly: false,
+        weeklyGoal: pickWeeklyGoal(weekOf(new Date())),
+        weekly: state.weekly,
         seedChallenge: false,
         daily: state.daily,
         dailyHistory: state.dailyHistory,
@@ -840,6 +959,10 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         family: state.family,
       };
     }
+
+    case 'WEEKLY_UPDATED':
+      // 每周挑战最佳已写入 localStorage，更新运行时记录（标题页展示）
+      return { ...state, weekly: action.weekly };
 
     case 'SAVES_UPDATED':
       // 存档已写入 localStorage，同步回运行时（标题页存档卡与覆盖确认读此状态）
@@ -946,12 +1069,16 @@ export function createInitialRuntime(): RuntimeState {
     pendingEndingKey: '',
     fateEventIds: [],
     isDaily: false,
+    isWeekly: false,
+    weeklyGoal: pickWeeklyGoal(weekOf(new Date())),
     seedChallenge: false,
     // 每日挑战记录初始同步读取
     daily: loadDaily(),
     // 挑战历史同样初始同步读取
     dailyHistory: loadDailyHistory(),
     dailyStreak: loadDailyStreak(),
+    // 每周挑战记录初始同步读取
+    weekly: loadWeekly(),
     seedScores: loadSeedScores(),
     // 族谱同样初始同步读取
     family: loadFamily(),
@@ -1011,6 +1138,13 @@ export function useGame() {
       saveDailyStreak(nextStreak);
       dispatch({ type: 'DAILY_STREAK_UPDATED', dailyStreak: nextStreak });
     }
+    // 每周挑战局：结算更新当周最佳（跨周则以本局初始化当周记录）+ 判定本周目标通关
+    if (rt.isWeekly) {
+      const week = weekOf(new Date());
+      const nextWeekly = updateWeeklyBest(rt.weekly, week, score, rt.game.age, checkWeeklyGoal(rt.weeklyGoal, rt.game));
+      saveWeekly(nextWeekly);
+      dispatch({ type: 'WEEKLY_UPDATED', weekly: nextWeekly });
+    }
     // 种子挑战局：记录该种子本地比分（最佳评分 + 享年 + 游玩次数）
     if (rt.seedChallenge && rt.shuffleSeed != null) {
       const nextScores = recordSeedScore(rt.seedScores, String(rt.shuffleSeed), score, rt.game.age);
@@ -1051,10 +1185,10 @@ export function useGame() {
     return () => clearTimeout(timer);
   }, [rt]);
 
-  const startGame = useCallback((gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | CustomGoal | null, challenge: boolean = false, realMode: boolean = false, seed?: number | null) => {
+  const startGame = useCallback((gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | CustomGoal | null, challenge: boolean = false, realMode: boolean = false, seed?: number | null, talents?: string[], alloc?: Partial<Attributes>) => {
     // 埋点：开局（种子挑战 variant=seed，普通开局 variant=normal）
     track({ type: 'game_start', ts: Date.now(), variant: seed != null ? 'seed' : 'normal', pace: paceMode, challenge });
-    dispatch({ type: 'START_GAME', gender, name, paceMode, typeSpeed, goal, challenge, realMode, seed: seed ?? undefined });
+    dispatch({ type: 'START_GAME', gender, name, paceMode, typeSpeed, goal, challenge, realMode, seed: seed ?? undefined, talents, alloc });
   }, []);
 
   const startAutoGame = useCallback((gender: 'male' | 'female', name: string) => {
@@ -1078,6 +1212,24 @@ export function useGame() {
       challenge: false,
       seed: dateToSeed(formatDate(new Date())),
       isDaily: true,
+    });
+  }, []);
+
+  // 每周挑战：随机性别/名字 + 固定种子（本周日期哈希）手动开局，本周目标由周种子确定，不写存档槽
+  const startWeeklyGame = useCallback(() => {
+    const gender = Math.random() < 0.5 ? 'male' : 'female';
+    // 埋点：每周挑战开局
+    track({ type: 'game_start', ts: Date.now(), variant: 'weekly', pace: 'full', challenge: false });
+    dispatch({
+      type: 'START_GAME',
+      gender,
+      name: gender === 'male' ? '小明' : '小美',
+      paceMode: 'full',
+      typeSpeed: 'normal',
+      goal: null,
+      challenge: false,
+      seed: weekSeed(weekOf(new Date())),
+      isWeekly: true,
     });
   }, []);
 
@@ -1126,14 +1278,18 @@ export function useGame() {
     newAchievements: rt.pendingNewIds,
     fateEventIds: rt.fateEventIds,
     isDaily: rt.isDaily,
+    isWeekly: rt.isWeekly,
+    weeklyGoal: rt.weeklyGoal,
     shuffleSeed: rt.shuffleSeed,
     daily: rt.daily,
     dailyHistory: rt.dailyHistory,
+    weekly: rt.weekly,
     seedScores: rt.seedScores,
     family: rt.family,
     startGame,
     startAutoGame,
     startDailyGame,
+    startWeeklyGame,
     restart,
     reincarnate,
     makeChoice,

@@ -14,12 +14,12 @@ function formatDate(d: Date): string {
 /** 原始事件流上限：超过裁最旧（localStorage 体积控制） */
 const MAX_EVENTS = 300;
 
-export type AnalyticsVariant = 'normal' | 'daily' | 'seed' | 'auto';
+export type AnalyticsVariant = 'normal' | 'daily' | 'weekly' | 'seed' | 'auto';
 
 export type FeatureKey =
-  | 'quick_sim' | 'daily' | 'seed' | 'goal'
+  | 'quick_sim' | 'daily' | 'weekly' | 'seed' | 'goal' | 'build'
   | 'achievements' | 'collection' | 'family' | 'stats' | 'guide' | 'data'
-  | 'share_card' | 'biography';
+  | 'share_card' | 'biography' | 'almanac' | 'almanac_export' | 'talent_inherit';
 
 export type AnalyticsEvent =
   | { type: 'game_start'; ts: number; variant: AnalyticsVariant; pace: 'full' | 'lite'; challenge: boolean }

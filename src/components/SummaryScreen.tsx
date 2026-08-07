@@ -5,9 +5,17 @@ import { GOALS, checkGoal } from '../engine/goals';
 import { ACHIEVEMENTS } from '../engine/achievements';
 import ShareCardModal from './ShareCardModal';
 import GrowthChart from './GrowthChart';
+import AlmanacModal from './AlmanacModal';
 import { buildBiographyMarkdown, downloadText } from '../utils/biography';
 import { track } from '../utils/analytics';
 import { VERDICT_META, nextRouteToExplore, verdictKey } from '../engine/verdict';
+import { jobStatus, JOB_MILESTONE_FLAGS } from '../engine/jobs';
+import { npcBonds, BOND_META } from '../engine/npcs';
+import { gaokaoResult } from '../engine/gaokao';
+import { assetStatus } from '../engine/assets';
+import { getTalent, saveInheritTalent, type TalentInherit } from '../engine/talents';
+import { formatDate } from '../hooks/useGame';
+import { checkWeeklyGoal, type WeeklyGoal } from '../engine/weekly';
 
 interface Props {
   game: GameState;
@@ -24,10 +32,16 @@ interface Props {
   collectedEndings?: string[];
   /** 每日挑战局（分享卡片 CTA 切换「今日战绩」文案） */
   isDaily?: boolean;
+  /** 每周挑战局（展示本周目标达成） */
+  isWeekly?: boolean;
+  /** 本周挑战目标（每周变化；周目标达成展示用） */
+  weeklyGoal?: WeeklyGoal;
   /** 累计完成局数（周目判定：第 6 周目起显示「人生重开」） */
   totalLives?: number;
   /** 人生重开（第 6 周目起）：携半身属性重新投胎 */
   onReincarnate?: () => void;
+  /** 当前继承天赋（上一世传承；App 传入；世代回看不传 → 不显示继承面板） */
+  inheritTalent?: TalentInherit | null;
 }
 
 interface Verdict {
@@ -167,13 +181,18 @@ function getVerdict(game: GameState): Verdict {
   return scoreVerdict(score);
 }
 
-/** 里程碑 flag：命中则时间线高亮 */
-const MILESTONE_FLAGS = ['went_to_college', 'grad_school', 'top_university', 'married', 'has_child', 'doctor', 'startup_success', 'civil_servant', 'world_traveler', 'athlete_pro', 'military_flag', 'skilled_worker', 'tech_career', 'retired'];
+/** 里程碑 flag：命中则时间线高亮（含职业 flag——职业入行即里程碑） */
+const MILESTONE_FLAGS = ['went_to_college', 'grad_school', 'top_university', 'married', 'has_child', 'doctor', 'startup_success', 'civil_servant', 'world_traveler', 'athlete_pro', 'military_flag', 'skilled_worker', 'tech_career', 'retired', ...JOB_MILESTONE_FLAGS];
 
-export default function SummaryScreen({ game, onRestart, newAchievements, skippedTitles, generation, seed, collectedEndings = [], isDaily = false, totalLives = 0, onReincarnate }: Props) {
+export default function SummaryScreen({ game, onRestart, newAchievements, skippedTitles, generation, seed, collectedEndings = [], isDaily = false, isWeekly = false, weeklyGoal, totalLives = 0, onReincarnate, inheritTalent = null }: Props) {
   const score = calcScore(game.attributes);
   const { title, desc } = getVerdict(game);
   const goal = checkGoal(game.goal, game);
+  // 本局推导信息：职业 / 家人关系 / 高考结果 / 资产（纯函数，旧存档兼容）
+  const job = jobStatus(game);
+  const bonds = npcBonds(game);
+  const gaokao = gaokaoResult(game);
+  const assets = assetStatus(game);
   // 「下一站」：本局结算后（当前结局已计入收集）提示下一条未走过的路线；全收集显示通关文案
   const nextRoute = useMemo(
     () => nextRouteToExplore(verdictKey(game), new Set(collectedEndings)),
@@ -187,6 +206,15 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
   }));
   // 分享卡片模态开关
   const [showShare, setShowShare] = useState(false);
+  // 人生年鉴模态开关
+  const [showAlmanac, setShowAlmanac] = useState(false);
+  // 天赋继承：当前继承（App 传入）+ 本局选择（直接写 localStorage）
+  const [inherit, setInherit] = useState<TalentInherit | null>(inheritTalent);
+  const setInheritTalent = (talentId: string) => {
+    track({ type: 'feature_use', ts: Date.now(), feature: 'talent_inherit' });
+    saveInheritTalent(talentId, formatDate(new Date()));
+    setInherit({ talentId, date: formatDate(new Date()) });
+  };
 
   return (
     <div className="w-full h-full bg-gradient-to-b from-[#0a0a14] via-[#1a1a2e] to-[#0a0a14]
@@ -196,7 +224,32 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
         {game.challenge && <span className="text-[#e8a05d] ml-2">⚔️ 挑战人生</span>}
         {game.inherited && <span className="text-[#c9a96e] ml-2">🧬 传承</span>}
         {game.reincarnated && <span className="text-[#8fb8e8] ml-2">🔄 轮回</span>}
+        {game.allocBonus && <span className="text-[#b57edc] ml-2">🏅 成就加成</span>}
       </p>
+
+      {/* 职业 · 学业 · 天赋 · 资产（推导信息行） */}
+      {(job || gaokao || (game.talents && game.talents.length > 0)) && (
+        <div className="flex flex-wrap items-center justify-center gap-2 max-w-[640px] animate-[fadeIn_1.3s_ease]">
+          {job && (
+            <span className="px-3 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.03] text-[11px] text-white/55">
+              {job.icon} {job.title} · 从业 {job.years} 年
+            </span>
+          )}
+          {gaokao && (
+            <span className="px-3 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.03] text-[11px] text-white/55">
+              {gaokao.icon} {gaokao.label}
+            </span>
+          )}
+          {(game.talents ?? []).map(id => {
+            const t = getTalent(id);
+            return t ? (
+              <span key={id} className="px-3 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.03] text-[11px] text-white/55">
+                {t.icon} {t.name}
+              </span>
+            ) : null;
+          })}
+        </div>
+      )}
       <h2 className="text-[34px] font-extralight tracking-[10px] text-[#c9a96e] animate-[fadeInDown_0.8s_ease]">
         {title}
       </h2>
@@ -257,6 +310,23 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
         </div>
       )}
 
+      {/* 每周挑战：本周目标达成展示（周目标终局判定，同周复玩可刷新最佳） */}
+      {isWeekly && weeklyGoal && (
+        <div className={`flex items-start gap-3 max-w-[560px] px-5 py-3.5 rounded-xl border animate-[fadeIn_1.4s_ease]
+          ${checkWeeklyGoal(weeklyGoal, game) ? 'bg-[#5de8a0]/5 border-[#5de8a0]/30' : 'bg-white/[0.03] border-white/[0.06]'}`}>
+          <span className="text-lg leading-none mt-0.5">{checkWeeklyGoal(weeklyGoal, game) ? '✅' : weeklyGoal.icon}</span>
+          <div>
+            <div className="text-[11px] text-white/40 tracking-[2px]">🗓️ 本周挑战</div>
+            <div className={`text-[13px] mt-1 ${checkWeeklyGoal(weeklyGoal, game) ? 'text-[#5de8a0]' : 'text-white/70'}`}>
+              {weeklyGoal.name}
+              <span className={`ml-2 text-[11px] tracking-[2px] ${checkWeeklyGoal(weeklyGoal, game) ? 'text-[#5de8a0]/60' : 'text-white/35'}`}>
+                {checkWeeklyGoal(weeklyGoal, game) ? '已通关 ✓' : weeklyGoal.desc}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* 综合评分 */}
       <div className="w-[80px] h-[80px] rounded-full border-2 border-[#c9a96e]
         flex items-center justify-center text-3xl text-[#c9a96e] font-extralight
@@ -265,6 +335,76 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
         {score}
       </div>
       <p className="text-[11px] text-white/40 tracking-[3px]">综合评分</p>
+
+      {/* 资产（本局拥有的资产组合） */}
+      {assets.length > 0 && (
+        <div className="flex flex-wrap items-center justify-center gap-2 max-w-[640px] animate-[fadeIn_1.4s_ease]">
+          {assets.map(a => (
+            <span key={a.label} className="px-3 py-1.5 rounded-full border border-[#e8c95d]/20 bg-[#e8c95d]/5 text-[11px] text-[#e8c95d]/80">
+              {a.icon} {a.label}
+            </span>
+          ))}
+        </div>
+      )}
+
+      {/* 与身边人的关系（推导自本局在家庭/爱情/友谊事件中的取舍） */}
+      <div className="w-full max-w-[720px] animate-[fadeInUp_1.1s_ease]">
+        <h3 className="text-[13px] tracking-[4px] text-[#c9a96e] mb-2.5 font-normal">🤝 与身边人</h3>
+        <div className="flex flex-col gap-2">
+          {(Object.keys(bonds) as Array<keyof typeof bonds>).map(k => {
+            const meta = BOND_META[k];
+            const v = bonds[k];
+            return (
+              <div key={k} className="flex items-center gap-2.5 text-[11px]">
+                <span className="w-[64px] text-white/40 shrink-0">{meta.icon} {meta.label}</span>
+                <div className="flex-1 h-[6px] bg-white/8 rounded-sm overflow-hidden">
+                  <div
+                    className="h-full rounded-sm transition-all duration-700"
+                    style={{ width: `${v}%`, backgroundColor: meta.color }}
+                  />
+                </div>
+                <span className={`w-[26px] text-right shrink-0 font-semibold ${v >= 80 ? 'text-[#5de8a0]' : v <= 30 ? 'text-[#e85d75]' : 'text-white/50'}`}>
+                  {v}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* 天赋继承（本局选了天赋才出现；设定后下一世抽卡该天赋置顶） */}
+      {inheritTalent !== null && (game.talents ?? []).length > 0 && (
+        <div className="w-full max-w-[720px] animate-[fadeIn_1.5s_ease]">
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="text-[13px] tracking-[4px] text-[#c9a96e] font-normal">🧬 天赋传承</h3>
+            <span className="text-[10px] text-white/30 tracking-[1px]">
+              下一世抽卡时置顶出现
+              {inherit && <span className="text-[#e8c95d] ml-1">当前：{getTalent(inherit.talentId)?.icon} {getTalent(inherit.talentId)?.name}</span>}
+            </span>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {(game.talents ?? []).map(id => {
+              const t = getTalent(id);
+              if (!t) {
+                return null;
+              }
+              const current = inherit?.talentId === id;
+              return (
+                <button
+                  key={id}
+                  onClick={() => setInheritTalent(id)}
+                  className={`px-3.5 py-2 rounded-lg border text-[12px] transition-all duration-200 font-sans
+                    ${current
+                      ? 'border-[#e8c95d]/60 bg-[#e8c95d]/10 text-[#e8c95d]'
+                      : 'border-white/10 bg-white/[0.03] text-white/55 hover:border-[#e8c95d]/40 hover:text-[#e8c95d]'}`}
+                >
+                  {t.icon} {t.name}{current ? ' ✓' : ''}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* 属性展示 */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full max-w-[720px] animate-[fadeInUp_1s_ease]">
@@ -368,6 +508,21 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
         📜 导出人生传记
       </button>
 
+      {/* 人生年鉴：一页纸的终局报告（成长曲线 + 职业资产 + 家人 + 大事记），可导出 markdown */}
+      <button
+        onClick={() => {
+          // 埋点：年鉴打开
+          track({ type: 'feature_use', ts: Date.now(), feature: 'almanac' });
+          setShowAlmanac(true);
+        }}
+        className="px-9 py-3 border border-white/20 rounded-2xl bg-transparent
+          text-sm text-white/50 tracking-[4px] font-sans
+          hover:border-[#c9a96e] hover:text-[#c9a96e] hover:shadow-[0_4px_20px_rgba(201,169,110,0.3)]
+          transition-all duration-300 mt-2"
+      >
+        📖 人生年鉴
+      </button>
+
       <button
         onClick={onRestart}
         className="px-9 py-3 border border-white/20 rounded-2xl bg-transparent
@@ -402,6 +557,19 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
           generation={generation}
           seed={seed}
           onClose={() => setShowShare(false)}
+        />
+      )}
+
+      {showAlmanac && (
+        <AlmanacModal
+          game={game}
+          verdictTitle={title}
+          verdictDesc={desc}
+          job={job}
+          bonds={bonds}
+          gaokao={gaokao}
+          assets={assets}
+          onClose={() => setShowAlmanac(false)}
         />
       )}
     </div>

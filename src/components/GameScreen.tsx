@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect, useRef, useMemo } from 'react';
 import type { AttributeKey, Choice, GameState, LifeEvent, TypeSpeed } from '../types';
 import { STAGE_META } from '../engine/state';
 import { sfx, startBgm, stopBgm } from '../utils/sound';
@@ -8,6 +8,9 @@ import StatusBar from './StatusBar';
 import DialogBox from './DialogBox';
 import ChoicePanel from './ChoicePanel';
 import ConfirmModal from './ConfirmModal';
+import { jobStatus } from '../engine/jobs';
+import { assetStatus } from '../engine/assets';
+import type { WeeklyGoal } from '../engine/weekly';
 
 /** 选项效果主属性（绝对值最大）→ 背景色调，让每个选项的选择有视觉反馈 */
 function pickAttrTint(choice: Choice): string | null {
@@ -31,6 +34,10 @@ interface Props {
   typeSpeed: TypeSpeed;
   /** 本局命运事件 id 列表（第 3 周目起 1 个、第 5 周目起 2 个：效果 ×1.5，展示角标） */
   fateEventIds: string[];
+  /** 每周挑战局（顶部展示本周目标） */
+  isWeekly?: boolean;
+  /** 本周挑战目标 */
+  weeklyGoal?: WeeklyGoal;
   onTypeSpeedChange: (s: TypeSpeed) => void;
   onChoice: (choice: Choice) => void;
   onContinue: () => void;
@@ -45,11 +52,24 @@ const SPEED_OPTIONS: Array<{ value: TypeSpeed; label: string }> = [
   { value: 'fast', label: '快' },
 ];
 
-export default function GameScreen({ game, currentEvent, feedback, autoPlay, typeSpeed, fateEventIds, onTypeSpeedChange, onChoice, onContinue, onExit, onRestart }: Props) {
+export default function GameScreen({ game, currentEvent, feedback, autoPlay, typeSpeed, fateEventIds, isWeekly = false, weeklyGoal, onTypeSpeedChange, onChoice, onContinue, onExit, onRestart }: Props) {
   const [showChoices, setShowChoices] = useState(false);
   const [showExit, setShowExit] = useState(false);
   // 最近选择选项的主属性色调（反馈页期间叠加在场景上，继续后清除）
   const [tint, setTint] = useState<string | null>(null);
+  // 职业/资产摘要（状态栏一行展示；纯函数推导，无职业时为空）
+  const statusCaption = useMemo(() => {
+    const job = jobStatus(game);
+    const assets = assetStatus(game);
+    const parts: string[] = [];
+    if (job) {
+      parts.push(`${job.icon} ${job.title} · 从业 ${job.years} 年`);
+    }
+    if (assets.length > 0) {
+      parts.push(assets.map(a => `${a.icon}${a.label}`).join(' '));
+    }
+    return parts.length > 0 ? parts.join(' · ') : null;
+  }, [game]);
 
   // 选择选项：记录主属性色调（视觉反馈）
   const handleChoice = useCallback((choice: Choice) => {
@@ -95,7 +115,7 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
     return (
       <div className="w-full h-full relative">
         <SceneArea stage={game.stage} age={game.age} gender={game.gender} stageLabel={stageMeta.label} category={currentEvent?.category ?? null} tint={tint} />
-        <StatusBar attributes={game.attributes} age={game.age} />
+        <StatusBar attributes={game.attributes} age={game.age} caption={statusCaption} />
         <div
           className="absolute bottom-0 left-0 right-0 bg-gradient-to-b from-black/92 to-black/97
             backdrop-blur-xl border-t border-white/5 cursor-pointer z-10"
@@ -128,7 +148,7 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
 
       {/* 状态栏 — 锚定场景区（h-[55%]）底缘：底部区域限高 45% 恰好互补，任何视口高度下都不重叠 */}
       <div className="absolute top-0 left-0 right-0 h-[55%] z-10 flex flex-col justify-end">
-        <StatusBar attributes={game.attributes} age={game.age} />
+        <StatusBar attributes={game.attributes} age={game.age} caption={statusCaption} />
       </div>
 
       {/* 底部区域：对话框 + 选项（限高 45%，与场景区互补） */}
@@ -177,6 +197,14 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
         <div className="absolute top-2 left-2 z-20 px-3 py-1.5 rounded-full border border-[#e8c95d]/40 bg-[#e8c95d]/10
           text-[#e8c95d] text-[11px] tracking-[2px] animate-pulse">
           ⚡ 命运事件 · 效果 ×1.5
+        </div>
+      )}
+
+      {/* 每周挑战角标（本周目标：全周可见的局内目标） */}
+      {isWeekly && weeklyGoal && (
+        <div className="absolute top-2 left-2 z-20 px-3 py-1.5 rounded-full border border-[#e8a05d]/40 bg-[#e8a05d]/10
+          text-[#e8a05d] text-[11px] tracking-[2px]">
+          🗓️ 本周：{weeklyGoal.icon} {weeklyGoal.name}
         </div>
       )}
 

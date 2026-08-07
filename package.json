@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "build:events": "node script/convert-events.mjs",
-    "test": "node --test \"script/*.test.mjs\" && node --experimental-strip-types --test script/engine-state.test.ts script/pace-mode.test.ts script/goals.test.ts script/save.test.ts script/verdict.test.ts script/use-game.test.ts",
+    "test": "node --test \"script/*.test.mjs\" && node --experimental-strip-types --test script/engine-state.test.ts script/pace-mode.test.ts script/goals.test.ts script/save.test.ts script/verdict.test.ts script/use-game.test.ts script/gameplay.test.ts script/family.test.ts script/talents.test.ts script/life-systems.test.ts script/weekly.test.ts script/achievements.test.ts",
     "test:ui": "vitest run",
     "preview": "vite preview"
   },

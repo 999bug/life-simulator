@@ -4,12 +4,20 @@ import { ATTR_META, ageCap } from '../engine/state';
 interface Props {
   attributes: Attributes;
   age: number;
+  /** 职业/资产摘要行（GameScreen 按本局状态推导：如「⚕️ 医生 · 从业 12 年」；无则隐藏） */
+  caption?: string | null;
 }
 
-export default function StatusBar({ attributes, age }: Props) {
+export default function StatusBar({ attributes, age, caption = null }: Props) {
   // 背景条全宽出血，属性网格限宽居中（大屏下进度条保持原有比例）
   return (
     <div className="px-5 py-2.5 bg-black/95 backdrop-blur-md border-b border-white/5">
+      {/* 职业/资产摘要（可选）：一行的本局身份信息 */}
+      {caption && (
+        <div className="max-w-[960px] mx-auto pb-1.5 text-[10px] text-[#c9a96e]/80 tracking-[2px]">
+          {caption}
+        </div>
+      )}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-0.5 max-w-[960px] mx-auto">
         {Object.entries(attributes).map(([key, val]) => {
           const meta = ATTR_META[key as AttributeKey];

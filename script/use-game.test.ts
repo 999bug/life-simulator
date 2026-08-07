@@ -92,6 +92,55 @@ test('START_GAME：初始快照 + 事件预载 + 参数生效', () => {
   assert.strictEqual(rt.game.snapshots![0].attrs.health, 65);
 });
 
+test('START_GAME：开局构筑——天赋属性 + 分配点 + 成就加成按序应用', () => {
+  const rt0 = createInitialRuntime();
+  // 已解锁 12 个成就（成就加成 1 步：全属性 +2）
+  const rt = reducer({ ...rt0, achievements: { unlocked: Array.from({ length: 12 }, (_, i) => `ach_${i}` as AchievementId), completedLives: 12, endings: [] } }, {
+    type: 'START_GAME', gender: 'male', name: '小明', paceMode: 'full', typeSpeed: 'normal', goal: null,
+    talents: ['robust', 'clever'], alloc: { wealth: 5 },
+  });
+  // 初始：health 65+6(健壮)+2(成就)=73，intelligence 25+6(聪慧)+2=33，wealth 20+5(分配)+2=27
+  assert.strictEqual(rt.game.attributes.health, 73);
+  assert.strictEqual(rt.game.attributes.intelligence, 33);
+  assert.strictEqual(rt.game.attributes.wealth, 27);
+  assert.deepStrictEqual(rt.game.talents, ['robust', 'clever']);
+  assert.deepStrictEqual(rt.game.allocated, { wealth: 5 });
+  assert.strictEqual(rt.game.allocBonus, true);
+});
+
+test('START_GAME：无天赋/分配/成就时保持初始属性且不加标记', () => {
+  const rt = reducer(createInitialRuntime(), {
+    type: 'START_GAME', gender: 'male', name: '小明', paceMode: 'full', typeSpeed: 'normal', goal: null,
+  });
+  assert.strictEqual(rt.game.attributes.health, 65);
+  assert.strictEqual(rt.game.talents, undefined);
+  assert.strictEqual(rt.game.allocated, undefined);
+  assert.strictEqual(rt.game.allocBonus, undefined);
+});
+
+test('RESTART：局中重开保留开局构筑（天赋 + 分配点）', () => {
+  const rt = reducer(createInitialRuntime(), {
+    type: 'START_GAME', gender: 'male', name: '小明', paceMode: 'full', typeSpeed: 'normal', goal: null,
+    talents: ['zen'], alloc: { luck: 2 },
+  });
+  const rt2 = reducer(rt, { type: 'RESTART' });
+  assert.deepStrictEqual(rt2.game.talents, ['zen']);
+  assert.deepStrictEqual(rt2.game.allocated, { luck: 2 });
+  // 出生配置保留：初始 luck 50 + 分配 2
+  assert.strictEqual(rt2.game.attributes.luck, 52);
+});
+
+test('START_GAME：每周挑战局（本周目标 + 固定周种子 + 不写存档槽）', () => {
+  const rt = reducer(createInitialRuntime(), {
+    type: 'START_GAME', gender: 'male', name: '小明', paceMode: 'full', typeSpeed: 'normal', goal: null, isWeekly: true,
+  });
+  assert.strictEqual(rt.isWeekly, true);
+  assert.ok(rt.weeklyGoal.key.length > 0, '应确定本周目标');
+  assert.strictEqual(rt.seedChallenge, false, '每周挑战不是种子挑战');
+  // 临时局：不写存档槽位
+  assert.strictEqual(saveState(rt), null);
+});
+
 test('START_AUTO_GAME：精简档 + 中速 + 无目标', () => {
   const rt = reducer(createInitialRuntime(), { type: 'START_AUTO_GAME', gender: 'female', name: '小美' });
   assert.strictEqual(rt.autoPlay, true);

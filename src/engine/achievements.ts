@@ -1,5 +1,7 @@
-import type { AchievementId, GameState } from '../types';
+import type { AchievementId, AttributeKey, Attributes, GameState } from '../types';
 import { calcScore } from './state.ts';
+import { npcBonds } from './npcs.ts';
+import { jobStatus, jobLevel } from './jobs.ts';
 
 /** 成就分层：1 铜 / 2 银 / 3 金（仅展示分组与徽章，不影响判定） */
 export type AchievementTier = 1 | 2 | 3;
@@ -11,6 +13,8 @@ export interface AchievementDef {
   name: string;
   desc: string;
   tier: AchievementTier;
+  /** 隐藏成就（解锁前在成就面板显示「？？？」；解锁条件不公开，保留探索乐趣） */
+  hidden?: boolean;
 }
 
 /** 27 个跨周目成就（按铜→银→金排序，同档内按系列排列） */
@@ -49,6 +53,11 @@ export const ACHIEVEMENTS: AchievementDef[] = [
   { id: 'ten_lives', icon: '♾️', name: '十世轮回', desc: '累计完成 10 局人生', tier: 3 },
   { id: 'ten_endings', icon: '🏛️', name: '阅尽人生', desc: '累计达成 10 种不同结局', tier: 3 },
   { id: 'challenger', icon: '⚔️', name: '破局者', desc: '以挑战开局达成 70 分以上人生', tier: 3 },
+  // 隐藏成就：解锁前只显示问号（条件不公开，保留探索乐趣）
+  { id: 'gaokao_top', icon: '🎓', name: '金榜题名', desc: '考入重点大学', tier: 2, hidden: true },
+  { id: 'family_harmony', icon: '🏡', name: '家和万事兴', desc: '与家人关系融洽（家人关系值 80 以上）', tier: 2, hidden: true },
+  { id: 'job_elite', icon: '💼', name: '职场精英', desc: '深耕一个行业十年（职业等级 5 级）', tier: 3, hidden: true },
+  { id: 'asset_owner', icon: '🏦', name: '有产者', desc: '拥有投资或实业资产', tier: 1, hidden: true },
 ];
 
 /** 成就判定输入 */
@@ -104,5 +113,45 @@ export function checkAchievements(input: AchievementCheckInput): AchievementId[]
   // 连续挑战（日活钩子）：连续 3/7 天完成每日挑战
   if (input.dailyStreak >= 3) { ids.add('daily_streak_3'); }
   if (input.dailyStreak >= 7) { ids.add('daily_streak_7'); }
+  // 隐藏成就（2026-08 新增）：金榜题名 / 家和万事兴 / 职场精英 / 有产者
+  if (has('top_university')) { ids.add('gaokao_top'); }
+  if (npcBonds(game).family >= 80) { ids.add('family_harmony'); }
+  const job = jobStatus(game);
+  if (job && job.since !== null && jobLevel(job.years) >= 5) { ids.add('job_elite'); }
+  if (has('investor', 'investor_sharp', 'invest_legend', 'startup_success')) { ids.add('asset_owner'); }
   return [...ids];
+}
+
+// ============ 成就加成（跨周目）============
+
+/** 成就加成周期：每解锁 N 个成就，下一世开局全属性 +2 */
+const ACH_BONUS_PER = 10;
+/** 成就加成步长（全属性 +2） */
+const ACH_BONUS_STEP = 2;
+/** 成就加成上限（加成后单属性不超过 100，由引擎统一钳位） */
+export const ACH_BONUS_MAX_STEPS = 3;
+
+/** 当前解锁数对应的加成步数（每 10 个 +1 步，封顶 3 步 = +6） */
+export function achievementBonusSteps(unlockedCount: number): number {
+  return Math.min(ACH_BONUS_MAX_STEPS, Math.floor(unlockedCount / ACH_BONUS_PER));
+}
+
+/**
+ * 成就加成：按已解锁成就数给下一世开局全属性加成（每 10 个 +2，封顶 +6）。
+ * 加成顺序在天赋/分配之后、传承之前（「祖辈的成就照亮下一代」）。
+ *
+ * @param attrs 初始属性表（已含天赋/分配点）
+ * @param unlockedCount 已解锁成就总数
+ * @returns 加成后的属性表（不足 10 个时原样返回）
+ */
+export function applyAchievementBonus(attrs: Attributes, unlockedCount: number): Attributes {
+  const steps = achievementBonusSteps(unlockedCount);
+  if (steps <= 0) {
+    return attrs;
+  }
+  const out = { ...attrs };
+  for (const k of Object.keys(out) as AttributeKey[]) {
+    out[k] = Math.min(100, out[k] + ACH_BONUS_STEP * steps);
+  }
+  return out;
 }

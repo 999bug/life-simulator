@@ -36,7 +36,7 @@ export async function loadEvents(): Promise<LifeEvent[]> {
 }
 
 /** mulberry32 伪随机数生成器：同一种子产生相同洗牌结果（存档恢复用） */
-function mulberry32(seed: number): () => number {
+export function mulberry32(seed: number): () => number {
   let a = seed >>> 0;
   return () => {
     a = (a + 0x6d2b79f5) >>> 0;

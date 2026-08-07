@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { sfx } from '../utils/sound';
 import { track } from '../utils/analytics';
-import type { AchievementId, CustomGoal, FamilyMember, GoalKey, PaceMode, TypeSpeed } from '../types';
+import type { AchievementId, Attributes, CustomGoal, FamilyMember, GoalKey, PaceMode, TypeSpeed } from '../types';
 import type { SavesV2 } from '../engine/save';
-import type { DailyHistory, DailyStore, SeedScores, StatsStore } from '../hooks/useGame';
+import type { DailyHistory, DailyStore, SeedScores, StatsStore, WeeklyStore } from '../hooks/useGame';
 import { formatDate } from '../hooks/useGame';
+import type { WeeklyGoal } from '../engine/weekly';
+import { weekOf } from '../engine/weekly';
+import type { Theme } from '../App';
+import BuildModal from './BuildModal';
 import GoalModal from './GoalModal';
 import ConfirmModal from './ConfirmModal';
 import AchievementsModal from './AchievementsModal';
@@ -17,15 +21,18 @@ import GuideModal from './GuideModal';
 import AnalyticsModal from './AnalyticsModal';
 import { recapGame } from '../engine/family';
 import { VERDICT_ROUTES } from '../engine/verdict';
+import { loadInheritTalent } from '../engine/talents';
 
 /** 玩法说明首访标记（localStorage key；不存在则首进自动弹出） */
 const GUIDE_SEEN_KEY = 'life-sim-guide-seen';
 
 interface Props {
-  onStart: (gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | CustomGoal | null, challenge: boolean, realMode: boolean, seed?: number | null) => void;
+  onStart: (gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | CustomGoal | null, challenge: boolean, realMode: boolean, seed?: number | null, talents?: string[], alloc?: Partial<Attributes>) => void;
   onAutoStart: (gender: 'male' | 'female', name: string) => void;
   /** 每日挑战：随机性别/名字 + 今日固定种子开局（手动播放） */
   onDailyStart: () => void;
+  /** 每周挑战：随机性别/名字 + 本周固定种子开局（本周目标由周种子确定） */
+  onWeeklyStart: () => void;
   saves: SavesV2;
   onContinue: (slot: number) => void;
   /** 跨周目成就存储（标题页成就总览展示） */
@@ -36,17 +43,28 @@ interface Props {
   daily: DailyStore;
   /** 每日挑战历史（StatsModal 周视图） */
   dailyHistory: DailyHistory;
+  /** 每周挑战记录（入口旁展示本周目标与通关状态） */
+  weekly: WeeklyStore;
+  /** 本周挑战目标（每周变化） */
+  weeklyGoal: WeeklyGoal;
   /** 种子挑战本地比分（SeedModal 展示） */
   seedScores: SeedScores;
   /** 家族族谱（标题页族谱入口 + 开局继承提示） */
   family: FamilyMember[];
+  /** 全局主题（深空蓝/纯黑；切换按钮在快捷入口行） */
+  theme: Theme;
+  onToggleTheme: () => void;
 }
 
-export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves, onContinue, achievements, stats, daily, dailyHistory, seedScores, family }: Props) {
+export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeeklyStart, saves, onContinue, achievements, stats, daily, dailyHistory, weekly, weeklyGoal, seedScores, family, theme, onToggleTheme }: Props) {
   const [gender, setGender] = useState<'male' | 'female' | null>(null);
   const [name, setName] = useState('');
   const [paceMode, setPaceMode] = useState<PaceMode>('full');
   const [typeSpeed, setTypeSpeed] = useState<TypeSpeed>('normal');
+  /** 开局构筑（天赋 + 属性分配）：普通手动开局先构筑再选目标 */
+  const [showBuild, setShowBuild] = useState(false);
+  const [talents, setTalents] = useState<string[]>([]);
+  const [alloc, setAlloc] = useState<Partial<Attributes>>({});
   const [showGoal, setShowGoal] = useState(false);
   const [confirmCover, setConfirmCover] = useState(false);
   const [showAchievements, setShowAchievements] = useState(false);
@@ -95,14 +113,23 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
       setConfirmCover(true);
       return;
     }
-    // 埋点：自定义目标模态打开
-    track({ type: 'feature_use', ts: Date.now(), feature: 'goal' });
-    setShowGoal(true);
+    // 埋点：开局构筑模态打开
+    track({ type: 'feature_use', ts: Date.now(), feature: 'build' });
+    setShowBuild(true);
   };
 
   const handleCoverConfirm = () => {
     setConfirmCover(false);
-    // 埋点：自定义目标模态打开（覆盖确认后进入）
+    // 埋点：开局构筑模态打开（覆盖确认后进入）
+    track({ type: 'feature_use', ts: Date.now(), feature: 'build' });
+    setShowBuild(true);
+  };
+
+  const handleBuildConfirm = (t: string[], a: Partial<Attributes>) => {
+    setShowBuild(false);
+    setTalents(t);
+    setAlloc(a);
+    // 埋点：自定义目标模态打开（构筑完成后进入）
     track({ type: 'feature_use', ts: Date.now(), feature: 'goal' });
     setShowGoal(true);
   };
@@ -111,7 +138,7 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
     if (!gender) return;
     setShowGoal(false);
     const finalName = name.trim() || (gender === 'male' ? '小明' : '小美');
-    onStart(gender, finalName, paceMode, typeSpeed, goal, challenge, realMode, seed);
+    onStart(gender, finalName, paceMode, typeSpeed, goal, challenge, realMode, seed, talents, alloc);
   };
 
   return (
@@ -352,6 +379,30 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
           </span>
         )}
 
+        {/* 每周挑战：本周固定种子开局（同周同序列 + 本周目标），结算判定通关 */}
+        <button
+          onClick={() => {
+            sfx.select();
+            // 埋点：每周挑战入口
+            track({ type: 'feature_use', ts: Date.now(), feature: 'weekly' });
+            onWeeklyStart();
+          }}
+          className="px-10 py-2 rounded-[30px] text-[13px] tracking-[4px] transition-all duration-300 border font-sans
+            border-white/15 text-white/35 bg-transparent
+            hover:border-[#e8a05d]/50 hover:text-[#e8a05d] hover:bg-[#e8a05d]/5 cursor-pointer"
+        >
+          🗓️ 每周挑战
+        </button>
+
+        {weekly.week === weekOf(new Date()) && (
+          <span className="text-[10px] text-white/30 tracking-[1px] whitespace-nowrap">
+            本周：{weeklyGoal.icon} {weeklyGoal.name}
+            <span className={weekly.cleared ? 'text-[#5de8a0] ml-1' : 'text-white/25 ml-1'}>
+              {weekly.cleared ? '已通关 ✓' : `最佳 ${weekly.bestScore || '—'}`}
+            </span>
+          </span>
+        )}
+
         {/* 生涯入口 */}
         <button
           onClick={() => {
@@ -442,12 +493,30 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, saves,
         >
           📊 数据
         </button>
+
+        {/* 主题切换：深空蓝 / 纯黑（全局背景，localStorage 记忆） */}
+        <button
+          onClick={onToggleTheme}
+          title="切换主题"
+          className="text-[12px] text-white/30 tracking-[3px] hover:text-[#c9a96e] transition-colors duration-200 font-sans"
+        >
+          🎨 {theme === 'dark' ? '深空' : '墨黑'}
+        </button>
       </div>
 
       </div>
       </div>
 
-      {/* 目标选择模态（开始人生后弹出，确认目标后开局）；模态放滚动层外，防未来包含块变化导致错位 */}
+      {/* 开局构筑模态（天赋抽卡 + 属性分配；普通手动开局第一步）；模态放滚动层外 */}
+      {showBuild && (
+        <BuildModal
+          inheritTalent={loadInheritTalent()}
+          onConfirm={handleBuildConfirm}
+          onCancel={() => setShowBuild(false)}
+        />
+      )}
+
+      {/* 目标选择模态（构筑完成后弹出，确认目标后开局）；模态放滚动层外，防未来包含块变化导致错位 */}
       {showGoal && (
         <GoalModal onSelect={handleGoalSelect} onCancel={() => setShowGoal(false)} latestMember={family[family.length - 1]} />
       )}

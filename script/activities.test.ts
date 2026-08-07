@@ -51,9 +51,9 @@ function mkPlaying(events: LifeEvent[], attrs: Partial<Attributes> = {}): Runtim
 
 // ============ 活动表完整性 ============
 
-test('活动表：8 个活动、id 唯一、结果池 ≥3、属性键合法、minAge 与设计表一致', () => {
+test('活动表：16 个活动、id 唯一、结果池 ≥3、属性键合法、minAge 与设计表一致', () => {
   const ids = new Set(ACTIVITIES.map(a => a.id));
-  assert.strictEqual(ACTIVITIES.length, 8);
+  assert.strictEqual(ACTIVITIES.length, 16);
   assert.strictEqual(ids.size, ACTIVITIES.length, '活动 id 必须唯一');
   const attrKeys = Object.keys(ATTR_META);
   for (const a of ACTIVITIES) {
@@ -66,11 +66,20 @@ test('活动表：8 个活动、id 唯一、结果池 ≥3、属性键合法、m
       }
     }
   }
-  // minAge 与设计表一致（6 岁起基础活动/10 岁社交/14 岁犯罪/16 岁打工/18 岁体检）
-  const expected: Record<string, number> = { fitness: 6, study: 6, work: 16, social: 10, health: 18, leisure: 6, walk_dog: 6, crime: 14 };
+  // minAge 与设计表一致（6 岁起基础活动/8 岁冥想/10 岁社交·问候·练手艺/14 岁犯罪/16 岁打工·投简历/18 岁体检·投资·相亲·约会夜/20 岁育儿）
+  const expected: Record<string, number> = {
+    fitness: 6, study: 6, work: 16, social: 10, health: 18, leisure: 6, walk_dog: 6, crime: 14,
+    invest: 18, blind_date: 18, date_night: 18, parenting: 20, family_call: 10, job_hunt: 16, skill_practice: 10, meditate: 8,
+  };
   for (const a of ACTIVITIES) {
     assert.strictEqual(a.minAge, expected[a.id], `${a.id} minAge 应=${expected[a.id]}`);
   }
+});
+
+test('活动表：invest 收益与风险并存（含亏损负档与高风险高收益档）', () => {
+  const invest = ACTIVITIES.find(a => a.id === 'invest')!;
+  assert.ok(invest.results.some(r => (r.attr.wealth ?? 0) < 0), '结果池应含亏损负档');
+  assert.ok(invest.results.some(r => (r.attr.wealth ?? 0) >= 12), '结果池应含高风险高收益档（≥12）');
 });
 
 test('活动表：遛狗要求养宠 flag（任一），犯罪结果池含被抓/逃跑变体', () => {
@@ -165,7 +174,7 @@ test('SKIP_INTRO：每日挑战局不开幼儿期自动播放（公平同局）'
 
 // ============ 结果池随机抽取 ============
 
-test('pickActivityResult：返回结果池中一员（8 个活动各抽 50 次）', () => {
+test('pickActivityResult：返回结果池中一员（16 个活动各抽 50 次）', () => {
   for (const a of ACTIVITIES) {
     for (let i = 0; i < 50; i++) {
       const r = pickActivityResult(a);
@@ -217,6 +226,38 @@ test('MAKE_ACTION：requires 拒绝（无养宠 flag 遛狗；任一 flag 可执
   assert.strictEqual(reducer(rt, { type: 'MAKE_ACTION', activityId: 'walk_dog' }), rt);
   const hasDog = { ...rt, game: { ...rt.game, flags: ['has_dog'] } };
   assert.notStrictEqual(reducer(hasDog, { type: 'MAKE_ACTION', activityId: 'walk_dog' }), hasDog);
+});
+
+test('MAKE_ACTION：requiresNot 拒绝（已婚相亲/有职业投简历；无限制可用）', () => {
+  const rt = mkPlaying([evt('a_01', 20, {})]);
+  // 未婚无职业：相亲与投简历可用
+  assert.notStrictEqual(reducer(rt, { type: 'MAKE_ACTION', activityId: 'blind_date' }), rt, '未婚可相亲');
+  assert.notStrictEqual(reducer(rt, { type: 'MAKE_ACTION', activityId: 'job_hunt' }), rt, '无职业可投简历');
+  // 已婚：相亲被拒
+  const married = { ...rt, game: { ...rt.game, flags: ['married'] } };
+  assert.strictEqual(reducer(married, { type: 'MAKE_ACTION', activityId: 'blind_date' }), married, '已婚相亲应拒绝');
+  // 有职业 flag（任一，含 retired）：投简历被拒
+  for (const f of ['doctor', 'tech_career', 'retired']) {
+    const employed = { ...rt, game: { ...rt.game, flags: [f] } };
+    assert.strictEqual(reducer(employed, { type: 'MAKE_ACTION', activityId: 'job_hunt' }), employed, `有 ${f} 不应投简历`);
+  }
+});
+
+test('MAKE_ACTION：requires 正例与反例（练手艺/约会夜/育儿陪伴）', () => {
+  const rt = mkPlaying([evt('a_01', 25, {})]);
+  // 反例：无兴趣 flag 练手艺拒绝
+  assert.strictEqual(reducer(rt, { type: 'MAKE_ACTION', activityId: 'skill_practice' }), rt, '无兴趣 flag 练手艺应拒绝');
+  // 正例：任一兴趣 flag 可练
+  for (const f of ['music_path', 'tech_path']) {
+    const hobby = { ...rt, game: { ...rt.game, flags: [f] } };
+    assert.notStrictEqual(reducer(hobby, { type: 'MAKE_ACTION', activityId: 'skill_practice' }), hobby, `有 ${f} 可练手艺`);
+  }
+  // 约会夜/育儿陪伴需对应 flag，无 flag 拒绝
+  assert.strictEqual(reducer(rt, { type: 'MAKE_ACTION', activityId: 'date_night' }), rt, '未婚约会夜应拒绝');
+  assert.strictEqual(reducer(rt, { type: 'MAKE_ACTION', activityId: 'parenting' }), rt, '无孩育儿陪伴应拒绝');
+  const parent = { ...rt, game: { ...rt.game, flags: ['married', 'has_child'] } };
+  assert.notStrictEqual(reducer(parent, { type: 'MAKE_ACTION', activityId: 'date_night' }), parent, '已婚可约会夜');
+  assert.notStrictEqual(reducer(parent, { type: 'MAKE_ACTION', activityId: 'parenting' }), parent, '有孩可育儿陪伴');
 });
 
 test('MAKE_ACTION：反馈页/快速模拟/非 playing 阶段拒绝', () => {

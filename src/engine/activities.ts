@@ -17,6 +17,8 @@ export interface Activity {
   minAge: number;
   /** flag 要求（任一满足即可；遛狗要求养宠 flag） */
   requires?: string[];
+  /** flag 排除（任一存在则不可用；相亲要求未婚、投简历要求无职业） */
+  requiresNot?: string[];
   /** 结果池（常规活动 3-4 个变体随机抽取；犯罪为 3 类：成功变体 + 被抓 + 逃跑） */
   results: ActivityResult[];
 }
@@ -27,7 +29,7 @@ export const CRIME_ACTIVITY_ID = 'crime';
 /** 犯罪活动：结果池前部的成功变体数量（其余为被抓/逃跑，位置约定） */
 const CRIME_SUCCESS_VARIANTS = 3;
 
-/** 主动行为活动表（第一批 8 个：健身/学习/打工/社交/体检/休闲/遛宠/犯罪） */
+/** 主动行为活动表（16 个：健身/学习/打工/社交/体检/休闲/遛宠/犯罪/投资/相亲/约会夜/育儿/问候家人/投简历/练手艺/冥想） */
 export const ACTIVITIES: Activity[] = [
   {
     id: 'fitness',
@@ -225,6 +227,217 @@ export const ACTIVITIES: Activity[] = [
       {
         text: '被店员的吼声吓得夺门而出。你跑出两条街才敢停下来喘气，膝盖磕青了一块，钱包却比脸还干净。',
         attr: { wealth: -3, happiness: -2 },
+      },
+    ],
+  },
+  {
+    id: 'invest',
+    name: '投资理财',
+    icon: '📈',
+    desc: '让钱生钱，也得愿赌服输',
+    minAge: 18,
+    results: [
+      {
+        text: '你把发下来的奖金分成十二份，存了三年定期。柜员说利率又降了，你数了数到期的日子，想着正好给家里换台新冰箱。',
+        attr: { wealth: 4 },
+      },
+      {
+        text: '定投的基金又翻红了。你看着那条慢慢爬起来的净值曲线，把手机揣回兜里——耐心这东西，市场会付你利息。',
+        attr: { wealth: 7 },
+      },
+      {
+        text: '定投的基金绿了三天。你掐着 APP 反复看，最后还是没动——账面上的数字会骗人，你信的是慢慢变富。',
+        attr: { wealth: -2 },
+      },
+      {
+        text: '你把闲钱全押进了一只妖股。连着三个涨停，账户余额蹦着往上跳，你关掉行情软件，手心全是汗。',
+        attr: { wealth: 13, luck: 2 },
+      },
+      {
+        text: '那只股票连着跌停，你终于割肉离场。账户回到原点，你对着 K 线图发了会儿呆，然后卸载了行情软件。',
+        attr: { wealth: -8, luck: -2 },
+      },
+      {
+        text: '你报了个理财课，老师讲得实在：不懂的不碰，别把鸡蛋放一个篮子。你认真做了两页笔记。',
+        attr: { intelligence: 2 },
+      },
+    ],
+  },
+  {
+    id: 'blind_date',
+    name: '相亲',
+    icon: '💑',
+    desc: '缘分说不定就藏在介绍人那儿',
+    minAge: 18,
+    requiresNot: ['married'],
+    results: [
+      {
+        text: '阿姨牵的线，你硬着头皮去了。没想到对方也是个话匣子，一顿饭聊了俩小时，散场时你俩交换了微信。',
+        attr: { social: 6 },
+      },
+      {
+        text: '对方全程低头刷手机，你找话题找得口干舌燥。结账时你们礼貌道别，谁也没再提下次。',
+        attr: { social: 2, happiness: -2 },
+      },
+      {
+        text: '对方条件不错，工作稳定人也礼貌。可你心里清楚，聊不到一起去的感觉，和条件好坏无关。',
+        attr: { social: 3 },
+      },
+      {
+        text: '约好的咖啡店，对方临时说不来了。你一个人喝完了那杯美式，走的时候反而轻松了些。',
+        attr: { social: 2 },
+      },
+    ],
+  },
+  {
+    id: 'date_night',
+    name: '约会夜',
+    icon: '🌹',
+    desc: '婚后也要记得恋爱时的样子',
+    minAge: 18,
+    requires: ['married'],
+    results: [
+      {
+        text: '你订了老地方那家西餐厅。蜡烛、红酒、你俩都爱的那道牛排——她说比结婚纪念日那顿还用心。',
+        attr: { happiness: 7, social: 2 },
+      },
+      {
+        text: '没有安排什么，你们沿着河边散步。她讲起当年刚认识时的糗事，你笑着听着，路灯把影子拉得很长。',
+        attr: { happiness: 6 },
+      },
+      {
+        text: '爆米花买了一大桶，电影却没什么人看。你们在最后一排笑成一团，散场时她挽着你的胳膊说下次还来。',
+        attr: { happiness: 5 },
+      },
+      {
+        text: '今晚没出去，你们在家做饭。她掌勺你打下手，厨房里油烟和笑声搅在一起，比什么都香。',
+        attr: { happiness: 4 },
+      },
+    ],
+  },
+  {
+    id: 'parenting',
+    name: '育儿陪伴',
+    icon: '🧑‍🍼',
+    desc: '陪伴是给孩子最好的礼物',
+    minAge: 20,
+    requires: ['has_child'],
+    results: [
+      {
+        text: '孩子咬着笔杆发呆，你搬了把椅子坐下，把题目拆成一小步一小步讲。他眼睛亮起来的那一刻，你觉得值了。',
+        attr: { happiness: 5, social: 2 },
+      },
+      {
+        text: '睡前故事讲到第三遍，孩子还是不肯睡。你把声音放轻，讲着讲着，他攥着你的手指睡着了。',
+        attr: { happiness: 4, social: 1 },
+      },
+      {
+        text: '积木搭到一半塌了，孩子咯咯直笑。你俩干脆盘腿坐下，从头再来——塌了再搭，比他写作业耐心多了。',
+        attr: { happiness: 5 },
+      },
+      {
+        text: '辅导作业到第八题，你的耐心余额告急。深呼吸三次，你告诉自己：亲生的、亲生的。',
+        attr: { happiness: 2 },
+      },
+    ],
+  },
+  {
+    id: 'family_call',
+    name: '问候家人',
+    icon: '📞',
+    desc: '常回家看看，电话也行',
+    minAge: 10,
+    results: [
+      {
+        text: '给爸妈打了个电话，他们问吃了吗、冷不冷、钱够不够花。你听着听着就笑了，跟电话那头唠了半个多小时。',
+        attr: { happiness: 4, social: 2 },
+      },
+      {
+        text: '给兄弟姐妹发了条消息，问他最近怎么样。那边秒回一串语音，你听完发现嘴角一直翘着。',
+        attr: { happiness: 3, social: 2 },
+      },
+      {
+        text: '周末回了趟家，妈做了你最爱吃的菜。桌上的筷子多添了一双，爸爸说：常回来。',
+        attr: { happiness: 6 },
+      },
+      {
+        text: '视频通话里，爸妈的气色看着还行。妈说别老惦记家里，你把镜头转向窗外：看，我这儿下雪了。',
+        attr: { happiness: 4 },
+      },
+    ],
+  },
+  {
+    id: 'job_hunt',
+    name: '投简历',
+    icon: '💼',
+    desc: '广撒网，等一个有缘的 Offer',
+    minAge: 16,
+    // 职业 flag 清单与 JOB_FLAG_MAP 同步（有职业或退休不再求职）
+    requiresNot: ['doctor', 'startup_success', 'civil_servant', 'tech_career', 'grad_school', 'research_path', 'artist_pro', 'artist_life', 'athlete_pro', 'sports_career', 'military_flag', 'skilled_worker', 'retired'],
+    results: [
+      {
+        text: '简历投出去几十份，终于等来一个面试电话。你连夜把项目经历背得滚瓜烂熟，面试官点头的时候，你感觉离那扇门又近了一步。',
+        attr: { intelligence: 4 },
+      },
+      {
+        text: '第七封拒信安静地躺在邮箱里。你关掉页面，下楼买了杯热奶茶，告诉自己：这才哪到哪。',
+        attr: { happiness: 2 },
+      },
+      {
+        text: '朋友内推的岗位递进了面试。沾了熟人的光，你也不敢掉链子，把状态调到最好，聊得挺投缘。',
+        attr: { social: 5 },
+      },
+      {
+        text: 'HR 在电话里跟你聊了薪资范围。你按捺住心跳，翻出收藏夹里的谈薪攻略——这一晚睡得特别踏实。',
+        attr: { wealth: 6 },
+      },
+    ],
+  },
+  {
+    id: 'skill_practice',
+    name: '练手艺',
+    icon: '🎨',
+    desc: '兴趣这口井，越挖越甜',
+    minAge: 10,
+    // 兴趣 flag（任一即可；音乐/绘画/科技三线，结果池混合变体）
+    requires: ['music_path', 'music_piano', 'art_skill', 'artist_life', 'tech_path', 'coding_early'],
+    results: [
+      {
+        text: '琴键按下去的时候，邻居家的猫都会安静下来。练了半小时，指缝间的和弦终于不那么生涩了。',
+        attr: { appearance: 4 },
+      },
+      {
+        text: '写生的颜料挤了一盘。夕阳把影子拉长，你把最后一笔落下去，画里的老街比照片还像。',
+        attr: { appearance: 5 },
+      },
+      {
+        text: '敲代码敲到晚饭凉了。调完最后一个 bug，程序跑通了——那种感觉，比喝汽水还痛快。',
+        attr: { intelligence: 5 },
+      },
+    ],
+  },
+  {
+    id: 'meditate',
+    name: '冥想静心',
+    icon: '🧘',
+    desc: '给脑子按个暂停键',
+    minAge: 8,
+    results: [
+      {
+        text: '早上起来先冥想十分钟。闹钟不响，窗外只有鸟叫，脑子里那团乱麻慢慢松开了。',
+        attr: { happiness: 5 },
+      },
+      {
+        text: '睡前做正念呼吸，数着数着呼吸就匀了。这一觉，睡得比以往都沉。',
+        attr: { happiness: 4 },
+      },
+      {
+        text: '睡前写下三件感恩的事：热汤、老友的消息、今天没下雨。写着写着，心里就软下来了。',
+        attr: { happiness: 4 },
+      },
+      {
+        text: '湖边有张空长椅，你坐下来什么也不做。风从水面吹过来，时间好像也慢了一拍。',
+        attr: { happiness: 5 },
       },
     ],
   },

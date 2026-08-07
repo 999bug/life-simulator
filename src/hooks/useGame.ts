@@ -1028,6 +1028,9 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
       if (activity.requires && !activity.requires.some(f => state.game.flags.includes(f))) {
         return state;
       }
+      if (activity.requiresNot && activity.requiresNot.some(f => state.game.flags.includes(f))) {
+        return state;
+      }
       // 结果：犯罪走专用分支（成功率 + 被抓/逃跑，即时操作不需要确定性）；其余从结果池随机
       const result = activity.id === 'crime'
         ? rollCrime(state.game.attributes.luck, state.game.attributes.intelligence, Math.random)

@@ -31,7 +31,8 @@ script/chiled.json ──convert-events.mjs──▶ public/events.json
 ```
 
 - **chiled.json**：事件数据源（snake_case 原始格式：`age_range`/`flags_add`/`has_flags`/`min_attrs`）。**所有事件改动都改这里，不手改 events.json**
-- **convert-events.mjs**：唯一转换器。`ATTR_MAP`（107 键）把 chiled 属性名映射到 8 大引擎属性；`INVERSE` 集合内的键是负向维度（取反求和，如 `pressure:+8` → happiness:-8）；未映射键 fail-fast 抛错；**事件 id 校验**（2 位主线/4 位模拟，其他抛错）。`ATTR_ORDER`/`STAGE_RANGES` 需与 `src/engine/state.ts` 的 `ATTR_META`/`STAGE_META` 手动同步。**产物为 `public/events.json`**（无缩进压缩输出）：运行时 fetch 加载（避免 586KB 数据内联进单文件 bundle，首屏 HTML 584KB→302KB），SW precache 保离线
+- **convert-events.mjs**：唯一转换器。`ATTR_MAP`（107 键）把 chiled 属性名映射到 8 大引擎属性；`INVERSE` 集合内的键是负向维度（取反求和，如 `pressure:+8` → happiness:-8）；未映射键 fail-fast 抛错；**事件 id 校验**（2 位主线/4 位模拟，其他抛错）；**选项 `personality` 手工性格标注透传**（白名单 6 端校验 fail-fast，透传到 `outcomes.personality`，引擎 traitForOutcome 优先采用——内容层文案重写时标注）。`ATTR_ORDER`/`STAGE_RANGES` 需与 `src/engine/state.ts` 的 `ATTR_META`/`STAGE_META` 手动同步。**产物为 `public/events.json`**（无缩进压缩输出）：运行时 fetch 加载（避免 586KB 数据内联进单文件 bundle，首屏 HTML 584KB→302KB），SW precache 保离线
+- **apply-rewrites.mjs**：文案重写补丁工具（`script/rewrites/*.json`，按 id 精确替换 title/text/choices 文案与 personality 标注，**效果值/flags/conditions 一律保留原值**——防重写误伤平衡与事件链；补丁选项数不匹配即抛错）。分批重写 0-12 岁已用 batch1-a~d（81 个事件，0-12 岁徽章覆盖率 7%→62-76%）；后续批次续用
 - **prune-events.mjs**：精选工具。事件 id 规则：**2 位数字后缀 = 原始主线事件（如 child_01），一字不改、永远保留；4 位数字后缀 = 模拟事件（如 child_0017），只能被精选删除、不能改内容**。`keep-list.json` 记录保留清单（审计用，当前 260 条 = 全部保留的模拟事件；新增模拟事件后需同步追加，否则 prune 会被过滤）。运行方式：`node script/prune-events.mjs script/keep-list.json`（写回 chiled.json，含 gap_year 补丁）
 - **merge-fragments.mjs**：合并 chiled.json + `script/fragments/` 片段，跑三重校验：convertAll fail-fast + 每岁密度（0-2 岁 3-5 个、3-12 岁 5-13 个、13-75 岁 3-8 个）+ flag 生产/消费配对（has_flags 引用的 flag 必须有产出者，not_flags 不算悬空）。**幂等**：片段中已合并的 id 自动跳过，片段文件保留在 fragments/ 目录可重复运行
 - **clamp-effects.mjs**：效果值钳位工具。4 位模拟事件的效果按转换后属性值等比例压缩到 ±3~±20 声明范围内（多键求和超范围时压缩该属性所有来源键）；2 位主线一字不改。幂等，效果值调整后用它 + build:events
@@ -105,6 +106,7 @@ script/chiled.json ──convert-events.mjs──▶ public/events.json
 ```
 
 - effects 键只能取 `ATTR_MAP` 内的键（107 个）；值 ±3~±20（原版数据有 ±2 与 25 的先例）；每项 1-3 键
+- 选项可选 `personality: ["rational"]` 手工性格标注（6 端白名单：rational/emotional/adventurous/cautious/selfish/altruistic；标注即最终信号，覆盖效果自动推导——用于修正「自律→利他」类误判与供给无信号端（安稳））
 - flags 生产（`flags_add`）/消费（`has_flags`）必须成对；新 flag 必须登记产出者与消费者
 - 合并后密度校验：0-2 岁 3-5、3-12 岁 5-13、13-75 岁 3-8 个/岁
 - 测试数据工具用 node:test，见 `script/data-tools.test.mjs` 的 `ev()` 辅助函数

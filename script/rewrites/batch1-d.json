@@ -1,0 +1,202 @@
+[
+  {
+    "id": "primary_0109",
+    "choices": [
+      { "text": "研究怎么把纸星星卖得更多——五分的星星，攒出第一个存钱罐", "personality": ["adventurous"] },
+      { "text": "帮家里做了一暑假家务，爸妈给了零花钱", "personality": null },
+      { "text": "还是算了，钱的事等长大再说", "personality": ["cautious"] }
+    ]
+  },
+  {
+    "id": "primary_0116",
+    "choices": [
+      { "text": "每天加练到天黑——市里的对手，一个都不能小看", "personality": null },
+      { "text": "就当去见世面——赢不了，也要看看高手长什么样", "personality": ["adventurous"] },
+      { "text": "算了，别丢人——我还是待在舒适区吧", "personality": ["cautious"] }
+    ]
+  },
+  {
+    "id": "primary_0117",
+    "choices": [
+      { "text": "这个秘密，我替你守住了", "personality": null },
+      { "text": "没多问，也没告诉别人——知道得太多不是好事", "personality": null },
+      { "text": "第二天就忍不住说漏了嘴——后来再没人跟我说秘密了", "personality": ["selfish"] }
+    ]
+  },
+  {
+    "id": "primary_0119",
+    "choices": [
+      { "text": "既然选了，就练出个样子来——一周三次，雷打不动", "personality": null },
+      { "text": "快乐就好——玩着玩着，说不定也能玩出点名堂", "personality": null },
+      { "text": "不合适就换——人生还长，方向多着呢", "personality": null }
+    ]
+  },
+  {
+    "id": "primary_0121",
+    "choices": [
+      { "text": "计划表贴墙上，撕下来三次又贴回去三次——最后我赢了", "personality": ["rational"] },
+      { "personality": null },
+      { "text": "先玩一会儿，作业等会儿再说——时间还早呢", "personality": ["emotional"] }
+    ]
+  },
+  {
+    "id": "lineage_0004",
+    "choices": [
+      { "text": "学着自己查资料找答案", "personality": ["rational"] },
+      { "text": "问长辈：读书读到你这个程度是什么感觉", "personality": ["emotional"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "lineage_0007",
+    "choices": [
+      { "text": "学着备一个自己的小本子", "personality": ["cautious"] },
+      { "text": "问：帮了这么多人，开心吗", "personality": ["emotional"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "tech_0003",
+    "choices": [
+      { "text": "我按记忆把零件一件件装回去，闹钟真的响了", "personality": ["rational"] },
+      { "text": "装不回去，我把零件藏进铁盒当宝贝", "personality": ["emotional"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "child_08",
+    "choices": [
+      { "personality": null },
+      { "text": "叫上几个同学一起送他回家，一路说说笑笑", "personality": ["altruistic"] },
+      { "text": "假装没看见，和朋友们打打闹闹地跑了", "personality": ["selfish"] },
+      { "text": "觉得他一定有什么毛病，和几个同学一起嘲笑他", "personality": ["selfish"] }
+    ]
+  },
+  {
+    "id": "primary_0146",
+    "choices": [
+      { "text": "想配得上TA——每天多背二十个单词，书桌前的灯亮到很晚", "personality": ["rational"] },
+      { "text": "还是做好朋友吧——有些话，说破了就回不去了", "personality": ["cautious"] },
+      { "text": "悄悄写在日记本里，锁好——谁也不知道", "personality": ["emotional"] }
+    ]
+  },
+  {
+    "id": "primary_0155",
+    "choices": [
+      { "text": "错题本翻了五遍，最后一页都快磨破了", "personality": ["rational"] },
+      { "text": "心态放平，会的做对，不会的认——考完对答案一概不听", "personality": ["cautious"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "primary_0167",
+    "choices": [
+      { "text": "重点。考上了，就是另一条路", "personality": null },
+      { "text": "离家近、同学熟——适合自己的才是最好的", "personality": ["cautious"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "primary_0176",
+    "choices": [
+      { "text": "活出个样子来——让爸妈提到我的时候，眼睛里有光", "personality": null },
+      { "text": "开心最重要——一辈子那么短，别委屈自己", "personality": null },
+      { "text": "让这个世界因为我好一点点——就够了", "personality": null }
+    ]
+  },
+  {
+    "id": "lineage_0011",
+    "choices": [
+      { "text": "问长辈：要考多少分才能戴上它", "personality": ["rational"] },
+      { "personality": null },
+      { "text": "觉得压力好大，还是先去玩一会儿", "personality": ["emotional"] }
+    ]
+  },
+  {
+    "id": "hobby_0004",
+    "choices": [
+      { "text": "主动把每个月黑板报的活儿都揽下来", "personality": ["rational"] },
+      { "text": "偷偷报了校外的周末美术班，从素描学起", "personality": ["cautious"] },
+      { "text": "拉着好朋友一起画，教她怎么调出好看的颜色", "personality": ["altruistic"] }
+    ]
+  },
+  {
+    "id": "child_10",
+    "choices": [
+      { "text": "从此改变了。主动帮新同学适应班级", "personality": ["altruistic"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "primary_0186",
+    "choices": [
+      { "text": "约好每个周末都见，哪怕坐一个小时的公交", "personality": ["emotional"] },
+      { "text": "天下没有不散的筵席——新学校，也会有好朋友", "personality": null },
+      { "text": "先把自己过好——交朋友的事，不着急", "personality": ["cautious"] }
+    ]
+  },
+  {
+    "id": "primary_0188",
+    "choices": [
+      { "text": "盯着TA的名次：下一次考试，我要出现在你前面", "personality": null },
+      { "text": "偷偷观察TA怎么学的——好方法，拿来用", "personality": null },
+      { "text": "不比了——跟昨天的自己比，才是正经事", "personality": ["cautious"] }
+    ]
+  },
+  {
+    "id": "primary_0189",
+    "choices": [
+      { "text": "搞明白「为什么」比「能用」更过瘾——原理也要弄懂", "personality": null },
+      { "text": "把方法记进本子——下次再遇到，三分钟搞定", "personality": null },
+      { "text": "还是直接问懂行的人最快——别自己瞎折腾", "personality": null }
+    ]
+  },
+  {
+    "id": "primary_0196",
+    "choices": [
+      { "text": "重点初中。新课本已经预习了一半", "personality": ["rational"] },
+      { "text": "普通初中。离家近，早自习能多睡半小时", "personality": ["cautious"] },
+      { "text": "分数出来那天晚上没睡着——第二天开始，每天多学一小时", "personality": ["adventurous"] }
+    ]
+  },
+  {
+    "id": "lineage_0012",
+    "choices": [
+      { "text": "问长辈当年是怎么苦读出来的", "personality": ["rational"] },
+      { "text": "暗下决心：家里第二张文凭由我来拿", "personality": ["adventurous"] },
+      { "text": "把文凭小心放回原处，像放回一件传家宝", "personality": ["emotional"] }
+    ]
+  },
+  {
+    "id": "lineage_0013",
+    "choices": [
+      { "text": "问长辈：那一年是怎么熬过来的", "personality": ["emotional"] },
+      { "text": "把照片里的眼神记在心里", "personality": ["rational"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "hobby_0005",
+    "choices": [
+      { "text": "每天中午雷打不动地去练琴", "personality": ["cautious"] },
+      { "text": "缠着老师学乐理，把五线谱抄满了一个本子", "personality": ["rational"] },
+      { "text": "和隔壁班学琴的同学约好一起合奏", "personality": ["altruistic"] }
+    ]
+  },
+  {
+    "id": "route_0001",
+    "choices": [
+      { "text": "我要走体育这条路，交表！", "personality": ["adventurous"] },
+      { "text": "体育当爱好，先把学习抓起来", "personality": ["cautious"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "teen_01",
+    "choices": [
+      { "text": "「我要考年级前二十。」列了详细的学习计划", "personality": ["rational"] },
+      { "text": "「成绩中上就好，多交点朋友更重要。」", "personality": ["cautious"] },
+      { "text": "「其实我更想打篮球……」", "personality": ["emotional"] }
+    ]
+  }
+]

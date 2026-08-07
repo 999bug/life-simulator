@@ -53,6 +53,8 @@ export interface Choice {
 export interface ChoiceOutcome {
   attr: Partial<Attributes>;
   flags?: string[];
+  /** 手工性格标注（内容层文案重写时标注；traitForOutcome 优先采用，值须在 PERSONA_META 白名单内） */
+  personality?: string[];
 }
 
 /** 事件触发条件 */

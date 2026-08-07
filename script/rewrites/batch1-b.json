@@ -1,0 +1,139 @@
+[
+  {
+    "id": "child_0101",
+    "choices": [
+      { "text": "咯咯笑着越滑越快，回头对爸爸喊「再快一点！再快一点！」", "personality": ["adventurous"] },
+      { "text": "小心翼翼地蹬一下停一下，每滑两步就回头看看爸爸还在不在", "personality": ["cautious"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "child_0102",
+    "choices": [
+      { "text": "缠着妈妈一页一页再讲一遍，每个颜色都要自己用手指出来", "personality": null },
+      { "personality": null },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "child_0103",
+    "choices": [
+      { "personality": null },
+      { "text": "死死攥着铲子大喊「我先拿到的！你不许碰！」", "personality": ["selfish"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "child_01",
+    "choices": [
+      { "personality": null },
+      { "personality": null },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "child_0023",
+    "choices": [
+      { "text": "不满意就拆开重来，纸撕了三张，终于做出心里想要的样子", "personality": null },
+      { "text": "涂完胶水就交上去，第一个冲出教室", "personality": null },
+      { "text": "跑去问老师：你觉得我这样做对吗？", "personality": ["cautious"] }
+    ]
+  },
+  {
+    "id": "child_0018",
+    "choices": [
+      { "text": "每天喂食换水，它生病了，你整夜守着它", "personality": null },
+      { "text": "逗了它三天就没意思了，喂食全丢给爸妈", "personality": null },
+      { "text": "把它放回纸箱退给宠物店——我照顾不好它，就别害它", "personality": ["cautious"] }
+    ]
+  },
+  {
+    "id": "child_0024",
+    "choices": [
+      { "text": "一到新地方就甩开爸妈跑去看稀奇，街角巷尾都要钻一遍", "personality": ["adventurous"] },
+      { "text": "还是家里的床睡着踏实——出门三天就开始惦记回家", "personality": ["cautious"] },
+      { "text": "缠着问当地人：你们这儿最好吃的是什么？", "personality": null }
+    ]
+  },
+  {
+    "id": "child_0026",
+    "choices": [
+      { "text": "学着笨手笨脚地给TA冲奶粉，被烫了手也咧嘴笑", "personality": null },
+      { "text": "把门一摔回房间，偷偷在被窝里抹眼泪", "personality": ["emotional"] },
+      { "text": "照常上下学，该干嘛干嘛——TA是TA，我是我", "personality": null }
+    ]
+  },
+  {
+    "id": "child_0039",
+    "choices": [
+      { "text": "蹲在溪边看水黾画圈，一蹲就是一下午", "personality": null },
+      { "text": "跟着老师往林子深处钻，专挑没人走过的路", "personality": null },
+      { "text": "找个树荫坐下，安安静静想自己的事", "personality": null }
+    ]
+  },
+  {
+    "id": "child_0019",
+    "choices": [
+      { "text": "打着手电筒缩在被窝里读，一个字一个字啃完了整本书", "personality": null },
+      { "text": "翻到恐龙那页就挪不动了，别的书看都不看", "personality": null },
+      { "text": "翻了两页就扔一边，还是楼下疯跑好玩", "personality": null }
+    ]
+  },
+  {
+    "id": "child_0020",
+    "choices": [
+      { "text": "每天放学先跑三圈再写作业，刮风下雨都不停", "personality": ["rational"] },
+      { "text": "报了名，去了几天就三天打鱼两天晒网", "personality": null },
+      { "text": "坐在树荫下看别人跑，心里在想自己的事", "personality": null }
+    ]
+  },
+  {
+    "id": "child_0042",
+    "choices": [
+      { "text": "科学家！我想研究星星是怎么来的", "personality": null },
+      { "text": "画家！我想把看到的世界都画下来", "personality": ["emotional"] },
+      { "text": "医生！我想治好每个人的病", "personality": null }
+    ]
+  },
+  {
+    "id": "child_03",
+    "choices": [
+      { "personality": null },
+      { "personality": null },
+      { "text": "选了笼子角落那只不起眼的小兔子——它看起来最孤单", "personality": ["altruistic"] },
+      { "text": "「不了，我怕照顾不好它。」认真地说", "personality": ["cautious"] }
+    ]
+  },
+  {
+    "id": "child_0076",
+    "choices": [
+      { "text": "看见同桌先伸出手：「你好呀，我叫——」", "personality": null },
+      { "text": "先不出声，把教室每个角落都看了一遍", "personality": null },
+      { "text": "攥着书包带缩在椅子上，不敢抬头", "personality": null }
+    ]
+  },
+  {
+    "id": "child_0084",
+    "choices": [
+      { "text": "音乐。琴声一响，心里就安静了", "personality": ["emotional"] },
+      { "text": "运动。跑起来的时候，风都是我的", "personality": null },
+      { "text": "科技。电脑里的世界，我想全部弄明白", "personality": null }
+    ]
+  },
+  {
+    "id": "child_0100",
+    "choices": [
+      { "text": "好好学习——这是我最确定能做好的一件事", "personality": ["rational"] },
+      { "text": "跟着兴趣走，喜欢什么就学什么", "personality": ["emotional"] },
+      { "text": "我想当班长，让大家都喜欢我", "personality": null }
+    ]
+  },
+  {
+    "id": "lineage_0003",
+    "choices": [
+      { "text": "指着地图最远的角落：以后我要去这里", "personality": ["adventurous"] },
+      { "text": "把每个故事都记在小本子上，怕忘", "personality": ["rational"] },
+      { "text": "问：路上有没有想家呀", "personality": ["emotional"] }
+    ]
+  }
+]

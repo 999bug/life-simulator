@@ -83,7 +83,7 @@ npm run dev        # 启动开发服务器（端口 5173）
 
 ## 游戏数据
 
-事件数据源在 `script/chiled.json`（681 个事件，snake_case 原始格式；2026-08 实测反馈后儿童期减量——3-12 岁每岁从 11-13 降到 5-9 个，love 事件称谓统一中性 TA），修改后运行 `npm run build:events` 生成引擎使用的 `public/events.json`（**请勿手改生成文件**）。
+事件数据源在 `script/chiled.json`（681 个事件，snake_case 原始格式；2026-08 实测反馈后儿童期减量——3-12 岁每岁从 11-13 降到 5-9 个，love 事件称谓统一中性 TA；2026-08-07 起 0-12 岁选项文案分批重写为第一人称行动并标注性格 `personality` 字段），修改后运行 `npm run build:events` 生成引擎使用的 `public/events.json`（**请勿手改生成文件**）。
 
 - 事件 id 规则：2 位数字后缀为原始主线事件（一字不改），4 位数字后缀为模拟事件（可新增/精选删除/效果钳位）
 - effects 属性键需在 `script/convert-events.mjs` 的 ATTR_MAP 内（未映射键会转换报错）

@@ -93,6 +93,15 @@ test('traitForOutcome：未知 flag 不标注', () => {
   assert.deepStrictEqual(traitForOutcome({ happiness: 3 }, ['has_pet']), []);
 });
 
+test('traitForOutcome：手工标注优先，不做自动推导叠加（安稳端唯一来源）', () => {
+  // 效果弱无自动信号，手工标注 → 安稳
+  assert.deepStrictEqual(traitForOutcome({ happiness: 2 }, [], ['cautious']), ['cautious']);
+  // 效果强（本会标冒险），手工标注后只按标注走
+  assert.deepStrictEqual(traitForOutcome({ wealth: 15, happiness: -10 }, [], ['rational']), ['rational']);
+  // 去重 + 白名单过滤（非法值忽略）
+  assert.deepStrictEqual(traitForOutcome({}, [], ['altruistic', 'altruistic', 'brave']), ['altruistic']);
+});
+
 // ============ derivePersona：历史推导 ============
 
 test('derivePersona：按历史逐条累积', () => {

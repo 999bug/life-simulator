@@ -85,14 +85,21 @@ const PERSONA_FLAG_RULES: Record<string, PersonaTrait> = {
 /**
  * 选项效果 → 命中的性格端（0-2 个）。
  *
- * 强信号规则：效果结构（求和后判定）+ flag 补充表；无信号不标注。
+ * 手工标注优先（内容层文案重写时标注，标注即最终信号，不做自动推导叠加）；
+ * 无标注走强信号规则：效果结构（求和后判定）+ flag 补充表；无信号不标注。
  * 阈值口径：原始效果值（数据声明即设计意图，不做年龄收益折算）。
  *
  * @param attr 选项效果（属性键 → 声明值）
  * @param flags 选项产出的 flag
+ * @param manual 手工性格标注（白名单过滤，非法值忽略）
  * @returns 命中的性格端数组（去重，最多 2 个）
  */
-export function traitForOutcome(attr: Partial<Attributes>, flags: string[] = []): PersonaTrait[] {
+export function traitForOutcome(attr: Partial<Attributes>, flags: string[] = [], manual: string[] = []): PersonaTrait[] {
+  // 手工标注优先（内容层文案重写时标注；标注即最终信号）
+  if (manual.length > 0) {
+    return [...new Set(manual)].filter((t): t is PersonaTrait => t in PERSONA_META);
+  }
+
   const traits = new Set<PersonaTrait>();
 
   // flag 补充规则（叙事信号优先）
@@ -158,7 +165,7 @@ export function derivePersona(history: ChoiceRecord[]): PersonaState {
     if (!ch) {
       continue;
     }
-    for (const t of traitForOutcome(ch.outcomes.attr, ch.outcomes.flags)) {
+    for (const t of traitForOutcome(ch.outcomes.attr, ch.outcomes.flags, ch.outcomes.personality)) {
       out[t]++;
     }
   }

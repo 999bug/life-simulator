@@ -149,6 +149,9 @@ function mapConditions(conditions, eventId) {
   return out;
 }
 
+/** 性格端合法值（与 src/engine/personality.ts 的 PERSONA_META 键同步，改动需两侧一致） */
+const PERSONA_TRAITS = ['rational', 'emotional', 'adventurous', 'cautious', 'selfish', 'altruistic'];
+
 /** 校验原始事件结构，缺字段抛错 */
 function validateRaw(raw) {
   const missing = [];
@@ -170,6 +173,16 @@ function validateRaw(raw) {
   }
   if (missing.length > 0) {
     throw new Error(`invalid event ${raw.id ?? '(no id)'}: ${missing.join(', ')}`);
+  }
+  // 选项性格标注：可选，值必须在性格端白名单内（写错即抛错，防静默失效）
+  for (const c of raw.choices) {
+    const tags = c.personality;
+    if (tags === undefined) {
+      continue;
+    }
+    if (!Array.isArray(tags) || tags.length === 0 || tags.some(t => !PERSONA_TRAITS.includes(t))) {
+      throw new Error(`invalid personality in event ${raw.id}: ${JSON.stringify(tags)}`);
+    }
   }
 }
 
@@ -198,6 +211,10 @@ export function convertEvent(raw) {
       const choice = { text: c.text, effects: toEffectsString(attr), outcomes: { attr } };
       if (Array.isArray(c.flags_add) && c.flags_add.length > 0) {
         choice.outcomes.flags = c.flags_add;
+      }
+      // 手工性格标注透传（内容层文案重写时标注，引擎端 traitForOutcome 优先采用）
+      if (Array.isArray(c.personality) && c.personality.length > 0) {
+        choice.outcomes.personality = c.personality;
       }
       return choice;
     }),

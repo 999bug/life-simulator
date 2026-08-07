@@ -68,6 +68,32 @@ test('事件 id 规则校验：2 位主线与 4 位模拟通过，其他抛错',
   assert.strictEqual(isValidEventId('no_number'), false);
 });
 
+test('convertAll：选项手工性格标注透传到 outcomes.personality', () => {
+  const raw = [{
+    id: 'child_0018', age_range: [4, 6], category: 'hobby', title: 't', text: 'x',
+    choices: [
+      { text: 'a', effects: { happiness: 2 }, personality: ['cautious'] },
+      { text: 'b', effects: { happiness: 1 } },
+    ],
+  }];
+  const [ev] = convertAll(raw);
+  assert.deepEqual(ev.choices[0].outcomes.personality, ['cautious']);
+  assert.equal(ev.choices[1].outcomes.personality, undefined);
+});
+
+test('convertAll：性格标注非法值抛错（fail fast）', () => {
+  const bad = [{
+    id: 'child_0019', age_range: [4, 6], category: 'hobby', title: 't', text: 'x',
+    choices: [{ text: 'a', effects: { happiness: 1 }, personality: ['brave'] }],
+  }];
+  assert.throws(() => convertAll(bad), /invalid personality/);
+  const empty = [{
+    id: 'child_0020', age_range: [4, 6], category: 'hobby', title: 't', text: 'x',
+    choices: [{ text: 'a', effects: { happiness: 1 }, personality: [] }],
+  }];
+  assert.throws(() => convertAll(empty), /invalid personality/);
+});
+
 test('convertAll 对非法 id 抛错（fail fast）', () => {
   assert.throws(() => convertAll([ev('adult_100', 30)]), /非法事件 id/);
   assert.throws(() => convertAll([ev('child_01', 3), ev('a', 5)]), /非法事件 id/);

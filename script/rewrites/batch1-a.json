@@ -1,0 +1,96 @@
+[
+  {
+    "id": "infant_0004",
+    "choices": [
+      { "personality": null },
+      { "text": "爸爸忙前忙后，订了最贵的月子餐和护工，说大人小孩都不能马虎", "personality": ["cautious"] },
+      { "text": "妈妈把你贴在胸口，笑爸爸笨手笨脚，笑着笑着眼睛就红了", "personality": ["emotional"] }
+    ]
+  },
+  {
+    "id": "infant_0005",
+    "choices": [
+      { "text": "爸爸借了邻居的三轮车，雪夜里蹬了四十分钟，省下的钱够半个月奶粉", "personality": ["cautious"] },
+      { "text": "爸爸咬牙叫了出租车，车费抵他半个月工钱——他说不能让你们娘俩冻着", "personality": ["emotional"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "infant_0006",
+    "choices": [
+      { "text": "爷爷摆了十几桌，礼金记了满满一页账——排场要大，喜气才足", "personality": ["adventurous"] },
+      { "text": "家里只摆了两桌，收的红包还没有尿布多——日子要细水长流地过", "personality": ["cautious"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "infant_0007",
+    "choices": [
+      { "text": "退烧后睁开眼，看见妈妈红红的眼眶，冲她笑了", "personality": ["emotional"] },
+      { "text": "爸爸背着你跑了三家诊所，药钱花了半月工资——多跑一家，多一分安心", "personality": ["cautious"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "infant_0008",
+    "choices": [
+      { "text": "松开手，摇摇晃晃扑进妈妈怀里", "personality": ["emotional"] },
+      { "text": "扶着墙一步一步慢慢挪，坚决不摔——稳一点，再稳一点", "personality": ["cautious"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "infant_0009",
+    "choices": [
+      { "text": "你拉着王婶家的小哥哥，把玩具小车分给他玩", "personality": ["altruistic"] },
+      { "text": "妈妈用萝卜干换回一袋鸡蛋，说谁也不占谁便宜", "personality": ["cautious"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "infant_0010",
+    "choices": [
+      { "text": "妈妈蹲下来认真告诉你，「不」要说给该说的事，不是用来说着玩的", "personality": ["rational"] },
+      { "text": "你叉着腰又喊了两声「不」，全家笑作一团", "personality": ["emotional"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "infant_0002",
+    "choices": [
+      { "text": "爬起来拍拍手，继续朝爸爸走去，一次比一次稳——摔跤算什么", "personality": ["adventurous"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "infant_0003",
+    "choices": [
+      { "text": "抽噎着把积木捡起来，轻轻放回盒子里——妈妈说，规矩得从小立", "personality": ["cautious"] },
+      { "text": "趁大人不注意，偷偷伸手去够饼干盒——就尝一小口，不会被发现的", "personality": ["selfish"] }
+    ]
+  },
+  {
+    "id": "child_02",
+    "choices": [
+      { "personality": null },
+      { "text": "有点吃醋——为什么大家都在看TA不看我了，眼泪在眼眶里打转", "personality": ["emotional"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "hobby_0001",
+    "choices": [
+      { "text": "「那我再画一朵云送给你！」", "personality": ["emotional"] },
+      { "text": "认认真真地把每一片叶子都补上——画就要画完整", "personality": ["rational"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "pet_0001",
+    "choices": [
+      { "personality": null },
+      { "text": "买根火腿肠喂它，看它吃完才放心地回家", "personality": ["altruistic"] },
+      { "personality": null }
+    ]
+  }
+]

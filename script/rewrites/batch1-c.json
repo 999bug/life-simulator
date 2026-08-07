@@ -1,0 +1,218 @@
+[
+  {
+    "id": "primary_0003",
+    "choices": [
+      { "text": "「咱俩换零食吃吧？」——这一句话，换来六年的好朋友", "personality": null },
+      { "text": "借了橡皮，道了谢，规规矩矩坐回自己那一半", "personality": ["cautious"] },
+      { "text": "偷偷记下TA的考试成绩，心里憋着一股劲儿：下次超过你", "personality": null }
+    ]
+  },
+  {
+    "id": "primary_0009",
+    "choices": [
+      { "text": "乐器。练琴要天天挨打手心，可曲子响了真好听", "personality": ["emotional"] },
+      { "text": "体育。教练说我有天赋，跑起来就停不下来", "personality": null },
+      { "text": "计算机。敲出第一行代码的时候，屏幕亮了", "personality": null }
+    ]
+  },
+  {
+    "id": "primary_0010",
+    "choices": [
+      { "text": "站直了，把故事讲完——声音越大，心越不慌", "personality": null },
+      { "text": "磕磕绊绊讲完了，下台时手心全是汗", "personality": null },
+      { "text": "「老师，我不行——我还没准备好」", "personality": ["cautious"] }
+    ]
+  },
+  {
+    "id": "primary_0013",
+    "choices": [
+      { "text": "看到名字在第五名，攥紧了拳头：下一次，再往前一点", "personality": null },
+      { "text": "第十名，还行——稳步往上走就行", "personality": ["cautious"] },
+      { "text": "倒数。把卷子折起来收进书包——这笔账，下次算回来", "personality": null }
+    ]
+  },
+  {
+    "id": "primary_0040",
+    "choices": [
+      { "text": "暑假把二年级课本借来，提前预习", "personality": null },
+      { "text": "暑假报了美术班，画了一整个夏天", "personality": ["emotional"] },
+      { "text": "组织了一个「放学小队」，每天结伴回家", "personality": null }
+    ]
+  },
+  {
+    "id": "lineage_0001",
+    "choices": [
+      { "text": "戴上玩具听诊器，给全家玩偶挨个看病", "personality": ["altruistic"] },
+      { "text": "缠着问：怎么才能当医生呀", "personality": ["rational"] },
+      { "text": "乖乖把药吃了，不让医生操心", "personality": ["cautious"] }
+    ]
+  },
+  {
+    "id": "lineage_0006",
+    "choices": [
+      { "text": "接过笔，大胆地画下去——画坏了也是我画的", "personality": ["adventurous"] },
+      { "text": "问长辈：怎么才能画得这么好", "personality": ["rational"] },
+      { "text": "把今天这幅画偷偷藏进自己书包", "personality": ["emotional"] }
+    ]
+  },
+  {
+    "id": "hobby_0003",
+    "choices": [
+      { "text": "回家把「小星星」完整吹给妈妈听", "personality": ["emotional"] },
+      { "text": "缠着老师多学了一首新曲子", "personality": ["rational"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "child_05",
+    "choices": [
+      { "text": "听话减少了看电视时间，和妈妈约定每天只看一小时", "personality": ["cautious"] },
+      { "personality": null },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "primary_0043",
+    "choices": [
+      { "text": "他闯祸你兜着，你补作业他陪——后来你俩谁也不提「朋友」俩字，但都懂", "personality": null },
+      { "text": "一起玩可以，掏心窝子的事，先不说", "personality": null },
+      { "text": "你追我赶一年，谁也不服谁——但只有你能让我服气", "personality": null }
+    ]
+  },
+  {
+    "id": "primary_0045",
+    "choices": [
+      { "text": "摸清TA的作息，每晚多刷一套卷子——考试见", "personality": ["rational"] },
+      { "text": "不会的题互相讲，期末考试我们都要进前十", "personality": ["altruistic"] },
+      { "text": "比来比去没意思，按自己的节奏来", "personality": ["cautious"] }
+    ]
+  },
+  {
+    "id": "primary_0049",
+    "choices": [
+      { "text": "练到腿软也咬牙跑完最后一圈——教练说坚持下来才出成绩", "personality": ["rational"] },
+      { "text": "想去就去，累了就歇——快乐运动", "personality": null },
+      { "text": "体育课能逃就逃，作业本才是我的主场", "personality": null }
+    ]
+  },
+  {
+    "id": "primary_0051",
+    "choices": [
+      { "text": "一个链接点开一个，做了满满三页笔记——原来答案可以自己找到", "personality": null },
+      { "text": "搜着搜着就点进了游戏攻略，一下午没了", "personality": null },
+      { "text": "问了一圈人，最后等爸爸下班回来教", "personality": null }
+    ]
+  },
+  {
+    "id": "music_0001",
+    "choices": [
+      { "text": "鼓起勇气求爸妈，报名学琴——「我想学」", "personality": ["adventurous"] },
+      { "text": "攒零花钱买琴谱，自己跟着学", "personality": ["cautious"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "lineage_0005",
+    "choices": [
+      { "text": "咬牙跟上，一步都不落下", "personality": ["adventurous"] },
+      { "text": "问长辈当年比赛的故事", "personality": ["rational"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "lineage_0010",
+    "choices": [
+      { "text": "明天还要叠得更方正", "personality": ["cautious"] },
+      { "text": "问长辈部队里的故事", "personality": ["emotional"] },
+      { "text": "偷偷给自己也定了三条家规", "personality": ["rational"] }
+    ]
+  },
+  {
+    "id": "tech_0001",
+    "choices": [
+      { "text": "我蹲下来研究遥控器上每个键的用处", "personality": ["rational"] },
+      { "text": "我猛按油门，让它在客厅横冲直撞", "personality": ["emotional"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "child_06",
+    "choices": [
+      { "text": "报名！回家让妈妈陪你练了一个星期，站上台那刻心都要跳出来", "personality": ["adventurous"] },
+      { "text": "不想上台。但帮参赛的同学做了好看的背景板", "personality": ["altruistic"] },
+      { "text": "算了，把时间花在看书上好了", "personality": ["rational"] }
+    ]
+  },
+  {
+    "id": "primary_0076",
+    "choices": [
+      { "text": "放学留下加练，图书馆的灯陪我坐到最晚", "personality": ["rational"] },
+      { "text": "反正选上了，那就去试试——输了也不丢人", "personality": ["adventurous"] },
+      { "text": "跟老师说我不行，别耽误班级名额", "personality": ["cautious"] }
+    ]
+  },
+  {
+    "id": "primary_0078",
+    "choices": [
+      { "text": "每天写完作业敲半小时代码，一行一行啃", "personality": null },
+      { "text": "只学好玩的——会动的图形、能响的声音", "personality": ["emotional"] },
+      { "text": "看两行就头大，关掉了——这玩意儿不是给人学的", "personality": null }
+    ]
+  },
+  {
+    "id": "primary_0079",
+    "choices": [
+      { "text": "进校队。训练再苦也认了——说不定真能跑出点名堂", "personality": ["adventurous"] },
+      { "text": "还是当爱好吧，放学跑两圈就够了", "personality": null },
+      { "text": "算了吧，学习要紧——操场留给别人", "personality": null }
+    ]
+  },
+  {
+    "id": "primary_0096",
+    "choices": [
+      { "text": "科学家。我想解开这个世界所有的为什么", "personality": null },
+      { "text": "企业家。我要自己开公司，让爸妈不用再那么累", "personality": null },
+      { "text": "艺术家。我想把生活画得比生活好看", "personality": ["emotional"] }
+    ]
+  },
+  {
+    "id": "lineage_0002",
+    "choices": [
+      { "text": "在白板角落画下自己的「商业计划」", "personality": ["adventurous"] },
+      { "text": "认真观察大人是怎么开会的", "personality": ["rational"] },
+      { "text": "只想知道公司的零食柜在哪", "personality": ["emotional"] }
+    ]
+  },
+  {
+    "id": "lineage_0008",
+    "choices": [
+      { "text": "把每件工具的名字都记下来", "personality": ["rational"] },
+      { "text": "抢着干下一个修理活", "personality": ["adventurous"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "lineage_0009",
+    "choices": [
+      { "text": "缠着要学敲那几行「咒语」", "personality": ["rational"] },
+      { "text": "把拆下来的零件摆了一桌子研究", "personality": ["adventurous"] },
+      { "text": "问：电脑能打游戏吗", "personality": ["emotional"] }
+    ]
+  },
+  {
+    "id": "tech_0002",
+    "choices": [
+      { "text": "我照着书上的教程，一个键一个键地学打字", "personality": ["rational"] },
+      { "text": "我天天守着屏幕打游戏，连饭都顾不上吃", "personality": ["emotional"] },
+      { "personality": null }
+    ]
+  },
+  {
+    "id": "child_07",
+    "choices": [
+      { "personality": null },
+      { "text": "假装什么都没发生。但变得更加安静和敏感了", "personality": ["emotional"] },
+      { "personality": null }
+    ]
+  }
+]

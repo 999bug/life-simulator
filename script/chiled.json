@@ -18,20 +18,26 @@
         "flags_add": []
       },
       {
-        "text": "爸爸忙前忙后，订了最贵的月子餐和护工",
+        "text": "爸爸忙前忙后，订了最贵的月子餐和护工，说大人小孩都不能马虎",
         "effects": {
           "family_need": 4,
           "money": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
-        "text": "妈妈把你贴在胸口，笑爸爸笨手笨脚",
+        "text": "妈妈把你贴在胸口，笑爸爸笨手笨脚，笑着笑着眼睛就红了",
         "effects": {
           "happiness": 3,
           "family_relation": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ],
     "conditions": {
@@ -52,20 +58,26 @@
     "text": "预产期提前了一周，那天夜里下着鹅毛大雪。爸爸用军大衣裹住你和妈妈，深一脚浅一脚地往医院赶。值班医生搓着手说来得及时。产房的灯亮了一整夜，雪也落了一整夜。你踩着一路风雪来到这个世界，睁开眼看见的第一束光，是父母通红却含笑的眼睛。",
     "choices": [
       {
-        "text": "爸爸借了邻居的三轮车，雪夜里蹬了四十分钟",
+        "text": "爸爸借了邻居的三轮车，雪夜里蹬了四十分钟，省下的钱够半个月奶粉",
         "effects": {
           "saving": 3,
           "patience": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
-        "text": "爸爸咬牙叫了出租车，车费抵他半个月工钱",
+        "text": "爸爸咬牙叫了出租车，车费抵他半个月工钱——他说不能让你们娘俩冻着",
         "effects": {
           "money": -4,
           "family_relation": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "护士姐姐往妈妈怀里塞了个暖水袋，说这孩子福气大",
@@ -94,20 +106,26 @@
     "text": "满月这天，家里摆了酒席。爷爷请了要好的亲戚，鞭炮炸了一地红。妈妈把你抱给一桌桌人看，人人都夸你白胖。爸爸守在门口，一笔一笔记着随礼的账。你被塞了一兜红包，懵懵懂懂打了个哈欠，把满屋子的大人都逗笑了。",
     "choices": [
       {
-        "text": "爷爷摆了十几桌，礼金记了满满一页账",
+        "text": "爷爷摆了十几桌，礼金记了满满一页账——排场要大，喜气才足",
         "effects": {
           "family_need": 4,
           "money": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
-        "text": "家里只摆了两桌，收的红包还没有尿布多",
+        "text": "家里只摆了两桌，收的红包还没有尿布多——日子要细水长流地过",
         "effects": {
           "saving": 3,
           "stability": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "你被逗得咯咯笑，挥着小拳头「啊啊」应和",
@@ -158,15 +176,21 @@
           "family_need": 4,
           "happiness": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
-        "text": "爸爸背着你跑了三家诊所，药钱花了半月工资",
+        "text": "爸爸背着你跑了三家诊所，药钱花了半月工资——多跑一家，多一分安心",
         "effects": {
           "money": -4,
           "family_relation": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "天亮前妈妈还要赶去上早班，把你交给奶奶守",
@@ -200,15 +224,21 @@
           "happiness": 4,
           "health": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
-        "text": "扶着墙一步一步慢慢挪，坚决不摔",
+        "text": "扶着墙一步一步慢慢挪，坚决不摔——稳一点，再稳一点",
         "effects": {
           "safety": 3,
           "patience": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "走了两步就摔了，坐在地上哭，非要妈妈抱",
@@ -292,7 +322,10 @@
           "friendship": 4,
           "social": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "altruistic"
+        ]
       },
       {
         "text": "妈妈用萝卜干换回一袋鸡蛋，说谁也不占谁便宜",
@@ -300,7 +333,10 @@
           "saving": 3,
           "family_relation": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "妈妈一整天都在忙，你只好拽着王婶的衣角听她聊天",
@@ -329,12 +365,15 @@
     "text": "妈妈让你把玩具收起来，你摇摇头，小小声说了句「不」。她愣了一下，你又说了第二遍，声音大了些，带着试探。爸爸在边上笑出声：「嘿，有主意了。」你忽然发现这个字有神奇的魔力，大人会停下来看你。你决定，再多说几遍试试。",
     "choices": [
       {
-        "text": "妈妈蹲下来认真告诉你，「不」要说给该说的事",
+        "text": "妈妈蹲下来认真告诉你，「不」要说给该说的事，不是用来说着玩的",
         "effects": {
           "discipline": 4,
           "patience": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "你叉着腰又喊了两声「不」，全家笑作一团",
@@ -342,7 +381,10 @@
           "happiness": 4,
           "courage": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "妈妈板起脸把玩具收走，你哭得直打嗝",
@@ -371,12 +413,15 @@
     "text": "你扶着沙发站起来，小短腿颤颤巍巍。爸爸蹲在不远处张开双臂，鼓励你迈出第一步。你松开手，摇摇晃晃地走了两步，摔了个屁股蹲。全家人的心都提到了嗓子眼，然后一起笑出声来。",
     "choices": [
       {
-        "text": "爬起来拍拍手，继续朝爸爸走去，一次比一次稳",
+        "text": "爬起来拍拍手，继续朝爸爸走去，一次比一次稳——摔跤算什么",
         "effects": {
           "health": 10,
           "happiness": 8
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "摔疼了，坐在地上哇哇大哭，要妈妈抱",
@@ -400,20 +445,26 @@
     "text": "晚饭前你非要吃饼干，妈妈说不可以。你小脸涨得通红，把积木推得满地都是，哭得惊天动地。奶奶想哄，妈妈拦住了：「规矩得从小立。」你哭累了，抽抽搭搭地坐下来，终于接受了这顿饭前没有饼干的事实。",
     "choices": [
       {
-        "text": "抽噎着把积木捡起来，轻轻放回盒子里",
+        "text": "抽噎着把积木捡起来，轻轻放回盒子里——妈妈说，规矩得从小立",
         "effects": {
           "discipline": 8,
           "happiness": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
-        "text": "趁大人不注意，偷偷伸手去够饼干盒",
+        "text": "趁大人不注意，偷偷伸手去够饼干盒——就尝一小口，不会被发现的",
         "effects": {
           "luck": -5,
           "discipline": -6
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "selfish"
+        ]
       }
     ],
     "conditions": {}
@@ -429,13 +480,16 @@
     "text": "三岁了，爸爸带回来一辆亮红色的小滑板车，三个轮子稳稳当当，车把上还有一只会叮叮响的小铃铛。你双手紧紧攥着车把，一只脚踩上踏板，另一只脚用力一蹬——车身晃了两下，差点摔倒，可下一秒居然滑出去了。风轻轻吹过脸颊，爸爸在后面小跑跟着，两只手在你身后张开，随时准备接住你。",
     "choices": [
       {
-        "text": "咯咯笑着越滑越快，回头对爸爸喊「再快一点！」",
+        "text": "咯咯笑着越滑越快，回头对爸爸喊「再快一点！再快一点！」",
         "effects": {
           "happiness": 10,
           "courage": 8,
           "health": 5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "小心翼翼地蹬一下停一下，每滑两步就回头看看爸爸还在不在",
@@ -444,7 +498,10 @@
           "safety_awareness": 6,
           "happiness": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "摔了一跤膝盖擦破了皮，坐在地上哇哇哭再也不肯上去",
@@ -521,7 +578,10 @@
           "social": -6,
           "impulse": 8
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "selfish"
+        ]
       },
       {
         "text": "哭着跑去找妈妈，把脸埋进她怀里不肯出来",
@@ -590,7 +650,7 @@
     "text": "幼儿园的手工课上，老师发下彩纸、胶水和剪刀，让大家做一个属于自己的作品。你盯着空白的卡纸想了一会儿，然后认真地动起手来。剪歪了、贴反了，就拆开重来。放学时你举着自己的作品走出教室，阳光照在纸片上，亮晶晶的。",
     "choices": [
       {
-        "text": "不断改进作品",
+        "text": "不满意就拆开重来，纸撕了三张，终于做出心里想要的样子",
         "effects": {
           "creativity": 20,
           "patience": 10
@@ -600,16 +660,19 @@
         ]
       },
       {
-        "text": "快速完成",
+        "text": "涂完胶水就交上去，第一个冲出教室",
         "effects": {
           "efficiency": 10
         }
       },
       {
-        "text": "寻求别人帮助",
+        "text": "跑去问老师：你觉得我这样做对吗？",
         "effects": {
           "teamwork": 15
-        }
+        },
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -635,13 +698,16 @@
         ]
       },
       {
-        "text": "有点吃醋——为什么大家都在看TA不看我了",
+        "text": "有点吃醋——为什么大家都在看TA不看我了，眼泪在眼眶里打转",
         "effects": {
           "happiness": -3,
           "empathy": -3,
           "family_relation": -5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "好奇地观察一切，问了好多「为什么」",
@@ -665,7 +731,7 @@
     "text": "你一直想要一只属于自己的小动物。这天放学回家，客厅角落里多了一个纸箱，里面传来轻轻的叫声——那是一只毛茸茸的小家伙，正怯生生地望着你。你蹲下来，小心地伸出手，它犹豫了一下，凑过来蹭了蹭你的手指。从这天起，你有了要照顾的生命。",
     "choices": [
       {
-        "text": "认真照顾宠物",
+        "text": "每天喂食换水，它生病了，你整夜守着它",
         "effects": {
           "responsibility": 11,
           "empathy": 9,
@@ -676,17 +742,20 @@
         ]
       },
       {
-        "text": "喜欢但无法坚持",
+        "text": "逗了它三天就没意思了，喂食全丢给爸妈",
         "effects": {
           "happiness": 10,
           "responsibility": -5
         }
       },
       {
-        "text": "不喜欢宠物",
+        "text": "把它放回纸箱退给宠物店——我照顾不好它，就别害它",
         "effects": {
           "independence": 5
-        }
+        },
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -701,23 +770,29 @@
     "text": "假期里，父母带你坐上火车，去一个完全陌生的地方。窗外的风景从高楼变成田野，又从田野变成大山。你趴在车窗上，第一次发现世界原来这么大。到了目的地，一切都是新奇的：听不懂的方言、没吃过的饭菜、和家里完全不一样的味道。",
     "choices": [
       {
-        "text": "喜欢探索新地方",
+        "text": "一到新地方就甩开爸妈跑去看稀奇，街角巷尾都要钻一遍",
         "effects": {
           "curiosity": 13,
           "experience": 7
         },
         "flags_add": [
           "explorer"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
-        "text": "更喜欢待在熟悉环境",
+        "text": "还是家里的床睡着踏实——出门三天就开始惦记回家",
         "effects": {
           "stability": 10
-        }
+        },
+        "personality": [
+          "cautious"
+        ]
       },
       {
-        "text": "关注当地文化",
+        "text": "缠着问当地人：你们这儿最好吃的是什么？",
         "effects": {
           "knowledge": 15
         },
@@ -738,7 +813,7 @@
     "text": "家里多了一个整天睡觉、大哭、需要所有人围着他转的小家伙。你的玩具被挪了位置，父母的注意力也分走了一大半。有时候你会觉得被冷落，有时候又忍不住凑过去看那个皱巴巴的小脸。你正在学着，怎么当一个哥哥或姐姐。",
     "choices": [
       {
-        "text": "主动照顾弟弟妹妹",
+        "text": "学着笨手笨脚地给TA冲奶粉，被烫了手也咧嘴笑",
         "effects": {
           "responsibility": 11,
           "empathy": 9,
@@ -749,17 +824,20 @@
         ]
       },
       {
-        "text": "觉得父母忽视自己",
+        "text": "把门一摔回房间，偷偷在被窝里抹眼泪",
         "effects": {
           "independence": 15,
           "family_relation": -10
         },
         "flags_add": [
           "attention_need"
+        ],
+        "personality": [
+          "emotional"
         ]
       },
       {
-        "text": "保持自己的生活",
+        "text": "照常上下学，该干嘛干嘛——TA是TA，我是我",
         "effects": {
           "independence": 10
         }
@@ -777,7 +855,7 @@
     "text": "春游那天，老师带你们走进一片山林。你第一次这么近地观察蚂蚁排队搬家，第一次听见那么多不同的鸟叫。一片叶子、一粒石子，在你眼里都藏着秘密。你蹲在溪边看了很久，直到同学喊你集合，才恋恋不舍地站起来。",
     "choices": [
       {
-        "text": "喜欢观察植物动物",
+        "text": "蹲在溪边看水黾画圈，一蹲就是一下午",
         "effects": {
           "observation": 13,
           "knowledge": 7
@@ -787,7 +865,7 @@
         ]
       },
       {
-        "text": "喜欢冒险探索",
+        "text": "跟着老师往林子深处钻，专挑没人走过的路",
         "effects": {
           "courage": 20,
           "risk": 10
@@ -797,7 +875,7 @@
         ]
       },
       {
-        "text": "更喜欢室内活动",
+        "text": "找个树荫坐下，安安静静想自己的事",
         "effects": {
           "thinking": 10
         }
@@ -823,16 +901,22 @@
         },
         "flags_add": [
           "artist_life"
+        ],
+        "personality": [
+          "emotional"
         ]
       },
       {
-        "text": "认认真真地把每一片叶子都补上",
+        "text": "认认真真地把每一片叶子都补上——画就要画完整",
         "effects": {
           "art": 5,
           "focus": 5,
           "creativity": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "画完卷起画纸，跑去和小朋友玩滑梯",
@@ -862,7 +946,7 @@
     "text": "一本带拼音的图画书被塞进你手里，你漫不经心地翻开第一页。没想到，这一页接一页地翻下去，你走进了一个完全不一样的世界：那里有冒险、有朋友、有你想不到的故事。那天晚上，你窝在被窝里，借着手电筒的光，读完了最后一个字。",
     "choices": [
       {
-        "text": "爱上阅读",
+        "text": "打着手电筒缩在被窝里读，一个字一个字啃完了整本书",
         "effects": {
           "knowledge": 11,
           "imagination": 9,
@@ -873,14 +957,14 @@
         ]
       },
       {
-        "text": "只阅读感兴趣的内容",
+        "text": "翻到恐龙那页就挪不动了，别的书看都不看",
         "effects": {
           "specialization": 10,
           "curiosity": 10
         }
       },
       {
-        "text": "觉得阅读很无聊",
+        "text": "翻了两页就扔一边，还是楼下疯跑好玩",
         "effects": {
           "action": 10,
           "knowledge": -5
@@ -899,24 +983,27 @@
     "text": "学校组织运动会，老师拉着你报了跑步项目。发令枪响的那一刻，你的心跳得像打鼓，风从耳边呼啸而过。你冲过终点，喘着气，发现自己的腿还能再跑。那天之后，你开始喜欢上这种身体里涌动着力量的感觉。",
     "choices": [
       {
-        "text": "喜欢运动并坚持",
+        "text": "每天放学先跑三圈再写作业，刮风下雨都不停",
         "effects": {
           "health": 20,
           "willpower": 15
         },
         "flags_add": [
           "sports_talent"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
-        "text": "偶尔参与",
+        "text": "报了名，去了几天就三天打鱼两天晒网",
         "effects": {
           "health": 5,
           "social": 5
         }
       },
       {
-        "text": "更喜欢安静活动",
+        "text": "坐在树荫下看别人跑，心里在想自己的事",
         "effects": {
           "thinking": 10,
           "health": -5
@@ -935,7 +1022,7 @@
     "text": "老师问全班同学：长大以后想做什么？小朋友们的答案五花八门，有想当警察的，有想当医生的。轮到你的时候，你认真地想了很久，然后说出一个自己都没想到的答案。老师笑着点点头，你忽然觉得，未来好像真的可以期待。",
     "choices": [
       {
-        "text": "想成为科学家",
+        "text": "科学家！我想研究星星是怎么来的",
         "effects": {
           "logic": 8,
           "ambition": 12
@@ -945,16 +1032,19 @@
         ]
       },
       {
-        "text": "想成为艺术家",
+        "text": "画家！我想把看到的世界都画下来",
         "effects": {
           "creativity": 15
         },
         "flags_add": [
           "art_dream"
+        ],
+        "personality": [
+          "emotional"
         ]
       },
       {
-        "text": "想帮助别人",
+        "text": "医生！我想治好每个人的病",
         "effects": {
           "empathy": 15
         },
@@ -997,13 +1087,16 @@
         ]
       },
       {
-        "text": "选了笼子角落那只不起眼的小兔子",
+        "text": "选了笼子角落那只不起眼的小兔子——它看起来最孤单",
         "effects": {
           "happiness": 5,
           "empathy": 5
         },
         "flags_add": [
           "has_pet"
+        ],
+        "personality": [
+          "altruistic"
         ]
       },
       {
@@ -1012,7 +1105,10 @@
           "maturity": 5,
           "empathy": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -1027,7 +1123,7 @@
     "text": "你第一次背上书包，沉甸甸的，里面装着崭新的课本和文具盒。走进教室的那一刻，几十双眼睛齐刷刷地看过来，你攥紧了书包带。老师冲你笑了笑，指了指空座位。你走过去坐下，小学生活，就这样开始了。",
     "choices": [
       {
-        "text": "主动认识同学",
+        "text": "看见同桌先伸出手：「你好呀，我叫——」",
         "effects": {
           "social": 20,
           "confidence": 10
@@ -1037,14 +1133,14 @@
         ]
       },
       {
-        "text": "认真观察环境",
+        "text": "先不出声，把教室每个角落都看了一遍",
         "effects": {
           "observation": 13,
           "thinking": 7
         }
       },
       {
-        "text": "紧张害怕",
+        "text": "攥着书包带缩在椅子上，不敢抬头",
         "effects": {
           "anxiety": 10,
           "pressure": 5
@@ -1063,7 +1159,7 @@
     "text": "父母问你想学点什么：音乐、运动，还是科技？你站在乐器行的橱窗前看了很久，又去球场边坐了一下午。每一样都好像有意思，每一样又好像很难。最后你指着一个方向说：就它了。这个决定，将陪你走过很长的路。",
     "choices": [
       {
-        "text": "学习音乐",
+        "text": "音乐。琴声一响，心里就安静了",
         "effects": {
           "music": 20,
           "creativity": 10,
@@ -1071,10 +1167,13 @@
         },
         "flags_add": [
           "musician_path"
+        ],
+        "personality": [
+          "emotional"
         ]
       },
       {
-        "text": "学习运动",
+        "text": "运动。跑起来的时候，风都是我的",
         "effects": {
           "health": 11,
           "sports": 9
@@ -1084,7 +1183,7 @@
         ]
       },
       {
-        "text": "学习科技",
+        "text": "科技。电脑里的世界，我想全部弄明白",
         "effects": {
           "technology": 11,
           "logic": 9
@@ -1106,27 +1205,33 @@
     "text": "六岁的这一年，你告别了幼儿园的滑梯和积木，即将背起书包走进小学。家里的照片墙上，你的个头一年比一年高，笑容一年比一年大。你的性格、兴趣和习惯，已经在这几年悄悄定型。前面的路还很长，但你已经准备好出发了。",
     "choices": [
       {
-        "text": "成为优秀学生路线",
+        "text": "好好学习——这是我最确定能做好的一件事",
         "effects": {
           "learning": 20,
           "discipline": 20
         },
         "flags_add": [
           "student_route"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
-        "text": "成为兴趣发展路线",
+        "text": "跟着兴趣走，喜欢什么就学什么",
         "effects": {
           "creativity": 10,
           "curiosity": 10
         },
         "flags_add": [
           "talent_route"
+        ],
+        "personality": [
+          "emotional"
         ]
       },
       {
-        "text": "成为社交领导路线",
+        "text": "我想当班长，让大家都喜欢我",
         "effects": {
           "social": 10,
           "leadership": 10
@@ -1158,12 +1263,15 @@
         ]
       },
       {
-        "text": "买根火腿肠喂它，看它吃完",
+        "text": "买根火腿肠喂它，看它吃完才放心地回家",
         "effects": {
           "empathy": 3,
           "happiness": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "altruistic"
+        ]
       },
       {
         "text": "当作没看见，跑回家",
@@ -1196,15 +1304,21 @@
           "ambition": 2,
           "curiosity": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
-        "text": "把每个故事都记在小本子上",
+        "text": "把每个故事都记在小本子上，怕忘",
         "effects": {
           "memory": 2,
           "intelligence": 1
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "问：路上有没有想家呀",
@@ -1212,7 +1326,10 @@
           "empathy": 2,
           "emotion": 1
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ],
     "conditions": {
@@ -1291,7 +1408,7 @@
     "text": "开学排座位，你和一个陌生同学成了同桌。起初你们谁也不理谁，课桌中间像隔着一道看不见的线。后来因为一次借橡皮，你们搭上了话。慢慢地，那道线不见了，你们开始每天分享零食、互相掩护迟到。",
     "choices": [
       {
-        "text": "成为亲密朋友",
+        "text": "「咱俩换零食吃吧？」——这一句话，换来六年的好朋友",
         "effects": {
           "friendship": 13,
           "communication": 7
@@ -1301,13 +1418,16 @@
         ]
       },
       {
-        "text": "保持普通关系",
+        "text": "借了橡皮，道了谢，规规矩矩坐回自己那一半",
         "effects": {
           "stability": 10
-        }
+        },
+        "personality": [
+          "cautious"
+        ]
       },
       {
-        "text": "产生竞争",
+        "text": "偷偷记下TA的考试成绩，心里憋着一股劲儿：下次超过你",
         "effects": {
           "competition": 15
         },
@@ -1328,17 +1448,20 @@
     "text": "父母建议你培养一项长期兴趣，乐器、体育、计算机，列了一串选项。他们说不指望你学出什么名堂，就是多一门手艺、多一个朋友。你被带着去试听了几节课，最后在某间教室门口停下了脚步。",
     "choices": [
       {
-        "text": "学习乐器",
+        "text": "乐器。练琴要天天挨打手心，可曲子响了真好听",
         "effects": {
           "music": 20,
           "creativity": 10
         },
         "flags_add": [
           "music_path"
+        ],
+        "personality": [
+          "emotional"
         ]
       },
       {
-        "text": "参加体育训练",
+        "text": "体育。教练说我有天赋，跑起来就停不下来",
         "effects": {
           "health": 11,
           "sports": 9
@@ -1348,7 +1471,7 @@
         ]
       },
       {
-        "text": "学习计算机",
+        "text": "计算机。敲出第一行代码的时候，屏幕亮了",
         "effects": {
           "technology": 11,
           "logic": 9
@@ -1370,7 +1493,7 @@
     "text": "老师点名叫你到讲台上讲一个故事。全班的目光齐刷刷地落在你身上，你的耳朵开始发烫，声音也有些发抖。讲到一半，你偷偷看了老师一眼，她微微点了点头。你深吸一口气，声音渐渐大了起来。",
     "choices": [
       {
-        "text": "大胆表达",
+        "text": "站直了，把故事讲完——声音越大，心越不慌",
         "effects": {
           "confidence": 11,
           "charisma": 9
@@ -1380,16 +1503,19 @@
         ]
       },
       {
-        "text": "紧张完成",
+        "text": "磕磕绊绊讲完了，下台时手心全是汗",
         "effects": {
           "courage": 10
         }
       },
       {
-        "text": "拒绝发言",
+        "text": "「老师，我不行——我还没准备好」",
         "effects": {
           "introversion": 10
-        }
+        },
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -1404,7 +1530,7 @@
     "text": "期中考试后，老师在黑板上贴出了成绩排名。你挤在人群里找自己的名字，从第一名往后看，心里越跳越快。看到你的名字出现在一个位置，你顿了顿——那个名次，比你自己预想的要好，也比预想的要差。",
     "choices": [
       {
-        "text": "进入前列",
+        "text": "看到名字在第五名，攥紧了拳头：下一次，再往前一点",
         "effects": {
           "confidence": 20,
           "ambition": 15,
@@ -1415,14 +1541,17 @@
         ]
       },
       {
-        "text": "排名中等",
+        "text": "第十名，还行——稳步往上走就行",
         "effects": {
           "stability": 10,
           "willpower": 10
-        }
+        },
+        "personality": [
+          "cautious"
+        ]
       },
       {
-        "text": "排名靠后",
+        "text": "倒数。把卷子折起来收进书包——这笔账，下次算回来",
         "effects": {
           "resilience": 20
         },
@@ -1443,7 +1572,7 @@
     "text": "一年级的最后一天，你领回了成绩单。班主任在评语里写了不少话，夸你适应得快。你背着书包走出校门，回头看了一眼教学楼，忽然有点舍不得。但暑假就在眼前，你很快就跑起来，把那些舍不得抛在了身后。",
     "choices": [
       {
-        "text": "成为成绩优秀学生",
+        "text": "暑假把二年级课本借来，提前预习",
         "effects": {
           "learning": 20,
           "confidence": 15
@@ -1453,16 +1582,19 @@
         ]
       },
       {
-        "text": "成为兴趣发展学生",
+        "text": "暑假报了美术班，画了一整个夏天",
         "effects": {
           "creativity": 20
         },
         "flags_add": [
           "talent_student"
+        ],
+        "personality": [
+          "emotional"
         ]
       },
       {
-        "text": "成为社交型学生",
+        "text": "组织了一个「放学小队」，每天结伴回家",
         "effects": {
           "social": 20
         },
@@ -1488,7 +1620,10 @@
           "health": 2,
           "empathy": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "altruistic"
+        ]
       },
       {
         "text": "缠着问：怎么才能当医生呀",
@@ -1496,7 +1631,10 @@
           "intelligence": 2,
           "curiosity": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "乖乖把药吃了，不让医生操心",
@@ -1504,7 +1642,10 @@
           "discipline": 2,
           "health": 1
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ],
     "conditions": {
@@ -1527,12 +1668,15 @@
     "text": "周末的画室全是颜料味。长辈在画布前一站就是一下午，你搬个小板凳坐在旁边看。偶尔长辈把笔递给你：「来，这一笔你来。」你屏住呼吸画下去，歪歪扭扭的一笔，长辈却说：「好极了。」",
     "choices": [
       {
-        "text": "接过笔，大胆地画下去",
+        "text": "接过笔，大胆地画下去——画坏了也是我画的",
         "effects": {
           "creativity": 3,
           "confidence": 1
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "问长辈：怎么才能画得这么好",
@@ -1540,7 +1684,10 @@
           "art": 2,
           "curiosity": 1
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "把今天这幅画偷偷藏进自己书包",
@@ -1548,7 +1695,10 @@
           "happiness": 2,
           "emotion": 1
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ],
     "conditions": {
@@ -1579,6 +1729,9 @@
         },
         "flags_add": [
           "music_path"
+        ],
+        "personality": [
+          "emotional"
         ]
       },
       {
@@ -1588,7 +1741,10 @@
           "learning": 4,
           "motivation": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "约同桌明天一起练习，互相听",
@@ -1626,6 +1782,9 @@
         },
         "flags_add": [
           "self_discipline_early"
+        ],
+        "personality": [
+          "cautious"
         ]
       },
       {
@@ -1660,7 +1819,7 @@
     "text": "班里转来一个新同学，跟你性格完全不一样：你安静，他闹腾；你慢热，他自来熟。可偏偏，你们成了朋友。他拉着你闯祸，你帮他补作业，一学期下来，你们好得像亲兄弟。",
     "choices": [
       {
-        "text": "成为长期好友",
+        "text": "他闯祸你兜着，你补作业他陪——后来你俩谁也不提「朋友」俩字，但都懂",
         "effects": {
           "friendship": 11,
           "trust": 9
@@ -1670,13 +1829,13 @@
         ]
       },
       {
-        "text": "保持普通朋友",
+        "text": "一起玩可以，掏心窝子的事，先不说",
         "effects": {
           "social": 10
         }
       },
       {
-        "text": "保持竞争关系",
+        "text": "你追我赶一年，谁也不服谁——但只有你能让我服气",
         "effects": {
           "competition": 15
         },
@@ -1697,7 +1856,7 @@
     "text": "你遇到了一个和你成绩不相上下的同学，每次考试都咬得很紧。你开始偷偷观察他什么时候睡觉、什么时候刷题。你们在成绩单上你追我赶，谁也不肯先松口气。有这么一个对手，你的学习反而更有劲了。",
     "choices": [
       {
-        "text": "努力超过对方",
+        "text": "摸清TA的作息，每晚多刷一套卷子——考试见",
         "effects": {
           "ambition": 20,
           "discipline": 15,
@@ -1705,20 +1864,29 @@
         },
         "flags_add": [
           "rivalry"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
-        "text": "成为互相帮助的伙伴",
+        "text": "不会的题互相讲，期末考试我们都要进前十",
         "effects": {
           "teamwork": 11,
           "friendship": 9
-        }
+        },
+        "personality": [
+          "altruistic"
+        ]
       },
       {
-        "text": "避免竞争",
+        "text": "比来比去没意思，按自己的节奏来",
         "effects": {
           "pressure": -5
-        }
+        },
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -1733,23 +1901,26 @@
     "text": "学校新开了免费的体育训练课，放学后操场就热闹起来。你被拉着报了名，第一天训练就累得直喘气。教练说坚持下来才能出成绩，你看着操场上跑得飞快的大孩子，咬了咬牙：先练一个月再说。",
     "choices": [
       {
-        "text": "坚持训练",
+        "text": "练到腿软也咬牙跑完最后一圈——教练说坚持下来才出成绩",
         "effects": {
           "sports": 10,
           "health": 10
         },
         "flags_add": [
           "athlete_seed"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
-        "text": "偶尔参加",
+        "text": "想去就去，累了就歇——快乐运动",
         "effects": {
           "health": 10
         }
       },
       {
-        "text": "专注学习",
+        "text": "体育课能逃就逃，作业本才是我的主场",
         "effects": {
           "learning": 10
         }
@@ -1767,7 +1938,7 @@
     "text": "老师布置了一个作业，让大家查一个课本上没有的知识。你第一次自己打开电脑，在搜索框里敲下问题。链接一个接一个，信息越来越多，你眼花缭乱地看了一下午。原来，答案可以自己去找到。",
     "choices": [
       {
-        "text": "学习信息检索",
+        "text": "一个链接点开一个，做了满满三页笔记——原来答案可以自己找到",
         "effects": {
           "technology": 11,
           "research": 9
@@ -1777,13 +1948,13 @@
         ]
       },
       {
-        "text": "只寻找娱乐内容",
+        "text": "搜着搜着就点进了游戏攻略，一下午没了",
         "effects": {
           "fun": 15
         }
       },
       {
-        "text": "完全依赖别人",
+        "text": "问了一圈人，最后等爸爸下班回来教",
         "effects": {
           "independence": -5
         }
@@ -1801,7 +1972,7 @@
     "text": "商场角落的琴行里，一架钢琴盖着红布。店员掀开布，你踮起脚按下一个白键，「叮」的一声，像一滴水落进心里。你回头拽了拽妈妈的衣角，又怯怯地缩回手。那声音很小，可回家的路上，你的耳朵里一直有那一声「叮」在响。",
     "choices": [
       {
-        "text": "鼓起勇气求爸妈，报名学琴",
+        "text": "鼓起勇气求爸妈，报名学琴——「我想学」",
         "effects": {
           "music": 5,
           "courage": 3,
@@ -1809,6 +1980,9 @@
         },
         "flags_add": [
           "music_piano"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -1820,6 +1994,9 @@
         },
         "flags_add": [
           "music_piano"
+        ],
+        "personality": [
+          "cautious"
         ]
       },
       {
@@ -1853,7 +2030,10 @@
           "health": 3,
           "persistence": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "问长辈当年比赛的故事",
@@ -1861,7 +2041,10 @@
           "curiosity": 2,
           "family_relation": 1
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "跑完自己去加练了一组跳远",
@@ -1897,7 +2080,10 @@
           "discipline": 3,
           "self_control": 1
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "问长辈部队里的故事",
@@ -1905,7 +2091,10 @@
           "curiosity": 2,
           "family_relation": 1
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "偷偷给自己也定了三条家规",
@@ -1913,7 +2102,10 @@
           "responsibility": 2,
           "planning": 1
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       }
     ],
     "conditions": {
@@ -1943,6 +2135,9 @@
         },
         "flags_add": [
           "technology_path"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -1951,7 +2146,10 @@
           "fun": 5,
           "happiness": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "我把车翻回来，拉着爸爸一起拆开看",
@@ -1980,7 +2178,7 @@
     "text": "学校要举办朗诵比赛，语文老师鼓励你报名。你站在班级门口犹豫了很久——脑子里一半是「我想试试」，一半是「万一忘词了多丢人」。",
     "choices": [
       {
-        "text": "报名！回家让妈妈陪你练了一个星期",
+        "text": "报名！回家让妈妈陪你练了一个星期，站上台那刻心都要跳出来",
         "effects": {
           "confidence": 8,
           "charisma": 5,
@@ -1988,6 +2186,9 @@
         },
         "flags_add": [
           "public_speaking"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -1997,7 +2198,10 @@
           "social": 5,
           "empathy": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "altruistic"
+        ]
       },
       {
         "text": "算了，把时间花在看书上好了",
@@ -2005,7 +2209,10 @@
           "learning": 5,
           "happiness": -2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       }
     ]
   },
@@ -2020,26 +2227,35 @@
     "text": "学校组织全校比赛，每个班要选人参加。老师在班里宣布消息时，你正好抬头，撞上了她的目光。她朝你点了点头，你忽然明白了她的意思。放学后，你留在了教室，开始翻开那本已经翻过很多遍的教材。",
     "choices": [
       {
-        "text": "积极准备",
+        "text": "放学留下加练，图书馆的灯陪我坐到最晚",
         "effects": {
           "competition": 10,
           "confidence": 10
         },
         "flags_add": [
           "school_competitor"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
-        "text": "尝试参与",
+        "text": "反正选上了，那就去试试——输了也不丢人",
         "effects": {
           "courage": 15
-        }
+        },
+        "personality": [
+          "adventurous"
+        ]
       },
       {
-        "text": "放弃机会",
+        "text": "跟老师说我不行，别耽误班级名额",
         "effects": {
           "comfort": 10
-        }
+        },
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -2054,7 +2270,7 @@
     "text": "你接触到了编程——一行行代码，在屏幕上变成能动的图形。第一次看到自己写的程序跑起来时，你愣住了。原来计算机这么听人话。那天之后，你的课余时间悄悄换了内容：作业本下面，压着一本编程入门书。",
     "choices": [
       {
-        "text": "持续学习",
+        "text": "每天写完作业敲半小时代码，一行一行啃",
         "effects": {
           "technology": 11,
           "logic": 9
@@ -2064,13 +2280,16 @@
         ]
       },
       {
-        "text": "作为兴趣了解",
+        "text": "只学好玩的——会动的图形、能响的声音",
         "effects": {
           "curiosity": 15
-        }
+        },
+        "personality": [
+          "emotional"
+        ]
       },
       {
-        "text": "认为太复杂",
+        "text": "看两行就头大，关掉了——这玩意儿不是给人学的",
         "effects": {
           "confidence": -5
         }
@@ -2088,7 +2307,7 @@
     "text": "体育老师又找你了，这次他说得很直接：「你身体条件好，练一练能出成绩。」他给你看了校队训练的照片，操场、汗水、奖杯。你有些心动，又有些犹豫——练体育，会不会耽误学习？",
     "choices": [
       {
-        "text": "接受专业训练",
+        "text": "进校队。训练再苦也认了——说不定真能跑出点名堂",
         "effects": {
           "sports": 11,
           "health": 9,
@@ -2096,16 +2315,19 @@
         },
         "flags_add": [
           "athlete_candidate"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
-        "text": "保持兴趣",
+        "text": "还是当爱好吧，放学跑两圈就够了",
         "effects": {
           "health": 15
         }
       },
       {
-        "text": "放弃运动",
+        "text": "算了吧，学习要紧——操场留给别人",
         "effects": {
           "learning": 10
         }
@@ -2123,7 +2345,7 @@
     "text": "老师布置了一篇作文：长大以后想做什么。你咬着笔杆想了很久，写了一个自己都不太确定的答案。第二天，老师在作文本上画了个圈，写了两个字：不错。你盯着那两个字看了很久，第一次认真琢磨起将来这个词。",
     "choices": [
       {
-        "text": "希望成为科学家",
+        "text": "科学家。我想解开这个世界所有的为什么",
         "effects": {
           "science": 11,
           "learning": 9
@@ -2133,7 +2355,7 @@
         ]
       },
       {
-        "text": "希望成为企业家",
+        "text": "企业家。我要自己开公司，让爸妈不用再那么累",
         "effects": {
           "business": 20,
           "leadership": 10
@@ -2143,13 +2365,16 @@
         ]
       },
       {
-        "text": "希望成为艺术家",
+        "text": "艺术家。我想把生活画得比生活好看",
         "effects": {
           "art": 20,
           "creativity": 15
         },
         "flags_add": [
           "artist_path"
+        ],
+        "personality": [
+          "emotional"
         ]
       }
     ]
@@ -2170,7 +2395,10 @@
           "ambition": 2,
           "creativity": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "认真观察大人是怎么开会的",
@@ -2178,14 +2406,20 @@
           "intelligence": 2,
           "communication": 1
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "只想知道公司的零食柜在哪",
         "effects": {
           "happiness": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ],
     "conditions": {
@@ -2213,7 +2447,10 @@
           "skill": 2,
           "memory": 1
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "抢着干下一个修理活",
@@ -2221,7 +2458,10 @@
           "action": 2,
           "confidence": 1
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "问长辈：手艺是怎么练出来的",
@@ -2257,7 +2497,10 @@
           "intelligence": 3,
           "curiosity": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "把拆下来的零件摆了一桌子研究",
@@ -2265,7 +2508,10 @@
           "engineering": 2,
           "focus": 1
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "问：电脑能打游戏吗",
@@ -2273,7 +2519,10 @@
           "gaming": 2,
           "happiness": 1
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ],
     "conditions": {
@@ -2304,6 +2553,9 @@
         },
         "flags_add": [
           "coding_early"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -2312,7 +2564,10 @@
           "gaming": 5,
           "fun": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "我缠着爸爸问电脑为什么会听话",
@@ -2358,7 +2613,10 @@
           "happiness": -5,
           "social": -2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "去问外婆发生了什么。外婆摸着你的头说「没事」",
@@ -2381,26 +2639,32 @@
     "text": "你发现班里有同学在卖自己折的纸星星，一个五分钱。你也试着折了一罐，摆在校门口。第一个顾客来的时候，你紧张得说不出话。接过那一枚硬币时，你忽然觉得，钱好像没有大人说的那么难赚。",
     "choices": [
       {
-        "text": "学习商业思维",
+        "text": "研究怎么把纸星星卖得更多——五分的星星，攒出第一个存钱罐",
         "effects": {
           "business": 10,
           "money_management": 10
         },
         "flags_add": [
           "young_business"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
-        "text": "帮助家人获得奖励",
+        "text": "帮家里做了一暑假家务，爸妈给了零花钱",
         "effects": {
           "responsibility": 15
         }
       },
       {
-        "text": "觉得赚钱太早",
+        "text": "还是算了，钱的事等长大再说",
         "effects": {
           "comfort": 10
-        }
+        },
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -2415,7 +2679,7 @@
     "text": "老师通知你，你被选上去参加市里的比赛了。消息传开，班里同学看你的眼神都不一样了。你知道，这次比赛的水平会高很多，对手都是各个学校的高手。你翻开课本，给自己定了一个目标：至少，不能输得太难看。",
     "choices": [
       {
-        "text": "投入大量训练",
+        "text": "每天加练到天黑——市里的对手，一个都不能小看",
         "effects": {
           "skill": 20,
           "confidence": 20,
@@ -2426,16 +2690,22 @@
         ]
       },
       {
-        "text": "体验比赛",
+        "text": "就当去见世面——赢不了，也要看看高手长什么样",
         "effects": {
           "courage": 15
-        }
+        },
+        "personality": [
+          "adventurous"
+        ]
       },
       {
-        "text": "放弃机会",
+        "text": "算了，别丢人——我还是待在舒适区吧",
         "effects": {
           "pressure": -10
-        }
+        },
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -2450,7 +2720,7 @@
     "text": "你和一个朋友之间，开始有了只有你们俩知道的秘密。他告诉你的时候，认真地看着你的眼睛，说你可别告诉别人。你点了点头，第一次体会到被信任的感觉。守一个秘密，比你想的要沉。",
     "choices": [
       {
-        "text": "保持信任",
+        "text": "这个秘密，我替你守住了",
         "effects": {
           "trust": 11,
           "friendship": 9
@@ -2460,16 +2730,19 @@
         ]
       },
       {
-        "text": "谨慎保护隐私",
+        "text": "没多问，也没告诉别人——知道得太多不是好事",
         "effects": {
           "judgement": 15
         }
       },
       {
-        "text": "告诉别人",
+        "text": "第二天就忍不住说漏了嘴——后来再没人跟我说秘密了",
         "effects": {
           "trust": -20
-        }
+        },
+        "personality": [
+          "selfish"
+        ]
       }
     ]
   },
@@ -2484,7 +2757,7 @@
     "text": "你学的那项兴趣，开始要投入更多时间了：一周三次训练，周末还有加练。你算了一下，这样一来，玩的时间就所剩无几。你坐在训练馆门口想了一下午，最后站起来，做了决定。",
     "choices": [
       {
-        "text": "成为长期训练方向",
+        "text": "既然选了，就练出个样子来——一周三次，雷打不动",
         "effects": {
           "talent": 10,
           "skill": 10
@@ -2494,13 +2767,13 @@
         ]
       },
       {
-        "text": "作为普通兴趣",
+        "text": "快乐就好——玩着玩着，说不定也能玩出点名堂",
         "effects": {
           "happiness": 20
         }
       },
       {
-        "text": "放弃转向其他方向",
+        "text": "不合适就换——人生还长，方向多着呢",
         "effects": {
           "adaptability": 15
         }
@@ -2518,13 +2791,16 @@
     "text": "你给自己定了一份作息表：几点起床、几点写作业、几点睡觉。第一天严格执行，第二天就差点破功。你盯着墙上的计划表，跟自己较劲：今天要是偷懒，明天就更难坚持了。",
     "choices": [
       {
-        "text": "严格执行计划",
+        "text": "计划表贴墙上，撕下来三次又贴回去三次——最后我赢了",
         "effects": {
           "discipline": 20,
           "planning": 15
         },
         "flags_add": [
           "self_discipline"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -2534,10 +2810,13 @@
         }
       },
       {
-        "text": "经常拖延",
+        "text": "先玩一会儿，作业等会儿再说——时间还早呢",
         "effects": {
           "procrastination": 20
-        }
+        },
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -2557,7 +2836,10 @@
           "intelligence": 3,
           "self_reliance": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "问长辈：读书读到你这个程度是什么感觉",
@@ -2565,7 +2847,10 @@
           "curiosity": 2,
           "intelligence": 1
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "暗暗发誓：以后我的书房也要有这样一盏灯",
@@ -2601,7 +2886,10 @@
           "responsibility": 2,
           "discipline": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "问：帮了这么多人，开心吗",
@@ -2609,7 +2897,10 @@
           "empathy": 2,
           "curiosity": 1
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "觉得无聊，还是动画片好看",
@@ -2648,6 +2939,9 @@
         },
         "flags_add": [
           "tech_savvy"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -2656,7 +2950,10 @@
           "curiosity": 4,
           "happiness": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "我拉上爸爸一起修，他不会，我们就翻书",
@@ -2705,6 +3002,9 @@
         },
         "flags_add": [
           "best_friend"
+        ],
+        "personality": [
+          "altruistic"
         ]
       },
       {
@@ -2714,7 +3014,10 @@
           "social": -2,
           "pressure": -5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "selfish"
+        ]
       },
       {
         "text": "觉得他一定有什么毛病，和几个同学一起嘲笑他",
@@ -2725,6 +3028,9 @@
         },
         "flags_add": [
           "bully"
+        ],
+        "personality": [
+          "selfish"
         ]
       }
     ]
@@ -2740,26 +3046,35 @@
     "text": "你开始注意到一个人——TA在人群里其实很普通，可你的目光总是忍不住跟着TA转。上课时，你偷偷记下TA喜欢的东西，又假装什么都没发生。你不太懂这种感觉是什么，只觉得心里多了件不能说的事。",
     "choices": [
       {
-        "text": "把它转化为成长动力",
+        "text": "想配得上TA——每天多背二十个单词，书桌前的灯亮到很晚",
         "effects": {
           "motivation": 20,
           "confidence": 10
         },
         "flags_add": [
           "first_crush"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
-        "text": "保持普通朋友关系",
+        "text": "还是做好朋友吧——有些话，说破了就回不去了",
         "effects": {
           "communication": 15
-        }
+        },
+        "personality": [
+          "cautious"
+        ]
       },
       {
-        "text": "隐藏自己的感觉",
+        "text": "悄悄写在日记本里，锁好——谁也不知道",
         "effects": {
           "introversion": 10
-        }
+        },
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -2774,20 +3089,26 @@
     "text": "学校组织了一场接近升学标准的模拟考试，全班都绷紧了弦。考场上，你盯着卷子上的题，手心冒汗，有几道题明明复习过，却怎么也想不起来。出考场时，你听见有人在对答案，你快步走开了。",
     "choices": [
       {
-        "text": "认真准备",
+        "text": "错题本翻了五遍，最后一页都快磨破了",
         "effects": {
           "learning": 20,
           "discipline": 20
         },
         "flags_add": [
           "exam_ready"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
-        "text": "正常发挥",
+        "text": "心态放平，会的做对，不会的认——考完对答案一概不听",
         "effects": {
           "stability": 15
-        }
+        },
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "压力过大",
@@ -2808,7 +3129,7 @@
     "text": "爸妈开始讨论你要上哪所初中，饭桌上摆着几所学校的招生简章。重点的、普通的、就近的，各有利弊。你第一次发现，原来选择这件事，会落在自己头上。你翻了翻那些简章，不知道哪一页，才是你的未来。",
     "choices": [
       {
-        "text": "冲刺重点学校",
+        "text": "重点。考上了，就是另一条路",
         "effects": {
           "ambition": 20,
           "pressure": 15
@@ -2818,10 +3139,13 @@
         ]
       },
       {
-        "text": "选择适合自己的学校",
+        "text": "离家近、同学熟——适合自己的才是最好的",
         "effects": {
           "balance": 20
-        }
+        },
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "顺其自然",
@@ -2842,7 +3166,7 @@
     "text": "你开始认真地想一个问题：什么样的人生算是好的？班里有人崇拜科学家，有人羡慕企业家，有人觉得快乐最重要。你听着大家各说各话，自己也慢慢有了答案。这个答案，将来还会变，但第一个版本，你记在了心里。",
     "choices": [
       {
-        "text": "追求成功",
+        "text": "活出个样子来——让爸妈提到我的时候，眼睛里有光",
         "effects": {
           "ambition": 20
         },
@@ -2851,7 +3175,7 @@
         ]
       },
       {
-        "text": "追求快乐",
+        "text": "开心最重要——一辈子那么短，别委屈自己",
         "effects": {
           "happiness": 20
         },
@@ -2860,7 +3184,7 @@
         ]
       },
       {
-        "text": "追求帮助别人",
+        "text": "让这个世界因为我好一点点——就够了",
         "effects": {
           "empathy": 20
         },
@@ -2886,7 +3210,10 @@
           "intelligence": 3,
           "ambition": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "把校徽的名字写进自己的愿望清单",
@@ -2902,7 +3229,10 @@
           "happiness": 2,
           "pressure": -2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ],
     "conditions": {
@@ -2931,7 +3261,10 @@
           "responsibility": 4,
           "confidence": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "偷偷报了校外的周末美术班，从素描学起",
@@ -2940,7 +3273,10 @@
           "skill": 4,
           "persistence": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "拉着好朋友一起画，教她怎么调出好看的颜色",
@@ -2949,7 +3285,10 @@
           "social": 4,
           "communication": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "altruistic"
+        ]
       }
     ],
     "conditions": {
@@ -3014,6 +3353,9 @@
         },
         "flags_add": [
           "redeemed"
+        ],
+        "personality": [
+          "altruistic"
         ]
       },
       {
@@ -3037,7 +3379,7 @@
     "text": "毕业倒计时，班里开始传同学录。大家互相留言，写友谊长存、常联系。你知道，上了不同的初中，有些人可能就真的不会再见了。你握着笔，给最好的朋友写了一句：不管考到哪里，我们都要好好长大。",
     "choices": [
       {
-        "text": "努力维持友情",
+        "text": "约好每个周末都见，哪怕坐一个小时的公交",
         "effects": {
           "loyalty": 20,
           "friendship": 20,
@@ -3045,19 +3387,25 @@
         },
         "flags_add": [
           "childhood_friend"
+        ],
+        "personality": [
+          "emotional"
         ]
       },
       {
-        "text": "接受人生变化",
+        "text": "天下没有不散的筵席——新学校，也会有好朋友",
         "effects": {
           "adaptability": 20
         }
       },
       {
-        "text": "减少投入新生活",
+        "text": "先把自己过好——交朋友的事，不着急",
         "effects": {
           "independence": 15
-        }
+        },
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -3072,7 +3420,7 @@
     "text": "你遇到一个很强的同龄人——不，应该说，你终于遇到一个让你觉得他好强的同龄人。他的成绩、反应、心态，都比你稳。你第一次觉得，自己那点成绩，好像没那么够看了。",
     "choices": [
       {
-        "text": "把对方作为目标",
+        "text": "盯着TA的名次：下一次考试，我要出现在你前面",
         "effects": {
           "ambition": 11,
           "learning": 9
@@ -3082,16 +3430,19 @@
         ]
       },
       {
-        "text": "学习对方优点",
+        "text": "偷偷观察TA怎么学的——好方法，拿来用",
         "effects": {
           "growth": 20
         }
       },
       {
-        "text": "避免比较",
+        "text": "不比了——跟昨天的自己比，才是正经事",
         "effects": {
           "mental": 15
-        }
+        },
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -3106,7 +3457,7 @@
     "text": "你遇到一个解决不了的电脑问题，搜遍了网页，问了很多人，最后自己一点一点试出来了。看着屏幕上跳出的成功字样，你松了一口气，又有点得意。你把方法记在本子上——万一以后还有人遇到同样的问题呢。",
     "choices": [
       {
-        "text": "深入研究技术",
+        "text": "搞明白「为什么」比「能用」更过瘾——原理也要弄懂",
         "effects": {
           "technology": 12,
           "logic": 8
@@ -3116,13 +3467,13 @@
         ]
       },
       {
-        "text": "记录经验",
+        "text": "把方法记进本子——下次再遇到，三分钟搞定",
         "effects": {
           "learning": 15
         }
       },
       {
-        "text": "寻求别人帮助",
+        "text": "还是直接问懂行的人最快——别自己瞎折腾",
         "effects": {
           "teamwork": 15
         }
@@ -3140,7 +3491,7 @@
     "text": "小升初的成绩出来了。那天你躲在自己房间里不敢听电话，直到父母敲门，声音里带着某种情绪。你打开门，看见他们手里的成绩单——上面那个数字，将决定你接下来三年的教室和同学。",
     "choices": [
       {
-        "text": "进入重点初中",
+        "text": "重点初中。新课本已经预习了一半",
         "conditions": {
           "learning": ">=80"
         },
@@ -3151,22 +3502,31 @@
         },
         "flags_add": [
           "key_middle_school"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
-        "text": "进入普通初中",
+        "text": "普通初中。离家近，早自习能多睡半小时",
         "effects": {
           "adaptability": 20
         },
         "flags_add": [
           "normal_middle_school"
+        ],
+        "personality": [
+          "cautious"
         ]
       },
       {
-        "text": "考试失利重新规划",
+        "text": "分数出来那天晚上没睡着——第二天开始，每天多学一小时",
         "effects": {
           "resilience": 20
-        }
+        },
+        "personality": [
+          "adventurous"
+        ]
       }
     ]
   },
@@ -3186,7 +3546,10 @@
           "intelligence": 2,
           "persistence": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "暗下决心：家里第二张文凭由我来拿",
@@ -3194,7 +3557,10 @@
           "ambition": 3,
           "self_reliance": 1
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "把文凭小心放回原处，像放回一件传家宝",
@@ -3202,7 +3568,10 @@
           "gratitude": 2,
           "emotion": 1
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ],
     "conditions": {
@@ -3230,7 +3599,10 @@
           "persistence": 3,
           "resilience": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "把照片里的眼神记在心里",
@@ -3238,7 +3610,10 @@
           "willpower": 2,
           "self_reliance": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "心想：原来大人也失败过啊",
@@ -3275,7 +3650,10 @@
           "discipline": 4,
           "patience": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "缠着老师学乐理，把五线谱抄满了一个本子",
@@ -3284,7 +3662,10 @@
           "knowledge": 4,
           "curiosity": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "和隔壁班学琴的同学约好一起合奏",
@@ -3293,7 +3674,10 @@
           "social": 4,
           "teamwork": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "altruistic"
+        ]
       }
     ],
     "conditions": {
@@ -3325,6 +3709,9 @@
         "flags_add": [
           "athlete_path",
           "sports_talent"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -3333,7 +3720,10 @@
           "learning": 5,
           "discipline": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "犹豫不决，先回家问问爸妈",
@@ -3371,6 +3761,9 @@
         },
         "flags_add": [
           "top_student"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -3382,6 +3775,9 @@
         },
         "flags_add": [
           "social_butterfly"
+        ],
+        "personality": [
+          "cautious"
         ]
       },
       {
@@ -3393,6 +3789,9 @@
         },
         "flags_add": [
           "athlete"
+        ],
+        "personality": [
+          "emotional"
         ]
       }
     ]

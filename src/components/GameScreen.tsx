@@ -102,7 +102,7 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
     }
     const ev = EVENTS.find(e => e.id === last.eventId);
     const ch = ev?.choices[last.choiceIndex];
-    return ch ? traitForOutcome(ch.outcomes.attr, ch.outcomes.flags) : [];
+    return ch ? traitForOutcome(ch.outcomes.attr, ch.outcomes.flags, ch.outcomes.personality) : [];
   }, [game.history]);
 
   // 选择选项：记录主属性色调（视觉反馈）

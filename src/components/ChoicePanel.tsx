@@ -19,8 +19,8 @@ export default function ChoicePanel({ choices, onSelect, visible, attributes, ag
   return (
     <div className="px-7 pb-5 flex flex-col gap-2 max-w-[860px] mx-auto">
       {choices.map((ch, idx) => {
-        // 性格徽章：效果结构强信号 + flag 补充规则（无信号不标注，留白也是区分）
-        const traits = traitForOutcome(ch.outcomes.attr, ch.outcomes.flags);
+        // 性格徽章：手工标注优先，无标注走效果结构 + flag 补充规则（无信号不标注，留白也是区分）
+        const traits = traitForOutcome(ch.outcomes.attr, ch.outcomes.flags, ch.outcomes.personality);
         return (
           <button
             key={idx}

@@ -1,0 +1,502 @@
+[
+  { "id": "young_0032", "choices": [
+    { "text": "和死党坐上西去的火车，钱花光了，但一辈子难忘", "personality": ["emotional"] },
+    { "text": "去快餐店打工，开学前攒下第一笔自己的钱", "personality": ["rational"] },
+    { "text": "哪也不去，在家吹空调打游戏，舒服又省钱", "personality": ["cautious"] }
+  ]},
+  { "id": "young_01", "choices": [
+    { "text": "「去远方，看看更大的世界。」", "personality": ["adventurous"] },
+    { "text": "「考上好大学，不给爸妈丢脸。」", "personality": ["rational"] },
+    { "text": "「希望能遇到对的人。」", "personality": ["emotional"] }
+  ]},
+  { "id": "young_19", "choices": [
+    { "text": "把每个人的地址记进本子，发誓保持联系", "personality": ["emotional"] },
+    { "personality": null },
+    { "text": "和暗恋多年的人在海边说出了那句话", "personality": ["adventurous"] }
+  ]},
+  { "id": "young_20", "choices": [
+    { "personality": null },
+    { "text": "算了，还是老老实实去报到", "personality": ["cautious"] },
+    { "text": "折中一下：先上一年学，大二再休学去", "personality": ["rational"] }
+  ]},
+  { "id": "young_21", "choices": [
+    { "text": "攒下大部分，当作大学的第一笔启动资金", "personality": ["cautious"] },
+    { "text": "请全家吃了顿好的，剩下的买了件想了很久的东西", "personality": ["emotional"] },
+    { "personality": null }
+  ]},
+  { "id": "young_22", "choices": [
+    { "text": "坚持自己的选择，去远方那个陌生的城市", "personality": ["adventurous"] },
+    { "text": "听了爸妈的话，填了离家近的学校", "personality": ["cautious"] },
+    { "text": "两个都填上，服从调剂，听天由命", "personality": ["emotional"] }
+  ]},
+  { "id": "young_65", "choices": [
+    { "text": "签！进省队拼一把", "personality": ["adventurous"] },
+    { "personality": null },
+    { "text": "算了吧，体育只是爱好", "personality": ["cautious"] }
+  ]},
+  { "id": "young_72", "choices": [
+    { "text": "训练标兵！我要当班长", "personality": ["adventurous"] },
+    { "personality": null },
+    { "text": "想家了……申请调回老家", "personality": ["emotional"] }
+  ]},
+  { "id": "young_0033", "choices": [
+    { "personality": null },
+    { "personality": null },
+    { "personality": null }
+  ]},
+  { "id": "young_02", "choices": [
+    { "text": "去北京/上海。见识一下真正的大城市", "personality": ["adventurous"] },
+    { "text": "留在省会。离家近，周末还能回去吃饭", "personality": ["cautious"] }
+  ]},
+  { "id": "young_03", "choices": [
+    { "text": "积极参加各种活动，把大学生活过得丰富多彩", "personality": ["emotional"] },
+    { "personality": null }
+  ]},
+  { "id": "young_04", "choices": [
+    { "text": "进了一家大厂做技术工，底薪加绩效，日子有奔头", "personality": ["cautious"] },
+    { "text": "和朋友合伙开了个小作坊，自己当老板", "personality": ["adventurous"] }
+  ]},
+  { "id": "young_05", "choices": [
+    { "personality": null }
+  ]},
+  { "id": "young_23", "choices": [
+    { "text": "主动张罗宿舍规矩和值日表，当起了「舍长」", "personality": ["altruistic"] },
+    { "text": "慢慢来，先观察每个人的脾气", "personality": ["cautious"] },
+    { "text": "和合得来的那个迅速成了形影不离的搭子", "personality": ["emotional"] }
+  ]},
+  { "id": "young_61", "choices": [
+    { "personality": null },
+    { "text": "选外企，生活工作平衡些。", "personality": ["cautious"] },
+    { "text": "先不签，我想自己创业。", "personality": ["adventurous"] }
+  ]},
+  { "id": "young_62", "choices": [
+    { "personality": null },
+    { "text": "考公试试，图个安稳。", "personality": ["cautious"] },
+    { "text": "多试试，总能找到适合的。", "personality": ["adventurous"] }
+  ]},
+  { "id": "young_0034", "choices": [
+    { "text": "买。每个月去看 TA，车票吃掉大半生活费", "personality": ["emotional"] },
+    { "text": "改成视频维系，把生活费省下来，深夜挂电话时有点空", "personality": ["rational"] },
+    { "personality": null }
+  ]},
+  { "id": "young_06", "choices": [
+    { "text": "加入了辩论队，大学四年几乎打遍了省内所有高校", "personality": ["rational"] },
+    { "personality": null },
+    { "text": "加入了创业社，开始捣鼓一些小项目", "personality": ["adventurous"] }
+  ]},
+  { "id": "young_24", "choices": [
+    { "text": "选了赚钱的 A，把兴趣放进选修课", "personality": ["rational"] },
+    { "text": "选了喜欢的 B，告诉自己「热爱是最好的饭碗」", "personality": ["emotional"] },
+    { "text": "摇摆不定，最后随了大流", "personality": ["cautious"] }
+  ]},
+  { "id": "young_25", "choices": [
+    { "text": "竞选成功，当了部长", "personality": ["adventurous"] },
+    { "text": "落选了，但演讲被大家记住，成了「人气王」", "personality": ["emotional"] },
+    { "text": "没去竞选，安静地退出了社团", "personality": ["cautious"] }
+  ]},
+  { "id": "young_26", "choices": [
+    { "personality": null },
+    { "text": "先当朋友相处，学业为重", "personality": ["rational"] },
+    { "text": "婉拒了，大学不想分心", "personality": ["cautious"] }
+  ]},
+  { "id": "young_27", "choices": [
+    { "text": "多做几份工，把下学期的学费自己挣出来", "personality": ["rational"] },
+    { "text": "平衡好时间，兼职只做周末，学业不耽误", "personality": ["cautious"] },
+    { "personality": null }
+  ]},
+  { "id": "young_63", "choices": [
+    { "text": "把技术练精，做高级技工。", "personality": ["rational"] },
+    { "text": "攒点钱，开个小店当老板。", "personality": ["adventurous"] },
+    { "text": "白天上班，晚上自学考个证。", "personality": ["rational"] }
+  ]},
+  { "id": "young_67", "choices": [
+    { "text": "参加比赛和展览，搏一个成名机会", "personality": ["adventurous"] },
+    { "text": "接商单赚钱，先养活自己", "personality": ["cautious"] },
+    { "text": "安心打磨作品，等时机", "personality": ["rational"] }
+  ]},
+  { "id": "music_0003", "choices": [
+    { "text": "把录用函叠好收进抽屉，去复试", "personality": ["adventurous"] },
+    { "text": "回老家上班，把琴留在这里", "personality": ["cautious"] },
+    { "text": "先去工作养活自己，琴也不丢", "personality": ["rational"] }
+  ]},
+  { "id": "young_07", "choices": [
+    { "personality": null },
+    { "text": "混社团、搞活动、认识了一大帮朋友", "personality": ["emotional"] },
+    { "personality": null }
+  ]},
+  { "id": "young_28", "choices": [
+    { "personality": null },
+    { "text": "只考最需要的四六级，不跟风", "personality": ["cautious"] },
+    { "text": "一个都不考，觉得证书不如真本事", "personality": ["adventurous"] }
+  ]},
+  { "id": "young_29", "choices": [
+    { "text": "认真打磨项目，把比赛当创业预演", "personality": ["rational"] },
+    { "text": "重在参与，顺便蹭个综测加分", "personality": ["cautious"] },
+    { "personality": null }
+  ]},
+  { "id": "young_30", "choices": [
+    { "text": "相信彼此，认真经营这段异地恋", "personality": ["emotional"] },
+    { "personality": null },
+    { "text": "忍痛分手，长痛不如短痛", "personality": ["rational"] }
+  ]},
+  { "id": "young_31", "choices": [
+    { "personality": null },
+    { "text": "够用了，把钱拿去考驾照", "personality": ["emotional"] },
+    { "personality": null }
+  ]},
+  { "id": "young_69", "choices": [
+    { "text": "咬牙撑住，医生是我的执念", "personality": ["rational"] },
+    { "text": "读书之余也要好好生活", "personality": ["cautious"] },
+    { "text": "太难了，转专业吧", "personality": ["emotional"] }
+  ]},
+  { "id": "wealth_0022", "choices": [
+    { "text": "认真端咖啡，踏实攒经验", "personality": ["cautious"] },
+    { "text": "挑战高提成的推销", "personality": ["adventurous"] },
+    { "text": "专心学业，暂不打工", "personality": ["rational"] }
+  ]},
+  { "id": "pet_0003", "choices": [
+    { "text": "好好道别，把它埋在院里的树下", "personality": ["rational"] },
+    { "text": "抱着它哭一场，说尽想说的话", "personality": ["emotional"] },
+    { "text": "假装什么都没发生，第二天照常上班", "personality": ["cautious"] }
+  ]},
+  { "id": "young_08", "choices": [
+    { "text": "从那天起每天最早到最晚走，主动向每个前辈请教", "personality": ["rational"] },
+    { "text": "没有太放在心上。实习经历而已，学到多少算多少", "personality": ["cautious"] },
+    { "text": "深受打击，开始怀疑自己适不适合这个行业", "personality": ["emotional"] }
+  ]},
+  { "id": "young_32", "choices": [
+    { "text": "拼了，报班加自习室，把这一年当高三过", "personality": ["rational"] },
+    { "text": "边考边投简历，两条腿走路", "personality": ["cautious"] },
+    { "personality": null }
+  ]},
+  { "id": "young_33", "choices": [
+    { "text": "扩大规模，开个校园跑腿群，生意越做越大", "personality": ["adventurous"] },
+    { "text": "小打小闹赚个零花钱，见好就收", "personality": ["cautious"] },
+    { "text": "被查后干脆收摊，老老实实回图书馆", "personality": ["rational"] }
+  ]},
+  { "id": "young_34", "choices": [
+    { "personality": null },
+    { "text": "再想想，先各自把工作稳定下来", "personality": ["cautious"] },
+    { "text": "拒绝了，觉得人生还没准备好", "personality": ["cautious"] }
+  ]},
+  { "id": "young_35", "choices": [
+    { "text": "定下方向，全力冲刺", "personality": ["adventurous"] },
+    { "text": "先就业攒经验，过两年再读研", "personality": ["cautious"] },
+    { "text": "想不清楚，先毕业旅行一趟再说", "personality": ["emotional"] }
+  ]},
+  { "id": "young_66", "choices": [
+    { "personality": null },
+    { "text": "养伤，退下来做教练，把经验传给下一代", "personality": ["cautious"] },
+    { "text": "退役，转行开个体育用品店", "personality": ["rational"] }
+  ]},
+  { "id": "young_0023", "choices": [
+    { "text": "认真听他说完，给些实在的建议", "personality": ["altruistic"] },
+    { "text": "约他出来见一面，当面聊", "personality": ["emotional"] },
+    { "text": "寒暄几句，说自己也在忙", "personality": ["cautious"] }
+  ]},
+  { "id": "young_0035", "choices": [
+    { "text": "自己租房。自由的味道，是月底吃土换来的", "personality": ["adventurous"] },
+    { "text": "住家里省钱，代价是每天被念叨到耳朵起茧", "personality": ["cautious"] },
+    { "text": "和同事合租折中，水电分摊的摩擦隔三差五", "personality": ["rational"] }
+  ]},
+  { "id": "young_09", "choices": [
+    { "text": "去互联网大厂，趁年轻多赚点", "personality": ["adventurous"] },
+    { "text": "加入创业公司，赌一把大的", "personality": ["adventurous"] },
+    { "personality": null },
+    { "text": "先不找正式工作。趁年轻去看世界", "personality": ["adventurous"] }
+  ]},
+  { "id": "young_36", "choices": [
+    { "personality": null },
+    { "text": "差了几分落榜。难过一晚，决定二战", "personality": ["adventurous"] },
+    { "text": "落榜，转头进春季招聘，塞翁失马", "personality": ["rational"] }
+  ]},
+  { "id": "young_37", "choices": [
+    { "text": "第一份工作认真干，从打杂开始学", "personality": ["rational"] },
+    { "text": "先干着，骑驴找马，随时准备跳", "personality": ["cautious"] },
+    { "text": "落差太大，干了一周就想辞职", "personality": ["emotional"] }
+  ]},
+  { "id": "young_38", "choices": [
+    { "text": "和大家约好五年一聚，笑着送走每个人", "personality": ["emotional"] },
+    { "personality": null },
+    { "text": "提前离场，怕自己哭出来", "personality": ["cautious"] }
+  ]},
+  { "id": "young_39", "choices": [
+    { "text": "货比三家，签了间贵一点但靠谱的", "personality": ["cautious"] },
+    { "text": "接受便宜的那间，省钱要紧", "personality": ["rational"] },
+    { "personality": null }
+  ]},
+  { "id": "young_64", "choices": [
+    { "text": "跟着导师深耕科研，发论文。", "personality": ["rational"] },
+    { "text": "早点去大厂实习，积累人脉和履历。", "personality": ["rational"] },
+    { "text": "佛系读研，按时毕业就好。", "personality": ["cautious"] }
+  ]},
+  { "id": "young_68", "choices": [
+    { "personality": null },
+    { "text": "做自由职业，接单养活创作", "personality": ["adventurous"] },
+    { "text": "转行做设计，把艺术当爱好", "personality": ["cautious"] }
+  ]},
+  { "id": "venture_0001", "choices": [
+    { "personality": null },
+    { "text": "先不辞职，边上班边小规模试水", "personality": ["rational"] },
+    { "text": "撕了辞职信，安心上班", "personality": ["cautious"] }
+  ]},
+  { "id": "young_10", "choices": [
+    { "text": "继续卷。这条路虽然累，但回报也是实打实的", "personality": ["adventurous"] },
+    { "text": "决定辞职。钱够了，想去小公司做真正想做的东西", "personality": ["emotional"] }
+  ]},
+  { "id": "young_11", "choices": [
+    { "text": "被风投看中，公司估值翻了五倍", "personality": ["adventurous"] },
+    { "personality": null }
+  ]},
+  { "id": "young_12", "choices": [
+    { "text": "知足常乐。这种安稳是多少人想要的", "personality": ["cautious"] },
+    { "text": "在体制内也不躺平——考了在职研究生提升自己", "personality": ["rational"] }
+  ]},
+  { "id": "young_13", "choices": [
+    { "text": "在路上找到了一生热爱的事——开了家青年旅舍", "personality": ["adventurous"] },
+    { "text": "走累了。回到城市找了份普通工作，但心里装着一个世界", "personality": ["cautious"] }
+  ]},
+  { "id": "young_40", "choices": [
+    { "text": "吃下这个亏，但把流程文件补齐，防住下次", "personality": ["rational"] },
+    { "text": "当场摆出证据，据理力争", "personality": ["adventurous"] },
+    { "text": "越想越气，开始投简历", "personality": ["emotional"] }
+  ]},
+  { "id": "young_70", "choices": [
+    { "personality": null },
+    { "text": "医生太累，转行政岗", "personality": ["cautious"] },
+    { "text": "辞职，回老家开个小诊所", "personality": ["adventurous"] }
+  ]},
+  { "id": "young_73", "choices": [
+    { "text": "继续留队，往上走", "personality": ["rational"] },
+    { "text": "转文职/转业，开始安稳人生", "personality": ["cautious"] },
+    { "text": "退役，回地方闯一闯", "personality": ["adventurous"] }
+  ]},
+  { "id": "young_0036", "choices": [
+    { "text": "飞回去，包两千。多年情谊，不缩水", "personality": ["emotional"] },
+    { "text": "包六百意思到了，听说有人在背后嘀咕", "personality": ["selfish"] },
+    { "text": "人不到礼到，省下机票钱，视频里说了声恭喜", "personality": ["rational"] }
+  ]},
+  { "id": "young_14", "choices": [
+    { "text": "利用专业技能接私活。虽然累但收入上来了", "personality": ["rational"] },
+    { "text": "尝试做了短视频，意外地有了几千粉丝", "personality": ["adventurous"] },
+    { "text": "算了太累了。身体和钱包只能牺牲一个", "personality": ["cautious"] }
+  ]},
+  { "id": "young_41", "choices": [
+    { "text": "跳！趁年轻多折腾", "personality": ["adventurous"] },
+    { "text": "再等等，把现在的业务吃透再说", "personality": ["cautious"] },
+    { "text": "约猎头聊聊，先探探行情不急着走", "personality": ["rational"] }
+  ]},
+  { "id": "young_42", "choices": [
+    { "text": "认真计划两个人的未来，开始看房", "personality": ["emotional"] },
+    { "text": "保持恋爱状态，暂时不聊结婚", "personality": ["cautious"] },
+    { "text": "发现两年的异地让彼此变陌生了，慢慢疏远", "personality": ["rational"] }
+  ]},
+  { "id": "young_43", "choices": [
+    { "text": "接受家里的帮助，背上房贷上车", "personality": ["cautious"] },
+    { "text": "坚持自己攒，不啃老，慢慢来", "personality": ["rational"] },
+    { "text": "不买了，租房自由，把钱花在体验上", "personality": ["adventurous"] }
+  ]},
+  { "id": "young_44", "choices": [
+    { "text": "认真接触，给彼此一个机会", "personality": ["cautious"] },
+    { "text": "聊完就没了下文，感觉不对不将就", "personality": ["emotional"] },
+    { "text": "反感相亲，从此拒绝所有介绍", "personality": ["adventurous"] }
+  ]},
+  { "id": "wealth_0026", "choices": [
+    { "text": "全部存定期，稳妥为上", "personality": ["cautious"] },
+    { "text": "试水基金定投", "personality": ["adventurous"] },
+    { "text": "交给专业理财顾问", "personality": ["rational"] }
+  ]},
+  { "id": "young_0026", "choices": [
+    { "text": "重新开始认真锻炼", "personality": ["rational"] },
+    { "personality": null },
+    { "text": "跑步就好，梦留在过去", "personality": ["emotional"] }
+  ]},
+  { "id": "young_0037", "choices": [
+    { "text": "借了。他连声道谢，只是还钱的日子一推再推", "personality": ["emotional"] },
+    { "text": "找借口推掉了。电话两头沉默了几秒，关系明显淡了", "personality": ["cautious"] },
+    { "text": "借一半，认真立了字据，亲兄弟明算账", "personality": ["rational"] }
+  ]},
+  { "id": "young_15", "choices": [
+    { "text": "继续留在大城市。机会多、见识广，再拼几年", "personality": ["rational"] },
+    { "text": "回老家/省会城市。离爸妈近，生活成本低", "personality": ["cautious"] },
+    { "text": "去一个从来没去过的新城市，重新开始", "personality": ["adventurous"] }
+  ]},
+  { "id": "young_45", "choices": [
+    { "text": "辞职全职创业，All in", "personality": ["adventurous"] },
+    { "text": "副业继续，等收入稳定到工资两倍再全职", "personality": ["cautious"] },
+    { "text": "见好就收，副业就当零花钱", "personality": ["rational"] }
+  ]},
+  { "id": "young_46", "choices": [
+    { "text": "走！去小公司做真正想做的事", "personality": ["emotional"] },
+    { "text": "再熬一年，等期权行权再走", "personality": ["rational"] },
+    { "text": "申请转岗到轻松一点的部门", "personality": ["cautious"] }
+  ]},
+  { "id": "young_47", "choices": [
+    { "text": "在职读个研究生，给履历添块砖", "personality": ["rational"] },
+    { "text": "安安稳稳过日子，提拔随缘", "personality": ["cautious"] },
+    { "text": "辞职下海，去看看体制外的世界", "personality": ["adventurous"] }
+  ]},
+  { "id": "young_48", "choices": [
+    { "text": "接过户口本：「那就结！」", "personality": ["adventurous"] },
+    { "text": "按下暂停键，先相处半年再说", "personality": ["cautious"] },
+    { "text": "被吓跑了，觉得太草率", "personality": ["emotional"] }
+  ]},
+  { "id": "young_0024", "choices": [
+    { "text": "主动打招呼，聊聊这些年的经历", "personality": ["emotional"] },
+    { "text": "暗中较劲，争取表现得更好", "personality": ["adventurous"] },
+    { "text": "点头示意，保持距离", "personality": ["cautious"] }
+  ]},
+  { "id": "young_0038", "choices": [
+    { "text": "咬牙扛住。项目上线被点名表扬，体检报告多了两个箭头", "personality": ["adventurous"] },
+    { "text": "找领导谈了边界。这个季度的绩效，被打了个 B", "personality": ["rational"] },
+    { "text": "提了离职。走出写字楼那一刻，世界瞬间安静了", "personality": ["emotional"] }
+  ]},
+  { "id": "young_0039", "choices": [
+    { "text": "分期拿下。后来才发现手续费和会员费滚了一笔", "personality": ["emotional"] },
+    { "text": "忍住没买。月末再看，好像也就那么回事", "personality": ["rational"] },
+    { "personality": null }
+  ]},
+  { "id": "young_16", "choices": [
+    { "text": "借钱了。但让TA写了借条，约定了还款时间", "personality": ["rational"] },
+    { "text": "婉拒了——「我不能借钱给你，但我可以帮你看看还有什么别的办法」", "personality": ["altruistic"] },
+    { "text": "直接借了。没有借条，因为「朋友之间不用这些」", "personality": ["emotional"] }
+  ]},
+  { "id": "young_49", "choices": [
+    { "text": "上车！从此背上甜蜜的负担", "personality": ["cautious"] },
+    { "text": "再等等，等房价降一降", "personality": ["rational"] },
+    { "personality": null }
+  ]},
+  { "id": "young_50", "choices": [
+    { "text": "笑着打太极，心里想着「管好自己」", "personality": ["cautious"] },
+    { "text": "认真跟爸妈谈了一次，说出自己的规划", "personality": ["rational"] },
+    { "text": "大吵一架，提前买了返程票", "personality": ["emotional"] }
+  ]},
+  { "id": "young_51", "choices": [
+    { "text": "收拾心情，沉淀一年再战", "personality": ["rational"] },
+    { "text": "直接提离职，去更好的平台", "personality": ["adventurous"] },
+    { "text": "找领导摊牌，要个说法", "personality": ["emotional"] }
+  ]},
+  { "id": "young_52", "choices": [
+    { "text": "真诚地祝贺每个人，也坦然说起自己", "personality": ["altruistic"] },
+    { "text": "默默记下差距，回去给自己立了个目标", "personality": ["rational"] },
+    { "text": "找借口早退，心里不是滋味", "personality": ["cautious"] }
+  ]},
+  { "id": "young_71", "choices": [
+    { "personality": null },
+    { "text": "教学带教，培养年轻医生", "personality": ["altruistic"] },
+    { "text": "试试互联网医疗，换个活法", "personality": ["adventurous"] }
+  ]},
+  { "id": "young_0028", "choices": [
+    { "text": "走过去，自然地问候一句", "personality": ["emotional"] },
+    { "personality": null },
+    { "text": "低头快步离开", "personality": ["cautious"] }
+  ]},
+  { "id": "venture_0002", "choices": [
+    { "text": "咬着牙撑下去，四处找钱", "personality": ["adventurous"] },
+    { "text": "砍掉一半业务，先活下来", "personality": ["cautious"] },
+    { "text": "消极躺平，任公司半死不活", "personality": ["emotional"] }
+  ]},
+  { "id": "young_17", "choices": [
+    { "personality": null },
+    { "text": "「再等我两年，事业稳了就结婚。」", "personality": ["rational"] },
+    { "text": "沉默了很久。「我……可能还没有准备好。」", "personality": ["cautious"] }
+  ]},
+  { "id": "young_53", "choices": [
+    { "text": "把红本本拍了发家庭群，官宣！", "personality": ["emotional"] },
+    { "text": "低调领证，只请最好的朋友吃了顿饭", "personality": ["cautious"] },
+    { "text": "领证前一晚还在犹豫，最后是 Ta 拉你来的", "personality": ["emotional"] }
+  ]},
+  { "id": "young_54", "choices": [
+    { "text": "和 Ta 商量好口径，一起搞定两边家长", "personality": ["rational"] },
+    { "text": "按老家的规矩来，不让爸妈丢面子", "personality": ["cautious"] },
+    { "text": "主张一切从简，旅行结婚", "personality": ["adventurous"] }
+  ]},
+  { "id": "young_55", "choices": [
+    { "text": "立下家规，定期开「家庭会议」", "personality": ["rational"] },
+    { "text": "互相迁就，小事不计较", "personality": ["altruistic"] },
+    { "text": "冷战几天，谁也不理谁", "personality": ["emotional"] }
+  ]},
+  { "id": "young_56", "choices": [
+    { "text": "主动和 Ta 排班，家务分工明确", "personality": ["rational"] },
+    { "text": "以事业为重，让 Ta 多担待些", "personality": ["selfish"] },
+    { "text": "放慢工作节奏，家庭优先", "personality": ["emotional"] }
+  ]},
+  { "id": "young_74", "choices": [
+    { "text": "平凡生活，军魂不灭", "personality": ["cautious"] },
+    { "text": "创业，把队伍里的狠劲用上", "personality": ["adventurous"] },
+    { "personality": null }
+  ]},
+  { "id": "young_0040", "choices": [
+    { "text": "举杯表态。之后果然被提携，只是心里有点不是滋味", "personality": ["selfish"] },
+    { "text": "装病推掉。第二个星期，好项目再没有你的份", "personality": ["cautious"] },
+    { "text": "去了但只吃饭不表态，结果两边都没拿你当自己人", "personality": ["rational"] }
+  ]},
+  { "id": "young_0041", "choices": [
+    { "text": "立刻办健身卡，调整作息，和夜宵说再见", "personality": ["rational"] },
+    { "text": "收藏了一堆养生帖，然后继续熬夜", "personality": ["emotional"] },
+    { "text": "找中医慢慢调理，把生活节奏一点点找回来", "personality": ["cautious"] }
+  ]},
+  { "id": "young_18", "choices": [
+    { "personality": null }
+  ]},
+  { "id": "young_57", "choices": [
+    { "text": "给十八岁的自己写封信，感谢那个没放弃的人", "personality": ["emotional"] },
+    { "text": "列出三十岁之后的 to-do list", "personality": ["rational"] },
+    { "text": "有些遗憾，有些释然，喝完这杯就睡", "personality": ["cautious"] }
+  ]},
+  { "id": "young_58", "choices": [
+    { "personality": null },
+    { "text": "手足无措，先学着换尿布再说", "personality": ["cautious"] },
+    { "personality": null }
+  ]},
+  { "id": "young_59", "choices": [
+    { "text": "咬咬牙换学区房，一切为了孩子", "personality": ["altruistic"] },
+    { "text": "不跟风，先把当下的日子过好", "personality": ["cautious"] },
+    { "text": "和 Ta 认真聊了教育观，达成共识", "personality": ["rational"] }
+  ]},
+  { "id": "young_60", "choices": [
+    { "text": "报了个一直想学的课，重新出发", "personality": ["adventurous"] },
+    { "text": "保持节奏，稳扎稳打往上走", "personality": ["cautious"] },
+    { "text": "忽然有些累了，想给自己放个长假", "personality": ["emotional"] }
+  ]},
+  { "id": "adult_13", "choices": [
+    { "personality": null },
+    { "text": "主动找领导聊职业发展，争取转岗机会", "personality": ["cautious"] },
+    { "text": "嘴上说没事，夜里翻来覆去刷手机到两点", "personality": ["emotional"] }
+  ]},
+  { "id": "adult_14", "choices": [
+    { "text": "值得。终于不用再看房东脸色了", "personality": ["cautious"] },
+    { "text": "有点后悔，这三十年像一条锁链捆在脖子上", "personality": ["emotional"] },
+    { "text": "咬咬牙，把精力全放在赚钱上", "personality": ["adventurous"] }
+  ]},
+  { "id": "adult_15", "choices": [
+    { "text": "接过来，两个人边喝边把话聊开", "personality": ["rational"] },
+    { "text": "「这日子没法过了」——冷战三天", "personality": ["emotional"] },
+    { "text": "约定每周五晚上固定「不吵架时间」", "personality": ["cautious"] }
+  ]},
+  { "id": "adult_16", "choices": [
+    { "text": "别人的路是别人的。你看着自己的存款和计划，心里有数", "personality": ["rational"] },
+    { "text": "默默记住了差距，把躺平的心态收了起来", "personality": ["adventurous"] },
+    { "text": "失眠了半宿，反复刷大家的朋友圈", "personality": ["emotional"] }
+  ]},
+  { "id": "research_0001", "choices": [
+    { "text": "加入项目组，坐冷板凳也认了", "personality": ["rational"] },
+    { "text": "婉拒，去业界挣快钱，专业慢慢荒了", "personality": ["adventurous"] },
+    { "text": "再想想，拖着拖着就没了下文", "personality": ["cautious"] }
+  ]},
+  { "id": "gray_0001", "choices": [
+    { "text": "入局。钱来得快，心也悬得快", "personality": ["adventurous"] },
+    { "text": "把钱推回去：这碗饭，吃不了", "personality": ["rational"] },
+    { "text": "不置可否，回去越想越后怕", "personality": ["cautious"] }
+  ]},
+  { "id": "adult_01", "choices": [
+    { "text": "觉得自己干得还不错。每一步都走得很稳", "personality": ["cautious"] },
+    { "personality": null },
+    { "text": "恍惚觉得时间过太快了，但不知道该做什么", "personality": ["emotional"] }
+  ]},
+  { "id": "adult_02", "choices": [
+    { "text": "不后悔。宁缺毋滥，一个人的生活也精彩", "personality": ["rational"] },
+    { "text": "开始认真地通过朋友介绍认识新的人", "personality": ["cautious"] },
+    { "text": "孤独感越来越重，用工作填满所有时间", "personality": ["emotional"] }
+  ]}
+]

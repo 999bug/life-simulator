@@ -3822,18 +3822,24 @@
         ]
       },
       {
-        "text": "先观察观察，找到自己的节奏。",
+        "text": "先观察观察，找到自己的节奏——不急着证明什么",
         "effects": {
           "learning": 10,
           "stability": 8
-        }
+        },
+        "personality": [
+          "cautious"
+        ]
       },
       {
-        "text": "压力太大了，我想回普通班。",
+        "text": "压力太大了，我想回普通班",
         "effects": {
           "happiness": -8,
           "learning": -6
-        }
+        },
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -3853,7 +3859,10 @@
           "ambition": 3,
           "intelligence": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "有点犹豫，先把生物学好再说",
@@ -3861,7 +3870,10 @@
           "intelligence": 2,
           "caution": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "被吓住了，还是想点别的出路吧",
@@ -3869,7 +3881,10 @@
           "independence": 2,
           "happiness": 1
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ],
     "conditions": {
@@ -3900,6 +3915,9 @@
         },
         "flags_add": [
           "athlete"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -3908,14 +3926,20 @@
           "patience": 3,
           "observation": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "觉得自己没戏，盘算着还是算了，明年再说",
         "effects": {
           "avoidance": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ],
     "conditions": {
@@ -3944,6 +3968,9 @@
         },
         "flags_add": [
           "self_discipline"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -3964,7 +3991,10 @@
           "happiness": 3,
           "discipline": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -3990,7 +4020,10 @@
           "communication": 6,
           "happiness": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "「算了，人总是要向前走的。」去交新的朋友",
@@ -3998,7 +4031,10 @@
           "social": 8,
           "maturity": 5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "在班级群里发了一句阴阳怪气的话",
@@ -4006,7 +4042,10 @@
           "conflict": 8,
           "social": -5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "selfish"
+        ]
       }
     ]
   },
@@ -4027,7 +4066,10 @@
           "competition": 8,
           "health": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "「保持现在的强度就好，成绩也不能丢。」",
@@ -4036,7 +4078,10 @@
           "focus": 5,
           "happiness": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "「篮球场才是我的主战场。」退出奥数班",
@@ -4045,7 +4090,10 @@
           "happiness": 5,
           "learning": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -4066,7 +4114,10 @@
           "confidence": 8,
           "social": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "悄悄退了社，换成人人都说好的美术课",
@@ -4075,7 +4126,10 @@
           "happiness": 4,
           "learning": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "「一个人不敢，两个人就不怕了。」拉着同桌一起入社",
@@ -4104,7 +4158,10 @@
           "anger": 8,
           "family_relation": -6
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "「日记是隐私，下次请先敲门。」平静地告诉她",
@@ -4113,7 +4170,10 @@
           "family_relation": 5,
           "maturity": 5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "换一个没人找得到的地方写日记，一个字都不给她看",
@@ -4122,7 +4182,10 @@
           "family_relation": -4,
           "self_awareness": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -4151,6 +4214,9 @@
         },
         "flags_add": [
           "sports_career"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -4167,7 +4233,10 @@
           "happiness": -4,
           "health": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -4194,6 +4263,9 @@
         },
         "flags_add": [
           "military_flag"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -4204,6 +4276,9 @@
         },
         "flags_add": [
           "military_flag"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -4211,7 +4286,10 @@
         "effects": {
           "happiness": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -4231,7 +4309,10 @@
           "patience": 4,
           "family_relation": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "攒零花钱，带它去看兽医",
@@ -4240,7 +4321,10 @@
           "health": 3,
           "responsibility": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "altruistic"
+        ]
       },
       {
         "text": "嫌它麻烦，不再理它",
@@ -4248,7 +4332,10 @@
           "happiness": -3,
           "loyalty": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "selfish"
+        ]
       }
     ],
     "conditions": {
@@ -4300,7 +4387,10 @@
           "happiness": 4,
           "learning": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -4373,7 +4463,10 @@
           "avoidance": 8,
           "anxiety": 6
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -4394,7 +4487,10 @@
           "friendship": 5,
           "courage": 5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "「我也有自己的圈子。」从此各走各的",
@@ -4403,7 +4499,10 @@
           "independence": 5,
           "friendship": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "故意在她面前和新朋友说说笑笑",
@@ -4412,7 +4511,10 @@
           "conflict": 5,
           "friendship": -5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "selfish"
+        ]
       }
     ]
   },
@@ -4433,7 +4535,10 @@
           "family_relation": 4,
           "freedom": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "「头发是我的，我想染就染。」硬扛到底",
@@ -4442,7 +4547,10 @@
           "confidence": 5,
           "family_relation": -6
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "坐下来跟爸妈好好谈：为什么想染头发，那些被嘲笑的心情",
@@ -4451,7 +4559,10 @@
           "communication": 6,
           "family_relation": 5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       }
     ]
   },
@@ -4490,6 +4601,9 @@
         },
         "flags_add": [
           "normal_high_school"
+        ],
+        "personality": [
+          "cautious"
         ]
       },
       {
@@ -4537,6 +4651,9 @@
         },
         "flags_add": [
           "vocational_path"
+        ],
+        "personality": [
+          "cautious"
         ]
       },
       {
@@ -4548,6 +4665,9 @@
         },
         "flags_add": [
           "retake"
+        ],
+        "personality": [
+          "adventurous"
         ]
       }
     ]
@@ -4576,6 +4696,9 @@
         },
         "flags_add": [
           "key_high_school"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -4586,6 +4709,9 @@
         },
         "flags_add": [
           "normal_high_school"
+        ],
+        "personality": [
+          "cautious"
         ]
       },
       {
@@ -4616,7 +4742,10 @@
           "money_management": 3,
           "intelligence": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "咬牙囤一批热门货搏一把",
@@ -4624,7 +4753,10 @@
           "money": 3,
           "risk": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "算了算太累，把钱还回去专心学习",
@@ -4632,7 +4764,10 @@
           "learning": 3,
           "intelligence": 1
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       }
     ],
     "conditions": {
@@ -4663,6 +4798,9 @@
         },
         "flags_add": [
           "reconciled"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -4681,7 +4819,10 @@
           "happiness": 3,
           "independence": -2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -4704,6 +4845,9 @@
         },
         "flags_add": [
           "exam_focus"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -4715,6 +4859,9 @@
         },
         "flags_add": [
           "exam_focus"
+        ],
+        "personality": [
+          "cautious"
         ]
       },
       {
@@ -4724,7 +4871,10 @@
           "learning": -6,
           "gaming": 5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -4760,7 +4910,10 @@
           "learning": 6,
           "maturity": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "躲在教学楼里不敢去，第二天当作没看见",
@@ -4768,7 +4921,10 @@
           "avoidance": 8,
           "anxiety": 5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -4789,7 +4945,10 @@
           "friendship": 5,
           "communication": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "「我还有很多张成绩单。」体育、画画、修东西，我都在行",
@@ -4798,7 +4957,10 @@
           "confidence": 8,
           "learning": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "也许他说得对，我确实不适合读书",
@@ -4837,6 +4999,9 @@
         },
         "flags_add": [
           "art_career"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -4854,7 +5019,10 @@
           "learning": 10,
           "happiness": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -4897,7 +5065,10 @@
           "happiness": 2,
           "learning": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -4918,7 +5089,10 @@
           "social": 4,
           "happiness": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "以学业为重，谢绝邀请",
@@ -4927,7 +5101,10 @@
           "stability": 3,
           "music": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "只在周末偷偷去排练",
@@ -4936,7 +5113,10 @@
           "fun": 3,
           "anxiety": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ],
     "conditions": {
@@ -4979,6 +5159,9 @@
         },
         "flags_add": [
           "balanced_path"
+        ],
+        "personality": [
+          "cautious"
         ]
       },
       {
@@ -4991,6 +5174,9 @@
         },
         "flags_add": [
           "tech_path"
+        ],
+        "personality": [
+          "rational"
         ]
       }
     ]
@@ -5025,6 +5211,9 @@
         },
         "flags_add": [
           "liberal_track"
+        ],
+        "personality": [
+          "emotional"
         ]
       },
       {
@@ -5060,7 +5249,10 @@
           "confidence": 6,
           "learning": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "答应分开，把心思放回学习上",
@@ -5069,7 +5261,10 @@
           "learning": 8,
           "happiness": -6
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "表面上答应，私下转成地下恋",
@@ -5078,7 +5273,10 @@
           "happiness": 6,
           "anxiety": 5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -5108,7 +5306,10 @@
           "planning": 6,
           "balance": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "「还是课堂成绩最实在。」退出竞赛",
@@ -5147,7 +5348,10 @@
           "introversion": 6,
           "learning": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "主动当起宿舍长，把值日表排得明明白白",
@@ -5184,6 +5388,9 @@
         },
         "flags_add": [
           "top_university"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -5194,6 +5401,9 @@
         },
         "flags_add": [
           "normal_university"
+        ],
+        "personality": [
+          "cautious"
         ]
       },
       {
@@ -5234,6 +5444,9 @@
         },
         "flags_add": [
           "normal_university"
+        ],
+        "personality": [
+          "cautious"
         ]
       },
       {
@@ -5244,6 +5457,9 @@
         },
         "flags_add": [
           "vocational_path"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -5255,6 +5471,9 @@
         },
         "flags_add": [
           "retake"
+        ],
+        "personality": [
+          "adventurous"
         ]
       }
     ]
@@ -5275,7 +5494,10 @@
           "intelligence": 2,
           "independence": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "在青旅和天南海北的人聊天",
@@ -5283,7 +5505,10 @@
           "social": 3,
           "courage": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "站在长辈拍过照的地方，拍同一张照片",
@@ -5291,7 +5516,10 @@
           "emotion": 2,
           "gratitude": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ],
     "conditions": {
@@ -5322,6 +5550,9 @@
         },
         "flags_add": [
           "class_leader"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -5331,7 +5562,10 @@
           "happiness": -3,
           "social": -2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "推荐了好朋友参选，自己帮忙做策划",
@@ -5340,7 +5574,10 @@
           "empathy": 5,
           "creativity": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "altruistic"
+        ]
       }
     ]
   },
@@ -5363,6 +5600,9 @@
         },
         "flags_add": [
           "went_to_college"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -5374,6 +5614,9 @@
         },
         "flags_add": [
           "went_to_college"
+        ],
+        "personality": [
+          "emotional"
         ]
       },
       {
@@ -5436,7 +5679,10 @@
           "conflict": 6,
           "learning": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -5477,7 +5723,10 @@
           "happiness": 6,
           "gratitude": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -5507,7 +5756,10 @@
           "social": -3,
           "happiness": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "「算了，都过去了。」摇了摇头",
@@ -5516,7 +5768,10 @@
           "happiness": -4,
           "friendship": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -5544,6 +5799,9 @@
         },
         "flags_add": [
           "top_university"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -5555,6 +5813,9 @@
         },
         "flags_add": [
           "normal_university"
+        ],
+        "personality": [
+          "cautious"
         ]
       },
       {
@@ -5593,6 +5854,9 @@
         },
         "flags_add": [
           "art_admission"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -5603,6 +5867,9 @@
         },
         "flags_add": [
           "art_admission"
+        ],
+        "personality": [
+          "cautious"
         ]
       },
       {
@@ -5611,7 +5878,10 @@
           "happiness": -8,
           "learning": 6
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       }
     ]
   },
@@ -5632,7 +5902,10 @@
           "happiness": 6,
           "money": -6
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "去快餐店打工，开学前攒下第一笔自己的钱",
@@ -5640,7 +5913,10 @@
           "money": 8,
           "happiness": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "哪也不去，在家吹空调打游戏，舒服又省钱",
@@ -5648,7 +5924,10 @@
           "comfort": 5,
           "social": -2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ],
     "conditions": {
@@ -5677,6 +5956,9 @@
         },
         "flags_add": [
           "wanderlust"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -5688,6 +5970,9 @@
         },
         "flags_add": [
           "filial"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -5697,7 +5982,10 @@
           "charisma": 5,
           "relationship": 5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -5717,7 +6005,10 @@
           "friendship": 8,
           "happiness": 6
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "一个人爬到灯塔下看了整晚的海",
@@ -5735,7 +6026,10 @@
           "relationship": 5,
           "happiness": 5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       }
     ]
   },
@@ -5767,7 +6061,10 @@
           "family_relation": 3,
           "motivation": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "折中一下：先上一年学，大二再休学去",
@@ -5775,7 +6072,10 @@
           "planning": 6,
           "happiness": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       }
     ]
   },
@@ -5796,7 +6096,10 @@
           "money": 6,
           "discipline": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "请全家吃了顿好的，剩下的买了件想了很久的东西",
@@ -5805,7 +6108,10 @@
           "happiness": 6,
           "money": -5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "太累了，干到一半就辞了职",
@@ -5834,7 +6140,10 @@
           "freedom": 6,
           "family_relation": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "听了爸妈的话，填了离家近的学校",
@@ -5843,7 +6152,10 @@
           "comfort": 3,
           "happiness": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "两个都填上，服从调剂，听天由命",
@@ -5851,7 +6163,10 @@
           "risk": 4,
           "happiness": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -5879,6 +6194,9 @@
         },
         "flags_add": [
           "athlete_pro"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -5897,7 +6215,10 @@
           "happiness": 4,
           "learning": 6
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -5922,7 +6243,10 @@
           "health": 12,
           "discipline": 12
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "选技术兵种/技术警种，学门真本事",
@@ -5938,7 +6262,10 @@
           "happiness": 6,
           "discipline": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -6011,6 +6338,9 @@
         "flags_add": [
           "went_to_college",
           "big_city"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -6023,6 +6353,9 @@
         "flags_add": [
           "went_to_college",
           "hometown"
+        ],
+        "personality": [
+          "cautious"
         ]
       }
     ]
@@ -6054,6 +6387,9 @@
         },
         "flags_add": [
           "went_to_college"
+        ],
+        "personality": [
+          "emotional"
         ]
       },
       {
@@ -6093,6 +6429,9 @@
         },
         "flags_add": [
           "skilled_worker"
+        ],
+        "personality": [
+          "cautious"
         ]
       },
       {
@@ -6104,6 +6443,9 @@
         },
         "flags_add": [
           "small_business"
+        ],
+        "personality": [
+          "adventurous"
         ]
       }
     ]
@@ -6155,7 +6497,10 @@
           "responsibility": 5,
           "social": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "altruistic"
+        ]
       },
       {
         "text": "慢慢来，先观察每个人的脾气",
@@ -6164,7 +6509,10 @@
           "introversion": 2,
           "social": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "和合得来的那个迅速成了形影不离的搭子",
@@ -6172,7 +6520,10 @@
           "friendship": 8,
           "happiness": 5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -6211,6 +6562,9 @@
         },
         "flags_add": [
           "tech_career"
+        ],
+        "personality": [
+          "cautious"
         ]
       },
       {
@@ -6221,6 +6575,9 @@
         },
         "flags_add": [
           "startup"
+        ],
+        "personality": [
+          "adventurous"
         ]
       }
     ]
@@ -6256,6 +6613,9 @@
         },
         "flags_add": [
           "civil_servant"
+        ],
+        "personality": [
+          "cautious"
         ]
       },
       {
@@ -6263,7 +6623,10 @@
         "effects": {
           "experience": 10,
           "money": 6
-        }
+        },
+        "personality": [
+          "adventurous"
+        ]
       }
     ]
   },
@@ -6283,7 +6646,10 @@
           "happiness": 6,
           "money": -8
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "改成视频维系，把生活费省下来，深夜挂电话时有点空",
@@ -6291,7 +6657,10 @@
           "money": 3,
           "happiness": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "和平分手，祝彼此前程似锦，躲在被子里哭了一场",
@@ -6333,6 +6702,9 @@
         },
         "flags_add": [
           "debater"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -6355,6 +6727,9 @@
         },
         "flags_add": [
           "entrepreneurial"
+        ],
+        "personality": [
+          "adventurous"
         ]
       }
     ]
@@ -6381,7 +6756,10 @@
           "planning": 5,
           "interest": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "选了喜欢的 B，告诉自己「热爱是最好的饭碗」",
@@ -6390,7 +6768,10 @@
           "motivation": 6,
           "money": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "摇摆不定，最后随了大流",
@@ -6398,7 +6779,10 @@
           "happiness": 3,
           "strategy": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -6426,6 +6810,9 @@
         },
         "flags_add": [
           "club_president"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -6435,7 +6822,10 @@
           "social": 5,
           "happiness": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "没去竞选，安静地退出了社团",
@@ -6444,7 +6834,10 @@
           "learning": 3,
           "social": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -6476,7 +6869,10 @@
           "friendship": 4,
           "happiness": -2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "婉拒了，大学不想分心",
@@ -6485,7 +6881,10 @@
           "freedom": 4,
           "relationship": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -6506,7 +6905,10 @@
           "independence": 6,
           "health": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "平衡好时间，兼职只做周末，学业不耽误",
@@ -6515,7 +6917,10 @@
           "money": 5,
           "learning": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "太累了，辞了兼职回宿舍躺平",
@@ -6551,6 +6956,9 @@
         },
         "flags_add": [
           "skilled_worker"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -6561,6 +6969,9 @@
         },
         "flags_add": [
           "small_business"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -6571,6 +6982,9 @@
         },
         "flags_add": [
           "skilled_worker"
+        ],
+        "personality": [
+          "rational"
         ]
       }
     ]
@@ -6599,6 +7013,9 @@
         },
         "flags_add": [
           "artist_pro"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -6607,7 +7024,10 @@
           "money": 12,
           "art": 6
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "安心打磨作品，等时机",
@@ -6615,7 +7035,10 @@
           "art": 10,
           "stability": 6
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       }
     ]
   },
@@ -6638,6 +7061,9 @@
         },
         "flags_add": [
           "music_stick"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -6647,7 +7073,10 @@
           "money": 4,
           "music": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "先去工作养活自己，琴也不丢",
@@ -6658,6 +7087,9 @@
         },
         "flags_add": [
           "music_stick"
+        ],
+        "personality": [
+          "rational"
         ]
       }
     ],
@@ -6705,6 +7137,9 @@
         },
         "flags_add": [
           "social_leader"
+        ],
+        "personality": [
+          "emotional"
         ]
       },
       {
@@ -6746,7 +7181,10 @@
           "learning": 4,
           "money": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "一个都不考，觉得证书不如真本事",
@@ -6755,7 +7193,10 @@
           "money": 3,
           "learning": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       }
     ]
   },
@@ -6783,6 +7224,9 @@
         },
         "flags_add": [
           "entrepreneurial"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -6792,7 +7236,10 @@
           "happiness": 3,
           "learning": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "退赛，觉得这些比赛太虚",
@@ -6821,7 +7268,10 @@
           "relationship": 6,
           "happiness": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "保持距离，给彼此自由，顺其自然",
@@ -6839,7 +7289,10 @@
           "relationship": -8,
           "maturity": 5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       }
     ]
   },
@@ -6876,7 +7329,10 @@
           "happiness": 3,
           "money": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "没当回事，奖学金而已",
@@ -6912,6 +7368,9 @@
         },
         "flags_add": [
           "med_admission"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -6920,7 +7379,10 @@
           "balance": 8,
           "happiness": 6
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "太难了，转专业吧",
@@ -6928,7 +7390,10 @@
           "learning": -8,
           "happiness": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -6948,7 +7413,10 @@
           "money": 10,
           "social": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "挑战高提成的推销",
@@ -6957,7 +7425,10 @@
           "pressure": 4,
           "luck": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "专心学业，暂不打工",
@@ -6965,7 +7436,10 @@
           "money": 2,
           "learning": 5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       }
     ],
     "conditions": {
@@ -6993,6 +7467,9 @@
         },
         "flags_add": [
           "pet_memory"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -7003,6 +7480,9 @@
         },
         "flags_add": [
           "pet_memory"
+        ],
+        "personality": [
+          "emotional"
         ]
       },
       {
@@ -7011,7 +7491,10 @@
           "happiness": -4,
           "stability": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ],
     "conditions": {
@@ -7047,6 +7530,9 @@
         },
         "flags_add": [
           "resilient"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -7055,7 +7541,10 @@
           "happiness": 3,
           "learning": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "深受打击，开始怀疑自己适不适合这个行业",
@@ -7064,7 +7553,10 @@
           "confidence": -5,
           "pressure": 8
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -7095,6 +7587,9 @@
         },
         "flags_add": [
           "kaoyan_path"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -7106,6 +7601,9 @@
         },
         "flags_add": [
           "kaoyan_path"
+        ],
+        "personality": [
+          "cautious"
         ]
       },
       {
@@ -7138,6 +7636,9 @@
         },
         "flags_add": [
           "entrepreneurial"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -7147,7 +7648,10 @@
           "happiness": 4,
           "balance": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "被查后干脆收摊，老老实实回图书馆",
@@ -7156,7 +7660,10 @@
           "discipline": 3,
           "money": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       }
     ]
   },
@@ -7188,7 +7695,10 @@
           "money": 5,
           "relationship": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "拒绝了，觉得人生还没准备好",
@@ -7197,7 +7707,10 @@
           "relationship": -8,
           "independence": 5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -7218,7 +7731,10 @@
           "ambition": 5,
           "confidence": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "先就业攒经验，过两年再读研",
@@ -7227,7 +7743,10 @@
           "money": 5,
           "learning": -2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "想不清楚，先毕业旅行一趟再说",
@@ -7236,7 +7755,10 @@
           "freedom": 5,
           "money": -6
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -7272,7 +7794,10 @@
           "happiness": 8,
           "sports": 8
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "退役，转行开个体育用品店",
@@ -7281,7 +7806,10 @@
           "happiness": 4,
           "health": 8
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       }
     ]
   },
@@ -7301,7 +7829,10 @@
           "social": 5,
           "happiness": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "altruistic"
+        ]
       },
       {
         "text": "约他出来见一面，当面聊",
@@ -7309,14 +7840,20 @@
           "social": 4,
           "money": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "寒暄几句，说自己也在忙",
         "effects": {
           "social": -2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ],
     "conditions": {
@@ -7344,7 +7881,10 @@
           "independence": 8,
           "money": -7
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "住家里省钱，代价是每天被念叨到耳朵起茧",
@@ -7353,7 +7893,10 @@
           "happiness": -4,
           "pressure": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "和同事合租折中，水电分摊的摩擦隔三差五",
@@ -7362,7 +7905,10 @@
           "money": -3,
           "happiness": -2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       }
     ],
     "conditions": {
@@ -7392,6 +7938,9 @@
         },
         "flags_add": [
           "tech_career"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -7403,6 +7952,9 @@
         },
         "flags_add": [
           "startup"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -7427,6 +7979,9 @@
         },
         "flags_add": [
           "world_traveler"
+        ],
+        "personality": [
+          "adventurous"
         ]
       }
     ]
@@ -7464,7 +8019,10 @@
           "willpower": 6,
           "learning": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "落榜，转头进春季招聘，塞翁失马",
@@ -7473,7 +8031,10 @@
           "money": 5,
           "happiness": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       }
     ]
   },
@@ -7494,7 +8055,10 @@
           "discipline": 5,
           "money": 5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "先干着，骑驴找马，随时准备跳",
@@ -7503,7 +8067,10 @@
           "adaptability": 4,
           "loyalty": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "落差太大，干了一周就想辞职",
@@ -7512,7 +8079,10 @@
           "confidence": -4,
           "money": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -7533,7 +8103,10 @@
           "happiness": 5,
           "social": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "和最好的朋友聊到后半夜，把没说的话说完",
@@ -7551,7 +8124,10 @@
           "friendship": -3,
           "introversion": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -7572,7 +8148,10 @@
           "comfort": 6,
           "security_need": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "接受便宜的那间，省钱要紧",
@@ -7581,7 +8160,10 @@
           "saving": 5,
           "comfort": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "先住家里通勤，攒够钱再说",
@@ -7618,6 +8200,9 @@
         },
         "flags_add": [
           "tech_career"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -7629,6 +8214,9 @@
         },
         "flags_add": [
           "tech_career"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -7636,7 +8224,10 @@
         "effects": {
           "stability": 10,
           "happiness": 8
-        }
+        },
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -7673,7 +8264,10 @@
           "art": 6,
           "happiness": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "转行做设计，把艺术当爱好",
@@ -7682,7 +8276,10 @@
           "happiness": -2,
           "art": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -7717,6 +8314,9 @@
         },
         "flags_add": [
           "venture"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -7726,7 +8326,10 @@
           "money": 3,
           "ambition": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ],
     "conditions": {
@@ -7761,6 +8364,9 @@
         },
         "flags_add": [
           "tech_lead"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -7772,6 +8378,9 @@
         },
         "flags_add": [
           "escaped_rat_race"
+        ],
+        "personality": [
+          "emotional"
         ]
       }
     ]
@@ -7801,6 +8410,9 @@
         },
         "flags_add": [
           "startup_success"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -7838,7 +8450,10 @@
           "discipline": 5,
           "money": 5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "在体制内也不躺平——考了在职研究生提升自己",
@@ -7847,7 +8462,10 @@
           "money": 3,
           "happiness": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       }
     ]
   },
@@ -7875,6 +8493,9 @@
         },
         "flags_add": [
           "hostel_owner"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -7886,6 +8507,9 @@
         },
         "flags_add": [
           "settled_down"
+        ],
+        "personality": [
+          "cautious"
         ]
       }
     ]
@@ -7907,7 +8531,10 @@
           "planning": 5,
           "happiness": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "当场摆出证据，据理力争",
@@ -7916,7 +8543,10 @@
           "confidence": 4,
           "conflict": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "越想越气，开始投简历",
@@ -7925,7 +8555,10 @@
           "money": 2,
           "loyalty": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -7961,7 +8594,10 @@
           "stability": 8,
           "money": 6
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "辞职，回老家开个小诊所",
@@ -7969,7 +8605,10 @@
           "money": 10,
           "freedom": 8
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       }
     ]
   },
@@ -7995,7 +8634,10 @@
           "ambition": 8,
           "health": 6
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "转文职/转业，开始安稳人生",
@@ -8003,7 +8645,10 @@
           "stability": 10,
           "money": 8
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "退役，回地方闯一闯",
@@ -8012,7 +8657,10 @@
           "ambition": 8,
           "money": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       }
     ]
   },
@@ -8032,7 +8680,10 @@
           "friendship": 6,
           "money": -5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "包六百意思到了，听说有人在背后嘀咕",
@@ -8041,7 +8692,10 @@
           "happiness": -3,
           "social": -2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "selfish"
+        ]
       },
       {
         "text": "人不到礼到，省下机票钱，视频里说了声恭喜",
@@ -8049,7 +8703,10 @@
           "money": 3,
           "friendship": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       }
     ],
     "conditions": {
@@ -8079,6 +8736,9 @@
         },
         "flags_add": [
           "side_hustle"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -8090,6 +8750,9 @@
         },
         "flags_add": [
           "content_creator"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -8099,7 +8762,10 @@
           "health": 3,
           "money": -2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -8120,7 +8786,10 @@
           "risk": 5,
           "happiness": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "再等等，把现在的业务吃透再说",
@@ -8129,7 +8798,10 @@
           "stability": 4,
           "money": -2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "约猎头聊聊，先探探行情不急着走",
@@ -8138,7 +8810,10 @@
           "social": 3,
           "planning": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       }
     ]
   },
@@ -8159,7 +8834,10 @@
           "happiness": 7,
           "money": -5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "保持恋爱状态，暂时不聊结婚",
@@ -8168,7 +8846,10 @@
           "happiness": 3,
           "relationship": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "发现两年的异地让彼此变陌生了，慢慢疏远",
@@ -8177,7 +8858,10 @@
           "relationship": -8,
           "maturity": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       }
     ]
   },
@@ -8198,7 +8882,10 @@
           "pressure": 6,
           "money": -8
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "坚持自己攒，不啃老，慢慢来",
@@ -8207,7 +8894,10 @@
           "patience": 5,
           "money": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "不买了，租房自由，把钱花在体验上",
@@ -8216,7 +8906,10 @@
           "happiness": 4,
           "security_need": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       }
     ]
   },
@@ -8237,7 +8930,10 @@
           "relationship": 4,
           "happiness": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "聊完就没了下文，感觉不对不将就",
@@ -8246,7 +8942,10 @@
           "happiness": 2,
           "relationship": -2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "反感相亲，从此拒绝所有介绍",
@@ -8255,7 +8954,10 @@
           "independence": 4,
           "family_relation": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       }
     ]
   },
@@ -8274,7 +8976,10 @@
         "effects": {
           "money": 8
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "试水基金定投",
@@ -8283,7 +8988,10 @@
           "luck": 3,
           "anxiety": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "交给专业理财顾问",
@@ -8291,7 +8999,10 @@
           "money": 6,
           "learning": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       }
     ],
     "conditions": {
@@ -8317,7 +9028,10 @@
           "health": 5,
           "happiness": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "报一个业余运动俱乐部",
@@ -8332,7 +9046,10 @@
         "effects": {
           "health": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ],
     "conditions": {
@@ -8360,7 +9077,10 @@
           "friendship": 5,
           "money": -6
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "找借口推掉了。电话两头沉默了几秒，关系明显淡了",
@@ -8368,7 +9088,10 @@
           "money": 2,
           "friendship": -5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "借一半，认真立了字据，亲兄弟明算账",
@@ -8376,7 +9099,10 @@
           "money": -3,
           "intelligence": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       }
     ],
     "conditions": {
@@ -8406,6 +9132,9 @@
         },
         "flags_add": [
           "city_dweller"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -8417,6 +9146,9 @@
         },
         "flags_add": [
           "returned_home"
+        ],
+        "personality": [
+          "cautious"
         ]
       },
       {
@@ -8426,7 +9158,10 @@
           "happiness": 5,
           "social": -5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       }
     ]
   },
@@ -8449,6 +9184,9 @@
         },
         "flags_add": [
           "startup"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -8458,7 +9196,10 @@
           "money": 5,
           "balance": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "见好就收，副业就当零花钱",
@@ -8467,7 +9208,10 @@
           "money": 3,
           "ambition": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       }
     ]
   },
@@ -8495,6 +9239,9 @@
         },
         "flags_add": [
           "escaped_rat_race"
+        ],
+        "personality": [
+          "emotional"
         ]
       },
       {
@@ -8504,7 +9251,10 @@
           "patience": 5,
           "health": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "申请转岗到轻松一点的部门",
@@ -8513,7 +9263,10 @@
           "health": 4,
           "money": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -8539,7 +9292,10 @@
           "ambition": 5,
           "money": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "安安稳稳过日子，提拔随缘",
@@ -8548,7 +9304,10 @@
           "balance": 5,
           "ambition": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "辞职下海，去看看体制外的世界",
@@ -8557,7 +9316,10 @@
           "risk": 6,
           "security_need": -5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       }
     ]
   },
@@ -8580,6 +9342,9 @@
         },
         "flags_add": [
           "married"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -8589,7 +9354,10 @@
           "relationship": 2,
           "happiness": -2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "被吓跑了，觉得太草率",
@@ -8598,7 +9366,10 @@
           "freedom": 4,
           "relationship": -6
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -8618,7 +9389,10 @@
           "social": 4,
           "happiness": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "暗中较劲，争取表现得更好",
@@ -8626,14 +9400,20 @@
           "intelligence": 3,
           "pressure": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "点头示意，保持距离",
         "effects": {
           "social": -1
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ],
     "conditions": {
@@ -8661,7 +9441,10 @@
           "ambition": 8,
           "health": -6
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "找领导谈了边界。这个季度的绩效，被打了个 B",
@@ -8669,7 +9452,10 @@
           "independence": 5,
           "money": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "提了离职。走出写字楼那一刻，世界瞬间安静了",
@@ -8677,7 +9463,10 @@
           "happiness": 6,
           "money": -5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ],
     "conditions": {
@@ -8704,7 +9493,10 @@
           "money": -8,
           "impulse": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "忍住没买。月末再看，好像也就那么回事",
@@ -8712,7 +9504,10 @@
           "discipline": 6,
           "money": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "买了，玩了两周，挂二手平台回血一半",
@@ -8749,6 +9544,9 @@
         },
         "flags_add": [
           "loyal_friend"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -8758,7 +9556,10 @@
           "empathy": 3,
           "social": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "altruistic"
+        ]
       },
       {
         "text": "直接借了。没有借条，因为「朋友之间不用这些」",
@@ -8769,6 +9570,9 @@
         },
         "flags_add": [
           "too_trusting"
+        ],
+        "personality": [
+          "emotional"
         ]
       }
     ]
@@ -8790,7 +9594,10 @@
           "pressure": 7,
           "money": -8
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "再等等，等房价降一降",
@@ -8799,7 +9606,10 @@
           "money": 3,
           "anxiety": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "跟爸妈商量，买个小一点的",
@@ -8829,7 +9639,10 @@
           "happiness": 2,
           "family_relation": -2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "认真跟爸妈谈了一次，说出自己的规划",
@@ -8838,7 +9651,10 @@
           "family_relation": 5,
           "empathy": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "大吵一架，提前买了返程票",
@@ -8847,7 +9663,10 @@
           "family_relation": -6,
           "independence": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -8868,7 +9687,10 @@
           "learning": 5,
           "happiness": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "直接提离职，去更好的平台",
@@ -8877,7 +9699,10 @@
           "money": 4,
           "risk": 5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "找领导摊牌，要个说法",
@@ -8885,7 +9710,10 @@
           "courage": 5,
           "happiness": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -8906,7 +9734,10 @@
           "empathy": 5,
           "happiness": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "altruistic"
+        ]
       },
       {
         "text": "默默记下差距，回去给自己立了个目标",
@@ -8915,7 +9746,10 @@
           "motivation": 5,
           "pressure": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "找借口早退，心里不是滋味",
@@ -8924,7 +9758,10 @@
           "social": -3,
           "introversion": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -8957,7 +9794,10 @@
           "communication": 10,
           "empathy": 8
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "altruistic"
+        ]
       },
       {
         "text": "试试互联网医疗，换个活法",
@@ -8965,7 +9805,10 @@
           "money": 10,
           "technology": 8
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       }
     ]
   },
@@ -8985,7 +9828,10 @@
           "social": 4,
           "happiness": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "相视一笑，然后擦肩而过",
@@ -8999,7 +9845,10 @@
         "effects": {
           "happiness": -2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ],
     "conditions": {
@@ -9028,7 +9877,10 @@
           "willpower": 4,
           "money": -5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "砍掉一半业务，先活下来",
@@ -9037,7 +9889,10 @@
           "saving": 4,
           "happiness": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "消极躺平，任公司半死不活",
@@ -9046,7 +9901,10 @@
           "motivation": -3,
           "stability": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ],
     "conditions": {
@@ -9088,7 +9946,10 @@
           "relationship": -8,
           "happiness": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "沉默了很久。「我……可能还没有准备好。」",
@@ -9098,7 +9959,10 @@
           "maturity": 3,
           "independence": 5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -9121,6 +9985,9 @@
         },
         "flags_add": [
           "married"
+        ],
+        "personality": [
+          "emotional"
         ]
       },
       {
@@ -9132,6 +9999,9 @@
         },
         "flags_add": [
           "married"
+        ],
+        "personality": [
+          "cautious"
         ]
       },
       {
@@ -9140,7 +10010,10 @@
           "happiness": 2,
           "relationship": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -9161,7 +10034,10 @@
           "relationship": 6,
           "money": -5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "按老家的规矩来，不让爸妈丢面子",
@@ -9170,7 +10046,10 @@
           "money": -10,
           "happiness": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "主张一切从简，旅行结婚",
@@ -9179,7 +10058,10 @@
           "freedom": 5,
           "family_relation": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       }
     ]
   },
@@ -9205,7 +10087,10 @@
           "relationship": 6,
           "discipline": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "互相迁就，小事不计较",
@@ -9214,7 +10099,10 @@
           "happiness": 4,
           "family_relation": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "altruistic"
+        ]
       },
       {
         "text": "冷战几天，谁也不理谁",
@@ -9223,7 +10111,10 @@
           "relationship": -6,
           "conflict": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -9249,7 +10140,10 @@
           "relationship": 5,
           "balance": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "以事业为重，让 Ta 多担待些",
@@ -9258,7 +10152,10 @@
           "relationship": -5,
           "pressure": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "selfish"
+        ]
       },
       {
         "text": "放慢工作节奏，家庭优先",
@@ -9267,7 +10164,10 @@
           "family_relation": 6,
           "money": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -9292,7 +10192,10 @@
           "happiness": 8,
           "stability": 8
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "创业，把队伍里的狠劲用上",
@@ -9300,7 +10203,10 @@
           "ambition": 12,
           "money": 8
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "做公益，帮助退役战友",
@@ -9328,7 +10234,10 @@
           "money": 5,
           "avoidance": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "selfish"
+        ]
       },
       {
         "text": "装病推掉。第二个星期，好项目再没有你的份",
@@ -9337,7 +10246,10 @@
           "ambition": -3,
           "social": -2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "去了但只吃饭不表态，结果两边都没拿你当自己人",
@@ -9345,7 +10257,10 @@
           "social": -2,
           "intelligence": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       }
     ],
     "conditions": {
@@ -9371,7 +10286,10 @@
           "health": 8,
           "money": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "收藏了一堆养生帖，然后继续熬夜",
@@ -9379,7 +10297,10 @@
           "comfort": 3,
           "health": -5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "找中医慢慢调理，把生活节奏一点点找回来",
@@ -9388,7 +10309,10 @@
           "money": -3,
           "patience": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ],
     "conditions": {
@@ -9442,7 +10366,10 @@
           "happiness": 5,
           "gratitude": 5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "列出三十岁之后的 to-do list",
@@ -9451,7 +10378,10 @@
           "ambition": 5,
           "motivation": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "有些遗憾，有些释然，喝完这杯就睡",
@@ -9460,7 +10390,10 @@
           "emotion": 3,
           "comfort": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -9499,6 +10432,9 @@
         },
         "flags_add": [
           "has_child"
+        ],
+        "personality": [
+          "cautious"
         ]
       },
       {
@@ -9536,7 +10472,10 @@
           "pressure": 6,
           "security_need": 6
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "altruistic"
+        ]
       },
       {
         "text": "不跟风，先把当下的日子过好",
@@ -9545,7 +10484,10 @@
           "happiness": 4,
           "money": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "和 Ta 认真聊了教育观，达成共识",
@@ -9554,7 +10496,10 @@
           "relationship": 5,
           "trust": 4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       }
     ]
   },
@@ -9575,7 +10520,10 @@
           "motivation": 5,
           "money": -4
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "保持节奏，稳扎稳打往上走",
@@ -9584,7 +10532,10 @@
           "money": 4,
           "happiness": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "忽然有些累了，想给自己放个长假",
@@ -9593,7 +10544,10 @@
           "happiness": 4,
           "money": -5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -9627,7 +10581,10 @@
           "stability": 5,
           "confidence": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "嘴上说没事，夜里翻来覆去刷手机到两点",
@@ -9635,7 +10592,10 @@
           "anxiety": 12,
           "health": -5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -9656,7 +10616,10 @@
           "happiness": 5,
           "money": -5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "有点后悔，这三十年像一条锁链捆在脖子上",
@@ -9665,7 +10628,10 @@
           "happiness": -5,
           "pressure": 5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "咬咬牙，把精力全放在赚钱上",
@@ -9674,7 +10640,10 @@
           "money": 5,
           "health": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       }
     ]
   },
@@ -9700,7 +10669,10 @@
           "empathy": 5,
           "happiness": 5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "「这日子没法过了」——冷战三天",
@@ -9708,7 +10680,10 @@
           "conflict": 10,
           "happiness": -8
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       },
       {
         "text": "约定每周五晚上固定「不吵架时间」",
@@ -9717,7 +10692,10 @@
           "stability": 8,
           "emotion_control": 5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ]
   },
@@ -9738,7 +10716,10 @@
           "confidence": 5,
           "self_awareness": 5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "默默记住了差距，把躺平的心态收了起来",
@@ -9747,7 +10728,10 @@
           "pressure": 5,
           "happiness": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "失眠了半宿，反复刷大家的朋友圈",
@@ -9755,7 +10739,10 @@
           "anxiety": 10,
           "happiness": -5
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -9777,6 +10764,9 @@
         },
         "flags_add": [
           "research_path"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -9785,14 +10775,20 @@
           "money": 8,
           "intelligence": -2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "adventurous"
+        ]
       },
       {
         "text": "再想想，拖着拖着就没了下文",
         "effects": {
           "comfort": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ],
     "conditions": {
@@ -9822,6 +10818,9 @@
         },
         "flags_add": [
           "gray_deal"
+        ],
+        "personality": [
+          "adventurous"
         ]
       },
       {
@@ -9830,14 +10829,20 @@
           "self_control": 4,
           "money": -2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "rational"
+        ]
       },
       {
         "text": "不置可否，回去越想越后怕",
         "effects": {
           "intelligence": 3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       }
     ],
     "conditions": {
@@ -9868,6 +10873,9 @@
         },
         "flags_add": [
           "thirty_steady"
+        ],
+        "personality": [
+          "cautious"
         ]
       },
       {
@@ -9888,7 +10896,10 @@
           "health": -5,
           "pressure": 8
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },
@@ -9916,6 +10927,9 @@
         },
         "flags_add": [
           "single_and_thriving"
+        ],
+        "personality": [
+          "rational"
         ]
       },
       {
@@ -9925,7 +10939,10 @@
           "relationship": 5,
           "happiness": 2
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "cautious"
+        ]
       },
       {
         "text": "孤独感越来越重，用工作填满所有时间",
@@ -9934,7 +10951,10 @@
           "happiness": -8,
           "health": -3
         },
-        "flags_add": []
+        "flags_add": [],
+        "personality": [
+          "emotional"
+        ]
       }
     ]
   },

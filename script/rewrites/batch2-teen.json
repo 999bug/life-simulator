@@ -1,0 +1,212 @@
+[
+  { "id": "teen_26", "choices": [
+    { "personality": null },
+    { "text": "先观察观察，找到自己的节奏——不急着证明什么", "personality": ["cautious"] },
+    { "text": "压力太大了，我想回普通班", "personality": ["cautious"] }
+  ]},
+  { "id": "lineage_0014", "choices": [
+    { "text": "更坚定了：苦我也要学", "personality": ["adventurous"] },
+    { "text": "有点犹豫，先把生物学好再说", "personality": ["cautious"] },
+    { "text": "被吓住了，还是想点别的出路吧", "personality": ["emotional"] }
+  ]},
+  { "id": "sport_0006", "choices": [
+    { "text": "上前一步：「老师，让我再跑一次，这次肯定更快！」", "personality": ["adventurous"] },
+    { "text": "退回队伍里，安静等老师念成绩", "personality": ["cautious"] },
+    { "text": "觉得自己没戏，盘算着还是算了，明年再说", "personality": ["emotional"] }
+  ]},
+  { "id": "teen_02", "choices": [
+    { "text": "意识到不对，主动删了游戏，把账号给了同学", "personality": ["rational"] },
+    { "personality": null },
+    { "text": "把游戏当成奖励——写完作业才能玩一局", "personality": ["cautious"] }
+  ]},
+  { "id": "teen_08", "choices": [
+    { "text": "「周末我去找你，一起去看场电影。」主动约他见面", "personality": ["emotional"] },
+    { "text": "「算了，人总是要向前走的。」去交新的朋友", "personality": ["rational"] },
+    { "text": "在班级群里发了一句阴阳怪气的话", "personality": ["selfish"] }
+  ]},
+  { "id": "teen_09", "choices": [
+    { "text": "「我要打进省队。」把训练加到每天两小时", "personality": ["adventurous"] },
+    { "text": "「保持现在的强度就好，成绩也不能丢。」", "personality": ["cautious"] },
+    { "text": "「篮球场才是我的主战场。」退出奥数班", "personality": ["emotional"] }
+  ]},
+  { "id": "teen_10", "choices": [
+    { "text": "「我就是喜欢，关你们什么事。」抬起头直视他们", "personality": ["adventurous"] },
+    { "text": "悄悄退了社，换成人人都说好的美术课", "personality": ["cautious"] },
+    { "personality": null }
+  ]},
+  { "id": "teen_11", "choices": [
+    { "text": "「你凭什么翻我东西！」第一次对妈妈吼出来", "personality": ["emotional"] },
+    { "text": "「日记是隐私，下次请先敲门。」平静地告诉她", "personality": ["rational"] },
+    { "text": "换一个没人找得到的地方写日记，一个字都不给她看", "personality": ["cautious"] }
+  ]},
+  { "id": "teen_32", "choices": [
+    { "text": "「去！我想跑出点名堂。」", "personality": ["adventurous"] },
+    { "personality": null },
+    { "text": "太苦了，不去了", "personality": ["cautious"] }
+  ]},
+  { "id": "teen_38", "choices": [
+    { "text": "「将来我要当兵。」", "personality": ["adventurous"] },
+    { "text": "「当警察也不错，抓坏人帅。」", "personality": ["adventurous"] },
+    { "text": "他们值得尊敬，但我不想上战场", "personality": ["cautious"] }
+  ]},
+  { "id": "pet_0002", "choices": [
+    { "text": "放慢脚步，每天陪它多走一段", "personality": ["emotional"] },
+    { "text": "攒零花钱，带它去看兽医", "personality": ["altruistic"] },
+    { "text": "嫌它麻烦，不再理它", "personality": ["selfish"] }
+  ]},
+  { "id": "teen_03", "choices": [
+    { "personality": null },
+    { "personality": null },
+    { "text": "找闺蜜/死党倾诉，在朋友们的起哄声中度过", "personality": ["emotional"] }
+  ]},
+  { "id": "teen_04", "choices": [
+    { "personality": null },
+    { "personality": null }
+  ]},
+  { "id": "teen_12", "choices": [
+    { "personality": null },
+    { "personality": null },
+    { "text": "低着头，假装什么也没看见", "personality": ["cautious"] }
+  ]},
+  { "id": "teen_13", "choices": [
+    { "text": "「是不是我哪里做错了？」放学后找她当面问清楚", "personality": ["rational"] },
+    { "text": "「我也有自己的圈子。」从此各走各的", "personality": ["cautious"] },
+    { "text": "故意在她面前和新朋友说说笑笑", "personality": ["selfish"] }
+  ]},
+  { "id": "teen_14", "choices": [
+    { "text": "认错，把头发染回黑色——但心里觉得校规很没道理", "personality": ["cautious"] },
+    { "text": "「头发是我的，我想染就染。」硬扛到底", "personality": ["adventurous"] },
+    { "text": "坐下来跟爸妈好好谈：为什么想染头发，那些被嘲笑的心情", "personality": ["rational"] }
+  ]},
+  { "id": "teen_27", "choices": [
+    { "personality": null },
+    { "text": "普通高中，适合自己的才是最好的。", "personality": ["cautious"] },
+    { "personality": null }
+  ]},
+  { "id": "teen_28", "choices": [
+    { "personality": null },
+    { "text": "去职业高中学门技术，早点挣钱。", "personality": ["cautious"] },
+    { "text": "不甘心，复读一年。", "personality": ["adventurous"] }
+  ]},
+  { "id": "teen_33", "choices": [
+    { "text": "专项满分！体育分拉满", "personality": ["adventurous"] },
+    { "text": "成绩一般，但过了线", "personality": ["cautious"] },
+    { "personality": null }
+  ]},
+  { "id": "lineage_0015", "choices": [
+    { "text": "薄利多销，先把摊子做稳", "personality": ["cautious"] },
+    { "text": "咬牙囤一批热门货搏一把", "personality": ["adventurous"] },
+    { "text": "算了算太累，把钱还回去专心学习", "personality": ["rational"] }
+  ]},
+  { "id": "teen_05", "choices": [
+    { "text": "爬起来写了封信塞到爸妈房门下：「对不起，但我也有自己的想法」", "personality": ["rational"] },
+    { "personality": null },
+    { "text": "找爷爷奶奶诉苦，让他们帮你说话", "personality": ["emotional"] }
+  ]},
+  { "id": "teen_15", "choices": [
+    { "text": "「我要冲刺重点高中。」把全部时间扑进题海", "personality": ["rational"] },
+    { "text": "定好计划稳扎稳打，累了就睡", "personality": ["cautious"] },
+    { "text": "压力大到失眠，躲进厕所偷偷刷手机", "personality": ["emotional"] }
+  ]},
+  { "id": "teen_16", "choices": [
+    { "personality": null },
+    { "text": "「先中考，考完再说。」把纸条还回去", "personality": ["rational"] },
+    { "text": "躲在教学楼里不敢去，第二天当作没看见", "personality": ["cautious"] }
+  ]},
+  { "id": "teen_17", "choices": [
+    { "text": "「教教我，你是怎么学的？」去找好朋友取经", "personality": ["rational"] },
+    { "text": "「我还有很多张成绩单。」体育、画画、修东西，我都在行", "personality": ["emotional"] },
+    { "personality": null }
+  ]},
+  { "id": "teen_34", "choices": [
+    { "text": "走艺考，把热爱当专业", "personality": ["adventurous"] },
+    { "personality": null },
+    { "text": "放弃艺术，专心文化课", "personality": ["cautious"] }
+  ]},
+  { "id": "teen_36", "choices": [
+    { "personality": null },
+    { "personality": null },
+    { "text": "救人的责任太重了，我担不起", "personality": ["cautious"] }
+  ]},
+  { "id": "music_0002", "choices": [
+    { "text": "加入乐队，当键盘手", "personality": ["emotional"] },
+    { "text": "以学业为重，谢绝邀请", "personality": ["rational"] },
+    { "text": "只在周末偷偷去排练", "personality": ["cautious"] }
+  ]},
+  { "id": "teen_06", "choices": [
+    { "personality": null },
+    { "text": "上普通高中实验班，保持自己的节奏", "personality": ["cautious"] },
+    { "text": "去职业高中学一门实用技术", "personality": ["rational"] }
+  ]},
+  { "id": "teen_18", "choices": [
+    { "personality": null },
+    { "text": "「我要选文科，我想研究这个世界。」", "personality": ["emotional"] },
+    { "personality": null }
+  ]},
+  { "id": "teen_19", "choices": [
+    { "text": "「我不分手。恋爱和学习，可以都不耽误。」", "personality": ["adventurous"] },
+    { "text": "答应分开，把心思放回学习上", "personality": ["rational"] },
+    { "text": "表面上答应，私下转成地下恋", "personality": ["emotional"] }
+  ]},
+  { "id": "teen_20", "choices": [
+    { "personality": null },
+    { "text": "「两手抓，哪怕只拿省二也好。」", "personality": ["cautious"] },
+    { "personality": null }
+  ]},
+  { "id": "teen_21", "choices": [
+    { "personality": null },
+    { "text": "戴着耳机做自己的事，不太适应群居", "personality": ["rational"] },
+    { "personality": null }
+  ]},
+  { "id": "teen_29", "choices": [
+    { "text": "报重点大学——这才是十年的目标。", "personality": ["adventurous"] },
+    { "text": "重点线上普通大学的好专业，稳妥。", "personality": ["cautious"] },
+    { "personality": null }
+  ]},
+  { "id": "teen_30", "choices": [
+    { "text": "普通大学，也是大学。", "personality": ["cautious"] },
+    { "text": "去专科，早点学门真本事。", "personality": ["rational"] },
+    { "text": "复读一年，拼一把。", "personality": ["adventurous"] }
+  ]},
+  { "id": "lineage_0016", "choices": [
+    { "text": "一路记录见闻，写下自己的旅行日志", "personality": ["rational"] },
+    { "text": "在青旅和天南海北的人聊天", "personality": ["adventurous"] },
+    { "text": "站在长辈拍过照的地方，拍同一张照片", "personality": ["emotional"] }
+  ]},
+  { "id": "teen_07", "choices": [
+    { "text": "走上讲台。虽然紧张，但讲出了自己想为班级做的事", "personality": ["adventurous"] },
+    { "text": "婉拒了。高考在即，不想分心", "personality": ["rational"] },
+    { "text": "推荐了好朋友参选，自己帮忙做策划", "personality": ["altruistic"] }
+  ]},
+  { "id": "teen_22", "choices": [
+    { "text": "第一志愿填985名校的热门专业，赌一把", "personality": ["adventurous"] },
+    { "text": "填自己真正喜欢的专业，哪怕学校普通", "personality": ["emotional"] },
+    { "personality": null },
+    { "personality": null }
+  ]},
+  { "id": "teen_23", "choices": [
+    { "personality": null },
+    { "personality": null },
+    { "text": "忍不住吵了起来，说了很多伤人的话", "personality": ["emotional"] }
+  ]},
+  { "id": "teen_24", "choices": [
+    { "personality": null },
+    { "personality": null },
+    { "text": "把证书寄回家，爸妈当晚就贴到了墙上", "personality": ["emotional"] }
+  ]},
+  { "id": "teen_25", "choices": [
+    { "personality": null },
+    { "text": "点了点头，却还是没有跟上TA的脚步", "personality": ["cautious"] },
+    { "text": "「算了，都过去了。」摇了摇头", "personality": ["emotional"] }
+  ]},
+  { "id": "teen_31", "choices": [
+    { "text": "逆袭！分数冲过了重点线。", "personality": ["adventurous"] },
+    { "text": "考上了普通学校，也算上岸了。", "personality": ["cautious"] },
+    { "personality": null }
+  ]},
+  { "id": "teen_35", "choices": [
+    { "text": "专业排名靠前，冲最好的艺术院校！", "personality": ["adventurous"] },
+    { "text": "稳一点，上普通院校的艺术专业", "personality": ["cautious"] },
+    { "text": "校考失利，回去走文化课", "personality": ["rational"] }
+  ]}
+]

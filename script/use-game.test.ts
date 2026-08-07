@@ -241,7 +241,9 @@ test('RESTART：局中重开沿用角色/设置/目标/挑战，换新种子重�
   assert.strictEqual(restart.game.challenge, true);
   assert.strictEqual(restart.paceMode, 'lite');
   assert.strictEqual(restart.typeSpeed, 'slow');
-  assert.strictEqual(restart.autoPlay, false);
+  // 重开普通局：幼儿期走过场（0-5 岁自动播放，6 岁起交还玩家）
+  assert.strictEqual(restart.autoPlay, true);
+  assert.strictEqual(restart.introAuto, true);
   // 年龄由首事件驱动
   assert.strictEqual(restart.game.age, restart.currentEvent!.age);
   // 换新随机种子（同岁组顺序不同）

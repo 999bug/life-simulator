@@ -9,6 +9,7 @@ import DialogBox from './DialogBox';
 import ChoicePanel from './ChoicePanel';
 import ConfirmModal from './ConfirmModal';
 import KeyChoicesModal from './KeyChoicesModal';
+import ActionModal from './ActionModal';
 import CharacterPanel from './CharacterPanel';
 import { checkGoal, GOALS } from '../engine/goals';
 import { jobStatus } from '../engine/jobs';
@@ -57,6 +58,14 @@ interface Props {
   onExit: () => void;
   /** 局中重开：沿用本局角色与设置换新种子重开 */
   onRestart: () => void;
+  /** 本岁已做过的活动 id 列表（App 从 game.actionsDone 取，旧存档无字段 = []） */
+  actionsDone: string[];
+  /** 主动行动入口（ActionModal 选择后触发引擎 MAKE_ACTION） */
+  onAction: (activityId: string) => void;
+  /** 幼儿期走过场标记（0-5 岁自动播放中，显示角标与跳过按钮） */
+  introAuto: boolean;
+  /** 跳过剩余幼儿期（幼儿期自动播放时显示「⏭」按钮） */
+  onSkipIntro: () => void;
 }
 
 const SPEED_OPTIONS: Array<{ value: TypeSpeed; label: string }> = [
@@ -65,9 +74,11 @@ const SPEED_OPTIONS: Array<{ value: TypeSpeed; label: string }> = [
   { value: 'fast', label: '快' },
 ];
 
-export default function GameScreen({ game, currentEvent, feedback, autoPlay, typeSpeed, fateEventIds, isWeekly = false, weeklyGoal, undoStack, onUndo, onUndoToAge, onTypeSpeedChange, onChoice, onContinue, onExit, onRestart }: Props) {
+export default function GameScreen({ game, currentEvent, feedback, autoPlay, typeSpeed, fateEventIds, isWeekly = false, weeklyGoal, undoStack, onUndo, onUndoToAge, onTypeSpeedChange, onChoice, onContinue, onExit, onRestart, actionsDone, onAction, introAuto, onSkipIntro }: Props) {
   const [showChoices, setShowChoices] = useState(false);
   const [showExit, setShowExit] = useState(false);
+  // 主动行动弹窗（「⚡ 行动」入口；每岁每个活动限 1 次）
+  const [showActions, setShowActions] = useState(false);
   // 后悔弹窗（回退上一步 / 回退到某岁）
   const [showUndo, setShowUndo] = useState(false);
   // 关键抉择回顾弹窗（本局里程碑选择）
@@ -254,8 +265,18 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
         />
       </div>
 
-      {/* 打字速度切换（游戏内实时生效） */}
-      <div className="absolute right-2 bottom-1.5 z-20 flex gap-1.5">
+      {/* 打字速度切换 + 主动行动（快速模拟与反馈页不显示行动；反馈页走独立早退分支，此处分支恒为 false 时仅为防御） */}
+      <div className="absolute right-2 bottom-1.5 z-20 flex gap-1.5 items-center">
+        {!autoPlay && !feedback && (
+          <button
+            onClick={() => { sfx.select(); setShowActions(true); }}
+            title="主动行动"
+            className="h-7 px-2.5 rounded-full text-[11px] border transition-all duration-200 font-sans flex items-center gap-1
+              border-[#c9a96e]/40 text-[#c9a96e] bg-[#c9a96e]/5 hover:border-[#c9a96e] hover:bg-[#c9a96e]/15"
+          >
+            ⚡ 行动
+          </button>
+        )}
         {SPEED_OPTIONS.map(s => (
           <button
             key={s.value}
@@ -414,6 +435,33 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
           onConfirm={() => { setShowExit(false); onExit(); }}
           onCancel={() => setShowExit(false)}
         />
+      )}
+
+      {/* 主动行动弹窗：活动列表 + 可用性置灰（选择后 onAction 触发引擎 MAKE_ACTION，结果走反馈页） */}
+      <ActionModal
+        open={showActions}
+        onClose={() => setShowActions(false)}
+        onAction={onAction}
+        age={game.age}
+        flags={game.flags}
+        actionsDone={actionsDone}
+      />
+
+      {/* 幼儿期走过场：0-5 岁自动播放（intraAuto），顶部角标 + 一键跳过 */}
+      {introAuto && (
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
+          <span className="px-3 py-1 rounded-full border border-[#c9a96e]/30 bg-black/50 text-[11px] text-[#c9a96e]">
+            👶 幼儿期 · 自动播放
+          </span>
+          <button
+            onClick={() => { sfx.select(); onSkipIntro(); }}
+            title="跳过幼儿期"
+            className="px-2.5 h-7 rounded-full border border-white/25 bg-black/40 text-white/80 text-[11px]
+              hover:border-[#c9a96e]/80 hover:text-[#c9a96e] transition-all duration-200 font-sans"
+          >
+            ⏭ 跳过
+          </button>
+        </div>
       )}
     </div>
   );

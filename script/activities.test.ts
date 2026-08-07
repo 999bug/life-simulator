@@ -9,7 +9,7 @@ import { test } from 'node:test';
 import assert from 'node:assert';
 import { reducer, createInitialRuntime } from '../src/hooks/useGame.ts';
 import { getStageForAge, STAGE_ORDER, ATTR_META } from '../src/engine/state.ts';
-import { ACTIVITIES, ACTIONS_PER_AGE, crimeSuccessRate, pickActivityResult, rollCrime } from '../src/engine/activities.ts';
+import { ACTIVITIES, crimeSuccessRate, pickActivityResult, rollCrime } from '../src/engine/activities.ts';
 import type { Attributes, LifeEvent, RuntimeState } from '../src/types/index.ts';
 
 /** 构造测试事件 */
@@ -55,7 +55,6 @@ test('活动表：8 个活动、id 唯一、结果池 ≥3、属性键合法、m
   const ids = new Set(ACTIVITIES.map(a => a.id));
   assert.strictEqual(ACTIVITIES.length, 8);
   assert.strictEqual(ids.size, ACTIVITIES.length, '活动 id 必须唯一');
-  assert.strictEqual(ACTIONS_PER_AGE, 2, '每岁行动配额应为 2');
   const attrKeys = Object.keys(ATTR_META);
   for (const a of ACTIVITIES) {
     assert.ok(a.name.length > 0 && a.icon.length > 0 && a.desc.length > 0, `${a.id} 应有名称/图标/描述`);
@@ -128,6 +127,42 @@ test('rollCrime：成功时随机挑成功变体（第二个 rand 控变体）',
   assert.strictEqual(r.attr.luck, -2);
 });
 
+// ============ SKIP_INTRO（幼儿期走过场快进） ============
+
+test('SKIP_INTRO：普通局 0 岁自动播放开启，快进到 6 岁并交还控制', () => {
+  const events = [
+    evt('a_01', 0, { health: 2 }),
+    evt('a_02', 1, { intelligence: 2 }),
+    evt('a_03', 3, { happiness: 2 }),
+    evt('b_01', 6, { wealth: 3 }),
+  ];
+  const base = createInitialRuntime();
+  const rt = reducer(base, { type: 'START_GAME', gender: 'male', name: '小明', paceMode: 'full', typeSpeed: 'normal', goal: null });
+  // 普通手动局 0 岁：幼儿期自动播放开启（introAuto 标记）
+  assert.strictEqual(rt.introAuto, true);
+  assert.strictEqual(rt.autoPlay, true);
+  // 覆盖事件流（自制数组）
+  const setup = { ...rt, shuffledEvents: events, currentEvent: events[0], eventIndex: 0 };
+  const skipped = reducer(setup, { type: 'SKIP_INTRO' });
+  assert.strictEqual(skipped.game.age, 6, '应推进到 6 岁');
+  assert.strictEqual(skipped.introAuto, false, '走过场标记清除');
+  assert.strictEqual(skipped.autoPlay, false, '交还玩家控制');
+  assert.ok(skipped.game.attributes.health >= 65, '自动选择应积累了属性');
+  // 非幼儿期局 SKIP_INTRO 原样返回
+  const manual = { ...setup, introAuto: false, autoPlay: false };
+  assert.strictEqual(reducer(manual, { type: 'SKIP_INTRO' }), manual);
+});
+
+test('SKIP_INTRO：每日挑战局不开幼儿期自动播放（公平同局）', () => {
+  const base = createInitialRuntime();
+  const rt = reducer(base, {
+    type: 'START_GAME', gender: 'male', name: '小明', paceMode: 'full', typeSpeed: 'normal',
+    goal: null, challenge: false, seed: 12345, isDaily: true,
+  });
+  assert.strictEqual(rt.autoPlay, false, '每日挑战保持手动');
+  assert.strictEqual(rt.introAuto, false, '每日挑战无幼儿期标记');
+});
+
 // ============ 结果池随机抽取 ============
 
 test('pickActivityResult：返回结果池中一员（8 个活动各抽 50 次）', () => {
@@ -141,12 +176,12 @@ test('pickActivityResult：返回结果池中一员（8 个活动各抽 50 次�
 
 // ============ MAKE_ACTION（reducer 流） ============
 
-test('MAKE_ACTION：正常执行——属性变化 + 配额递增 + 反馈文本', () => {
+test('MAKE_ACTION：正常执行——属性变化 + 记录已做 + 反馈文本', () => {
   const rt0 = mkPlaying([evt('a_01', 7, {})]);
   const rt = reducer(rt0, { type: 'MAKE_ACTION', activityId: 'leisure' });
   // 7 岁 happiness 上限 75、初始 60：距上限 15 点无衰减，+3~6 全值生效
   assert.ok(rt.game.attributes.happiness >= 63 && rt.game.attributes.happiness <= 66, `happiness 应为 63~66，实际 ${rt.game.attributes.happiness}`);
-  assert.strictEqual(rt.game.actionsThisAge, 1, '配额应递增 1');
+  assert.deepStrictEqual(rt.game.actionsDone, ['leisure'], '应记录本岁已做过该活动');
   assert.ok(rt.feedback!.length > 0, '反馈应展示结果文本');
   // 活动不推年龄、不进 history、不进后悔栈、不动事件流（不污染人物推导）
   assert.strictEqual(rt.game.age, 7);
@@ -155,17 +190,18 @@ test('MAKE_ACTION：正常执行——属性变化 + 配额递增 + 反馈文本
   assert.strictEqual(rt.currentEvent, rt0.currentEvent);
 });
 
-test('MAKE_ACTION：配额 2 次用尽后第 3 次拒绝（原样返回）', () => {
+test('MAKE_ACTION：同一活动本岁重复做拒绝，不同活动可继续做（每活动限 1 次）', () => {
   let rt = mkPlaying([evt('a_01', 7, {})]);
   // 活动反馈页需 CONTINUE 清掉后才能再次行动（与事件反馈同一机制）
   rt = reducer(rt, { type: 'MAKE_ACTION', activityId: 'leisure' });
   rt = reducer(rt, { type: 'CONTINUE' });
-  rt = reducer(rt, { type: 'MAKE_ACTION', activityId: 'leisure' });
-  rt = reducer(rt, { type: 'CONTINUE' });
-  assert.strictEqual(rt.game.actionsThisAge, 2);
+  // 重复同一活动：拒绝
   const rejected = reducer(rt, { type: 'MAKE_ACTION', activityId: 'leisure' });
-  assert.strictEqual(rejected, rt, '超配额应原样返回');
-  assert.strictEqual(rejected.game.actionsThisAge, 2);
+  assert.strictEqual(rejected, rt, '重复同活动应原样返回');
+  // 换一个活动：可继续（不限制总次数）
+  const next = reducer(rt, { type: 'MAKE_ACTION', activityId: 'fitness' });
+  assert.notStrictEqual(next, rt, '不同活动应可继续执行');
+  assert.deepStrictEqual(next.game.actionsDone, ['leisure', 'fitness']);
 });
 
 test('MAKE_ACTION：minAge 拒绝（6 岁打工/体检/犯罪不可用，健身可用）', () => {
@@ -237,10 +273,10 @@ test('MAKE_ACTION：犯罪走 rollCrime 专用分支（Math.random 桩控制成�
   }
 });
 
-test('MAKE_ACTION 后 CONTINUE：清反馈、配额保留', () => {
+test('MAKE_ACTION 后 CONTINUE：清反馈、已做记录保留', () => {
   let rt = mkPlaying([evt('a_01', 7, {})]);
   rt = reducer(rt, { type: 'MAKE_ACTION', activityId: 'leisure' });
   rt = reducer(rt, { type: 'CONTINUE' });
   assert.strictEqual(rt.feedback, null);
-  assert.strictEqual(rt.game.actionsThisAge, 1, '配额不随 CONTINUE 重置');
+  assert.deepStrictEqual(rt.game.actionsDone, ['leisure'], '已做记录不随 CONTINUE 重置');
 });

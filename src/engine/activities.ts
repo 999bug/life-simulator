@@ -21,9 +21,6 @@ export interface Activity {
   results: ActivityResult[];
 }
 
-/** 每岁行动配额（第 3 次起拒绝：行动不推进年龄，配额随岁刷新） */
-export const ACTIONS_PER_AGE = 2;
-
 /** 犯罪活动 id（reducer 分支判定用） */
 export const CRIME_ACTIVITY_ID = 'crime';
 

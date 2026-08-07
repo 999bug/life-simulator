@@ -146,8 +146,8 @@ export interface GameState {
   allocated?: Partial<Attributes>;
   /** 成就加成（每解锁 10 成就开局全属性 +2；旧存档无此字段） */
   allocBonus?: boolean;
-  /** 本岁主动行为已执行次数（每岁配额 2 次，见 ACTIONS_PER_AGE；行动不推年龄，随岁刷新；旧存档无此字段 = 0） */
-  actionsThisAge?: number;
+  /** 本岁已做过的主动活动 id 列表（每岁每个活动限 1 次；行动不推年龄，随岁刷新；旧存档无此字段 = 未做过） */
+  actionsDone?: string[];
 }
 
 /** 属性元数据 */

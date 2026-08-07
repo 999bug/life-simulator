@@ -45,6 +45,7 @@ test('UNDO：回退上一步恢复选择前状态（属性/事件/反馈/跳过�
     evt('b_01', 8, { wealth: 4 }),
   ];
   let rt = reducer(createInitialRuntime(), { type: 'START_GAME', gender: 'male', name: '小明', paceMode: 'full', typeSpeed: 'normal', goal: null });
+  rt = { ...rt, autoPlay: false, introAuto: false };
   rt = { ...rt, game: { ...rt.game, age: 7 }, shuffledEvents: events, currentEvent: events[0], eventIndex: 0 };
   // 第一次选择：智力 +5（初始智力 25）
   rt = reducer(rt, { type: 'MAKE_CHOICE', choice: events[0].choices[0], eventId: 'a_01' });
@@ -67,6 +68,7 @@ test('UNDO：回退上一步恢复选择前状态（属性/事件/反馈/跳过�
 
 test('UNDO：栈空时原样返回', () => {
   let rt = reducer(createInitialRuntime(), { type: 'START_GAME', gender: 'male', name: '小明', paceMode: 'full', typeSpeed: 'normal', goal: null });
+  rt = { ...rt, autoPlay: false, introAuto: false };
   rt = { ...rt, shuffledEvents: [evt('a_01', 7)], currentEvent: evt('a_01', 7), eventIndex: 0 };
   const before = rt;
   const after = reducer(rt, { type: 'UNDO' });
@@ -76,6 +78,7 @@ test('UNDO：栈空时原样返回', () => {
 test('UNDO 栈上限：超过 5 步裁掉最旧', () => {
   const events = Array.from({ length: 8 }, (_, i) => evt(`e_${i}`, 7 + i, { health: 1 }));
   let rt = reducer(createInitialRuntime(), { type: 'START_GAME', gender: 'male', name: '小明', paceMode: 'full', typeSpeed: 'normal', goal: null });
+  rt = { ...rt, autoPlay: false, introAuto: false };
   rt = { ...rt, shuffledEvents: events, currentEvent: events[0], eventIndex: 0 };
   for (const e of events) {
     rt = reducer(rt, { type: 'MAKE_CHOICE', choice: e.choices[0], eventId: e.id });
@@ -92,6 +95,7 @@ test('UNDO_TO_AGE：回退到最近一次 ≤ 目标岁的选择前状态', () =
     evt('c_01', 30, { wealth: 1 }),
   ];
   let rt = reducer(createInitialRuntime(), { type: 'START_GAME', gender: 'male', name: '小明', paceMode: 'full', typeSpeed: 'normal', goal: null });
+  rt = { ...rt, autoPlay: false, introAuto: false };
   rt = { ...rt, game: { ...rt.game, age: 10 }, shuffledEvents: events, currentEvent: events[0], eventIndex: 0 };
   for (const e of events) {
     rt = reducer(rt, { type: 'MAKE_CHOICE', choice: e.choices[0], eventId: e.id });
@@ -115,6 +119,7 @@ test('伴侣互动：married 后到达互动年龄插入 love 事件，选择后
     evt('n_29', 29, { wealth: 2 }),
   ];
   let rt = reducer(createInitialRuntime(), { type: 'START_GAME', gender: 'female', name: '小美', paceMode: 'full', typeSpeed: 'normal', goal: null });
+  rt = { ...rt, autoPlay: false, introAuto: false };
   rt = { ...rt, shuffledEvents: events, currentEvent: events[0], eventIndex: 0 };
   // 结婚（产出 married）
   rt = reducer(rt, { type: 'MAKE_CHOICE', choice: events[0].choices[0], eventId: 'marry' });
@@ -136,6 +141,7 @@ test('伴侣互动：married 后到达互动年龄插入 love 事件，选择后
 test('伴侣互动：未结婚不插入', () => {
   const events = [evt('n_25', 25, { wealth: 2 })];
   let rt = reducer(createInitialRuntime(), { type: 'START_GAME', gender: 'male', name: '小明', paceMode: 'full', typeSpeed: 'normal', goal: null });
+  rt = { ...rt, autoPlay: false, introAuto: false };
   rt = { ...rt, shuffledEvents: events, currentEvent: events[0], eventIndex: 0 };
   rt = reducer(rt, { type: 'MAKE_CHOICE', choice: events[0].choices[0], eventId: 'n_25' });
   assert.ok(!rt.currentEvent?.id.startsWith('companion_'), '未婚不插入伴侣互动');
@@ -145,6 +151,7 @@ test('伴侣互动：未结婚不插入', () => {
 test('伴侣互动：undo 栈在互动期间正常记录（可回退互动选择）', () => {
   const events = [evt('marry', 24, {}, ['married']), evt('n_25', 25, { wealth: 2 })];
   let rt = reducer(createInitialRuntime(), { type: 'START_GAME', gender: 'male', name: '小明', paceMode: 'full', typeSpeed: 'normal', goal: null });
+  rt = { ...rt, autoPlay: false, introAuto: false };
   rt = { ...rt, shuffledEvents: events, currentEvent: events[0], eventIndex: 0 };
   rt = reducer(rt, { type: 'MAKE_CHOICE', choice: events[0].choices[0], eventId: 'marry' });
   rt = reducer(rt, { type: 'MAKE_CHOICE', choice: rt.currentEvent!.choices[0], eventId: rt.currentEvent!.id });

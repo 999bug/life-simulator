@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useGame } from './hooks/useGame';
 import { sfx, setMuted } from './utils/sound';
 import TitleScreen from './components/TitleScreen';
@@ -23,7 +23,12 @@ function loadTheme(): Theme {
 }
 
 export default function App() {
-  const { game, currentEvent, feedback, skippedEvents, autoPlay, typeSpeed, saves, achievements, stats, newAchievements, fateEventIds, isDaily, isWeekly, weeklyGoal, daily, dailyHistory, weekly, seedScores, family, shuffleSeed, startGame, startAutoGame, startDailyGame, startWeeklyGame, restart, reincarnate, makeChoice, undo, undoToAge, undoStack, continue: continue_, continueGame, reset, setTypeSpeed } = useGame();
+  const { game, currentEvent, feedback, skippedEvents, autoPlay, introAuto, typeSpeed, saves, achievements, stats, newAchievements, fateEventIds, isDaily, isWeekly, weeklyGoal, daily, dailyHistory, weekly, seedScores, family, shuffleSeed, startGame, startAutoGame, startDailyGame, startWeeklyGame, restart, reincarnate, makeChoice, makeAction, skipIntro, undo, undoToAge, undoStack, continue: continue_, continueGame, reset, setTypeSpeed } = useGame();
+
+  // 主动行动：选择活动后触发引擎 MAKE_ACTION（结果由反馈页展示；不推进年龄、不进 history）
+  const handleAction = useCallback((activityId: string) => {
+    makeAction(activityId);
+  }, [makeAction]);
 
   // 主题切换（纯黑/深空蓝；持久化到 localStorage）
   const [theme, setTheme] = useState<Theme>(loadTheme);
@@ -88,6 +93,10 @@ export default function App() {
             onContinue={continue_}
             onExit={reset}
             onRestart={restart}
+            onAction={handleAction}
+            actionsDone={game.actionsDone ?? []}
+            introAuto={introAuto}
+            onSkipIntro={skipIntro}
           />
         )}
         {game.phase === 'summary' && (

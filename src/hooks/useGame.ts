@@ -27,7 +27,7 @@ import {
 import { EVENTS, filterEvents, shuffleEvents, pickFateEvents } from '../engine/events.ts';
 import { derivePersona, meetsPersonality } from '../engine/personality.ts';
 import { buildCompanionEvent, COMPANION_DISABLED, COMPANION_END_AGE, COMPANION_INTERVAL, COMPANION_START_AGE, companionEnabled } from '../engine/companion.ts';
-import { ACTIVITIES, ACTIONS_PER_AGE, pickActivityResult, rollCrime } from '../engine/activities.ts';
+import { ACTIVITIES, pickActivityResult, rollCrime } from '../engine/activities.ts';
 import { track } from '../utils/analytics.ts';
 
 /** 中途放弃埋点：结算后回标题（phase 已为 summary）不误记，其余情况记放弃 */
@@ -313,6 +313,7 @@ export type Action =
   | { type: 'RESTART' }
   | { type: 'MAKE_CHOICE'; choice: Choice; eventId: string }
   | { type: 'MAKE_ACTION'; activityId: string }
+  | { type: 'SKIP_INTRO' }
   | { type: 'UNDO' }
   | { type: 'UNDO_TO_AGE'; age: number }
   | { type: 'CONTINUE' }
@@ -343,6 +344,8 @@ export interface RuntimeState {
   shuffleSeed: number;
   /** 快速模拟模式：自动随机选择快速走完一生 */
   autoPlay: boolean;
+  /** 幼儿期走过场（手动局 0-5 岁自动播放，6 岁起交还玩家；快速模拟局无此标记） */
+  introAuto?: boolean;
   /** 本局密度档位（开局选定，中途不可切） */
   paceMode: PaceMode;
   /** 打字机速度档（游戏内可随时切换） */
@@ -715,6 +718,8 @@ function startNewGame(state: RuntimeState, p: StartParams): RuntimeState {
   // 第 3 周目起（累计完成 ≥ 2 局）：抽 1 个本局命运事件；第 5 周目起（累计 ≥ 4 局）：抽 2 个（效果 ×1.5）
   const fateCount = state.stats.totalLives >= 4 ? 2 : 1;
   const fateEvents = state.stats.totalLives >= 2 ? pickFateEvents(shuffleSeed, fateCount) : [];
+  // 幼儿期走过场资格：仅普通手动局（非快速模拟/每日/每周/种子）——每日/每周/种子挑战自动随机选择会破坏「同一天同一局」的公平性
+  const introEligible = p.seed == null && !p.isDaily && !p.isWeekly && game.age < 6;
   return {
     game,
     currentEvent: first,
@@ -723,7 +728,9 @@ function startNewGame(state: RuntimeState, p: StartParams): RuntimeState {
     shuffledEvents,
     skippedEvents: firstScan.skipped,
     shuffleSeed,
-    autoPlay: p.autoPlay,
+    // 幼儿期走过场：普通手动局 0-5 岁自动播放（introAuto 标记，6 岁起交还玩家）；快速模拟局全自动无标记
+    autoPlay: p.autoPlay || introEligible,
+    introAuto: !p.autoPlay && introEligible,
     paceMode: p.paceMode,
     typeSpeed: p.typeSpeed,
     saves: state.saves,
@@ -964,7 +971,9 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         skippedEvents: [...state.skippedEvents, ...nextScan.skipped],
         shuffledEvents: state.shuffledEvents,
         shuffleSeed: state.shuffleSeed,
-        autoPlay: state.autoPlay,
+        // 幼儿期走过场：到 6 岁自动交还玩家控制（快速模拟局 introAuto 无标记，保持全自动）
+        autoPlay: state.autoPlay && !(state.introAuto && age >= 6),
+        introAuto: state.introAuto && age < 6,
         paceMode: state.paceMode,
         typeSpeed: state.typeSpeed,
         saves: state.saves,
@@ -1004,8 +1013,8 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         // 快速模拟不行动
         return state;
       }
-      if ((state.game.actionsThisAge ?? 0) >= ACTIONS_PER_AGE) {
-        // 本岁配额已用完
+      if ((state.game.actionsDone ?? []).includes(action.activityId)) {
+        // 本岁该活动已做过（每岁每个活动限 1 次，防无限刷同一种）
         return state;
       }
       const activity = ACTIVITIES.find(a => a.id === action.activityId);
@@ -1037,10 +1046,44 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         ...state.game,
         attributes: attrs,
         flags,
-        actionsThisAge: (state.game.actionsThisAge ?? 0) + 1,
+        actionsDone: [...(state.game.actionsDone ?? []), activity.id],
       };
       // 反馈复用现有机制（CONTINUE 清反馈）；活动不推进事件流
       return { ...state, game, feedback: result.text };
+    }
+
+    case 'SKIP_INTRO': {
+      // 跳过剩余幼儿期：自动随机选择推进到 6 岁（与逐次自动播放的随机分布一致，可安全快进）
+      if (!state.introAuto) {
+        return state;
+      }
+      let game = state.game;
+      let currentEvent = state.currentEvent;
+      let eventIndex = state.eventIndex;
+      const shuffledEvents = state.shuffledEvents;
+      let guard = 0;
+      while (game.age < 6 && currentEvent && guard++ < 500) {
+        const choice = currentEvent.choices[Math.floor(Math.random() * currentEvent.choices.length)];
+        const out = state.fateEventIds.includes(currentEvent.id)
+          ? scaleOutcomes(choice.outcomes, FATE_MULTIPLIER)
+          : choice.outcomes;
+        let attrs = applyOutcomes(game.attributes, out, game.age);
+        const flags = [...game.flags];
+        if (out.flags) {
+          out.flags.forEach(f => { if (!flags.includes(f)) flags.push(f); });
+        }
+        const scan = findNextEvent({ ...game, attributes: attrs, flags }, eventIndex, shuffledEvents);
+        const next = scan.event;
+        const nextAge = next ? next.age : game.age;
+        if (nextAge >= 65) {
+          attrs = applyElderDecay(attrs);
+        }
+        attrs = ensureInt(attrs);
+        game = { ...game, attributes: attrs, flags, age: nextAge, stage: getStageForAge(nextAge) };
+        currentEvent = next;
+        eventIndex = next ? shuffledEvents.indexOf(next) : eventIndex;
+      }
+      return { ...state, game, currentEvent, eventIndex, feedback: null, autoPlay: false, introAuto: false };
     }
 
     case 'UNDO': {
@@ -1435,6 +1478,11 @@ export function useGame() {
     dispatch({ type: 'MAKE_ACTION', activityId });
   }, []);
 
+  // 跳过剩余幼儿期：自动随机选择推进到 6 岁（幼儿期走过场的快进）
+  const skipIntro = useCallback(() => {
+    dispatch({ type: 'SKIP_INTRO' });
+  }, []);
+
   // 后悔：回退上一步（栈空时 UI 不显示按钮，此处防御性兜底）
   const undo = useCallback(() => {
     dispatch({ type: 'UNDO' });
@@ -1470,6 +1518,7 @@ export function useGame() {
     skippedEvents: rt.skippedEvents,
     saves: rt.saves,
     autoPlay: rt.autoPlay,
+    introAuto: rt.introAuto ?? false,
     typeSpeed: rt.typeSpeed,
     achievements: rt.achievements,
     stats: rt.stats,
@@ -1492,6 +1541,7 @@ export function useGame() {
     reincarnate,
     makeChoice,
     makeAction,
+    skipIntro,
     undo,
     undoToAge,
     undoStack: rt.undoStack,

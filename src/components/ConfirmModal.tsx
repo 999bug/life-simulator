@@ -12,11 +12,11 @@ interface Props {
 /** 轻量确认模态（覆盖存档/中途退出共用） */
 export default function ConfirmModal({ title, desc, extra, onConfirm, onCancel }: Props) {
   return (
-    <div className="absolute inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center" onClick={onCancel}>
-      <div className="w-[380px] max-w-[92vw] rounded-2xl border border-white/10 bg-[#15152a] p-6 flex flex-col gap-4
+    <div className="absolute inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center" onClick={onCancel}>
+      <div className="w-[380px] max-w-[92vw] rounded-2xl border border-white/15 bg-[#10101f] shadow-2xl shadow-black/70 p-6 flex flex-col gap-4
         items-center" onClick={e => e.stopPropagation()}>
         <h3 className="text-[16px] tracking-[4px] text-[#c9a96e]">{title}</h3>
-        <p className="text-[12px] text-white/50 leading-relaxed text-center">{desc}</p>
+        <p className="text-[12px] text-white/75 leading-relaxed text-center">{desc}</p>
         <div className="flex flex-wrap justify-center gap-3 mt-1">
           <button
             onClick={() => { sfx.select(); onCancel(); }}

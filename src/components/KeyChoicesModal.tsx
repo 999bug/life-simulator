@@ -15,21 +15,21 @@ interface Props {
 export default function KeyChoicesModal({ history, onClose }: Props) {
   const keyChoices = history.filter(h => (h.flags ?? []).some(f => MILESTONE_FLAGS.includes(f)));
   return (
-    <div className="absolute inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center" onClick={onClose}>
-      <div className="w-[480px] max-w-[92vw] max-h-[min(520px,86vh)] overflow-y-auto rounded-2xl border border-white/10 bg-[#15152a] p-6 flex flex-col gap-3.5" onClick={e => e.stopPropagation()}>
+    <div className="absolute inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center" onClick={onClose}>
+      <div className="w-[480px] max-w-[92vw] max-h-[min(520px,86vh)] overflow-y-auto rounded-2xl border border-white/15 bg-[#10101f] shadow-2xl shadow-black/70 p-6 flex flex-col gap-3.5" onClick={e => e.stopPropagation()}>
         <h3 className="text-center text-[17px] tracking-[5px] text-[#c9a96e]">📌 关键抉择</h3>
-        <p className="text-center text-[10px] text-white/30 tracking-[2px]">这一生走到这里，几个重要的路口</p>
+        <p className="text-center text-[10px] text-white/50 tracking-[2px]">这一生走到这里，几个重要的路口</p>
         {keyChoices.length === 0 && (
-          <p className="text-center text-[12px] text-white/35 py-8">还没有做出影响一生的选择</p>
+          <p className="text-center text-[12px] text-white/55 py-8">还没有做出影响一生的选择</p>
         )}
         {keyChoices.map((h, i) => {
           const title = EVENTS.find(e => e.id === h.eventId)?.title;
           return (
-            <div key={i} className="flex gap-3 py-2.5 border-b border-white/[0.04]">
+            <div key={i} className="flex gap-3 py-2.5 border-b border-white/[0.06]">
               <span className="text-[#c9a96e] min-w-[38px] text-[12px] font-semibold pt-0.5">⭐ {h.age}岁</span>
               <div className="min-w-0">
-                <div className="text-[12px] text-[#c9a96e]/80">{title ?? '人生事件'}</div>
-                <div className="text-[12px] text-white/55 mt-0.5 leading-relaxed">{h.text}</div>
+                <div className="text-[12px] text-[#c9a96e]/90">{title ?? '人生事件'}</div>
+                <div className="text-[12px] text-white/75 mt-0.5 leading-relaxed">{h.text}</div>
               </div>
             </div>
           );

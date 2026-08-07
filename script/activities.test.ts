@@ -95,14 +95,14 @@ test('活动表：遛狗要求养宠 flag（任一），犯罪结果池含被抓
 
 // ============ 犯罪成功率与分支 ============
 
-test('crimeSuccessRate：基础值/钳位边界', () => {
-  assert.strictEqual(crimeSuccessRate(0, 0), 60, '零运气零智力 = 基础 60%');
-  // 60 + 50×0.5 + 50×0.3 = 100 → 钳位 90
-  assert.strictEqual(crimeSuccessRate(50, 50), 90);
-  // 60 + 100×0.5 + 100×0.3 = 140 → 钳位 90
+test('crimeSuccessRate：基础值/钳位边界（2026-08 平衡审计调参：55+luck×0.35+int×0.25）', () => {
+  assert.strictEqual(crimeSuccessRate(0, 0), 55, '零运气零智力 = 基础 55%');
+  // 55 + 50×0.35 + 50×0.25 = 85
+  assert.strictEqual(crimeSuccessRate(50, 50), 85);
+  // 55 + 100×0.35 + 100×0.25 = 115 → 钳位 90
   assert.strictEqual(crimeSuccessRate(100, 100), 90);
-  // 60 + 0 + 100×0.3 = 90（恰好上限）
-  assert.strictEqual(crimeSuccessRate(0, 100), 90);
+  // 55 + 0 + 100×0.25 = 80
+  assert.strictEqual(crimeSuccessRate(0, 100), 80);
   // 下限 0
   assert.strictEqual(crimeSuccessRate(-200, -200), 0);
 });
@@ -424,4 +424,24 @@ test('幼儿期每岁只播 1 个事件：同岁多事件跳过（幻灯片精�
   assert.strictEqual(step2.currentEvent?.id, 'c_01', '同岁 b_02 应被跳过');
   assert.strictEqual(step2.game.age, 6);
   assert.strictEqual(step2.introAuto, false, '6 岁交还玩家控制');
+});
+
+test('MAKE_ACTION：进入新岁后本岁已做记录重置（每岁每个活动限 1 次）', () => {
+  const events = [evt('a_01', 7, {}), evt('b_01', 8, {})];
+  const base = createInitialRuntime();
+  const rt = reducer(base, { type: 'START_GAME', gender: 'male', name: '小明', paceMode: 'full', typeSpeed: 'normal', goal: null });
+  const setup = { ...rt, autoPlay: false, introAuto: false, shuffledEvents: events, currentEvent: events[0], eventIndex: 0, game: { ...rt.game, age: 7 } };
+  // 7 岁做休闲
+  let cur = reducer(setup, { type: 'MAKE_ACTION', activityId: 'leisure' });
+  assert.deepStrictEqual(cur.game.actionsDone, ['leisure']);
+  cur = reducer(cur, { type: 'CONTINUE' });
+  // 同岁重复做拒绝
+  assert.strictEqual(reducer(cur, { type: 'MAKE_ACTION', activityId: 'leisure' }), cur);
+  // 推进到 8 岁（MAKE_CHOICE）后清反馈
+  cur = reducer(cur, { type: 'MAKE_CHOICE', choice: events[0].choices[0], eventId: 'a_01' });
+  assert.strictEqual(cur.game.age, 8);
+  assert.deepStrictEqual(cur.game.actionsDone, [], '进入新岁应重置已做记录');
+  cur = reducer(cur, { type: 'CONTINUE' });
+  // 新岁可再次做
+  assert.notStrictEqual(reducer(cur, { type: 'MAKE_ACTION', activityId: 'leisure' }), cur);
 });

@@ -911,6 +911,9 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         flags: out.flags ?? undefined,
       }];
 
+      // 主动行为记录随岁刷新：进入新岁清空本岁已做活动（每岁每个活动限 1 次——审计发现此前从不重置，实际是「一生一次」）
+      const nextActionsDone = age !== state.game.age ? [] : state.game.actionsDone;
+
       const game: GameState = {
         ...state.game,
         age: isDead ? Math.min(age, maxAge) : age,
@@ -921,6 +924,7 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         history,
         deathCause,
         phase: gameOver ? 'summary' : 'playing',
+        actionsDone: nextActionsDone,
         // 每岁属性快照：进入新岁或终局时记录（同岁内不重复）
         snapshots: appendSnapshot(state.game.snapshots, isDead ? Math.min(age, maxAge) : age, attrs, gameOver),
       };

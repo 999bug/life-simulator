@@ -724,7 +724,9 @@ export const ACTIVITIES: Activity[] = [
  * @returns 成功率（0-90 的百分数值）
  */
 export function crimeSuccessRate(luck: number, intelligence: number): number {
-  return Math.max(0, Math.min(90, 60 + luck * 0.5 + intelligence * 0.3));
+  // 平衡审计（2026-08）：原 60+luck×0.5+int×0.3 在 50/50 即顶钳位，属性无边际收益；
+  // 调整为 55+luck×0.35+int×0.25——低属性新手风险更大（50/50≈75%），满属性仍可达钳位 90
+  return Math.max(0, Math.min(90, 55 + luck * 0.35 + intelligence * 0.25));
 }
 
 /**

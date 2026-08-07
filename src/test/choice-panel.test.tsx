@@ -61,4 +61,50 @@ describe('ChoicePanel', () => {
     fireEvent.click(screen.getByText('去散步'));
     expect(onSelect).toHaveBeenCalledWith(ch);
   });
+
+  it('性格徽章：效果达强信号阈值时显示（普通模式也显示，风格提示非数值）', () => {
+    render(
+      <ChoicePanel
+        choices={[choice('放下书本去远方', { happiness: 10, intelligence: -6 })]}
+        onSelect={vi.fn()}
+        visible
+        attributes={attrs}
+        age={30}
+        realMode={false}
+      />,
+    );
+    expect(screen.getByText('😊 感性')).toBeTruthy();
+  });
+
+  it('性格徽章：flag 补充规则命中（休学一年 → 冒险）', () => {
+    render(
+      <ChoicePanel
+        choices={[{ text: '休学一年去旅行', effects: '', outcomes: { attr: { happiness: 2 }, flags: ['gap_year'] } }]}
+        onSelect={vi.fn()}
+        visible
+        attributes={attrs}
+        age={30}
+        realMode={false}
+      />,
+    );
+    expect(screen.getByText('⚡ 冒险')).toBeTruthy();
+  });
+
+  it('性格徽章：弱效果无信号不显示徽章', () => {
+    render(
+      <ChoicePanel
+        choices={[choice('平淡度日', { happiness: 4, wealth: -2 })]}
+        onSelect={vi.fn()}
+        visible
+        attributes={attrs}
+        age={30}
+        realMode={false}
+      />,
+    );
+    expect(screen.queryByText('理性')).toBeNull();
+    expect(screen.queryByText('感性')).toBeNull();
+    expect(screen.queryByText('冒险')).toBeNull();
+    expect(screen.queryByText('利己')).toBeNull();
+    expect(screen.queryByText('利他')).toBeNull();
+  });
 });

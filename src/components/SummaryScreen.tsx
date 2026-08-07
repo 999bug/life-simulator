@@ -16,6 +16,7 @@ import { assetStatus } from '../engine/assets';
 import { getTalent, saveInheritTalent, type TalentInherit } from '../engine/talents';
 import { formatDate } from '../hooks/useGame';
 import { checkWeeklyGoal, type WeeklyGoal } from '../engine/weekly';
+import { derivePersona, personaSummary, PERSONA_META, type PersonaTrait } from '../engine/personality';
 
 interface Props {
   game: GameState;
@@ -184,15 +185,23 @@ function getVerdict(game: GameState): Verdict {
 /** 里程碑 flag：命中则时间线高亮（含职业 flag——职业入行即里程碑）；关键抉择回顾共用 */
 export const MILESTONE_FLAGS = ['went_to_college', 'grad_school', 'top_university', 'married', 'has_child', 'doctor', 'startup_success', 'civil_servant', 'world_traveler', 'athlete_pro', 'military_flag', 'skilled_worker', 'tech_career', 'retired', ...JOB_MILESTONE_FLAGS];
 
+/** 性格维度展示对（条形图左端 → 右端，与 PERSONA_META 维度一致） */
+const PERSONA_DIMENSIONS: Array<[PersonaTrait, PersonaTrait]> = [
+  ['rational', 'emotional'],
+  ['adventurous', 'cautious'],
+  ['selfish', 'altruistic'],
+];
+
 export default function SummaryScreen({ game, onRestart, newAchievements, skippedTitles, generation, seed, collectedEndings = [], isDaily = false, isWeekly = false, weeklyGoal, totalLives = 0, onReincarnate, inheritTalent = null }: Props) {
   const score = calcScore(game.attributes);
   const { title, desc } = getVerdict(game);
   const goal = checkGoal(game.goal, game);
-  // 本局推导信息：职业 / 家人关系 / 高考结果 / 资产（纯函数，旧存档兼容）
+  // 本局推导信息：职业 / 家人关系 / 高考结果 / 资产 / 性格画像（纯函数，旧存档兼容）
   const job = jobStatus(game);
   const bonds = npcBonds(game);
   const gaokao = gaokaoResult(game);
   const assets = assetStatus(game);
+  const persona = derivePersona(game.history);
   // 「下一站」：本局结算后（当前结局已计入收集）提示下一条未走过的路线；全收集显示通关文案
   const nextRoute = useMemo(
     () => nextRouteToExplore(verdictKey(game), new Set(collectedEndings)),
@@ -365,6 +374,44 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
                 </div>
                 <span className={`w-[26px] text-right shrink-0 font-semibold ${v >= 80 ? 'text-[#5de8a0]' : v <= 30 ? 'text-[#e85d75]' : 'text-white/50'}`}>
                   {v}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* 性格画像（推导自本局全部选择：3 维 6 端累积；弱画像只显示概括句） */}
+      <div className="w-full max-w-[720px] animate-[fadeInUp_1.2s_ease]">
+        <h3 className="text-[13px] tracking-[4px] text-[#c9a96e] mb-1 font-normal">🧭 性格画像</h3>
+        <p className="text-[11px] text-white/45 mb-2.5">{personaSummary(persona)}</p>
+        <div className="flex flex-col gap-2">
+          {PERSONA_DIMENSIONS.map(([a, b]) => {
+            const av = persona[a];
+            const bv = persona[b];
+            const aPct = av + bv > 0 ? (av / (av + bv)) * 100 : 0;
+            return (
+              <div key={a} className="flex items-center gap-2.5 text-[11px]"
+                title={`${PERSONA_META[a].name} ${av} 次 · ${PERSONA_META[b].name} ${bv} 次`}>
+                <span className="w-[64px] text-right shrink-0"
+                  style={{ color: av > 0 ? PERSONA_META[a].color : 'rgba(255,255,255,0.25)' }}>
+                  {PERSONA_META[a].icon} {PERSONA_META[a].name}
+                </span>
+                <div className="flex-1 h-[6px] bg-white/8 rounded-sm overflow-hidden relative">
+                  {/* 中线（两端对半分界） */}
+                  <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/15" />
+                  {av > 0 && (
+                    <div className="absolute left-0 top-0 bottom-0 transition-all duration-700"
+                      style={{ width: `${aPct}%`, backgroundColor: PERSONA_META[a].color }} />
+                  )}
+                  {bv > 0 && (
+                    <div className="absolute right-0 top-0 bottom-0 transition-all duration-700"
+                      style={{ width: `${100 - aPct}%`, backgroundColor: PERSONA_META[b].color }} />
+                  )}
+                </div>
+                <span className="w-[64px] shrink-0"
+                  style={{ color: bv > 0 ? PERSONA_META[b].color : 'rgba(255,255,255,0.25)' }}>
+                  {PERSONA_META[b].name} {PERSONA_META[b].icon}
                 </span>
               </div>
             );

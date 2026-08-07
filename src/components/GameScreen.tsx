@@ -16,6 +16,8 @@ import { useName } from '../utils/naming';
 import { undoableAges } from '../hooks/useGame';
 import type { UndoEntry } from '../types';
 import type { WeeklyGoal } from '../engine/weekly';
+import { EVENTS } from '../engine/events';
+import { PERSONA_META, traitForOutcome } from '../engine/personality';
 
 /** 选项效果主属性（绝对值最大）→ 背景色调，让每个选项的选择有视觉反馈 */
 function pickAttrTint(choice: Choice): string | null {
@@ -92,6 +94,16 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
   // 称呼替换：事件文本与反馈文本中的「你」→ 玩家名字
   const eventText = currentEvent ? useName(currentEvent.text, game.name) : '';
   const feedbackText = feedback ? useName(feedback, game.name) : null;
+  // 本次选择的性格端（反馈页「你的选择」徽章；从 history 最后一条反查选项，纯推导）
+  const lastTraits = useMemo(() => {
+    const last = game.history[game.history.length - 1];
+    if (!last) {
+      return [];
+    }
+    const ev = EVENTS.find(e => e.id === last.eventId);
+    const ch = ev?.choices[last.choiceIndex];
+    return ch ? traitForOutcome(ch.outcomes.attr, ch.outcomes.flags) : [];
+  }, [game.history]);
 
   // 选择选项：记录主属性色调（视觉反馈）
   const handleChoice = useCallback((choice: Choice) => {
@@ -145,6 +157,19 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
         >
           <div className="px-7 py-5 text-center max-w-[860px] mx-auto">
             <div className="text-lg text-[#c9a96e] whitespace-pre-line leading-relaxed">{feedbackText}</div>
+            {/* 本次选择的性格徽章：选择累积成画像，选完即时可见（无信号选项不显示） */}
+            {lastTraits.length > 0 && (
+              <div className="mt-3 flex items-center justify-center gap-1.5">
+                <span className="text-[11px] text-white/40 tracking-wider">你的选择</span>
+                {lastTraits.map(t => (
+                  <span key={t}
+                    className="text-[11px] px-1.5 py-0.5 rounded border"
+                    style={{ color: PERSONA_META[t].color, borderColor: `${PERSONA_META[t].color}55`, backgroundColor: `${PERSONA_META[t].color}1a` }}>
+                    {PERSONA_META[t].icon} {PERSONA_META[t].name} +1
+                  </span>
+                ))}
+              </div>
+            )}
             <div className="text-[11px] text-white/30 mt-3 animate-pulse">▼ 点击继续</div>
           </div>
         </div>

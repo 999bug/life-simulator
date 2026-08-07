@@ -1,6 +1,7 @@
 import type { GameState } from '../types';
 import { ATTR_META } from '../engine/state';
 import { EVENTS } from '../engine/events';
+import { derivePersona, personaSummary, PERSONA_META, type PersonaTrait } from '../engine/personality';
 
 /** 里程碑 flag（与结算页时间线一致） */
 const MILESTONE_FLAGS = ['went_to_college', 'grad_school', 'top_university', 'married', 'has_child', 'doctor', 'startup_success', 'civil_servant', 'world_traveler', 'athlete_pro', 'military_flag', 'skilled_worker', 'tech_career', 'retired'];
@@ -45,6 +46,18 @@ export function buildBiographyMarkdown(game: GameState, verdictTitle: string, sc
       }
       lines.push('');
     }
+  }
+
+  // 性格画像（推导自本局全部选择：概括句 + 命中的性格端与次数）
+  const persona = derivePersona(game.history);
+  lines.push('## 🧭 性格画像');
+  lines.push('');
+  lines.push(`> ${personaSummary(persona)}`);
+  lines.push('');
+  const activeTraits = (Object.keys(PERSONA_META) as PersonaTrait[]).filter(t => persona[t] > 0);
+  if (activeTraits.length > 0) {
+    lines.push(activeTraits.map(t => `${PERSONA_META[t].icon} ${PERSONA_META[t].name} ${persona[t]}`).join(' · '));
+    lines.push('');
   }
 
   // 最终属性表

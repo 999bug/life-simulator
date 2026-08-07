@@ -27,6 +27,7 @@ import {
 import { EVENTS, filterEvents, shuffleEvents, pickFateEvents } from '../engine/events.ts';
 import { derivePersona, meetsPersonality } from '../engine/personality.ts';
 import { buildCompanionEvent, COMPANION_DISABLED, COMPANION_END_AGE, COMPANION_INTERVAL, COMPANION_START_AGE, companionEnabled } from '../engine/companion.ts';
+import { ACTIVITIES, ACTIONS_PER_AGE, pickActivityResult, rollCrime } from '../engine/activities.ts';
 import { track } from '../utils/analytics.ts';
 
 /** 中途放弃埋点：结算后回标题（phase 已为 summary）不误记，其余情况记放弃 */
@@ -311,6 +312,7 @@ export type Action =
   | { type: 'REINCARNATE' }
   | { type: 'RESTART' }
   | { type: 'MAKE_CHOICE'; choice: Choice; eventId: string }
+  | { type: 'MAKE_ACTION'; activityId: string }
   | { type: 'UNDO' }
   | { type: 'UNDO_TO_AGE'; age: number }
   | { type: 'CONTINUE' }
@@ -988,6 +990,59 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
       };
     }
 
+    case 'MAKE_ACTION': {
+      // 主动行为（活动）：局内即时操作——不推年龄、不进 history、不进后悔栈（纯即时，不污染人物推导）
+      // 前置校验：任一不满足原样返回（返回原引用，UI 可判断无变化）
+      if (state.game.phase !== 'playing') {
+        return state;
+      }
+      if (state.feedback) {
+        // 反馈页不行动（纯点击继续）
+        return state;
+      }
+      if (state.autoPlay) {
+        // 快速模拟不行动
+        return state;
+      }
+      if ((state.game.actionsThisAge ?? 0) >= ACTIONS_PER_AGE) {
+        // 本岁配额已用完
+        return state;
+      }
+      const activity = ACTIVITIES.find(a => a.id === action.activityId);
+      if (!activity) {
+        return state;
+      }
+      if (state.game.age < activity.minAge) {
+        return state;
+      }
+      if (activity.requires && !activity.requires.some(f => state.game.flags.includes(f))) {
+        return state;
+      }
+      // 结果：犯罪走专用分支（成功率 + 被抓/逃跑，即时操作不需要确定性）；其余从结果池随机
+      const result = activity.id === 'crime'
+        ? rollCrime(state.game.attributes.luck, state.game.attributes.intelligence, Math.random)
+        : pickActivityResult(activity);
+      // 属性应用（年龄决定成长上限；活动收益不享受天赋/传承等额外加成）
+      const attrs = applyOutcomes(state.game.attributes, result, state.game.age);
+      // flags 追加（去重；犯罪被抓产出 jailed 接入铁窗路线）
+      const flags = [...state.game.flags];
+      if (result.flags) {
+        for (const f of result.flags) {
+          if (!flags.includes(f)) {
+            flags.push(f);
+          }
+        }
+      }
+      const game: GameState = {
+        ...state.game,
+        attributes: attrs,
+        flags,
+        actionsThisAge: (state.game.actionsThisAge ?? 0) + 1,
+      };
+      // 反馈复用现有机制（CONTINUE 清反馈）；活动不推进事件流
+      return { ...state, game, feedback: result.text };
+    }
+
     case 'UNDO': {
       // 后悔：回退上一步（栈空时原样返回）
       if (state.undoStack.length === 0) {
@@ -1375,6 +1430,11 @@ export function useGame() {
     dispatch({ type: 'MAKE_CHOICE', choice, eventId: rt.currentEvent.id });
   }, [rt.currentEvent]);
 
+  // 主动行为：局内发起活动（合法性由 reducer 校验，UI 置灰状态与之同源）
+  const makeAction = useCallback((activityId: string) => {
+    dispatch({ type: 'MAKE_ACTION', activityId });
+  }, []);
+
   // 后悔：回退上一步（栈空时 UI 不显示按钮，此处防御性兜底）
   const undo = useCallback(() => {
     dispatch({ type: 'UNDO' });
@@ -1431,6 +1491,7 @@ export function useGame() {
     restart,
     reincarnate,
     makeChoice,
+    makeAction,
     undo,
     undoToAge,
     undoStack: rt.undoStack,

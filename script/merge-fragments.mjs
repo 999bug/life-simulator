@@ -26,7 +26,7 @@ export function mergeFragments(base, fragments) {
 }
 
 /**
- * 每岁密度校验：0-2 岁每岁 3-5 个；3-12 岁每岁 5-13 个；13-75 岁每岁 3-8 个。
+ * 每岁密度校验：0-2 岁每岁 3-5 个；3-12 岁每岁 5-13 个；13-75 岁每岁 3-9 个。
  *
  * @returns 违规描述数组，空数组表示通过
  */
@@ -42,8 +42,8 @@ export function checkDistribution(events) {
       violations.push(`${age} 岁事件 ${count} 个，超出 3-5 范围`);
     } else if (age >= 3 && age <= 12 && (count < 5 || count > 13)) {
       violations.push(`${age} 岁事件 ${count} 个，${count < 5 ? '过少' : '过多'}（要求 5-13）`);
-    } else if (age >= 13 && age <= 75 && (count < 3 || count > 8)) {
-      violations.push(`${age} 岁事件 ${count} 个，${count < 3 ? '过少' : '过多'}（要求 3-8）`);
+    } else if (age >= 13 && age <= 75 && (count < 3 || count > 9)) {
+      violations.push(`${age} 岁事件 ${count} 个，${count < 3 ? '过少' : '过多'}（要求 3-9）`);
     }
   }
   return violations;

@@ -1,5 +1,5 @@
 /**
- * 结局 key 判定引擎测试（verdictKey：13 路线 flag 优先 + 5 档分数兜底）。
+ * 结局 key 判定引擎测试（verdictKey：14 路线 flag 优先 + 5 档分数兜底）。
  *
  * 运行：node --experimental-strip-types --test script/verdict.test.ts
  */
@@ -18,7 +18,7 @@ function game(flags: string[], attrsVal: number = 50): GameState {
   };
 }
 
-test('verdictKey：13 条路线 flag 命中（单 flag）', () => {
+test('verdictKey：14 条路线 flag 命中（单 flag）', () => {
   assert.strictEqual(verdictKey(game(['startup_success'])), 'startup_success');
   assert.strictEqual(verdictKey(game(['world_traveler'])), 'world_traveler');
   assert.strictEqual(verdictKey(game(['grad_school'])), 'grad_school');
@@ -28,9 +28,28 @@ test('verdictKey：13 条路线 flag 命中（单 flag）', () => {
   assert.strictEqual(verdictKey(game(['military_flag'])), 'military_flag');
   assert.strictEqual(verdictKey(game(['athlete_pro'])), 'athlete_pro');
   assert.strictEqual(verdictKey(game(['tech_career'])), 'tech_career');
+  assert.strictEqual(verdictKey(game(['jailed'])), 'jailed');
   assert.strictEqual(verdictKey(game(['went_to_college'])), 'went_to_college');
   assert.strictEqual(verdictKey(game(['skilled_worker'])), 'skilled_worker');
   assert.strictEqual(verdictKey(game(['civil_servant'])), 'civil_servant');
+});
+
+test('verdictKey：入过狱即铁窗人生（jailed 判定，与是否出狱无关）', () => {
+  // 狱中离世（无 released）仍算铁窗路线
+  assert.strictEqual(verdictKey(game(['jailed'])), 'jailed');
+  // 出狱重生（jailed + released）同样算铁窗路线
+  assert.strictEqual(verdictKey(game(['jailed', 'released'])), 'jailed');
+  // 仅出狱 flag 不构成路线（无 jailed 不会出现，防御性校验）
+  assert.strictEqual(verdictKey(game(['released'])), 'score:45+');
+});
+
+test('verdictKey：jailed 优先级高于普通学历路线、低于高成就路线', () => {
+  // 入狱 + 大学 → 铁窗（jailed 排在 went_to_college 之前）
+  assert.strictEqual(verdictKey(game(['jailed', 'went_to_college'])), 'jailed');
+  // 创业成功 + 入狱 → 创业者的传奇（startup_success 高优路线在前）
+  assert.strictEqual(verdictKey(game(['jailed', 'startup_success'])), 'startup_success');
+  // 技术精英 + 入狱 → 技术精英（tech_career 排在 jailed 之前）
+  assert.strictEqual(verdictKey(game(['jailed', 'tech_career'])), 'tech_career');
 });
 
 test('verdictKey：artist 路线双 flag 任一生效', () => {

@@ -112,7 +112,8 @@ export type AchievementId =
   | 'age_80' | 'wealthy_60' | 'bright_70' | 'score_60' | 'score_92' | 'three_endings' | 'ten_endings'
   | 'daily_streak_3' | 'daily_streak_7'
   | 'gaokao_top' | 'family_harmony' | 'job_elite' | 'asset_owner'
-  | 'vivid_persona' | 'hexagon_persona' | 'adventurous_persona' | 'altruistic_persona';
+  | 'vivid_persona' | 'hexagon_persona' | 'adventurous_persona' | 'altruistic_persona'
+  | 'redeemed_life';
 
 /** 游戏状态 */
 export interface GameState {

@@ -18,7 +18,7 @@ export interface AchievementDef {
   hidden?: boolean;
 }
 
-/** 38 个跨周目成就（按铜→银→金排序，同档内按系列排列） */
+/** 39 个跨周目成就（按铜→银→金排序，同档内按系列排列） */
 export const ACHIEVEMENTS: AchievementDef[] = [
   // 铜档：入门与轻度目标
   { id: 'first_life', icon: '👶', name: '第一次人生', desc: '完整走完第一局人生', tier: 1 },
@@ -32,6 +32,7 @@ export const ACHIEVEMENTS: AchievementDef[] = [
   { id: 'auto_clear', icon: '🤖', name: '命运旁观者', desc: '完成一局快速模拟', tier: 1 },
   { id: 'vivid_persona', icon: '🎭', name: '性格鲜明', desc: '任一性格端达到 15 次', tier: 1 },
   { id: 'adventurous_persona', icon: '🏃', name: '冒险家的一生', desc: '冒险性格达到 12 次', tier: 1 },
+  { id: 'redeemed_life', icon: '🌱', name: '改过自新', desc: '入狱后洗心革面，重新开始人生', tier: 1 },
   // 银档：需要经营的中度目标
   { id: 'longevity', icon: '🎂', name: '长寿', desc: '享年达到 90 岁', tier: 2 },
   { id: 'rich', icon: '💎', name: '财富自由', desc: '财富达到 90', tier: 2 },
@@ -131,6 +132,8 @@ export function checkAchievements(input: AchievementCheckInput): AchievementId[]
   if (personaValues.every(v => v >= 5)) { ids.add('hexagon_persona'); }
   if (persona.adventurous >= 12) { ids.add('adventurous_persona'); }
   if (persona.altruistic >= 12) { ids.add('altruistic_persona'); }
+  // 铁窗人生路线（2026-08 新增）：入狱后出狱且改过自新（终局道德与幸福达标）
+  if (flags.includes('jailed') && flags.includes('released') && attributes.morality >= 60 && attributes.happiness >= 50) { ids.add('redeemed_life'); }
   return [...ids];
 }
 

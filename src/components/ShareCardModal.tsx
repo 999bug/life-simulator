@@ -3,7 +3,7 @@ import type { GameState } from '../types';
 import { ATTR_META, calcScore } from '../engine/state';
 import { checkGoal } from '../engine/goals';
 import { GOALS } from '../engine/goals';
-import { VERDICT_META } from '../engine/verdict';
+import { VERDICT_META, VERDICT_ROUTES } from '../engine/verdict';
 import { derivePersona, personaSummary } from '../engine/personality';
 import { drawGrowthChart } from './GrowthChart';
 
@@ -13,7 +13,7 @@ interface Props {
   verdictTitle: string;
   /** 本局结局 key（verdictKey；路线结局查图鉴表展示 icon，分数档无 icon） */
   endingKey: string;
-  /** 图鉴收集进度（X/13，卡片展示收集状态驱动分享欲） */
+  /** 图鉴收集进度（X/路线总数，卡片展示收集状态驱动分享欲） */
   collectionDone: number;
   /** 每日挑战局：CTA 改为「今日挑战」战绩比较文案 */
   isDaily?: boolean;
@@ -87,7 +87,7 @@ export default function ShareCardModal({ game, verdictTitle, endingKey, collecti
     }
     ctx.textAlign = 'right';
     ctx.fillStyle = 'rgba(201,169,110,0.8)';
-    ctx.fillText(collectionDone >= 13 ? `🏆 图鉴 13/13 全收集` : `📖 图鉴 ${collectionDone}/13`, 560, 322);
+    ctx.fillText(collectionDone >= VERDICT_ROUTES.length ? `🏆 图鉴 ${VERDICT_ROUTES.length}/${VERDICT_ROUTES.length} 全收集` : `📖 图鉴 ${collectionDone}/${VERDICT_ROUTES.length}`, 560, 322);
 
     // 目标
     if (goalDef) {

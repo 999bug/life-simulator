@@ -129,6 +129,20 @@ test('checkAchievements：温暖的人（利他端 ≥ 12，隐藏）', () => {
   assert.ok(!check(game({ history: personaHistory('altruistic', 11) })).includes('altruistic_persona'));
 });
 
+test('checkAchievements：改过自新（入狱出狱 + 道德幸福达标）', () => {
+  // 入狱 + 出狱 + 道德 60 + 幸福 50 → 解锁
+  const ok = check(game({ flags: ['jailed', 'released'], attributes: attrs({ morality: 60, happiness: 50 }) }));
+  assert.ok(ok.includes('redeemed_life'));
+  // 仅入狱未出狱 → 不解锁
+  assert.ok(!check(game({ flags: ['jailed'], attributes: attrs({ morality: 70, happiness: 60 }) })).includes('redeemed_life'));
+  // 出狱但道德不达标 → 不解锁
+  assert.ok(!check(game({ flags: ['jailed', 'released'], attributes: attrs({ morality: 59, happiness: 60 }) })).includes('redeemed_life'));
+  // 出狱但幸福不达标 → 不解锁
+  assert.ok(!check(game({ flags: ['jailed', 'released'], attributes: attrs({ morality: 70, happiness: 49 }) })).includes('redeemed_life'));
+  // 未入狱（防御性：仅 released）→ 不解锁
+  assert.ok(!check(game({ flags: ['released'], attributes: attrs({ morality: 80, happiness: 80 }) })).includes('redeemed_life'));
+});
+
 test('achievementBonusSteps：每 10 个 +1 步，封顶 3 步', () => {
   assert.strictEqual(achievementBonusSteps(0), 0);
   assert.strictEqual(achievementBonusSteps(9), 0);

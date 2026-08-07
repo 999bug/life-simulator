@@ -470,7 +470,7 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
           🏆 成就
         </button>
 
-        {/* 图鉴入口：13 条结局路线收集 */}
+        {/* 图鉴入口：结局路线收集 */}
         <button
           onClick={() => {
             sfx.select();
@@ -481,7 +481,7 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
           className="text-[12px] text-white/30 tracking-[3px] hover:text-[#c9a96e] transition-colors duration-200 font-sans"
         >
           📖 图鉴
-          <span className="ml-1 text-[10px] text-[#c9a96e]/70">{collectionDone}/13</span>
+          <span className="ml-1 text-[10px] text-[#c9a96e]/70">{collectionDone}/{VERDICT_ROUTES.length}</span>
         </button>
 
         {/* 家族入口：族谱跨世代收藏 */}

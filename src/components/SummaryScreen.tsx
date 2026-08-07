@@ -172,6 +172,12 @@ function getVerdict(game: GameState): Verdict {
       desc: `从刷题到写代码，你用技术改变了生活的轨迹。一个个深夜的项目、一次次的攻坚，最终都成了你简历上的注脚。${score >= 75 ? '技术改变命运，你做到了。' : '纵然疲惫，你依然站在浪潮之上。'}`,
     };
   }
+  if (has('jailed')) {
+    return {
+      title: VERDICT_META.jailed.title,
+      desc: `铁窗内的岁月，成了你人生的一道分水岭。高墙、放风场、探视日的玻璃——你在那里看清了很多事。${score >= 75 ? '走出来之后，你把日子重新过成了干净的样子。' : '有些债，你用余生慢慢偿还。'}`,
+    };
+  }
   if (has('went_to_college')) {
     return {
       title: VERDICT_META.went_to_college.title,
@@ -215,6 +221,7 @@ export function verdictBasis(game: GameState, score: number): string {
     ['athlete_pro', ['athlete_pro']],
     ['artist', ['artist_pro', 'artist_life']],
     ['tech_career', ['tech_career']],
+    ['jailed', ['jailed']],
     ['went_to_college', ['went_to_college']],
     ['skilled_worker', ['skilled_worker']],
     ['civil_servant', ['civil_servant']],
@@ -424,7 +431,7 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
           <span className="text-lg leading-none mt-0.5">🏆</span>
           <div>
             <div className="text-[11px] text-white/40 tracking-[2px]">人生图鉴 · 全收集</div>
-            <div className="text-[13px] text-[#c9a96e] mt-1">13 条人生路线已全部走过</div>
+            <div className="text-[13px] text-[#c9a96e] mt-1">14 条人生路线已全部走过</div>
           </div>
         </div>
       )}

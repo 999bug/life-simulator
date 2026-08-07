@@ -1,0 +1,132 @@
+[
+  {
+    "id": "prison_0034",
+    "age_range": [34, 34],
+    "category": "career",
+    "title": "东窗事发",
+    "text": "那个凌晨的敲门声终究还是来了。审讯室的白炽灯晃得人睁不开眼，你这些年经手的每一笔账、每一个接头的人，都被摊在桌面上。检察官念出一长串罪名，你坐在被告席上，听见旁听席有人在哭。",
+    "choices": [
+      { "text": "认罪伏法，交代清楚，争取从轻", "effects": { "responsibility": 8, "money": -16 }, "flags_add": ["jailed"], "personality": ["rational"] },
+      { "text": "咬死不认，把锅甩给「只是打工的」", "effects": { "strategy": 6, "empathy": -8 }, "flags_add": ["jailed"], "personality": ["selfish"] },
+      { "text": "花重金请律师周旋，能拖则拖", "effects": { "money": -14, "thinking": 4 }, "flags_add": ["jailed"], "personality": ["cautious"] }
+    ],
+    "conditions": { "has_flags": ["gray_deep"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "prison_0035",
+    "age_range": [35, 35],
+    "category": "career",
+    "title": "入狱第一天",
+    "text": "看守所的铁门在身后合拢，发出一声闷响。领囚服、拍照、按手印，一串编号从此代替了你的名字。晚饭是白菜炖粉条，犯人们排着队打饭，谁也不敢多说话。你端着搪瓷碗坐在长条凳上，第一次尝到铁窗的味道。",
+    "choices": [
+      { "text": "低头吃饭，先活下来再说", "effects": { "discipline": 6, "happiness": -5 }, "flags_add": [], "personality": ["cautious"] },
+      { "text": "心里堵得慌，一口都咽不下去", "effects": { "happiness": -8, "emotion": 3 }, "flags_add": [], "personality": ["emotional"] },
+      { "text": "跟邻铺的狱友搭话，摸清这里的水深", "effects": { "social": 6, "observation": 4 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["jailed"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "prison_0036",
+    "age_range": [36, 36],
+    "category": "friend",
+    "title": "狱中百态",
+    "text": "放风的时候，院子里蹲着几拨人。靠墙那位是个老江湖，说话带江湖气，指给你听「这里谁说了算」；角落里那个文弱书生判了六年，天天捧着一本书；还有位老实巴交的大哥，每个探视日都有人来看他。你站在场中央，不知道该往哪边走。",
+    "choices": [
+      { "text": "跟老江湖称兄道弟，学点门道", "effects": { "social": 7, "risk": 5, "empathy": -4 }, "flags_add": [], "personality": ["selfish"] },
+      { "text": "独来独往，不站队也不得罪人", "effects": { "independence": 6, "social": -5 }, "flags_add": [], "personality": ["cautious"] },
+      { "text": "跟那位读书人借书，把日子过起来", "effects": { "learning": 7, "friendship": 4 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["jailed"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "prison_0037",
+    "age_range": [37, 37],
+    "category": "career",
+    "title": "狱中考验",
+    "text": "劳动改造的车间里，你分到了一条流水线。车间主任说，干得好能评先进，减刑材料上就多一行字。休息时，管教把一摞旧书放在窗台上——有人要了教材，有人要了武侠小说，也有人什么都不看，盯着天花板数时间。",
+    "choices": [
+      { "text": "埋头干活，攒减刑表现", "effects": { "discipline": 6, "health": 4, "happiness": -3 }, "flags_add": [] },
+      { "text": "向管教借教材，狱中自考", "effects": { "learning": 9, "ambition": 5 }, "flags_add": [] },
+      { "text": "出工不出力，混一天是一天", "effects": { "freedom": 5, "discipline": -6 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["jailed"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "prison_0038",
+    "age_range": [38, 38],
+    "category": "family",
+    "title": "探视日",
+    "text": "探视日，家属区排起了长队。轮到你的名字时，你看见玻璃那边坐着母亲——她头发白了许多，隔着话筒直问你吃得饱不饱。旁边还坐着那个人，低着头不看你。规定时间只有二十分钟，话筒很重，你有点握不住。",
+    "choices": [
+      { "text": "眼泪没忍住，跟家人保证好好改造", "effects": { "empathy": 8, "happiness": 5 }, "flags_add": [], "personality": ["emotional"] },
+      { "text": "笑着报平安，让他们别担心", "effects": { "emotion_control": 7, "family_relation": 4 }, "flags_add": [], "personality": ["rational"] },
+      { "text": "觉得自己没脸见人，说「下次别来了」", "effects": { "happiness": -8, "introversion": 5 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["jailed"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "prison_0039",
+    "age_range": [39, 39],
+    "category": "personality",
+    "title": "改造抉择",
+    "text": "深夜，熄灯号响过之后，你躺在铁架床上盯着天花板。同铺的老江湖白天又凑过来，说出去之后「带你发财」；白天管教讲的那堂法制课，却一直在你脑子里转。还有两年刑期，出去以后，是重新做人，还是重操旧业？窗外只有放风场那盏孤零零的路灯。",
+    "choices": [
+      { "text": "写下检讨书，真心悔过", "effects": { "responsibility": 8, "self_control": 5 }, "flags_add": [], "personality": ["altruistic"] },
+      { "text": "数着刑期熬日子，不动任何念头", "effects": { "patience": 5, "happiness": -3 }, "flags_add": [], "personality": ["cautious"] },
+      { "text": "盘算出去后的「生意」，跟老江湖越走越近", "effects": { "strategy": 6, "risk": 6, "empathy": -6 }, "flags_add": [], "personality": ["selfish"] }
+    ],
+    "conditions": { "has_flags": ["jailed"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "prison_0040",
+    "age_range": [40, 40],
+    "category": "career",
+    "title": "减刑通知",
+    "text": "早上点名的时候，管教念到你的名字：劳动表现好、认罪态度端正，减刑六个月，下个月办理出狱手续。队列里有人投来羡慕的目光，你盯着地上那块被太阳晒白的操场，有点恍惚——那道高墙，你真的要走出去了。",
+    "choices": [
+      { "text": "认认真真站好这最后一班岗", "effects": { "discipline": 5, "happiness": 6 }, "flags_add": [], "personality": ["rational"] },
+      { "text": "又怕又喜，一宿没睡踏实", "effects": { "emotion": 6, "anxiety": 3 }, "flags_add": [], "personality": ["emotional"] },
+      { "text": "心已经飞出高墙，盘算着出去后的安排", "effects": { "ambition": 5, "risk": 4 }, "flags_add": [], "personality": ["adventurous"] }
+    ],
+    "conditions": { "has_flags": ["jailed"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "prison_0041",
+    "age_range": [41, 41],
+    "category": "personality",
+    "title": "刑满释放",
+    "text": "铁门在身后缓缓合拢，阳光刺得你睁不开眼。背包里是狱里发的两身换洗衣服和一张车票钱。手机早就停机了，通讯录里的名字，有的进去了，有的换了号，有的大概把你忘了。马路对面停着一辆面包车，车窗摇下来，是你熟悉的那张脸。",
+    "choices": [
+      { "text": "回老家，先安顿下来", "effects": { "family_relation": 7, "stability": 6 }, "flags_add": ["released"], "personality": ["cautious"] },
+      { "text": "上了那辆面包车，先看看行情", "effects": { "money": 6, "risk": 6, "empathy": -6 }, "flags_add": ["released"], "personality": ["selfish"] },
+      { "text": "在城里从头开始，不回老家也不沾旧人", "effects": { "freedom": 8, "independence": 6, "happiness": 4 }, "flags_add": ["released"], "personality": ["adventurous"] }
+    ],
+    "conditions": { "has_flags": ["jailed"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "prison_0043",
+    "age_range": [43, 43],
+    "category": "career",
+    "title": "重新做人",
+    "text": "出狱两年，你投了上百份简历，面试官一看到档案里那行字，眼神就变了。有个老板问得直白：「坐过牢的，我凭什么用你？」那天晚上，手机里老哥的短信又亮了：「哥们儿，手头有个活，钱好赚，就一趟。」屏幕的光，映着你皱紧的眉头。",
+    "choices": [
+      { "text": "删了短信，明天再去人力市场站一天", "effects": { "persistence": 7, "discipline": 5 }, "flags_add": [] },
+      { "text": "托亲戚找了个熟人厂子，从学徒干起", "effects": { "family_relation": 6, "skill": 6 }, "flags_add": [], "personality": ["cautious"] },
+      { "text": "回了那条短信", "effects": { "money": 12, "risk": 8, "empathy": -8 }, "flags_add": [], "personality": ["selfish"] }
+    ],
+    "conditions": { "has_flags": ["released"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "prison_0045",
+    "age_range": [45, 45],
+    "category": "personality",
+    "title": "洗白人生",
+    "text": "四十五岁这年，你站在十字路口。这几年你打过零工、摆过地摊，也差点又走回那条老路。朋友说可以帮你盘下一家小面馆，本钱不多，胜在干净。夜里你翻出旧照片：铁窗、放风场、母亲的白发——这条路，你不想再走第二次了。",
+    "choices": [
+      { "text": "把旧手机卡扔进河里，从明天起只过干净日子", "effects": { "empathy": 9, "happiness": 8, "self_control": 6 }, "flags_add": [], "personality": ["altruistic"] },
+      { "text": "盘下面馆，起早贪黑地做生意", "effects": { "business": 8, "money": 9, "happiness": 4 }, "flags_add": [], "personality": ["rational"] },
+      { "text": "老哥的「大生意」就在眼前，再干一票就收手", "effects": { "money": 15, "risk": 8, "empathy": -8 }, "flags_add": [], "personality": ["selfish"] }
+    ],
+    "conditions": { "has_flags": ["released"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  }
+]

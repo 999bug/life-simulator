@@ -89,12 +89,12 @@ test('checkGoal：自定义目标不干扰预设分支（旧字符串 goal 兼�
   assert.strictEqual(checkGoal('family', game({ flags: ['married', 'has_child'] }, { happiness: 75 }))!.achieved, true);
 });
 
-test('ACHIEVEMENTS：34 个定义齐全（含 4 个隐藏成就）', () => {
-  assert.strictEqual(ACHIEVEMENTS.length, 34);
-  assert.strictEqual(new Set(ACHIEVEMENTS.map(a => a.id)).size, 34);
-  // 隐藏成就：4 个，名称/描述不应泄漏条件
+test('ACHIEVEMENTS：38 个定义齐全（含 6 个隐藏成就）', () => {
+  assert.strictEqual(ACHIEVEMENTS.length, 38);
+  assert.strictEqual(new Set(ACHIEVEMENTS.map(a => a.id)).size, 38);
+  // 隐藏成就：6 个，名称/描述不应泄漏条件
   const hidden = ACHIEVEMENTS.filter(a => a.hidden);
-  assert.strictEqual(hidden.length, 4);
+  assert.strictEqual(hidden.length, 6);
 });
 
 test('checkAchievements：新增 8 个成就判定', () => {

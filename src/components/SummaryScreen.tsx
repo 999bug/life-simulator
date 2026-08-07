@@ -1,11 +1,13 @@
 import { useState, useMemo } from 'react';
-import type { AchievementId, GameState } from '../types';
+import type { AchievementId, ChoiceRecord, GameState } from '../types';
 import { ATTR_META, calcScore } from '../engine/state';
 import { GOALS, checkGoal } from '../engine/goals';
 import { ACHIEVEMENTS } from '../engine/achievements';
+import { EVENTS } from '../engine/events';
 import ShareCardModal from './ShareCardModal';
 import GrowthChart from './GrowthChart';
 import AlmanacModal from './AlmanacModal';
+import LifeCardModal from './LifeCardModal';
 import { buildBiographyMarkdown, downloadText } from '../utils/biography';
 import { track } from '../utils/analytics';
 import { VERDICT_META, nextRouteToExplore, verdictKey } from '../engine/verdict';
@@ -16,7 +18,7 @@ import { assetStatus } from '../engine/assets';
 import { getTalent, saveInheritTalent, type TalentInherit } from '../engine/talents';
 import { formatDate } from '../hooks/useGame';
 import { checkWeeklyGoal, type WeeklyGoal } from '../engine/weekly';
-import { derivePersona, personaSummary, PERSONA_META, type PersonaTrait } from '../engine/personality';
+import { derivePersona, personaSummary, PERSONA_META, type PersonaState, type PersonaTrait } from '../engine/personality';
 
 interface Props {
   game: GameState;
@@ -48,6 +50,14 @@ interface Props {
 interface Verdict {
   title: string;
   desc: string;
+}
+
+/** 人生际遇数据：性格专属事件的触发情况（「🎭 人生际遇」小节数据源） */
+export interface EncounterData {
+  /** 已触发的性格事件标题（按触发先后顺序） */
+  triggered: string[];
+  /** 差一点触发：该端性格已达专属事件阈值但事件未发生 */
+  missed: Array<{ trait: PersonaTrait; count: number; threshold: number }>;
 }
 
 /** 死因文案：说明此生如何落幕 */
@@ -182,6 +192,96 @@ function getVerdict(game: GameState): Verdict {
   return scoreVerdict(score);
 }
 
+/**
+ * 结局判定依据（与 getVerdict 判定顺序一致，纯展示透明化）。
+ * 路线 flag 优先（tech_career 需智力 ≥ 60 才构成路线结局，不足走分数档），
+ * 无路线命中时按分数档输出。
+ *
+ * @param game 终局状态
+ * @param score 综合评分（calcScore 输出）
+ * @returns 判定依据文案（如「命中「医者仁心的一生」路线」/「综合评分 66 分 · 充实的一生」）
+ */
+export function verdictBasis(game: GameState, score: number): string {
+  const has = (...flags: string[]) => flags.some(f => game.flags.includes(f));
+  const order: Array<[string, string[]]> = [
+    ['startup_success', ['startup_success']],
+    ['world_traveler', ['world_traveler']],
+    ['grad_school', ['grad_school']],
+    ['top_university', ['top_university']],
+    ['retake', ['retake']],
+    ['doctor', ['doctor']],
+    ['military_flag', ['military_flag']],
+    ['athlete_pro', ['athlete_pro']],
+    ['artist', ['artist_pro', 'artist_life']],
+    ['tech_career', ['tech_career']],
+    ['went_to_college', ['went_to_college']],
+    ['skilled_worker', ['skilled_worker']],
+    ['civil_servant', ['civil_servant']],
+  ];
+  for (const [key, flags] of order) {
+    if (!has(...flags)) {
+      continue;
+    }
+    // tech_career 需智力 ≥ 60 才构成路线结局（与 getVerdict 一致；不足走分数档）
+    if (key === 'tech_career' && game.attributes.intelligence < 60) {
+      continue;
+    }
+    return `命中「${VERDICT_META[key].title}」路线`;
+  }
+  return `综合评分 ${score} 分 · ${scoreVerdict(score).title}`;
+}
+
+/**
+ * 人生际遇数据：性格专属事件（pers_ 前缀，条件为 minPersonality）的触发与错失。
+ * 已触发：history 中 pers_ 开头的事件，逐条输出标题；
+ * 未触发但该端次数 ≥ 专属事件阈值（同端多事件取最低值）且事件从未发生 → 提示差一点。
+ * 弱画像（无触发且无达标端）返回空数据，展示层不渲染整节。
+ *
+ * @param persona 性格画像（derivePersona 输出）
+ * @param history 选择记录
+ * @returns 际遇数据（triggered 事件标题 + missed 差一点触发的端）
+ */
+export function personalityEncounters(persona: PersonaState, history: ChoiceRecord[]): EncounterData {
+  const triggered: string[] = [];
+  const triggeredIds = new Set<string>();
+  for (const h of history) {
+    if (!h.eventId.startsWith('pers_') || triggeredIds.has(h.eventId)) {
+      continue;
+    }
+    triggeredIds.add(h.eventId);
+    const ev = EVENTS.find(e => e.id === h.eventId);
+    if (ev?.title) {
+      triggered.push(ev.title);
+    }
+  }
+  // 性格专属事件：按端取 minPersonality 最低值作为该端触发阈值
+  const thresholds = new Map<PersonaTrait, number>();
+  for (const e of EVENTS) {
+    if (!e.id.startsWith('pers_') || !e.conditions?.minPersonality) {
+      continue;
+    }
+    for (const [t, v] of Object.entries(e.conditions.minPersonality) as [PersonaTrait, number][]) {
+      thresholds.set(t, Math.min(thresholds.get(t) ?? Infinity, v));
+    }
+  }
+  const missed: EncounterData['missed'] = [];
+  for (const [t, threshold] of thresholds) {
+    if (persona[t] < threshold) {
+      continue;
+    }
+    // 该端专属事件已触发过则不再提示（错过感只留给真正没发生的那一端）
+    const eventTriggered = EVENTS.some(e =>
+      e.id.startsWith('pers_')
+      && e.conditions?.minPersonality
+      && t in e.conditions.minPersonality
+      && triggeredIds.has(e.id));
+    if (!eventTriggered) {
+      missed.push({ trait: t, count: persona[t], threshold });
+    }
+  }
+  return { triggered, missed };
+}
+
 /** 里程碑 flag：命中则时间线高亮（含职业 flag——职业入行即里程碑）；关键抉择回顾共用 */
 export const MILESTONE_FLAGS = ['went_to_college', 'grad_school', 'top_university', 'married', 'has_child', 'doctor', 'startup_success', 'civil_servant', 'world_traveler', 'athlete_pro', 'military_flag', 'skilled_worker', 'tech_career', 'retired', ...JOB_MILESTONE_FLAGS];
 
@@ -217,6 +317,10 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
   const personaTop = (Object.keys(PERSONA_META) as PersonaTrait[])
     .filter(t => persona[t] > 0)
     .sort((a, b) => persona[b] - persona[a])[0];
+  // 人生际遇：性格专属事件的触发与错失（纯推导，弱画像返回空数据）
+  const encounters = personalityEncounters(persona, game.history);
+  // 判定依据：结局判定透明化（路线 flag 或分数档，与 getVerdict 顺序一致）
+  const basisText = verdictBasis(game, score);
   // 「下一站」：本局结算后（当前结局已计入收集）提示下一条未走过的路线；全收集显示通关文案
   const nextRoute = useMemo(
     () => nextRouteToExplore(verdictKey(game), new Set(collectedEndings)),
@@ -232,6 +336,8 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
   const [showShare, setShowShare] = useState(false);
   // 人生年鉴模态开关
   const [showAlmanac, setShowAlmanac] = useState(false);
+  // 人生名片模态开关
+  const [showLifeCard, setShowLifeCard] = useState(false);
   // 天赋继承：当前继承（App 传入）+ 本局选择（直接写 localStorage）
   const [inherit, setInherit] = useState<TalentInherit | null>(inheritTalent);
   const setInheritTalent = (talentId: string) => {
@@ -279,6 +385,10 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       </h2>
       <p className="text-sm text-white/40 text-center max-w-[400px] leading-relaxed animate-[fadeIn_1.2s_ease]">
         {desc}
+      </p>
+      {/* 判定依据：结局判定透明化（路线 flag 命中或分数档，低调不抢戏） */}
+      <p className="text-[10px] text-white/35 tracking-wide text-center animate-[fadeIn_1.3s_ease]">
+        判定依据：{basisText}
       </p>
       {/* 性格注脚：Top1 端的一句话（弱画像不显示，低调不抢戏） */}
       {personaTotal >= 2 && personaTop && (
@@ -440,6 +550,25 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
         </div>
       </div>
 
+      {/* 人生际遇：性格专属事件的触发与错失（弱画像无内容不显示整节） */}
+      {(encounters.triggered.length > 0 || encounters.missed.length > 0) && (
+        <div className="w-full max-w-[720px] animate-[fadeInUp_1.25s_ease]">
+          <h3 className="text-[13px] tracking-[4px] text-[#c9a96e] mb-2.5 font-normal">🎭 人生际遇</h3>
+          <div className="flex flex-col gap-1.5">
+            {encounters.triggered.map(title => (
+              <p key={title} className="text-[11px] text-white/50 leading-relaxed">
+                ⚡ 你遇到了「{title}」——你的性格，让这次际遇成真
+              </p>
+            ))}
+            {encounters.missed.map(({ trait, count, threshold }) => (
+              <p key={trait} className="text-[11px] text-white/35 leading-relaxed">
+                ✨ 若{PERSONA_META[trait].name}再鲜明一些（当前 {count}/{threshold}），人生或许会有不同的际遇
+              </p>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* 天赋继承（本局选了天赋才出现；设定后下一世抽卡该天赋置顶） */}
       {inheritTalent !== null && (game.talents ?? []).length > 0 && (
         <div className="w-full max-w-[720px] animate-[fadeIn_1.5s_ease]">
@@ -576,6 +705,21 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
         📜 导出人生传记
       </button>
 
+      {/* 人生名片：一张可下载的视觉简历卡（收藏/简历向，与传播向分享卡差异化） */}
+      <button
+        onClick={() => {
+          // 埋点：人生名片打开
+          track({ type: 'feature_use', ts: Date.now(), feature: 'life_card' });
+          setShowLifeCard(true);
+        }}
+        className="px-9 py-3 border border-white/20 rounded-2xl bg-transparent
+          text-sm text-white/50 tracking-[4px] font-sans
+          hover:border-[#c9a96e] hover:text-[#c9a96e] hover:shadow-[0_4px_20px_rgba(201,169,110,0.3)]
+          transition-all duration-300 mt-2"
+      >
+        🎫 人生名片
+      </button>
+
       {/* 人生年鉴：一页纸的终局报告（成长曲线 + 职业资产 + 家人 + 大事记），可导出 markdown */}
       <button
         onClick={() => {
@@ -638,6 +782,17 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
           gaokao={gaokao}
           assets={assets}
           onClose={() => setShowAlmanac(false)}
+        />
+      )}
+
+      {showLifeCard && (
+        <LifeCardModal
+          game={game}
+          score={score}
+          verdictTitle={title}
+          seed={seed}
+          generation={generation}
+          onClose={() => setShowLifeCard(false)}
         />
       )}
     </div>

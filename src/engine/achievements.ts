@@ -2,6 +2,7 @@ import type { AchievementId, AttributeKey, Attributes, GameState } from '../type
 import { calcScore } from './state.ts';
 import { npcBonds } from './npcs.ts';
 import { jobStatus, jobLevel } from './jobs.ts';
+import { derivePersona } from './personality.ts';
 
 /** 成就分层：1 铜 / 2 银 / 3 金（仅展示分组与徽章，不影响判定） */
 export type AchievementTier = 1 | 2 | 3;
@@ -17,7 +18,7 @@ export interface AchievementDef {
   hidden?: boolean;
 }
 
-/** 27 个跨周目成就（按铜→银→金排序，同档内按系列排列） */
+/** 38 个跨周目成就（按铜→银→金排序，同档内按系列排列） */
 export const ACHIEVEMENTS: AchievementDef[] = [
   // 铜档：入门与轻度目标
   { id: 'first_life', icon: '👶', name: '第一次人生', desc: '完整走完第一局人生', tier: 1 },
@@ -29,6 +30,8 @@ export const ACHIEVEMENTS: AchievementDef[] = [
   { id: 'early_death', icon: '⏳', name: '英年早逝', desc: '40 岁前走完一生', tier: 1 },
   { id: 'lite_clear', icon: '⚡', name: '精简通关', desc: '以精简模式走完一生', tier: 1 },
   { id: 'auto_clear', icon: '🤖', name: '命运旁观者', desc: '完成一局快速模拟', tier: 1 },
+  { id: 'vivid_persona', icon: '🎭', name: '性格鲜明', desc: '任一性格端达到 15 次', tier: 1 },
+  { id: 'adventurous_persona', icon: '🏃', name: '冒险家的一生', desc: '冒险性格达到 12 次', tier: 1 },
   // 银档：需要经营的中度目标
   { id: 'longevity', icon: '🎂', name: '长寿', desc: '享年达到 90 岁', tier: 2 },
   { id: 'rich', icon: '💎', name: '财富自由', desc: '财富达到 90', tier: 2 },
@@ -58,6 +61,8 @@ export const ACHIEVEMENTS: AchievementDef[] = [
   { id: 'family_harmony', icon: '🏡', name: '家和万事兴', desc: '与家人关系融洽（家人关系值 80 以上）', tier: 2, hidden: true },
   { id: 'job_elite', icon: '💼', name: '职场精英', desc: '深耕一个行业十年（职业等级 5 级）', tier: 3, hidden: true },
   { id: 'asset_owner', icon: '🏦', name: '有产者', desc: '拥有投资或实业资产', tier: 1, hidden: true },
+  { id: 'hexagon_persona', icon: '🧬', name: '六边形战士', desc: '六种性格端全部达到 5 次', tier: 2, hidden: true },
+  { id: 'altruistic_persona', icon: '🕊️', name: '温暖的人', desc: '利他性格达到 12 次', tier: 1, hidden: true },
 ];
 
 /** 成就判定输入 */
@@ -119,6 +124,13 @@ export function checkAchievements(input: AchievementCheckInput): AchievementId[]
   const job = jobStatus(game);
   if (job && job.since !== null && jobLevel(job.years) >= 5) { ids.add('job_elite'); }
   if (has('investor', 'investor_sharp', 'invest_legend', 'startup_success')) { ids.add('asset_owner'); }
+  // 性格成就（2026-08 新增）：从选择历史推导性格画像判定
+  const persona = derivePersona(game.history);
+  const personaValues = Object.values(persona);
+  if (personaValues.some(v => v >= 15)) { ids.add('vivid_persona'); }
+  if (personaValues.every(v => v >= 5)) { ids.add('hexagon_persona'); }
+  if (persona.adventurous >= 12) { ids.add('adventurous_persona'); }
+  if (persona.altruistic >= 12) { ids.add('altruistic_persona'); }
   return [...ids];
 }
 

@@ -88,6 +88,47 @@ test('checkAchievements：有产者（投资或实业资产）', () => {
   assert.ok(ids2.includes('asset_owner'));
 });
 
+/** 构造指定性格端命中的选择历史（真实事件数据：取含该端手工标注的事件选项） */
+function personaHistory(trait: string, count: number): Array<{ age: number; stage: 'adult'; eventId: string; choiceIndex: number; text: string }> {
+  const real = JSON.parse(readFileSync(new URL('../public/events.json', import.meta.url), 'utf8')) as Array<{ id: string; choices: Array<{ outcomes: { personality?: string[] } }> }>;
+  const events = real.filter(e => e.choices.some(c => (c.outcomes.personality ?? []).includes(trait)));
+  assert.ok(events.length >= count, `事件库 ${trait} 标注事件应足够（${events.length} ≥ ${count}）`);
+  return events.slice(0, count).map((e, i) => ({
+    age: 30 + i,
+    stage: 'adult' as const,
+    eventId: e.id,
+    choiceIndex: e.choices.findIndex(c => (c.outcomes.personality ?? []).includes(trait)),
+    text: '性格选择',
+  }));
+}
+
+/** 通用判定辅助（固定非本局相关输入） */
+function check(game: GameState) {
+  return checkAchievements({ game, completedLives: 1, wasLite: false, wasAuto: false, endingsCount: 1, dailyStreak: 0 });
+}
+
+test('checkAchievements：性格鲜明（任一性格端 ≥ 15）', () => {
+  assert.ok(check(game({ history: personaHistory('adventurous', 15) })).includes('vivid_persona'));
+  assert.ok(!check(game({ history: personaHistory('adventurous', 14) })).includes('vivid_persona'));
+});
+
+test('checkAchievements：六边形战士（六端全部 ≥ 5，隐藏）', () => {
+  const all = (n: number) => (['adventurous', 'altruistic', 'cautious', 'emotional', 'rational', 'selfish'] as const)
+    .flatMap(t => personaHistory(t, n));
+  assert.ok(check(game({ history: all(5) })).includes('hexagon_persona'));
+  assert.ok(!check(game({ history: all(4) })).includes('hexagon_persona'));
+});
+
+test('checkAchievements：冒险家的一生（冒险端 ≥ 12）', () => {
+  assert.ok(check(game({ history: personaHistory('adventurous', 12) })).includes('adventurous_persona'));
+  assert.ok(!check(game({ history: personaHistory('adventurous', 11) })).includes('adventurous_persona'));
+});
+
+test('checkAchievements：温暖的人（利他端 ≥ 12，隐藏）', () => {
+  assert.ok(check(game({ history: personaHistory('altruistic', 12) })).includes('altruistic_persona'));
+  assert.ok(!check(game({ history: personaHistory('altruistic', 11) })).includes('altruistic_persona'));
+});
+
 test('achievementBonusSteps：每 10 个 +1 步，封顶 3 步', () => {
   assert.strictEqual(achievementBonusSteps(0), 0);
   assert.strictEqual(achievementBonusSteps(9), 0);

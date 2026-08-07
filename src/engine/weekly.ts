@@ -1,4 +1,5 @@
 import type { GameState } from '../types';
+import { derivePersona } from './personality.ts';
 
 /** 每周挑战目标定义（复用 GoalKey 语义 + 独立判定函数） */
 export interface WeeklyGoal {
@@ -9,8 +10,8 @@ export interface WeeklyGoal {
 }
 
 /**
- * 每周挑战目标池（5 个）：每周按周种子确定性地抽 1 个。
- * 判定全部为「终局时刻」可确定的属性/flag 条件。
+ * 每周挑战目标池（9 个）：每周按周种子确定性地抽 1 个。
+ * 判定全部为「终局时刻」可确定的属性/flag/性格画像条件。
  */
 export const WEEKLY_GOALS: WeeklyGoal[] = [
   { key: 'age80', icon: '🎋', name: '长寿人生', desc: '活到 80 岁' },
@@ -18,6 +19,11 @@ export const WEEKLY_GOALS: WeeklyGoal[] = [
   { key: 'academic', icon: '🎓', name: '学有所成', desc: '考入重点大学或深造' },
   { key: 'doctor', icon: '🏥', name: '白衣天使', desc: '成为一名医生' },
   { key: 'family', icon: '🏠', name: '家庭美满', desc: '已婚有娃且幸福达到 70' },
+  // 2026-08 新增：家庭养育 / 性格 / 暮年题材
+  { key: 'college_child', icon: '🎓', name: '桃李满门', desc: '把孩子培养成材（有孩子且用心养育）' },
+  { key: 'personality', icon: '🧭', name: '性格鲜明', desc: '任一性格端达到 15 次' },
+  { key: 'stable_life', icon: '🏛️', name: '安稳一生', desc: '活到 80 岁且财富达到 60' },
+  { key: 'age90', icon: '💪', name: '硬朗暮年', desc: '活到 90 岁' },
 ];
 
 /**
@@ -76,6 +82,15 @@ export function checkWeeklyGoal(goal: WeeklyGoal, game: GameState): boolean {
       return has('doctor');
     case 'family':
       return has('married', 'has_child') && attributes.happiness >= 70;
+    case 'college_child':
+      // 孩子考上大学无独立产出 flag（went_to_college 为玩家自身学业线），以「有孩子且用心养育」代理
+      return has('has_child') && has('good_parent');
+    case 'personality':
+      return Object.values(derivePersona(game.history)).some(v => v >= 15);
+    case 'stable_life':
+      return game.age >= 80 && attributes.wealth >= 60;
+    case 'age90':
+      return game.age >= 90;
     default:
       return false;
   }

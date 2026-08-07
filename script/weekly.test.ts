@@ -5,6 +5,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert';
+import { readFileSync } from 'node:fs';
 import {
   checkWeeklyGoal,
   pickWeeklyGoal,
@@ -13,7 +14,11 @@ import {
   WEEKLY_GOALS,
 } from '../src/engine/weekly.ts';
 import { updateWeeklyBest } from '../src/hooks/useGame.ts';
+import { setEvents } from '../src/engine/events.ts';
 import type { GameState } from '../src/types/index.ts';
+
+// 性格画像推导需要事件表（node 无 fetch，直接读产物注入）
+setEvents(JSON.parse(readFileSync(new URL('../public/events.json', import.meta.url), 'utf8')));
 
 /** 构造终局状态 */
 function game(overrides: Partial<GameState> = {}): GameState {
@@ -71,6 +76,38 @@ test('checkWeeklyGoal：各目标终局判定', () => {
   assert.strictEqual(checkWeeklyGoal(doctor, game({ flags: ['doctor'] })), true);
   assert.strictEqual(checkWeeklyGoal(family, game({ flags: ['married', 'has_child'], attributes: { ...game().attributes, happiness: 70 } })), true);
   assert.strictEqual(checkWeeklyGoal(family, game({ flags: ['married', 'has_child'], attributes: { ...game().attributes, happiness: 69 } })), false);
+});
+
+test('checkWeeklyGoal：新增目标终局判定（桃李满门/性格鲜明/安稳一生/硬朗暮年）', () => {
+  const collegeChild = WEEKLY_GOALS.find(g => g.key === 'college_child')!;
+  const personality = WEEKLY_GOALS.find(g => g.key === 'personality')!;
+  const stableLife = WEEKLY_GOALS.find(g => g.key === 'stable_life')!;
+  const age90 = WEEKLY_GOALS.find(g => g.key === 'age90')!;
+
+  // 桃李满门：有孩子且用心养育（孩子考学无独立产出 flag，以 good_parent 代理）
+  assert.strictEqual(checkWeeklyGoal(collegeChild, game({ flags: ['has_child', 'good_parent'] })), true);
+  assert.strictEqual(checkWeeklyGoal(collegeChild, game({ flags: ['has_child'] })), false);
+  assert.strictEqual(checkWeeklyGoal(collegeChild, game({ flags: ['good_parent'] })), false);
+  // 硬朗暮年：活到 90 岁
+  assert.strictEqual(checkWeeklyGoal(age90, game({ age: 89 })), false);
+  assert.strictEqual(checkWeeklyGoal(age90, game({ age: 90 })), true);
+  // 安稳一生：活到 80 岁且财富达到 60
+  assert.strictEqual(checkWeeklyGoal(stableLife, game({ age: 80, attributes: { ...game().attributes, wealth: 60 } })), true);
+  assert.strictEqual(checkWeeklyGoal(stableLife, game({ age: 79, attributes: { ...game().attributes, wealth: 60 } })), false);
+  assert.strictEqual(checkWeeklyGoal(stableLife, game({ age: 80, attributes: { ...game().attributes, wealth: 59 } })), false);
+  // 性格鲜明：任一性格端 ≥ 15（用真实事件数据的冒险标注选项构造历史）
+  const real = JSON.parse(readFileSync(new URL('../public/events.json', import.meta.url), 'utf8')) as Array<{ id: string; choices: Array<{ outcomes: { personality?: string[] } }> }>;
+  const advEvents = real.filter(e => e.choices.some(c => (c.outcomes.personality ?? []).includes('adventurous')));
+  assert.ok(advEvents.length >= 15, '事件库冒险标注事件应足够构造性格历史');
+  const history = (n: number) => advEvents.slice(0, n).map((e, i) => ({
+    age: 30 + i,
+    stage: 'adult' as const,
+    eventId: e.id,
+    choiceIndex: e.choices.findIndex(c => (c.outcomes.personality ?? []).includes('adventurous')),
+    text: '冒险选择',
+  }));
+  assert.strictEqual(checkWeeklyGoal(personality, game({ history: history(15) })), true);
+  assert.strictEqual(checkWeeklyGoal(personality, game({ history: history(14) })), false);
 });
 
 test('updateWeeklyBest：跨周初始化当周记录', () => {

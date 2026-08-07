@@ -1,0 +1,1054 @@
+[
+  { "id": "pension_0001", "choices": [
+    { "text": "精打细算，每月还能存下一点", "personality": ["cautious"] },
+    { "text": "取出来大半，补贴给子女还房贷", "personality": ["altruistic"] },
+    { "text": "给自己报了老年大学的书法班", "personality": ["emotional"] }
+  ]},
+  { "id": "research_0008", "choices": [
+    { "personality": null },
+    { "text": "致辞时宣布捐出奖金，设立青年学者基金", "personality": ["altruistic"] },
+    { "text": "平静领奖。荣誉是过去式，明天还有新的问题", "personality": ["rational"] }
+  ]},
+  { "id": "echo_0017", "choices": [
+    { "text": "研究配土施肥，搞成专业阳台", "personality": ["rational"] },
+    { "text": "拍下生长日记发到网上", "personality": ["emotional"] },
+    { "text": "浇浇水就好，别太费心", "personality": ["cautious"] }
+  ]},
+  { "id": "hobby_0012", "choices": [
+    { "text": "报了老年摄影班，从光圈快门学起", "personality": ["rational"] },
+    { "text": "每天傍晚出门拍一张，记录退休后的日子", "personality": ["emotional"] },
+    { "personality": null }
+  ]},
+  { "id": "mid_60", "choices": [
+    { "text": "摆正心态：当老师，不当老板，把经验教透", "personality": ["altruistic"] },
+    { "text": "觉得被冷落，开始抢着表态、揽事", "personality": ["selfish"] },
+    { "text": "干得不痛快，提前结束了返聘合同", "personality": ["adventurous"] }
+  ]},
+  { "id": "mid_61", "choices": [
+    { "text": "拜孙辈为师，每周学一个新技能", "personality": ["rational"] },
+    { "text": "让TA教你玩小游戏，祖孙俩组队开黑", "personality": ["emotional"] },
+    { "text": "「这些花里胡哨的，不如多读点书」", "personality": ["cautious"] }
+  ]},
+  { "id": "mid_62", "choices": [
+    { "text": "把纸包收好，回家写了一段悼文发在群里", "personality": ["emotional"] },
+    { "personality": null },
+    { "text": "从那之后不再参加任何聚会，怕送别", "personality": ["cautious"] }
+  ]},
+  { "id": "mid_63", "choices": [
+    { "text": "订了下一年度的旅居计划，清单越拉越长", "personality": ["adventurous"] },
+    { "text": "用手机记账、拍vlog，把日子过成纪录片", "personality": ["rational"] },
+    { "text": "走哪儿都惦记孙辈，玩了三天就想回家", "personality": ["emotional"] }
+  ]},
+  { "id": "pension_0004", "choices": [
+    { "personality": null },
+    { "text": "趁报销到账，把一直舍不得换的药换成好药", "personality": ["rational"] },
+    { "text": "约了全面的复查套餐，图个安心", "personality": ["cautious"] }
+  ]},
+  { "id": "gray_0008", "choices": [
+    { "text": "辗转找到他，当面道歉并补偿", "personality": ["altruistic"] },
+    { "text": "匿名寄去一笔钱，不打扰彼此的生活", "personality": ["cautious"] },
+    { "text": "往事已矣。把这份愧疚讲给孙辈当教训", "personality": ["rational"] }
+  ]},
+  { "id": "mid_07", "choices": [
+    { "text": "第二天给所有久未联系的老朋友都打了一遍电话", "personality": ["emotional"] },
+    { "text": "开始更加珍惜每一天。早晨的咖啡、傍晚的散步都认真对待", "personality": ["rational"] },
+    { "personality": null }
+  ]},
+  { "id": "mid_64", "choices": [
+    { "text": "每月雷打不动存教育金，记账本上多了一栏", "personality": ["cautious"] },
+    { "text": "和儿子/女儿商量，把教育金做成全家计划", "personality": ["rational"] },
+    { "text": "「儿孙自有儿孙福」，把钱花在自己身上", "personality": ["emotional"] }
+  ]},
+  { "id": "mid_65", "choices": [
+    { "text": "平静地送完TA，回来把老照片翻出来擦了擦", "personality": ["rational"] },
+    { "text": "开始整理自己的「人生纪念册」，把故事写下来", "personality": ["emotional"] },
+    { "personality": null }
+  ]},
+  { "id": "mid_66", "choices": [
+    { "text": "术后认真康复，三个月后又能爬山了", "personality": ["rational"] },
+    { "text": "换了新膝盖，把年轻时没走完的路补上", "personality": ["adventurous"] },
+    { "text": "术后怕疼，窝在家里不愿复健", "personality": ["cautious"] }
+  ]},
+  { "id": "mid_67", "choices": [
+    { "text": "写成电子稿打印几本，发给亲戚朋友", "personality": ["altruistic"] },
+    { "text": "用短视频把老故事讲给孙辈听", "personality": ["emotional"] },
+    { "text": "写了三页就搁下，「想不起来了，算了」", "personality": ["cautious"] }
+  ]},
+  { "id": "pension_0002", "choices": [
+    { "text": "收下慰问金，日子宽裕了些", "personality": ["cautious"] },
+    { "text": "慰问金婉拒了，只收下免费体检单", "personality": ["altruistic"] },
+    { "personality": null }
+  ]},
+  { "id": "invest_0008", "choices": [
+    { "text": "讲那次逆势加仓：「纪律比聪明重要」", "personality": ["rational"] },
+    { "personality": null },
+    { "text": "设立奖学金，让答案由他们自己去寻找", "personality": ["altruistic"] }
+  ]},
+  { "id": "echo_0016", "choices": [
+    { "text": "眼眶一热：以后水果都在你这买", "personality": ["emotional"] },
+    { "personality": null },
+    { "text": "摆摆手说小事一桩", "personality": ["cautious"] }
+  ]},
+  { "id": "mid_68", "choices": [
+    { "text": "跟孙辈学会了，隔三差五在群里活跃", "personality": ["rational"] },
+    { "text": "建了个「老宝贝学习群」，和老伙计互相教", "personality": ["altruistic"] },
+    { "text": "嫌麻烦，让儿子/女儿「直接帮我弄好」", "personality": ["cautious"] }
+  ]},
+  { "id": "mid_69", "choices": [
+    { "text": "带一抔土回城里，种在阳台的花盆里", "personality": ["emotional"] },
+    { "text": "把老物件拍照存档，做了个电子相册", "personality": ["rational"] },
+    { "personality": null }
+  ]},
+  { "id": "mid_70", "choices": [
+    { "text": "睡不着就起来打太极，把清晨过成自己的", "personality": ["rational"] },
+    { "text": "约上老伙计们一起晨钓，边钓边等天亮", "personality": ["emotional"] },
+    { "text": "睡不着就刷手机，越刷越精神，天亮更累了", "personality": ["cautious"] }
+  ]},
+  { "id": "mid_71", "choices": [
+    { "text": "固定排班风雨无阻，成了社区的「名人」", "personality": ["altruistic"] },
+    { "personality": null },
+    { "text": "干了两周嫌琐碎，悄悄退了群", "personality": ["cautious"] }
+  ]},
+  { "id": "pension_0005", "choices": [
+    { "text": "按月存起来，积少成多", "personality": ["cautious"] },
+    { "text": "用来改善伙食，每天加个蛋添个荤", "personality": ["rational"] },
+    { "text": "常请老伙伴们下馆子，热闹", "personality": ["emotional"] }
+  ]},
+  { "id": "echo_0018", "choices": [
+    { "text": "每周三天，风雨无阻", "personality": ["altruistic"] },
+    { "personality": null },
+    { "text": "量力而行，别累着", "personality": ["cautious"] }
+  ]},
+  { "id": "tech_0009", "choices": [
+    { "text": "我认真研究构图和光线，拍出了一组小区四季组图", "personality": ["rational"] },
+    { "text": "我随手拍随手发，被夸一句就开心一整天", "personality": ["emotional"] },
+    { "text": "做菜视频攒下的镜头感派上了用场，我把四季组图做成合集，在家族群里小火", "personality": ["altruistic"] }
+  ]},
+  { "id": "mid_72", "choices": [
+    { "text": "把退休生活过成「第二份职业」，日程排得满满", "personality": ["rational"] },
+    { "text": "学了门新手艺：木工、烘焙、园艺，成品摆了一屋子", "personality": ["emotional"] },
+    { "text": "日子越过越懒散，天天沙发和电视两点一线", "personality": ["cautious"] }
+  ]},
+  { "id": "mid_73", "choices": [
+    { "text": "把体检结果做成表，哪项有波动立刻复查", "personality": ["rational"] },
+    { "text": "约上老伴一起体检，互相监督指标", "personality": ["altruistic"] },
+    { "text": "「查出来也治不好，不如不知道」", "personality": ["cautious"] }
+  ]},
+  { "id": "mid_74", "choices": [
+    { "text": "「各住各的，常聚聚就好」，保持距离的亲密", "personality": ["cautious"] },
+    { "text": "答应搬去同住，帮忙带娃，享受天伦", "personality": ["altruistic"] },
+    { "text": "孩子们争着接你，你乐得当「老宝贝」", "personality": ["emotional"] }
+  ]},
+  { "id": "mid_75", "choices": [
+    { "text": "偷偷策划金婚庆典，给老伴一个大惊喜", "personality": ["adventurous"] },
+    { "text": "写了封长信，把几十年没说的话写进去", "personality": ["emotional"] },
+    { "text": "「仪式感是年轻人的事」，嘴上这么说，还是把戒指收好了", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_11", "choices": [
+    { "text": "「正好，把年轻时没时间学的都补上。」报名了老年大学和书法班", "personality": ["adventurous"] },
+    { "text": "先什么都不想干，睡几天懒觉再说", "personality": ["cautious"] },
+    { "text": "「一下子没班上了，心里空落落的。」", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_12", "choices": [
+    { "text": "抢着抱TA，一抱就不肯撒手。以后要多陪TA长大", "personality": ["emotional"] },
+    { "text": "高兴是高兴，但带娃的事让年轻人自己操心", "personality": ["cautious"] },
+    { "personality": null }
+  ]},
+  { "id": "elder_13", "choices": [
+    { "text": "从今天开始，每天走一万步，药按时吃", "personality": ["rational"] },
+    { "text": "「活到这个岁数了，该吃吃该喝喝。」照旧", "personality": ["cautious"] },
+    { "text": "开始收集各种养生偏方，心里才踏实", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_14", "choices": [
+    { "text": "拿出一部分，报了心心念念多年的旅行团", "personality": ["adventurous"] },
+    { "text": "「钱留着，给孩子们将来用。」", "personality": ["altruistic"] },
+    { "text": "「这钱来得太不容易，一分都不能乱花。」", "personality": ["cautious"] }
+  ]},
+  { "id": "pension_0003", "choices": [
+    { "text": "本息转存，留着给晚年托底", "personality": ["cautious"] },
+    { "text": "取出一部分，把家里的老物件换换新", "personality": ["emotional"] },
+    { "text": "给孙辈包了个大红包，看他们蹦蹦跳跳", "personality": ["altruistic"] }
+  ]},
+  { "id": "love_0005", "choices": [
+    { "text": "点点头：「好，那就在湖边走走」", "personality": ["adventurous"] },
+    { "text": "摆摆手：「不了，我一个人习惯了」", "personality": ["cautious"] },
+    { "text": "不置可否，却悄悄放慢了脚步", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_01", "choices": [
+    { "text": "开始写回忆录。把这一生的故事记下来留给孙辈", "personality": ["rational"] },
+    { "text": "组织老同学聚会。有些人五十多年没见了", "personality": ["emotional"] },
+    { "text": "学着用微信拍短视频，笨拙地拍些花草发出去", "personality": ["adventurous"] }
+  ]},
+  { "id": "elder_02", "choices": [
+    { "text": "虽然身体不好，但心态还行。每天坚持散步半小时", "personality": ["rational"] },
+    { "text": "后悔了。当初要是对自己好一点就好了", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_15", "choices": [
+    { "text": "「走，这次聚会我请客！」以后每年都要聚一次", "personality": ["emotional"] },
+    { "text": "热闹归热闹，聊到最后还是各回各家。随缘吧", "personality": ["cautious"] },
+    { "personality": null }
+  ]},
+  { "id": "elder_16", "choices": [
+    { "text": "把两拨人叫到一起，商了个轮班表，大家都满意", "personality": ["rational"] },
+    { "text": "「吵什么吵，我再建一个群，想跳的跟我走！」", "personality": ["adventurous"] },
+    { "text": "不掺和。找个人少的角落自己打太极", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_17", "choices": [
+    { "text": "「你要是想跑，明天这个点儿我等你。」", "personality": ["altruistic"] },
+    { "text": "「秘诀啊，就是不服老。」继续跑自己的", "personality": ["adventurous"] },
+    { "text": "「跑不动的那天，也就认了。」", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_18", "choices": [
+    { "text": "「好！爷爷一定第一个到！」下午提前半小时在门口等着", "personality": ["emotional"] },
+    { "text": "接送归接送，功课的事我一概不掺和", "personality": ["cautious"] },
+    { "personality": null }
+  ]},
+  { "id": "pension_0006", "choices": [
+    { "text": "办了。每月多一笔进账，手头一下子宽裕了", "personality": ["adventurous"] },
+    { "text": "没办。房子要原样留给子女，是个念想", "personality": ["altruistic"] },
+    { "text": "再观望观望，把条款研究了个透", "personality": ["rational"] }
+  ]},
+  { "id": "echo_0019", "choices": [
+    { "text": "先低头，这个年纪了不置气", "personality": ["cautious"] },
+    { "text": "约法三章，把规矩说清楚", "personality": ["rational"] },
+    { "personality": null }
+  ]},
+  { "id": "elder_19", "choices": [
+    { "text": "「走，再去那家面馆来一碗，看看味道变没变。」", "personality": ["emotional"] },
+    { "personality": null },
+    { "text": "「当年要是听你的，或许就是另一辈子了。」", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_20", "choices": [
+    { "text": "「学东西，什么时候都不晚。」每周准时去上课", "personality": ["rational"] },
+    { "text": "报了摄影班，拿着新相机满街拍", "personality": ["adventurous"] },
+    { "text": "上了两节课就嫌累，还是在家看电视舒服", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_21", "choices": [
+    { "text": "「先从最难忘的那件事写起。」一口气写到了半夜", "personality": ["emotional"] },
+    { "text": "口述给孙子/孙女，让TA帮我录下来", "personality": ["altruistic"] },
+    { "text": "「写这些做什么，过去的就过去了。」又放下了笔", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_22", "choices": [
+    { "text": "「没事，死不了。回家给我炖只鸡就行。」", "personality": ["adventurous"] },
+    { "text": "「以后真得听医生的话了。」开始认真养生", "personality": ["rational"] },
+    { "text": "「躺在病床上才明白，什么都是虚的，身体才是真的。」", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_23", "choices": [
+    { "text": "「让我想想吧。」其实心里已经知道，也许该为孩子们着想", "personality": ["altruistic"] },
+    { "text": "「我能照顾自己，别操这个心！」", "personality": ["adventurous"] },
+    { "text": "「你们有孝心，我知道。先去看看吧。」", "personality": ["cautious"] }
+  ]},
+  { "id": "hobby_0013", "choices": [
+    { "text": "每周都去，认真准备每一次分享", "personality": ["rational"] },
+    { "text": "把年轻时读过的书翻出来重读一遍", "personality": ["emotional"] },
+    { "text": "在读书会交了几个朋友，散会后一起去喝茶", "personality": ["cautious"] }
+  ]},
+  { "id": "sport_0011", "choices": [
+    { "text": "站到队伍末尾，跟着老人一招一式慢慢学", "personality": ["rational"] },
+    { "text": "摆手说改天再学，坐回长椅接着看", "personality": ["cautious"] },
+    { "text": "回家查了太极教学视频，决定明天带保温杯正式报到", "personality": ["adventurous"] }
+  ]},
+  { "id": "elder_24", "choices": [
+    { "personality": null },
+    { "personality": null },
+    { "text": "「我自己还一身毛病，管好自己就行了。」", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_25", "choices": [
+    { "text": "「走！庆祝一下！」一老一小开开心心去便利店", "personality": ["emotional"] },
+    { "text": "「考得不错，但这两分错在哪，回家好好想想。」", "personality": ["rational"] },
+    { "text": "「下次考个一百分，爷爷再请你。」", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_26", "choices": [
+    { "text": "「老李，棋局还没下完呢。走好。」", "personality": ["emotional"] },
+    { "text": "帮忙操办了后事，让老李体体面面地走", "personality": ["altruistic"] },
+    { "text": "「说不定哪天就轮到我了。」回家给老伴打了个电话", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_27", "choices": [
+    { "text": "「按法律规矩来，一碗水端平，孩子们也别争。」", "personality": ["rational"] },
+    { "text": "「条件差的那个孩子，多分一些吧。」", "personality": ["altruistic"] },
+    { "text": "「算了，孩子们的事，让他们自己商量去。」", "personality": ["cautious"] }
+  ]},
+  { "id": "tech_0010", "choices": [
+    { "text": "我每天练一小时，把常用功能一个个记牢", "personality": ["rational"] },
+    { "text": "我学不会就上火，把手机丢在沙发上生闷气", "personality": ["emotional"] },
+    { "text": "凭着拆了半辈子机器的底气，我学得飞快，转头还能教邻居张婶", "personality": ["altruistic"] }
+  ]},
+  { "id": "elder_03", "choices": [
+    { "text": "讲了很多——好的坏的、骄傲的遗憾的。TA听得入迷了", "personality": ["emotional"] },
+    { "text": "挑那些快乐的故事讲。不想让TA太早知道人生有多难", "personality": ["altruistic"] }
+  ]},
+  { "id": "elder_28", "choices": [
+    { "text": "「当年那些破代码，现在想想还挺骄傲的。」", "personality": ["emotional"] },
+    { "text": "「要是当年再坚持几年，说不定也能做出点什么。」", "personality": ["cautious"] },
+    { "personality": null }
+  ]},
+  { "id": "elder_29", "choices": [
+    { "text": "「当年是爸/妈不对。这些年，委屈你了。」", "personality": ["emotional"] },
+    { "text": "「过去的事就不提了。以后，咱们都好好的。」", "personality": ["rational"] },
+    { "text": "话到嘴边，还是咽了回去。有些话，到底没说出口", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_30", "choices": [
+    { "personality": null },
+    { "text": "「捐一部分意思意思吧，我也要留点养老钱。」", "personality": ["cautious"] },
+    { "text": "「我自己的日子也就这样，哪管得了别人。」", "personality": ["selfish"] }
+  ]},
+  { "id": "elder_31", "choices": [
+    { "text": "「走吧，这回补上欠你的蜜月。」", "personality": ["emotional"] },
+    { "text": "「先去城里逛逛，再去海边，反正不赶时间。」", "personality": ["adventurous"] },
+    { "text": "「花这个钱干啥，在家看看电视也挺好。」", "personality": ["cautious"] }
+  ]},
+  { "id": "echo_0007", "choices": [
+    { "text": "跟着队伍打太极，一天不落", "personality": ["rational"] },
+    { "text": "先从快走开始，量力而行", "personality": ["cautious"] },
+    { "personality": null }
+  ]},
+  { "id": "love_0006", "choices": [
+    { "text": "笑着应：「风雨无阻，我家狗都替你答应了」", "personality": ["emotional"] },
+    { "text": "认真地说：「好，我也想多听听你的故事」", "personality": ["rational"] },
+    { "text": "犹豫了一下，低头踢了踢石子：「到时候再说吧」", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_32", "choices": [
+    { "text": "「谢谢你们。这辈子有你们，值了。」", "personality": ["emotional"] },
+    { "text": "「别破费了，以后生日都回家吃碗面就行。」", "personality": ["cautious"] },
+    { "personality": null }
+  ]},
+  { "id": "elder_33", "choices": [
+    { "text": "「每年重阳都来爬，爬到爬不动为止。」", "personality": ["adventurous"] },
+    { "text": "「下山请你们吃烤鸭。」一家人其乐融融", "personality": ["emotional"] },
+    { "text": "「能爬上来一次算一次，日子过一天赚一天。」", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_34", "choices": [
+    { "text": "「治病要紧。钱没了可以再想别的办法。」", "personality": ["rational"] },
+    { "text": "「能省则省，能出院就出院，不住了。」", "personality": ["cautious"] },
+    { "text": "「一把年纪了，给孩子们省点钱吧。」", "personality": ["altruistic"] }
+  ]},
+  { "id": "elder_35", "choices": [
+    { "text": "「多印几本，每个孩子都送一本。」", "personality": ["altruistic"] },
+    { "text": "试着联系出版社，想让更多人看看那一代人的故事", "personality": ["adventurous"] },
+    { "text": "「写完就完了，放起来吧。」", "personality": ["cautious"] }
+  ]},
+  { "id": "music_0005", "choices": [
+    { "text": "教孙辈们弹这首曲子", "personality": ["altruistic"] },
+    { "text": "办一场家庭小音乐会，把家人都叫来", "personality": ["emotional"] },
+    { "personality": null }
+  ]},
+  { "id": "elder_04", "choices": [
+    { "text": "「钱很重要，但它只是工具。真正富足的是内心。」", "personality": ["rational"] },
+    { "text": "「运气。我赶上了好时代。能帮到别人的时候尽量帮。」", "personality": ["altruistic"] }
+  ]},
+  { "id": "elder_05", "choices": [
+    { "text": "「钱少的时候，爱就要多。这辈子值了。」", "personality": ["emotional"] },
+    { "text": "「如果重来一次……可能还是老样子吧。」", "personality": ["rational"] }
+  ]},
+  { "id": "elder_06", "choices": [
+    { "text": "「爱是最值得的事。勇敢去爱，别怕受伤。」", "personality": ["emotional"] },
+    { "text": "「做自己。人生不长，不要活在别人的期待里。」", "personality": ["adventurous"] },
+    { "text": "「钱和健康，健康更重要。可惜年轻时不明白。」", "personality": ["rational"] },
+    { "text": "「如果能重来一次……」", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_36", "choices": [
+    { "text": "「一个人也要把日子过好。」养了只猫，给它取了个名", "personality": ["rational"] },
+    { "text": "「一个人的清静，也是一种福气。」", "personality": ["cautious"] },
+    { "text": "「要是有人能说说话就好了。」", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_37", "choices": [
+    { "text": "「把该交代的一次性交代清楚，我才能安心。」", "personality": ["rational"] },
+    { "text": "「这些年攒的邮票都留给你，记得好好收着。」", "personality": ["emotional"] },
+    { "text": "「改来改去麻烦，就这样吧。」", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_38", "choices": [
+    { "text": "「做人要正直，走自己的路。」", "personality": ["rational"] },
+    { "text": "「别怕犯错，爷爷这一辈子，错事也干了不少，照样过来了。」", "personality": ["emotional"] },
+    { "text": "「年轻真好。你们的路，比我们当年宽多了。」", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_39", "choices": [
+    { "text": "「没事，有我呢。」日夜守在病床边，学喂饭、学按摩", "personality": ["altruistic"] },
+    { "text": "请了护工，自己白天黑夜两头跑", "personality": ["rational"] },
+    { "text": "「这日子，真不知道怎么过下去了。」", "personality": ["emotional"] }
+  ]},
+  { "id": "hobby_0014", "choices": [
+    { "text": "潜心研究棋谱，成了凉亭里的常胜将军", "personality": ["rational"] },
+    { "text": "输赢都不恼，就爱这份热闹", "personality": ["emotional"] },
+    { "text": "教会小孙子下棋，爷孙俩在树下对弈", "personality": ["altruistic"] }
+  ]},
+  { "id": "sport_0012", "choices": [
+    { "text": "陪老王多走了一圈，听他聊老伴的病情", "personality": ["altruistic"] },
+    { "text": "今天想走快些，一个人走完三圈", "personality": ["rational"] },
+    { "personality": null }
+  ]},
+  { "id": "elder_40", "choices": [
+    { "text": "「人少了，更要聚。只要还能走，我就来。」", "personality": ["emotional"] },
+    { "text": "「想见的人，平时就该多见见。」散场后去看望住院的老友", "personality": ["altruistic"] },
+    { "personality": null }
+  ]},
+  { "id": "elder_41", "choices": [
+    { "text": "「我回去跟孩子们商量商量再说。」出门就给儿子/女儿打了个电话", "personality": ["rational"] },
+    { "text": "「钱是小事，身体是大事。」刷了卡，买了三盒", "personality": ["emotional"] },
+    { "text": "「别忽悠我，我这辈子见过的骗局比你吃过的饭都多。」", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_42", "choices": [
+    { "text": "「我就不信学不会。」回家偷偷跟着录音练", "personality": ["adventurous"] },
+    { "text": "「反正大家唱我也跟着唱，图个乐。」", "personality": ["cautious"] },
+    { "text": "「嗓子不行了，不唱了，丢人。」", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_43", "choices": [
+    { "text": "「一家人，就该是这个样子。」", "personality": ["emotional"] },
+    { "text": "「以前的事就别提了，往后的日子好好过。」", "personality": ["rational"] },
+    { "text": "「有时候想想，当初要是早点说开就好了。」", "personality": ["cautious"] }
+  ]},
+  { "id": "echo_0025", "choices": [
+    { "text": "敬这一路的风风雨雨", "personality": ["emotional"] },
+    { "personality": null },
+    { "text": "平平淡淡才是真，在家下碗面", "personality": ["cautious"] }
+  ]},
+  { "id": "tech_0011", "choices": [
+    { "text": "我定了每周固定时间视频，还学会了截屏存照片", "personality": ["rational"] },
+    { "text": "我怕拨错号码，总是等他们打过来", "personality": ["cautious"] },
+    { "text": "我研究出了美颜功能，全家都说我变年轻了", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_07", "choices": [
+    { "text": "「我这辈子最骄傲的不是赚了多少钱，而是帮了多少人。」", "personality": ["altruistic"] },
+    { "text": "「钱是手段，不是目的。可惜很多人一辈子都没搞明白。」", "personality": ["rational"] }
+  ]},
+  { "id": "elder_08", "choices": [
+    { "text": "「日子苦是苦了点，但能走到今天也是一种本事。」", "personality": ["rational"] },
+    { "text": "「下辈子，可能该对自己好一点。」", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_44", "choices": [
+    { "text": "「房子给你们，我住哪儿都行。老了，看得开了。」", "personality": ["altruistic"] },
+    { "text": "「过户归过户，我们老两口得留一间自己住。」", "personality": ["cautious"] },
+    { "personality": null }
+  ]},
+  { "id": "elder_45", "choices": [
+    { "text": "「医生的话要听，但也不能全听。」换了双好鞋，量力而行", "personality": ["rational"] },
+    { "text": "「老了就是老了，认了。」以后都让子女接送", "personality": ["cautious"] },
+    { "text": "「多走一步，就是赚一步。」", "personality": ["adventurous"] }
+  ]},
+  { "id": "elder_46", "choices": [
+    { "text": "「我还能干几年，你慢慢学。」手把手地带新人", "personality": ["altruistic"] },
+    { "text": "「我身体不如以前了，这摊子，以后就交给你们年轻人了。」", "personality": ["rational"] },
+    { "personality": null }
+  ]},
+  { "id": "elder_47", "choices": [
+    { "text": "「没实现的不遗憾。年轻时敢想，就很了不起了。」", "personality": ["rational"] },
+    { "text": "「趁还走得动，去看看海吧。」第二天就报了旅行团", "personality": ["adventurous"] },
+    { "text": "「想这些有什么用，日子不还得照常过。」把匣子又盖上了", "personality": ["cautious"] }
+  ]},
+  { "id": "love_0007", "choices": [
+    { "text": "把削好的苹果递给TA：「快点好起来，家里花还等你浇呢」", "personality": ["emotional"] },
+    { "text": "夜里留在病房陪床，握着TA的手睡了一宿", "personality": ["altruistic"] },
+    { "text": "回家休息一夜，第二天天没亮又赶到医院", "personality": ["rational"] }
+  ]},
+  { "id": "elder_48", "choices": [
+    { "text": "「好样的！爷爷/奶奶给你包个大红包！」", "personality": ["emotional"] },
+    { "text": "「好好念书，别辜负了这机会。」", "personality": ["rational"] },
+    { "text": "「你长大了，以后的路，就靠你自己走了。」", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_49", "choices": [
+    { "text": "「你走了，我也得替你把日子过下去。」", "personality": ["rational"] },
+    { "text": "每天去墓园坐一会儿，跟TA说说话", "personality": ["emotional"] },
+    { "personality": null }
+  ]},
+  { "id": "elder_50", "choices": [
+    { "text": "「睡不着就睡不着，起来听会儿广播。」", "personality": ["rational"] },
+    { "text": "天亮给儿子/女儿打个电话，听听TA们的声音", "personality": ["emotional"] },
+    { "personality": null }
+  ]},
+  { "id": "elder_51", "choices": [
+    { "text": "「都安排妥当了，我走也走得安心。」", "personality": ["rational"] },
+    { "text": "把清单复印了一份，亲手交给儿子/女儿", "personality": ["cautious"] },
+    { "personality": null }
+  ]},
+  { "id": "elder_52", "choices": [
+    { "text": "「好兄弟，下辈子还做朋友。」", "personality": ["emotional"] },
+    { "text": "「你交代的事，我都记下了。放心。」", "personality": ["altruistic"] },
+    { "personality": null }
+  ]},
+  { "id": "love_0008", "choices": [
+    { "text": "伸出手指让TA戴上：「五十年哪够，我要六十年」", "personality": ["emotional"] },
+    { "text": "把戒指小心收进贴身衣袋，什么都没说，只是笑了", "personality": ["cautious"] },
+    { "personality": null }
+  ]},
+  { "id": "elder_53", "choices": [
+    { "text": "「读万卷书，行万里路，这辈子值了。」", "personality": ["rational"] },
+    { "text": "「趁还走得动，再出去走一趟吧。」", "personality": ["adventurous"] },
+    { "text": "「照片都在，人老了。看着看着，眼睛就花了。」", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_54", "choices": [
+    { "text": "「阎王爷要是来收我，我就跟它商量商量，再让我多活几年。」", "personality": ["adventurous"] },
+    { "text": "「这辈子没什么遗憾了。就是舍不得你们。」", "personality": ["emotional"] },
+    { "text": "「早知道多注意身体就好了。你们一定要爱惜自己。」", "personality": ["altruistic"] }
+  ]},
+  { "id": "elder_55", "choices": [
+    { "text": "「这照片，挂客厅正中间。」", "personality": ["emotional"] },
+    { "text": "「以后每年都拍一张。」", "personality": ["rational"] },
+    { "personality": null }
+  ]},
+  { "id": "elder_56", "choices": [
+    { "text": "「这五十年，辛苦你了。」牵起TA的手，就像五十年前那样", "personality": ["emotional"] },
+    { "personality": null },
+    { "text": "「半个世纪，说短不短，说长也真长。」", "personality": ["rational"] }
+  ]},
+  { "id": "elder_09", "choices": [
+    { "text": "「希望你们都能好好爱自己。」在心里默默许愿", "personality": ["altruistic"] },
+    { "text": "「没什么愿望了。这样就很好。」", "personality": ["cautious"] },
+    { "text": "「多希望还能再活一遍……」", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_10", "choices": [
+    { "text": "「不后悔。自由是一生最好的伴侣。」", "personality": ["adventurous"] },
+    { "text": "「有时候也会想——如果当初……」", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_57", "choices": [
+    { "text": "「这封信，就是爷爷/奶奶留给你们的宝贝。」", "personality": ["emotional"] },
+    { "text": "「一辈子太短，能留下的，也就是这些字了。」", "personality": ["rational"] },
+    { "text": "「写了也没人看，算了吧。」", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_58", "choices": [
+    { "text": "「捐一半，留一半。孩子们的日子，也要顾着。」", "personality": ["rational"] },
+    { "text": "「全捐了。钱生不带来，死不带去，留给他们比留给我有用。」", "personality": ["altruistic"] },
+    { "text": "「算了，还是都留给孩子们吧，世道艰难。」", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_59", "choices": [
+    { "text": "「该交代的，我都交代过了。你们都要好好的。」", "personality": ["rational"] },
+    { "text": "「帮我谢谢所有帮过我的人。这辈子，欠的人情还不完了。」", "personality": ["altruistic"] },
+    { "text": "「真想再多陪你们几年啊。」", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_60", "choices": [
+    { "text": "「我这一生，没有遗憾。」", "personality": ["rational"] },
+    { "text": "「有些事没做成，但没做成，也是一种活法。」", "personality": ["cautious"] },
+    { "personality": null }
+  ]},
+  { "id": "elderwarm_0001", "choices": [
+    { "text": "立刻回信，再寄一张近照", "personality": ["emotional"] },
+    { "personality": null },
+    { "text": "让孙辈常打视频来", "personality": ["rational"] }
+  ]},
+  { "id": "elder_0101", "choices": [
+    { "text": "认真记下医嘱，从此每天清晨去公园走两圈", "personality": ["rational"] },
+    { "text": "嘴上应着，转头就忘了，日子照旧", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_61", "choices": [
+    { "text": "「走一个算一个，活着的人要好好活。」", "personality": ["rational"] },
+    { "text": "给老同学打个电话，约出来喝早茶", "personality": ["emotional"] },
+    { "text": "把自己关在家里，不想见人", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0077", "choices": [
+    { "text": "立刻回信，约他见面", "personality": ["emotional"] },
+    { "text": "把信收进抽屉，改天再说", "personality": ["cautious"] },
+    { "personality": null }
+  ]},
+  { "id": "elderwarm_0002", "choices": [
+    { "text": "开一瓶存了多年的老酒，边喝边聊", "personality": ["emotional"] },
+    { "text": "约他常来，把没聊完的话都聊完", "personality": ["rational"] },
+    { "personality": null }
+  ]},
+  { "id": "hobby_0015", "choices": [
+    { "text": "把果子挨家分给邻居，和街坊们一起尝鲜", "personality": ["altruistic"] },
+    { "text": "学着酿一坛石榴酒，封起来等冬天开", "personality": ["rational"] },
+    { "text": "坐在树下剥石榴，慢慢地回味这些年", "personality": ["emotional"] }
+  ]},
+  { "id": "sport_0013", "choices": [
+    { "text": "虚心跟老队长学，练了一下午找手感", "personality": ["rational"] },
+    { "text": "坐场边看他们打，输赢无所谓，热闹就好", "personality": ["cautious"] },
+    { "text": "买了一套自己的球杆，正式加入球队", "personality": ["adventurous"] }
+  ]},
+  { "id": "elder_0102", "choices": [
+    { "text": "翻出相册，把孙辈从小到大的照片看了一遍又一遍", "personality": ["emotional"] },
+    { "text": "惦记着孙辈，又忍不住念叨儿子儿媳工作太忙", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_62", "choices": [
+    { "text": "「这是我见过最漂亮的小家伙。」", "personality": ["emotional"] },
+    { "text": "悄悄给孩子的教育基金存了一笔", "personality": ["rational"] },
+    { "text": "年纪大了，看一眼就交给年轻人吧", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0078", "choices": [
+    { "text": "把菜园打理得漂漂亮亮", "personality": ["rational"] },
+    { "text": "教邻居也种一片", "personality": ["altruistic"] },
+    { "text": "种了几天就懒了", "personality": ["cautious"] }
+  ]},
+  { "id": "elderwarm_0003", "choices": [
+    { "text": "和老伴一张张辨认照片里的人", "personality": ["emotional"] },
+    { "text": "把照片翻拍下来传给家人", "personality": ["rational"] },
+    { "text": "看完小心地把相册收好", "personality": ["cautious"] }
+  ]},
+  { "id": "tech_0012", "choices": [
+    { "text": "我把挂号和缴费的流程都记进小本子，转手教给老伴", "personality": ["rational"] },
+    { "text": "我在屏幕上点来点去，差点挂错科室", "personality": ["cautious"] },
+    { "text": "我趁热打铁学会了线上复诊，还帮同病房的老伙计下载了医院 App", "personality": ["altruistic"] }
+  ]},
+  { "id": "elder_0103", "choices": [
+    { "text": "留了联系方式，约好以后每月聚一次", "personality": ["emotional"] },
+    { "text": "热闹归热闹，散场后还是觉得一个人清静", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_63", "choices": [
+    { "text": "继续保持，每天早起打太极", "personality": ["rational"] },
+    { "text": "松一口气，终于可以放开吃了", "personality": ["emotional"] },
+    { "text": "买个血糖仪天天盯着，反而紧张", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0079", "choices": [
+    { "text": "认真教他，不轻易放水", "personality": ["rational"] },
+    { "text": "讲棋也讲当年的故事", "personality": ["emotional"] },
+    { "text": "赢了就赢了吧", "personality": ["cautious"] }
+  ]},
+  { "id": "elderwarm_0004", "choices": [
+    { "text": "把家书按年月理好，标注清楚", "personality": ["rational"] },
+    { "text": "念几段给儿孙听", "personality": ["emotional"] },
+    { "text": "读完后小心放回盒底", "personality": ["cautious"] }
+  ]},
+  { "id": "love_0009", "choices": [
+    { "text": "挪到TA身边，也拿起小水壶：「那我们一起过日子」", "personality": ["emotional"] },
+    { "text": "让TA把每种花的花期写在卡片上，贴满窗台", "personality": ["rational"] },
+    { "text": "让TA专心照料，自己坐在旁边看着就好", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0104", "choices": [
+    { "text": "认真学，不懂就问，很快就成了老伙伴里的「技术顾问」", "personality": ["rational"] },
+    { "text": "学了两天嫌麻烦，还是让子女代劳", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_64", "choices": [
+    { "text": "举杯：「这辈子，值了。」", "personality": ["emotional"] },
+    { "text": "把存折分了，让孩子们早点安心", "personality": ["altruistic"] },
+    { "personality": null }
+  ]},
+  { "id": "elder_0080", "choices": [
+    { "text": "举杯感谢每一个家人", "personality": ["emotional"] },
+    { "text": "许愿：儿孙平安", "personality": ["altruistic"] },
+    { "text": "热闹是他们的，你安静看着", "personality": ["cautious"] }
+  ]},
+  { "id": "elderwarm_0005", "choices": [
+    { "text": "也早起一回，给老伴煮一锅粥", "personality": ["altruistic"] },
+    { "text": "把每天的早餐拍下来，攒成一本相册", "personality": ["emotional"] },
+    { "text": "端着粥碗，慢慢喝完", "personality": ["cautious"] }
+  ]},
+  { "id": "sport_0014", "choices": [
+    { "text": "量力而行，把动作放得更慢，只做自己做得到的", "personality": ["cautious"] },
+    { "text": "戴上老花镜，认真记下主持人讲的每个要领", "personality": ["rational"] },
+    { "text": "报名社区的老年健身班，跟老师同学一起练", "personality": ["adventurous"] }
+  ]},
+  { "id": "elder_0105", "choices": [
+    { "text": "坚持每天报到，风雨无阻", "personality": ["rational"] },
+    { "text": "天气好就去，下雨天就窝在家里", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_65", "choices": [
+    { "text": "给每一张照片写上名字和年份", "personality": ["rational"] },
+    { "text": "把相册翻拍，发给每个孩子一份", "personality": ["altruistic"] },
+    { "text": "看一会儿就合上，不敢看太久", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_0081", "choices": [
+    { "text": "把最想做的事排进日程", "personality": ["adventurous"] },
+    { "text": "每完成一项就划掉一项", "personality": ["rational"] },
+    { "text": "想想就好，懒得动", "personality": ["cautious"] }
+  ]},
+  { "id": "elderwarm_0006", "choices": [
+    { "text": "把物件洗干净，讲给孙辈听", "personality": ["emotional"] },
+    { "text": "把物件传给最小的孙辈", "personality": ["altruistic"] },
+    { "text": "多看两眼，放回原处", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0106", "choices": [
+    { "text": "拍了几张照片，把最珍贵的东西都收进箱子里", "personality": ["rational"] },
+    { "text": "把老物件送给街坊邻居，说「留个念想」", "personality": ["altruistic"] }
+  ]},
+  { "id": "elder_66", "choices": [
+    { "text": "睡不着就睡不着，起来听会儿广播", "personality": ["rational"] },
+    { "text": "躺在床上数羊，越数越清醒", "personality": ["cautious"] },
+    { "text": "把儿孙叫醒聊天，被说「爷爷你饶了我」", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_0082", "choices": [
+    { "text": "主动张罗明年的聚会", "personality": ["adventurous"] },
+    { "text": "和每个人都好好说说话", "personality": ["altruistic"] },
+    { "text": "坐在角落，看着他们热闹", "personality": ["cautious"] }
+  ]},
+  { "id": "elderwarm_0007", "choices": [
+    { "text": "报书法班，每周准时上课", "personality": ["rational"] },
+    { "text": "和同班的老伙计切磋交流", "personality": ["emotional"] },
+    { "text": "先去听听课，再决定报哪个班", "personality": ["cautious"] }
+  ]},
+  { "id": "tech_0013", "choices": [
+    { "text": "我学会了比价和看评论，买的东西件件实用", "personality": ["rational"] },
+    { "text": "我一时贪便宜囤了一堆，用不上的只能送人", "personality": ["emotional"] },
+    { "text": "我把收货地址背得滚瓜烂熟，还替腿脚不便的邻居代收代拿", "personality": ["altruistic"] }
+  ]},
+  { "id": "elder_0107", "choices": [
+    { "text": "把一生的故事慢慢讲给他们听，一代传一代", "personality": ["altruistic"] },
+    { "text": "讲一半就摆手说「都是老黄历了，没啥好说的」", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_67", "choices": [
+    { "text": "认真学，交几个新朋友", "personality": ["rational"] },
+    { "text": "学了两天就嫌手抖，不去了", "personality": ["cautious"] },
+    { "text": "把老伴也拉来一起学", "personality": ["altruistic"] }
+  ]},
+  { "id": "elder_0083", "choices": [
+    { "text": "听医生的话，坚持散步", "personality": ["rational"] },
+    { "text": "把家搬到一楼", "personality": ["cautious"] },
+    { "text": "不服老，照旧爬楼", "personality": ["adventurous"] }
+  ]},
+  { "id": "elderwarm_0008", "choices": [
+    { "text": "每天清晨浇水施肥，把花养得更好", "personality": ["rational"] },
+    { "text": "再买几盆新花，把花园装点得更热闹", "personality": ["emotional"] },
+    { "text": "把开得好的花剪下来送邻居", "personality": ["altruistic"] }
+  ]},
+  { "id": "sport_0015", "choices": [
+    { "text": "笑着让男孩自己来捡球，夸他踢得真好", "personality": ["altruistic"] },
+    { "personality": null },
+    { "text": "靠在椅背上，看着孩子们踢球，想起自己的童年", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_0108", "choices": [
+    { "text": "病好后开始更加爱惜身体，按时体检、注意保暖", "personality": ["rational"] },
+    { "text": "嘴上说没事，心里却开始害怕生病", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_68", "choices": [
+    { "text": "享受这一刻，什么都不想", "personality": ["emotional"] },
+    { "personality": null },
+    { "text": "坐着坐着就难过：这样的日子还有几天", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0084", "choices": [
+    { "text": "把照片洗出来挂满墙", "personality": ["emotional"] },
+    { "text": "再约一次全家旅行", "personality": ["adventurous"] },
+    { "text": "拍完就行", "personality": ["cautious"] }
+  ]},
+  { "id": "elderwarm_0009", "choices": [
+    { "text": "每天写一段，从年轻时慢慢写起", "personality": ["rational"] },
+    { "text": "口述，让孙辈代笔整理", "personality": ["altruistic"] },
+    { "text": "想到哪儿写到哪儿，随性而为", "personality": ["emotional"] }
+  ]},
+  { "id": "love_0010", "choices": [
+    { "text": "把那张照片抽出来，郑重地放进新相册第一页", "personality": ["emotional"] },
+    { "personality": null },
+    { "text": "看了很久，又把相册合上，轻轻放回原处", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0109", "choices": [
+    { "text": "握紧老伴的手，说「下辈子还娶/嫁你」", "personality": ["emotional"] },
+    { "text": "嘴上不说，心里却全是感激", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_69", "choices": [
+    { "text": "教重孙下象棋，讲自己小时候的事", "personality": ["emotional"] },
+    { "text": "给重孙准备了一笔「长大才许拆」的红包", "personality": ["rational"] },
+    { "text": "孩子们闹得头疼，躲回屋里清净", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0085", "choices": [
+    { "text": "把故事讲给孙辈听", "personality": ["emotional"] },
+    { "personality": null },
+    { "text": "合上铁盒，放回原处", "personality": ["cautious"] }
+  ]},
+  { "id": "elderwarm_0010", "choices": [
+    { "text": "从最基础的定式教起，不厌其烦", "personality": ["rational"] },
+    { "text": "边下棋边讲棋里的道理", "personality": ["altruistic"] },
+    { "text": "和小家伙们下一整天", "personality": ["emotional"] }
+  ]},
+  { "id": "sport_0016", "choices": [
+    { "text": "听医生的话，把运动改成每天楼下走两圈", "personality": ["rational"] },
+    { "text": "拄着拐杖去公园看人打太极，听听热闹", "personality": ["cautious"] },
+    { "text": "不服老，想偷偷再试一次当年那套动作", "personality": ["adventurous"] }
+  ]},
+  { "id": "elder_0110", "choices": [
+    { "text": "加入了合唱团，每周排练成了最期待的事", "personality": ["adventurous"] },
+    { "text": "唱了一次就觉得不好意思，还是回家听收音机", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_70", "choices": [
+    { "text": "听医生的，戒了烟酒，按时吃药", "personality": ["rational"] },
+    { "text": "「活到这个岁数够本了」，照旧生活", "personality": ["cautious"] },
+    { "text": "心里害怕，频繁往医院跑", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_0086", "choices": [
+    { "text": "每天准时下楼坐坐", "personality": ["rational"] },
+    { "text": "和每个路过的人打招呼", "personality": ["altruistic"] },
+    { "text": "就坐在阳台上看看", "personality": ["cautious"] }
+  ]},
+  { "id": "hobby_0016", "choices": [
+    { "text": "慢慢织完这件小毛衣，寄给重孙", "personality": ["altruistic"] },
+    { "text": "把老手艺捡起来，又织了好几件小帽小袜", "personality": ["rational"] },
+    { "text": "手累了就歇一歇，看着窗外发一会儿呆", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_0116", "choices": [
+    { "text": "珍惜眼前人，给老伙计们挨个打了电话", "personality": ["emotional"] },
+    { "text": "沉默了很久，一个人坐到了天黑", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_71", "choices": [
+    { "text": "把遗嘱、存款、钥匙都交代清楚", "personality": ["rational"] },
+    { "text": "「该说的都说了，剩下的你们自己决定」", "personality": ["cautious"] },
+    { "text": "抗拒谈这个话题，一提就生气", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_0087", "choices": [
+    { "text": "在日记末尾补上今天的日子", "personality": ["emotional"] },
+    { "text": "把日记交给孩子保管", "personality": ["altruistic"] },
+    { "text": "读完放回抽屉", "personality": ["cautious"] }
+  ]},
+  { "id": "sport_0017", "choices": [
+    { "text": "起身给他一个大大的拥抱，连声说「跑得真好」", "personality": ["emotional"] },
+    { "text": "拉着他的手，比划着教他起跑姿势，说明年能更快", "personality": ["rational"] },
+    { "text": "笑着看他去领奖，自己在座位上慢慢鼓掌", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0117", "choices": [
+    { "text": "把压箱底的传家之物送给了孙辈", "personality": ["altruistic"] },
+    { "text": "只说了句「好好干」，心里却无比骄傲", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_72", "choices": [
+    { "text": "「老张，下辈子还做朋友。」", "personality": ["emotional"] },
+    { "personality": null },
+    { "text": "不想参加任何葬礼了，太难过", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0088", "choices": [
+    { "text": "把积蓄分给需要的家人", "personality": ["altruistic"] },
+    { "personality": null },
+    { "text": "交代完就不想了", "personality": ["cautious"] }
+  ]},
+  { "id": "tech_0014", "choices": [
+    { "text": "我按年代给照片排好序，给每张都写了备注", "personality": ["rational"] },
+    { "text": "我对着照片看了很久，想起很多人、很多事", "personality": ["emotional"] },
+    { "text": "凭着一双拍过晚霞的手，我配上自己写的旁白，把相册剪成一部家族纪录片", "personality": ["altruistic"] }
+  ]},
+  { "id": "elder_0118", "choices": [
+    { "text": "坚持了三年，身体比同龄人硬朗不少", "personality": ["rational"] },
+    { "text": "走了几天就嫌累，又窝回了沙发", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_73", "choices": [
+    { "text": "「再活十年，看着他们长大。」", "personality": ["emotional"] },
+    { "text": "顺其自然，活一天算一天", "personality": ["cautious"] },
+    { "personality": null }
+  ]},
+  { "id": "elder_0089", "choices": [
+    { "text": "讲一讲那些走过弯路的教训", "personality": ["altruistic"] },
+    { "text": "讲讲那些开心的往事", "personality": ["emotional"] },
+    { "text": "讲完就走", "personality": ["cautious"] }
+  ]},
+  { "id": "sport_0018", "choices": [
+    { "text": "坐下陪老邻居晒太阳，享受这一刻的宁静", "personality": ["emotional"] },
+    { "text": "坚持把这一圈走完，再回楼上休息", "personality": ["rational"] },
+    { "text": "走完一圈，回来时给花坛浇了浇水", "personality": ["altruistic"] }
+  ]},
+  { "id": "elder_0119", "choices": [
+    { "text": "在老屋里又住了一年，说「这里最安心」", "personality": ["cautious"] },
+    { "text": "修好后还是搬去了孩子家，老屋留作念想", "personality": ["rational"] }
+  ]},
+  { "id": "elder_74", "choices": [
+    { "personality": null }
+  ]},
+  { "id": "elder_0090", "choices": [
+    { "text": "敬每一张熟悉的面孔", "personality": ["emotional"] },
+    { "personality": null },
+    { "text": "安安静静吃完这顿饭", "personality": ["cautious"] }
+  ]},
+  { "id": "hobby_0017", "choices": [
+    { "text": "把年轻时喜欢的歌一首首讲给外孙听", "personality": ["altruistic"] },
+    { "text": "学着摆弄留声机，研究它为什么会出声", "personality": ["rational"] },
+    { "text": "和老伴一人一句地跟着哼，像年轻时那样", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_0120", "choices": [
+    { "text": "吹蜡烛时，许了一个「儿孙平安」的愿望", "personality": ["altruistic"] },
+    { "text": "笑着说「活够了」，心里却还想多看看这个世界", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_0091", "choices": [
+    { "text": "把梦记下来", "personality": ["emotional"] },
+    { "text": "给还健在的故人打个电话", "personality": ["altruistic"] },
+    { "text": "当作没做过这个梦", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0137", "choices": [
+    { "text": "明天还来，一天都不落", "personality": ["rational"] },
+    { "text": "教新来的年轻人站桩", "personality": ["altruistic"] },
+    { "text": "练完坐在长椅上晒太阳", "personality": ["cautious"] }
+  ]},
+  { "id": "love_0011", "choices": [
+    { "text": "握住TA搭在肩上的手：「有你，每一天都很好」", "personality": ["emotional"] },
+    { "text": "也拿起梳子，帮TA理理所剩不多的白发", "personality": ["altruistic"] },
+    { "text": "对着镜子里的自己笑一笑，什么也没说", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0111", "choices": [
+    { "text": "坚持每天写一点，留给子孙们", "personality": ["rational"] },
+    { "text": "写了几页就搁下了，觉得往事不堪回首", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0092", "choices": [
+    { "text": "给每张照片写上注释", "personality": ["rational"] },
+    { "text": "挑几张寄给远方的家人", "personality": ["altruistic"] },
+    { "text": "合上相册", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0138", "choices": [
+    { "text": "跟着哼完这一整出", "personality": ["emotional"] },
+    { "text": "给孙辈讲讲这出戏的来历", "personality": ["altruistic"] },
+    { "text": "把收音机音量调小，独自慢慢听", "personality": ["cautious"] }
+  ]},
+  { "id": "tech_0015", "choices": [
+    { "text": "我把它当老伙计，每天聊几句，还学会了用它叫儿子来帮忙", "personality": ["adventurous"] },
+    { "text": "我怕说错话闹笑话，只敢远远看着它", "personality": ["cautious"] },
+    { "text": "九岁那年敲下的第一个字母，原来都是为今天准备的", "personality": ["rational"] }
+  ]},
+  { "id": "elder_0112", "choices": [
+    { "text": "享受这份安宁，心满意足", "personality": ["emotional"] },
+    { "text": "晒着晒着，竟有些害怕这样的日子不多了", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0093", "choices": [
+    { "text": "在树旁立一块小牌子", "personality": ["emotional"] },
+    { "text": "每年春天都回来看看", "personality": ["rational"] },
+    { "text": "种完就好了", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0139", "choices": [
+    { "text": "认真教他：下棋先学做人", "personality": ["rational"] },
+    { "text": "再让一局，看他高兴就好", "personality": ["altruistic"] },
+    { "text": "讲讲当年教你下棋的那个人的故事", "personality": ["emotional"] }
+  ]},
+  { "id": "love_0012", "choices": [
+    { "text": "用尽力气握了握TA的手，轻声说：「这辈子，谢谢你」", "personality": ["emotional"] },
+    { "text": "安安静静躺着，听TA讲你们年轻时的事，慢慢睡着", "personality": ["rational"] },
+    { "personality": null }
+  ]},
+  { "id": "elder_0113", "choices": [
+    { "text": "抱着重孙，笑得合不拢嘴", "personality": ["emotional"] },
+    { "personality": null }
+  ]},
+  { "id": "elder_0094", "choices": [
+    { "text": "每天都要出来看看花开", "personality": ["rational"] },
+    { "text": "把花开的样子讲给家人听", "personality": ["emotional"] },
+    { "text": "躺着晒太阳就好", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0140", "choices": [
+    { "text": "得意地再检查一遍针脚", "personality": ["rational"] },
+    { "text": "教重孙认针线：东西坏了，能修就别扔", "personality": ["altruistic"] },
+    { "text": "想起年轻时为一家人缝补的那些夜晚", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_0114", "choices": [
+    { "text": "把每件事都交代得清清楚楚，无牵无挂", "personality": ["rational"] },
+    { "text": "说着说着，还是舍不得这个人间", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_0095", "choices": [
+    { "text": "把最后的力气，都用在微笑上", "personality": ["emotional"] },
+    { "text": "握紧每个家人的手", "personality": ["altruistic"] },
+    { "text": "安静地听完他们的声音", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0141", "choices": [
+    { "text": "把寿桃分给围观的邻居孩子们", "personality": ["altruistic"] },
+    { "text": "拉着工作人员聊了很久的家常", "personality": ["emotional"] },
+    { "text": "捧着贺卡，看了又看", "personality": ["cautious"] }
+  ]},
+  { "id": "hobby_0018", "choices": [
+    { "text": "给常来的鸟儿都起了名字，记下它们每天到访的时间", "personality": ["rational"] },
+    { "text": "把看到的鸟儿画在本子上，攒了一本翅膀的痕迹", "personality": ["emotional"] },
+    { "text": "就这样安静地坐着，什么都不做，也很好", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0115", "choices": [
+    { "text": "微笑着迎接新的一天", "personality": ["emotional"] },
+    { "text": "静静躺着，回忆这一生的光", "personality": ["rational"] }
+  ]},
+  { "id": "elder_0142", "choices": [
+    { "text": "在堂屋门槛上再坐一会儿", "personality": ["emotional"] },
+    { "personality": null },
+    { "text": "和老邻居们在巷口合了张影", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0151", "choices": [
+    { "text": "把报告单看了又看，说要裱起来", "personality": ["emotional"] },
+    { "text": "按报告上的建议，认认真真喝养生粥", "personality": ["rational"] },
+    { "text": "收起报告单，打算给重孙们看看", "personality": ["altruistic"] }
+  ]},
+  { "id": "elder_0135", "choices": [
+    { "text": "郑重写下心愿，等待百岁那天", "personality": ["rational"] },
+    { "text": "把旧相册从头翻到尾", "personality": ["emotional"] },
+    { "text": "笑着说：活到这把岁数，心愿早不重要了", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0130", "choices": [
+    { "text": "把这一百年的变化讲给年轻人听", "personality": ["altruistic"] },
+    { "text": "在新事物里认出旧日子的影子", "personality": ["emotional"] },
+    { "text": "安静地看完这场日落", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0143", "choices": [
+    { "text": "给他讲讲挣工分的年月", "personality": ["altruistic"] },
+    { "text": "从抽屉深处摸出一枚老分币送他", "personality": ["emotional"] },
+    { "text": "感慨一句：日子真是越过越好了", "personality": ["rational"] }
+  ]},
+  { "id": "elder_0152", "choices": [
+    { "text": "蹲下来，张开手臂接住他", "personality": ["emotional"] },
+    { "text": "扶着他的小手，耐心走完整个客厅", "personality": ["altruistic"] },
+    { "text": "看着这一幕，轻轻说：路就是这样走出来的", "personality": ["rational"] }
+  ]},
+  { "id": "elder_0144", "choices": [
+    { "text": "把津贴攒进给重孙的红包匣子", "personality": ["altruistic"] },
+    { "text": "请街坊老伙计们吃顿好的", "personality": ["emotional"] },
+    { "text": "笑呵呵地应下每一声「老寿星」", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0153", "choices": [
+    { "text": "把当年背过的课文再背一遍", "personality": ["rational"] },
+    { "text": "指着插图，给重孙讲当年的教室", "personality": ["altruistic"] },
+    { "text": "合上课本，摩挲着扉页上自己的名字", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_0136", "choices": [
+    { "text": "把一百个春天的故事讲给重孙听", "personality": ["altruistic"] },
+    { "text": "在树下坐一整个下午，看蚂蚁搬家", "personality": ["emotional"] },
+    { "text": "让重孙替你把花种撒满院子", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0131", "choices": [
+    { "text": "去送他最后一程，认真道别", "personality": ["emotional"] },
+    { "text": "把你们的故事讲给孙辈听", "personality": ["altruistic"] },
+    { "personality": null }
+  ]},
+  { "id": "elder_0145", "choices": [
+    { "text": "给兰花换个向阳的位置", "personality": ["rational"] },
+    { "text": "让孙子拍下来，发给远方的孩子们看", "personality": ["altruistic"] },
+    { "text": "搬把椅子坐在花旁边，陪它一下午", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_0154", "choices": [
+    { "text": "抢着当庄家，连赢三把才肯下桌", "personality": ["adventurous"] },
+    { "text": "趁洗牌的空当，挨个问问老伙计的近况", "personality": ["altruistic"] },
+    { "personality": null }
+  ]},
+  { "id": "elder_0132", "choices": [
+    { "text": "把祝福分给每一个孩子", "personality": ["altruistic"] },
+    { "text": "对着镜头说了句心里话", "personality": ["adventurous"] },
+    { "text": "端起长寿面，敬满院子的人", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_0146", "choices": [
+    { "text": "对着镜头讲一段百年前的童年", "personality": ["altruistic"] },
+    { "text": "学着比了个年轻人教的手势", "personality": ["adventurous"] },
+    { "personality": null }
+  ]},
+  { "id": "elder_0147", "choices": [
+    { "text": "把照片摆在床头，每天看一遍", "personality": ["emotional"] },
+    { "text": "给玄孙戴上你珍藏的长命锁", "personality": ["altruistic"] },
+    { "text": "对着满院子人说了声：都好好的", "personality": ["rational"] }
+  ]},
+  { "id": "elder_0155", "choices": [
+    { "text": "许愿：孩子们都平平安安的", "personality": ["altruistic"] },
+    { "text": "吹灭蜡烛，把愿望大大方方说了出来", "personality": ["adventurous"] },
+    { "text": "闭眼的片刻，把这一生静静过了一遍", "personality": ["rational"] }
+  ]},
+  { "id": "elder_0133", "choices": [
+    { "text": "把压箱底的诀窍都教给他", "personality": ["altruistic"] },
+    { "text": "边教边讲这门手艺的来历", "personality": ["rational"] },
+    { "text": "看他编出第一只完整的篮子", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_0148", "choices": [
+    { "text": "把常联系的人都视频了一遍", "personality": ["emotional"] },
+    { "text": "让重孙再教你怎么发语音", "personality": ["rational"] },
+    { "text": "得意地说：活到老，学到老", "personality": ["adventurous"] }
+  ]},
+  { "id": "elder_0156", "choices": [
+    { "text": "把老友的名字一个个写进本子，记下他们的故事", "personality": ["rational"] },
+    { "text": "给空着的位子也倒上茶，举杯敬了敬", "personality": ["emotional"] },
+    { "personality": null }
+  ]},
+  { "id": "elder_0134", "choices": [
+    { "text": "把这一生的经历都写进去", "personality": ["rational"] },
+    { "text": "郑重写下：好好活，别怕", "personality": ["emotional"] },
+    { "text": "把信压在枕头底下，等他自己来读", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0149", "choices": [
+    { "text": "在信里讲讲这一百年的变化", "personality": ["rational"] },
+    { "text": "只写一句：好好活，日子会更好", "personality": ["emotional"] },
+    { "text": "附上一张五世同堂的全家福复印件", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0157", "choices": [
+    { "text": "把笔记按四季分章，写得工工整整", "personality": ["rational"] },
+    { "personality": null },
+    { "text": "最后一页写上：最好的养生，是心里不搁事", "personality": ["emotional"] }
+  ]},
+  { "id": "elder_0121", "choices": [
+    { "text": "落款：一个走过了整个世纪的人", "personality": ["emotional"] },
+    { "text": "把回信寄给一百年前的自己", "personality": ["rational"] },
+    { "text": "把信放在枕边，微笑着入睡", "personality": ["cautious"] }
+  ]},
+  { "id": "elder_0150", "choices": [
+    { "text": "举杯敬了全家人一杯", "personality": ["emotional"] },
+    { "text": "给每个孩子都夹了一筷子菜", "personality": ["altruistic"] },
+    { "personality": null }
+  ]},
+  { "id": "elder_0158", "choices": [
+    { "text": "把清单誊抄工整，每一行都标上实现的年份", "personality": ["rational"] },
+    { "text": "划掉一行：剩下的愿望，今天就开始做", "personality": ["adventurous"] },
+    { "text": "在背面落笔：这一生，我没有遗憾", "personality": ["emotional"] }
+  ]}
+]

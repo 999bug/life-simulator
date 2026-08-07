@@ -1,0 +1,397 @@
+[
+  { "id": "adult_17", "choices": [
+    { "text": "预约了皮肤科，开始早睡早起不熬夜", "personality": ["rational"] },
+    { "text": "研究了半个月生发产品，花了小半年工资", "personality": ["emotional"] },
+    { "text": "剪短！男人成熟的标志就是坦然面对", "personality": ["cautious"] }
+  ]},
+  { "id": "adult_18", "choices": [
+    { "text": "逐个约谈，问他们的目标和顾虑", "personality": ["rational"] },
+    { "text": "自己扛下所有活，怕他们干不好", "personality": ["cautious"] },
+    { "text": "定好规矩和节点，不合格就淘汰", "personality": ["rational"] }
+  ]},
+  { "id": "adult_19", "choices": [
+    { "text": "下定决心生下来。开始攒钱、查孕检、买书", "personality": ["emotional"] },
+    { "text": "还没准备好，先把事业搞稳再说", "personality": ["cautious"] },
+    { "text": "顺其自然。该来的都会来", "personality": ["emotional"] }
+  ]},
+  { "id": "adult_20", "choices": [
+    { "text": "关掉朋友圈，专注自己的节奏", "personality": ["rational"] },
+    { "text": "开始折腾副业，什么赚钱试什么", "personality": ["adventurous"] },
+    { "text": "承认焦虑，把焦虑写进日记里", "personality": ["emotional"] }
+  ]},
+  { "id": "adult_21", "choices": [
+    { "text": "放下手机，好好陪TA吃完这顿饭", "personality": ["emotional"] },
+    { "text": "补了一份礼物，下次纪念日一定请假", "personality": ["cautious"] },
+    { "personality": null }
+  ]},
+  { "id": "young_0031", "choices": [
+    { "text": "复查到位，安心养伤", "personality": ["cautious"] },
+    { "text": "找人理赔，该争取的都争取", "personality": ["rational"] },
+    { "text": "急着出院，工作不能停", "personality": ["adventurous"] }
+  ]},
+  { "id": "research_0002", "choices": [
+    { "text": "擦干记录本，开始第一千零一次", "personality": ["rational"] },
+    { "text": "换个角度切入，思路忽然活了", "personality": ["adventurous"] },
+    { "text": "承认不是这块料，转行去了企业", "personality": ["cautious"] }
+  ]},
+  { "id": "hosp_0001", "choices": [
+    { "text": "老老实实住院，把这些年欠身体的先还上", "personality": ["cautious"] },
+    { "text": "开点药就走，工作还堆着，哪有时间住院", "personality": ["adventurous"] },
+    { "text": "家人连夜赶来，看着你红了眼眶", "personality": ["emotional"] }
+  ]},
+  { "id": "adult_22", "choices": [
+    { "text": "把副业当正经事做起来，每周固定投入时间", "personality": ["rational"] },
+    { "text": "偶尔摆摊，主业不能丢", "personality": ["cautious"] },
+    { "text": "赚了三百，路费和材料倒贴了四百", "personality": ["adventurous"] }
+  ]},
+  { "id": "adult_23", "choices": [
+    { "text": "精打细算，给孩子最好的也给自己留余地", "personality": ["rational"] },
+    { "text": "孩子要什么买什么，来日方长", "personality": ["emotional"] },
+    { "text": "开始研究育儿省钱攻略，把每一分钱花在刀刃上", "personality": ["cautious"] }
+  ]},
+  { "id": "adult_24", "choices": [
+    { "text": "请了一周假，在医院陪床，晚上趴床沿睡", "personality": ["emotional"] },
+    { "text": "安排好护工和费用，白天上班晚上探视", "personality": ["rational"] },
+    { "text": "人到了，但心里一直惦记着明天的会", "personality": ["selfish"] }
+  ]},
+  { "id": "adult_25", "choices": [
+    { "text": "办张健身卡，每周跑三次，戒掉奶茶", "personality": ["rational"] },
+    { "text": "买了护肝片，继续原来的日子", "personality": ["emotional"] },
+    { "text": "跟同事组了个跑步打卡群，互相监督", "personality": ["altruistic"] }
+  ]},
+  { "id": "wealth_0032", "choices": [
+    { "personality": null },
+    { "text": "跳槽去拿高薪", "personality": ["adventurous"] },
+    { "text": "婉拒升职，保持现状", "personality": ["cautious"] }
+  ]},
+  { "id": "invest_0001", "choices": [
+    { "text": "先尽调再说，花钱请专业人士查了个底朝天", "personality": ["rational"] },
+    { "text": "机会不等人，重注一把", "personality": ["adventurous"] },
+    { "personality": null }
+  ]},
+  { "id": "gray_0002", "choices": [
+    { "text": "继续加码，撑死胆大的", "personality": ["adventurous"] },
+    { "text": "找借口抽身，宁可少赚也要睡个安稳觉", "personality": ["cautious"] },
+    { "text": "找个替身挡在前面，自己往后躲", "personality": ["selfish"] }
+  ]},
+  { "id": "adult_03", "choices": [
+    { "text": "公平竞争。展示了最漂亮的业绩数据和下季度规划", "personality": ["rational"] },
+    { "text": "主动和TA沟通——「不管谁上，我们都要继续好好合作」", "personality": ["altruistic"] },
+    { "text": "私下打听了总监的偏好，针对性地包装了自己", "personality": ["selfish"] }
+  ]},
+  { "id": "adult_26", "choices": [
+    { "text": "复盘问题，下次讲重点", "personality": ["rational"] },
+    { "text": "觉得资历不够，先让给别人", "personality": ["cautious"] },
+    { "text": "不服气，直接找老领导要个说法", "personality": ["adventurous"] }
+  ]},
+  { "id": "adult_27", "choices": [
+    { "text": "躲在转角看了半小时，确认TA不哭了才走", "personality": ["emotional"] },
+    { "text": "狠心转身就走。成长嘛，总要有这一课", "personality": ["rational"] },
+    { "personality": null }
+  ]},
+  { "id": "adult_28", "choices": [
+    { "text": "约定每季度视频一次，专聊废话", "personality": ["emotional"] },
+    { "text": "接受距离。成年人都有自己的战场", "personality": ["rational"] },
+    { "text": "买了张周末机票，突然出现在TA公司楼下", "personality": ["adventurous"] }
+  ]},
+  { "id": "adult_29", "choices": [
+    { "text": "喜欢就做，不喜欢就换。给自己三年期限", "personality": ["adventurous"] },
+    { "text": "别想那么多，先赚钱再说", "personality": ["rational"] },
+    { "text": "写下十年后想成为的人，贴在床头", "personality": ["emotional"] }
+  ]},
+  { "id": "adult_30", "choices": [
+    { "text": "学！把 AI 变成自己的左膀右臂", "personality": ["rational"] },
+    { "text": "抵触。人写的方案才有人味", "personality": ["emotional"] },
+    { "personality": null }
+  ]},
+  { "id": "venture_0003", "choices": [
+    { "text": "迎来转机，公司活下来了", "personality": ["adventurous"] },
+    { "text": "回天乏术，亲手关掉公司", "personality": ["rational"] },
+    { "text": "把公司转让给合伙人，抽身离开", "personality": ["cautious"] }
+  ]},
+  { "id": "research_0003", "choices": [
+    { "text": "继续深耕，把这条路走到底", "personality": ["rational"] },
+    { "text": "把成果转成专利，第一次尝到学术变现", "personality": ["adventurous"] },
+    { "text": "心愿已了，把重心放回生活", "personality": ["cautious"] }
+  ]},
+  { "id": "invest_0002", "choices": [
+    { "text": "抹不开面子，跟投了一笔", "personality": ["emotional"] },
+    { "personality": null },
+    { "text": "全部资金撤到安全区，宁可少赚", "personality": ["cautious"] }
+  ]},
+  { "id": "adult_31", "choices": [
+    { "text": "先休息三天，然后全力找工作", "personality": ["rational"] },
+    { "text": "当天就投了五十份简历，广撒网", "personality": ["adventurous"] },
+    { "text": "接受赔偿，趁机做一件一直想做的事", "personality": ["emotional"] }
+  ]},
+  { "id": "adult_32", "choices": [
+    { "text": "敲了卧室门：「饭做好了，出来吃点？」", "personality": ["emotional"] },
+    { "text": "你不吃我吃。冷战到底，看谁先低头", "personality": ["selfish"] },
+    { "text": "写了一张纸条塞进门缝：我们聊聊吧", "personality": ["rational"] }
+  ]},
+  { "id": "adult_33", "choices": [
+    { "text": "认栽。以后只买看得懂的", "personality": ["rational"] },
+    { "text": "找朋友理论，让TA赔一半", "personality": ["selfish"] },
+    { "text": "去查了理财知识，把闲钱换成低风险组合", "personality": ["cautious"] }
+  ]},
+  { "id": "adult_34", "choices": [
+    { "text": "完整。我有自己的活法", "personality": ["adventurous"] },
+    { "text": "被说得有点动摇，回家和伴侣认真聊了一次", "personality": ["rational"] },
+    { "text": "有些羡慕，但看看他们的黑眼圈又释然了", "personality": ["cautious"] }
+  ]},
+  { "id": "adult_0034", "choices": [
+    { "text": "彻底休养，做一次全面体检", "personality": ["cautious"] },
+    { "text": "检查结果都还好，才放下心", "personality": ["emotional"] },
+    { "text": "出院就忙，检查以后再说", "personality": ["adventurous"] }
+  ]},
+  { "id": "invest_0003", "choices": [
+    { "text": "血汗钱打了水漂，蹲在马路牙子上抽了半包烟", "personality": ["emotional"] },
+    { "personality": null },
+    { "text": "联合其他受害者报案，能追回一点是一点", "personality": ["altruistic"] }
+  ]},
+  { "id": "hosp_0002", "choices": [
+    { "text": "把清单收好，出院后一条一条去实现", "personality": ["adventurous"] },
+    { "text": "发誓彻底改变，从戒掉熬夜开始", "personality": ["rational"] },
+    { "text": "越想越委屈，凭什么是我", "personality": ["emotional"] }
+  ]},
+  { "id": "adult_04", "choices": [
+    { "text": "从明天开始跑步+调整饮食。这是最后一次看到红箭头", "personality": ["rational"] },
+    { "text": "吓了几天，然后继续熬夜加班。没办法啊", "personality": ["emotional"] },
+    { "personality": null }
+  ]},
+  { "id": "adult_35", "choices": [
+    { "text": "会后单独聊，先听TA说完", "personality": ["rational"] },
+    { "text": "当场压回去，树立威信", "personality": ["adventurous"] },
+    { "personality": null }
+  ]},
+  { "id": "adult_36", "choices": [
+    { "text": "生。热闹是钱买不来的", "personality": ["emotional"] },
+    { "text": "一个孩子够了，把精力都留给TA", "personality": ["cautious"] },
+    { "text": "再想想。先攒点钱，过两年再说", "personality": ["rational"] }
+  ]},
+  { "id": "adult_37", "choices": [
+    { "text": "把十字绣摘了，挂上了全家福", "personality": ["emotional"] },
+    { "text": "也开始看房，不行就置换", "personality": ["adventurous"] },
+    { "text": "释然。每个人的人生进度条不一样", "personality": ["rational"] }
+  ]},
+  { "id": "adult_38", "choices": [
+    { "text": "把恐惧变成行动：学新技能、经营人脉", "personality": ["rational"] },
+    { "text": "慌归慌，日子还得过", "personality": ["cautious"] },
+    { "text": "年龄是枷锁，也是护城河。我比TA多十年经验", "personality": ["adventurous"] }
+  ]},
+  { "id": "adult_39", "choices": [
+    { "text": "关了电视，聊了一整晚以前的事", "personality": ["emotional"] },
+    { "personality": null },
+    { "text": "计划了一次两个人的短途旅行", "personality": ["adventurous"] }
+  ]},
+  { "id": "music_0004", "choices": [
+    { "text": "再忙也留一小时给琴", "personality": ["emotional"] },
+    { "text": "把琴房钥匙送给琴行，教孩子们弹琴", "personality": ["altruistic"] },
+    { "text": "合上琴盖，明天还要早起", "personality": ["cautious"] }
+  ]},
+  { "id": "gray_0003", "choices": [
+    { "text": "从消防通道跑了，从此东躲西藏", "personality": ["cautious"] },
+    { "text": "瘫坐在沙发上等门开，听天由命", "personality": ["emotional"] },
+    { "text": "第二天走进派出所，把这些年全交代了", "personality": ["adventurous"] }
+  ]},
+  { "id": "adult_05", "choices": [
+    { "text": "约TA去第一次约会的那家餐厅。点上当年的菜，聊了很多", "personality": ["emotional"] },
+    { "text": "觉得太累了。各退一步，分居一段时间冷静", "personality": ["cautious"] },
+    { "text": "把心里的话全都倒出来。吵了一整夜，但第二天早上TA给你倒了杯水", "personality": ["adventurous"] }
+  ]},
+  { "id": "adult_40", "choices": [
+    { "text": "再撑一年，砍掉不赚钱的业务，专注核心", "personality": ["adventurous"] },
+    { "text": "接受现实，体面地关门，给员工写好推荐信", "personality": ["altruistic"] },
+    { "text": "找老东家聊聊，看看有没有回头路", "personality": ["cautious"] }
+  ]},
+  { "id": "adult_41", "choices": [
+    { "text": "「有我在呢，以后我常回家」", "personality": ["emotional"] },
+    { "text": "给家里装了监控和扶手，请了护工", "personality": ["rational"] },
+    { "text": "累到虚脱，回家倒头就睡，第二天接着上班", "personality": ["adventurous"] }
+  ]},
+  { "id": "adult_42", "choices": [
+    { "text": "就近入学，给孩子一个轻松的童年", "personality": ["cautious"] },
+    { "text": "托关系、买学区房，把能做的都做了", "personality": ["adventurous"] },
+    { "text": "研究了一年升学政策，做出最优解", "personality": ["rational"] }
+  ]},
+  { "id": "adult_43", "choices": [
+    { "text": "挂了心内科专家号，全面检查", "personality": ["cautious"] },
+    { "text": "从此每天十点睡，戒了熬夜和重油", "personality": ["rational"] },
+    { "text": "年轻人哪有那么多毛病，睡一觉就好", "personality": ["adventurous"] }
+  ]},
+  { "id": "wealth_0036", "choices": [
+    { "text": "落袋为安", "personality": ["cautious"] },
+    { "text": "继续持有，等更大回报", "personality": ["adventurous"] },
+    { "text": "取出部分改善生活", "personality": ["emotional"] }
+  ]},
+  { "id": "adult_0036", "choices": [
+    { "text": "认真训练，下次拿个好名次", "personality": ["rational"] },
+    { "text": "带动同事一起运动", "personality": ["altruistic"] },
+    { "text": "偶尔参加，不勉强自己", "personality": ["cautious"] }
+  ]},
+  { "id": "research_0004", "choices": [
+    { "text": "把时间留给年轻人，像老教授当年对你那样", "personality": ["altruistic"] },
+    { "text": "全力冲击更高头衔，连轴转的日子又开始了", "personality": ["adventurous"] },
+    { "text": "减少课题，周末留给家人", "personality": ["cautious"] }
+  ]},
+  { "id": "echo_0020", "choices": [
+    { "text": "去吧，给彼此一个机会", "personality": ["cautious"] },
+    { "text": "去，但只是为了让妈安心", "personality": ["emotional"] },
+    { "text": "明确拒绝：我的婚事我做主", "personality": ["adventurous"] }
+  ]},
+  { "id": "adult_44", "choices": [
+    { "text": "转。学管理、带团队，路越走越宽", "personality": ["adventurous"] },
+    { "text": "拒绝。我就想写代码写到六十岁", "personality": ["rational"] },
+    { "text": "边带团队边接私活，两条腿走路", "personality": ["cautious"] }
+  ]},
+  { "id": "adult_45", "choices": [
+    { "text": "跟领导请了假，运动会那天举着相机满场跑", "personality": ["emotional"] },
+    { "text": "让TA妈去，自己周末补一次「父女日」", "personality": ["rational"] },
+    { "personality": null }
+  ]},
+  { "id": "adult_46", "choices": [
+    { "text": "还了。无债一身轻", "personality": ["cautious"] },
+    { "text": "不还。钱在自己手里才踏实", "personality": ["adventurous"] },
+    { "text": "还一半，留一半应急", "personality": ["rational"] }
+  ]},
+  { "id": "adult_47", "choices": [
+    { "text": "重启运动：晨跑、举铁，三个月瘦回毕业时", "personality": ["rational"] },
+    { "text": "办了卡，去了两次，然后在群里立了个「明年再战」的 flag", "personality": ["emotional"] },
+    { "text": "发福怎么了，心里没发福就行", "personality": ["cautious"] }
+  ]},
+  { "id": "hosp_0003", "choices": [
+    { "text": "换上跑鞋，从气喘吁吁的一公里开始", "personality": ["rational"] },
+    { "text": "先划掉「带爸妈旅行」，订票出发", "personality": ["adventurous"] },
+    { "text": "工作一忙，清单又塞回了抽屉深处", "personality": ["cautious"] }
+  ]},
+  { "id": "echo_0021", "choices": [
+    { "text": "周末约一次二人旅行，重新点火", "personality": ["emotional"] },
+    { "text": "今晚就放下手机好好谈谈", "personality": ["rational"] },
+    { "text": "婚姻不都这样，凑合过", "personality": ["cautious"] }
+  ]},
+  { "id": "love_0003", "choices": [
+    { "text": "握住TA的手：「谢谢你陪我走到今天」", "personality": ["emotional"] },
+    { "text": "提议：以后每周留一晚，只属于我们俩", "personality": ["rational"] },
+    { "text": "聊着聊着困了，各自回屋睡下", "personality": ["cautious"] }
+  ]},
+  { "id": "adult_06", "choices": [
+    { "text": "请了年假回家。工作可以再找，爸妈的时间不能等", "personality": ["emotional"] },
+    { "text": "每天固定时间视频通话，按月打生活费", "personality": ["rational"] },
+    { "text": "心里难受，但项目走不开。对自己说下次一定请假", "personality": ["cautious"] }
+  ]},
+  { "id": "adult_48", "choices": [
+    { "text": "帮同事联系下家，送TA们最后一程", "personality": ["altruistic"] },
+    { "text": "庆幸之余加倍表现，争取留下", "personality": ["rational"] },
+    { "text": "趁机谈涨薪。留下可以，条件得变", "personality": ["adventurous"] }
+  ]},
+  { "id": "adult_49", "choices": [
+    { "text": "摊牌。把话说开，能过就过，不能过就散", "personality": ["adventurous"] },
+    { "text": "假装不知道，加倍对TA好", "personality": ["emotional"] },
+    { "text": "预约了婚姻咨询，拉着TA一起去", "personality": ["rational"] }
+  ]},
+  { "id": "adult_50", "choices": [
+    { "text": "这顿饭吃得比任何团建都痛快", "personality": ["emotional"] },
+    { "text": "大家都不容易，但没人认输", "personality": ["adventurous"] },
+    { "personality": null }
+  ]},
+  { "id": "adult_51", "choices": [
+    { "text": "抱了抱TA，跟TA道歉，一起把题做完", "personality": ["emotional"] },
+    { "text": "报了辅导班，把难题交给老师", "personality": ["cautious"] },
+    { "text": "你教不了，找TA妈/爸来，自己躲进书房", "personality": ["selfish"] }
+  ]},
+  { "id": "adult_52", "choices": [
+    { "text": "遵医嘱吃药，运动，戒酒", "personality": ["rational"] },
+    { "text": "换个工作节奏，把命捡回来", "personality": ["adventurous"] },
+    { "text": "先扛着，等忙完这阵再说", "personality": ["emotional"] }
+  ]},
+  { "id": "adult_0038", "choices": [
+    { "text": "也谢谢他当年逼着你往前跑", "personality": ["emotional"] },
+    { "personality": null },
+    { "text": "碰杯，客套几句", "personality": ["cautious"] }
+  ]},
+  { "id": "invest_0004", "choices": [
+    { "text": "按组合纪律执行，睡得着觉比暴利重要", "personality": ["cautious"] },
+    { "text": "小仓位搏一把，输了就当娱乐", "personality": ["adventurous"] },
+    { "personality": null }
+  ]},
+  { "id": "adult_53", "choices": [
+    { "text": "跳。稳定是留给三十岁以前的", "personality": ["adventurous"] },
+    { "text": "不跳。这个年纪，稳比什么都重要", "personality": ["cautious"] },
+    { "text": "跟老板深谈了一次，留下来换个新项目", "personality": ["rational"] }
+  ]},
+  { "id": "adult_54", "choices": [
+    { "text": "买。房子是抗通胀的硬通货", "personality": ["adventurous"] },
+    { "text": "不买。现金流比砖头重要", "personality": ["rational"] },
+    { "text": "买了套小的，租金能抵月供", "personality": ["cautious"] }
+  ]},
+  { "id": "adult_55", "choices": [
+    { "personality": null },
+    { "text": "联系了最好的医院，四处借钱筹治疗费", "personality": ["altruistic"] },
+    { "text": "瞒着爸爸病情，怕他承受不住", "personality": ["emotional"] }
+  ]},
+  { "id": "adult_56", "choices": [
+    { "text": "和年轻的自己和解：平凡也是另一种答案", "personality": ["rational"] },
+    { "text": "不行，还有机会。把日记收起来，重新出发", "personality": ["adventurous"] },
+    { "text": "把日记锁进抽屉，有些梦想适合尘封", "personality": ["cautious"] }
+  ]},
+  { "id": "invest_0005", "choices": [
+    { "personality": null },
+    { "text": "设好家族信托，把财富稳稳传下去", "personality": ["rational"] },
+    { "text": "买张机票，把年轻时没去过的地方走一遍", "personality": ["adventurous"] }
+  ]},
+  { "id": "hosp_0004", "choices": [
+    { "text": "把自己的经历讲给那个年轻人听", "personality": ["altruistic"] },
+    { "text": "继续保持，健康是攒出来的复利", "personality": ["rational"] },
+    { "text": "晚上庆祝一下，拉着老伴吃了一顿好的", "personality": ["emotional"] }
+  ]},
+  { "id": "gray_0004", "choices": [
+    { "text": "把正规公司一点点做大，这次走得慢但稳", "personality": ["cautious"] },
+    { "text": "匿名资助了几个学生，算是还债", "personality": ["altruistic"] },
+    { "personality": null }
+  ]},
+  { "id": "echo_0003", "choices": [
+    { "text": "加个微信，以后常联系", "personality": ["emotional"] },
+    { "text": "敬往事一杯酒，各自回家", "personality": ["rational"] },
+    { "text": "第二天约出来单独吃了顿饭", "personality": ["adventurous"] }
+  ]},
+  { "id": "adult_57", "choices": [
+    { "text": "干。人生下半场，总得自己当一次老板", "personality": ["adventurous"] },
+    { "text": "先办停薪留职，给自己留条退路", "personality": ["cautious"] },
+    { "text": "辞呈压在抽屉里，先做副业试试水", "personality": ["rational"] }
+  ]},
+  { "id": "adult_58", "choices": [
+    { "text": "不硬闯。写了一张纸条从门缝塞进去", "personality": ["rational"] },
+    { "text": "没收手机，立规矩", "personality": ["adventurous"] },
+    { "text": "找TA的朋友了解TA的近况", "personality": ["emotional"] }
+  ]},
+  { "id": "adult_59", "choices": [
+    { "text": "出院后辞职，换了份不加班的活", "personality": ["cautious"] },
+    { "text": "请了长假，带全家去云南待了半个月", "personality": ["emotional"] },
+    { "text": "休息一周，继续回到原来的轨道", "personality": ["adventurous"] }
+  ]},
+  { "id": "adult_60", "choices": [
+    { "text": "从现在开始定投+保险，把窟窿补上", "personality": ["rational"] },
+    { "text": "算了，车到山前必有路", "personality": ["emotional"] },
+    { "text": "开源：把多年的经验变现，做起了知识付费", "personality": ["adventurous"] }
+  ]},
+  { "id": "adult_61", "choices": [
+    { "text": "认真考虑了要个孩子。年龄越大，越觉得值得", "personality": ["emotional"] },
+    { "text": "可爱归可爱，但我们的二人世界也很好", "personality": ["cautious"] },
+    { "text": "预约了孕前检查，把身体调理好再说", "personality": ["rational"] }
+  ]},
+  { "id": "adult_0040", "choices": [
+    { "text": "在他家吃顿饭，聊聊这些年的日子", "personality": ["emotional"] },
+    { "personality": null },
+    { "text": "匆匆告别，说下次一定", "personality": ["cautious"] }
+  ]},
+  { "id": "pet_0004", "choices": [
+    { "text": "把猫带回家，给它一个家", "personality": ["altruistic"] },
+    { "text": "上楼拿旧毛巾给它擦干，再放点吃的", "personality": ["altruistic"] },
+    { "text": "看了一会儿，转身走进雨里", "personality": ["selfish"] }
+  ]},
+  { "id": "adult_08", "choices": [
+    { "text": "很满足。虽然没有波澜壮阔，但每一天都活得很踏实", "personality": ["cautious"] },
+    { "text": "不甘心！辞掉工作去追那个搁置了十五年的梦想", "personality": ["adventurous"] },
+    { "text": "哭了很久，然后擦干眼泪继续生活", "personality": ["emotional"] }
+  ]}
+]

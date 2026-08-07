@@ -321,3 +321,26 @@ test('MAKE_ACTION 后 CONTINUE：清反馈、已做记录保留', () => {
   assert.strictEqual(rt.feedback, null);
   assert.deepStrictEqual(rt.game.actionsDone, ['leisure'], '已做记录不随 CONTINUE 重置');
 });
+
+test('幼儿期每岁只播 1 个事件：同岁多事件跳过（幻灯片精简），6 岁交还后恢复正常', () => {
+  const events = [
+    evt('a_01', 0, { health: 2 }),
+    evt('a_02', 0, { intelligence: 2 }), // 同 0 岁，幻灯片跳过
+    evt('b_01', 1, { wealth: 2 }),
+    evt('b_02', 1, { happiness: 2 }),    // 同 1 岁，幻灯片跳过
+    evt('c_01', 6, { social: 2 }),
+  ];
+  const base = createInitialRuntime();
+  const rt = reducer(base, { type: 'START_GAME', gender: 'male', name: '小明', paceMode: 'full', typeSpeed: 'normal', goal: null });
+  assert.strictEqual(rt.introAuto, true, '0 岁幼儿期开启');
+  const setup = { ...rt, shuffledEvents: events, currentEvent: events[0], eventIndex: 0 };
+  // 第 1 张（0 岁 a_01）：同岁 a_02 跳过，直接到 1 岁
+  const step1 = reducer(setup, { type: 'MAKE_CHOICE', choice: events[0].choices[0], eventId: 'a_01' });
+  assert.strictEqual(step1.currentEvent?.id, 'b_01', '同岁 a_02 应被跳过');
+  assert.strictEqual(step1.game.age, 1);
+  // 第 2 张（1 岁 b_01）：同岁 b_02 跳过，直接到 6 岁并交还控制
+  const step2 = reducer(step1, { type: 'MAKE_CHOICE', choice: events[1].choices[0], eventId: 'b_01' });
+  assert.strictEqual(step2.currentEvent?.id, 'c_01', '同岁 b_02 应被跳过');
+  assert.strictEqual(step2.game.age, 6);
+  assert.strictEqual(step2.introAuto, false, '6 岁交还玩家控制');
+});

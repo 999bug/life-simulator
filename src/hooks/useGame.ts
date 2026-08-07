@@ -857,8 +857,8 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         out.flags.forEach(f => { if (!flags.includes(f)) flags.push(f); });
       }
 
-      // 基于更新后的属性/标记，线性扫描下一个满足条件的事件
-      const nextScan = findNextEvent({ ...state.game, attributes: attrs, flags }, state.eventIndex, state.shuffledEvents);
+      // 基于更新后的属性/标记，线性扫描下一个满足条件的事件（幼儿期跳过同岁剩余，每岁只播 1 张幻灯片）
+      const nextScan = findNextEvent({ ...state.game, attributes: attrs, flags }, state.eventIndex, state.shuffledEvents, !!state.introAuto);
       const next = nextScan.event;
 
       // 伴侣互动（婚后每 4 岁一次，25-61 岁）：到达互动年龄且本事件非伴侣互动 → 先播伴侣互动
@@ -1076,7 +1076,7 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         if (out.flags) {
           out.flags.forEach(f => { if (!flags.includes(f)) flags.push(f); });
         }
-        const scan = findNextEvent({ ...game, attributes: attrs, flags }, eventIndex, shuffledEvents);
+        const scan = findNextEvent({ ...game, attributes: attrs, flags }, eventIndex, shuffledEvents, true);
         const next = scan.event;
         const nextAge = next ? next.age : game.age;
         if (nextAge >= 65) {
@@ -1153,6 +1153,8 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         shuffleSeed,
         shuffledEvents,
         autoPlay: false,
+        // 幼儿期中途退出读档：恢复幻灯片标记（自动模拟局不写槽，读档年龄 <6 必为手动局）
+        introAuto: saved.game.age < 6,
         paceMode,
         typeSpeed,
         saves,
@@ -1226,13 +1228,18 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
 // ============ 事件查找 ============
 
 /** 从 fromIndex 之后线性扫描：返回第一个满足条件的事件与扫描中跳过的所有事件（条件不满足） */
-function findNextEvent(game: GameState, fromIndex: number, events: LifeEvent[]): { event: LifeEvent | null; skipped: LifeEvent[] } {
+function findNextEvent(game: GameState, fromIndex: number, events: LifeEvent[], skipSameAge = false): { event: LifeEvent | null; skipped: LifeEvent[] } {
   const skipped: LifeEvent[] = [];
   for (let i = fromIndex + 1; i < events.length; i++) {
-    if (checkConditions(events[i], game)) {
-      return { event: events[i], skipped };
+    const e = events[i];
+    // 幼儿期幻灯片：跳过同岁剩余事件（每岁只播 1 张；非条件不满足，不进「未触发」列表）
+    if (skipSameAge && e.age <= game.age) {
+      continue;
     }
-    skipped.push(events[i]);
+    if (checkConditions(e, game)) {
+      return { event: e, skipped };
+    }
+    skipped.push(e);
   }
   return { event: null, skipped };
 }

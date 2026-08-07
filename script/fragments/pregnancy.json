@@ -1,0 +1,41 @@
+[
+  {
+    "id": "preg_0001",
+    "age_range": [18, 18],
+    "category": "love",
+    "title": "验孕棒上的两道杠",
+    "text": "十八岁的傍晚，你在便利店买了一支验孕棒。两道杠。你捏着那根小塑料棍站在走廊尽头，脑子里嗡嗡响。手机屏幕亮了又灭，是 TA 发来的消息：在吗。你蹲下来，把脸埋进膝盖里——你们才在一起几个月，从没认真聊过将来。可此刻，一个意外的小生命，正安静地待在你身体里。",
+    "choices": [
+      { "text": "把 TA 约到楼下长椅上，深吸一口气：「我怀孕了。我想留下 TA。」", "effects": { "responsibility": 6, "happiness": 4 }, "flags_add": ["pregnant"] },
+      { "text": "先瞒着，说最近考试忙：「过完这阵子再谈。」", "effects": { "anxiety": 5, "social": -3 }, "flags_add": [] },
+      { "text": "第二天清晨独自去医院，当作什么都没发生", "effects": { "health": -4, "emotion": -5 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["first_love"], "not_flags": ["pregnant", "has_child"], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "preg_0002",
+    "age_range": [19, 19],
+    "category": "health",
+    "title": "身体里的另一颗心",
+    "text": "孕吐像闹钟一样准时，清晨五点半，你在洗手台边吐到腿软。医院走廊的灯管嗡嗡响，你攥着产检单排队，前面是几个挺着大肚子的姐姐，她们好奇地打量你。第一次听见胎心的时候，咕咚咕咚的节奏让你愣住了——你肚子里，真的有一个小小的人在活着。某天深夜，TA 轻轻动了一下，像小鱼甩了甩尾巴。",
+    "choices": [
+      { "text": "按时产检，把每一次数据都认真记下来", "effects": { "money": -5, "responsibility": 5, "health": 2 }, "flags_add": [] },
+      { "text": "孕吐太难受，请假在家躺着硬扛", "effects": { "health": -4, "stability": 3 }, "flags_add": [] },
+      { "text": "深夜把 TA 的手按在自己肚子上：「你摸摸，TA 在动。」", "effects": { "happiness": 6, "social": 4 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["pregnant"], "not_flags": ["has_child"], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "preg_0003",
+    "age_range": [20, 20],
+    "category": "family",
+    "title": "二十岁的产房门口",
+    "text": "二十岁，产房门口的走廊灯白得晃眼。你听见门里传来一声哭喊，紧接着是一阵响亮的啼哭。护士走出来，把皱巴巴的小小一团递到你怀里。你抱着 TA，手一直在抖：你才二十岁，却已经是另一个人的全部依靠了。TA 的小拳头攥得紧紧的，眉头皱着，像在嫌弃这个世界。你忽然就笑了，眼泪砸在襁褓上。",
+    "choices": [
+      { "text": "顺产，疼了整整一夜，咬牙扛过来了", "effects": { "health": -3, "responsibility": 5, "money": -2 }, "flags_add": ["has_child"] },
+      { "text": "听医生的，剖腹产更稳妥", "effects": { "health": -2, "money": -7, "safety": 4 }, "flags_add": ["has_child"] },
+      { "text": "产房里的虚惊：TA 迟迟没有哭出声，你吓得腿软，医生轻轻拍了两下，啼哭才响起来", "effects": { "health": -5, "happiness": 4, "emotion": 5 }, "flags_add": ["has_child"] }
+    ],
+    "conditions": { "has_flags": ["pregnant"], "not_flags": ["has_child"], "min_attrs": {}, "max_attrs": {} }
+  }
+]

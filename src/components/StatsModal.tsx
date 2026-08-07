@@ -54,6 +54,13 @@ export default function StatsModal({ stats, family, dailyHistory = {}, onRecap, 
             <div className="text-[10px] text-white/40 mt-1">平均寿命</div>
           </div>
         </div>
+        {/* 无生涯记录：幽默空状态（保留引导信息） */}
+        {stats.totalLives === 0 && (
+          <p className="text-center text-[12px] text-white/40 leading-relaxed">
+            还没有人生数据——快开始第一世吧，人生苦短，模拟器里可以重来
+            <span className="block text-[10px] text-white/25 mt-1">此页面不会有排行榜，因为你是唯一的玩家</span>
+          </p>
+        )}
         {/* 每一世：点击回看该世结算页（仅最近若干代保留完整回顾数据） */}
         {family.length > 0 && (
           <div>
@@ -107,7 +114,7 @@ export default function StatsModal({ stats, family, dailyHistory = {}, onRecap, 
         <div>
           <h4 className="text-[12px] tracking-[3px] text-white/50 mb-2">结局分布</h4>
           {endings.length === 0 ? (
-            <p className="text-[11px] text-white/30">还没有完成任何一局</p>
+            <p className="text-[11px] text-white/30">还没有完成任何一局——人生图鉴第一页，等你来填</p>
           ) : (
             <div className="flex flex-col gap-1.5">
               {endings.map(([key, n]) => (

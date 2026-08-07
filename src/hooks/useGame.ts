@@ -4,6 +4,7 @@ import { emptySaves, isValidSaveData, migrateLegacySave, SLOT_COUNT, type SavesV
 import { applyAchievementBonus, checkAchievements } from '../engine/achievements.ts';
 import { verdictKey } from '../engine/verdict.ts';
 import { appendFamilyMember, loadFamily, parentFlag, saveFamily } from '../engine/family.ts';
+import { applyLegacy, deriveLegacy } from '../engine/legacy.ts';
 import { applyAllocation, applyTalents } from '../engine/talents.ts';
 import { checkWeeklyGoal, pickWeeklyGoal, weekOf, weekSeed, type WeeklyGoal } from '../engine/weekly.ts';
 import {
@@ -682,6 +683,8 @@ function startNewGame(state: RuntimeState, p: StartParams): RuntimeState {
       game.attributes = applyInheritance(game.attributes, state.stats.lastEndAttrs);
       game.inherited = true;
     }
+    // 家族底蕴（第 2 代手玩局起）：最近手玩代均值 ≥70 的强项属性各 +2，总加成封顶 +6
+    game.attributes = applyLegacy(game.attributes, deriveLegacy(state.family));
     // 挑战开局（第 2 周目解锁）：属性整体下调 10 点（与传承独立叠加，后挑战）
     game.challenge = p.challenge;
     if (game.challenge) {

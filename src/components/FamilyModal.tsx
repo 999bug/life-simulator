@@ -1,5 +1,7 @@
-import type { FamilyMember } from '../types';
+import type { AttributeKey, FamilyMember } from '../types';
 import { verdictTitle } from '../engine/verdict';
+import { ATTR_META } from '../engine/state';
+import { deriveLegacy, legacyBonuses, LEGACY_MIN_GENERATIONS } from '../engine/legacy';
 
 interface Props {
   family: FamilyMember[];
@@ -11,12 +13,32 @@ interface Props {
 /** 家族族谱模态（标题页入口）：最新一代在上，世代线性向下追溯；有回顾数据的代可点击回看结算页 */
 export default function FamilyModal({ family, onRecap, onClose }: Props) {
   const latest = family[family.length - 1];
+  // 家族底蕴（手玩代数 + 最近 5 代均值）：标题页实时推导，与开局应用同源
+  const legacy = deriveLegacy(family);
+  const bonuses = legacyBonuses(legacy);
+  const bonusText = Object.entries(bonuses)
+    .map(([k, v]) => `${ATTR_META[k as AttributeKey].icon}${ATTR_META[k as AttributeKey].name} +${v}`)
+    .join(' ');
   return (
     <div className="absolute inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center" onClick={onClose}>
       <div className="w-[480px] max-w-[92vw] max-h-[min(520px,86vh)] overflow-y-auto rounded-2xl border border-white/10 bg-[#15152a] p-6 flex flex-col gap-3" onClick={e => e.stopPropagation()}>
         <h3 className="text-center text-[18px] tracking-[6px] text-[#c9a96e]">
           家族族谱{latest ? ` · 第 ${latest.generation} 代` : ''}
         </h3>
+        {family.length > 0 && (
+          legacy.generations >= LEGACY_MIN_GENERATIONS ? (
+            <div className="rounded-lg border border-[#c9a96e]/20 bg-[#c9a96e]/5 px-3 py-2.5 flex flex-col gap-1">
+              <div className="text-[12px] text-[#c9a96e] tracking-[1px]">🏛️ 家族底蕴 · 第 {legacy.generations} 代</div>
+              <div className="text-[11px] text-white/45 leading-relaxed">
+                {Object.keys(bonuses).length > 0 ? `家族强项：${bonusText}` : '强项尚未显现——暂无均值达到 70 的属性'}
+              </div>
+            </div>
+          ) : (
+            <div className="rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 text-center text-[11px] text-white/35 leading-relaxed">
+              🏛️ 家族底蕴正在积累——多玩几代，天资代代相传
+            </div>
+          )
+        )}
         {family.length === 0 ? (
           <p className="text-center text-[12px] text-white/35 leading-relaxed py-6">
             族谱还是空白。<br />走完一生，你就成为这个家族的第一代。

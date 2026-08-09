@@ -7307,6 +7307,14 @@
         "flags_add": [
           "fatal_accident"
         ]
+      },
+      {
+        "text": "关掉煤气总阀，开窗通风，蹲在楼道口等气味散尽",
+        "effects": {
+          "health": -20,
+          "safety": 3
+        },
+        "flags_add": []
       }
     ],
     "conditions": {
@@ -7314,7 +7322,7 @@
       "not_flags": [],
       "min_attrs": {},
       "max_attrs": {
-        "luck": 75
+        "luck": 60
       }
     }
   },
@@ -9094,6 +9102,14 @@
         "flags_add": [
           "fatal_accident"
         ]
+      },
+      {
+        "text": "贴着墙根快速走，眼睛死死盯着头顶",
+        "effects": {
+          "health": -18,
+          "safety_awareness": 3
+        },
+        "flags_add": []
       }
     ],
     "conditions": {
@@ -9101,7 +9117,7 @@
       "not_flags": [],
       "min_attrs": {},
       "max_attrs": {
-        "luck": 75
+        "luck": 60
       }
     }
   },
@@ -19401,6 +19417,14 @@
         "flags_add": [
           "fatal_illness"
         ]
+      },
+      {
+        "text": "按住胸口慢慢坐下，让身边人帮忙打急救电话",
+        "effects": {
+          "health": -25,
+          "social": 3
+        },
+        "flags_add": []
       }
     ],
     "conditions": {
@@ -19408,7 +19432,7 @@
       "not_flags": [],
       "min_attrs": {},
       "max_attrs": {
-        "health": 90
+        "health": 80
       }
     }
   },
@@ -21795,6 +21819,14 @@
         "flags_add": [
           "fatal_overwork"
         ]
+      },
+      {
+        "text": "合上电脑跟同事道别，头也不回地走了",
+        "effects": {
+          "health": -15,
+          "happiness": 2
+        },
+        "flags_add": []
       }
     ],
     "conditions": {
@@ -21802,7 +21834,7 @@
       "not_flags": [],
       "min_attrs": {},
       "max_attrs": {
-        "happiness": 85
+        "happiness": 75
       }
     }
   },
@@ -23595,6 +23627,14 @@
         "flags_add": [
           "fatal_accident"
         ]
+      },
+      {
+        "text": "靠边停车，开双闪，趴在方向盘上眯五分钟",
+        "effects": {
+          "health": -12,
+          "safety": 3
+        },
+        "flags_add": []
       }
     ],
     "conditions": {
@@ -23602,7 +23642,7 @@
       "not_flags": [],
       "min_attrs": {},
       "max_attrs": {
-        "luck": 75
+        "luck": 60
       }
     }
   },

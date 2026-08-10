@@ -1456,7 +1456,13 @@ export function useGame() {
         dispatch({ type: 'CONTINUE' });
       } else if (rt.currentEvent) {
         const choices = rt.currentEvent.choices;
-        const pick = choices[Math.floor(Math.random() * choices.length)];
+        // 快速模拟避开致死选项（fatal flag：煤气/坠物/心梗等意外死亡留给手动玩家的真实选择——
+        // 「30 秒看一生」的快速模拟体验不应被 21 岁煤气泄漏打断；有非致死选项时才避开）
+        const fatalPool = choices.filter(c => (c.outcomes.flags ?? []).some(f => f.startsWith('fatal_')));
+        const pool = fatalPool.length > 0 && fatalPool.length < choices.length
+          ? choices.filter(c => !fatalPool.includes(c))
+          : choices;
+        const pick = pool[Math.floor(Math.random() * pool.length)];
         dispatch({ type: 'MAKE_CHOICE', choice: pick, eventId: rt.currentEvent.id });
       }
     }, rt.feedback ? AUTO_PLAY_FEEDBACK_INTERVAL : AUTO_PLAY_INTERVAL);

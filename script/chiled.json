@@ -5053,8 +5053,7 @@
     "text": "十六岁，生物课讲到人体解剖，你听得入了神。老师说「学医很苦，八年起步」，你却在心里想：能救人，苦点怕什么。",
     "conditions": {
       "has_flags": [
-        "science_dream",
-        "researcher"
+        "service_dream"
       ]
     },
     "choices": [

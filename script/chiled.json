@@ -16871,7 +16871,9 @@
       "has_flags": [
         "jailed"
       ],
-      "not_flags": [],
+      "not_flags": [
+        "escape_plan"
+      ],
       "min_attrs": {},
       "max_attrs": {}
     }
@@ -17336,7 +17338,9 @@
         "jailed",
         "escape_plan"
       ],
-      "not_flags": [],
+      "not_flags": [
+        "released"
+      ],
       "min_attrs": {},
       "max_attrs": {}
     }
@@ -18244,7 +18248,9 @@
         "jailed",
         "escape_attempt"
       ],
-      "not_flags": [],
+      "not_flags": [
+        "released"
+      ],
       "min_attrs": {},
       "max_attrs": {}
     }

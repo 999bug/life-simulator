@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import type { AttributeKey, Attributes } from '../types';
 import { sfx } from '../utils/sound';
 import { ATTR_META } from '../engine/state';
@@ -34,6 +34,9 @@ export default function BuildModal({ inheritTalent, onConfirm, onCancel }: Props
   const [picked, setPicked] = useState<string[]>([]);
   // 属性分配：各属性加点（默认全 0）
   const [alloc, setAlloc] = useState<Partial<Attributes>>({});
+  // 稀有天赋高光：最近选中的紫/橙天赋 id（触发一次外扩光晕，短暂后清除）
+  const [flashId, setFlashId] = useState<string | null>(null);
+  const flashTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const total = allocPoints(picked);
   const used = Object.values(alloc).reduce((a, b) => a + b, 0);
@@ -41,13 +44,25 @@ export default function BuildModal({ inheritTalent, onConfirm, onCancel }: Props
   const conflict = picked.length >= TALENT_PICK_LIMIT ? '已达上限' : null;
 
   const toggleTalent = (id: string) => {
-    sfx.select();
     if (picked.includes(id)) {
+      sfx.select();
       setPicked(picked.filter(x => x !== id));
       return;
     }
     if (talentConflict(picked, id)) {
       return;
+    }
+    const t = getTalent(id);
+    if (t && (t.rarity === 'rare' || t.rarity === 'epic')) {
+      // 紫/橙：稀有音效 + 短暂高光
+      sfx.rareTalent();
+      setFlashId(id);
+      if (flashTimer.current) {
+        clearTimeout(flashTimer.current);
+      }
+      flashTimer.current = setTimeout(() => setFlashId(null), 900);
+    } else {
+      sfx.select();
     }
     setPicked([...picked, id]);
   };
@@ -95,7 +110,7 @@ export default function BuildModal({ inheritTalent, onConfirm, onCancel }: Props
                   title={blocked ? talentConflict(picked, id) ?? undefined : t.desc}
                   className={`flex items-start gap-2 p-2.5 rounded-lg border text-left transition-all duration-200
                     ${pickedNow
-                      ? 'border-[#c9a96e] bg-[#c9a96e]/10 shadow-[0_0_14px_rgba(201,169,110,0.15)]'
+                      ? `border-[#c9a96e] bg-[#c9a96e]/10 shadow-[0_0_14px_rgba(201,169,110,0.15)]${flashId === id ? ' animate-talent-flash' : ''}`
                       : blocked
                         ? 'border-white/[0.04] bg-white/[0.01] opacity-35 cursor-not-allowed'
                         : 'border-white/10 bg-white/[0.03] hover:border-white/25 hover:-translate-y-0.5'}`}

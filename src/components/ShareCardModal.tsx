@@ -8,6 +8,7 @@ import { derivePersona, personaSummary } from '../engine/personality';
 import { drawGrowthChart } from './GrowthChart';
 import { track } from '../utils/analytics';
 import { buildChallengeUrl, buildShareText, canvasToFile, shareViaSystem } from '../utils/share';
+import { deriveTitle } from '../engine/titles';
 
 interface Props {
   game: GameState;
@@ -68,6 +69,11 @@ export default function ShareCardModal({ game, verdictTitle, endingKey, collecti
     ctx.font = `300 24px ${F}`;
     ctx.fillStyle = 'rgba(255,255,255,0.5)';
     ctx.fillText(`${game.gender === 'male' ? '♂' : '♀'} ${game.name} · 享年 ${game.age} 岁${generation != null ? ` · 第 ${generation} 代` : ''}`, 60, 122);
+
+    // 称号（金色徽章，社交货币）
+    ctx.fillStyle = '#e8c95d';
+    ctx.font = `300 21px ${F}`;
+    ctx.fillText(`🏅 ${deriveTitle(game, endingKey)}`, 60, 150);
 
     // 结局标题
     ctx.fillStyle = '#e8e8e8';

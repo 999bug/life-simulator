@@ -12,6 +12,8 @@ import { buildBiographyMarkdown, downloadText } from '../utils/biography';
 import { buildLifeExport } from '../engine/compare';
 import { track } from '../utils/analytics';
 import { buildChallengeUrl, buildShareText, shareViaSystem, type ChallengeLink } from '../utils/share';
+import { deriveTitle } from '../engine/titles';
+import { deathOneLiner } from '../engine/deaths';
 import { VERDICT_META, nextRouteToExplore, verdictKey } from '../engine/verdict';
 import { jobStatus, JOB_MILESTONE_FLAGS } from '../engine/jobs';
 import { npcBonds, BOND_META } from '../engine/npcs';
@@ -442,6 +444,10 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       <p className="text-sm text-white/40 text-center max-w-[400px] leading-relaxed animate-[fadeIn_1.2s_ease]">
         {desc}
       </p>
+      {/* 称号：路线/财富/性格/评分档推导的社交货币（确定性） */}
+      <p className="text-[16px] text-[#e8c95d] tracking-[2px] text-center animate-[fadeIn_1.1s_ease]">
+        🏅 {deriveTitle(game, verdictKey(game))}
+      </p>
       {/* 判定依据：结局判定透明化（路线 flag 命中或分数档，低调不抢戏） */}
       <p className="text-[10px] text-white/35 tracking-wide text-center animate-[fadeIn_1.3s_ease]">
         判定依据：{basisText}
@@ -505,7 +511,10 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       <div className="flex items-start gap-3 max-w-[560px] px-5 py-3.5 bg-white/[0.03] border border-white/[0.06] rounded-xl
         animate-[fadeIn_1.4s_ease]">
         <span className="text-lg leading-none mt-0.5">{deathText(game.deathCause).icon}</span>
-        <p className="text-xs text-white/50 leading-relaxed">{deathText(game.deathCause).text}</p>
+        <div className="flex-1">
+          <p className="text-xs text-white/50 leading-relaxed">{deathText(game.deathCause).text}</p>
+          <p className="text-[11px] text-white/35 italic mt-1">{deathOneLiner(game.deathCause, game.age)}</p>
+        </div>
       </div>
 
       {/* 人生目标达成度（开局选了目标才展示） */}

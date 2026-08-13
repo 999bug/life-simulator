@@ -1,0 +1,106 @@
+[
+  {
+    "id": "prnt_0001",
+    "age_range": [60, 64],
+    "category": "family",
+    "title": "空巢的第一声回响",
+    "text": "深夜，你忽然醒了。屋子里静得能听见墙上的挂钟在走。孩子搬出去住已经好多年了，可你好像到今天才真正意识到：那个曾经一到饭点就喊饿、一放学就冲进门的家，原来已经空了很久。手机在床头亮了一下，是孩子发来的消息：「睡了吗？最近降温，记得加衣服。」你盯着那行字，笑着笑着，眼眶就热了。",
+    "choices": [
+      { "text": "回了一句「都好，别惦记」，然后把手机贴在了胸口", "effects": { "emotion": 5, "happiness": 3 }, "flags_add": [] },
+      { "text": "打了个电话过去，听 TA 说了半个小时的近况", "effects": { "social": 4, "happiness": 3 }, "flags_add": [] },
+      { "text": "穿上外套，把冰箱里给 TA 留的菜又热了一遍", "effects": { "family_relation": 4, "happiness": 3, "money": -2 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["has_child"], "not_flags": ["has_grandchild"], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "prnt_0002",
+    "age_range": [62, 66],
+    "category": "family",
+    "title": "你当上爷爷奶奶了",
+    "text": "医院产房外，你来回踱步，紧张得手心全是汗。门推开的一瞬，孩子抱着一个小小的襁褓走出来，笑着说：「快看看，这是你的孙子辈了。」你伸出手，又缩回去，最后用两根手指轻轻碰了碰那皱巴巴的小脸。几十年前你在产房外抱着 TA 的画面，和此刻重叠在一起。原来人生，就是一场温柔的接力。",
+    "choices": [
+      { "text": "小心翼翼接过襁褓，嘴里念叨「像，真像你小时候」", "effects": { "happiness": 5, "emotion": 4 }, "flags_add": ["has_grandchild"] },
+      { "text": "偷偷抹眼泪，被孩子撞见，两个人一起笑", "effects": { "emotion": 5, "social": 3 }, "flags_add": ["has_grandchild"] },
+      { "text": "早就备好了见面礼：一对沉甸甸的长命锁", "effects": { "money": -4, "happiness": 4 }, "flags_add": ["has_grandchild"] }
+    ],
+    "conditions": { "has_flags": ["has_child"], "not_flags": ["has_grandchild"], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "prnt_0003",
+    "age_range": [65, 70],
+    "category": "family",
+    "title": "第一次带孙辈",
+    "text": "孩子把小孙辈塞到你怀里，扔下一句「帮我带两天」就匆匆去加班。你嘴上说着「你们这些年轻人啊」，手上却把 TA 抱得稳稳的。小孙辈在你怀里踢着小腿，咯咯直笑。你忽然想起，很多年前，也是这样一个午后，你也是这样抱着自己的孩子。时光转了一圈，又把这个小小的、软软的、香香的麻烦，塞回了你怀里。",
+    "choices": [
+      { "text": "抱着 TA 在小区里慢慢走，逢人就显摆", "effects": { "happiness": 4, "social": 3 }, "flags_add": [] },
+      { "text": "给 TA 唱你孩子小时候最爱听的童谣", "effects": { "emotion": 4, "happiness": 3 }, "flags_add": [] },
+      { "text": "笨手笨脚地冲奶粉，还打电话问孩子步骤", "effects": { "family_relation": 3, "happiness": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["has_grandchild"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "prnt_0004",
+    "age_range": [68, 74],
+    "category": "family",
+    "title": "你讲孩子小时候的事",
+    "text": "孙辈趴在你膝头，眨着眼睛问：「我爸爸/妈妈小时候是什么样呀？」你笑了，眼前浮现出那个曾经把墨水打翻在作业本上、被老师叫家长、却在你生病时偷偷给你倒水的小小身影。你慢悠悠地讲着，孙辈听得入神。你这才发现，原来记忆并不会老去，它只是在你心里，温柔地等着被一次次讲起。",
+    "choices": [
+      { "text": "翻出老相册，一张一张讲给孙辈听", "effects": { "emotion": 5, "happiness": 4 }, "flags_add": [] },
+      { "text": "挑了几件糗事讲，把孙辈逗得前仰后合", "effects": { "social": 4, "happiness": 4 }, "flags_add": [] },
+      { "text": "讲到一半，发现孩子就靠在门边，正安静地听着", "effects": { "family_relation": 5, "happiness": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["has_grandchild"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "prnt_0005",
+    "age_range": [72, 78],
+    "category": "family",
+    "title": "孙辈长大了",
+    "text": "一晃眼，那个被你抱在怀里的小孙辈，已经背起书包上了学。校门口，TA 回头冲你挥挥手，像极了你孩子当年的样子。你站在人群里，恍惚间分不清这是哪一年、哪一代。你忽然想：自己这一生最了不起的成就，也许不是走过多少路、赚过多少钱，而是看着一代又一代的人，从你的怀里，走向他们自己的人生。",
+    "choices": [
+      { "text": "每天准时在校门口等 TA，风雨无阻", "effects": { "responsibility": 4, "happiness": 3 }, "flags_add": [] },
+      { "text": "把家风一代代讲给 TA 听，教 TA 感恩", "effects": { "gratitude": 3, "happiness": 3 }, "flags_add": [] },
+      { "text": "教 TA 下棋、写字，把一辈子的手艺传下去", "effects": { "intelligence": 3, "happiness": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["has_grandchild"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "prnt_0006",
+    "age_range": [76, 82],
+    "category": "family",
+    "title": "孩子一家回来看你",
+    "text": "孩子一家老小回来吃团圆饭。厨房里，你执意要下厨，说「我这手艺，饭店都比不上」。饭桌上，孙辈抢着给你夹菜，孩子给你倒酒，说：「这些年，辛苦你了。」你摆摆手，说一家人平平安安就好。可低下头扒饭的时候，你的眼睛还是湿了。这一生跌跌撞撞走到今天，原来最想要的东西，一直就在这张小小的饭桌旁。",
+    "choices": [
+      { "text": "把每个人都爱吃的菜，都端到了他们面前", "effects": { "family_relation": 5, "happiness": 4, "money": -3 }, "flags_add": [] },
+      { "text": "给孩子倒了杯酒，碰了一杯，话都在酒里", "effects": { "social": 4, "emotion": 4 }, "flags_add": [] },
+      { "text": "张罗到一半，被孙辈拉着坐下：「你先吃」", "effects": { "happiness": 5, "emotion": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["has_grandchild"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "prnt_0007",
+    "age_range": [80, 86],
+    "category": "family",
+    "title": "把一生的故事讲给下一代",
+    "text": "你坐在摇椅上，孙辈依偎在身边，说想听你年轻时候的故事。你慢慢讲起那些早已远去的日子——讲起你十七岁的夏天、讲起你第一次离家、讲起你如何一步步走到今天。讲到动情处，你停了一下，说：「这一生谈不上多成功，但每一步，都算数。」孙辈认真地点了点头，把你说的每一句话，都记进了心里。",
+    "choices": [
+      { "text": "把那些跌过的跤、走过的弯路，都毫无保留地讲给 TA 听", "effects": { "empathy": 4, "happiness": 3 }, "flags_add": [] },
+      { "text": "讲到最后，轻轻拍了拍 TA 的头：「以后的路，要靠你自己走了」", "effects": { "emotion": 5, "maturity": 3 }, "flags_add": [] },
+      { "text": "把你攒了一辈子的经验，写成一本小册子留给 TA", "effects": { "intelligence": 4, "happiness": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["has_grandchild"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "prnt_0008",
+    "age_range": [84, 90],
+    "category": "family",
+    "title": "爱是一辈子的轮回",
+    "text": "你的腿脚不如从前了，孩子回来的次数却越来越多。TA 会扶你去楼下晒太阳，会把你爱吃的水果切成小块，会坐在床边听你讲那些重复了无数遍的往事，从不打断。有一天，TA 忽然说：「我小时候，你也是这样照顾我的。」你愣了一下，然后笑了。原来爱这件事，从来都是这样，一代一代，无声地还回来。",
+    "choices": [
+      { "text": "笑着说「那会儿你可皮了」，两个人都笑了", "effects": { "happiness": 5, "emotion": 4 }, "flags_add": [] },
+      { "text": "把 TA 的手握在手里，很久很久没有说话", "effects": { "emotion": 5, "family_relation": 3 }, "flags_add": [] },
+      { "text": "告诉 TA：「有你这句话，这辈子就值了」", "effects": { "happiness": 5, "stability": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["has_grandchild"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  }
+]

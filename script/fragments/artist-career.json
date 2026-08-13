@@ -1,0 +1,54 @@
+[
+  {
+    "id": "art_0001",
+    "age_range": [28, 28],
+    "category": "hobby",
+    "title": "第一次个人画展",
+    "text": "二十八岁，你的第一次个展开幕。展厅不大，来看的人不多，但每一幅画前都有人认真站了十分钟。撤展前，策展人问你下一场还办不办。",
+    "choices": [
+      { "text": "办。哪怕亏钱，也要把作品挂出去", "effects": { "art": 6, "courage": 4, "money": -4 }, "flags_add": [] },
+      { "text": "先接商业插画，攒够钱再办", "effects": { "money": 5, "strategy": 3 }, "flags_add": [] },
+      { "text": "把卖画的钱分一半给一直支持自己的老师", "effects": { "gratitude": 5, "empathy": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["artist_pro"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "art_0002",
+    "age_range": [40, 40],
+    "category": "hobby",
+    "title": "作品拍出高价",
+    "text": "四十岁，你的一幅旧作在拍卖会上拍出了当年想都不敢想的价格。那些曾经笑你「不务正业」的人，如今都改口喊你「老师」。",
+    "choices": [
+      { "text": "把钱投进工作室，做更大的作品", "effects": { "money": 8, "creativity": 5 }, "flags_add": [] },
+      { "text": "捐出一半，资助年轻艺术家", "effects": { "gratitude": 6, "social": 4 }, "flags_add": [] },
+      { "text": "保持清醒：涨价的是画，不是你", "effects": { "self_awareness": 6, "intelligence": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["artist_pro"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "art_0003",
+    "age_range": [47, 47],
+    "category": "personality",
+    "title": "创作瓶颈",
+    "text": "四十七岁，你对着空白的画布坐了一整夜，一笔都画不出来。名气越大，越怕画砸了。有人劝你「别画了，吃老本吧」。",
+    "choices": [
+      { "text": "把画布泼上颜料，先破坏再重建", "effects": { "creativity": 6, "courage": 5, "happiness": -3 }, "flags_add": [] },
+      { "text": "回到最初的家乡，重新写生", "effects": { "emotion": 5, "stability": 3 }, "flags_add": [] },
+      { "text": "收个学生，教别人的过程里找回自己", "effects": { "social": 4, "empathy": 4 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["artist_pro"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "art_0004",
+    "age_range": [52, 52],
+    "category": "personality",
+    "title": "回顾展",
+    "text": "五十二岁，美术馆为你办回顾展。从第一张涂鸦到最后一张，你的一生被挂在墙上。开幕那天，你站在展厅中央，像个观众一样重新看了一遍自己。",
+    "choices": [
+      { "text": "把最早那张涂鸦重新裱起来，放在最显眼处", "effects": { "emotion": 6, "happiness": 4 }, "flags_add": [] },
+      { "text": "在留言簿上写：艺术不是终点，是过程", "effects": { "intelligence": 5, "gratitude": 4 }, "flags_add": [] },
+      { "text": "宣布封笔，把舞台留给年轻人", "effects": { "freedom": 6, "happiness": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["artist_pro"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  }
+]

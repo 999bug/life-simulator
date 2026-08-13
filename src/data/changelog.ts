@@ -15,6 +15,16 @@ export interface ChangelogEntry {
  */
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.19.0',
+    date: '2026-08-13',
+    title: '更多人生路线',
+    items: [
+      '🚀 创业弄潮儿：新增第一笔融资/合伙人分家/转型危机/上市敲钟 4 个职业事件',
+      '🎨 艺术人生：新增第一次个展/作品拍出高价/创作瓶颈/回顾展 4 个职业事件',
+      '🏅🎖️ 新增赛场传奇、铁血人生两条开局路线（可直接选）',
+    ],
+  },
+  {
     version: '0.18.0',
     date: '2026-08-13',
     title: '白衣天使补全',

@@ -129,48 +129,6 @@
     }
   },
   {
-    "id": "young_0028",
-    "age_range": [
-      28,
-      28
-    ],
-    "category": "love",
-    "title": "街角的偶遇",
-    "text": "下班路上，你在街角的咖啡店门口看到了TA。十多年没见，TA比当年高了一些，轮廓也成熟了，但你一眼就认了出来。你站在原地，手心微微出汗，想起小学时那些偷偷记在心里的心事。TA似乎也认出了你，冲你笑了笑。",
-    "choices": [
-      {
-        "text": "走过去，自然地问候一句",
-        "effects": {
-          "social": 4,
-          "happiness": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "相视一笑，然后擦肩而过",
-        "effects": {
-          "happiness": 2
-        },
-        "flags_add": []
-      },
-      {
-        "text": "低头快步离开",
-        "effects": {
-          "happiness": -2
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [
-        "first_crush"
-      ],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "adult_0036",
     "age_range": [
       36,
@@ -207,49 +165,6 @@
     "conditions": {
       "has_flags": [
         "sports_path"
-      ],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
-    "id": "adult_0038",
-    "age_range": [
-      38,
-      38
-    ],
-    "category": "friend",
-    "title": "同学会重逢",
-    "text": "小学同学聚会，你迟到了。推开门，一张张陌生的脸看过来，直到有人喊你的名字——是那个从小学起就跟你较劲的人。他头发少了些，笑起来却还是当年的样子。你们碰了碰杯，他说：当年要不是你，我可能考不上那个学校。你愣了一下，笑了。",
-    "choices": [
-      {
-        "text": "也谢谢他当年逼着你往前跑",
-        "effects": {
-          "social": 4,
-          "happiness": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "约他改天好好喝一杯",
-        "effects": {
-          "social": 3,
-          "happiness": 2
-        },
-        "flags_add": []
-      },
-      {
-        "text": "碰杯，客套几句",
-        "effects": {
-          "social": 1
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [
-        "lifelong_competitor"
       ],
       "not_flags": [],
       "min_attrs": {},

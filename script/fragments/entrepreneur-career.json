@@ -1,0 +1,54 @@
+[
+  {
+    "id": "startup_0001",
+    "age_range": [26, 26],
+    "category": "finance",
+    "title": "第一笔融资",
+    "text": "创业第三年，你的产品终于有了第一批用户，投资机构找上门来。对方递来一份投资协议，条件是出让两成股权，还要签一份对赌。你盯着那串零，心跳得厉害。",
+    "choices": [
+      { "text": "签了，拿钱换扩张速度", "effects": { "money": 10, "risk": 6, "pressure": 3 }, "flags_add": [] },
+      { "text": "不签，慢慢滚雪球，把命运握在自己手里", "effects": { "independence": 5, "patience": 4, "money": -2 }, "flags_add": [] },
+      { "text": "签，但坚持给自己留一票否决权", "effects": { "strategy": 6, "ambition": 5 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["startup_success"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "startup_0002",
+    "age_range": [32, 32],
+    "category": "career",
+    "title": "合伙人分家",
+    "text": "一起从车库走出来的合伙人，因为方向分歧闹到了要拆伙。他想要快速套现上岸，你想把公司继续做大。当年说好一起走到上市，如今各怀心事。",
+    "choices": [
+      { "text": "买下他的股份，自己扛", "effects": { "money": -12, "responsibility": 6, "pressure": 4 }, "flags_add": [] },
+      { "text": "好聚好散，按估值回购，留个体面", "effects": { "empathy": 4, "social": 3, "money": -8 }, "flags_add": [] },
+      { "text": "僵着，先拖着看谁先让步", "effects": { "risk": 5, "happiness": -3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["startup_success"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "startup_0003",
+    "age_range": [38, 38],
+    "category": "career",
+    "title": "公司转型危机",
+    "text": "行业风口过去，公司现金流吃紧，账上的钱只够再撑六个月。裁员、转型、卖身，三张牌摆在桌上，员工们都在等你的决定。",
+    "choices": [
+      { "text": "壮士断腕，砍掉不赚钱的业务，全力转型", "effects": { "strategy": 8, "courage": 5, "happiness": -4 }, "flags_add": [] },
+      { "text": "找大厂谈谈收购，保住团队", "effects": { "social": 4, "money": 6, "freedom": -3 }, "flags_add": [] },
+      { "text": "借钱硬撑，赌下一轮风口", "effects": { "risk": 8, "money": -6, "pressure": 5 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["startup_success"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "startup_0004",
+    "age_range": [44, 44],
+    "category": "career",
+    "title": "上市敲钟",
+    "text": "交易所的铜锣被你敲响。台下是当年一起熬夜的员工、信任你的投资人，还有那个永远缺席的合伙人。你举起锤子，眼眶有点热。",
+    "choices": [
+      { "text": "把团队叫上台，一起敲", "effects": { "gratitude": 6, "social": 5 }, "flags_add": [] },
+      { "text": "敲完钟，一个人去天台吹了会儿风", "effects": { "emotion": 4, "happiness": 3 }, "flags_add": [] },
+      { "text": "当场宣布：下一阶段，全力押注新技术", "effects": { "ambition": 7, "risk": 5 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["startup_success"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  }
+]

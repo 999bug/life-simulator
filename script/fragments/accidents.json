@@ -1,47 +1,5 @@
 [
   {
-    "id": "adult_0044",
-    "age_range": [
-      44,
-      44
-    ],
-    "category": "career",
-    "title": "裁员风暴",
-    "text": "周一例会上，老板宣布公司业务调整，整个部门都要砍掉。消息像一盆冷水浇下来，工位上一片安静。你在这个行业干了十几年，人到中年，简历却不知道该怎么写。那天你走出写字楼，站在十字路口，第一次觉得自己和这座城市之间，隔着一层玻璃。",
-    "choices": [
-      {
-        "text": "盘算积蓄，从容规划下一步",
-        "effects": {
-          "money": -8,
-          "happiness": -2
-        },
-        "flags_add": []
-      },
-      {
-        "text": "转行重新开始，接受降薪",
-        "effects": {
-          "money": -12,
-          "intelligence": 4
-        },
-        "flags_add": []
-      },
-      {
-        "text": "焦虑硬扛，先找份差不多的",
-        "effects": {
-          "money": -15,
-          "happiness": -4
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "mid_0052",
     "age_range": [
       52,

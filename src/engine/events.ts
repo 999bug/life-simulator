@@ -151,16 +151,43 @@ function pickShuffled<T>(arr: T[], k: number, rng: () => number): T[] {
 }
 
 /**
+ * 从种子 flag 沿「事件消费 → 事件生产」正向展开，得到该人生路线涉及的全部 flag。
+ * 用于精简档保留路线事件：这些 flag 的消费/生产事件必须全部保留，否则选定路线会「隐身」。
+ */
+function expandRouteFlags(events: LifeEvent[], seeds: string[]): Set<string> {
+  const flags = new Set(seeds);
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (const e of events) {
+      const consume = e.conditions?.hasFlags ?? [];
+      if (!consume.some(f => flags.has(f))) {
+        continue;
+      }
+      for (const f of e.choices.flatMap(c => c.outcomes?.flags ?? [])) {
+        if (!flags.has(f)) {
+          flags.add(f);
+          changed = true;
+        }
+      }
+    }
+  }
+  return flags;
+}
+
+/**
  * 按档位过滤事件（纯函数，确定性）。
  * full 返回原数组；lite 每岁主线优先 + seed 抽模拟补足目标密度，
  * 再跨岁迭代补齐 flag 闭包（消费事件的产出者必须在子集内）。
+ * routeFlags 为开局人生路线涉及的 flag（精简档下这些事件不参与抽样，全部保留）。
  *
  * @param events 全量事件数组
  * @param mode 节奏档位
  * @param seed 抽样种子（与 shuffleEvents 共用，保证读档可重建）
+ * @param routeFlags 人生路线 seed flag（可选）
  * @returns 过滤后的新数组
  */
-export function filterEvents(events: LifeEvent[], mode: PaceMode, seed: number): LifeEvent[] {
+export function filterEvents(events: LifeEvent[], mode: PaceMode, seed: number, routeFlags: string[] = []): LifeEvent[] {
   if (mode === 'full') {
     return events;
   }
@@ -185,6 +212,18 @@ export function filterEvents(events: LifeEvent[], mode: PaceMode, seed: number):
     const keptSim = pickShuffled(sims, target - keptMain.length, rng);
     for (const e of [...personality, ...keptMain, ...keptSim]) {
       selected.add(e);
+    }
+  }
+
+  // 1.5 路线事件全保留（不占密度）：消费/生产路线 flag 的事件必须都在，保证选定人生路线在精简档也能体验
+  if (routeFlags.length > 0) {
+    const routeSet = expandRouteFlags(events, routeFlags);
+    for (const e of events) {
+      const consume = e.conditions?.hasFlags ?? [];
+      const produce = e.choices.flatMap(c => c.outcomes?.flags ?? []);
+      if (consume.some(f => routeSet.has(f)) || produce.some(f => routeSet.has(f))) {
+        selected.add(e);
+      }
     }
   }
 

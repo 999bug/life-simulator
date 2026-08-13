@@ -121,3 +121,12 @@ test('filterEvents：lite 模式性格事件优先保留（条件触发彩蛋不
     setEvents(saved);
   }
 });
+
+test('filterEvents：lite 保留人生路线事件（routeFlags 全链）', () => {
+  const lite = filterEvents(EVENTS, 'lite', 7, ['gang_member']);
+  const ids = new Set(lite.map(e => e.id));
+  assert.ok(ids.has('gang_0002'), '看场子应保留');
+  assert.ok(ids.has('gang_0004'), '上位应保留');
+  assert.ok(ids.has('prison_0034'), '东窗事发（路线闭包）应保留');
+  assert.ok(ids.has('prison_0035'), '入狱第一天应保留');
+});

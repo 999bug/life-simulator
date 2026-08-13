@@ -78,7 +78,7 @@ npm run dev        # 启动开发服务器（端口 5173）
 | `npm run build` | 生产构建：单文件 `dist/index.html` + 独立 `dist/events.json` + PWA Service Worker（离线可用） |
 | `npm run preview` | 预览生产构建产物 |
 | `npm run build:events` | 从 `script/chiled.json` 重新生成 `public/events.json` |
-| `npm test` | 数据工具 + 引擎测试（219 个用例） |
+| `npm test` | 数据工具 + 引擎测试（220 个用例） |
 | `npm run test:ui` | UI 组件测试（vitest，119 个用例） |
 | `node script/stats.mjs` | 事件数据看板（密度/分类/flag 配对/空缺报告） |
 | `node --experimental-strip-types script/sim-balance.ts 500` | 500 局平衡审计（属性归零率/享年/结局分布） |

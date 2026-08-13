@@ -738,7 +738,7 @@ function startNewGame(state: RuntimeState, p: StartParams): RuntimeState {
   }
   const shuffleSeed = p.seed ?? Math.floor(Math.random() * 2 ** 31);
   // 快速模拟用精简档（每岁 1-2 个）；手动模式按所选密度档过滤
-  const shuffledEvents = shuffleEvents(filterEvents(EVENTS, p.paceMode, shuffleSeed), shuffleSeed);
+  const shuffledEvents = shuffleEvents(filterEvents(EVENTS, p.paceMode, shuffleSeed, getRoute(p.route)?.seedFlags ?? []), shuffleSeed);
   const firstScan = findNextEvent(game, -1, shuffledEvents);
   const first = firstScan.event;
   if (first) {
@@ -1208,7 +1208,7 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
       const typeSpeed = saved.typeSpeed ?? 'normal';
       // 按存档种子还原本局事件顺序（旧版存档无种子则用默认顺序）
       const shuffleSeed = typeof saved.shuffleSeed === 'number' ? saved.shuffleSeed : 0;
-      const shuffledEvents = shuffleEvents(filterEvents(EVENTS, paceMode, shuffleSeed), shuffleSeed);
+      const shuffledEvents = shuffleEvents(filterEvents(EVENTS, paceMode, shuffleSeed, getRoute(saved.game.route)?.seedFlags ?? []), shuffleSeed);
       // 伴侣互动事件不在事件数组中，按存档的互动年龄重建（旧档无字段 = 未启用）
       const companionAge = typeof saved.companionNextAge === 'number' ? saved.companionNextAge : COMPANION_DISABLED;
       const currentEvent = saved.currentEventId

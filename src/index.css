@@ -60,10 +60,30 @@ body {
   100% { transform: rotate(360deg); }
 }
 
+/* 氛围光漂移（电影感柔光） */
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(5%, 4%) scale(1.06); }
+}
+@keyframes driftSlow {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-5%, -4%) scale(1.08); }
+}
+/* 漂浮光尘 */
+@keyframes mote {
+  0% { opacity: 0; transform: translateY(0); }
+  15% { opacity: 0.5; }
+  85% { opacity: 0.12; }
+  100% { opacity: 0; transform: translateY(-90px); }
+}
+
 .animate-twinkle { animation: twinkle 3s ease-in-out infinite; }
 .animate-glow { animation: glow 2s ease-in-out infinite; }
 .animate-neon { animation: neon 3s ease-in-out infinite; }
 .animate-infant-mobile { animation: infantMobile 12s linear infinite; transform-origin: 480px 180px; }
+.animate-drift { animation: drift 20s ease-in-out infinite; }
+.animate-drift-slow { animation: driftSlow 30s ease-in-out infinite; }
+.animate-mote { animation: mote 12s ease-in-out infinite; }
 
 /* 滚动条 */
 ::-webkit-scrollbar { width: 4px; }

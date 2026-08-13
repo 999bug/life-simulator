@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import type { AttributeKey, EventCategory, LifeStage } from '../types';
 import SceneDecor from './SceneDecor';
 import CategoryDecor from './CategoryDecor';
@@ -43,6 +44,22 @@ export default function SceneArea({ stage, age, gender, stageLabel, category = n
 
       {/* 事件分类场景（叠加在阶段场景上，如教室/办公室/医院） */}
       <CategoryDecor category={category} />
+
+      {/* 氛围层：环境光 + 暗角 + 漂移柔光 + 光尘，统一画面景深（不遮挡文字） */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* 顶部环境光 */}
+        <div className="absolute inset-x-0 top-0 h-1/2"
+          style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.06), transparent)' }} />
+        {/* 暗角（聚焦中央人物，营造电影感） */}
+        <div className="absolute inset-0"
+          style={{ background: 'radial-gradient(ellipse at 50% 40%, transparent 48%, rgba(5,8,20,0.32) 100%)' }} />
+        {/* 两团缓慢漂移的柔光（暖金 + 冷蓝，随阶段背景自然融合） */}
+        <div className="absolute w-[60%] h-[60%] rounded-full blur-3xl animate-drift"
+          style={{ left: '-15%', top: '-20%', background: 'radial-gradient(circle, rgba(255,220,170,0.10), transparent 70%)' }} />
+        <div className="absolute w-[55%] h-[55%] rounded-full blur-3xl animate-drift-slow"
+          style={{ right: '-15%', bottom: '-20%', background: 'radial-gradient(circle, rgba(140,180,255,0.08), transparent 70%)' }} />
+        <Motes />
+      </div>
 
       {/* 选项属性色调响应（选择后底部暖光，反馈消失后还原） */}
       {tint && (
@@ -150,4 +167,38 @@ function getCharacterSVG(stage: LifeStage) {
     default:
       return null;
   }
+}
+
+/** 漂浮光尘：微弱的暖光粒子缓慢上浮，增添氛围（数量克制，避免喧宾夺主） */
+function Motes() {
+  // 位置用确定性伪随机（不随阶段切换重排，避免闪烁）
+  const motes = useMemo(() => Array.from({ length: 18 }).map((_, i) => {
+    const seed = (i * 7919 + 13) % 97;
+    return {
+      left: `${(seed * 37) % 100}%`,
+      bottom: `${(seed * 53) % 72}%`,
+      size: 2 + (seed % 4),
+      delay: `${(i * 0.73) % 12}s`,
+      duration: `${9 + (i % 5) * 3}s`,
+    };
+  }), []);
+  return (
+    <div className="absolute inset-0">
+      {motes.map((m, i) => (
+        <span
+          key={i}
+          className="absolute rounded-full bg-[#ffe6b0] animate-mote"
+          style={{
+            left: m.left,
+            bottom: m.bottom,
+            width: m.size,
+            height: m.size,
+            boxShadow: '0 0 6px rgba(255,230,176,0.6)',
+            animationDelay: m.delay,
+            animationDuration: m.duration,
+          }}
+        />
+      ))}
+    </div>
+  );
 }

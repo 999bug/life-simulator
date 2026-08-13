@@ -1,5 +1,6 @@
 import { ATTR_META } from '../engine/state';
 import type { AttributeKey } from '../types';
+import { LIFE_ROUTES } from '../engine/routes';
 
 interface Props {
   onClose: () => void;
@@ -29,6 +30,20 @@ export default function GuideModal({ onClose }: Props) {
           <p className="text-[12px] text-white/55 leading-relaxed">
             从 0 岁活到寿终：每个事件读一段人生、做一次选择，选择改变八项属性；属性决定寿命长短、能触发的事件与最终的结局评价。
           </p>
+        </section>
+
+        <section>
+          <h4 className="text-[13px] tracking-[3px] text-[#c9a96e] mb-1.5">🎭 开局选一条人生路线</h4>
+          <p className="text-[12px] text-white/55 leading-relaxed mb-2">
+            想体验某一种活法，开局可以直接选——每条都有专属剧情与结局；选「自由人生」则随机展开。
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {LIFE_ROUTES.map(r => (
+              <span key={r.key} className="text-[11px] px-2 py-0.5 rounded-full border border-white/10 text-white/60">
+                {r.icon} {r.name}
+              </span>
+            ))}
+          </div>
         </section>
 
         <section>
@@ -64,7 +79,7 @@ export default function GuideModal({ onClose }: Props) {
           <h4 className="text-[13px] tracking-[3px] text-[#c9a96e] mb-1.5">🏆 局外成长</h4>
           <ul className="text-[12px] text-white/55 leading-relaxed list-none flex flex-col gap-1">
             <li>· 开局可选人生目标，结算时判定达成</li>
-            <li>· 3 个自动存档槽，随时退出随时继续</li>
+            <li>· 3 个存档槽可自由切换，随时退出随时继续</li>
             <li>· 走完的每一生都写入家族族谱，下一代继承上一世的际遇</li>
             <li>· 多周目逐步解锁：挑战开局、真实模式、命运事件、传承加成</li>
             <li>· 42 个成就、16 条结局路线图鉴等你收集</li>
@@ -74,7 +89,7 @@ export default function GuideModal({ onClose }: Props) {
         <section>
           <h4 className="text-[13px] tracking-[3px] text-[#c9a96e] mb-1.5">⚡ 快捷入口</h4>
           <p className="text-[12px] text-white/55 leading-relaxed">
-            快速模拟：自动随机选择，30 秒看完一生；每日挑战：同一天所有人面对同一局；种子挑战：输入好友分享的种子码，挑战同一个事件序列。
+            快速模拟：30 秒看完一生；每日挑战：同一天所有人面对同一局；种子挑战：输入好友分享的种子码挑战同一局；结算页还能一键分享人生卡、和好友比谁活得更漂亮。
           </p>
         </section>
 

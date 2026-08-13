@@ -24,6 +24,13 @@ export const LIFE_ROUTES: LifeRoute[] = [
     seedFlags: ['gang_member'],
   },
   {
+    key: 'underworld',
+    icon: '🕶️',
+    name: '江湖末路',
+    desc: '混江湖 → 东窗事发进监狱 → 越狱亡命，一条路走到黑',
+    seedFlags: ['gang_member', 'gray_deep', 'escape_plan'],
+  },
+  {
     key: 'prison',
     icon: '🔒',
     name: '铁窗人生',

@@ -531,6 +531,12 @@ test('START_GAME：人生路线注入入口 flag', () => {
   assert.ok(escape.game.flags.includes('escape_plan'));
   assert.strictEqual(escape.game.route, 'escape');
 
+  const underworld = reducer(createInitialRuntime(), { type: 'START_GAME', ...base, route: 'underworld' });
+  assert.ok(underworld.game.flags.includes('gang_member'));
+  assert.ok(underworld.game.flags.includes('gray_deep'));
+  assert.ok(underworld.game.flags.includes('escape_plan'));
+  assert.strictEqual(underworld.game.route, 'underworld');
+
   const free = reducer(createInitialRuntime(), { type: 'START_GAME', ...base });
   assert.strictEqual(free.game.route, undefined);
   assert.ok(!free.game.flags.includes('gang_member'));

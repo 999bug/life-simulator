@@ -19,7 +19,8 @@ export type AnalyticsVariant = 'normal' | 'daily' | 'weekly' | 'seed' | 'auto';
 export type FeatureKey =
   | 'quick_sim' | 'daily' | 'weekly' | 'seed' | 'goal' | 'build'
   | 'achievements' | 'collection' | 'family' | 'stats' | 'guide' | 'data'
-  | 'share_card' | 'biography' | 'almanac' | 'almanac_export' | 'talent_inherit' | 'life_card';
+  | 'share_card' | 'share_life' | 'biography' | 'almanac' | 'almanac_export' | 'talent_inherit' | 'life_card'
+  | 'life_export' | 'life_import';
 
 export type AnalyticsEvent =
   | { type: 'game_start'; ts: number; variant: AnalyticsVariant; pace: 'full' | 'lite'; challenge: boolean }

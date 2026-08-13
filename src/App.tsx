@@ -6,6 +6,7 @@ import GameScreen from './components/GameScreen';
 import SummaryScreen from './components/SummaryScreen';
 import InstallPrompt from './components/InstallPrompt';
 import { loadInheritTalent } from './engine/talents';
+import { parseChallengeLink, type ChallengeLink } from './utils/share';
 
 /** 主题（全局）：深空蓝（默认）/ 纯黑 */
 export type Theme = 'dark' | 'black';
@@ -23,7 +24,7 @@ function loadTheme(): Theme {
 }
 
 export default function App() {
-  const { game, currentEvent, feedback, skippedEvents, autoPlay, introAuto, typeSpeed, saves, achievements, stats, newAchievements, fateEventIds, isDaily, isWeekly, weeklyGoal, daily, dailyHistory, weekly, seedScores, family, shuffleSeed, startGame, startAutoGame, startDailyGame, startWeeklyGame, restart, reincarnate, makeChoice, makeAction, skipIntro, undo, undoToAge, undoStack, continue: continue_, continueGame, reset, resetFamily, setTypeSpeed } = useGame();
+  const { game, currentEvent, feedback, skippedEvents, autoPlay, introAuto, typeSpeed, saves, achievements, stats, newAchievements, fateEventIds, isDaily, isWeekly, seedChallenge, weeklyGoal, daily, dailyHistory, dailyStreak, weekly, seedScores, family, shuffleSeed, startGame, startAutoGame, startDailyGame, startWeeklyGame, restart, reincarnate, makeChoice, makeAction, skipIntro, undo, undoToAge, undoStack, continue: continue_, continueGame, reset, resetFamily, setTypeSpeed } = useGame();
 
   // 主动行动：选择活动后触发引擎 MAKE_ACTION（结果由反馈页展示；不推进年龄、不进 history）
   const handleAction = useCallback((activityId: string) => {
@@ -42,6 +43,11 @@ export default function App() {
       // 存储不可用静默降级
     }
   };
+
+  // 深链载入的种子挑战载荷（?seed&from&score&age&title；仅挂载时读取一次，刷新后 URL 仍可恢复）
+  const [challenge] = useState<ChallengeLink | null>(() => parseChallengeLink(window.location.search));
+  // 结算页对决目标：仅当本局确为「该种子的种子挑战」时展示（普通随机局不会命中同一种子）
+  const duelTarget = seedChallenge && challenge && challenge.seed === shuffleSeed ? challenge : undefined;
 
   // 快速模拟模式静音高频交互音；结算页恢复（保留落幕音）
   useEffect(() => {
@@ -70,7 +76,7 @@ export default function App() {
       <div className="w-full h-full text-white">
         {game.phase === 'title' && (
           <>
-            <TitleScreen onStart={startGame} onAutoStart={startAutoGame} onDailyStart={startDailyGame} onWeeklyStart={startWeeklyGame} saves={saves} onContinue={continueGame} achievements={achievements} stats={stats} daily={daily} dailyHistory={dailyHistory} weekly={weekly} weeklyGoal={weeklyGoal} seedScores={seedScores} family={family} theme={theme} onToggleTheme={toggleTheme} onResetFamily={resetFamily} />
+            <TitleScreen onStart={startGame} onAutoStart={startAutoGame} onDailyStart={startDailyGame} onWeeklyStart={startWeeklyGame} saves={saves} onContinue={continueGame} achievements={achievements} stats={stats} daily={daily} dailyHistory={dailyHistory} dailyStreak={dailyStreak} weekly={weekly} weeklyGoal={weeklyGoal} seedScores={seedScores} family={family} theme={theme} onToggleTheme={toggleTheme} onResetFamily={resetFamily} challengeLink={challenge} />
             {/* PWA 安装引导（仅标题页；Android/Chrome 系首次访问展示一次） */}
             <InstallPrompt />
           </>
@@ -111,6 +117,7 @@ export default function App() {
             isDaily={isDaily}
             isWeekly={isWeekly}
             weeklyGoal={weeklyGoal}
+            duelTarget={duelTarget}
             totalLives={stats.totalLives}
             onReincarnate={reincarnate}
             inheritTalent={loadInheritTalent()}

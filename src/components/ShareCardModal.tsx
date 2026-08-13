@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { GameState } from '../types';
 import { ATTR_META, calcScore } from '../engine/state';
 import { checkGoal } from '../engine/goals';
@@ -6,6 +6,8 @@ import { GOALS } from '../engine/goals';
 import { VERDICT_META, VERDICT_ROUTES } from '../engine/verdict';
 import { derivePersona, personaSummary } from '../engine/personality';
 import { drawGrowthChart } from './GrowthChart';
+import { track } from '../utils/analytics';
+import { buildChallengeUrl, buildShareText, canvasToFile, shareViaSystem } from '../utils/share';
 
 interface Props {
   game: GameState;
@@ -34,6 +36,8 @@ const CHART = { x: 570, y: 130, w: 340, h: 280 };
 /** 人生总结分享卡片：canvas 绘制，支持下载 PNG */
 export default function ShareCardModal({ game, verdictTitle, endingKey, collectionDone, isDaily = false, generation, seed, onClose }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  /** 分享结果反馈（「已复制」/「已打开分享面板」/降级提示） */
+  const [shareStatus, setShareStatus] = useState('');
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -164,6 +168,28 @@ export default function ShareCardModal({ game, verdictTitle, endingKey, collecti
     a.click();
   };
 
+  // 一键系统分享：优先 Web Share（带图 + 文案 + 深链），回退剪贴板复制
+  const handleShare = async () => {
+    const canvas = canvasRef.current;
+    if (!canvas) {
+      return;
+    }
+    track({ type: 'feature_use', ts: Date.now(), feature: 'share_life' });
+    const url = seed != null
+      ? buildChallengeUrl({ seed, from: game.name, score: calcScore(game.attributes), age: game.age, title: verdictTitle })
+      : undefined;
+    const text = buildShareText(game, verdictTitle, seed ?? undefined);
+    const image = await canvasToFile(canvas, `${game.name}-人生总结.png`);
+    const result = await shareViaSystem({ title: '人生模拟器', text, url, image });
+    setShareStatus(
+      result === 'shared'
+        ? '已打开分享面板'
+        : result === 'copied'
+          ? '已复制文案与链接'
+          : '当前环境不支持系统分享，请长按保存图片后手动分享',
+    );
+  };
+
   return (
     <div className="absolute inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center" onClick={onClose}>
       <div className="flex flex-col items-center gap-4" onClick={e => e.stopPropagation()}>
@@ -188,7 +214,18 @@ export default function ShareCardModal({ game, verdictTitle, endingKey, collecti
           >
             保存图片
           </button>
+          <button
+            onClick={handleShare}
+            className="px-7 py-2.5 rounded-[30px] text-[13px] tracking-[3px] border font-sans
+              border-[#5de8a0]/50 text-[#5de8a0]
+              hover:bg-[#5de8a0]/10 hover:shadow-[0_0_20px_rgba(93,232,160,0.25)]"
+          >
+            分享
+          </button>
         </div>
+        {shareStatus && (
+          <p className="text-[11px] text-white/45 tracking-[1px] text-center -mt-1">{shareStatus}</p>
+        )}
       </div>
     </div>
   );

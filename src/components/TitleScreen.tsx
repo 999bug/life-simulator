@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useRef, useState, type ChangeEvent } from 'react';
 import { sfx } from '../utils/sound';
 import { track } from '../utils/analytics';
 import type { AchievementId, Attributes, CustomGoal, FamilyMember, GoalKey, PaceMode, TypeSpeed } from '../types';
 import type { SavesV2 } from '../engine/save';
-import type { DailyHistory, DailyStore, SeedScores, StatsStore, WeeklyStore } from '../hooks/useGame';
+import type { DailyHistory, DailyStore, DailyStreak, SeedScores, StatsStore, WeeklyStore } from '../hooks/useGame';
 import { formatDate } from '../hooks/useGame';
 import type { WeeklyGoal } from '../engine/weekly';
 import { weekOf } from '../engine/weekly';
@@ -24,6 +24,9 @@ import { VERDICT_ROUTES } from '../engine/verdict';
 import { loadInheritTalent } from '../engine/talents';
 import ChangelogModal from './ChangelogModal';
 import { CHANGELOG, LATEST_VERSION } from '../data/changelog';
+import type { ChallengeLink } from '../utils/share';
+import FriendLifeModal from './FriendLifeModal';
+import { parseLifeExport, type LifeExport } from '../engine/compare';
 
 /** 玩法说明首访标记（localStorage key；不存在则首进自动弹出） */
 const GUIDE_SEEN_KEY = 'life-sim-guide-seen';
@@ -45,6 +48,8 @@ interface Props {
   daily: DailyStore;
   /** 每日挑战历史（StatsModal 周视图） */
   dailyHistory: DailyHistory;
+  /** 每日挑战连续打卡（连续 3/7 天成就的进度源，标题页展示当前连击） */
+  dailyStreak?: DailyStreak;
   /** 每周挑战记录（入口旁展示本周目标与通关状态） */
   weekly: WeeklyStore;
   /** 本周挑战目标（每周变化） */
@@ -58,12 +63,15 @@ interface Props {
   onToggleTheme: () => void;
   /** 重置家族（清空族谱，家族底蕴归零；家族面板入口） */
   onResetFamily: () => void;
+  /** 深链载入的种子挑战载荷（URL ?seed&from&score 解析传入；null = 无） */
+  challengeLink?: ChallengeLink | null;
 }
 
-export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeeklyStart, saves, onContinue, achievements, stats, daily, dailyHistory, weekly, weeklyGoal, seedScores, family, theme, onToggleTheme, onResetFamily }: Props) {
+export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeeklyStart, saves, onContinue, achievements, stats, daily, dailyHistory, dailyStreak, weekly, weeklyGoal, seedScores, family, theme, onToggleTheme, onResetFamily, challengeLink }: Props) {
   const [gender, setGender] = useState<'male' | 'female' | null>(null);
   const [name, setName] = useState('');
-  const [paceMode, setPaceMode] = useState<PaceMode>('full');
+  // 首局默认精简档：缩短首次「爽点」路径（约 15 分钟走完一生），老玩家仍默认沉浸档
+  const [paceMode, setPaceMode] = useState<PaceMode>(() => (stats.totalLives === 0 ? 'lite' : 'full'));
   const [typeSpeed, setTypeSpeed] = useState<TypeSpeed>('normal');
   /** 开局构筑（天赋 + 属性分配）：普通手动开局先构筑再选目标 */
   const [showBuild, setShowBuild] = useState(false);
@@ -93,9 +101,17 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
       // 存储不可用时忽略（下次进入仍会弹出）
     }
   };
-  /** 种子挑战：锁定的好友种子码（null = 随机种子） */
-  const [seed, setSeed] = useState<number | null>(null);
+  /** 种子挑战：锁定的好友种子码（null = 随机种子）；深链载入时以 URL 种子为初始值 */
+  const [seed, setSeed] = useState<number | null>(challengeLink?.seed ?? null);
   const [showSeed, setShowSeed] = useState(false);
+  /** 深链进入提示（好友挑战种子已载入；仅深链进入时显示，可手动关闭） */
+  const [deepLinkNotice, setDeepLinkNotice] = useState(challengeLink != null);
+  /** 导入的好友人生档案（展示模态；null = 未导入） */
+  const [friendLife, setFriendLife] = useState<LifeExport | null>(null);
+  /** 导入失败提示文案 */
+  const [importError, setImportError] = useState('');
+  /** 隐藏文件选择器（导入好友档案） */
+  const fileInputRef = useRef<HTMLInputElement>(null);
   /** 数据面板（📊 数据入口弹出） */
   const [showAnalytics, setShowAnalytics] = useState(false);
   /** 更新日志（🕓 入口 / 侧边栏「查看全部」弹出） */
@@ -108,8 +124,42 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
   const round = stats.totalLives + 1;
   /** 今日是否已有每日挑战记录（跨天不展示昨日最佳） */
   const hasTodayBest = daily.date === formatDate(new Date()) && (daily.bestScore > 0 || daily.bestAge > 0);
+  /** 连续打卡文案：今日已打卡 → 当前连击；昨日已打卡 → 今天继续的激励 */
+  const todayStr = formatDate(new Date());
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  const yesterdayStr = formatDate(yesterday);
+  let streakText = '';
+  if (dailyStreak && dailyStreak.count > 0) {
+    if (dailyStreak.date === todayStr) {
+      streakText = `🔥 连续打卡 ${dailyStreak.count} 天`;
+    } else if (dailyStreak.date === yesterdayStr) {
+      streakText = `🔥 昨日已打卡，今天继续可连 ${dailyStreak.count + 1} 天`;
+    }
+  }
   /** 图鉴收集进度（标题页入口实时可见，驱动收集欲） */
   const collectionDone = VERDICT_ROUTES.filter(r => (stats.endings[r.key] ?? 0) > 0).length;
+
+  // 导入好友人生档案：读取 JSON → 校验 → 展示档案模态（失败给出提示）
+  const handleImportFile = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) {
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      const life = parseLifeExport(String(reader.result ?? ''));
+      if (life) {
+        track({ type: 'feature_use', ts: Date.now(), feature: 'life_import' });
+        setFriendLife(life);
+        setImportError('');
+      } else {
+        setImportError('无法识别该档案，请选择「人生档案.json」');
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = '';
+  };
 
   const handleStart = () => {
     if (!gender) return;
@@ -223,6 +273,23 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
       <p className="text-sm text-white/40 tracking-[8px] z-10 animate-[fadeInUp_1.4s_ease]">
         L I F E  ·  S I M U L A T O R
       </p>
+
+      {/* 深链进入提示：好友挑战种子已载入，选择性别即可开局（可关闭） */}
+      {deepLinkNotice && seed != null && (
+        <div className="z-10 flex items-center gap-3 px-4 py-2 rounded-lg border border-[#c9a96e]/40 bg-[#c9a96e]/10 animate-[fadeIn_1.8s_ease]">
+          <span className="text-[12px] text-[#c9a96e] tracking-[1px]">
+            {challengeLink?.from
+              ? `🔑 挑战 ${challengeLink.from} 的人生（种子 ${seed}${challengeLink.score != null ? ` · 评分 ${challengeLink.score}` : ''}${challengeLink.age != null ? ` · 享年 ${challengeLink.age}` : ''}）${challengeLink.score != null ? '——超过 TA，走出更好的一生' : '——选择性别即可挑战 TA 的一生'}`
+              : `🔑 好友的人生已载入（种子 ${seed}）——选择性别即可挑战 TA 的一生`}
+          </span>
+          <button
+            onClick={() => { sfx.select(); setDeepLinkNotice(false); }}
+            className="text-[11px] text-white/40 hover:text-[#c9a96e] shrink-0 transition-colors"
+          >
+            知道了
+          </button>
+        </div>
+      )}
 
       {/* 名字输入 */}
       <div className="z-10 flex flex-col items-center gap-2 animate-[fadeIn_1.8s_ease]">
@@ -416,6 +483,12 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
           📅 每日挑战
         </button>
 
+        {streakText && (
+          <span className="text-[10px] text-[#e8c95d]/80 tracking-[1px] whitespace-nowrap">
+            {streakText}
+          </span>
+        )}
+
         {hasTodayBest && (
           <span className="text-[10px] text-white/30 tracking-[1px] whitespace-nowrap">
             今日最佳 评分 {daily.bestScore} / 享年 {daily.bestAge}
@@ -526,6 +599,14 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
           {seed != null ? `🔑 ${seed}` : '🔑 种子'}
         </button>
 
+        {/* 好友档案导入：读取好友导出的「人生档案.json」，查看并可直接挑战其种子 */}
+        <button
+          onClick={() => { sfx.select(); fileInputRef.current?.click(); }}
+          className="text-[12px] text-white/30 tracking-[3px] hover:text-[#c9a96e] transition-colors duration-200 font-sans"
+        >
+          📥 导入档案
+        </button>
+
         {/* 数据面板入口：埋点数据看板与导出（按计划刻意不埋点自身——与其余快捷入口不同） */}
         <button
           onClick={() => {
@@ -626,6 +707,36 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
           onCancel={() => setShowSeed(false)}
           scores={seedScores}
         />
+      )}
+
+      {/* 好友档案导入（隐藏文件选择器 + 档案模态 + 失败提示） */}
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="application/json,.json"
+        onChange={handleImportFile}
+        className="hidden"
+      />
+      {friendLife && (
+        <FriendLifeModal
+          life={friendLife}
+          onClose={() => setFriendLife(null)}
+          onChallenge={s => { setSeed(s); setFriendLife(null); }}
+        />
+      )}
+      {importError && (
+        <div className="absolute inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center" onClick={() => setImportError('')}>
+          <div className="w-[320px] max-w-[90vw] rounded-2xl border border-white/10 bg-[#15152a] p-6 flex flex-col gap-4" onClick={e => e.stopPropagation()}>
+            <p className="text-[13px] text-[#e8a05d] text-center leading-relaxed">{importError}</p>
+            <button
+              onClick={() => setImportError('')}
+              className="px-6 py-2 rounded-[30px] text-[12px] tracking-[3px] border font-sans mx-auto
+                border-white/15 text-white/40 hover:border-[#c9a96e]/50 hover:text-[#c9a96e]"
+            >
+              知道了
+            </button>
+          </div>
+        </div>
       )}
 
       {/* 玩法说明模态（❓ 入口 / 首次进入自动弹出） */}

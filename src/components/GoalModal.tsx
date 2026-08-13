@@ -157,6 +157,13 @@ export default function GoalModal({ onSelect, onCancel, latestMember }: Props) {
         </div>
         <div className="flex gap-3 justify-center mt-1">
           <button
+            onClick={() => { sfx.select(); setSelected(GOALS[Math.floor(Math.random() * GOALS.length)].key); }}
+            className="px-5 py-2.5 rounded-[30px] text-[13px] tracking-[3px] border font-sans
+              border-[#8fb8e8]/40 text-[#8fb8e8]/80 hover:border-[#8fb8e8] hover:text-[#8fb8e8]"
+          >
+            🎲 随机
+          </button>
+          <button
             onClick={() => { sfx.select(); onSelect(null); }}
             className="px-6 py-2.5 rounded-[30px] text-[13px] tracking-[3px] border font-sans
               border-white/15 text-white/40 hover:border-[#c9a96e]/50 hover:text-[#c9a96e]"

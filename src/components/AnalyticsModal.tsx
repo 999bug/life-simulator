@@ -47,8 +47,10 @@ function endingLabel(key: string): string {
 const FEATURE_LABELS: Record<string, string> = {
   quick_sim: '快速模拟',
   daily: '每日挑战',
+  weekly: '每周挑战',
   seed: '种子挑战',
   goal: '自定义目标',
+  build: '开局构筑',
   achievements: '成就',
   collection: '图鉴',
   family: '家族',
@@ -56,7 +58,14 @@ const FEATURE_LABELS: Record<string, string> = {
   guide: '玩法',
   data: '数据面板',
   share_card: '分享卡片',
+  share_life: '一键分享',
   biography: '传记导出',
+  almanac: '人生年鉴',
+  almanac_export: '年鉴导出',
+  talent_inherit: '天赋传承',
+  life_card: '人生名片',
+  life_export: '档案导出',
+  life_import: '档案导入',
 };
 
 function featureLabel(key: string): string {

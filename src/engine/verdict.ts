@@ -10,6 +10,8 @@ export interface VerdictRoute {
   hint: string;
   /** 达成线索（已收集后展示，玩家视角中文描述，不露 flag 名） */
   clue: string;
+  /** 稀有结局（灰色路线等达成门槛更高，图鉴与结算页打「稀有」角标驱动收集欲） */
+  rare?: boolean;
 }
 
 /**
@@ -61,14 +63,17 @@ export const VERDICT_ROUTES: VerdictRoute[] = [
   {
     key: 'escaped', icon: '🏃', title: '亡命天涯', hint: '越狱成功，从此隐姓埋名',
     clue: '铁窗困不住不甘的灵魂，越狱成功，从此隐姓埋名。这条路没有回头，踏上便是天涯',
+    rare: true,
   },
   {
     key: 'gang_boss', icon: '👑', title: '黑道风云', hint: '江湖上留下你的名号',
     clue: '在灰色地带一路向上，让江湖记住你的名号。这条路危险，却也另有一番天地',
+    rare: true,
   },
   {
     key: 'jailed', icon: '🔒', title: '铁窗人生', hint: '灰色生意东窗事发，高墙内度过人生',
     clue: '灰色生意东窗事发，高墙之内度过人生。一步踏错，换来的便是漫长的铁窗生涯',
+    rare: true,
   },
   {
     key: 'went_to_college', icon: '📚', title: '知识改变命运的一生', hint: '考上大学',

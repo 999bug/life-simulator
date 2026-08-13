@@ -9,7 +9,9 @@ import GrowthChart from './GrowthChart';
 import AlmanacModal from './AlmanacModal';
 import LifeCardModal from './LifeCardModal';
 import { buildBiographyMarkdown, downloadText } from '../utils/biography';
+import { buildLifeExport } from '../engine/compare';
 import { track } from '../utils/analytics';
+import { buildChallengeUrl, buildShareText, shareViaSystem, type ChallengeLink } from '../utils/share';
 import { VERDICT_META, nextRouteToExplore, verdictKey } from '../engine/verdict';
 import { jobStatus, JOB_MILESTONE_FLAGS } from '../engine/jobs';
 import { npcBonds, BOND_META } from '../engine/npcs';
@@ -38,6 +40,8 @@ interface Props {
   isDaily?: boolean;
   /** 每周挑战局（展示本周目标达成） */
   isWeekly?: boolean;
+  /** 种子挑战的对决目标（发起人评分/享年等；无则普通局不展示对决） */
+  duelTarget?: ChallengeLink;
   /** 本周挑战目标（每周变化；周目标达成展示用） */
   weeklyGoal?: WeeklyGoal;
   /** 累计完成局数（周目判定：第 6 周目起显示「人生重开」） */
@@ -341,7 +345,7 @@ const PERSONA_NOTES: Record<PersonaTrait, string> = {
   altruistic: '你把手里的光分给了很多人——最后，光也照亮了你自己的路。',
 };
 
-export default function SummaryScreen({ game, onRestart, newAchievements, skippedTitles, generation, seed, collectedEndings = [], isDaily = false, isWeekly = false, weeklyGoal, totalLives = 0, onReincarnate, inheritTalent = null }: Props) {
+export default function SummaryScreen({ game, onRestart, newAchievements, skippedTitles, generation, seed, collectedEndings = [], isDaily = false, isWeekly = false, weeklyGoal, duelTarget, totalLives = 0, onReincarnate, inheritTalent = null }: Props) {
   const score = calcScore(game.attributes);
   const { title, desc } = getVerdict(game);
   const goal = checkGoal(game.goal, game);
@@ -379,6 +383,8 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
   }));
   // 分享卡片模态开关
   const [showShare, setShowShare] = useState(false);
+  // 一键分享反馈（系统分享/剪贴板复制的结果提示）
+  const [shareMsg, setShareMsg] = useState<string | null>(null);
   // 人生年鉴模态开关
   const [showAlmanac, setShowAlmanac] = useState(false);
   // 人生名片模态开关
@@ -427,6 +433,11 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       )}
       <h2 className="text-[34px] font-extralight tracking-[10px] text-[#c9a96e] animate-[fadeInDown_0.8s_ease]">
         {title}
+        {VERDICT_META[verdictKey(game)]?.rare && (
+          <span className="ml-2 align-middle text-[11px] px-2 py-0.5 rounded-full bg-[#e8c95d]/15 border border-[#e8c95d]/40 text-[#e8c95d] tracking-[2px]">
+            稀有
+          </span>
+        )}
       </h2>
       <p className="text-sm text-white/40 text-center max-w-[400px] leading-relaxed animate-[fadeIn_1.2s_ease]">
         {desc}
@@ -435,6 +446,29 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       <p className="text-[10px] text-white/35 tracking-wide text-center animate-[fadeIn_1.3s_ease]">
         判定依据：{basisText}
       </p>
+      {/* 对决结果：种子挑战局展示「你 vs 发起人」的胜负（纯前端，发起人信息来自深链） */}
+      {duelTarget && (
+        <div className="w-full max-w-[560px] px-5 py-3.5 bg-[#e8c95d]/5 border border-[#e8c95d]/25 rounded-xl animate-[fadeIn_1.3s_ease]">
+          <div className="flex items-center gap-2">
+            <span className="text-lg leading-none">⚔️</span>
+            <span className="text-[11px] text-white/40 tracking-[2px]">对决 · 挑战 {duelTarget.from ?? '好友'} 的人生</span>
+          </div>
+          <div className="text-[14px] text-[#e8c95d] mt-1">
+            {duelTarget.score != null && score > duelTarget.score
+              ? `你赢了！评分 ${score} 胜过 ${duelTarget.from ?? 'TA'} 的 ${duelTarget.score} 分`
+              : duelTarget.score != null && score < duelTarget.score
+                ? `惜败，差 ${duelTarget.score - score} 分——再挑战一次试试？`
+                : duelTarget.score != null
+                  ? `打平！你们都是 ${score} 分`
+                  : `你走完了「${title}」，享年 ${game.age} 岁`}
+          </div>
+          {duelTarget.score != null && duelTarget.age != null && (
+            <div className="text-[11px] text-white/40 mt-1">
+              {duelTarget.from ?? 'TA'} 享年 {duelTarget.age} · 你享年 {game.age}
+            </div>
+          )}
+        </div>
+      )}
       {/* 性格注脚：Top1 端的一句话（弱画像不显示，低调不抢戏） */}
       {personaTotal >= 2 && personaTop && (
         <p className="text-[12px] text-white/50 italic text-center animate-[fadeIn_1.3s_ease]">
@@ -764,6 +798,34 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       </button>
 
       <button
+        onClick={async () => {
+          // 埋点：一键分享（系统分享或剪贴板复制）
+          track({ type: 'feature_use', ts: Date.now(), feature: 'share_life' });
+          const url = seed != null
+            ? buildChallengeUrl({ seed, from: game.name, score, age: game.age, title })
+            : undefined;
+          const text = buildShareText(game, title, seed ?? undefined);
+          const result = await shareViaSystem({ title: '人生模拟器', text, url });
+          setShareMsg(
+            result === 'copied'
+              ? '✅ 已复制文案与挑战链接，去粘贴给好友吧'
+              : result === 'shared'
+                ? '✅ 分享面板已打开'
+                : '⚠️ 当前环境不支持一键分享，请点「生成分享卡片」保存图片',
+          );
+        }}
+        className="px-9 py-3 border border-[#5de8a0]/50 rounded-2xl bg-transparent
+          text-sm text-[#5de8a0] tracking-[4px] font-sans
+          hover:bg-[#5de8a0]/10 hover:shadow-[0_4px_20px_rgba(93,232,160,0.3)]
+          transition-all duration-300 mt-2"
+      >
+        🔗 一键分享
+      </button>
+      {shareMsg && (
+        <p className="text-[11px] text-white/45 tracking-[1px] text-center -mt-1">{shareMsg}</p>
+      )}
+
+      <button
         onClick={() => {
           // 埋点：传记导出
           track({ type: 'feature_use', ts: Date.now(), feature: 'biography' });
@@ -775,6 +837,22 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
           transition-all duration-300 mt-2"
       >
         📜 导出人生传记
+      </button>
+
+      {/* 人生档案导出：一份可互发的好友对比 JSON（含种子，好友可导入并发起挑战） */}
+      <button
+        onClick={() => {
+          // 埋点：档案导出
+          track({ type: 'feature_use', ts: Date.now(), feature: 'life_export' });
+          const life = buildLifeExport(game, title, seed ?? undefined, formatDate(new Date()));
+          downloadText(`${game.name}-人生档案.json`, JSON.stringify(life, null, 2));
+        }}
+        className="px-9 py-3 border border-white/20 rounded-2xl bg-transparent
+          text-sm text-white/50 tracking-[4px] font-sans
+          hover:border-[#c9a96e] hover:text-[#c9a96e] hover:shadow-[0_4px_20px_rgba(201,169,110,0.3)]
+          transition-all duration-300 mt-2"
+      >
+        📦 导出人生档案
       </button>
 
       {/* 人生名片：一张可下载的视觉简历卡（收藏/简历向，与传播向分享卡差异化） */}

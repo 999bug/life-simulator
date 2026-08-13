@@ -21,8 +21,13 @@ export default function CollectionModal({ endings, onClose }: Props) {
             <div key={r.key} className={`flex items-center gap-3 p-3 rounded-lg border ${got ? 'border-[#c9a96e]/25 bg-[#c9a96e]/5' : 'border-white/[0.06] bg-white/[0.02]'}`}>
               <span className={`text-[18px] leading-none ${got ? '' : 'opacity-40 grayscale'}`}>{got ? r.icon : '🔒'}</span>
               <div className="flex-1">
-                <div className={`text-[13px] ${got ? 'text-[#c9a96e]' : 'text-white/40'}`}>
-                  {got ? r.title : '？？？'}
+                <div className={`text-[13px] ${got ? 'text-[#c9a96e]' : 'text-white/40'} flex items-center gap-2`}>
+                  <span>{got ? r.title : '？？？'}</span>
+                  {r.rare && (
+                    <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#e8c95d]/15 text-[#e8c95d] border border-[#e8c95d]/30 tracking-[1px]">
+                      稀有
+                    </span>
+                  )}
                 </div>
                 <div className="text-[11px] text-white/30 mt-0.5 leading-relaxed">
                   {got ? `已达成 ${count} 次` : r.hint}

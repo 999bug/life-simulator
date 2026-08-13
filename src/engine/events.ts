@@ -5,7 +5,7 @@ import type { LifeEvent, PaceMode } from '../types';
  * 数据由 script/convert-events.mjs 从 script/chiled.json 生成到 public/events.json，
  * 请勿手改；修改事件请编辑 script/chiled.json 后运行 npm run build:events。
  *
- * 拆分运行时的原因：633 个事件约 586KB，内联进单文件 bundle 会拖慢首屏解析；
+ * 拆分运行时的原因：752 个事件约 678KB，内联进单文件 bundle 会拖慢首屏解析；
  * public/ 独立文件由 SW precache 保障离线可用，且数据与代码可独立缓存。
  *
  * 播放机制：

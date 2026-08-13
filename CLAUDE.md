@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-人生模拟器：React 18 + TypeScript + Vite + Tailwind 的文字人生模拟游戏。纯前端、无后端，游戏内容由 JSON 事件数据驱动。事件数据源 `script/chiled.json`（744 个事件：523 原始 + 片段合入，其中 4 位模拟事件经 keep-list 精选 373 个）经转换器生成引擎格式 `public/events.json`（共 744 个事件，运行时 fetch 加载 + SW precache 离线可用），运行时同岁组内按种子洗牌后线性播放。PWA 可安装离线。
+人生模拟器：React 18 + TypeScript + Vite + Tailwind 的文字人生模拟游戏。纯前端、无后端，游戏内容由 JSON 事件数据驱动。事件数据源 `script/chiled.json`（752 个事件：523 原始 + 片段合入，其中 4 位模拟事件经 keep-list 精选 381 个）经转换器生成引擎格式 `public/events.json`（共 752 个事件，运行时 fetch 加载 + SW precache 离线可用），运行时同岁组内按种子洗牌后线性播放。PWA 可安装离线。
 
 ## 常用命令
 
@@ -32,7 +32,7 @@ script/chiled.json ──convert-events.mjs──▶ public/events.json
 
 - **chiled.json**：事件数据源（snake_case 原始格式：`age_range`/`flags_add`/`has_flags`/`min_attrs`）。**所有事件改动都改这里，不手改 events.json**
 - **convert-events.mjs**：唯一转换器。`ATTR_MAP`（107 键）把 chiled 属性名映射到 8 大引擎属性；`INVERSE` 集合内的键是负向维度（取反求和，如 `pressure:+8` → happiness:-8）；未映射键 fail-fast 抛错；**事件 id 校验**（2 位主线/4 位模拟，其他抛错）；**选项 `personality` 手工性格标注透传**（白名单 6 端校验 fail-fast，透传到 `outcomes.personality`，引擎 traitForOutcome 优先采用——内容层文案重写时标注）。`ATTR_ORDER`/`STAGE_RANGES` 需与 `src/engine/state.ts` 的 `ATTR_META`/`STAGE_META` 手动同步。**产物为 `public/events.json`**（无缩进压缩输出）：运行时 fetch 加载（避免 690KB 数据内联进单文件 bundle，首屏 HTML 584KB→302KB），SW precache 保离线
-- **apply-rewrites.mjs**：文案重写补丁工具（`script/rewrites/*.json`，按 id 精确替换 title/text/choices 文案与 personality 标注，**效果值/flags/conditions 一律保留原值**——防重写误伤平衡与事件链；补丁选项数不匹配即抛错）。分批重写已覆盖全部 744 个事件（batch1-a~d 童年 81 个、batch2 青年 144 个、batch3 中年 234 个、batch4 老年 216 个；手工标注 1681 个，徽章覆盖率 0-2 岁 62% / 3-12 岁 76% / 13-30 岁 92% / 31-60 岁 94% / 61+ 岁 93%）。后续文案优化续用
+- **apply-rewrites.mjs**：文案重写补丁工具（`script/rewrites/*.json`，按 id 精确替换 title/text/choices 文案与 personality 标注，**效果值/flags/conditions 一律保留原值**——防重写误伤平衡与事件链；补丁选项数不匹配即抛错）。分批重写已覆盖全部 752 个事件（batch1-a~d 童年 81 个、batch2 青年 144 个、batch3 中年 234 个、batch4 老年 216 个；手工标注 1681 个，徽章覆盖率 0-2 岁 62% / 3-12 岁 76% / 13-30 岁 92% / 31-60 岁 94% / 61+ 岁 93%）。后续文案优化续用
 - **prune-events.mjs**：精选工具。事件 id 规则：**2 位数字后缀 = 原始主线事件（如 child_01），一字不改、永远保留；4 位数字后缀 = 模拟事件（如 child_0017），只能被精选删除、不能改内容**。`keep-list.json` 记录保留清单（审计用，当前 373 条 = 全部保留的模拟事件；新增模拟事件后需同步追加，否则 prune 会被过滤）。运行方式：`node script/prune-events.mjs script/keep-list.json`（写回 chiled.json，含 gap_year 补丁）
 - **merge-fragments.mjs**：合并 chiled.json + `script/fragments/` 片段，跑三重校验：convertAll fail-fast + 每岁密度（0-2 岁 3-5 个、3-12 岁 5-13 个、13-75 岁 3-8 个）+ flag 生产/消费配对（has_flags 引用的 flag 必须有产出者，not_flags 不算悬空）。**幂等**：片段中已合并的 id 自动跳过，片段文件保留在 fragments/ 目录可重复运行
 - **clamp-effects.mjs**：效果值钳位工具。4 位模拟事件的效果按转换后属性值等比例压缩到 ±3~±20 声明范围内（多键求和超范围时压缩该属性所有来源键）；2 位主线一字不改。幂等，效果值调整后用它 + build:events

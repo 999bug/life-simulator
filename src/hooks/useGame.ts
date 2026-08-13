@@ -31,6 +31,7 @@ import { personaBonds, type PersonaId } from '../engine/personas.ts';
 import { buildCompanionEvent, COMPANION_DISABLED, COMPANION_END_AGE, COMPANION_INTERVAL, COMPANION_START_AGE, companionEnabled } from '../engine/companion.ts';
 import { ACTIVITIES, pickActivityResult, rollCrime } from '../engine/activities.ts';
 import { track } from '../utils/analytics.ts';
+import { getRoute } from '../engine/routes.ts';
 
 /** 中途放弃埋点：结算后回标题（phase 已为 summary）不误记，其余情况记放弃 */
 export function trackAbandonIfPlaying(phase: GamePhase, age: number): void {
@@ -323,7 +324,7 @@ export function updateWeeklyBest(prev: WeeklyStore, week: string, score: number,
 
 // ============ Action 类型 ============
 export type Action =
-  | { type: 'START_GAME'; gender: 'male' | 'female'; name: string; paceMode: PaceMode; typeSpeed: TypeSpeed; goal: GoalKey | CustomGoal | null; challenge: boolean; realMode?: boolean; seed?: number; isDaily?: boolean; isWeekly?: boolean; talents?: string[]; alloc?: Partial<Attributes> }
+  | { type: 'START_GAME'; gender: 'male' | 'female'; name: string; paceMode: PaceMode; typeSpeed: TypeSpeed; goal: GoalKey | CustomGoal | null; challenge: boolean; realMode?: boolean; seed?: number; isDaily?: boolean; isWeekly?: boolean; talents?: string[]; alloc?: Partial<Attributes>; route?: string }
   | { type: 'START_AUTO_GAME'; gender: 'male' | 'female'; name: string }
   | { type: 'REINCARNATE' }
   | { type: 'RESTART' }
@@ -669,6 +670,8 @@ interface StartParams {
   alloc?: Partial<Attributes>;
   /** 人生重开（第 6 周目起）：以本局终局属性的一半重新投胎 */
   reincarnateFrom?: Attributes;
+  /** 开局人生路线 key（「这一生想体验什么」；缺省 = 自由人生） */
+  route?: string;
 }
 
 /**
@@ -722,6 +725,16 @@ function startNewGame(state: RuntimeState, p: StartParams): RuntimeState {
   const pf = parentFlag(state.family);
   if (pf) {
     game.flags.push(pf);
+  }
+  // 开局人生路线：注入入口 flag，稳定触发对应事件链（自由人生 = 无注入）
+  if (p.route) {
+    const route = getRoute(p.route);
+    for (const f of route?.seedFlags ?? []) {
+      if (!game.flags.includes(f)) {
+        game.flags.push(f);
+      }
+    }
+    game.route = p.route;
   }
   const shuffleSeed = p.seed ?? Math.floor(Math.random() * 2 ** 31);
   // 快速模拟用精简档（每岁 1-2 个）；手动模式按所选密度档过滤
@@ -800,6 +813,7 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         isWeekly: action.isWeekly,
         talents: action.talents,
         alloc: action.alloc,
+        route: action.route,
       });
 
     case 'START_AUTO_GAME':
@@ -828,6 +842,7 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         talents: state.game.talents,
         alloc: state.game.allocated,
         reincarnateFrom: state.game.attributes,
+        route: state.game.route,
       });
     }
 
@@ -847,6 +862,7 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         isWeekly: state.isWeekly,
         talents: state.game.talents,
         alloc: state.game.allocated,
+        route: state.game.route,
       });
     }
 
@@ -1490,10 +1506,10 @@ export function useGame() {
     return () => clearTimeout(timer);
   }, [rt]);
 
-  const startGame = useCallback((gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | CustomGoal | null, challenge: boolean = false, realMode: boolean = false, seed?: number | null, talents?: string[], alloc?: Partial<Attributes>) => {
+  const startGame = useCallback((gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | CustomGoal | null, challenge: boolean = false, realMode: boolean = false, seed?: number | null, talents?: string[], alloc?: Partial<Attributes>, route?: string) => {
     // 埋点：开局（种子挑战 variant=seed，普通开局 variant=normal）
     track({ type: 'game_start', ts: Date.now(), variant: seed != null ? 'seed' : 'normal', pace: paceMode, challenge });
-    dispatch({ type: 'START_GAME', gender, name, paceMode, typeSpeed, goal, challenge, realMode, seed: seed ?? undefined, talents, alloc });
+    dispatch({ type: 'START_GAME', gender, name, paceMode, typeSpeed, goal, challenge, realMode, seed: seed ?? undefined, talents, alloc, route });
   }, []);
 
   const startAutoGame = useCallback((gender: 'male' | 'female', name: string) => {

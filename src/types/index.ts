@@ -153,6 +153,8 @@ export interface GameState {
   allocBonus?: boolean;
   /** 本岁已做过的主动活动 id 列表（每岁每个活动限 1 次；行动不推年龄，随岁刷新；旧存档无此字段 = 未做过） */
   actionsDone?: string[];
+  /** 开局人生路线 key（「这一生想体验什么」；旧存档无此字段 = 自由人生） */
+  route?: string;
 }
 
 /** 属性元数据 */

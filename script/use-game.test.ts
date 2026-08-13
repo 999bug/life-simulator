@@ -519,3 +519,20 @@ test('FAST_FORWARD_TO：非手动局或目标不合法时拒绝', () => {
   // 种子挑战局
   assert.strictEqual(reducer({ ...base, seedChallenge: true }, { type: 'FAST_FORWARD_TO', age: 30 }).fastForwardUntil, null);
 });
+
+test('START_GAME：人生路线注入入口 flag', () => {
+  const base = { gender: 'male' as const, name: '小明', paceMode: 'full' as const, typeSpeed: 'normal' as const, goal: null };
+  const gangster = reducer(createInitialRuntime(), { type: 'START_GAME', ...base, route: 'gangster' });
+  assert.ok(gangster.game.flags.includes('gang_member'));
+  assert.strictEqual(gangster.game.route, 'gangster');
+
+  const escape = reducer(createInitialRuntime(), { type: 'START_GAME', ...base, route: 'escape' });
+  assert.ok(escape.game.flags.includes('jailed'));
+  assert.ok(escape.game.flags.includes('escape_plan'));
+  assert.strictEqual(escape.game.route, 'escape');
+
+  const free = reducer(createInitialRuntime(), { type: 'START_GAME', ...base });
+  assert.strictEqual(free.game.route, undefined);
+  assert.ok(!free.game.flags.includes('gang_member'));
+  assert.ok(!free.game.flags.includes('jailed'));
+});

@@ -4,9 +4,10 @@ import { GOALS } from '../engine/goals';
 import { ATTR_META } from '../engine/state';
 import { VERDICT_META } from '../engine/verdict';
 import { sfx } from '../utils/sound';
+import { LIFE_ROUTES } from '../engine/routes';
 
 interface Props {
-  onSelect: (goal: GoalKey | CustomGoal | null) => void;
+  onSelect: (goal: GoalKey | CustomGoal | null, route?: string) => void;
   onCancel: () => void;
   /** 族谱最新一代（有则展示「你将作为下一代出生」继承提示） */
   latestMember?: FamilyMember;
@@ -20,6 +21,8 @@ const CUSTOM_DEFAULT_TARGET = 60;
 /** 目标选择模态：开局选择人生目标（无目标或自定义属性目标亦可） */
 export default function GoalModal({ onSelect, onCancel, latestMember }: Props) {
   const [selected, setSelected] = useState<GoalKey | null>(null);
+  /** 开局人生路线 key（null = 自由人生） */
+  const [route, setRoute] = useState<string | null>(null);
   const [showCustom, setShowCustom] = useState(false);
   /** 自定义目标勾选的属性 */
   const [customAttrs, setCustomAttrs] = useState<AttributeKey[]>([]);
@@ -42,7 +45,7 @@ export default function GoalModal({ onSelect, onCancel, latestMember }: Props) {
       attrs[k] = customTargets[k] ?? CUSTOM_DEFAULT_TARGET;
     }
     sfx.select();
-    onSelect({ attrs });
+    onSelect({ attrs }, route ?? undefined);
   };
 
   // 自定义目标面板
@@ -125,6 +128,37 @@ export default function GoalModal({ onSelect, onCancel, latestMember }: Props) {
         flex flex-col gap-4" onClick={e => e.stopPropagation()}>
         <h3 className="text-center text-[18px] tracking-[6px] text-[#c9a96e]">选择你的人生目标</h3>
         <p className="text-center text-[11px] text-white/40 tracking-[2px]">目标影响结算评价，也可以无目的地活一次</p>
+        {/* 开局人生路线：这一生想体验什么（可选，默认自由人生） */}
+        <div>
+          <div className="text-[11px] tracking-[3px] text-white/40 mb-2">🎭 这一生想体验什么</div>
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => { sfx.select(); setRoute(null); }}
+              className={`px-3 py-1.5 rounded-full text-[12px] border transition-all duration-200 font-sans
+                ${route === null
+                  ? 'border-[#c9a96e] text-[#c9a96e] bg-[#c9a96e]/10'
+                  : 'border-white/15 text-white/45 hover:border-[#c9a96e]/40 hover:text-[#c9a96e]'}`}
+            >
+              🌱 自由人生
+            </button>
+            {LIFE_ROUTES.map(r => (
+              <button
+                key={r.key}
+                onClick={() => { sfx.select(); setRoute(r.key); }}
+                title={r.desc}
+                className={`px-3 py-1.5 rounded-full text-[12px] border transition-all duration-200 font-sans
+                  ${route === r.key
+                    ? 'border-[#c9a96e] text-[#c9a96e] bg-[#c9a96e]/10'
+                    : 'border-white/15 text-white/45 hover:border-[#c9a96e]/40 hover:text-[#c9a96e]'}`}
+              >
+                {r.icon} {r.name}
+              </button>
+            ))}
+          </div>
+          <p className="text-[10px] text-white/30 mt-1 leading-relaxed">
+            选一条人生路线，开局会埋下对应的际遇，让你稳定体验这一种活法。
+          </p>
+        </div>
         {/* 家族继承提示：族谱非空时，本局作为下一代出生 */}
         {latestMember && (
           <p className="text-center text-[11px] text-[#c9a96e]/70 tracking-[1px] -mt-1">
@@ -164,14 +198,14 @@ export default function GoalModal({ onSelect, onCancel, latestMember }: Props) {
             🎲 随机
           </button>
           <button
-            onClick={() => { sfx.select(); onSelect(null); }}
+            onClick={() => { sfx.select(); onSelect(null, route ?? undefined); }}
             className="px-6 py-2.5 rounded-[30px] text-[13px] tracking-[3px] border font-sans
               border-white/15 text-white/40 hover:border-[#c9a96e]/50 hover:text-[#c9a96e]"
           >
             无目标，随心而活
           </button>
           <button
-            onClick={() => { if (selected) { sfx.select(); onSelect(selected); } }}
+            onClick={() => { if (selected) { sfx.select(); onSelect(selected, route ?? undefined); } }}
             disabled={!selected}
             className={`px-8 py-2.5 rounded-[30px] text-[13px] tracking-[3px] border font-sans
               ${selected

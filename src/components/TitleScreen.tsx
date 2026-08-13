@@ -32,7 +32,7 @@ import { parseLifeExport, type LifeExport } from '../engine/compare';
 const GUIDE_SEEN_KEY = 'life-sim-guide-seen';
 
 interface Props {
-  onStart: (gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | CustomGoal | null, challenge: boolean, realMode: boolean, seed?: number | null, talents?: string[], alloc?: Partial<Attributes>) => void;
+  onStart: (gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | CustomGoal | null, challenge: boolean, realMode: boolean, seed?: number | null, talents?: string[], alloc?: Partial<Attributes>, route?: string) => void;
   onAutoStart: (gender: 'male' | 'female', name: string) => void;
   /** 每日挑战：随机性别/名字 + 今日固定种子开局（手动播放） */
   onDailyStart: () => void;
@@ -190,11 +190,11 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
     setShowGoal(true);
   };
 
-  const handleGoalSelect = (goal: GoalKey | CustomGoal | null) => {
+  const handleGoalSelect = (goal: GoalKey | CustomGoal | null, route?: string) => {
     if (!gender) return;
     setShowGoal(false);
     const finalName = name.trim() || (gender === 'male' ? '小明' : '小美');
-    onStart(gender, finalName, paceMode, typeSpeed, goal, challenge, realMode, seed, talents, alloc);
+    onStart(gender, finalName, paceMode, typeSpeed, goal, challenge, realMode, seed, talents, alloc, route);
   };
 
   return (

@@ -15,6 +15,14 @@ export interface ChangelogEntry {
  */
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.17.0',
+    date: '2026-08-13',
+    title: '开局人生路线',
+    items: [
+      '🎭 开局人生路线：开局即可选择「这一生想体验什么」——白衣天使 / 黑道风云 / 铁窗人生 / 亡命天涯，稳定体验对应人生',
+    ],
+  },
+  {
     version: '0.16.0',
     date: '2026-08-13',
     title: '时代记忆与养育线',

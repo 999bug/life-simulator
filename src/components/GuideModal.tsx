@@ -56,7 +56,7 @@ export default function GuideModal({ onClose }: Props) {
         <section>
           <h4 className="text-[13px] tracking-[3px] text-[#c9a96e] mb-1.5">⏱️ 节奏与打字</h4>
           <p className="text-[12px] text-white/55 leading-relaxed">
-            沉浸人生：全部 600+ 事件，一局 1.5-3 小时；精简人生：每岁精选 1-2 个事件，约 30 分钟。打字速度在游戏内右下角随时切换，点击对话框直接显示全文。
+           沉浸人生：全部 752 个事件，一局 1.5-3 小时；精简人生：每岁精选 1-2 个事件，约 30 分钟。打字速度在游戏内右下角随时切换，点击对话框直接显示全文。
           </p>
         </section>
 
@@ -67,7 +67,7 @@ export default function GuideModal({ onClose }: Props) {
             <li>· 3 个自动存档槽，随时退出随时继续</li>
             <li>· 走完的每一生都写入家族族谱，下一代继承上一世的际遇</li>
             <li>· 多周目逐步解锁：挑战开局、真实模式、命运事件、传承加成</li>
-            <li>· 41 个成就、16 条结局路线图鉴等你收集</li>
+            <li>· 42 个成就、16 条结局路线图鉴等你收集</li>
           </ul>
         </section>
 

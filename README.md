@@ -41,6 +41,7 @@ npm run dev        # 启动开发服务器（端口 5173）
 - 有些选择带代价（压力/焦虑/金钱），得失交织——高收益选项往往有刺
 - **↩️ 后悔**：局内随时可回退（回退上一步或回到某岁，最多 5 步）——选错了就重来
 - **📌 关键抉择**：本局的重要路口（升学/结婚/事业等）随时可回看
+- **⏭ 快进**：手动局右上角可一键快进到关键年龄（18/30/60），跳过冗长等待直达转折点
 - 纯叙事事件点击「▼ 点击继续」推进
 
 ### 人生走向
@@ -76,7 +77,7 @@ npm run dev        # 启动开发服务器（端口 5173）
 | `npm run build` | 生产构建：单文件 `dist/index.html` + 独立 `dist/events.json` + PWA Service Worker（离线可用） |
 | `npm run preview` | 预览生产构建产物 |
 | `npm run build:events` | 从 `script/chiled.json` 重新生成 `public/events.json` |
-| `npm test` | 数据工具 + 引擎测试（216 个用例） |
+| `npm test` | 数据工具 + 引擎测试（218 个用例） |
 | `npm run test:ui` | UI 组件测试（vitest，119 个用例） |
 | `node script/stats.mjs` | 事件数据看板（密度/分类/flag 配对/空缺报告） |
 | `node --experimental-strip-types script/sim-balance.ts 500` | 500 局平衡审计（属性归零率/享年/结局分布） |

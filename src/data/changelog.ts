@@ -15,6 +15,14 @@ export interface ChangelogEntry {
  */
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.15.0',
+    date: '2026-08-13',
+    title: '快进人生',
+    items: [
+      '⏭ 局内快进：手动局右上角「快进」可一键跳到关键年龄（18/30/60），跳过冗长等待，直达人生转折点',
+    ],
+  },
+  {
     version: '0.14.0',
     date: '2026-08-13',
     title: '称号与亲情',

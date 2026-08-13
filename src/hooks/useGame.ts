@@ -330,6 +330,7 @@ export type Action =
   | { type: 'MAKE_CHOICE'; choice: Choice; eventId: string }
   | { type: 'MAKE_ACTION'; activityId: string }
   | { type: 'SKIP_INTRO' }
+  | { type: 'FAST_FORWARD_TO'; age: number }
   | { type: 'UNDO' }
   | { type: 'UNDO_TO_AGE'; age: number }
   | { type: 'CONTINUE' }
@@ -363,6 +364,8 @@ export interface RuntimeState {
   autoPlay: boolean;
   /** 幼儿期走过场（手动局 0-5 岁自动播放，6 岁起交还玩家；快速模拟局无此标记） */
   introAuto?: boolean;
+  /** 快进目标年龄（局内自动随机选择直到该岁后交还手动；null = 未快进） */
+  fastForwardUntil?: number | null;
   /** 本局密度档位（开局选定，中途不可切） */
   paceMode: PaceMode;
   /** 打字机速度档（游戏内可随时切换） */
@@ -749,6 +752,7 @@ function startNewGame(state: RuntimeState, p: StartParams): RuntimeState {
     // autoPlay 仅快速模拟为 true——幼儿期由 GameScreen 点击推进（onChoice 自动随机选），不做全自动播放
     autoPlay: p.autoPlay,
     introAuto: !p.autoPlay && introEligible,
+    fastForwardUntil: null,
     paceMode: p.paceMode,
     typeSpeed: p.typeSpeed,
     saves: state.saves,
@@ -849,7 +853,7 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
     case 'MAKE_CHOICE': {
       const { choice, eventId } = action;
       // 后悔栈：记录选择前状态（快速模拟与幼儿期自动选择不记录——玩家未亲自做选择；最多保留 UNDO_MAX 步）
-      const undoStack = state.autoPlay || state.introAuto
+      const undoStack = state.autoPlay || state.introAuto || state.fastForwardUntil != null
         ? state.undoStack
         : [...state.undoStack, {
             game: state.game,
@@ -999,6 +1003,10 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         // 幼儿期走过场：到 6 岁清除标记（自动选择期间不记录 undo）
         autoPlay: state.autoPlay,
         introAuto: state.introAuto && age < 6,
+        // 快进到目标年龄（或死亡）即交还手动控制
+        fastForwardUntil: state.fastForwardUntil != null && !gameOver && age < state.fastForwardUntil
+          ? state.fastForwardUntil
+          : null,
         paceMode: state.paceMode,
         typeSpeed: state.typeSpeed,
         saves: state.saves,
@@ -1123,6 +1131,17 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
       return { ...state, game, currentEvent, eventIndex, feedback: null, autoPlay: false, introAuto: false };
     }
 
+    case 'FAST_FORWARD_TO': {
+      // 局内快进：仅手动局（非快速模拟/每日/每周/种子，保证挑战公平）；目标年龄须大于当前
+      if (state.autoPlay || state.isDaily || state.isWeekly || state.seedChallenge) {
+        return state;
+      }
+      if (state.game.phase !== 'playing' || action.age <= state.game.age) {
+        return state;
+      }
+      return { ...state, fastForwardUntil: action.age };
+    }
+
     case 'UNDO': {
       // 后悔：回退上一步（栈空时原样返回）
       if (state.undoStack.length === 0) {
@@ -1194,6 +1213,7 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         autoPlay: false,
         // 幼儿期中途退出读档：恢复幻灯片标记（自动模拟局不写槽，读档年龄 <6 必为手动局）
         introAuto: saved.game.age < 6,
+        fastForwardUntil: null,
         paceMode,
         typeSpeed,
         saves,
@@ -1329,6 +1349,7 @@ export function createInitialRuntime(): RuntimeState {
     skippedEvents: [],
     shuffleSeed: 0,
     autoPlay: false,
+    fastForwardUntil: null,
     paceMode: 'full',
     typeSpeed: 'normal',
     saves: emptySaves(),
@@ -1446,9 +1467,9 @@ export function useGame() {
     }
   }, [rt]);
 
-  // 快速模拟：自动随机选择并推进，直到结算
+  // 自动推进：快速模拟（到结算）或局内快进（到目标年龄）——随机选择并推进，避开致死选项
   useEffect(() => {
-    if (!rt.autoPlay || rt.game.phase !== 'playing') {
+    if ((!rt.autoPlay && rt.fastForwardUntil == null) || rt.game.phase !== 'playing') {
       return;
     }
     const timer = setTimeout(() => {
@@ -1541,6 +1562,11 @@ export function useGame() {
     dispatch({ type: 'SKIP_INTRO' });
   }, []);
 
+  // 快进到关键年龄：自动随机选择推进到目标岁后交还手动（目标年龄须大于当前）
+  const fastForwardTo = useCallback((age: number) => {
+    dispatch({ type: 'FAST_FORWARD_TO', age });
+  }, []);
+
   // 后悔：回退上一步（栈空时 UI 不显示按钮，此处防御性兜底）
   const undo = useCallback(() => {
     dispatch({ type: 'UNDO' });
@@ -1598,6 +1624,7 @@ export function useGame() {
     weekly: rt.weekly,
     seedScores: rt.seedScores,
     family: rt.family,
+    fastForwardUntil: rt.fastForwardUntil ?? null,
     startGame,
     startAutoGame,
     startDailyGame,
@@ -1607,6 +1634,7 @@ export function useGame() {
     makeChoice,
     makeAction,
     skipIntro,
+    fastForwardTo,
     undo,
     undoToAge,
     undoStack: rt.undoStack,

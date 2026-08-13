@@ -68,6 +68,12 @@ interface Props {
   introAuto: boolean;
   /** 跳过剩余幼儿期（幼儿期自动播放时显示「⏭」按钮） */
   onSkipIntro: () => void;
+  /** 快进目标年龄（null = 未快进；快进中隐藏交互并跳过打字机） */
+  fastForwardUntil?: number | null;
+  /** 是否可快进（普通手动局开放，快速模拟/每日/每周/种子挑战不开放） */
+  canFastForward?: boolean;
+  /** 快进到指定关键年龄 */
+  onFastForward?: (age: number) => void;
 }
 
 const SPEED_OPTIONS: Array<{ value: TypeSpeed; label: string }> = [
@@ -76,13 +82,15 @@ const SPEED_OPTIONS: Array<{ value: TypeSpeed; label: string }> = [
   { value: 'fast', label: '快' },
 ];
 
-export default function GameScreen({ game, currentEvent, feedback, autoPlay, typeSpeed, fateEventIds, isWeekly = false, weeklyGoal, undoStack, onUndo, onUndoToAge, onTypeSpeedChange, onChoice, onContinue, onExit, onRestart, actionsDone, onAction, introAuto, onSkipIntro }: Props) {
+export default function GameScreen({ game, currentEvent, feedback, autoPlay, typeSpeed, fateEventIds, isWeekly = false, weeklyGoal, undoStack, onUndo, onUndoToAge, onTypeSpeedChange, onChoice, onContinue, onExit, onRestart, actionsDone, onAction, introAuto, onSkipIntro, fastForwardUntil, canFastForward = false, onFastForward }: Props) {
   const [showChoices, setShowChoices] = useState(false);
   const [showExit, setShowExit] = useState(false);
   // 主动行动弹窗（「⚡ 行动」入口；每岁每个活动限 1 次）
   const [showActions, setShowActions] = useState(false);
   // 后悔弹窗（回退上一步 / 回退到某岁）
   const [showUndo, setShowUndo] = useState(false);
+  // 快进目标年龄弹层
+  const [showFastForward, setShowFastForward] = useState(false);
   // 关键抉择回顾弹窗（本局里程碑选择）
   const [showKeyChoices, setShowKeyChoices] = useState(false);
   // 性格面板展开/收起（数值栏「🧭 性格」入口按钮切换）
@@ -91,6 +99,9 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
   const [tint, setTint] = useState<string | null>(null);
   // 新手渐进提示：当前激活的提示位（null 无提示；首次遇到某系统时激活一次，见下方三个触发点）
   const [activeTip, setActiveTip] = useState<string | null>(null);
+  // 快进中 / 自动推进（快速模拟或局内快进）：隐藏选择面板、跳过打字机
+  const fastForwarding = fastForwardUntil != null;
+  const autoMode = autoPlay || fastForwarding;
   // 后悔按钮「首次出现」标记（栈从空变非空只检测一次；requestTip 另有全局防重复）
   const undoShownRef = useRef(false);
   // 职业/资产/退休摘要（状态栏一行展示；纯函数推导，无职业时为空）
@@ -195,27 +206,27 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
 
   // 新手提示 1：首次见到性格徽章（选择面板可见且当前事件选项含徽章，非快速模拟）时引导一次
   useEffect(() => {
-    if (showChoices && !autoPlay && hasTraitBadges && requestTip('persona_badge')) {
+    if (showChoices && !autoMode && hasTraitBadges && requestTip('persona_badge')) {
       setActiveTip('persona_badge');
     }
-  }, [showChoices, autoPlay, hasTraitBadges]);
+  }, [showChoices, autoMode, hasTraitBadges]);
 
   // 新手提示 2：首次打开主动行动面板时引导一次
   useEffect(() => {
-    if (showActions && !autoPlay && requestTip('actions')) {
+    if (showActions && !autoMode && requestTip('actions')) {
       setActiveTip('actions');
     }
-  }, [showActions, autoPlay]);
+  }, [showActions, autoMode]);
 
   // 新手提示 3：后悔按钮首次出现（栈非空且非快速模拟）时引导一次
   useEffect(() => {
-    if (!autoPlay && undoStack.length > 0 && !undoShownRef.current) {
+    if (!autoMode && undoStack.length > 0 && !undoShownRef.current) {
       undoShownRef.current = true;
       if (requestTip('undo')) {
         setActiveTip('undo');
       }
     }
-  }, [autoPlay, undoStack.length]);
+  }, [autoMode, undoStack.length]);
 
   // 反馈页面
   if (feedback) {
@@ -271,7 +282,7 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
       {/* 状态栏 — 锚定场景区（h-[55%]）底缘：底部区域限高 45% 恰好互补，任何视口高度下都不重叠 */}
       <div className="absolute top-0 left-0 right-0 h-[55%] z-10 flex flex-col justify-end">
         {/* 数值栏右上角工具行：性格面板入口（展开/收起；快速模拟不显示） */}
-        {!autoPlay && (
+        {!autoMode && (
           <div className="flex justify-end px-3 pb-1.5">
             <button
               onClick={() => { sfx.select(); setShowPersona(prev => !prev); }}
@@ -297,7 +308,7 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
           stage={stageMeta.label}
           title={currentEvent.title}
           autoAdvance={isAuto}
-          instant={autoPlay}
+          instant={autoMode}
           typeSpeed={typeSpeed}
           onComplete={handleDialogComplete}
           onAutoContinue={isAuto ? () => (introAuto ? handleDialogComplete() : handleChoice(currentEvent.choices[0])) : undefined}
@@ -305,7 +316,7 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
         <ChoicePanel
           choices={currentEvent.choices}
           onSelect={handleChoice}
-          visible={showChoices && !autoPlay}
+          visible={showChoices && !autoMode}
           attributes={game.attributes}
           age={game.age}
           realMode={game.realMode ?? false}
@@ -314,7 +325,7 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
 
       {/* 打字速度切换 + 主动行动（快速模拟与反馈页不显示行动；反馈页走独立早退分支，此处分支恒为 false 时仅为防御） */}
       <div className="absolute right-2 bottom-1.5 z-20 flex gap-1.5 items-center">
-        {!autoPlay && !feedback && (
+        {!autoMode && !feedback && (
           <button
             onClick={() => { sfx.select(); setShowActions(true); }}
             title="主动行动"
@@ -388,8 +399,26 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
 
       {/* 右上角操作组：flex 自动排列（后悔/抉择/退出），杜绝按钮宽度变化导致的粘连 */}
       <div className="absolute top-2 right-2 z-20 flex items-center gap-2">
+        {/* 快进到关键年龄（普通手动局可用；快进中显示进行态） */}
+        {canFastForward && !fastForwarding && (
+          <button
+            onClick={() => { sfx.select(); setShowFastForward(prev => !prev); }}
+            title="快进到关键年龄"
+            className="px-3 h-8 rounded-full border border-white/25 bg-black/40 text-white/80 text-[12px]
+              hover:border-[#5de8a0]/80 hover:text-[#5de8a0] transition-all duration-200 font-sans"
+          >
+            ⏭ 快进
+          </button>
+        )}
+        {fastForwarding && (
+          <span className="px-3 h-8 rounded-full border border-[#5de8a0]/50 bg-[#5de8a0]/10 text-[#5de8a0] text-[12px]
+            flex items-center animate-pulse font-sans">
+            ⏭ 快进中…
+          </span>
+        )}
+
         {/* 后悔回退（快速模拟不显示）：回退上一步 / 回退到某岁（半透明深底胶囊，场景光晕下也清晰可见） */}
-        {!autoPlay && undoStack.length > 0 && (
+        {!autoMode && undoStack.length > 0 && (
           <button
             onClick={() => { sfx.select(); setShowUndo(true); }}
             title="后悔回退"
@@ -401,7 +430,7 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
         )}
 
         {/* 关键抉择回顾（快速模拟不显示）：本局里程碑选择随时回看 */}
-        {!autoPlay && game.history.length > 0 && (
+        {!autoMode && game.history.length > 0 && (
           <button
             onClick={() => { sfx.select(); setShowKeyChoices(true); }}
             title="关键抉择"
@@ -423,8 +452,30 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
         </button>
       </div>
 
+      {/* 快进目标年龄弹层（关键年龄：18/30/60，只列大于当前年龄的） */}
+      {showFastForward && !fastForwarding && (
+        <div className="absolute top-12 right-2 z-30 rounded-xl border border-white/10 bg-[#10101f]/95 backdrop-blur-sm p-2 flex flex-col gap-1">
+          <div className="text-[10px] text-white/40 px-2 pt-1">⏭ 快进到关键年龄</div>
+          {[18, 30, 60].filter(a => a > game.age).map(a => (
+            <button
+              key={a}
+              onClick={() => { sfx.select(); setShowFastForward(false); onFastForward?.(a); }}
+              className="px-4 py-2 rounded-lg text-[12px] text-left text-[#5de8a0] hover:bg-[#5de8a0]/10 font-sans"
+            >
+              {a} 岁
+            </button>
+          ))}
+          <button
+            onClick={() => { sfx.select(); setShowFastForward(false); }}
+            className="px-4 py-2 rounded-lg text-[11px] text-white/40 hover:text-white/70 font-sans"
+          >
+            取消
+          </button>
+        </div>
+      )}
+
       {/* 性格面板（数值栏「🧭 性格」展开；画像推导自本局全部选择，含专属际遇距离提示） */}
-      {showPersona && !autoPlay && (
+      {showPersona && !autoMode && (
         <div className="absolute top-14 right-2 z-20">
           <CharacterPanel persona={persona} />
         </div>

@@ -24,7 +24,7 @@ function loadTheme(): Theme {
 }
 
 export default function App() {
-  const { game, currentEvent, feedback, skippedEvents, autoPlay, introAuto, typeSpeed, saves, achievements, stats, newAchievements, fateEventIds, isDaily, isWeekly, seedChallenge, weeklyGoal, daily, dailyHistory, dailyStreak, weekly, seedScores, family, shuffleSeed, startGame, startAutoGame, startDailyGame, startWeeklyGame, restart, reincarnate, makeChoice, makeAction, skipIntro, undo, undoToAge, undoStack, continue: continue_, continueGame, reset, resetFamily, setTypeSpeed } = useGame();
+  const { game, currentEvent, feedback, skippedEvents, autoPlay, introAuto, typeSpeed, saves, achievements, stats, newAchievements, fateEventIds, isDaily, isWeekly, seedChallenge, weeklyGoal, daily, dailyHistory, dailyStreak, weekly, seedScores, family, shuffleSeed, fastForwardUntil, startGame, startAutoGame, startDailyGame, startWeeklyGame, restart, reincarnate, makeChoice, makeAction, skipIntro, fastForwardTo, undo, undoToAge, undoStack, continue: continue_, continueGame, reset, resetFamily, setTypeSpeed } = useGame();
 
   // 主动行动：选择活动后触发引擎 MAKE_ACTION（结果由反馈页展示；不推进年龄、不进 history）
   const handleAction = useCallback((activityId: string) => {
@@ -48,6 +48,8 @@ export default function App() {
   const [challenge] = useState<ChallengeLink | null>(() => parseChallengeLink(window.location.search));
   // 结算页对决目标：仅当本局确为「该种子的种子挑战」时展示（普通随机局不会命中同一种子）
   const duelTarget = seedChallenge && challenge && challenge.seed === shuffleSeed ? challenge : undefined;
+  // 快进仅对普通手动局开放（快速模拟/每日/每周/种子挑战为保证公平不开放）
+  const canFastForward = !autoPlay && !isDaily && !isWeekly && !seedChallenge;
 
   // 快速模拟模式静音高频交互音；结算页恢复（保留落幕音）
   useEffect(() => {
@@ -103,6 +105,9 @@ export default function App() {
             actionsDone={game.actionsDone ?? []}
             introAuto={introAuto}
             onSkipIntro={skipIntro}
+            fastForwardUntil={fastForwardUntil}
+            canFastForward={canFastForward}
+            onFastForward={fastForwardTo}
           />
         )}
         {game.phase === 'summary' && (

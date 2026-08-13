@@ -490,3 +490,32 @@ test('SAVES_UPDATED：同步存档回运行时状态', () => {
   const updated = reducer(createInitialRuntime(), { type: 'SAVES_UPDATED', saves: next });
   assert.strictEqual(updated.saves.slots[updated.saves.active]?.game.age, 7);
 });
+
+test('FAST_FORWARD_TO：设置目标年龄，到达后交还手动控制', () => {
+  const events = [evt('e1', 6), evt('e2', 10), evt('e3', 18), evt('e4', 30), evt('e5', 40)];
+  let rt = mkState(events);
+  rt = reducer(rt, { type: 'FAST_FORWARD_TO', age: 30 });
+  assert.strictEqual(rt.fastForwardUntil, 30);
+  // 模拟自动随机选择推进（等同 autoPlay effect 的逐次 MAKE_CHOICE；无 CONTINUE 不影响推进）
+  let guard = 0;
+  while (rt.fastForwardUntil != null && rt.game.phase === 'playing' && guard++ < 20) {
+    rt = choose(rt);
+  }
+  assert.strictEqual(rt.fastForwardUntil, null);
+  assert.ok(rt.game.age >= 30, `快进后应达到或超过 30 岁，实际 ${rt.game.age}`);
+});
+
+test('FAST_FORWARD_TO：非手动局或目标不合法时拒绝', () => {
+  const events = [evt('e1', 6), evt('e2', 30)];
+  const base = mkState(events);
+  // 目标年龄不大于当前年龄
+  assert.strictEqual(reducer(base, { type: 'FAST_FORWARD_TO', age: 6 }).fastForwardUntil, null);
+  // 每日挑战局
+  assert.strictEqual(reducer({ ...base, isDaily: true }, { type: 'FAST_FORWARD_TO', age: 30 }).fastForwardUntil, null);
+  // 每周挑战局
+  assert.strictEqual(reducer({ ...base, isWeekly: true }, { type: 'FAST_FORWARD_TO', age: 30 }).fastForwardUntil, null);
+  // 快速模拟局
+  assert.strictEqual(reducer({ ...base, autoPlay: true }, { type: 'FAST_FORWARD_TO', age: 30 }).fastForwardUntil, null);
+  // 种子挑战局
+  assert.strictEqual(reducer({ ...base, seedChallenge: true }, { type: 'FAST_FORWARD_TO', age: 30 }).fastForwardUntil, null);
+});

@@ -4260,9 +4260,8 @@
     "title": "保家卫国的念头",
     "text": "十四岁，国庆阅兵。你盯着电视里整齐的方队挪不开眼，爸爸说「你爷爷当年也穿过军装」。那一夜你失眠了，脑子里全是迷彩绿。",
     "conditions": {
-      "has_flags": [
-        "service_dream"
-      ]
+      "has_flags": [],
+      "not_flags": []
     },
     "choices": [
       {
@@ -7321,7 +7320,7 @@
       "not_flags": [],
       "min_attrs": {},
       "max_attrs": {
-        "luck": 60
+        "luck": 35
       }
     }
   },
@@ -7578,9 +7577,8 @@
     "title": "医学院五年",
     "text": "二十二岁，医学院大三。解剖课、生理课、临床课，课本摞起来比你还高。同学里有劝退的，也有像你一样熬下来的。你看着走廊里的「健康所系，性命相托」，把咖啡又续了一杯。",
     "conditions": {
-      "has_flags": [
-        "med_dream"
-      ]
+      "has_flags": [],
+      "not_flags": []
     },
     "choices": [
       {
@@ -9116,7 +9114,7 @@
       "not_flags": [],
       "min_attrs": {},
       "max_attrs": {
-        "luck": 60
+        "luck": 35
       }
     }
   },

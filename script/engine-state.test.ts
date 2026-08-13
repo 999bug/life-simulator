@@ -87,6 +87,21 @@ test('applyOutcomes：负向全额并钳位下限', () => {
   assert.strictEqual(next.happiness, 0);
 });
 
+test('applyOutcomes：40 岁前非致命健康损失有青年保底', () => {
+  assert.strictEqual(applyOutcomes(attrs({ health: 8 }), { attr: { health: -20 } }, 16).health, 25);
+  assert.strictEqual(applyOutcomes(attrs({ health: 8 }), { attr: { health: -20 } }, 30).health, 10);
+  assert.strictEqual(applyOutcomes(attrs({ health: 8 }), { attr: { health: -20 } }, 40).health, 0);
+});
+
+test('applyOutcomes：致命意外 flag 不受青年健康保底限制', () => {
+  const next = applyOutcomes(
+    attrs({ health: 50 }),
+    { attr: { health: -100 }, flags: ['fatal_accident'] },
+    20,
+  );
+  assert.strictEqual(next.health, 0);
+});
+
 test('applyOutcomes：多属性互不影响', () => {
   const next = applyOutcomes(attrs({ wealth: 20, morality: 70 }), { attr: { wealth: 10, morality: 20 } }, 40);
   assert.strictEqual(next.wealth, 30);       // 20+10，低值全额

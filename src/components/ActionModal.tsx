@@ -2,6 +2,8 @@ import { ACTIVITIES, type Activity } from '../engine/activities';
 import { ATTR_META } from '../engine/state';
 import type { AttributeKey } from '../types';
 import { sfx } from '../utils/sound';
+import { useId } from 'react';
+import Modal from './Modal';
 
 interface Props {
   open: boolean;
@@ -49,6 +51,7 @@ const ACTIVITY_TAGS: Record<string, AttributeKey> = {
  * 犯罪活动标注「高风险」。选择后由引擎 MAKE_ACTION 执行，结果走反馈页展示。
  */
 export default function ActionModal({ open, onClose, onAction, age, flags, actionsDone, knownPersonas }: Props) {
+  const titleId = useId();
   if (!open) {
     return null;
   }
@@ -73,12 +76,8 @@ export default function ActionModal({ open, onClose, onAction, age, flags, actio
     return null;
   };
   return (
-    <div className="absolute inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center" onClick={onClose}>
-      <div
-        className="w-[480px] max-w-[92vw] max-h-[min(520px,86vh)] overflow-y-auto rounded-2xl border border-white/15 bg-[#10101f] shadow-2xl shadow-black/70 p-6 flex flex-col gap-3"
-        onClick={e => e.stopPropagation()}
-      >
-        <h3 className="text-center text-[17px] tracking-[5px] text-[#c9a96e]">⚡ 主动行动</h3>
+    <Modal onClose={onClose} labelledBy={titleId} contentClassName="w-[480px] max-h-[min(520px,86vh)] overflow-y-auto flex flex-col gap-3">
+        <h3 id={titleId} className="text-center text-[17px] tracking-[5px] text-[#c9a96e]">⚡ 主动行动</h3>
         <p className="text-center text-[10px] text-white/50 tracking-[2px]">每岁每个活动可做一次 · 不推进年龄</p>
         {ACTIVITY_GROUPS.map(group => {
           const activities = group.activities
@@ -140,7 +139,6 @@ export default function ActionModal({ open, onClose, onAction, age, flags, actio
         >
           关闭
         </button>
-      </div>
-    </div>
+    </Modal>
   );
 }

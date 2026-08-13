@@ -147,7 +147,7 @@ export function effectiveDelta(key: AttributeKey, delta: number, attrs: Attribut
  */
 export function applyOutcomes(
   attrs: Attributes,
-  out: { attr: Partial<Attributes> },
+  out: { attr: Partial<Attributes>; flags?: string[] },
   age: number,
 ): Attributes {
   const next = { ...attrs };
@@ -159,6 +159,16 @@ export function applyOutcomes(
       Math.max(0, Math.min(100, next[key] + delta)),
     );
   }
+
+  // 青年健康保底：避免随机选择连续惩罚导致 40 岁前过早死亡。
+  // 致命意外事件仍可立即死亡，因此只对非致命健康损失施加保底。
+  const fatalFlags = new Set(['fatal_accident', 'fatal_illness', 'fatal_overwork']);
+  const hasFatalFlag = (out.flags ?? []).some(flag => fatalFlags.has(flag));
+  if (!hasFatalFlag) {
+    const floor = age < 18 ? 25 : age < 40 ? 10 : 0;
+    next.health = Math.max(next.health, floor);
+  }
+
   return next;
 }
 

@@ -178,11 +178,11 @@ test('MAKE_CHOICE：同岁连续不重复快照，进入新岁追加', () => {
 
 test('MAKE_CHOICE：健康归零死亡 → 死因/结算标志/快照替换', () => {
   const events = [
-    evt('a_01', 7, { happiness: 1 }),
+    evt('a_01', 45, { happiness: 1 }),
     evt('b_01', 95, {}),
   ];
   let rt = mkState(events, { health: 1 });
-  // 7 岁事件后 next 为 95 岁：按 next 年龄先应用老年衰减 health 1-1=0 → 死亡
+  // 45 岁事件后 next 为 95 岁：按 next 年龄先应用老年衰减 health 1-1=0 → 死亡
   rt = choose(rt);
   assert.strictEqual(rt.game.phase, 'summary');
   assert.strictEqual(rt.game.deathCause, 'health');

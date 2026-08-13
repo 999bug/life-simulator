@@ -1,6 +1,8 @@
 import type { ChoiceRecord } from '../types';
 import { EVENTS } from '../engine/events';
 import { MILESTONE_FLAGS } from './SummaryScreen';
+import { useId } from 'react';
+import Modal from './Modal';
 
 interface Props {
   history: ChoiceRecord[];
@@ -13,11 +15,11 @@ interface Props {
  * 按时间正序——「中途重要的选择」随时可回看。
  */
 export default function KeyChoicesModal({ history, onClose }: Props) {
+  const titleId = useId();
   const keyChoices = history.filter(h => (h.flags ?? []).some(f => MILESTONE_FLAGS.includes(f)));
   return (
-    <div className="absolute inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center" onClick={onClose}>
-      <div className="w-[480px] max-w-[92vw] max-h-[min(520px,86vh)] overflow-y-auto rounded-2xl border border-white/15 bg-[#10101f] shadow-2xl shadow-black/70 p-6 flex flex-col gap-3.5" onClick={e => e.stopPropagation()}>
-        <h3 className="text-center text-[17px] tracking-[5px] text-[#c9a96e]">📌 关键抉择</h3>
+    <Modal onClose={onClose} labelledBy={titleId} contentClassName="w-[480px] max-h-[min(520px,86vh)] overflow-y-auto flex flex-col gap-3.5">
+        <h3 id={titleId} className="text-center text-[17px] tracking-[5px] text-[#c9a96e]">📌 关键抉择</h3>
         <p className="text-center text-[10px] text-white/50 tracking-[2px]">这一生走到这里，几个重要的路口</p>
         {keyChoices.length === 0 && (
           <p className="text-center text-[12px] text-white/55 py-8">还没有做出影响一生的选择</p>
@@ -41,7 +43,6 @@ export default function KeyChoicesModal({ history, onClose }: Props) {
         >
           关闭
         </button>
-      </div>
-    </div>
+    </Modal>
   );
 }

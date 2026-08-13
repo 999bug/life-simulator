@@ -1,4 +1,6 @@
 import { sfx } from '../utils/sound';
+import { useId } from 'react';
+import Modal from './Modal';
 
 interface Props {
   title: string;
@@ -11,11 +13,10 @@ interface Props {
 
 /** 轻量确认模态（覆盖存档/中途退出共用） */
 export default function ConfirmModal({ title, desc, extra, onConfirm, onCancel }: Props) {
+  const titleId = useId();
   return (
-    <div className="absolute inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center" onClick={onCancel}>
-      <div className="w-[380px] max-w-[92vw] rounded-2xl border border-white/15 bg-[#10101f] shadow-2xl shadow-black/70 p-6 flex flex-col gap-4
-        items-center" onClick={e => e.stopPropagation()}>
-        <h3 className="text-[16px] tracking-[4px] text-[#c9a96e]">{title}</h3>
+    <Modal onClose={onCancel} labelledBy={titleId} contentClassName="w-[380px] flex flex-col gap-4 items-center">
+        <h3 id={titleId} className="text-[16px] tracking-[4px] text-[#c9a96e]">{title}</h3>
         <p className="text-[12px] text-white/75 leading-relaxed text-center">{desc}</p>
         <div className="flex flex-wrap justify-center gap-3 mt-1">
           <button
@@ -42,7 +43,6 @@ export default function ConfirmModal({ title, desc, extra, onConfirm, onCancel }
             确定
           </button>
         </div>
-      </div>
-    </div>
+    </Modal>
   );
 }

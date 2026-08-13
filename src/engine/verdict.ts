@@ -151,9 +151,9 @@ export function verdictKey(game: GameState): string {
     ['escaped', ['escaped']],
     ['gang_boss', ['gang_boss']],
     ['jailed', ['jailed']],
-    ['went_to_college', ['went_to_college']],
-    ['skilled_worker', ['skilled_worker']],
     ['civil_servant', ['civil_servant']],
+    ['skilled_worker', ['skilled_worker']],
+    ['went_to_college', ['went_to_college']],
   ];
   for (const [key, fs] of order) {
     if (has(...fs)) {

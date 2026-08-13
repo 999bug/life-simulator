@@ -77,6 +77,12 @@ test('verdictKey：多 flag 时按判定顺序取先命中者', () => {
   assert.strictEqual(verdictKey(game(['doctor', 'went_to_college', 'retake'])), 'retake');
 });
 
+test('verdictKey：公务员和技能路线优先于普通大学路线', () => {
+  assert.strictEqual(verdictKey(game(['civil_servant', 'went_to_college'])), 'civil_servant');
+  assert.strictEqual(verdictKey(game(['skilled_worker', 'went_to_college'])), 'skilled_worker');
+  assert.strictEqual(verdictKey(game(['civil_servant', 'skilled_worker'])), 'civil_servant');
+});
+
 test('verdictKey：tech_career 只认 flag 不校验智力（与 SummaryScreen 文案判定不同）', () => {
   assert.strictEqual(verdictKey(game(['tech_career'], 30)), 'tech_career');
 });

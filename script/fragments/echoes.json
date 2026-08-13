@@ -594,52 +594,6 @@
     }
   },
   {
-    "id": "echo_0014",
-    "age_range": [
-      46,
-      46
-    ],
-    "category": "career",
-    "title": "副业转正",
-    "text": "做了三年的副业，这个月收入第一次超过了工资。你盯着两条银行到账短信看了很久。当年同事笑你「瞎折腾」，现在他们想跟你取经。辞不辞职，是个问题。",
-    "choices": [
-      {
-        "text": "辞职，全身心干自己的",
-        "effects": {
-          "money": 8,
-          "freedom": 4,
-          "pressure": 4
-        },
-        "flags_add": []
-      },
-      {
-        "text": "两手抓，累就累点",
-        "effects": {
-          "money": 5,
-          "health": -2,
-          "persistence": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "稳住，副业只是补贴",
-        "effects": {
-          "money": 3,
-          "stability": 3
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [
-        "side_hustle"
-      ],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "echo_0015",
     "age_range": [
       42,

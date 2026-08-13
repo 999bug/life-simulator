@@ -1,0 +1,106 @@
+[
+  {
+    "id": "era_0001",
+    "age_range": [6, 6],
+    "category": "hobby",
+    "title": "小霸王学习机",
+    "text": "家里的黑白电视机旁多了一台「学习机」，插上黄色的游戏卡，屏幕就亮起了《超级玛丽》。你握着塑料手柄，第一次明白什么叫「通关」。大人以为你在学打字，其实你正抱着手柄，在小人国里蹦蹦跳跳。",
+    "choices": [
+      { "text": "把马里奥从头到尾打了一遍", "effects": { "fun": 4, "happiness": 3 }, "flags_add": [] },
+      { "text": "缠着同学借新卡带，换着玩", "effects": { "social": 3, "friendship": 3 }, "flags_add": [] },
+      { "text": "真去学了打字，练起了五笔", "effects": { "intelligence": 3, "skill": 2 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "era_0002",
+    "age_range": [11, 11],
+    "category": "hobby",
+    "title": "干脆面里的卡片",
+    "text": "校门口的小卖部里，一包干脆面五毛钱，里面藏着一张水浒英雄卡。你已经攒了一抽屉，还差「及时雨宋江」没抽到。同桌用三张换你一张稀有的，你攥着卡片犹豫了一整个课间。",
+    "choices": [
+      { "text": "换了！收集癖大于天", "effects": { "happiness": 4, "social": 2 }, "flags_add": [] },
+      { "text": "不换，就差这一张了", "effects": { "self_control": 3, "patience": 2 }, "flags_add": [] },
+      { "text": "把重复的卡片送给班里的同学", "effects": { "friendship": 4, "social": 2 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "era_0003",
+    "age_range": [12, 12],
+    "category": "friend",
+    "title": "电视机前的动画片",
+    "text": "每天下午五点，你准时守在电视机前看动画片。片头曲一响，全楼的小孩都像被按下了开关，凑到楼下谁家的大彩电前。大结局那天，你看到主角挥手告别，竟偷偷红了眼眶。",
+    "choices": [
+      { "text": "拉着小伙伴一起看完大结局", "effects": { "friendship": 4, "happiness": 3 }, "flags_add": [] },
+      { "text": "把主题曲抄在本子上学唱", "effects": { "emotion": 3, "happiness": 2 }, "flags_add": [] },
+      { "text": "看完意犹未尽，自己画起了漫画", "effects": { "creativity": 3, "art": 2 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "era_0004",
+    "age_range": [13, 13],
+    "category": "technology",
+    "title": "第一部手机",
+    "text": "爸爸把他淘汰的旧手机塞给你：「就打电话用，别玩物丧志。」那台直板手机的屏幕还不到巴掌大，你却像捧着稀世珍宝。你把通讯录里仅有的几个号码翻来覆去，又给同桌发去了人生第一条短信。",
+    "choices": [
+      { "text": "学会发短信，字斟句酌", "effects": { "intelligence": 2, "social": 3 }, "flags_add": [] },
+      { "text": "偷偷设了个炫酷的铃声", "effects": { "happiness": 3, "confidence": 2 }, "flags_add": [] },
+      { "text": "用它玩起了贪吃蛇", "effects": { "fun": 4, "gaming": 2 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "era_0005",
+    "age_range": [14, 14],
+    "category": "personality",
+    "title": "QQ空间的火星文",
+    "text": "周末你泡在网吧里，花了一下午把自己的 QQ 空间布置成闪瞎眼的非主流风格：火星文签名、会闪的边框、循环播放的伤感情歌。好友来「踩空间」时留了一串看不懂的符号，你却觉得酷毙了。",
+    "choices": [
+      { "text": "把空间装修得独一无二", "effects": { "creativity": 3, "happiness": 3 }, "flags_add": [] },
+      { "text": "和网友互踩空间，聊到深夜", "effects": { "social": 4, "emotion": 2 }, "flags_add": [] },
+      { "text": "觉得太中二，把空间改回了默认", "effects": { "self_awareness": 3, "intelligence": 1 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "era_0006",
+    "age_range": [15, 15],
+    "category": "hobby",
+    "title": "MP3里的青春",
+    "text": "你用攒了半年的零花钱买了一台 MP3，里面只存得下二十几首歌。晚自习时，你把耳机线从校服袖口穿出来，一只塞进自己耳朵，一只分给同桌。歌里唱到「谁在用琵琶弹奏一曲东风破」，你们谁也没说话。",
+    "choices": [
+      { "text": "和同桌一人一只耳机", "effects": { "friendship": 4, "emotion": 3 }, "flags_add": [] },
+      { "text": "把歌词抄满了整个笔记本", "effects": { "memory": 2, "happiness": 3 }, "flags_add": [] },
+      { "text": "晚自习偷偷听，差点被老师发现", "effects": { "happiness": 3, "risk": 1 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "era_0007",
+    "age_range": [16, 16],
+    "category": "technology",
+    "title": "网吧的第一次",
+    "text": "周五放学，几个男生把你拽进了学校后巷的网吧。烟雾缭绕的房间里，键盘敲得噼里啪啦，有人在打 CS，有人在挂梦幻西游。你戴上耳机，注册了人生第一个游戏账号，屏幕上的世界又大又新。",
+    "choices": [
+      { "text": "和兄弟开黑，默契渐长", "effects": { "friendship": 4, "gaming": 3 }, "flags_add": [] },
+      { "text": "好奇地研究起电脑配置", "effects": { "intelligence": 3, "engineering": 2 }, "flags_add": [] },
+      { "text": "只敢玩一会儿就早早回家", "effects": { "self_control": 3, "responsibility": 2 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "era_0008",
+    "age_range": [17, 17],
+    "category": "friend",
+    "title": "毕业同学录",
+    "text": "高考前最后一个晚自习，教室里传来传去的一本本同学录。你把那一页递出去，又收回来几十张五颜六色的留言。有人说「苟富贵勿相忘」，有人只写了句「前程似锦」。你一张张翻着，第一次觉得青春要散了。",
+    "choices": [
+      { "text": "给每个同学都认真写一句祝福", "effects": { "friendship": 5, "emotion": 3 }, "flags_add": [] },
+      { "text": "把同学录一张张夹进课本里珍藏", "effects": { "memory": 3, "happiness": 2 }, "flags_add": [] },
+      { "text": "和最好的朋友约好考同一座城市", "effects": { "social": 3, "ambition": 2 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": [], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  }
+]

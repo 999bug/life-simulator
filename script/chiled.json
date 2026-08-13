@@ -1344,6 +1344,48 @@
     }
   },
   {
+    "id": "era_0001",
+    "age_range": [
+      6,
+      6
+    ],
+    "category": "hobby",
+    "title": "小霸王学习机",
+    "text": "家里的黑白电视机旁多了一台「学习机」，插上黄色的游戏卡，屏幕就亮起了《超级玛丽》。你握着塑料手柄，第一次明白什么叫「通关」。大人以为你在学打字，其实你正抱着手柄，在小人国里蹦蹦跳跳。",
+    "choices": [
+      {
+        "text": "把马里奥从头到尾打了一遍",
+        "effects": {
+          "fun": 4,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "缠着同学借新卡带，换着玩",
+        "effects": {
+          "social": 3,
+          "friendship": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "真去学了打字，练起了五笔",
+        "effects": {
+          "intelligence": 3,
+          "skill": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
     "id": "child_04",
     "age_range": [
       6,
@@ -3308,6 +3350,48 @@
     }
   },
   {
+    "id": "era_0002",
+    "age_range": [
+      11,
+      11
+    ],
+    "category": "hobby",
+    "title": "干脆面里的卡片",
+    "text": "校门口的小卖部里，一包干脆面五毛钱，里面藏着一张水浒英雄卡。你已经攒了一抽屉，还差「及时雨宋江」没抽到。同桌用三张换你一张稀有的，你攥着卡片犹豫了一整个课间。",
+    "choices": [
+      {
+        "text": "换了！收集癖大于天",
+        "effects": {
+          "happiness": 4,
+          "social": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "不换，就差这一张了",
+        "effects": {
+          "self_control": 3,
+          "patience": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把重复的卡片送给班里的同学",
+        "effects": {
+          "friendship": 4,
+          "social": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
     "id": "child_09",
     "age_range": [
       11,
@@ -3750,6 +3834,48 @@
     }
   },
   {
+    "id": "era_0003",
+    "age_range": [
+      12,
+      12
+    ],
+    "category": "friend",
+    "title": "电视机前的动画片",
+    "text": "每天下午五点，你准时守在电视机前看动画片。片头曲一响，全楼的小孩都像被按下了开关，凑到楼下谁家的大彩电前。大结局那天，你看到主角挥手告别，竟偷偷红了眼眶。",
+    "choices": [
+      {
+        "text": "拉着小伙伴一起看完大结局",
+        "effects": {
+          "friendship": 4,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把主题曲抄在本子上学唱",
+        "effects": {
+          "emotion": 3,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "看完意犹未尽，自己画起了漫画",
+        "effects": {
+          "creativity": 3,
+          "art": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
     "id": "teen_01",
     "age_range": [
       12,
@@ -3948,6 +4074,48 @@
         "personality": [
           "emotional"
         ]
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "era_0004",
+    "age_range": [
+      13,
+      13
+    ],
+    "category": "technology",
+    "title": "第一部手机",
+    "text": "爸爸把他淘汰的旧手机塞给你：「就打电话用，别玩物丧志。」那台直板手机的屏幕还不到巴掌大，你却像捧着稀世珍宝。你把通讯录里仅有的几个号码翻来覆去，又给同桌发去了人生第一条短信。",
+    "choices": [
+      {
+        "text": "学会发短信，字斟句酌",
+        "effects": {
+          "intelligence": 2,
+          "social": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "偷偷设了个炫酷的铃声",
+        "effects": {
+          "happiness": 3,
+          "confidence": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "用它玩起了贪吃蛇",
+        "effects": {
+          "fun": 4,
+          "gaming": 2
+        },
+        "flags_add": []
       }
     ],
     "conditions": {
@@ -4351,6 +4519,48 @@
       "has_flags": [
         "pet_dog"
       ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "era_0005",
+    "age_range": [
+      14,
+      14
+    ],
+    "category": "personality",
+    "title": "QQ空间的火星文",
+    "text": "周末你泡在网吧里，花了一下午把自己的 QQ 空间布置成闪瞎眼的非主流风格：火星文签名、会闪的边框、循环播放的伤感情歌。好友来「踩空间」时留了一串看不懂的符号，你却觉得酷毙了。",
+    "choices": [
+      {
+        "text": "把空间装修得独一无二",
+        "effects": {
+          "creativity": 3,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "和网友互踩空间，聊到深夜",
+        "effects": {
+          "social": 4,
+          "emotion": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "觉得太中二，把空间改回了默认",
+        "effects": {
+          "self_awareness": 3,
+          "intelligence": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
       "not_flags": [],
       "min_attrs": {},
       "max_attrs": {}
@@ -4793,6 +5003,48 @@
     }
   },
   {
+    "id": "era_0006",
+    "age_range": [
+      15,
+      15
+    ],
+    "category": "hobby",
+    "title": "MP3里的青春",
+    "text": "你用攒了半年的零花钱买了一台 MP3，里面只存得下二十几首歌。晚自习时，你把耳机线从校服袖口穿出来，一只塞进自己耳朵，一只分给同桌。歌里唱到「谁在用琵琶弹奏一曲东风破」，你们谁也没说话。",
+    "choices": [
+      {
+        "text": "和同桌一人一只耳机",
+        "effects": {
+          "friendship": 4,
+          "emotion": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把歌词抄满了整个笔记本",
+        "effects": {
+          "memory": 2,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "晚自习偷偷听，差点被老师发现",
+        "effects": {
+          "happiness": 3,
+          "risk": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
     "id": "teen_05",
     "age_range": [
       15,
@@ -5137,6 +5389,48 @@
       "has_flags": [
         "music_piano"
       ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "era_0007",
+    "age_range": [
+      16,
+      16
+    ],
+    "category": "technology",
+    "title": "网吧的第一次",
+    "text": "周五放学，几个男生把你拽进了学校后巷的网吧。烟雾缭绕的房间里，键盘敲得噼里啪啦，有人在打 CS，有人在挂梦幻西游。你戴上耳机，注册了人生第一个游戏账号，屏幕上的世界又大又新。",
+    "choices": [
+      {
+        "text": "和兄弟开黑，默契渐长",
+        "effects": {
+          "friendship": 4,
+          "gaming": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "好奇地研究起电脑配置",
+        "effects": {
+          "intelligence": 3,
+          "engineering": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "只敢玩一会儿就早早回家",
+        "effects": {
+          "self_control": 3,
+          "responsibility": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
       "not_flags": [],
       "min_attrs": {},
       "max_attrs": {}
@@ -5540,6 +5834,48 @@
       "has_flags": [
         "parent_world_traveler"
       ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "era_0008",
+    "age_range": [
+      17,
+      17
+    ],
+    "category": "friend",
+    "title": "毕业同学录",
+    "text": "高考前最后一个晚自习，教室里传来传去的一本本同学录。你把那一页递出去，又收回来几十张五颜六色的留言。有人说「苟富贵勿相忘」，有人只写了句「前程似锦」。你一张张翻着，第一次觉得青春要散了。",
+    "choices": [
+      {
+        "text": "给每个同学都认真写一句祝福",
+        "effects": {
+          "friendship": 5,
+          "emotion": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把同学录一张张夹进课本里珍藏",
+        "effects": {
+          "memory": 3,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "和最好的朋友约好考同一座城市",
+        "effects": {
+          "social": 3,
+          "ambition": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [],
       "not_flags": [],
       "min_attrs": {},
       "max_attrs": {}
@@ -7620,58 +7956,6 @@
     ]
   },
   {
-    "id": "wealth_0022",
-    "age_range": [
-      22,
-      22
-    ],
-    "category": "finance",
-    "title": "第一份兼职",
-    "text": "大学快毕业了，室友介绍你去做周末兼职：一家连锁咖啡店的服务员。时薪不高，但能攒下第一笔属于自己的钱。同时班里还有同学接了高薪的网课推销，据说提成很可观，只是被拒绝是家常便饭。",
-    "choices": [
-      {
-        "text": "认真端咖啡，踏实攒经验",
-        "effects": {
-          "money": 10,
-          "social": 2
-        },
-        "flags_add": [],
-        "personality": [
-          "cautious"
-        ]
-      },
-      {
-        "text": "挑战高提成的推销",
-        "effects": {
-          "money": 18,
-          "pressure": 4,
-          "luck": 2
-        },
-        "flags_add": [],
-        "personality": [
-          "adventurous"
-        ]
-      },
-      {
-        "text": "专心学业，暂不打工",
-        "effects": {
-          "money": 2,
-          "learning": 5
-        },
-        "flags_add": [],
-        "personality": [
-          "rational"
-        ]
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "pet_0003",
     "age_range": [
       22,
@@ -7765,6 +8049,51 @@
     ],
     "conditions": {
       "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "parenthood_0001",
+    "age_range": [
+      22,
+      22
+    ],
+    "category": "family",
+    "title": "第一声「妈妈」",
+    "text": "半夜三点，你被一阵含糊的咿呀声惊醒。摇篮里的小家伙睁着亮晶晶的眼睛，朝你伸出小手，奶声奶气地冒出一个词——像「妈妈」，又像「爸爸」。你愣在原地，眼泪「唰」地就下来了。",
+    "choices": [
+      {
+        "text": "把这一刻录下来，回放给全家人看",
+        "effects": {
+          "happiness": 4,
+          "emotion": 3,
+          "social": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "轻轻把 TA 抱起来，哼着歌哄睡",
+        "effects": {
+          "comfort": 4,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "发到家族群里炫耀，收获一片羡慕",
+        "effects": {
+          "social": 4,
+          "happiness": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "has_child"
+      ],
       "not_flags": [],
       "min_attrs": {},
       "max_attrs": {}
@@ -9013,59 +9342,6 @@
     ]
   },
   {
-    "id": "young_0036",
-    "persona": "p_sidekick",
-    "age_range": [
-      25,
-      25
-    ],
-    "category": "friend",
-    "title": "婚礼请柬与份子钱",
-    "text": "大学睡你上铺的兄弟要结婚了，请柬寄到公司，婚礼在老家办。你打开购票软件看了看机票，又看了看群里大家讨论的份子钱行情。这个月的账单，已经排到下个月发工资了。",
-    "choices": [
-      {
-        "text": "飞回去，包两千。多年情谊，不缩水",
-        "effects": {
-          "friendship": 6,
-          "money": -5
-        },
-        "flags_add": [],
-        "personality": [
-          "emotional"
-        ]
-      },
-      {
-        "text": "包六百意思到了，听说有人在背后嘀咕",
-        "effects": {
-          "money": -2,
-          "happiness": -3,
-          "social": -2
-        },
-        "flags_add": [],
-        "personality": [
-          "selfish"
-        ]
-      },
-      {
-        "text": "人不到礼到，省下机票钱，视频里说了声恭喜",
-        "effects": {
-          "money": 3,
-          "friendship": -3
-        },
-        "flags_add": [],
-        "personality": [
-          "rational"
-        ]
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "death_0002",
     "age_range": [
       25,
@@ -9116,6 +9392,50 @@
       "max_attrs": {
         "luck": 35
       }
+    }
+  },
+  {
+    "id": "parenthood_0002",
+    "age_range": [
+      25,
+      25
+    ],
+    "category": "family",
+    "title": "幼儿园门口的分离",
+    "text": "孩子第一天去幼儿园，小手死死攥着你的衣角不肯松开。老师在门口招手，孩子却哭得撕心裂肺。你蹲下来，把 TA 的手一点点掰开，转身的时候自己眼眶也红了。",
+    "choices": [
+      {
+        "text": "狠心转身，相信老师能安抚",
+        "effects": {
+          "responsibility": 3,
+          "pressure": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "在门口偷看了整整一上午",
+        "effects": {
+          "emotion": 3,
+          "happiness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "和老师约好，明天早点来接",
+        "effects": {
+          "family_relation": 3,
+          "comfort": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "has_child"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
     }
   },
   {
@@ -11837,56 +12157,6 @@
     ]
   },
   {
-    "id": "young_0031",
-    "age_range": [
-      31,
-      31
-    ],
-    "category": "health",
-    "title": "车祸惊魂",
-    "text": "凌晨加班回家的路上，一辆失控的轿车从斜后方撞了上来。你眼前一黑，耳边全是金属摩擦的刺耳声。醒来时你躺在医院里，手臂打着石膏，医生说万幸没有伤到要害。窗外的天刚亮，你盯着天花板，第一次如此真切地感觉到：活着，原来是这么侥幸的事。",
-    "choices": [
-      {
-        "text": "复查到位，安心养伤",
-        "effects": {
-          "health": -8,
-          "happiness": -3
-        },
-        "flags_add": [],
-        "personality": [
-          "cautious"
-        ]
-      },
-      {
-        "text": "找人理赔，该争取的都争取",
-        "effects": {
-          "health": -12,
-          "money": 10
-        },
-        "flags_add": [],
-        "personality": [
-          "rational"
-        ]
-      },
-      {
-        "text": "急着出院，工作不能停",
-        "effects": {
-          "health": -18
-        },
-        "flags_add": [],
-        "personality": [
-          "adventurous"
-        ]
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "research_0002",
     "age_range": [
       31,
@@ -12044,6 +12314,50 @@
     "conditions": {
       "has_flags": [
         "gang_member"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "parenthood_0003",
+    "age_range": [
+      31,
+      31
+    ],
+    "category": "education",
+    "title": "辅导作业的晚上",
+    "text": "晚上九点，你盯着作业本上「2+3=5」的题目，孩子却算出了「6」。你深吸一口气，把铅笔放回桌上。窗外的家长群里，别的家长正在晒孩子的一百分。",
+    "choices": [
+      {
+        "text": "耐着性子再讲一遍，把步骤拆开",
+        "effects": {
+          "patience": 4,
+          "intelligence": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "火气上来了，拍了下桌子",
+        "effects": {
+          "conflict": 3,
+          "pressure": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "先放一放，明天问老师",
+        "effects": {
+          "stability": 3,
+          "happiness": 1
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "has_child"
       ],
       "not_flags": [],
       "min_attrs": {},
@@ -13749,60 +14063,6 @@
     }
   },
   {
-    "id": "gray_0003",
-    "age_range": [
-      35,
-      35
-    ],
-    "category": "career",
-    "title": "半夜的敲门声",
-    "text": "凌晨两点，急促的敲门声。猫眼里是几个陌生面孔：「开门，例行检查。」你的血一下子凉了，手机里有不能见光的东西，保险柜里有说不清的现金。敲门声越来越重。",
-    "choices": [
-      {
-        "text": "从消防通道跑了，从此东躲西藏",
-        "effects": {
-          "money": -8,
-          "anxiety": 6
-        },
-        "flags_add": [],
-        "personality": [
-          "cautious"
-        ]
-      },
-      {
-        "text": "瘫坐在沙发上等门开，听天由命",
-        "effects": {
-          "luck": 6,
-          "pressure": 5
-        },
-        "flags_add": [],
-        "personality": [
-          "emotional"
-        ]
-      },
-      {
-        "text": "第二天走进派出所，把这些年全交代了",
-        "effects": {
-          "responsibility": 8,
-          "money": -10,
-          "happiness": -4
-        },
-        "flags_add": [],
-        "personality": [
-          "adventurous"
-        ]
-      }
-    ],
-    "conditions": {
-      "has_flags": [
-        "gray_deep"
-      ],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "prison_0035",
     "age_range": [
       35,
@@ -13846,6 +14106,50 @@
     "conditions": {
       "has_flags": [
         "jailed"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "parenthood_0004",
+    "age_range": [
+      35,
+      35
+    ],
+    "category": "personality",
+    "title": "要不要逼孩子学琴",
+    "text": "钢琴老师委婉地说，孩子坐不住，可能不是这块料。可别的孩子都有一技之长，你不想让 TA 输在起跑线上。琴凳上，孩子低着头，手指在琴键上乱按。",
+    "choices": [
+      {
+        "text": "坚持要孩子学完这一年再说",
+        "effects": {
+          "discipline": 4,
+          "pressure": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "尊重孩子，换 TA 真正喜欢的",
+        "effects": {
+          "freedom": 4,
+          "happiness": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "和 TA 约定：再试三个月，不行就换",
+        "effects": {
+          "balance": 3,
+          "communication": 2
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "has_child"
       ],
       "not_flags": [],
       "min_attrs": {},
@@ -16384,55 +16688,6 @@
     ]
   },
   {
-    "id": "wealth_0041",
-    "age_range": [
-      41,
-      41
-    ],
-    "category": "finance",
-    "title": "中年财务规划",
-    "text": "上有老下有小，家里的开支像流水。家人提议做一份家庭财务规划：孩子的教育金、父母的养老、你们自己的保险。每月固定存下一笔，虽不多，但积少成多。",
-    "choices": [
-      {
-        "text": "立即开始执行规划",
-        "effects": {
-          "money": 10,
-          "happiness": 2,
-          "pressure": 4
-        },
-        "flags_add": [],
-        "personality": [
-          "rational"
-        ]
-      },
-      {
-        "text": "等收入更高些再说",
-        "effects": {
-          "money": 4,
-          "happiness": 3
-        },
-        "flags_add": [],
-        "personality": [
-          "emotional"
-        ]
-      },
-      {
-        "text": "让我来管钱",
-        "effects": {
-          "money": 8,
-          "social": 2
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "research_0005",
     "age_range": [
       41,
@@ -16650,6 +16905,50 @@
     "conditions": {
       "has_flags": [
         "jailed"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "parenthood_0005",
+    "age_range": [
+      41,
+      41
+    ],
+    "category": "personality",
+    "title": "青春期的房门",
+    "text": "不知从什么时候起，孩子的房门总是关着。你说一句，TA 顶三句；你进房间，TA 就戴上耳机。饭桌上只剩碗筷声，你忽然发现，自己已经看不懂这个从小抱大的孩子了。",
+    "choices": [
+      {
+        "text": "找个周末，平等地聊一聊",
+        "effects": {
+          "communication": 4,
+          "emotion": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "尊重 TA 的边界，但立好底线",
+        "effects": {
+          "trust": 3,
+          "self_control": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "忍不住翻 TA 的手机查聊天记录",
+        "effects": {
+          "conflict": 4,
+          "happiness": -3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "has_child"
       ],
       "not_flags": [],
       "min_attrs": {},
@@ -18811,61 +19110,6 @@
     }
   },
   {
-    "id": "echo_0014",
-    "age_range": [
-      46,
-      46
-    ],
-    "category": "career",
-    "title": "副业转正",
-    "text": "做了三年的副业，这个月收入第一次超过了工资。你盯着两条银行到账短信看了很久。当年同事笑你「瞎折腾」，现在他们想跟你取经。辞不辞职，是个问题。",
-    "choices": [
-      {
-        "text": "辞职，全身心干自己的",
-        "effects": {
-          "money": 8,
-          "freedom": 4,
-          "pressure": 4
-        },
-        "flags_add": [],
-        "personality": [
-          "adventurous"
-        ]
-      },
-      {
-        "text": "两手抓，累就累点",
-        "effects": {
-          "money": 5,
-          "health": -2,
-          "persistence": 3
-        },
-        "flags_add": [],
-        "personality": [
-          "rational"
-        ]
-      },
-      {
-        "text": "稳住，副业只是补贴",
-        "effects": {
-          "money": 3,
-          "stability": 3
-        },
-        "flags_add": [],
-        "personality": [
-          "cautious"
-        ]
-      }
-    ],
-    "conditions": {
-      "has_flags": [
-        "side_hustle"
-      ],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "pesc_0003",
     "age_range": [
       46,
@@ -18909,6 +19153,50 @@
     "conditions": {
       "has_flags": [
         "escaped"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "parenthood_0006",
+    "age_range": [
+      46,
+      46
+    ],
+    "category": "education",
+    "title": "高考志愿",
+    "text": "高考分数出来了，孩子想填一个你完全不了解的专业。你翻遍报考指南，心里那杆秤晃来晃去：稳定，还是热爱？晚饭时，孩子把志愿表推到你面前，等你签字。",
+    "choices": [
+      {
+        "text": "支持 TA 选热爱的，路自己走",
+        "effects": {
+          "freedom": 5,
+          "happiness": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "劝 TA 选个好就业的稳妥专业",
+        "effects": {
+          "stability": 4,
+          "money_awareness": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "一起查资料分析，把选择权交给 TA",
+        "effects": {
+          "intelligence": 3,
+          "communication": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "has_child"
       ],
       "not_flags": [],
       "min_attrs": {},

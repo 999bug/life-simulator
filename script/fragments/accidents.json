@@ -1,46 +1,5 @@
 [
   {
-    "id": "young_0031",
-    "age_range": [
-      31,
-      31
-    ],
-    "category": "health",
-    "title": "车祸惊魂",
-    "text": "凌晨加班回家的路上，一辆失控的轿车从斜后方撞了上来。你眼前一黑，耳边全是金属摩擦的刺耳声。醒来时你躺在医院里，手臂打着石膏，医生说万幸没有伤到要害。窗外的天刚亮，你盯着天花板，第一次如此真切地感觉到：活着，原来是这么侥幸的事。",
-    "choices": [
-      {
-        "text": "复查到位，安心养伤",
-        "effects": {
-          "health": -8,
-          "happiness": -3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "找人理赔，该争取的都争取",
-        "effects": {
-          "health": -12,
-          "money": 10
-        },
-        "flags_add": []
-      },
-      {
-        "text": "急着出院，工作不能停",
-        "effects": {
-          "health": -18
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "adult_0034",
     "age_range": [
       34,

@@ -5,6 +5,9 @@ import type { JobStatus } from '../engine/jobs';
 import type { NpcBonds } from '../engine/npcs';
 import type { GaokaoResult } from '../engine/gaokao';
 import type { AssetItem } from '../engine/assets';
+import { verdictKey } from '../engine/verdict';
+import { deriveTitle } from '../engine/titles';
+import { deathOneLiner } from '../engine/deaths';
 
 /**
  * 生成一局人生的「人生年鉴」markdown（年度回顾式终局报告）。
@@ -34,6 +37,8 @@ export function buildAlmanacMarkdown(
   lines.push('## 🏆 结局');
   lines.push('');
   lines.push(`**${verdictTitle}**`);
+  lines.push('');
+  lines.push(`> 🏅 称号：${deriveTitle(game, verdictKey(game))}`);
   lines.push('');
   lines.push(verdictDesc);
   lines.push('');
@@ -107,6 +112,10 @@ export function buildAlmanacMarkdown(
     }
   }
 
+  lines.push('## 🕯️ 尾声');
+  lines.push('');
+  lines.push(deathOneLiner(game.deathCause, game.age));
+  lines.push('');
   lines.push('*由人生模拟器生成的人生年鉴*');
   return lines.join('\n');
 }

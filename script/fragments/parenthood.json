@@ -1,0 +1,80 @@
+[
+  {
+    "id": "parenthood_0001",
+    "age_range": [22, 22],
+    "category": "family",
+    "title": "第一声「妈妈」",
+    "text": "半夜三点，你被一阵含糊的咿呀声惊醒。摇篮里的小家伙睁着亮晶晶的眼睛，朝你伸出小手，奶声奶气地冒出一个词——像「妈妈」，又像「爸爸」。你愣在原地，眼泪「唰」地就下来了。",
+    "choices": [
+      { "text": "把这一刻录下来，回放给全家人看", "effects": { "happiness": 4, "emotion": 3, "social": 2 }, "flags_add": [] },
+      { "text": "轻轻把 TA 抱起来，哼着歌哄睡", "effects": { "comfort": 4, "happiness": 2 }, "flags_add": [] },
+      { "text": "发到家族群里炫耀，收获一片羡慕", "effects": { "social": 4, "happiness": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["has_child"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "parenthood_0002",
+    "age_range": [25, 25],
+    "category": "family",
+    "title": "幼儿园门口的分离",
+    "text": "孩子第一天去幼儿园，小手死死攥着你的衣角不肯松开。老师在门口招手，孩子却哭得撕心裂肺。你蹲下来，把 TA 的手一点点掰开，转身的时候自己眼眶也红了。",
+    "choices": [
+      { "text": "狠心转身，相信老师能安抚", "effects": { "responsibility": 3, "pressure": 2 }, "flags_add": [] },
+      { "text": "在门口偷看了整整一上午", "effects": { "emotion": 3, "happiness": 2 }, "flags_add": [] },
+      { "text": "和老师约好，明天早点来接", "effects": { "family_relation": 3, "comfort": 2 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["has_child"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "parenthood_0003",
+    "age_range": [31, 31],
+    "category": "education",
+    "title": "辅导作业的晚上",
+    "text": "晚上九点，你盯着作业本上「2+3=5」的题目，孩子却算出了「6」。你深吸一口气，把铅笔放回桌上。窗外的家长群里，别的家长正在晒孩子的一百分。",
+    "choices": [
+      { "text": "耐着性子再讲一遍，把步骤拆开", "effects": { "patience": 4, "intelligence": 2 }, "flags_add": [] },
+      { "text": "火气上来了，拍了下桌子", "effects": { "conflict": 3, "pressure": 2 }, "flags_add": [] },
+      { "text": "先放一放，明天问老师", "effects": { "stability": 3, "happiness": 1 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["has_child"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "parenthood_0004",
+    "age_range": [35, 35],
+    "category": "personality",
+    "title": "要不要逼孩子学琴",
+    "text": "钢琴老师委婉地说，孩子坐不住，可能不是这块料。可别的孩子都有一技之长，你不想让 TA 输在起跑线上。琴凳上，孩子低着头，手指在琴键上乱按。",
+    "choices": [
+      { "text": "坚持要孩子学完这一年再说", "effects": { "discipline": 4, "pressure": 3 }, "flags_add": [] },
+      { "text": "尊重孩子，换 TA 真正喜欢的", "effects": { "freedom": 4, "happiness": 3 }, "flags_add": [] },
+      { "text": "和 TA 约定：再试三个月，不行就换", "effects": { "balance": 3, "communication": 2 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["has_child"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "parenthood_0005",
+    "age_range": [41, 41],
+    "category": "personality",
+    "title": "青春期的房门",
+    "text": "不知从什么时候起，孩子的房门总是关着。你说一句，TA 顶三句；你进房间，TA 就戴上耳机。饭桌上只剩碗筷声，你忽然发现，自己已经看不懂这个从小抱大的孩子了。",
+    "choices": [
+      { "text": "找个周末，平等地聊一聊", "effects": { "communication": 4, "emotion": 3 }, "flags_add": [] },
+      { "text": "尊重 TA 的边界，但立好底线", "effects": { "trust": 3, "self_control": 2 }, "flags_add": [] },
+      { "text": "忍不住翻 TA 的手机查聊天记录", "effects": { "conflict": 4, "happiness": -3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["has_child"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "parenthood_0006",
+    "age_range": [46, 46],
+    "category": "education",
+    "title": "高考志愿",
+    "text": "高考分数出来了，孩子想填一个你完全不了解的专业。你翻遍报考指南，心里那杆秤晃来晃去：稳定，还是热爱？晚饭时，孩子把志愿表推到你面前，等你签字。",
+    "choices": [
+      { "text": "支持 TA 选热爱的，路自己走", "effects": { "freedom": 5, "happiness": 4 }, "flags_add": [] },
+      { "text": "劝 TA 选个好就业的稳妥专业", "effects": { "stability": 4, "money_awareness": 2 }, "flags_add": [] },
+      { "text": "一起查资料分析，把选择权交给 TA", "effects": { "intelligence": 3, "communication": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["has_child"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  }
+]

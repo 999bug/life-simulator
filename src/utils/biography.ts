@@ -2,6 +2,9 @@ import type { GameState } from '../types';
 import { ATTR_META } from '../engine/state';
 import { EVENTS } from '../engine/events';
 import { derivePersona, personaSummary, PERSONA_META, type PersonaTrait } from '../engine/personality';
+import { verdictKey } from '../engine/verdict';
+import { deriveTitle } from '../engine/titles';
+import { deathOneLiner } from '../engine/deaths';
 
 /** 里程碑 flag（与结算页时间线一致） */
 const MILESTONE_FLAGS = ['went_to_college', 'grad_school', 'top_university', 'married', 'has_child', 'doctor', 'startup_success', 'civil_servant', 'world_traveler', 'athlete_pro', 'military_flag', 'skilled_worker', 'tech_career', 'retired'];
@@ -21,6 +24,7 @@ export function buildBiographyMarkdown(game: GameState, verdictTitle: string, sc
   lines.push(`# ${game.name}的一生`);
   lines.push('');
   lines.push(`> ${genderIcon} ${game.name} · 享年 ${game.age} 岁 · 结局：${verdictTitle} · 综合评分：${score}`);
+  lines.push(`> 🏅 称号：${deriveTitle(game, verdictKey(game))}`);
   // 性格注脚：画像成形（总分 ≥ 2）才写入开场白，与结算页展示规则一致
   const persona = derivePersona(game.history);
   const personaTotal = Object.values(persona).reduce((s, n) => s + n, 0);
@@ -87,6 +91,7 @@ export function buildBiographyMarkdown(game: GameState, verdictTitle: string, sc
     lifespan: '在睡梦中安静地走完了这一生。',
   }[game.deathCause ?? 'lifespan'] ?? '在睡梦中安静地走完了这一生。';
   lines.push(deathLine);
+  lines.push(`> ${deathOneLiner(game.deathCause, game.age)}`);
   lines.push('');
   lines.push('*由人生模拟器生成*');
 

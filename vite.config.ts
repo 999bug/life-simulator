@@ -3,7 +3,12 @@ import react from '@vitejs/plugin-react';
 import { viteSingleFile } from 'vite-plugin-singlefile';
 import { VitePWA } from 'vite-plugin-pwa';
 
+const buildVersion = Date.now().toString(36);
+
 export default defineConfig({
+  define: {
+    __BUILD_VERSION__: JSON.stringify(buildVersion),
+  },
   plugins: [
     react(),
     viteSingleFile(),

@@ -7,30 +7,43 @@
  * 「已可离线游玩」提示为假）。改为手写 SW：逻辑完全可控可调试。
  *
  * 策略：
- * - install：precache 清单（构建时 __WB_MANIFEST 注入）全量入缓存
+ * - install：precache 清单（构建时 __WB_MANIFEST 注入）全量入版本化缓存
+ * - message：收到 ReloadPrompt 的 SKIP_WAITING 后再接管，避免游戏进行中被强制刷新
  * - activate：清理旧版本缓存 + 立即接管控制
- * - fetch：同源请求 cache-first；导航请求回退 index.html；其余走网络
+ * - fetch：导航请求 network-first 回退 index.html；其余同源 GET cache-first
  */
 declare const self: ServiceWorkerGlobalScope & {
   __WB_MANIFEST: Array<{ url: string; revision: string | null }>;
 };
-
-/** 当前 SW 版本缓存名（升级时换名即清旧缓存） */
-const CACHE_NAME = 'life-sim-cache-v1';
+declare const __BUILD_VERSION__: string;
 
 /**
  * precache 清单：构建时由 vite-plugin-pwa 注入（dist 产物文件名）。
  * 注入清单可能含重复 URL（glob 扫描 + manifest/icons 自动附加），
  * Cache.addAll 对重复请求抛 InvalidStateError 导致 install 失败——此处 Set 去重。
  */
-const MANIFEST: string[] = [...new Set((self.__WB_MANIFEST || []).map(e => e.url))];
+const PRECACHE_ENTRIES = [
+  ...new Map((self.__WB_MANIFEST || []).map(entry => [entry.url, entry])).values(),
+];
+
+/**
+ * 构建期注入稳定版本号，避免 Service Worker 被休眠后重启时顶层代码重新执行
+ * 导致缓存名变化。旧 SW 继续读旧缓存，新 SW
+ * 安装完成后接管并清理旧缓存，避免新旧入口文件在同一缓存中互相覆盖。
+ */
+const CACHE_NAME = `life-sim-cache-${__BUILD_VERSION__}`;
 
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
-    await cache.addAll(MANIFEST);
-    await self.skipWaiting();
+    await cache.addAll(PRECACHE_ENTRIES.map(entry => entry.url));
   })());
+});
+
+self.addEventListener('message', (event) => {
+  if (event.data?.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });
 
 self.addEventListener('activate', (event) => {
@@ -49,18 +62,32 @@ self.addEventListener('fetch', (event) => {
     return;
   }
   event.respondWith((async () => {
+    // 导航请求优先访问网络，保证大版本部署后普通刷新即可拿到新 index.html；
+    // 离线时回退到缓存的单文件入口。
+    if (event.request.mode === 'navigate') {
+      const cache = await caches.open(CACHE_NAME);
+      try {
+        const response = await fetch(event.request);
+        if (response.ok) {
+          await cache.put('index.html', response.clone());
+        }
+        return response;
+      } catch {
+        const index = await cache.match('index.html');
+        return index ?? Response.error();
+      }
+    }
+
     const cache = await caches.open(CACHE_NAME);
     const cached = await cache.match(event.request);
     if (cached) {
       return cached;
     }
-    // 导航请求（离线刷新页面）：回退到缓存的 index.html（singlefile 单文件，全部应用代码在其中）
-    if (event.request.mode === 'navigate') {
-      const index = await cache.match('index.html');
-      if (index) {
-        return index;
-      }
+
+    const response = await fetch(event.request);
+    if (event.request.method === 'GET' && response.ok) {
+      await cache.put(event.request, response.clone());
     }
-    return fetch(event.request);
+    return response;
   })());
 });

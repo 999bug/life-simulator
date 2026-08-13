@@ -8013,48 +8013,6 @@
     }
   },
   {
-    "id": "egg2_0008",
-    "age_range": [
-      22,
-      22
-    ],
-    "category": "career",
-    "title": "电梯里遇到老板",
-    "text": "电梯门一开，老板站在里面。你俩四目相对，同时低头掏出手机。30 秒的沉默里，你把屏幕滑过来滑过去，假装在忙天大的项目。电梯到了，老板先出去，回头看你一眼——你立刻挺直腰板，像刚开完季度会。",
-    "choices": [
-      {
-        "text": "主动开口：「老板，X 项目进展顺利」——给自己加戏",
-        "effects": {
-          "courage": 5,
-          "communication": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "全程沉默装深沉——此时无声胜有声",
-        "effects": {
-          "patience": 4,
-          "stability": 2
-        },
-        "flags_add": []
-      },
-      {
-        "text": "回到工位默默记下：明天开始早五分钟上班",
-        "effects": {
-          "discipline": 5,
-          "efficiency": 2
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "parenthood_0001",
     "age_range": [
       22,
@@ -8093,6 +8051,50 @@
     "conditions": {
       "has_flags": [
         "has_child"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "mil_0001",
+    "age_range": [
+      22,
+      22
+    ],
+    "category": "career",
+    "title": "入伍新兵连",
+    "text": "二十二岁，你穿上军装，进了新兵连。第一天叠被子，班长盯着你叠了七遍，最后淡淡地说「合格」。你才知道，军营里连被子都有标准。",
+    "choices": [
+      {
+        "text": "把每一件小事都做到极致",
+        "effects": {
+          "discipline": 6,
+          "self_control": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "主动帮战友，迅速融入集体",
+        "effects": {
+          "social": 4,
+          "teamwork": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "训练加练，想当尖子兵",
+        "effects": {
+          "persistence": 5,
+          "health": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "military_flag"
       ],
       "not_flags": [],
       "min_attrs": {},
@@ -8407,58 +8409,6 @@
     ]
   },
   {
-    "id": "young_0023",
-    "age_range": [
-      23,
-      23
-    ],
-    "category": "friend",
-    "title": "发小的电话",
-    "text": "深夜，手机屏幕亮起，是那个从小一起长大的名字。电话那头的声音有些疲惫，说最近遇到难处，想跟你聊聊。你想起小时候你们在沙坑里抢铲子、又和好的那些日子。有些人的情分，是小时候攒下的，越攒越厚。",
-    "choices": [
-      {
-        "text": "认真听他说完，给些实在的建议",
-        "effects": {
-          "social": 5,
-          "happiness": 3
-        },
-        "flags_add": [],
-        "personality": [
-          "altruistic"
-        ]
-      },
-      {
-        "text": "约他出来见一面，当面聊",
-        "effects": {
-          "social": 4,
-          "money": -3
-        },
-        "flags_add": [],
-        "personality": [
-          "emotional"
-        ]
-      },
-      {
-        "text": "寒暄几句，说自己也在忙",
-        "effects": {
-          "social": -2
-        },
-        "flags_add": [],
-        "personality": [
-          "cautious"
-        ]
-      }
-    ],
-    "conditions": {
-      "has_flags": [
-        "childhood_friend"
-      ],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "young_0035",
     "age_range": [
       23,
@@ -8548,6 +8498,51 @@
     ],
     "conditions": {
       "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "ath_0001",
+    "age_range": [
+      23,
+      23
+    ],
+    "category": "sports",
+    "title": "入选省队",
+    "text": "二十三岁，你终于入选省队。教练拍着你的肩膀说「好好练，别浪费了这身天赋」。窗外训练场的灯还亮着，还有人在加练。",
+    "choices": [
+      {
+        "text": "把每天训练量再往上加一成",
+        "effects": {
+          "health": 5,
+          "persistence": 5,
+          "pressure": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "和队里最强的那个较上劲了",
+        "effects": {
+          "competition": 5,
+          "ambition": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "记训练笔记，研究自己的技术动作",
+        "effects": {
+          "intelligence": 4,
+          "self_awareness": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "athlete_pro"
+      ],
       "not_flags": [],
       "min_attrs": {},
       "max_attrs": {}
@@ -8975,42 +8970,44 @@
     }
   },
   {
-    "id": "egg2_0001",
+    "id": "mil_0002",
     "age_range": [
       24,
       24
     ],
-    "category": "family",
-    "title": "空调遥控器失而复得",
-    "text": "空调遥控器找了三天，沙发缝、抽屉、被窝都翻遍了，连垃圾桶都没放过。第四天开冰箱拿可乐，它正稳稳躺在蔬菜格里——连遥控器都知道天热。你沉默地把它放回茶几，假装什么都没发生过，只是默默记住了它的新家。",
+    "category": "health",
+    "title": "第一次拉练",
+    "text": "二十四岁，第一次野外拉练，背着几十斤的装具走了几十公里。脚底起了血泡，天又下起雨，队伍里没有一个人掉队。",
     "choices": [
       {
-        "text": "认真向冰箱道谢——谢谢它保管得很好",
+        "text": "咬牙跟着队伍，一步不落",
         "effects": {
-          "fun": 5,
-          "happiness": 3
+          "willpower": 6,
+          "health": 3
         },
         "flags_add": []
       },
       {
-        "text": "把这事发进家庭群，收获满屏哈哈哈",
+        "text": "帮体力差的战友分担装备",
         "effects": {
-          "social": 5,
-          "fun": 3
+          "empathy": 4,
+          "social": 3
         },
         "flags_add": []
       },
       {
-        "text": "用双面胶把遥控器粘在墙上——立下「谁乱放谁请客」的家规",
+        "text": "在心里默数步伐，转移疼痛",
         "effects": {
-          "patience": 4,
-          "family_relation": 3
+          "self_control": 5,
+          "resilience": 3
         },
         "flags_add": []
       }
     ],
     "conditions": {
-      "has_flags": [],
+      "has_flags": [
+        "military_flag"
+      ],
       "not_flags": [],
       "min_attrs": {},
       "max_attrs": {}
@@ -9684,55 +9681,6 @@
     ]
   },
   {
-    "id": "young_0026",
-    "age_range": [
-      26,
-      26
-    ],
-    "category": "health",
-    "title": "操场上的梦",
-    "text": "清晨的公园，你跑完最后一圈，喘着气在跑道边坐下来。远处有几个学生模样的人在训练，起跑、冲刺、再来一次。你看着他们，忽然想起自己八九岁时在操场上的那些日子——汗水、奖牌、教练的哨声。原来有些梦，只是被放进了抽屉，并没有碎。",
-    "choices": [
-      {
-        "text": "重新开始认真锻炼",
-        "effects": {
-          "health": 5,
-          "happiness": 2
-        },
-        "flags_add": [],
-        "personality": [
-          "rational"
-        ]
-      },
-      {
-        "text": "报一个业余运动俱乐部",
-        "effects": {
-          "social": 4,
-          "health": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "跑步就好，梦留在过去",
-        "effects": {
-          "health": 2
-        },
-        "flags_add": [],
-        "personality": [
-          "emotional"
-        ]
-      }
-    ],
-    "conditions": {
-      "has_flags": [
-        "athlete_seed"
-      ],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "young_0037",
     "age_range": [
       26,
@@ -9868,6 +9816,50 @@
     "conditions": {
       "has_flags": [
         "startup_success"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "ath_0002",
+    "age_range": [
+      26,
+      26
+    ],
+    "category": "sports",
+    "title": "第一次全国大赛",
+    "text": "二十六岁，你第一次站上全国大赛的赛场。观众席的山呼海啸让你手心冒汗，检录处念到了你的名字。",
+    "choices": [
+      {
+        "text": "深呼吸，把注意力收回到动作本身",
+        "effects": {
+          "self_control": 5,
+          "courage": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "盯着最强的对手，心里发狠要赢",
+        "effects": {
+          "competition": 6,
+          "pressure": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "和教练击掌，相信平时的训练",
+        "effects": {
+          "teamwork": 4,
+          "stability": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "athlete_pro"
       ],
       "not_flags": [],
       "min_attrs": {},
@@ -10188,57 +10180,6 @@
     }
   },
   {
-    "id": "young_0038",
-    "age_range": [
-      27,
-      27
-    ],
-    "category": "career",
-    "title": "连续加班的第三十一天",
-    "text": "项目冲刺，你已经连续加班一个月。凌晨的写字楼只剩你这一层亮着灯，外卖盒堆在桌角，镜子里的自己眼窝深陷。领导在群里说：「再扛一扛，上线就好了。」",
-    "choices": [
-      {
-        "text": "咬牙扛住。项目上线被点名表扬，体检报告多了两个箭头",
-        "effects": {
-          "ambition": 8,
-          "health": -6
-        },
-        "flags_add": [],
-        "personality": [
-          "adventurous"
-        ]
-      },
-      {
-        "text": "找领导谈了边界。这个季度的绩效，被打了个 B",
-        "effects": {
-          "independence": 5,
-          "money": -3
-        },
-        "flags_add": [],
-        "personality": [
-          "rational"
-        ]
-      },
-      {
-        "text": "提了离职。走出写字楼那一刻，世界瞬间安静了",
-        "effects": {
-          "happiness": 6,
-          "money": -5
-        },
-        "flags_add": [],
-        "personality": [
-          "emotional"
-        ]
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "egg2_0009",
     "age_range": [
       27,
@@ -10318,6 +10259,50 @@
     "conditions": {
       "has_flags": [
         "doctor"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "mil_0003",
+    "age_range": [
+      27,
+      27
+    ],
+    "category": "career",
+    "title": "立功提干",
+    "text": "二十七岁，你在一次任务中表现突出，立了三等功。连长找你谈话：「组织上考虑提你。」你站得笔直，心跳却快了起来。",
+    "choices": [
+      {
+        "text": "继续留在基层，和兄弟们在一起",
+        "effects": {
+          "loyalty": 6,
+          "social": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "接受提干，担起更大的责任",
+        "effects": {
+          "responsibility": 5,
+          "ambition": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "先回家和父母商量",
+        "effects": {
+          "family_relation": 4,
+          "patience": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "military_flag"
       ],
       "not_flags": [],
       "min_attrs": {},
@@ -10668,50 +10653,6 @@
     }
   },
   {
-    "id": "egg2_0011",
-    "age_range": [
-      28,
-      28
-    ],
-    "category": "technology",
-    "title": "爆款之后",
-    "text": "你随手发的那条动态突然爆了：转发十万加，私信涌进来，连楼下便利店老板都认出了你。第二天，MCN 机构、品牌方、电视台的邀约接踵而至。你盯着屏幕上的数字，既兴奋又恍惚——这条动态的热度，能撑到下周吗？",
-    "choices": [
-      {
-        "text": "趁热接商单——流量是泼天的富贵，错过了就没了",
-        "effects": {
-          "business": 6,
-          "ambition": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "低调处理，回归正常生活——热度会过去，日子要过",
-        "effects": {
-          "stability": 4,
-          "patience": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "再接再厉，继续产出内容——乘胜追击",
-        "effects": {
-          "innovation": 5,
-          "entertainment": 4
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [
-        "viral"
-      ],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "art_0001",
     "age_range": [
       28,
@@ -10750,6 +10691,50 @@
     "conditions": {
       "has_flags": [
         "artist_pro"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "mil_0004",
+    "age_range": [
+      28,
+      28
+    ],
+    "category": "personality",
+    "title": "退役转业",
+    "text": "二十八岁，服役期满，你面临去留。留队意味着继续这份铁血的青春，转业则要重新适应外面的世界。营房外的白杨树又绿了一茬。",
+    "choices": [
+      {
+        "text": "选择留队，把青春再延长几年",
+        "effects": {
+          "loyalty": 5,
+          "discipline": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "转业到地方，开启第二人生",
+        "effects": {
+          "freedom": 5,
+          "adaptability": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "服从组织安排，去哪都行",
+        "effects": {
+          "responsibility": 4,
+          "stability": 4
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "military_flag"
       ],
       "not_flags": [],
       "min_attrs": {},
@@ -11059,58 +11044,6 @@
     ]
   },
   {
-    "id": "young_0041",
-    "age_range": [
-      29,
-      29
-    ],
-    "category": "health",
-    "title": "体检报告上的箭头",
-    "text": "公司年度体检，报告上多了三个向上的箭头：血脂、尿酸、脂肪肝倾向。医生推了推眼镜：「年轻人，少熬夜，多运动。」你捏着报告单，站在医院走廊里，第一次认真想了想「身体」这两个字。",
-    "choices": [
-      {
-        "text": "立刻办健身卡，调整作息，和夜宵说再见",
-        "effects": {
-          "health": 8,
-          "money": -4
-        },
-        "flags_add": [],
-        "personality": [
-          "rational"
-        ]
-      },
-      {
-        "text": "收藏了一堆养生帖，然后继续熬夜",
-        "effects": {
-          "comfort": 3,
-          "health": -5
-        },
-        "flags_add": [],
-        "personality": [
-          "emotional"
-        ]
-      },
-      {
-        "text": "找中医慢慢调理，把生活节奏一点点找回来",
-        "effects": {
-          "health": 5,
-          "money": -3,
-          "patience": 3
-        },
-        "flags_add": [],
-        "personality": [
-          "cautious"
-        ]
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "egg2_0012",
     "age_range": [
       29,
@@ -11193,6 +11126,51 @@
     "conditions": {
       "has_flags": [
         "doctor"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "ath_0003",
+    "age_range": [
+      29,
+      29
+    ],
+    "category": "health",
+    "title": "伤病低谷",
+    "text": "二十九岁，一次训练中的重伤把你按在了病床上。医生说「职业生涯可能受影响」。夜深人静，你盯着天花板，第一次怀疑这条路还能不能走下去。",
+    "choices": [
+      {
+        "text": "咬着牙做康复，一天都不落下",
+        "effects": {
+          "resilience": 6,
+          "health": 3,
+          "pressure": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "接受现实，开始想退役后的出路",
+        "effects": {
+          "intelligence": 4,
+          "stability": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "带伤坚持训练，赌一把",
+        "effects": {
+          "risk": 6,
+          "health": -4
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "athlete_pro"
       ],
       "not_flags": [],
       "min_attrs": {},
@@ -14387,58 +14365,6 @@
     ]
   },
   {
-    "id": "adult_0036",
-    "age_range": [
-      36,
-      36
-    ],
-    "category": "health",
-    "title": "再上赛场",
-    "text": "公司要办运动会，部门人手不够，有人起哄让你上四百米。你推脱了两句，说年纪大了跑不动。可站上跑道的那一刻，熟悉的感觉又回来了——腿上的肌肉还记得怎么发力，耳边的风还记得怎么呼啸。冲过终点时，你听见同事的欢呼，笑得像个孩子。",
-    "choices": [
-      {
-        "text": "认真训练，下次拿个好名次",
-        "effects": {
-          "health": 4,
-          "happiness": 2
-        },
-        "flags_add": [],
-        "personality": [
-          "rational"
-        ]
-      },
-      {
-        "text": "带动同事一起运动",
-        "effects": {
-          "social": 4,
-          "health": 2
-        },
-        "flags_add": [],
-        "personality": [
-          "altruistic"
-        ]
-      },
-      {
-        "text": "偶尔参加，不勉强自己",
-        "effects": {
-          "health": 1
-        },
-        "flags_add": [],
-        "personality": [
-          "cautious"
-        ]
-      }
-    ],
-    "conditions": {
-      "has_flags": [
-        "sports_path"
-      ],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "research_0004",
     "age_range": [
       36,
@@ -14634,6 +14560,51 @@
     "conditions": {
       "has_flags": [
         "doctor"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "ath_0004",
+    "age_range": [
+      36,
+      36
+    ],
+    "category": "career",
+    "title": "退役转型",
+    "text": "三十六岁，你在队里已经算「老将」了。退役的念头越来越频繁地冒出来。有人劝你留队当教练，也有人给你递来转型的橄榄枝。",
+    "choices": [
+      {
+        "text": "留队当教练，把经验传下去",
+        "effects": {
+          "gratitude": 5,
+          "social": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "退役后读书深造，换一条路走",
+        "effects": {
+          "intelligence": 5,
+          "ambition": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "还想再拼一届，不给自己留遗憾",
+        "effects": {
+          "courage": 5,
+          "persistence": 4,
+          "pressure": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "athlete_pro"
       ],
       "not_flags": [],
       "min_attrs": {},

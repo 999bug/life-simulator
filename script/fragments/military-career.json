@@ -1,0 +1,54 @@
+[
+  {
+    "id": "mil_0001",
+    "age_range": [22, 22],
+    "category": "career",
+    "title": "入伍新兵连",
+    "text": "二十二岁，你穿上军装，进了新兵连。第一天叠被子，班长盯着你叠了七遍，最后淡淡地说「合格」。你才知道，军营里连被子都有标准。",
+    "choices": [
+      { "text": "把每一件小事都做到极致", "effects": { "discipline": 6, "self_control": 3 }, "flags_add": [] },
+      { "text": "主动帮战友，迅速融入集体", "effects": { "social": 4, "teamwork": 4 }, "flags_add": [] },
+      { "text": "训练加练，想当尖子兵", "effects": { "persistence": 5, "health": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["military_flag"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "mil_0002",
+    "age_range": [24, 24],
+    "category": "health",
+    "title": "第一次拉练",
+    "text": "二十四岁，第一次野外拉练，背着几十斤的装具走了几十公里。脚底起了血泡，天又下起雨，队伍里没有一个人掉队。",
+    "choices": [
+      { "text": "咬牙跟着队伍，一步不落", "effects": { "willpower": 6, "health": 3 }, "flags_add": [] },
+      { "text": "帮体力差的战友分担装备", "effects": { "empathy": 4, "social": 3 }, "flags_add": [] },
+      { "text": "在心里默数步伐，转移疼痛", "effects": { "self_control": 5, "resilience": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["military_flag"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "mil_0003",
+    "age_range": [27, 27],
+    "category": "career",
+    "title": "立功提干",
+    "text": "二十七岁，你在一次任务中表现突出，立了三等功。连长找你谈话：「组织上考虑提你。」你站得笔直，心跳却快了起来。",
+    "choices": [
+      { "text": "继续留在基层，和兄弟们在一起", "effects": { "loyalty": 6, "social": 3 }, "flags_add": [] },
+      { "text": "接受提干，担起更大的责任", "effects": { "responsibility": 5, "ambition": 4 }, "flags_add": [] },
+      { "text": "先回家和父母商量", "effects": { "family_relation": 4, "patience": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["military_flag"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "mil_0004",
+    "age_range": [28, 28],
+    "category": "personality",
+    "title": "退役转业",
+    "text": "二十八岁，服役期满，你面临去留。留队意味着继续这份铁血的青春，转业则要重新适应外面的世界。营房外的白杨树又绿了一茬。",
+    "choices": [
+      { "text": "选择留队，把青春再延长几年", "effects": { "loyalty": 5, "discipline": 3 }, "flags_add": [] },
+      { "text": "转业到地方，开启第二人生", "effects": { "freedom": 5, "adaptability": 4 }, "flags_add": [] },
+      { "text": "服从组织安排，去哪都行", "effects": { "responsibility": 4, "stability": 4 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["military_flag"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  }
+]

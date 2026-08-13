@@ -1,0 +1,54 @@
+[
+  {
+    "id": "ath_0001",
+    "age_range": [23, 23],
+    "category": "sports",
+    "title": "入选省队",
+    "text": "二十三岁，你终于入选省队。教练拍着你的肩膀说「好好练，别浪费了这身天赋」。窗外训练场的灯还亮着，还有人在加练。",
+    "choices": [
+      { "text": "把每天训练量再往上加一成", "effects": { "health": 5, "persistence": 5, "pressure": 3 }, "flags_add": [] },
+      { "text": "和队里最强的那个较上劲了", "effects": { "competition": 5, "ambition": 4 }, "flags_add": [] },
+      { "text": "记训练笔记，研究自己的技术动作", "effects": { "intelligence": 4, "self_awareness": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["athlete_pro"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "ath_0002",
+    "age_range": [26, 26],
+    "category": "sports",
+    "title": "第一次全国大赛",
+    "text": "二十六岁，你第一次站上全国大赛的赛场。观众席的山呼海啸让你手心冒汗，检录处念到了你的名字。",
+    "choices": [
+      { "text": "深呼吸，把注意力收回到动作本身", "effects": { "self_control": 5, "courage": 4 }, "flags_add": [] },
+      { "text": "盯着最强的对手，心里发狠要赢", "effects": { "competition": 6, "pressure": 4 }, "flags_add": [] },
+      { "text": "和教练击掌，相信平时的训练", "effects": { "teamwork": 4, "stability": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["athlete_pro"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "ath_0003",
+    "age_range": [29, 29],
+    "category": "health",
+    "title": "伤病低谷",
+    "text": "二十九岁，一次训练中的重伤把你按在了病床上。医生说「职业生涯可能受影响」。夜深人静，你盯着天花板，第一次怀疑这条路还能不能走下去。",
+    "choices": [
+      { "text": "咬着牙做康复，一天都不落下", "effects": { "resilience": 6, "health": 3, "pressure": 4 }, "flags_add": [] },
+      { "text": "接受现实，开始想退役后的出路", "effects": { "intelligence": 4, "stability": 4 }, "flags_add": [] },
+      { "text": "带伤坚持训练，赌一把", "effects": { "risk": 6, "health": -4 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["athlete_pro"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "ath_0004",
+    "age_range": [36, 36],
+    "category": "career",
+    "title": "退役转型",
+    "text": "三十六岁，你在队里已经算「老将」了。退役的念头越来越频繁地冒出来。有人劝你留队当教练，也有人给你递来转型的橄榄枝。",
+    "choices": [
+      { "text": "留队当教练，把经验传下去", "effects": { "gratitude": 5, "social": 4 }, "flags_add": [] },
+      { "text": "退役后读书深造，换一条路走", "effects": { "intelligence": 5, "ambition": 3 }, "flags_add": [] },
+      { "text": "还想再拼一届，不给自己留遗憾", "effects": { "courage": 5, "persistence": 4, "pressure": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["athlete_pro"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  }
+]

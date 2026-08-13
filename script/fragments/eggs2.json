@@ -1,47 +1,5 @@
 [
   {
-    "id": "egg2_0001",
-    "age_range": [
-      24,
-      24
-    ],
-    "category": "family",
-    "title": "空调遥控器失而复得",
-    "text": "空调遥控器找了三天，沙发缝、抽屉、被窝都翻遍了，连垃圾桶都没放过。第四天开冰箱拿可乐，它正稳稳躺在蔬菜格里——连遥控器都知道天热。你沉默地把它放回茶几，假装什么都没发生过，只是默默记住了它的新家。",
-    "choices": [
-      {
-        "text": "认真向冰箱道谢——谢谢它保管得很好",
-        "effects": {
-          "fun": 5,
-          "happiness": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "把这事发进家庭群，收获满屏哈哈哈",
-        "effects": {
-          "social": 5,
-          "fun": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "用双面胶把遥控器粘在墙上——立下「谁乱放谁请客」的家规",
-        "effects": {
-          "patience": 4,
-          "family_relation": 3
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "egg2_0003",
     "age_range": [
       54,
@@ -210,48 +168,6 @@
     }
   },
   {
-    "id": "egg2_0008",
-    "age_range": [
-      22,
-      22
-    ],
-    "category": "career",
-    "title": "电梯里遇到老板",
-    "text": "电梯门一开，老板站在里面。你俩四目相对，同时低头掏出手机。30 秒的沉默里，你把屏幕滑过来滑过去，假装在忙天大的项目。电梯到了，老板先出去，回头看你一眼——你立刻挺直腰板，像刚开完季度会。",
-    "choices": [
-      {
-        "text": "主动开口：「老板，X 项目进展顺利」——给自己加戏",
-        "effects": {
-          "courage": 5,
-          "communication": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "全程沉默装深沉——此时无声胜有声",
-        "effects": {
-          "patience": 4,
-          "stability": 2
-        },
-        "flags_add": []
-      },
-      {
-        "text": "回到工位默默记下：明天开始早五分钟上班",
-        "effects": {
-          "discipline": 5,
-          "efficiency": 2
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "egg2_0009",
     "age_range": [
       27,
@@ -330,50 +246,6 @@
     ],
     "conditions": {
       "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
-    "id": "egg2_0011",
-    "age_range": [
-      28,
-      28
-    ],
-    "category": "technology",
-    "title": "爆款之后",
-    "text": "你随手发的那条动态突然爆了：转发十万加，私信涌进来，连楼下便利店老板都认出了你。第二天，MCN 机构、品牌方、电视台的邀约接踵而至。你盯着屏幕上的数字，既兴奋又恍惚——这条动态的热度，能撑到下周吗？",
-    "choices": [
-      {
-        "text": "趁热接商单——流量是泼天的富贵，错过了就没了",
-        "effects": {
-          "business": 6,
-          "ambition": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "低调处理，回归正常生活——热度会过去，日子要过",
-        "effects": {
-          "stability": 4,
-          "patience": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "再接再厉，继续产出内容——乘胜追击",
-        "effects": {
-          "innovation": 5,
-          "entertainment": 4
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [
-        "viral"
-      ],
       "not_flags": [],
       "min_attrs": {},
       "max_attrs": {}

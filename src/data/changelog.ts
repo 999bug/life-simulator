@@ -15,6 +15,15 @@ export interface ChangelogEntry {
  */
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.20.0',
+    date: '2026-08-13',
+    title: '赛场与军营',
+    items: [
+      '🏅 运动员线补全：入选省队/全国大赛/伤病低谷/退役转型 4 个职业事件',
+      '🎖️ 军人线补全：入伍新兵连/第一次拉练/立功提干/退役转业 4 个职业事件',
+    ],
+  },
+  {
     version: '0.19.0',
     date: '2026-08-13',
     title: '更多人生路线',

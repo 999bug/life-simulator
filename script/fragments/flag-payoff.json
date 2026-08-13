@@ -257,49 +257,6 @@
     }
   },
   {
-    "id": "adult_0040",
-    "age_range": [
-      40,
-      40
-    ],
-    "category": "friend",
-    "title": "回到老家",
-    "text": "出差路过老家，你多留了一天。傍晚走在当年的街道上，路灯还是那几盏，小卖部换了招牌。巷口有人喊你的名字——是那个从小一起长大的朋友，手里拎着菜，看见你愣了半天，然后咧开嘴笑了：「多少年没回来了？」那一瞬间，你忽然有点想哭。",
-    "choices": [
-      {
-        "text": "在他家吃顿饭，聊聊这些年的日子",
-        "effects": {
-          "social": 5,
-          "happiness": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "留了联系方式，约好常联系",
-        "effects": {
-          "social": 3,
-          "happiness": 2
-        },
-        "flags_add": []
-      },
-      {
-        "text": "匆匆告别，说下次一定",
-        "effects": {
-          "happiness": -1
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [
-        "lifelong_friend"
-      ],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "adult_0042",
     "age_range": [
       42,

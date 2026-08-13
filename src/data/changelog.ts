@@ -15,6 +15,14 @@ export interface ChangelogEntry {
  */
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.18.0',
+    date: '2026-08-13',
+    title: '白衣天使补全',
+    items: [
+      '⚕️ 医生线补全：新增实习值夜/规培轮转/第一台主刀/医疗纠纷/副主任晋升/突发公卫/疑难抉择/医者仁心 8 个职业事件，从医学生一路走到主任医师',
+    ],
+  },
+  {
     version: '0.17.0',
     date: '2026-08-13',
     title: '开局人生路线',

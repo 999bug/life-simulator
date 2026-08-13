@@ -9684,57 +9684,6 @@
     ]
   },
   {
-    "id": "wealth_0026",
-    "age_range": [
-      26,
-      26
-    ],
-    "category": "finance",
-    "title": "开始理财",
-    "text": "工作一年，银行卡里终于有了几万块存款。朋友说钱放着不动就是贬值，推荐你学习理财。银行定存、货币基金、还有风险更高的股票基金，选项不少。你盘算着怎么让钱生钱。",
-    "choices": [
-      {
-        "text": "全部存定期，稳妥为上",
-        "effects": {
-          "money": 8
-        },
-        "flags_add": [],
-        "personality": [
-          "cautious"
-        ]
-      },
-      {
-        "text": "试水基金定投",
-        "effects": {
-          "money": 14,
-          "luck": 3,
-          "anxiety": 4
-        },
-        "flags_add": [],
-        "personality": [
-          "adventurous"
-        ]
-      },
-      {
-        "text": "交给专业理财顾问",
-        "effects": {
-          "money": 6,
-          "learning": 3
-        },
-        "flags_add": [],
-        "personality": [
-          "rational"
-        ]
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "young_0026",
     "age_range": [
       26,
@@ -9871,6 +9820,51 @@
     ],
     "conditions": {
       "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "doctor_0001",
+    "age_range": [
+      26,
+      26
+    ],
+    "category": "career",
+    "title": "实习医生的第一夜",
+    "text": "实习第一年，你在急诊科值夜班。凌晨三点，来了一位捂着肚子直冒冷汗的老人，家属围着你七嘴八舌。带教老师还没赶到，你第一次要独自判断：是普通的肠胃炎，还是更凶险的急腹症。",
+    "choices": [
+      {
+        "text": "沉住气做检查，按流程逐项排除",
+        "effects": {
+          "intelligence": 6,
+          "responsibility": 4,
+          "pressure": 2
+        },
+        "flags_add": []
+      },
+      {
+        "text": "赶紧打电话摇带教老师",
+        "effects": {
+          "social": 3,
+          "happiness": 1
+        },
+        "flags_add": []
+      },
+      {
+        "text": "凭课本印象先处理，赌一把",
+        "effects": {
+          "risk": 4,
+          "pressure": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "doctor"
+      ],
       "not_flags": [],
       "min_attrs": {},
       "max_attrs": {}
@@ -10241,55 +10235,6 @@
     }
   },
   {
-    "id": "young_0039",
-    "age_range": [
-      27,
-      27
-    ],
-    "category": "finance",
-    "title": "分期免息的陷阱",
-    "text": "种草半年的新手机，购物车页面弹出「十二期免息，每月仅需 599」。你算了算工资，好像也不是不行。下单页面金光闪闪，「立即拥有」四个字一直在闪。",
-    "choices": [
-      {
-        "text": "分期拿下。后来才发现手续费和会员费滚了一笔",
-        "effects": {
-          "happiness": 5,
-          "money": -8,
-          "impulse": 3
-        },
-        "flags_add": [],
-        "personality": [
-          "emotional"
-        ]
-      },
-      {
-        "text": "忍住没买。月末再看，好像也就那么回事",
-        "effects": {
-          "discipline": 6,
-          "money": 2
-        },
-        "flags_add": [],
-        "personality": [
-          "rational"
-        ]
-      },
-      {
-        "text": "买了，玩了两周，挂二手平台回血一半",
-        "effects": {
-          "money": -3,
-          "intelligence": 4
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "egg2_0009",
     "age_range": [
       27,
@@ -10326,6 +10271,50 @@
     ],
     "conditions": {
       "has_flags": [],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "doctor_0002",
+    "age_range": [
+      27,
+      27
+    ],
+    "category": "career",
+    "title": "规培轮转",
+    "text": "规培轮转，你在内科、外科、儿科之间转。带教问你，想定哪个方向。你喜欢外科的干脆利落，也放不下内科的抽丝剥茧，儿科孩子的笑脸又总让你心软。",
+    "choices": [
+      {
+        "text": "选外科，刀口见真章",
+        "effects": {
+          "intelligence": 5,
+          "courage": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "选内科，慢慢磨出火候",
+        "effects": {
+          "patience": 5,
+          "thinking": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "选儿科，孩子的笑脸最治愈",
+        "effects": {
+          "empathy": 5,
+          "happiness": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "doctor"
+      ],
       "not_flags": [],
       "min_attrs": {},
       "max_attrs": {}
@@ -11069,58 +11058,6 @@
     ]
   },
   {
-    "id": "young_0040",
-    "age_range": [
-      29,
-      29
-    ],
-    "category": "career",
-    "title": "饭局上的站队",
-    "text": "部门两位领导明争暗斗，周五晚上，其中一位叫你去饭局。酒过三巡，他拍着你的肩膀：「小王是明白人，以后跟着我干。」桌上的人都看着你，等你举杯。",
-    "choices": [
-      {
-        "text": "举杯表态。之后果然被提携，只是心里有点不是滋味",
-        "effects": {
-          "money": 5,
-          "avoidance": 4
-        },
-        "flags_add": [],
-        "personality": [
-          "selfish"
-        ]
-      },
-      {
-        "text": "装病推掉。第二个星期，好项目再没有你的份",
-        "effects": {
-          "self_control": 4,
-          "ambition": -3,
-          "social": -2
-        },
-        "flags_add": [],
-        "personality": [
-          "cautious"
-        ]
-      },
-      {
-        "text": "去了但只吃饭不表态，结果两边都没拿你当自己人",
-        "effects": {
-          "social": -2,
-          "intelligence": 3
-        },
-        "flags_add": [],
-        "personality": [
-          "rational"
-        ]
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "young_0041",
     "age_range": [
       29,
@@ -11210,6 +11147,51 @@
     "conditions": {
       "has_flags": [
         "viral"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "doctor_0003",
+    "age_range": [
+      29,
+      29
+    ],
+    "category": "career",
+    "title": "第一台主刀",
+    "text": "三十岁，你第一次主刀一台小手术。无影灯亮起的那一刻，手术刀在你手里微微发颤。器械护士和助手都在等你的第一刀，监护仪滴答滴答地响。",
+    "choices": [
+      {
+        "text": "深呼吸，稳稳切下第一刀",
+        "effects": {
+          "health": 5,
+          "courage": 4,
+          "pressure": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "先和团队再核对一遍流程",
+        "effects": {
+          "intelligence": 5,
+          "teamwork": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "心里默背手术步骤，逼自己冷静",
+        "effects": {
+          "self_control": 5,
+          "intelligence": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "doctor"
       ],
       "not_flags": [],
       "min_attrs": {},
@@ -13498,55 +13480,6 @@
     ]
   },
   {
-    "id": "adult_0034",
-    "age_range": [
-      34,
-      34
-    ],
-    "category": "health",
-    "title": "急病住院",
-    "text": "下午开完会，你的右下腹突然剧痛，冷汗一层层地冒出来。同事把你送进医院，诊断为急性阑尾炎，医生说再晚两个小时就穿孔了。手术很顺利，但你躺在病床上看着输液瓶，开始认真盘点这些年欠下的睡眠、饭点和检查。",
-    "choices": [
-      {
-        "text": "彻底休养，做一次全面体检",
-        "effects": {
-          "health": -6,
-          "happiness": 2
-        },
-        "flags_add": [],
-        "personality": [
-          "cautious"
-        ]
-      },
-      {
-        "text": "检查结果都还好，才放下心",
-        "effects": {
-          "health": -10
-        },
-        "flags_add": [],
-        "personality": [
-          "emotional"
-        ]
-      },
-      {
-        "text": "出院就忙，检查以后再说",
-        "effects": {
-          "health": -16
-        },
-        "flags_add": [],
-        "personality": [
-          "adventurous"
-        ]
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "invest_0003",
     "age_range": [
       34,
@@ -13708,6 +13641,50 @@
     "conditions": {
       "has_flags": [
         "gray_deep"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "doctor_0004",
+    "age_range": [
+      34,
+      34
+    ],
+    "category": "career",
+    "title": "医疗纠纷",
+    "text": "一个术后出现并发症的患者家属把科室围了，说你「把人治坏了」。监控、录音笔、横幅……你被卷进舆论的漩涡，手机里全是未接来电。",
+    "choices": [
+      {
+        "text": "实事求是，把病历和流程摊开讲清楚",
+        "effects": {
+          "responsibility": 6,
+          "pressure": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "请院里出面，自己先避一避",
+        "effects": {
+          "self_control": 4,
+          "social": -3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "心里憋屈，但也开始反思自己的疏漏",
+        "effects": {
+          "empathy": 4,
+          "intelligence": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "doctor"
       ],
       "not_flags": [],
       "min_attrs": {},
@@ -14413,58 +14390,6 @@
     ]
   },
   {
-    "id": "wealth_0036",
-    "age_range": [
-      36,
-      36
-    ],
-    "category": "finance",
-    "title": "理财复盘",
-    "text": "年初跟风买的那支基金涨了不少，账面浮盈够买一辆车。要不要落袋为安？朋友说行情还会继续，理财顾问却提醒你落袋的才是自己的。钱的事，每个人都说得很有道理。",
-    "choices": [
-      {
-        "text": "落袋为安",
-        "effects": {
-          "money": 12,
-          "happiness": 2
-        },
-        "flags_add": [],
-        "personality": [
-          "cautious"
-        ]
-      },
-      {
-        "text": "继续持有，等更大回报",
-        "effects": {
-          "money": 16,
-          "luck": 3,
-          "anxiety": 4
-        },
-        "flags_add": [],
-        "personality": [
-          "adventurous"
-        ]
-      },
-      {
-        "text": "取出部分改善生活",
-        "effects": {
-          "money": 8,
-          "happiness": 4
-        },
-        "flags_add": [],
-        "personality": [
-          "emotional"
-        ]
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "adult_0036",
     "age_range": [
       36,
@@ -14668,6 +14593,50 @@
     "conditions": {
       "has_flags": [
         "jailed"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "doctor_0005",
+    "age_range": [
+      36,
+      36
+    ],
+    "category": "career",
+    "title": "副主任医师",
+    "text": "三十六岁，你评上了副主任医师。门诊号更多了，还要带团队、审病例。有人开始喊你「主任」，你愣了一下——这两个字的责任，原来这么沉。",
+    "choices": [
+      {
+        "text": "把经验沉淀下来，整理成教学笔记",
+        "effects": {
+          "intelligence": 6,
+          "responsibility": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "多下临床，少坐办公室",
+        "effects": {
+          "health": 4,
+          "empathy": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "开始带研究生，把一身本领传下去",
+        "effects": {
+          "social": 5,
+          "gratitude": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "doctor"
       ],
       "not_flags": [],
       "min_attrs": {},
@@ -16287,55 +16256,6 @@
     ]
   },
   {
-    "id": "adult_0040",
-    "age_range": [
-      40,
-      40
-    ],
-    "category": "friend",
-    "title": "回到老家",
-    "text": "出差路过老家，你多留了一天。傍晚走在当年的街道上，路灯还是那几盏，小卖部换了招牌。巷口有人喊你的名字——是那个从小一起长大的朋友，手里拎着菜，看见你愣了半天，然后咧开嘴笑了：「多少年没回来了？」那一瞬间，你忽然有点想哭。",
-    "choices": [
-      {
-        "text": "在他家吃顿饭，聊聊这些年的日子",
-        "effects": {
-          "social": 5,
-          "happiness": 3
-        },
-        "flags_add": [],
-        "personality": [
-          "emotional"
-        ]
-      },
-      {
-        "text": "留了联系方式，约好常联系",
-        "effects": {
-          "social": 3,
-          "happiness": 2
-        },
-        "flags_add": []
-      },
-      {
-        "text": "匆匆告别，说下次一定",
-        "effects": {
-          "happiness": -1
-        },
-        "flags_add": [],
-        "personality": [
-          "cautious"
-        ]
-      }
-    ],
-    "conditions": {
-      "has_flags": [
-        "lifelong_friend"
-      ],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "pet_0004",
     "age_range": [
       40,
@@ -16436,6 +16356,51 @@
     "conditions": {
       "has_flags": [
         "jailed"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "doctor_0006",
+    "age_range": [
+      40,
+      40
+    ],
+    "category": "health",
+    "title": "突发公共卫生",
+    "text": "四十岁，一场突如其来的公共卫生事件，急诊和发热门诊瞬间爆满。你连轴转了三十六个小时，护目镜在脸上勒出深深的印子，口罩摘下来时，呼吸都带着血腥味。",
+    "choices": [
+      {
+        "text": "顶在最前面，和团队一起扛",
+        "effects": {
+          "responsibility": 7,
+          "health": -4,
+          "happiness": -3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "优化流程，让有限人力用在刀刃上",
+        "effects": {
+          "intelligence": 5,
+          "strategy": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "每天抽空给家里打个电话报平安",
+        "effects": {
+          "family_relation": 4,
+          "stability": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "doctor"
       ],
       "not_flags": [],
       "min_attrs": {},
@@ -18535,63 +18500,6 @@
     ]
   },
   {
-    "id": "venture_0004",
-    "age_range": [
-      45,
-      45
-    ],
-    "category": "career",
-    "title": "行业寒冬",
-    "text": "行业寒潮来了，同行一家接一家地裁员、降薪。你看着当年的老部下收拾工位，心里不是滋味。董事会上吵成一团：收缩保命，还是转型搏一把？窗外北风卷着落叶，你想起二十一年前那个辞职的下午，和那团烧了很久的火。",
-    "choices": [
-      {
-        "text": "壮士断腕，收缩保命",
-        "effects": {
-          "competition": 4,
-          "money": -4,
-          "stability": 4
-        },
-        "flags_add": [],
-        "personality": [
-          "cautious"
-        ]
-      },
-      {
-        "text": "押上家底，转型新赛道",
-        "effects": {
-          "innovation": 5,
-          "business": 5,
-          "risk": 4,
-          "money": -5
-        },
-        "flags_add": [],
-        "personality": [
-          "adventurous"
-        ]
-      },
-      {
-        "text": "躺平观望，等春天自己来",
-        "effects": {
-          "money": -6,
-          "motivation": -3,
-          "stability": 3
-        },
-        "flags_add": [],
-        "personality": [
-          "emotional"
-        ]
-      }
-    ],
-    "conditions": {
-      "has_flags": [
-        "venture_out"
-      ],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "echo_0001",
     "age_range": [
       45,
@@ -18800,6 +18708,51 @@
     "conditions": {
       "has_flags": [
         "released"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "doctor_0007",
+    "age_range": [
+      45,
+      45
+    ],
+    "category": "personality",
+    "title": "疑难病例的抉择",
+    "text": "四十五岁，一个罕见病例摆在面前：手术风险极高，不做则患者活不过半年。家属把决定权交给你。做，可能人财两空还背官司；不做，只能眼睁睁看着。",
+    "choices": [
+      {
+        "text": "接下这台手术，尽人事听天命",
+        "effects": {
+          "courage": 6,
+          "responsibility": 5,
+          "pressure": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "请全院会诊，集思广益后再定",
+        "effects": {
+          "intelligence": 5,
+          "teamwork": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "如实告知风险，让家属自己做选择",
+        "effects": {
+          "empathy": 5,
+          "communication": 4
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "doctor"
       ],
       "not_flags": [],
       "min_attrs": {},
@@ -20686,56 +20639,6 @@
     }
   },
   {
-    "id": "love_0004",
-    "age_range": [
-      50,
-      50
-    ],
-    "category": "love",
-    "title": "重新约会",
-    "text": "孩子上了大学，家里忽然安静下来。周末TA翻箱倒柜找出一张十年前的电影票根，在沙发边坐下，问你：「要不要再去电影院坐一次？」你站在镜子前，鬼使神差地理了理头发——像第一次约会那样，提前半小时就到了影院门口。",
-    "choices": [
-      {
-        "text": "挽住TA的手臂：「走，这次我要大桶爆米花」",
-        "effects": {
-          "happiness": 5,
-          "relationship": 5
-        },
-        "flags_add": [],
-        "personality": [
-          "emotional"
-        ]
-      },
-      {
-        "text": "认真看着TA：「好，我正好也有些话想跟你说」",
-        "effects": {
-          "communication": 5,
-          "relationship": 3
-        },
-        "flags_add": [],
-        "personality": [
-          "rational"
-        ]
-      },
-      {
-        "text": "有点不习惯这份安静，摆摆手说改天吧",
-        "effects": {
-          "avoidance": 4
-        },
-        "flags_add": [],
-        "personality": [
-          "cautious"
-        ]
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "pesc_0005",
     "age_range": [
       50,
@@ -20781,6 +20684,50 @@
     "conditions": {
       "has_flags": [
         "escaped"
+      ],
+      "not_flags": [],
+      "min_attrs": {},
+      "max_attrs": {}
+    }
+  },
+  {
+    "id": "doctor_0008",
+    "age_range": [
+      50,
+      50
+    ],
+    "category": "personality",
+    "title": "医者仁心",
+    "text": "五十岁，你带的第一个研究生已经能独立上手术了。查房时，新来的实习医生怯生生地喊你「老师」。你忽然想起二十多年前那个在急诊科值夜班、手足无措的自己。",
+    "choices": [
+      {
+        "text": "手把手带新人，像当年老师带你一样",
+        "effects": {
+          "gratitude": 6,
+          "social": 4
+        },
+        "flags_add": []
+      },
+      {
+        "text": "把几十年临床经验整理成书",
+        "effects": {
+          "intelligence": 6,
+          "discipline": 3
+        },
+        "flags_add": []
+      },
+      {
+        "text": "继续坐诊，能多看一个是一个",
+        "effects": {
+          "empathy": 5,
+          "happiness": 3
+        },
+        "flags_add": []
+      }
+    ],
+    "conditions": {
+      "has_flags": [
+        "doctor"
       ],
       "not_flags": [],
       "min_attrs": {},

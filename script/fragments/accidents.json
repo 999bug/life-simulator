@@ -1,45 +1,5 @@
 [
   {
-    "id": "adult_0034",
-    "age_range": [
-      34,
-      34
-    ],
-    "category": "health",
-    "title": "急病住院",
-    "text": "下午开完会，你的右下腹突然剧痛，冷汗一层层地冒出来。同事把你送进医院，诊断为急性阑尾炎，医生说再晚两个小时就穿孔了。手术很顺利，但你躺在病床上看着输液瓶，开始认真盘点这些年欠下的睡眠、饭点和检查。",
-    "choices": [
-      {
-        "text": "彻底休养，做一次全面体检",
-        "effects": {
-          "health": -6,
-          "happiness": 2
-        },
-        "flags_add": []
-      },
-      {
-        "text": "检查结果都还好，才放下心",
-        "effects": {
-          "health": -10
-        },
-        "flags_add": []
-      },
-      {
-        "text": "出院就忙，检查以后再说",
-        "effects": {
-          "health": -16
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "adult_0044",
     "age_range": [
       44,

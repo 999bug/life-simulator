@@ -151,54 +151,6 @@
     }
   },
   {
-    "id": "venture_0004",
-    "age_range": [
-      45,
-      45
-    ],
-    "category": "career",
-    "title": "行业寒冬",
-    "text": "行业寒潮来了，同行一家接一家地裁员、降薪。你看着当年的老部下收拾工位，心里不是滋味。董事会上吵成一团：收缩保命，还是转型搏一把？窗外北风卷着落叶，你想起二十一年前那个辞职的下午，和那团烧了很久的火。",
-    "choices": [
-      {
-        "text": "壮士断腕，收缩保命",
-        "effects": {
-          "competition": 4,
-          "money": -4,
-          "stability": 4
-        },
-        "flags_add": []
-      },
-      {
-        "text": "押上家底，转型新赛道",
-        "effects": {
-          "innovation": 5,
-          "business": 5,
-          "risk": 4,
-          "money": -5
-        },
-        "flags_add": []
-      },
-      {
-        "text": "躺平观望，等春天自己来",
-        "effects": {
-          "money": -6,
-          "motivation": -3,
-          "stability": 3
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [
-        "venture_out"
-      ],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "venture_0005",
     "age_range": [
       60,

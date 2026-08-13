@@ -1,0 +1,106 @@
+[
+  {
+    "id": "doctor_0001",
+    "age_range": [26, 26],
+    "category": "career",
+    "title": "实习医生的第一夜",
+    "text": "实习第一年，你在急诊科值夜班。凌晨三点，来了一位捂着肚子直冒冷汗的老人，家属围着你七嘴八舌。带教老师还没赶到，你第一次要独自判断：是普通的肠胃炎，还是更凶险的急腹症。",
+    "choices": [
+      { "text": "沉住气做检查，按流程逐项排除", "effects": { "intelligence": 6, "responsibility": 4, "pressure": 2 }, "flags_add": [] },
+      { "text": "赶紧打电话摇带教老师", "effects": { "social": 3, "happiness": 1 }, "flags_add": [] },
+      { "text": "凭课本印象先处理，赌一把", "effects": { "risk": 4, "pressure": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["doctor"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "doctor_0002",
+    "age_range": [27, 27],
+    "category": "career",
+    "title": "规培轮转",
+    "text": "规培轮转，你在内科、外科、儿科之间转。带教问你，想定哪个方向。你喜欢外科的干脆利落，也放不下内科的抽丝剥茧，儿科孩子的笑脸又总让你心软。",
+    "choices": [
+      { "text": "选外科，刀口见真章", "effects": { "intelligence": 5, "courage": 4 }, "flags_add": [] },
+      { "text": "选内科，慢慢磨出火候", "effects": { "patience": 5, "thinking": 4 }, "flags_add": [] },
+      { "text": "选儿科，孩子的笑脸最治愈", "effects": { "empathy": 5, "happiness": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["doctor"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "doctor_0003",
+    "age_range": [29, 29],
+    "category": "career",
+    "title": "第一台主刀",
+    "text": "三十岁，你第一次主刀一台小手术。无影灯亮起的那一刻，手术刀在你手里微微发颤。器械护士和助手都在等你的第一刀，监护仪滴答滴答地响。",
+    "choices": [
+      { "text": "深呼吸，稳稳切下第一刀", "effects": { "health": 5, "courage": 4, "pressure": 3 }, "flags_add": [] },
+      { "text": "先和团队再核对一遍流程", "effects": { "intelligence": 5, "teamwork": 4 }, "flags_add": [] },
+      { "text": "心里默背手术步骤，逼自己冷静", "effects": { "self_control": 5, "intelligence": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["doctor"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "doctor_0004",
+    "age_range": [34, 34],
+    "category": "career",
+    "title": "医疗纠纷",
+    "text": "一个术后出现并发症的患者家属把科室围了，说你「把人治坏了」。监控、录音笔、横幅……你被卷进舆论的漩涡，手机里全是未接来电。",
+    "choices": [
+      { "text": "实事求是，把病历和流程摊开讲清楚", "effects": { "responsibility": 6, "pressure": 4 }, "flags_add": [] },
+      { "text": "请院里出面，自己先避一避", "effects": { "self_control": 4, "social": -3 }, "flags_add": [] },
+      { "text": "心里憋屈，但也开始反思自己的疏漏", "effects": { "empathy": 4, "intelligence": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["doctor"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "doctor_0005",
+    "age_range": [36, 36],
+    "category": "career",
+    "title": "副主任医师",
+    "text": "三十六岁，你评上了副主任医师。门诊号更多了，还要带团队、审病例。有人开始喊你「主任」，你愣了一下——这两个字的责任，原来这么沉。",
+    "choices": [
+      { "text": "把经验沉淀下来，整理成教学笔记", "effects": { "intelligence": 6, "responsibility": 3 }, "flags_add": [] },
+      { "text": "多下临床，少坐办公室", "effects": { "health": 4, "empathy": 3 }, "flags_add": [] },
+      { "text": "开始带研究生，把一身本领传下去", "effects": { "social": 5, "gratitude": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["doctor"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "doctor_0006",
+    "age_range": [40, 40],
+    "category": "health",
+    "title": "突发公共卫生",
+    "text": "四十岁，一场突如其来的公共卫生事件，急诊和发热门诊瞬间爆满。你连轴转了三十六个小时，护目镜在脸上勒出深深的印子，口罩摘下来时，呼吸都带着血腥味。",
+    "choices": [
+      { "text": "顶在最前面，和团队一起扛", "effects": { "responsibility": 7, "health": -4, "happiness": -3 }, "flags_add": [] },
+      { "text": "优化流程，让有限人力用在刀刃上", "effects": { "intelligence": 5, "strategy": 4 }, "flags_add": [] },
+      { "text": "每天抽空给家里打个电话报平安", "effects": { "family_relation": 4, "stability": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["doctor"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "doctor_0007",
+    "age_range": [45, 45],
+    "category": "personality",
+    "title": "疑难病例的抉择",
+    "text": "四十五岁，一个罕见病例摆在面前：手术风险极高，不做则患者活不过半年。家属把决定权交给你。做，可能人财两空还背官司；不做，只能眼睁睁看着。",
+    "choices": [
+      { "text": "接下这台手术，尽人事听天命", "effects": { "courage": 6, "responsibility": 5, "pressure": 4 }, "flags_add": [] },
+      { "text": "请全院会诊，集思广益后再定", "effects": { "intelligence": 5, "teamwork": 3 }, "flags_add": [] },
+      { "text": "如实告知风险，让家属自己做选择", "effects": { "empathy": 5, "communication": 4 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["doctor"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  },
+  {
+    "id": "doctor_0008",
+    "age_range": [50, 50],
+    "category": "personality",
+    "title": "医者仁心",
+    "text": "五十岁，你带的第一个研究生已经能独立上手术了。查房时，新来的实习医生怯生生地喊你「老师」。你忽然想起二十多年前那个在急诊科值夜班、手足无措的自己。",
+    "choices": [
+      { "text": "手把手带新人，像当年老师带你一样", "effects": { "gratitude": 6, "social": 4 }, "flags_add": [] },
+      { "text": "把几十年临床经验整理成书", "effects": { "intelligence": 6, "discipline": 3 }, "flags_add": [] },
+      { "text": "继续坐诊，能多看一个是一个", "effects": { "empathy": 5, "happiness": 3 }, "flags_add": [] }
+    ],
+    "conditions": { "has_flags": ["doctor"], "not_flags": [], "min_attrs": {}, "max_attrs": {} }
+  }
+]

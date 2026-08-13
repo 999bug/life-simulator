@@ -41,47 +41,6 @@
     }
   },
   {
-    "id": "love_0004",
-    "age_range": [
-      50,
-      50
-    ],
-    "category": "love",
-    "title": "重新约会",
-    "text": "孩子上了大学，家里忽然安静下来。周末TA翻箱倒柜找出一张十年前的电影票根，在沙发边坐下，问你：「要不要再去电影院坐一次？」你站在镜子前，鬼使神差地理了理头发——像第一次约会那样，提前半小时就到了影院门口。",
-    "choices": [
-      {
-        "text": "挽住TA的手臂：「走，这次我要大桶爆米花」",
-        "effects": {
-          "happiness": 5,
-          "relationship": 5
-        },
-        "flags_add": []
-      },
-      {
-        "text": "认真看着TA：「好，我正好也有些话想跟你说」",
-        "effects": {
-          "communication": 5,
-          "relationship": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "有点不习惯这份安静，摆摆手说改天吧",
-        "effects": {
-          "avoidance": 4
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "love_0005",
     "age_range": [
       65,

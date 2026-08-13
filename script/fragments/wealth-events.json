@@ -1,46 +1,5 @@
 [
   {
-    "id": "wealth_0026",
-    "age_range": [
-      26,
-      26
-    ],
-    "category": "finance",
-    "title": "开始理财",
-    "text": "工作一年，银行卡里终于有了几万块存款。朋友说钱放着不动就是贬值，推荐你学习理财。银行定存、货币基金、还有风险更高的股票基金，选项不少。你盘算着怎么让钱生钱。",
-    "choices": [
-      {
-        "text": "全部存定期，稳妥为上",
-        "effects": {
-          "money": 8
-        },
-        "flags_add": []
-      },
-      {
-        "text": "试水基金定投",
-        "effects": {
-          "money": 14,
-          "luck": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "交给专业理财顾问",
-        "effects": {
-          "money": 6,
-          "learning": 3
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
     "id": "wealth_0032",
     "age_range": [
       32,
@@ -72,48 +31,6 @@
         "effects": {
           "money": 3,
           "happiness": 6
-        },
-        "flags_add": []
-      }
-    ],
-    "conditions": {
-      "has_flags": [],
-      "not_flags": [],
-      "min_attrs": {},
-      "max_attrs": {}
-    }
-  },
-  {
-    "id": "wealth_0036",
-    "age_range": [
-      36,
-      36
-    ],
-    "category": "finance",
-    "title": "理财复盘",
-    "text": "年初跟风买的那支基金涨了不少，账面浮盈够买一辆车。要不要落袋为安？朋友说行情还会继续，理财顾问却提醒你落袋的才是自己的。钱的事，每个人都说得很有道理。",
-    "choices": [
-      {
-        "text": "落袋为安",
-        "effects": {
-          "money": 12,
-          "happiness": 2
-        },
-        "flags_add": []
-      },
-      {
-        "text": "继续持有，等更大回报",
-        "effects": {
-          "money": 16,
-          "luck": 3
-        },
-        "flags_add": []
-      },
-      {
-        "text": "取出部分改善生活",
-        "effects": {
-          "money": 8,
-          "happiness": 4
         },
         "flags_add": []
       }

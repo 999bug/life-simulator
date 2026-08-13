@@ -15,6 +15,14 @@ export interface ChangelogEntry {
  */
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.20.1',
+    date: '2026-08-13',
+    title: '槽位修复',
+    items: [
+      '💾 修复存档槽位只能用一个的问题：空槽现在可点击选中，新人生会保存到你选的槽位',
+    ],
+  },
+  {
     version: '0.20.0',
     date: '2026-08-13',
     title: '赛场与军营',

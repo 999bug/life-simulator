@@ -40,6 +40,8 @@ interface Props {
   onWeeklyStart: () => void;
   saves: SavesV2;
   onContinue: (slot: number) => void;
+  /** 选择空槽位（下一局新人生将保存到该槽） */
+  onSelectSlot: (slot: number) => void;
   /** 跨周目成就存储（标题页成就总览展示） */
   achievements: { unlocked: AchievementId[]; completedLives: number };
   /** 跨周目生涯统计（标题页生涯总览展示） */
@@ -67,7 +69,7 @@ interface Props {
   challengeLink?: ChallengeLink | null;
 }
 
-export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeeklyStart, saves, onContinue, achievements, stats, daily, dailyHistory, dailyStreak, weekly, weeklyGoal, seedScores, family, theme, onToggleTheme, onResetFamily, challengeLink }: Props) {
+export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeeklyStart, saves, onContinue, onSelectSlot, achievements, stats, daily, dailyHistory, dailyStreak, weekly, weeklyGoal, seedScores, family, theme, onToggleTheme, onResetFamily, challengeLink }: Props) {
   const [gender, setGender] = useState<'male' | 'female' | null>(null);
   const [name, setName] = useState('');
   // 首局默认精简档：缩短首次「爽点」路径（约 15 分钟走完一生），老玩家仍默认沉浸档
@@ -336,29 +338,32 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
         </button>
       </div>
 
-      {/* 存档槽位（3 卡片，点击继续） */}
+      {/* 存档槽位（3 卡片：非空点击继续，空槽点击选中供新局保存；高亮当前槽） */}
       {saves.slots.some(s => s !== null) && (
         <div className="z-10 flex gap-2.5 animate-[fadeIn_1.7s_ease]">
-          {saves.slots.map((s, i) => (
-            <button
-              key={i}
-              onClick={() => { if (s) { sfx.select(); onContinue(i); } }}
-              disabled={!s}
-              className={`w-[110px] py-1.5 rounded-xl border text-center transition-all duration-200 font-sans
-                ${s
-                  ? 'border-white/15 bg-white/[0.03] hover:border-[#c9a96e] hover:shadow-[0_0_14px_rgba(201,169,110,0.2)] cursor-pointer'
-                  : 'border-white/[0.06] bg-transparent text-white/20'}`}
-            >
-              {s ? (
-                <>
-                  <div className="text-[13px] text-[#c9a96e]">{s.game.name}</div>
-                  <div className="text-[10px] text-white/40 mt-0.5">{s.game.age} 岁 · {s.game.phase === 'summary' ? '已走完' : s.game.stage === 'infant' ? '婴儿期' : s.game.stage === 'childhood' ? '童年' : s.game.stage === 'teen' ? '少年' : s.game.stage === 'young_adult' ? '青年' : s.game.stage === 'adult' ? '成年' : s.game.stage === 'middle_age' ? '中年' : '老年'}</div>
-                </>
-              ) : (
-                <div className="text-[11px] text-white/25 tracking-[2px]">空槽位</div>
-              )}
-            </button>
-          ))}
+          {saves.slots.map((s, i) => {
+            const isActive = saves.active === i;
+            return (
+              <button
+                key={i}
+                onClick={() => { sfx.select(); if (s) { onContinue(i); } else { onSelectSlot(i); } }}
+                className={`w-[110px] py-1.5 rounded-xl border text-center transition-all duration-200 font-sans
+                  ${s
+                    ? `border-white/15 bg-white/[0.03] hover:border-[#c9a96e] hover:shadow-[0_0_14px_rgba(201,169,110,0.2)] cursor-pointer${isActive ? ' border-[#c9a96e] bg-[#c9a96e]/10' : ''}`
+                    : `border-white/10 bg-white/[0.02] hover:border-[#5de8a0] hover:text-[#5de8a0] cursor-pointer${isActive ? ' border-[#5de8a0] text-[#5de8a0] bg-[#5de8a0]/10' : ''}`}`}
+              >
+                <div className="text-[9px] text-white/30 tracking-[2px] mb-0.5">槽位 {i + 1}</div>
+                {s ? (
+                  <>
+                    <div className="text-[13px] text-[#c9a96e]">{s.game.name}</div>
+                    <div className="text-[10px] text-white/40 mt-0.5">{s.game.age} 岁 · {s.game.phase === 'summary' ? '已走完' : s.game.stage === 'infant' ? '婴儿期' : s.game.stage === 'childhood' ? '童年' : s.game.stage === 'teen' ? '少年' : s.game.stage === 'young_adult' ? '青年' : s.game.stage === 'adult' ? '成年' : s.game.stage === 'middle_age' ? '中年' : '老年'}</div>
+                  </>
+                ) : (
+                  <div className="text-[11px] tracking-[2px]">{isActive ? '已选中 · 新局存这里' : '空 · 点击选中'}</div>
+                )}
+              </button>
+            );
+          })}
         </div>
       )}
 

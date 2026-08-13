@@ -339,6 +339,7 @@ export type Action =
   | { type: 'RESET' }
   | { type: 'RESET_FAMILY' }
   | { type: 'CONTINUE_GAME'; slot: number }
+  | { type: 'SELECT_SLOT'; slot: number }
   | { type: 'HYDRATE_SAVES'; saves: SavesV2; achievements: AchievementStore }
   | { type: 'SAVES_UPDATED'; saves: SavesV2 }
   | { type: 'ACHIEVEMENTS_PERSISTED' }
@@ -1190,6 +1191,16 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
       return { ...rt, saves: state.saves };
     }
 
+    case 'SELECT_SLOT': {
+      // 选择存档槽位：下一局新人生将保存到该槽（空槽可直接选，非空槽点击为继续）
+      if (!Number.isInteger(action.slot) || action.slot < 0 || action.slot >= SLOT_COUNT) {
+        return state;
+      }
+      const saves = { ...state.saves, active: action.slot };
+      saveSaves(saves);
+      return { ...state, saves };
+    }
+
     case 'RESET_FAMILY': {
       // 重置家族：清空族谱（家族底蕴随之归零，下一世重新积累）
       saveFamily([]);
@@ -1612,6 +1623,11 @@ export function useGame() {
     dispatch({ type: 'CONTINUE_GAME', slot });
   }, []);
 
+  // 选择存档槽位（空槽选中后下一局新人生保存到该槽）
+  const selectSlot = useCallback((slot: number) => {
+    dispatch({ type: 'SELECT_SLOT', slot });
+  }, []);
+
   const setTypeSpeed = useCallback((typeSpeed: TypeSpeed) => {
     dispatch({ type: 'SET_TYPE_SPEED', typeSpeed });
   }, []);
@@ -1656,6 +1672,7 @@ export function useGame() {
     undoStack: rt.undoStack,
     continue: continue_,
     continueGame,
+    selectSlot,
     reset,
     resetFamily,
     setTypeSpeed,

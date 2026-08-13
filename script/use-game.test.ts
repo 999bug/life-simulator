@@ -542,3 +542,12 @@ test('START_GAME：人生路线注入入口 flag', () => {
   assert.ok(!free.game.flags.includes('gang_member'));
   assert.ok(!free.game.flags.includes('jailed'));
 });
+
+test('SELECT_SLOT：选择槽位更新 active，越界拒绝', () => {
+  const rt0 = createInitialRuntime();
+  const rt = reducer(rt0, { type: 'SELECT_SLOT', slot: 2 });
+  assert.strictEqual(rt.saves.active, 2);
+  // 越界槽位不生效
+  assert.strictEqual(reducer(rt, { type: 'SELECT_SLOT', slot: 3 }).saves.active, 2);
+  assert.strictEqual(reducer(rt, { type: 'SELECT_SLOT', slot: -1 }).saves.active, 2);
+});

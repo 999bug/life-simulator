@@ -122,6 +122,10 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
   const [showChangelog, setShowChangelog] = useState(false);
   /** 远端排行榜（仅后端已配置且拉取成功时展示） */
   const [remoteBoards, setRemoteBoards] = useState<{ daily: LeaderboardResponse | null; weekly: LeaderboardResponse | null; auto: LeaderboardResponse | null }>({ daily: null, weekly: null, auto: null });
+  /** 排行榜是否正在加载 */
+  const [boardsLoading, setBoardsLoading] = useState(isApiConfigured());
+  /** 排行榜是否拉取失败（加载失败时仍展示入口与重试按钮） */
+  const [boardsError, setBoardsError] = useState(false);
   /** 合并后的排行榜窗口开关 */
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   /** 挑战开局（第 2 周目解锁）：属性整体下调 10 点 */
@@ -148,30 +152,38 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
   /** 图鉴收集进度（标题页入口实时可见，驱动收集欲） */
   const collectionDone = VERDICT_ROUTES.filter(r => (stats.endings[r.key] ?? 0) > 0).length;
 
-  // 后端未配置时完全静默；配置后拉取每日/每周/快速模拟榜单（失败也静默降级为「—」/隐藏）。
-  useEffect(() => {
+  // 后端未配置时完全静默；配置后拉取每日/每周/快速模拟榜单。失败仍展示入口，可手动重试。
+  const refreshBoards = async () => {
     if (!isApiConfigured()) {
       setRemoteBoards({ daily: null, weekly: null, auto: null });
+      setBoardsLoading(false);
+      setBoardsError(false);
       return;
     }
-    let cancelled = false;
-    const load = async () => {
+
+    setBoardsLoading(true);
+    setBoardsError(false);
+    try {
       const deviceId = getDeviceId();
       const [dailyBoard, weeklyBoard, autoBoard] = await Promise.all([
         fetchLeaderboard('daily', formatDate(new Date()), deviceId),
         fetchLeaderboard('weekly', weekOf(new Date()), deviceId),
         fetchLeaderboard('auto', 'global', deviceId),
       ]);
-      if (!cancelled) {
-        setRemoteBoards({ daily: dailyBoard, weekly: weeklyBoard, auto: autoBoard });
-      }
-    };
-    load().catch(() => {
-      if (!cancelled) {
-        setRemoteBoards({ daily: null, weekly: null, auto: null });
-      }
-    });
-    return () => { cancelled = true; };
+      setRemoteBoards({ daily: dailyBoard, weekly: weeklyBoard, auto: autoBoard });
+      setBoardsError(!dailyBoard && !weeklyBoard && !autoBoard);
+    } catch {
+      setRemoteBoards({ daily: null, weekly: null, auto: null });
+      setBoardsError(true);
+    } finally {
+      setBoardsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    refreshBoards();
+    // 仅在标题页首次挂载时拉取一次；排行榜弹窗内提供手动刷新。
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // 导入好友人生档案：读取 JSON → 校验 → 展示档案模态（失败给出提示）
@@ -556,7 +568,7 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
           </span>
         )}
 
-        {(remoteBoards.daily || remoteBoards.weekly || remoteBoards.auto) && (
+        {isApiConfigured() && (
           <button
             onClick={() => { sfx.select(); setShowLeaderboard(true); }}
             className="px-10 py-2 rounded-[30px] text-[13px] tracking-[4px] transition-all duration-300 border font-sans
@@ -806,6 +818,9 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
       {showLeaderboard && (
         <LeaderboardModal
           boards={remoteBoards}
+          loading={boardsLoading}
+          error={boardsError}
+          onRefresh={refreshBoards}
           onClose={() => setShowLeaderboard(false)}
         />
       )}

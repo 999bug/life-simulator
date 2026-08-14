@@ -7,6 +7,9 @@ type BoardMap = Partial<Record<ChallengeMode, LeaderboardResponse | null>>;
 
 interface Props {
   boards: BoardMap;
+  loading?: boolean;
+  error?: boolean;
+  onRefresh?: () => void;
   onClose: () => void;
 }
 
@@ -30,10 +33,12 @@ function emptyBoard(): LeaderboardResponse {
   };
 }
 
-export default function LeaderboardModal({ boards, onClose }: Props) {
+export default function LeaderboardModal({ boards, loading = false, error = false, onRefresh, onClose }: Props) {
   const available = MODE_ORDER.filter(mode => boards[mode]);
   const [active, setActive] = useState<ChallengeMode>(available[0] ?? 'daily');
-  const board = boards[active] ?? emptyBoard();
+  const activeMode: ChallengeMode = boards[active] ? active : (available[0] ?? 'daily');
+  const board = boards[activeMode] ?? emptyBoard();
+  const noBoards = available.length === 0;
 
   return (
     <Modal onClose={onClose} labelledBy="leaderboard-title" contentClassName="w-[440px] max-w-[92vw] max-h-[82vh] overflow-y-auto">
@@ -41,20 +46,22 @@ export default function LeaderboardModal({ boards, onClose }: Props) {
         🏆 排行榜
       </h2>
 
-      <div className="mt-3 flex justify-center gap-2">
-        {available.map(mode => (
-          <button
-            key={mode}
-            onClick={() => setActive(mode)}
-            className={`px-3 py-1.5 rounded-full text-[11px] tracking-[2px] border font-sans transition-colors
-              ${active === mode
-                ? 'border-[#c9a96e] bg-[#c9a96e]/10 text-[#c9a96e]'
-                : 'border-white/10 bg-white/[0.02] text-white/35 hover:text-white/70'}`}
-          >
-            {MODE_TITLE[mode]}
-          </button>
-        ))}
-      </div>
+      {available.length > 0 && (
+        <div className="mt-3 flex justify-center gap-2">
+          {available.map(mode => (
+            <button
+              key={mode}
+              onClick={() => setActive(mode)}
+              className={`px-3 py-1.5 rounded-full text-[11px] tracking-[2px] border font-sans transition-colors
+                ${activeMode === mode
+                  ? 'border-[#c9a96e] bg-[#c9a96e]/10 text-[#c9a96e]'
+                  : 'border-white/10 bg-white/[0.02] text-white/35 hover:text-white/70'}`}
+            >
+              {MODE_TITLE[mode]}
+            </button>
+          ))}
+        </div>
+      )}
 
       <p className="mt-3 text-center text-[11px] tracking-[2px] text-white/40">
         我的排名 {board.myRank ?? '未上榜'}
@@ -63,7 +70,21 @@ export default function LeaderboardModal({ boards, onClose }: Props) {
       </p>
 
       <div className="mt-4 flex flex-col gap-1.5">
-        {board.entries.length === 0 ? (
+        {loading && noBoards ? (
+          <p className="py-8 text-center text-[12px] text-white/35">排行榜加载中…</p>
+        ) : error && noBoards ? (
+          <div className="py-8 flex flex-col items-center gap-3">
+            <p className="text-[12px] text-white/45">排行榜加载失败，请检查网络后重试。</p>
+            {onRefresh && (
+              <button
+                onClick={onRefresh}
+                className="px-5 py-2 rounded-[30px] text-[11px] tracking-[2px] border border-[#5de8a0]/40 text-[#5de8a0]/80 hover:bg-[#5de8a0]/10"
+              >
+                ↻ 重试
+              </button>
+            )}
+          </div>
+        ) : board.entries.length === 0 ? (
           <p className="py-8 text-center text-[12px] text-white/35">还没有成绩，完成一局对应模式后即可上榜。</p>
         ) : (
           board.entries.map((entry, index) => {
@@ -94,6 +115,16 @@ export default function LeaderboardModal({ boards, onClose }: Props) {
           })
         )}
       </div>
+
+      {onRefresh && !loading && (
+        <button
+          onClick={onRefresh}
+          className="mt-4 w-full px-6 py-2 rounded-[30px] text-[12px] tracking-[3px] border font-sans
+            border-white/10 text-white/40 hover:border-[#5de8a0]/40 hover:text-[#5de8a0] transition-colors"
+        >
+          ↻ 刷新榜单
+        </button>
+      )}
 
       <button
         onClick={onClose}

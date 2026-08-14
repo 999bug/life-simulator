@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, type ReactNode } from 'react';
 import type { AttributeKey, EventCategory, LifeStage } from '../types';
 import SceneDecor from './SceneDecor';
 import CategoryDecor from './CategoryDecor';
@@ -81,92 +81,439 @@ export default function SceneArea({ stage, age, gender, stageLabel, category = n
         {stageLabel}
       </div>
 
-      {/* 人物剪影 */}
-      <Character stage={stage} />
+      {/* 人物（按阶段 × 性别绘制） */}
+      <Character stage={stage} gender={gender} />
     </div>
   );
 }
 
-function Character({ stage }: { stage: LifeStage }) {
-  const svg = getCharacterSVG(stage);
-  // 高度跟随场景区（上限 280px 保持原尺寸），矮屏（横屏手机）等比缩小不露顶
+// ==================== 人物：按阶段 × 性别绘制的柔和扁平风角色 ====================
+
+/** 腮红 */
+const BLOOD = 'rgba(255,120,100,0.30)';
+
+interface CharacterProps {
+  stage: LifeStage;
+  gender: 'male' | 'female';
+}
+
+function Character({ stage, gender }: CharacterProps) {
   return (
     <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full flex items-end pointer-events-none">
-      <svg viewBox="0 0 120 280" className="h-full max-h-[280px] w-auto transition-all duration-700">
-        {svg}
-      </svg>
+      {/* 轻摇：以脚底为轴的呼吸感，不打扰阅读 */}
+      <div className="h-full animate-sway">
+        <svg viewBox="0 0 120 280" className="h-full max-h-[280px] w-auto transition-all duration-700">
+          {renderCharacter(stage, gender)}
+        </svg>
+      </div>
     </div>
   );
 }
 
-function getCharacterSVG(stage: LifeStage) {
-  const cx = 60;
+function renderCharacter(stage: LifeStage, gender: 'male' | 'female'): ReactNode {
+  let body: ReactNode;
   switch (stage) {
-    case 'infant':
-      return (
-        <>
-          <ellipse cx={cx} cy={255} rx="18" ry="22" fill="rgba(255,255,255,0.12)" />
-          <circle cx={cx} cy={235} r="12" fill="rgba(255,220,180,0.15)" />
-        </>
-      );
-    case 'childhood':
-      return (
-        <>
-          <circle cx={cx} cy={180} r="16" fill="rgba(255,220,180,0.15)" />
-          <rect x={cx - 11} y={196} width="22" height="36" rx="10" fill="rgba(255,255,255,0.1)" />
-          <rect x={cx - 13} y={232} width="8" height="28" rx="4" fill="rgba(255,255,255,0.08)" />
-          <rect x={cx + 5} y={232} width="8" height="28" rx="4" fill="rgba(255,255,255,0.08)" />
-        </>
-      );
-    case 'teen':
-      return (
-        <>
-          <circle cx={cx} cy={145} r="18" fill="rgba(255,220,180,0.15)" />
-          <rect x={cx - 13} y={163} width="26" height="52" rx="12" fill="rgba(255,255,255,0.1)" />
-          <rect x={cx - 15} y={215} width="9" height="42" rx="5" fill="rgba(255,255,255,0.08)" />
-          <rect x={cx + 6} y={215} width="9" height="42" rx="5" fill="rgba(255,255,255,0.08)" />
-        </>
-      );
-    case 'young_adult':
-      return (
-        <>
-          <circle cx={cx} cy={120} r="20" fill="rgba(255,220,180,0.15)" />
-          <rect x={cx - 15} y={140} width="30" height="62" rx="14" fill="rgba(255,255,255,0.1)" />
-          <rect x={cx - 17} y={202} width="10" height="52" rx="6" fill="rgba(255,255,255,0.08)" />
-          <rect x={cx + 7} y={202} width="10" height="52" rx="6" fill="rgba(255,255,255,0.08)" />
-        </>
-      );
-    case 'adult':
-      return (
-        <>
-          <circle cx={cx} cy={120} r="21" fill="rgba(255,220,180,0.15)" />
-          <rect x={cx - 18} y={141} width="36" height="64" rx="15" fill="rgba(255,255,255,0.1)" />
-          <rect x={cx - 19} y={205} width="11" height="50" rx="6" fill="rgba(255,255,255,0.08)" />
-          <rect x={cx + 8} y={205} width="11" height="50" rx="6" fill="rgba(255,255,255,0.08)" />
-        </>
-      );
-    case 'middle_age':
-      return (
-        <>
-          <circle cx={cx + 3} cy={125} r="21" fill="rgba(255,220,180,0.14)" />
-          <rect x={cx - 16} y={147} width="34" height="60" rx="13" fill="rgba(255,255,255,0.09)" transform={`rotate(-3,${cx},${180})`} />
-          <rect x={cx - 18} y={207} width="11" height="48" rx="6" fill="rgba(255,255,255,0.07)" />
-          <rect x={cx + 7} y={207} width="11" height="48" rx="6" fill="rgba(255,255,255,0.07)" />
-        </>
-      );
-    case 'elder':
-      return (
-        <>
-          <circle cx={cx + 6} cy={135} r="20" fill="rgba(255,220,180,0.12)" />
-          <rect x={cx - 14} y={155} width="32" height="54" rx="13" fill="rgba(255,255,255,0.08)" transform={`rotate(-6,${cx},${180})`} />
-          <rect x={cx - 17} y={209} width="11" height="45" rx="5" fill="rgba(255,255,255,0.06)" />
-          <rect x={cx + 6} y={209} width="11" height="45" rx="5" fill="rgba(255,255,255,0.06)" />
-          <line x1={cx + 26} y1={170} x2={cx + 44} y2={265} stroke="rgba(255,255,255,0.12)" strokeWidth="3" strokeLinecap="round" />
-        </>
-      );
-    default:
-      return null;
+    case 'infant': body = <InfantCharacter />; break;
+    case 'childhood': body = <KidCharacter gender={gender} />; break;
+    case 'teen': body = <TeenCharacter gender={gender} />; break;
+    case 'young_adult': body = <YoungAdultCharacter gender={gender} />; break;
+    case 'adult': body = <AdultCharacter gender={gender} />; break;
+    case 'middle_age': body = <MiddleAgeCharacter gender={gender} />; break;
+    case 'elder': body = <ElderCharacter gender={gender} />; break;
+    default: body = null;
   }
+  const infant = stage === 'infant';
+  return (
+    <g>
+      <defs>
+        {/* 肤色（左上柔光渐变） */}
+        <radialGradient id="char-skin" cx="35%" cy="28%" r="80%">
+          <stop offset="0%" stopColor="#ffe6c8" />
+          <stop offset="65%" stopColor="#ffd8b1" />
+          <stop offset="100%" stopColor="#f0b98e" />
+        </radialGradient>
+        {/* 脚下柔影 */}
+        <radialGradient id="char-shadow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="rgba(15,12,8,0.30)" />
+          <stop offset="100%" stopColor="rgba(15,12,8,0)" />
+        </radialGradient>
+      </defs>
+      <ellipse
+        cx="60"
+        cy={infant ? 270 : 274}
+        rx={infant ? 22 : 27}
+        ry="5.5"
+        fill="url(#char-shadow)"
+      />
+      {body}
+    </g>
+  );
+}
+
+/** 圆点眼睛 */
+function DotEyes({ cx, cy, dx = 4.5, r = 1.6, color = '#4a3a30' }: { cx: number; cy: number; dx?: number; r?: number; color?: string }) {
+  return (
+    <g fill={color}>
+      <circle cx={cx - dx} cy={cy} r={r} />
+      <circle cx={cx + dx} cy={cy} r={r} />
+    </g>
+  );
+}
+
+/** 微笑 */
+function Smile({ cx, cy, w = 5, stroke = '#b06a50' }: { cx: number; cy: number; w?: number; stroke?: string }) {
+  return (
+    <path d={`M${cx - w} ${cy} q${w} ${w * 0.9} ${w * 2} 0`}
+      fill="none" stroke={stroke} strokeWidth="1.6" strokeLinecap="round" />
+  );
+}
+
+/** 腮红 */
+function Blush({ cx, cy, dx = 9, r = 2.6 }: { cx: number; cy: number; dx?: number; r?: number }) {
+  return (
+    <g fill={BLOOD}>
+      <circle cx={cx - dx} cy={cy + 2} r={r} />
+      <circle cx={cx + dx} cy={cy + 2} r={r} />
+    </g>
+  );
+}
+
+/** 短发帽（头顶半圆发片） */
+function HairCap({ cx, cy, r, color }: { cx: number; cy: number; r: number; color: string }) {
+  return <path d={`M${cx - r} ${cy} a${r} ${r} 0 0 1 ${r * 2} 0 z`} fill={color} />;
+}
+
+/** 女性长发（两侧垂发 + 顶发片） */
+function LongHair({ cx, cy, r, color }: { cx: number; cy: number; r: number; color: string }) {
+  return (
+    <g>
+      <ellipse cx={cx - r + 2} cy={cy + r * 0.55} rx={r * 0.48} ry={r * 0.9} fill={color} />
+      <ellipse cx={cx + r - 2} cy={cy + r * 0.55} rx={r * 0.48} ry={r * 0.9} fill={color} />
+      <HairCap cx={cx} cy={cy - 1} r={r} color={color} />
+    </g>
+  );
+}
+
+/** 站立角色：腿 + 鞋 + 手臂（皮肤手掌） */
+function StandingLimbs({
+  legX, legY, legW, legH, legColor, shoeColor,
+  armX, armY, armW, armH, armColor, handY, shoeW = 8.5,
+}: {
+  legX: number; legY: number; legW: number; legH: number; legColor: string;
+  shoeColor: string; armX: number; armY: number; armW: number; armH: number;
+  armColor: string; handY: number; shoeW?: number;
+}) {
+  const legGap = legW + 1.5;
+  const shoeR = shoeW * 0.47;
+  return (
+    <g>
+      {/* 腿 */}
+      <rect x={legX} y={legY} width={legW} height={legH} rx={legW / 2} fill={legColor} />
+      <rect x={legX + legGap} y={legY} width={legW} height={legH} rx={legW / 2} fill={legColor} />
+      {/* 鞋 */}
+      <ellipse cx={legX + legW / 2} cy={274} rx={shoeW} ry={shoeR} fill={shoeColor} />
+      <ellipse cx={legX + legGap + legW / 2} cy={274} rx={shoeW} ry={shoeR} fill={shoeColor} />
+      {/* 手臂 */}
+      <rect x={armX} y={armY} width={armW} height={armH} rx={armW / 2} fill={armColor} />
+      <rect x={armX + armW + 34} y={armY} width={armW} height={armH} rx={armW / 2} fill={armColor} />
+      {/* 手 */}
+      <circle cx={armX + armW / 2} cy={handY} r={armW * 0.52} fill="url(#char-skin)" />
+      <circle cx={armX + armW + 34 + armW / 2} cy={handY} r={armW * 0.52} fill="url(#char-skin)" />
+    </g>
+  );
+}
+
+/** 婴儿：襁褓中的新生儿（睡眠状） */
+function InfantCharacter() {
+  return (
+    <g>
+      {/* 襁褓 */}
+      <rect x="32" y="233" width="56" height="41" rx="18" fill="#fdf4e4" />
+      <path d="M37 247 q6 4 12 0" stroke="#e8d4b4" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+      <path d="M83 247 q-6 4 -12 0" stroke="#e8d4b4" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+      <path d="M44 262 q16 6 32 0" stroke="#eeddc0" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+      {/* 头后柔光 */}
+      <circle cx="60" cy="215" r="19" fill="rgba(255,255,235,0.35)" />
+      {/* 头 */}
+      <circle cx="60" cy="220" r="14" fill="url(#char-skin)" />
+      {/* 胎发 */}
+      <path d="M50 210 q3 -6 8 -5 q4 1 6 -2 q3 2 6 3 q3 -1 5 4" fill="none" stroke="#8a6a4a" strokeWidth="2" strokeLinecap="round" />
+      {/* 睡眼 */}
+      <path d="M53 222 q2.8 3.2 5.6 0" fill="none" stroke="#8a5a40" strokeWidth="1.6" strokeLinecap="round" />
+      <path d="M61.4 222 q2.8 3.2 5.6 0" fill="none" stroke="#8a5a40" strokeWidth="1.6" strokeLinecap="round" />
+      {/* 嘴 */}
+      <path d="M57.2 228.5 q2.8 2.4 5.6 0" fill="none" stroke="#c9805f" strokeWidth="1.5" strokeLinecap="round" />
+      {/* 腮红 */}
+      <circle cx="52" cy="226" r="2.4" fill={BLOOD} />
+      <circle cx="68" cy="226" r="2.4" fill={BLOOD} />
+    </g>
+  );
+}
+
+/** 童年：小个子 + 短裤 + 圆头鞋 */
+function KidCharacter({ gender }: { gender: 'male' | 'female' }) {
+  const shirt = gender === 'female' ? '#ffab91' : '#ffd54f';
+  const shorts = '#5c8dd6';
+  const hair = '#3e2f23';
+  return (
+    <g>
+      {/* 腿（光脚） */}
+      <rect x="50" y="248" width="8.5" height="24" rx="4.2" fill="url(#char-skin)" />
+      <rect x="61.5" y="248" width="8.5" height="24" rx="4.2" fill="url(#char-skin)" />
+      {/* 鞋 */}
+      <ellipse cx="54" cy="273" rx="7.5" ry="4" fill="#7a5a3a" />
+      <ellipse cx="66" cy="273" rx="7.5" ry="4" fill="#7a5a3a" />
+      {/* 短裤 */}
+      <rect x="46" y="236" width="28" height="17" rx="7" fill={shorts} />
+      {/* 手臂 */}
+      <rect x="36" y="210" width="9" height="24" rx="4.5" fill={shirt} />
+      <rect x="75" y="210" width="9" height="24" rx="4.5" fill={shirt} />
+      <circle cx="40.5" cy="236" r="4.5" fill="url(#char-skin)" />
+      <circle cx="79.5" cy="236" r="4.5" fill="url(#char-skin)" />
+      {/* 上衣 */}
+      <rect x="42" y="198" width="36" height="44" rx="14" fill={shirt} />
+      <path d="M52 200 q8 8 16 0" fill="none" stroke="rgba(255,255,255,0.55)" strokeWidth="3" strokeLinecap="round" />
+      {/* 头 */}
+      <circle cx="60" cy="181" r="16" fill="url(#char-skin)" />
+      {/* 头发 */}
+      <HairCap cx={60} cy={180} r={16} color={hair} />
+      {gender === 'female' && (
+        <g>
+          <circle cx="43" cy="178" r="5.5" fill={hair} />
+          <circle cx="77" cy="178" r="5.5" fill={hair} />
+          <circle cx="43" cy="183" r="1.8" fill="#ff8fb0" />
+          <circle cx="77" cy="183" r="1.8" fill="#ff8fb0" />
+        </g>
+      )}
+      {/* 脸 */}
+      <DotEyes cx={60} cy={183} />
+      <Smile cx={60} cy={189.5} w={4.5} />
+      <Blush cx={60} cy={186} dx={8.5} />
+    </g>
+  );
+}
+
+/** 少年：连帽衫 + 牛仔裤 */
+function TeenCharacter({ gender }: { gender: 'male' | 'female' }) {
+  const hair = gender === 'female' ? '#3a2f28' : '#4a3a2c';
+  return (
+    <g>
+      <StandingLimbs
+        legX={50} legY={230} legW={9.5} legH={44} legColor="#3d4a5d"
+        shoeColor="#2e3440" armX={34} armY={182} armW={10} armH={30}
+        armColor="#5fb8a6" handY={213}
+      />
+      {/* 连帽衫 */}
+      <rect x="41" y="170" width="38" height="66" rx="15" fill="#5fb8a6" />
+      <path d="M45 172 q15 -15 30 0 l-2 5 q-13 -8 -26 0 z" fill="#4d9c8c" />
+      <path d="M52 216 q8 8 16 0 l0 8 q-8 6 -16 0 z" fill="rgba(255,255,255,0.18)" />
+      {/* 头 */}
+      <circle cx="60" cy="152" r="17" fill="url(#char-skin)" />
+      {/* 头发 */}
+      {gender === 'female'
+        ? <LongHair cx={60} cy={152} r={17} color={hair} />
+        : <HairCap cx={60} cy={151} r={17} color={hair} />}
+      {/* 脸 */}
+      <DotEyes cx={60} cy={154} />
+      <Smile cx={60} cy={160.5} w={5} />
+      <Blush cx={60} cy={157} dx={9} />
+    </g>
+  );
+}
+
+/** 青年：衬衫（男）/ 连衣裙（女） */
+function YoungAdultCharacter({ gender }: { gender: 'male' | 'female' }) {
+  const male = gender === 'male';
+  const hair = male ? '#2e2b33' : '#2a2730';
+  return (
+    <g>
+      {male ? (
+        <>
+          <StandingLimbs
+            legX={49} legY={214} legW={10} legH={60} legColor="#6a7480"
+            shoeColor="#3a3f47" armX={33} armY={152} armW={10} armH={34}
+            armColor="#8fb7e8" handY={186}
+          />
+          <rect x="41" y="146" width="38" height="74" rx="14" fill="#8fb7e8" />
+          <path d="M52 148 l8 8 l8 -8" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth="2.5" strokeLinecap="round" />
+        </>
+      ) : (
+        <>
+          {/* 腿（裙下）+ 鞋 */}
+          <rect x="51" y="238" width="8" height="36" rx="4" fill="url(#char-skin)" />
+          <rect x="61" y="238" width="8" height="36" rx="4" fill="url(#char-skin)" />
+          <ellipse cx="55" cy="274" rx="7.5" ry="3.8" fill="#8a5a78" />
+          <ellipse cx="65" cy="274" rx="7.5" ry="3.8" fill="#8a5a78" />
+          {/* 裙 */}
+          <path d="M41 178 L34 238 Q60 248 86 238 L79 178 Z" fill="#e87b8a" />
+          <rect x="41" y="146" width="38" height="40" rx="13" fill="#f28b82" />
+          <rect x="33" y="152" width="10" height="32" rx="5" fill="#f28b82" />
+          <rect x="77" y="152" width="10" height="32" rx="5" fill="#f28b82" />
+          <circle cx="38" cy="184" r="5.2" fill="url(#char-skin)" />
+          <circle cx="82" cy="184" r="5.2" fill="url(#char-skin)" />
+        </>
+      )}
+      {/* 头 */}
+      <circle cx="60" cy="122" r="19" fill="url(#char-skin)" />
+      {male
+        ? <HairCap cx={60} cy={121} r={19} color={hair} />
+        : <LongHair cx={60} cy={122} r={19} color={hair} />}
+      {/* 脸 */}
+      <DotEyes cx={60} cy={124} />
+      <Smile cx={60} cy={130.5} w={5.5} />
+    </g>
+  );
+}
+
+/** 成年：白衬衫领带（男）/ 淡紫裙（女） */
+function AdultCharacter({ gender }: { gender: 'male' | 'female' }) {
+  const male = gender === 'male';
+  const hair = male ? '#33302e' : '#40322c';
+  return (
+    <g>
+      {male ? (
+        <>
+          <StandingLimbs
+            legX={48.5} legY={212} legW={10.5} legH={62} legColor="#39465c"
+            shoeColor="#262c36" armX={32} armY={150} armW={10.5} armH={36}
+            armColor="#e8e8e2" handY={186}
+          />
+          {/* 衬衫 */}
+          <rect x="40" y="144" width="40" height="76" rx="14" fill="#f4f4f0" />
+          <path d="M52 148 q8 7 16 0" fill="none" stroke="rgba(0,0,0,0.15)" strokeWidth="2" />
+          {/* 领带 */}
+          <path d="M56 149 l8 0 l-3 22 l-2 6 z" fill="#7a4a8a" />
+        </>
+      ) : (
+        <>
+          <rect x="51" y="238" width="8" height="36" rx="4" fill="url(#char-skin)" />
+          <rect x="61" y="238" width="8" height="36" rx="4" fill="url(#char-skin)" />
+          <ellipse cx="55" cy="274" rx="7.5" ry="3.8" fill="#6a4a5a" />
+          <ellipse cx="65" cy="274" rx="7.5" ry="3.8" fill="#6a4a5a" />
+          {/* 连衣裙 */}
+          <path d="M41 178 L35 238 Q60 248 85 238 L79 178 Z" fill="#9a7bd6" />
+          <rect x="40" y="144" width="40" height="40" rx="13" fill="#a98be0" />
+          <rect x="32" y="150" width="10.5" height="32" rx="5" fill="#a98be0" />
+          <rect x="77.5" y="150" width="10.5" height="32" rx="5" fill="#a98be0" />
+          <circle cx="37" cy="182" r="5.4" fill="url(#char-skin)" />
+          <circle cx="83" cy="182" r="5.4" fill="url(#char-skin)" />
+        </>
+      )}
+      {/* 头 */}
+      <circle cx="60" cy="122" r="20" fill="url(#char-skin)" />
+      {male
+        ? <HairCap cx={60} cy={120} r={20} color={hair} />
+        : <LongHair cx={60} cy={122} r={20} color={hair} />}
+      {/* 脸 */}
+      <DotEyes cx={60} cy={124} />
+      <Smile cx={60} cy={130.5} w={6} />
+    </g>
+  );
+}
+
+/** 中年：夹克（男，微驼 + 眼镜）/ 开衫长裙（女） */
+function MiddleAgeCharacter({ gender }: { gender: 'male' | 'female' }) {
+  const male = gender === 'male';
+  return (
+    <g transform="rotate(-3 60 205)">
+      {male ? (
+        <>
+          <StandingLimbs
+            legX={49} legY={214} legW={10.5} legH={60} legColor="#8a7a5a"
+            shoeColor="#4a3f30" armX={32} armY={152} armW={10.5} armH={36}
+            armColor="#7a5e40" handY={188}
+          />
+          {/* 夹克 */}
+          <rect x="40" y="146" width="40" height="74" rx="14" fill="#8a6a4a" />
+          <path d="M52 148 q8 7 16 0" fill="none" stroke="rgba(0,0,0,0.18)" strokeWidth="2" />
+          <circle cx="60" cy="182" r="1.6" fill="#5a4a3a" />
+          <circle cx="60" cy="196" r="1.6" fill="#5a4a3a" />
+        </>
+      ) : (
+        <>
+          <rect x="51" y="240" width="8" height="34" rx="4" fill="url(#char-skin)" />
+          <rect x="61" y="240" width="8" height="34" rx="4" fill="url(#char-skin)" />
+          <ellipse cx="55" cy="274" rx="7.5" ry="3.8" fill="#5a4048" />
+          <ellipse cx="65" cy="274" rx="7.5" ry="3.8" fill="#5a4048" />
+          {/* 长裙 */}
+          <path d="M41 180 L36 238 Q60 247 84 238 L79 180 Z" fill="#8a5a68" />
+          {/* 开衫 */}
+          <rect x="40" y="148" width="40" height="42" rx="13" fill="#a85a6a" />
+          <rect x="32" y="154" width="10.5" height="32" rx="5" fill="#a85a6a" />
+          <rect x="77.5" y="154" width="10.5" height="32" rx="5" fill="#a85a6a" />
+          <circle cx="37" cy="186" r="5.4" fill="url(#char-skin)" />
+          <circle cx="83" cy="186" r="5.4" fill="url(#char-skin)" />
+        </>
+      )}
+      {/* 头 */}
+      <circle cx="60" cy="126" r="18.5" fill="url(#char-skin)" />
+      {/* 头发（带灰） */}
+      {male
+        ? <HairCap cx={60} cy={124} r={18.5} color="#7a7068" />
+        : <LongHair cx={60} cy={126} r={18.5} color="#6a5a50" />}
+      {/* 眼镜（男） */}
+      {male && (
+        <g stroke="#4a4038" strokeWidth="1.6" fill="none">
+          <circle cx="53.5" cy="128" r="6.2" />
+          <circle cx="66.5" cy="128" r="6.2" />
+          <path d="M59.7 128 h0.6" />
+        </g>
+      )}
+      {/* 脸 */}
+      <DotEyes cx={60} cy={128} />
+      <Smile cx={60} cy={134} w={5.5} />
+    </g>
+  );
+}
+
+/** 老年：驼背 + 白发（男持拐杖 / 女披肩长裙） */
+function ElderCharacter({ gender }: { gender: 'male' | 'female' }) {
+  const male = gender === 'male';
+  return (
+    <g transform="rotate(-6 60 205)">
+      {male ? (
+        <>
+          <StandingLimbs
+            legX={50} legY={218} legW={10} legH={56} legColor="#5a6168"
+            shoeColor="#33383e" armX={33} armY={158} armW={10} armH={34}
+            armColor="#8a9098" handY={192}
+          />
+          {/* 毛衣 */}
+          <rect x="41" y="152" width="38" height="72" rx="14" fill="#9aa0a8" />
+          {/* 拐杖（右手边） */}
+          <path d="M31 171 q7 -10 13 -3" stroke="#8a6a4a" strokeWidth="4" fill="none" strokeLinecap="round" />
+          <line x1="39" y1="173" x2="33" y2="270" stroke="#8a6a4a" strokeWidth="4" strokeLinecap="round" />
+        </>
+      ) : (
+        <>
+          <rect x="52" y="244" width="7.5" height="30" rx="3.5" fill="url(#char-skin)" />
+          <rect x="60.5" y="244" width="7.5" height="30" rx="3.5" fill="url(#char-skin)" />
+          <ellipse cx="55.5" cy="274" rx="7" ry="3.6" fill="#4a4048" />
+          <ellipse cx="64.5" cy="274" rx="7" ry="3.6" fill="#4a4048" />
+          {/* 长裙 */}
+          <path d="M42 186 L37 244 Q60 252 83 244 L78 186 Z" fill="#8a7a6a" />
+          {/* 披肩 */}
+          <path d="M42 152 q18 -12 36 0 l-6 12 q-12 -6 -24 0 z" fill="#c9a86a" />
+          <rect x="41" y="158" width="38" height="36" rx="12" fill="#9a8a78" />
+          <rect x="34" y="162" width="10" height="30" rx="5" fill="#c9a86a" />
+          <rect x="76" y="162" width="10" height="30" rx="5" fill="#c9a86a" />
+          <circle cx="39" cy="192" r="5.2" fill="url(#char-skin)" />
+          <circle cx="81" cy="192" r="5.2" fill="url(#char-skin)" />
+        </>
+      )}
+      {/* 头（略前倾） */}
+      <circle cx="61" cy="132" r="17" fill="url(#char-skin)" />
+      {/* 白发 */}
+      {male
+        ? <HairCap cx={61} cy={130} r={17} color="#e8e4dc" />
+        : <LongHair cx={61} cy={132} r={17} color="#ece8e0" />}
+      {/* 皱纹眉角 + 脸 */}
+      <path d="M50 129 q-2 -3 0 -5" stroke="rgba(180,120,90,0.5)" strokeWidth="1.4" fill="none" strokeLinecap="round" />
+      <path d="M72 129 q2 -3 0 -5" stroke="rgba(180,120,90,0.5)" strokeWidth="1.4" fill="none" strokeLinecap="round" />
+      <DotEyes cx={61} cy={134} dx={4.2} />
+      <Smile cx={61} cy={140} w={5} />
+    </g>
+  );
 }
 
 /** 漂浮光尘：微弱的暖光粒子缓慢上浮，增添氛围（数量克制，避免喧宾夺主） */

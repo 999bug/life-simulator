@@ -64,6 +64,10 @@ function InfantScene() {
       <path d="M620,120 Q580,80 550,100" stroke="#8a9a6a" strokeWidth="3" fill="none" />
       <path d="M620,120 Q590,100 570,130" stroke="#8a9a6a" strokeWidth="2" fill="none" />
 
+      {/* 地毯 + 婴儿床阴影 */}
+      <ellipse cx="480" cy="352" rx="280" ry="36" fill="rgba(255,245,225,0.14)" />
+      <Shadow x={480} y={350} rx={125} ry={12} opacity={0.13} />
+
       {/* 婴儿床 */}
       <rect x="380" y="260" width="200" height="90" rx="6" fill="#f0dcc0" stroke="#c4a882" strokeWidth="3" />
       <rect x="390" y="270" width="180" height="70" rx="4" fill="#fff8f0" />
@@ -141,6 +145,13 @@ function ChildhoodScene() {
       {/* 地面 */}
       <rect x="0" y="300" width="960" height="100" fill="#7CB342" />
       <rect x="0" y="300" width="960" height="8" fill="#8BC34A" />
+
+      {/* 落地影（树/滑梯/秋千） */}
+      <Shadow x={95} y={304} rx={42} ry={6} opacity={0.14} />
+      <Shadow x={742} y={312} rx={40} ry={6} opacity={0.13} />
+      <Shadow x={838} y={318} rx={34} ry={5} opacity={0.12} />
+      <Shadow x={330} y={304} rx={46} ry={6} opacity={0.14} />
+      <Shadow x={585} y={324} rx={46} ry={6} opacity={0.14} />
 
       {/* 滑梯 */}
       <g transform="translate(300, 230)">
@@ -254,6 +265,10 @@ function TeenScene() {
       {/* 地面 */}
       <rect x="0" y="300" width="960" height="100" fill="#0a0a16" />
 
+      {/* 路灯暖光池 */}
+      <GlowPool x={220} y={304} rx={60} ry={9} opacity={0.07} />
+      <GlowPool x={600} y={308} rx={60} ry={9} opacity={0.07} />
+
       {/* 街灯 */}
       <StreetLamp x={220} y={240} />
       <StreetLamp x={600} y={250} />
@@ -349,6 +364,9 @@ function YoungAdultScene() {
       <rect x="0" y="320" width="960" height="80" fill="#080816" />
       <rect x="0" y="340" width="960" height="3" fill="rgba(255,200,100,0.15)" />
 
+      {/* 霓虹招牌地面光晕 */}
+      <GlowPool x={540} y={334} rx={70} ry={12} rgb="255,120,170" opacity={0.08} />
+
       {/* 车灯轨迹 */}
       <CarLight x={100} y={345} delay={0} />
       <CarLight x={400} y={345} delay={3} />
@@ -418,6 +436,16 @@ function AdultScene() {
       <rect x="0" y="300" width="960" height="100" fill="#6d9a4a" />
       <rect x="0" y="300" width="960" height="6" fill="#7aad50" />
 
+      {/* 落地影（房屋/树/车/邮箱） */}
+      <Shadow x={95} y={252} rx={56} ry={8} opacity={0.12} />
+      <Shadow x={730} y={238} rx={52} ry={7} opacity={0.11} />
+      <Shadow x={395} y={234} rx={72} ry={9} opacity={0.14} />
+      <Shadow x={44} y={286} rx={40} ry={6} opacity={0.12} />
+      <Shadow x={214} y={298} rx={44} ry={6} opacity={0.12} />
+      <Shadow x={864} y={299} rx={40} ry={6} opacity={0.12} />
+      <Shadow x={517} y={302} rx={46} ry={6} opacity={0.15} />
+      <Shadow x={618} y={296} rx={17} ry={4} opacity={0.12} />
+
       {/* 小鸟 */}
       <Bird x={550} y={70} delay={1} />
       <Bird x={650} y={50} delay={5} />
@@ -457,6 +485,12 @@ function MiddleAgeScene() {
       {/* 花园 */}
       <rect x="0" y="280" width="960" height="120" fill="#5a7a3a" />
       <rect x="0" y="280" width="960" height="4" fill="#6a8a4a" />
+
+      {/* 落地影（长椅/树） */}
+      <Shadow x={430} y={304} rx={68} ry={8} opacity={0.14} />
+      <Shadow x={114} y={286} rx={42} ry={6} opacity={0.13} />
+      <Shadow x={664} y={286} rx={38} ry={6} opacity={0.12} />
+      <Shadow x={764} y={288} rx={34} ry={5} opacity={0.11} />
 
       {/* 长椅 */}
       <g transform="translate(380, 290)">
@@ -546,6 +580,12 @@ function ElderScene() {
       {/* 地面 */}
       <rect x="0" y="310" width="960" height="90" fill="#8a7a50" />
       <rect x="0" y="310" width="960" height="5" fill="#9a8a60" />
+
+      {/* 落地影（长椅/秋树） */}
+      <Shadow x={475} y={314} rx={72} ry={8} opacity={0.13} />
+      <Shadow x={137} y={306} rx={42} ry={6} opacity={0.14} />
+      <Shadow x={697} y={308} rx={38} ry={6} opacity={0.13} />
+      <Shadow x={813} y={302} rx={34} ry={5} opacity={0.12} />
 
       {/* 满地落叶 */}
       {[100, 200, 300, 350, 450, 520, 600, 700, 750, 830].map((x, i) => (
@@ -691,6 +731,38 @@ function House({ x, y, scale, windowLit }: { x: number; y: number; scale: number
       <rect x="60" y="60" width="16" height="20" fill={windowLit ? 'rgba(255,220,120,0.3)' : '#889'} />
       <rect x="42" y="85" width="20" height="25" fill="#6b4c3b" />
       <circle cx="57" cy="98" r="2" fill="#c9a96e" />
+    </g>
+  );
+}
+
+/** 柔和落地影（增强物体与地面的贴合感） */
+function Shadow({ x, y, rx, ry = 5, opacity = 0.16 }: { x: number; y: number; rx: number; ry?: number; opacity?: number }) {
+  const g = uid();
+  return (
+    <g>
+      <defs>
+        <radialGradient id={`${g}-sh`} cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor={`rgba(25,20,15,${opacity})`} />
+          <stop offset="100%" stopColor="rgba(25,20,15,0)" />
+        </radialGradient>
+      </defs>
+      <ellipse cx={x} cy={y} rx={rx} ry={ry} fill={`url(#${g}-sh)`} />
+    </g>
+  );
+}
+
+/** 暖色光池（路灯 / 霓虹灯在地面的光晕） */
+function GlowPool({ x, y, rx, ry = 10, rgb = '255,200,120', opacity = 0.07 }: { x: number; y: number; rx: number; ry?: number; rgb?: string; opacity?: number }) {
+  const g = uid();
+  return (
+    <g>
+      <defs>
+        <radialGradient id={`${g}-gp`} cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor={`rgba(${rgb},${opacity})`} />
+          <stop offset="100%" stopColor={`rgba(${rgb},0)`} />
+        </radialGradient>
+      </defs>
+      <ellipse cx={x} cy={y} rx={rx} ry={ry} fill={`url(#${g}-gp)`} />
     </g>
   );
 }

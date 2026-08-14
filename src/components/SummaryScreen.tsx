@@ -425,6 +425,7 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       mode: challengeMode,
       key: challengeKey,
       deviceId: getDeviceId(),
+      name: game.name.trim() || '无名玩家',
       score,
       age: game.age,
       endingKey,

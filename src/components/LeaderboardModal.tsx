@@ -69,6 +69,7 @@ export default function LeaderboardModal({ boards, onClose }: Props) {
           board.entries.map((entry, index) => {
             const rank = index + 1;
             const isMe = rank === board.myRank;
+            const name = entry.name?.trim() || '无名玩家';
             return (
               <div
                 key={`${entry.deviceId}-${rank}`}
@@ -79,7 +80,9 @@ export default function LeaderboardModal({ boards, onClose }: Props) {
                   {rank}
                 </span>
                 <div className="min-w-0 flex-1">
-                  <div className={isMe ? 'text-[#c9a96e]' : 'text-white/70'}>{isMe ? '你' : '匿名玩家'}</div>
+                  <div className={isMe ? 'text-[#c9a96e]' : 'text-white/70'}>
+                    {isMe ? `${name}（你）` : name}
+                  </div>
                   <div className="text-[10px] text-white/35 truncate">{verdictTitle(entry.endingKey)}</div>
                 </div>
                 <span className="shrink-0 text-white/40">享年 {entry.age}</span>

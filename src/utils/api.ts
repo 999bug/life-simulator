@@ -4,6 +4,7 @@ export type ChallengeMode = 'daily' | 'weekly' | 'seed' | 'auto';
 
 export interface LeaderboardEntry {
   deviceId: string;
+  name: string;
   score: number;
   age: number;
   endingKey: string;
@@ -30,6 +31,7 @@ export interface ScorePayload {
   mode: ChallengeMode;
   key: string;
   deviceId: string;
+  name: string;
   score: number;
   age: number;
   endingKey: string;

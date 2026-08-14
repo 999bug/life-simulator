@@ -15,6 +15,15 @@ export interface ChangelogEntry {
  */
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.21.1',
+    date: '2026-08-14',
+    title: '排行榜昵称显示',
+    items: [
+      '🏆 排行榜不再显示「匿名玩家」，改为显示玩家自填昵称',
+      '🛡️ 昵称会去除控制字符并截断，未填写时显示「无名玩家」',
+    ],
+  },
+  {
     version: '0.21.0',
     date: '2026-08-14',
     title: '匿名排行榜上线',

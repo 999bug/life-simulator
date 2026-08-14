@@ -127,6 +127,18 @@ function isValidDeviceId(value) {
   return typeof value === 'string' && DEVICE_ID_RE.test(value);
 }
 
+function normalizeName(value) {
+  if (typeof value !== 'string') {
+    return '无名玩家';
+  }
+  const cleaned = value
+    .replace(/[\u0000-\u001F\u007F]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 24);
+  return cleaned || '无名玩家';
+}
+
 function isValidKey(mode, key) {
   if (typeof key !== 'string' || key.length > 64) {
     return false;
@@ -233,6 +245,8 @@ async function handleScore(request, env) {
     return json({ error: 'endingKey 不在白名单内' }, 400);
   }
 
+  const name = normalizeName(body.name);
+
   const deviceOk = await enforceRateLimit(env, `device:${deviceId}`, DEVICE_RATE_LIMIT_MAX);
   const ipOk = await enforceRateLimit(env, `ip:${getClientIp(request)}`, IP_RATE_LIMIT_MAX);
   if (!deviceOk || !ipOk) {
@@ -243,6 +257,7 @@ async function handleScore(request, env) {
   const age = clampInt(body.age, 0, 103);
   const incoming = {
     deviceId,
+    name,
     score,
     age,
     endingKey: body.endingKey,
@@ -295,12 +310,16 @@ async function handleLeaderboard(request, env) {
   }
 
   const entries = await readLeaderboard(env, mode, key);
-  const my = deviceId ? rankInfo(entries, deviceId) : { myRank: null, myPercentile: null, total: entries.length };
+  const safeEntries = entries.map((entry) => ({
+    ...entry,
+    name: normalizeName(entry.name),
+  }));
+  const my = deviceId ? rankInfo(safeEntries, deviceId) : { myRank: null, myPercentile: null, total: safeEntries.length };
 
   return json({
     mode,
     key,
-    entries: entries.slice(0, TOP_N),
+    entries: safeEntries.slice(0, TOP_N),
     myRank: my.myRank,
     myPercentile: my.myPercentile,
     total: my.total,

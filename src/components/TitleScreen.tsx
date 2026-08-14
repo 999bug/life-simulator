@@ -37,9 +37,9 @@ interface Props {
   onStart: (gender: 'male' | 'female', name: string, paceMode: PaceMode, typeSpeed: TypeSpeed, goal: GoalKey | CustomGoal | null, challenge: boolean, realMode: boolean, seed?: number | null, talents?: string[], alloc?: Partial<Attributes>, route?: string) => void;
   onAutoStart: (gender: 'male' | 'female', name: string) => void;
   /** 每日挑战：随机性别/名字 + 今日固定种子开局（手动播放） */
-  onDailyStart: () => void;
+  onDailyStart: (name: string) => void;
   /** 每周挑战：随机性别/名字 + 本周固定种子开局（本周目标由周种子确定） */
-  onWeeklyStart: () => void;
+  onWeeklyStart: (name: string) => void;
   saves: SavesV2;
   onContinue: (slot: number) => void;
   /** 选择空槽位（下一局新人生将保存到该槽） */
@@ -496,7 +496,7 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
             // 埋点：快速模拟入口
             track({ type: 'feature_use', ts: Date.now(), feature: 'quick_sim' });
             const gender = Math.random() < 0.5 ? 'male' : 'female';
-            onAutoStart(gender, gender === 'male' ? '小明' : '小美');
+            onAutoStart(gender, name.trim() || (gender === 'male' ? '小明' : '小美'));
           }}
           className="px-10 py-2 rounded-[30px] text-[13px] tracking-[4px] transition-all duration-300 border font-sans
             border-white/15 text-white/35 bg-transparent
@@ -511,7 +511,7 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
             sfx.select();
             // 埋点：每日挑战入口
             track({ type: 'feature_use', ts: Date.now(), feature: 'daily' });
-            onDailyStart();
+            onDailyStart(name.trim());
           }}
           className="px-10 py-2 rounded-[30px] text-[13px] tracking-[4px] transition-all duration-300 border font-sans
             border-white/15 text-white/35 bg-transparent
@@ -538,7 +538,7 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
             sfx.select();
             // 埋点：每周挑战入口
             track({ type: 'feature_use', ts: Date.now(), feature: 'weekly' });
-            onWeeklyStart();
+            onWeeklyStart(name.trim());
           }}
           className="px-10 py-2 rounded-[30px] text-[13px] tracking-[4px] transition-all duration-300 border font-sans
             border-white/15 text-white/35 bg-transparent

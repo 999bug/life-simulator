@@ -78,7 +78,7 @@ export default function App() {
       <div className="w-full h-full text-white">
         {game.phase === 'title' && (
           <>
-            <TitleScreen onStart={startGame} onAutoStart={startAutoGame} onDailyStart={startDailyGame} onWeeklyStart={startWeeklyGame} saves={saves} onContinue={continueGame} onSelectSlot={selectSlot} achievements={achievements} stats={stats} daily={daily} dailyHistory={dailyHistory} dailyStreak={dailyStreak} weekly={weekly} weeklyGoal={weeklyGoal} seedScores={seedScores} family={family} theme={theme} onToggleTheme={toggleTheme} onResetFamily={resetFamily} challengeLink={challenge} />
+            <TitleScreen onStart={startGame} onAutoStart={startAutoGame} onDailyStart={(name) => startDailyGame(name)} onWeeklyStart={(name) => startWeeklyGame(name)} saves={saves} onContinue={continueGame} onSelectSlot={selectSlot} achievements={achievements} stats={stats} daily={daily} dailyHistory={dailyHistory} dailyStreak={dailyStreak} weekly={weekly} weeklyGoal={weeklyGoal} seedScores={seedScores} family={family} theme={theme} onToggleTheme={toggleTheme} onResetFamily={resetFamily} challengeLink={challenge} />
             {/* PWA 安装引导（仅标题页；Android/Chrome 系首次访问展示一次） */}
             <InstallPrompt />
           </>

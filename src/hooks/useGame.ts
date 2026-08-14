@@ -1530,14 +1530,14 @@ export function useGame() {
   }, []);
 
   // 每日挑战：随机性别/名字 + 固定种子（今日日期哈希）手动开局，不写存档槽
-  const startDailyGame = useCallback(() => {
+  const startDailyGame = useCallback((name: string) => {
     const gender = Math.random() < 0.5 ? 'male' : 'female';
     // 埋点：每日挑战开局
     track({ type: 'game_start', ts: Date.now(), variant: 'daily', pace: 'full', challenge: false });
     dispatch({
       type: 'START_GAME',
       gender,
-      name: gender === 'male' ? '小明' : '小美',
+      name: name.trim() || (gender === 'male' ? '小明' : '小美'),
       paceMode: 'full',
       typeSpeed: 'normal',
       goal: null,
@@ -1548,14 +1548,14 @@ export function useGame() {
   }, []);
 
   // 每周挑战：随机性别/名字 + 固定种子（本周日期哈希）手动开局，本周目标由周种子确定，不写存档槽
-  const startWeeklyGame = useCallback(() => {
+  const startWeeklyGame = useCallback((name: string) => {
     const gender = Math.random() < 0.5 ? 'male' : 'female';
     // 埋点：每周挑战开局
     track({ type: 'game_start', ts: Date.now(), variant: 'weekly', pace: 'full', challenge: false });
     dispatch({
       type: 'START_GAME',
       gender,
-      name: gender === 'male' ? '小明' : '小美',
+      name: name.trim() || (gender === 'male' ? '小明' : '小美'),
       paceMode: 'full',
       typeSpeed: 'normal',
       goal: null,

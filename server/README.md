@@ -75,12 +75,12 @@ Copy-Item .env.example .dev.vars
 npm run deploy
 ```
 
-部署成功后 CLI 会给出 `https://life-simulator-api.<你的子域>.workers.dev`。
+部署成功后 CLI 会给出 `https://life-simulator.<你的子域>.workers.dev`。
 
 前端构建时配置：
 
 ```powershell
-$env:VITE_API_BASE="https://life-simulator-api.<你的子域>.workers.dev"
+$env:VITE_API_BASE="https://life-simulator.<你的子域>.workers.dev"
 npm run build
 ```
 

@@ -27,7 +27,8 @@ import { CHANGELOG, LATEST_VERSION } from '../data/changelog';
 import type { ChallengeLink } from '../utils/share';
 import FriendLifeModal from './FriendLifeModal';
 import { parseLifeExport, type LifeExport } from '../engine/compare';
-import { fetchLeaderboard, getDeviceId, isApiConfigured, type LeaderboardResponse } from '../utils/api';
+import LeaderboardModal from './LeaderboardModal';
+import { fetchLeaderboard, getDeviceId, isApiConfigured, type ChallengeMode, type LeaderboardResponse } from '../utils/api';
 
 /** 玩法说明首访标记（localStorage key；不存在则首进自动弹出） */
 const GUIDE_SEEN_KEY = 'life-sim-guide-seen';
@@ -121,6 +122,8 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
   const [showChangelog, setShowChangelog] = useState(false);
   /** 远端排行榜（仅后端已配置且拉取成功时展示） */
   const [remoteBoards, setRemoteBoards] = useState<{ daily: LeaderboardResponse | null; weekly: LeaderboardResponse | null }>({ daily: null, weekly: null });
+  /** 当前打开的排行榜（点击每日/每周入口旁的成绩摘要弹出） */
+  const [leaderboardModal, setLeaderboardModal] = useState<{ mode: ChallengeMode; board: LeaderboardResponse } | null>(null);
   /** 挑战开局（第 2 周目解锁）：属性整体下调 10 点 */
   const [challenge, setChallenge] = useState(false);
   /** 真实模式（第 2 周目解锁）：选项只显示属性倾向箭头，隐藏精确数值 */
@@ -529,9 +532,13 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
         )}
 
         {remoteBoards.daily && (
-          <span className="text-[10px] text-white/30 tracking-[1px] whitespace-nowrap">
+          <button
+            onClick={() => setLeaderboardModal({ mode: 'daily', board: remoteBoards.daily! })}
+            className="text-[10px] text-white/30 tracking-[1px] whitespace-nowrap font-sans
+              hover:text-[#e8c95d] transition-colors"
+          >
             全局最佳 {remoteBoards.daily.entries[0]?.score ?? '—'} · 我的排名 {remoteBoards.daily.myRank ?? '—'}
-          </span>
+          </button>
         )}
 
         {/* 每周挑战：本周固定种子开局（同周同序列 + 本周目标），结算判定通关 */}
@@ -559,9 +566,13 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
         )}
 
         {remoteBoards.weekly && (
-          <span className="text-[10px] text-white/30 tracking-[1px] whitespace-nowrap">
+          <button
+            onClick={() => setLeaderboardModal({ mode: 'weekly', board: remoteBoards.weekly! })}
+            className="text-[10px] text-white/30 tracking-[1px] whitespace-nowrap font-sans
+              hover:text-[#e8a05d] transition-colors"
+          >
             全局最佳 {remoteBoards.weekly.entries[0]?.score ?? '—'} · 我的排名 {remoteBoards.weekly.myRank ?? '—'}
-          </span>
+          </button>
         )}
 
         {/* 生涯入口 */}
@@ -797,6 +808,15 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
       {/* 更新日志模态（🕓 入口 / 侧边栏「查看全部」弹出） */}
       {showChangelog && (
         <ChangelogModal onClose={() => setShowChangelog(false)} />
+      )}
+
+      {/* 排行榜弹窗（点击每日/每周成绩摘要打开） */}
+      {leaderboardModal && (
+        <LeaderboardModal
+          mode={leaderboardModal.mode}
+          board={leaderboardModal.board}
+          onClose={() => setLeaderboardModal(null)}
+        />
       )}
     </div>
   );

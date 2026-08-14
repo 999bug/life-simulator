@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { verdictTitle } from '../engine/verdict';
 import type { ChallengeMode, LeaderboardResponse } from '../utils/api';
 import Modal from './Modal';
@@ -36,9 +36,22 @@ function emptyBoard(): LeaderboardResponse {
 export default function LeaderboardModal({ boards, loading = false, error = false, onRefresh, onClose }: Props) {
   const available = MODE_ORDER.filter(mode => boards[mode]);
   const [active, setActive] = useState<ChallengeMode>(available[0] ?? 'daily');
+  const didAutoSelect = useRef(false);
   const activeMode: ChallengeMode = boards[active] ? active : (available[0] ?? 'daily');
   const board = boards[activeMode] ?? emptyBoard();
   const noBoards = available.length === 0;
+
+  // 首次加载完成后，自动切到有成绩的榜单，避免用户只看到空榜而误以为成绩没记录。
+  useEffect(() => {
+    if (didAutoSelect.current || available.length === 0) {
+      return;
+    }
+    const preferred = MODE_ORDER.find(mode => boards[mode]?.entries.length) ?? available[0];
+    if (preferred) {
+      didAutoSelect.current = true;
+      setActive(preferred);
+    }
+  }, [available, boards]);
 
   return (
     <Modal onClose={onClose} labelledBy="leaderboard-title" contentClassName="w-[440px] max-w-[92vw] max-h-[82vh] overflow-y-auto">

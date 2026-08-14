@@ -1,10 +1,10 @@
-# 人生模拟器排行榜 / 云存档后端
+# 人生模拟器排行榜后端
 
 本目录是独立部署在 Cloudflare Workers + KV 的轻量后端。前端仍部署在 GitHub Pages，未配置后端地址时完全静默降级。
 
 ## 目录
 
-- `src/index.js`：Worker 入口，包含昵称排行榜、云存档预留接口、CORS、参数校验与基础限流。
+- `src/index.js`：Worker 入口，包含昵称排行榜、CORS、参数校验与基础限流。
 - `wrangler.toml`：Worker 配置和 `LEADERBOARD` KV 绑定。
 - `.env.example`：本地环境变量示例（当前没有必须的服务端密钥）。
 
@@ -51,6 +51,8 @@ CORS_ORIGINS = "https://999bug.github.io,http://localhost:5173"
 
 只允许正式 GitHub Pages 域名和本地 Vite 调试地址。多个来源用英文逗号分隔，不要带末尾斜杠。修改后重新 `npm run deploy`。
 
+写接口 `POST /api/score` 会额外校验请求头 `Origin` 必须命中 `CORS_ORIGINS`，否则返回 `403`。这是「来源校验」：能挡住普通跨站脚本与不带 `Origin` 的 curl，但 `Origin` 可被脚本伪造，不是强鉴权；彻底防作弊仍需服务端复算或 Turnstile 等方案。
+
 ## 四、本地调试
 
 先把 KV id 替换好，然后：
@@ -88,11 +90,11 @@ GitHub Pages 的自动构建可以在仓库 Secrets/Variables 里设置 `VITE_AP
 
 ## 六、是否需要密钥
 
-当前排行榜和云存档接口都不需要服务端密钥：
+当前排行榜接口不需要服务端密钥：
 
 - 排行榜公开只读；
-- 成绩上报靠匿名 `deviceId` 去重和限流；榜单展示的 `name` 是玩家自填昵称，不要求实名。
-- 云存档按 `deviceId` 读写，`deviceId` 是前端 `crypto.randomUUID()` 生成并保存在本地的匿名标识，不包含个人信息。
+- 成绩上报靠匿名 `deviceId` 去重和限流；榜单展示的 `name` 是玩家自填昵称，不要求实名；
+- `deviceId` 是前端 `crypto.randomUUID()` 生成并保存在本地的匿名标识，只用于服务端去重与限流，不随榜单响应下发。
 
 如果以后增加管理接口，不要把 token 写进代码。用法：
 
@@ -153,7 +155,7 @@ ADMIN_TOKEN=replace-me
   "mode": "daily",
   "key": "20260814",
   "entries": [
-    { "deviceId": "...", "name": "小明", "score": 92, "age": 88, "endingKey": "top_university", "ts": 1757000000000 }
+    { "name": "小明", "score": 92, "age": 88, "endingKey": "top_university", "ts": 1757000000000 }
   ],
   "myRank": 12,
   "myPercentile": 12,
@@ -161,21 +163,9 @@ ADMIN_TOKEN=replace-me
 }
 ```
 
-### 3. GET / PUT `/api/save?deviceId=...`
+### 3. GET / PUT `/api/save?deviceId=...`（已移除）
 
-云存档接口预留。GET 返回：
-
-```json
-{ "exists": true, "data": { "updatedAt": 1757000000000, "data": { } } }
-```
-
-PUT 请求体必须是 JSON 对象，上限 64KB：
-
-```json
-{ "saves": "..." }
-```
-
-前端目前尚未接入云存档。
+原为无鉴权的云存档预留接口。为避免 `deviceId` 被当作读写钥匙、泄露后越权读写他人数据，该接口已删除。若未来恢复，必须先引入服务端鉴权（如签名 token / 一次性挑战）再开放。
 
 ## 八、数据模型
 
@@ -195,10 +185,11 @@ value 为按 `score` 降序、最多 100 条的 JSON 数组：
 ]
 ```
 
+`deviceId` 只存储用于服务端去重，不随接口下发。
+
 另有：
 
 - `rl:<deviceId>:<分钟时间戳>`：基础限流计数，自动过期。
-- `save:<deviceId>`：云存档。
 
 ## 九、免费额度与限制
 
@@ -211,8 +202,9 @@ value 为按 `score` 降序、最多 100 条的 JSON 数组：
 
 ## 十、安全取舍
 
-- 不收集邮箱、手机号等身份信息；`name` 只是玩家自填展示昵称，匿名 `deviceId` 仍用于去重和限流。
+- 不收集邮箱、手机号等身份信息；`name` 只是玩家自填展示昵称。
+- `deviceId` 只在服务端用于去重与限流，不随榜单响应下发。
 - 参数类型、长度、格式、白名单全部校验，非法请求返回 `400`。
 - 每 `deviceId` 每分钟最多 20 次写请求；KV 计数不是严格原子操作，但足以挡住简单脚本。
-- 云存档按公开 `deviceId` 定位，不做鉴权；请把 `deviceId` 视为本地 UUID，而不是登录凭证。
-- 不建议把前端 `deviceId` 或云存档内容当作不可篡改的高价值数据。
+- 已移除无鉴权的云存档接口；若未来恢复，必须先做服务端鉴权。
+- `POST /api/score` 校验 `Origin` 来源；`GET /api/leaderboard` 保持公开只读。

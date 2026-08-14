@@ -4,7 +4,6 @@ import type { Attributes, AttrSnapshot, DeathCause } from '../types';
 export type ChallengeMode = 'daily' | 'weekly' | 'seed' | 'auto';
 
 export interface LeaderboardEntry {
-  deviceId: string;
   name: string;
   score: number;
   age: number;
@@ -145,34 +144,5 @@ export async function fetchLeaderboard(
     return await apiJson<LeaderboardResponse>(`/api/leaderboard?${params.toString()}`);
   } catch {
     return null;
-  }
-}
-
-/** 云存档接口预留（当前前端未接入）。 */
-export async function fetchCloudSave(deviceId: string): Promise<unknown | null> {
-  if (!isApiConfigured()) {
-    return null;
-  }
-  try {
-    const data = await apiJson<{ exists: boolean; data: unknown }>(`/api/save?deviceId=${encodeURIComponent(deviceId)}`);
-    return data.exists ? data.data : null;
-  } catch {
-    return null;
-  }
-}
-
-/** 云存档写入接口预留（当前前端未接入）。 */
-export async function putCloudSave(deviceId: string, data: unknown): Promise<boolean> {
-  if (!isApiConfigured()) {
-    return false;
-  }
-  try {
-    await apiJson(`/api/save?deviceId=${encodeURIComponent(deviceId)}`, {
-      method: 'PUT',
-      body: JSON.stringify(data),
-    });
-    return true;
-  } catch {
-    return false;
   }
 }

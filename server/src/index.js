@@ -1,14 +1,14 @@
 /**
- * 人生模拟器匿名排行榜 + 云存档 Worker。
+ * 人生模拟器匿名排行榜 Worker。
  *
  * 免费档约束下刻意保持简单：
- * - 单 KV namespace 承载榜单、限流计数、云存档；
+ * - 单 KV namespace 承载榜单与限流计数；
  * - 榜单只保留 top N，降低读放大和单 key 体积；
- * - 匿名 deviceId 只做去重与限流，不收集任何个人信息。
+ * - 匿名 deviceId 只做去重与限流，不收集任何个人信息；
+ * - 榜单公开数据不包含 deviceId。
  */
 
 const TOP_N = 100;
-const SAVE_MAX_BYTES = 64 * 1024;
 const SCORE_MAX_BYTES = 64 * 1024;
 const DEVICE_RATE_LIMIT_MAX = 20;
 const IP_RATE_LIMIT_MAX = 60;
@@ -86,6 +86,11 @@ function corsHeaders(request, env) {
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Max-Age': '86400',
   };
+}
+
+function isAllowedWriteOrigin(request, env) {
+  const origin = request.headers.get('Origin');
+  return Boolean(origin) && getAllowedOrigins(env).includes(origin);
 }
 
 function isPlainObject(value) {
@@ -274,6 +279,9 @@ async function handleScore(request, env) {
   if (!hasJsonContentType(request)) {
     return json({ error: 'Content-Type 必须是 application/json' }, 415);
   }
+  if (!isAllowedWriteOrigin(request, env)) {
+    return json({ error: '请求来源不被允许' }, 403);
+  }
 
   const parsed = await readJsonBody(request, SCORE_MAX_BYTES);
   if (parsed.error) {
@@ -385,70 +393,23 @@ async function handleLeaderboard(request, env) {
   }
 
   const entries = await readLeaderboard(env, mode, key);
-  const safeEntries = entries.map((entry) => ({
-    ...entry,
-    name: normalizeName(entry.name),
+  const my = deviceId
+    ? rankInfo(entries, deviceId)
+    : { myRank: null, myPercentile: null, total: entries.length };
+  // 只下发公开字段，绝不包含 deviceId（避免把去重标识暴露成可被滥用的读写钥匙）。
+  const publicEntries = entries.slice(0, TOP_N).map(({ deviceId: _deviceId, ...rest }) => ({
+    ...rest,
+    name: normalizeName(rest.name),
   }));
-  const my = deviceId ? rankInfo(safeEntries, deviceId) : { myRank: null, myPercentile: null, total: safeEntries.length };
 
   return json({
     mode,
     key,
-    entries: safeEntries.slice(0, TOP_N),
+    entries: publicEntries,
     myRank: my.myRank,
     myPercentile: my.myPercentile,
     total: my.total,
   });
-}
-
-async function handleSaveGet(request, env) {
-  const url = new URL(request.url);
-  const deviceId = url.searchParams.get('deviceId');
-  if (!isValidDeviceId(deviceId)) {
-    return json({ error: 'deviceId 格式不合法' }, 400);
-  }
-
-  const data = await readJson(env, `save:${deviceId}`);
-  return json({ exists: data !== null, data });
-}
-
-async function handleSavePut(request, env) {
-  const url = new URL(request.url);
-  const deviceId = url.searchParams.get('deviceId');
-  if (!isValidDeviceId(deviceId)) {
-    return json({ error: 'deviceId 格式不合法' }, 400);
-  }
-
-  if (!hasJsonContentType(request)) {
-    return json({ error: 'Content-Type 必须是 application/json' }, 415);
-  }
-
-  const deviceOk = await enforceRateLimit(env, `device:${deviceId}`, DEVICE_RATE_LIMIT_MAX);
-  const ipOk = await enforceRateLimit(env, `ip:${getClientIp(request)}`, IP_RATE_LIMIT_MAX);
-  if (!deviceOk || !ipOk) {
-    return json({ error: '请求过于频繁，请稍后再试' }, 429);
-  }
-
-  const parsed = await readJsonBody(request, SAVE_MAX_BYTES);
-  if (parsed.error) {
-    return json({ error: parsed.error }, parsed.status);
-  }
-  const body = parsed.data;
-  if (!isPlainObject(body)) {
-    return json({ error: '云存档 body 必须是 JSON 对象' }, 400);
-  }
-
-  const serialized = JSON.stringify(body);
-  if (new TextEncoder().encode(serialized).byteLength > SAVE_MAX_BYTES) {
-    return json({ error: '云存档超过 64KB 上限' }, 413);
-  }
-
-  const stored = {
-    updatedAt: Date.now(),
-    data: body,
-  };
-  await env.LEADERBOARD.put(`save:${deviceId}`, JSON.stringify(stored));
-  return json({ ok: true, updatedAt: stored.updatedAt });
 }
 
 async function handleRequest(request, env) {
@@ -466,13 +427,6 @@ async function handleRequest(request, env) {
   if (method === 'GET' && path === '/api/leaderboard') {
     return handleLeaderboard(request, env);
   }
-  if (method === 'GET' && path === '/api/save') {
-    return handleSaveGet(request, env);
-  }
-  if (method === 'PUT' && path === '/api/save') {
-    return handleSavePut(request, env);
-  }
-
   return json({ error: 'Not Found' }, 404);
 }
 

@@ -112,7 +112,7 @@ export default function LeaderboardModal({ boards, loading = false, error = fals
             const name = entry.name?.trim() || '无名玩家';
             return (
               <div
-                key={`${entry.deviceId}-${rank}`}
+                key={rank}
                 role="button"
                 tabIndex={0}
                 onClick={() => setSelectedEntry(entry)}

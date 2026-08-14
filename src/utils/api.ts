@@ -1,4 +1,5 @@
 import { API_BASE } from '../config';
+import type { Attributes, AttrSnapshot, DeathCause } from '../types';
 
 export type ChallengeMode = 'daily' | 'weekly' | 'seed' | 'auto';
 
@@ -9,6 +10,15 @@ export interface LeaderboardEntry {
   age: number;
   endingKey: string;
   ts: number;
+  /** 精简结算数据（可空：旧榜单记录可能没有保存） */
+  summary?: LifeSummary;
+}
+
+export interface LifeSummary {
+  gender: 'male' | 'female';
+  attributes: Attributes;
+  snapshots: AttrSnapshot[];
+  deathCause?: DeathCause | null;
 }
 
 export interface LeaderboardResponse {
@@ -35,6 +45,7 @@ export interface ScorePayload {
   score: number;
   age: number;
   endingKey: string;
+  summary: LifeSummary;
 }
 
 const DEVICE_ID_KEY = 'life-sim-device-id';

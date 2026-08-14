@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { verdictTitle } from '../engine/verdict';
 import type { ChallengeMode, LeaderboardResponse } from '../utils/api';
+import LifeSummaryModal from './LifeSummaryModal';
 import Modal from './Modal';
 
 type BoardMap = Partial<Record<ChallengeMode, LeaderboardResponse | null>>;
@@ -36,6 +37,7 @@ function emptyBoard(): LeaderboardResponse {
 export default function LeaderboardModal({ boards, loading = false, error = false, onRefresh, onClose }: Props) {
   const available = MODE_ORDER.filter(mode => boards[mode]);
   const [active, setActive] = useState<ChallengeMode>(available[0] ?? 'daily');
+  const [selectedEntry, setSelectedEntry] = useState<LeaderboardResponse['entries'][number] | null>(null);
   const didAutoSelect = useRef(false);
   const activeMode: ChallengeMode = boards[active] ? active : (available[0] ?? 'daily');
   const board = boards[activeMode] ?? emptyBoard();
@@ -52,6 +54,10 @@ export default function LeaderboardModal({ boards, loading = false, error = fals
       setActive(preferred);
     }
   }, [available, boards]);
+
+  if (selectedEntry) {
+    return <LifeSummaryModal entry={selectedEntry} onClose={() => setSelectedEntry(null)} />;
+  }
 
   return (
     <Modal onClose={onClose} labelledBy="leaderboard-title" contentClassName="w-[440px] max-w-[92vw] max-h-[82vh] overflow-y-auto">
@@ -107,8 +113,18 @@ export default function LeaderboardModal({ boards, loading = false, error = fals
             return (
               <div
                 key={`${entry.deviceId}-${rank}`}
+                role="button"
+                tabIndex={0}
+                onClick={() => setSelectedEntry(entry)}
+                onKeyDown={e => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setSelectedEntry(entry);
+                  }
+                }}
                 className={`flex items-center gap-3 rounded-lg border px-3 py-2 text-[12px]
-                  ${isMe ? 'border-[#c9a96e]/50 bg-[#c9a96e]/10' : 'border-white/[0.06] bg-white/[0.02]'}`}
+                  cursor-pointer transition-colors
+                  ${isMe ? 'border-[#c9a96e]/50 bg-[#c9a96e]/10 hover:bg-[#c9a96e]/15' : 'border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.06]'}`}
               >
                 <span className={`w-8 shrink-0 text-center font-semibold ${isMe ? 'text-[#c9a96e]' : 'text-white/35'}`}>
                   {rank}

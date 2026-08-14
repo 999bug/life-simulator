@@ -9,13 +9,15 @@
 
 const TOP_N = 100;
 const SAVE_MAX_BYTES = 64 * 1024;
-const SCORE_MAX_BYTES = 8 * 1024;
+const SCORE_MAX_BYTES = 64 * 1024;
 const DEVICE_RATE_LIMIT_MAX = 20;
 const IP_RATE_LIMIT_MAX = 60;
 const RATE_LIMIT_WINDOW_SECONDS = 60;
 
 const VALID_MODES = new Set(['daily', 'weekly', 'seed', 'auto']);
 const DEVICE_ID_RE = /^[A-Za-z0-9._-]{8,128}$/;
+const ATTR_KEYS = ['health', 'intelligence', 'wealth', 'happiness', 'social', 'appearance', 'luck', 'morality'];
+const DEATH_CAUSES = new Set(['health', 'lifespan', 'accident', 'illness', 'overwork']);
 
 // 16 条路线结局 key + 5 个分数档 key，与前端 src/engine/verdict.ts 对齐。
 const ENDING_KEYS = new Set([
@@ -139,6 +141,64 @@ function normalizeName(value) {
   return cleaned || '无名玩家';
 }
 
+function sanitizeSummary(value) {
+  if (!isPlainObject(value)) {
+    return null;
+  }
+  if (value.gender !== 'male' && value.gender !== 'female') {
+    return null;
+  }
+  if (!isPlainObject(value.attributes)) {
+    return null;
+  }
+  const attributes = {};
+  for (const key of ATTR_KEYS) {
+    const attrValue = value.attributes[key];
+    if (typeof attrValue !== 'number' || !Number.isFinite(attrValue)) {
+      return null;
+    }
+    attributes[key] = clampInt(attrValue, 0, 100);
+  }
+
+  const snapshots = value.snapshots;
+  if (!Array.isArray(snapshots) || snapshots.length > 104) {
+    return null;
+  }
+  const safeSnapshots = [];
+  for (const snapshot of snapshots) {
+    if (!isPlainObject(snapshot) || !isPlainObject(snapshot.attrs)) {
+      return null;
+    }
+    if (typeof snapshot.age !== 'number' || !Number.isFinite(snapshot.age)) {
+      return null;
+    }
+    const attrs = {};
+    for (const key of ATTR_KEYS) {
+      const attrValue = snapshot.attrs[key];
+      if (typeof attrValue !== 'number' || !Number.isFinite(attrValue)) {
+        return null;
+      }
+      attrs[key] = clampInt(attrValue, 0, 100);
+    }
+    safeSnapshots.push({ age: clampInt(snapshot.age, 0, 103), attrs });
+  }
+
+  let deathCause = null;
+  if (value.deathCause != null) {
+    if (typeof value.deathCause !== 'string' || !DEATH_CAUSES.has(value.deathCause)) {
+      return null;
+    }
+    deathCause = value.deathCause;
+  }
+
+  return {
+    gender: value.gender,
+    attributes,
+    snapshots: safeSnapshots,
+    deathCause,
+  };
+}
+
 function isValidKey(mode, key) {
   if (typeof key !== 'string' || key.length > 64) {
     return false;
@@ -246,6 +306,13 @@ async function handleScore(request, env) {
   }
 
   const name = normalizeName(body.name);
+  let summary = null;
+  if (body.summary !== undefined) {
+    summary = sanitizeSummary(body.summary);
+    if (!summary) {
+      return json({ error: 'summary 格式不合法' }, 400);
+    }
+  }
 
   const deviceOk = await enforceRateLimit(env, `device:${deviceId}`, DEVICE_RATE_LIMIT_MAX);
   const ipOk = await enforceRateLimit(env, `ip:${getClientIp(request)}`, IP_RATE_LIMIT_MAX);
@@ -261,6 +328,7 @@ async function handleScore(request, env) {
     score,
     age,
     endingKey: body.endingKey,
+    summary,
     ts: Date.now(),
   };
 

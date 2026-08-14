@@ -429,6 +429,12 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       score,
       age: game.age,
       endingKey,
+      summary: {
+        gender: game.gender,
+        attributes: { ...game.attributes },
+        snapshots: game.snapshots ?? [],
+        deathCause: game.deathCause ?? null,
+      },
     }).catch(() => undefined);
   }, [challengeMode, challengeKey, score, game.age, endingKey]);
 

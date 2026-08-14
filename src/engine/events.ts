@@ -313,3 +313,23 @@ export function pickFateEvents(seed: number, count: number): LifeEvent[] {
   }
   return picked;
 }
+
+/** 是否处于「在押」状态：已入狱且尚未出狱/越狱。 */
+export function isIncarcerated(flags: string[]): boolean {
+  return flags.includes('jailed') && !flags.includes('released') && !flags.includes('escaped');
+}
+
+/**
+ * 监狱/越狱链事件：在押状态下只允许这些事件参与，避免与正常人生事件串线。
+ * 数据约定：监狱与越狱事件 id 分别以 prison_ / pesc_ 开头。
+ */
+export function isJailContextEvent(e: LifeEvent): boolean {
+  return e.id.startsWith('prison_') || e.id.startsWith('pesc_');
+}
+
+/**
+ * 在押期间监狱/越狱剧情覆盖的年龄区间（对应 prison_0034「东窗事发」到 pesc_0002「越狱之夜」）。
+ * 仅在此区间内抑制普通人生事件，避免「晚期入狱」或「越狱失败后」没有后续监狱剧情时被误伤。
+ */
+export const JAIL_SUPPRESS_MIN_AGE = 34;
+export const JAIL_SUPPRESS_MAX_AGE = 44;

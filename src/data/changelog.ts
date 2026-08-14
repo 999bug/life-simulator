@@ -15,6 +15,15 @@ export interface ChangelogEntry {
  */
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.22.1',
+    date: '2026-08-14',
+    title: '修复监狱路线串线',
+    items: [
+      '🔒 铁窗人生 / 亡命天涯：补齐「东窗事发」入狱前情，不再莫名从正常生活跳进监狱',
+      '🧩 入狱期间只播放监狱/越狱剧情，不再穿插正常生活事件',
+    ],
+  },
+  {
     version: '0.22.0',
     date: '2026-08-14',
     title: '安全与隐私加固',

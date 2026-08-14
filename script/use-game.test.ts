@@ -527,7 +527,7 @@ test('START_GAME：人生路线注入入口 flag', () => {
   assert.strictEqual(gangster.game.route, 'gangster');
 
   const escape = reducer(createInitialRuntime(), { type: 'START_GAME', ...base, route: 'escape' });
-  assert.ok(escape.game.flags.includes('jailed'));
+  assert.ok(escape.game.flags.includes('gray_deep'));
   assert.ok(escape.game.flags.includes('escape_plan'));
   assert.strictEqual(escape.game.route, 'escape');
 

@@ -25,7 +25,7 @@ import {
   fatalCause,
   STAGE_ORDER,
 } from '../engine/state.ts';
-import { EVENTS, filterEvents, shuffleEvents, pickFateEvents } from '../engine/events.ts';
+import { EVENTS, filterEvents, shuffleEvents, pickFateEvents, isIncarcerated, isJailContextEvent, JAIL_SUPPRESS_MIN_AGE, JAIL_SUPPRESS_MAX_AGE } from '../engine/events.ts';
 import { derivePersona, meetsPersonality } from '../engine/personality.ts';
 import { personaBonds, type PersonaId } from '../engine/personas.ts';
 import { buildCompanionEvent, COMPANION_DISABLED, COMPANION_END_AGE, COMPANION_INTERVAL, COMPANION_START_AGE, companionEnabled } from '../engine/companion.ts';
@@ -908,7 +908,7 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         companionNextAge = COMPANION_START_AGE;
       }
       let nextEvent = next;
-      if (next && !playingCompanion && companionEnabled(flags.includes('married'), companionNextAge) && next.age >= companionNextAge) {
+      if (next && !playingCompanion && !isIncarcerated(flags) && companionEnabled(flags.includes('married'), companionNextAge) && next.age >= companionNextAge) {
         // 到达互动年龄且本事件非伴侣互动 → 先播伴侣互动（互动选择完成后再推进下次互动年龄）
         nextEvent = buildCompanionEvent(companionNextAge);
       } else if (playingCompanion && companionNextAge <= COMPANION_END_AGE) {
@@ -1316,10 +1316,15 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
 /** 从 fromIndex 之后线性扫描：返回第一个满足条件的事件与扫描中跳过的所有事件（条件不满足） */
 function findNextEvent(game: GameState, fromIndex: number, events: LifeEvent[], skipSameAge = false): { event: LifeEvent | null; skipped: LifeEvent[] } {
   const skipped: LifeEvent[] = [];
+  const incarcerated = isIncarcerated(game.flags);
   for (let i = fromIndex + 1; i < events.length; i++) {
     const e = events[i];
     // 幼儿期幻灯片：跳过同岁剩余事件（每岁只播 1 张；非条件不满足，不进「未触发」列表）
     if (skipSameAge && e.age <= game.age) {
+      continue;
+    }
+    // 在押期间：监狱/越狱链年龄区间内只允许监狱剧情，避免正常人生事件串线。
+    if (incarcerated && !isJailContextEvent(e) && e.age >= JAIL_SUPPRESS_MIN_AGE && e.age <= JAIL_SUPPRESS_MAX_AGE) {
       continue;
     }
     if (checkConditions(e, game)) {

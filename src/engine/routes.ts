@@ -35,14 +35,14 @@ export const LIFE_ROUTES: LifeRoute[] = [
     icon: '🔒',
     name: '铁窗人生',
     desc: '灰色生意东窗事发，高墙内度过人生',
-    seedFlags: ['jailed'],
+    seedFlags: ['gray_deep'],
   },
   {
     key: 'escape',
     icon: '🏃',
     name: '亡命天涯',
     desc: '狱中盘算越狱，成功翻墙或被抓个正着',
-    seedFlags: ['jailed', 'escape_plan'],
+    seedFlags: ['gray_deep', 'escape_plan'],
   },
   {
     key: 'entrepreneur',

@@ -39,7 +39,7 @@ export interface ScorePayload {
 
 const DEVICE_ID_KEY = 'life-sim-device-id';
 const DEVICE_ID_RE = /^[A-Za-z0-9._-]{8,128}$/;
-const FETCH_TIMEOUT_MS = 4000;
+const FETCH_TIMEOUT_MS = 10000;
 
 let memoryDeviceId: string | null = null;
 

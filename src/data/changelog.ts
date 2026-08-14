@@ -15,6 +15,17 @@ export interface ChangelogEntry {
  */
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.22.0',
+    date: '2026-08-14',
+    title: '安全与隐私加固',
+    items: [
+      '🔒 排行榜只公开昵称与成绩，不再暴露设备标识',
+      '🛡️ 成绩上报增加来源校验，进一步减少脚本刷榜',
+      '📄 新增隐私政策，说明本地存档与排行榜的数据处理方式',
+      '⚖️ 补充 MIT 开源许可证',
+    ],
+  },
+  {
     version: '0.21.1',
     date: '2026-08-14',
     title: '排行榜昵称显示',

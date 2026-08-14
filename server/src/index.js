@@ -267,25 +267,32 @@ async function handleScore(request, env) {
   const entries = await readLeaderboard(env, mode, key);
   const existingIndex = entries.findIndex((entry) => entry.deviceId === deviceId);
   let accepted = false;
+  let changed = false;
 
   if (existingIndex >= 0) {
     if (entries[existingIndex].score >= incoming.score) {
-      return json({
-        accepted: false,
-        ...rankInfo(entries, deviceId),
-      });
+      // 同一设备只保留最高分；即使分数没刷新，也允许更新昵称。
+      if (entries[existingIndex].name !== incoming.name) {
+        entries[existingIndex].name = incoming.name;
+        changed = true;
+      }
+    } else {
+      entries.splice(existingIndex, 1);
+      entries.push(incoming);
+      accepted = true;
+      changed = true;
     }
-    entries.splice(existingIndex, 1);
-    entries.push(incoming);
-    accepted = true;
   } else {
     entries.push(incoming);
     accepted = true;
+    changed = true;
   }
 
   entries.sort((a, b) => b.score - a.score);
   const trimmed = entries.slice(0, TOP_N);
-  await writeLeaderboard(env, mode, key, trimmed);
+  if (changed) {
+    await writeLeaderboard(env, mode, key, trimmed);
+  }
 
   return json({
     accepted,

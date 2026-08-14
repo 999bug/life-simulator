@@ -74,6 +74,10 @@ interface Props {
 export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeeklyStart, saves, onContinue, onSelectSlot, achievements, stats, daily, dailyHistory, dailyStreak, weekly, weeklyGoal, seedScores, family, theme, onToggleTheme, onResetFamily, challengeLink }: Props) {
   const [gender, setGender] = useState<'male' | 'female' | null>(null);
   const [name, setName] = useState('');
+  /** 姓名输入框 ref：快速模拟未输入姓名时聚焦提示 */
+  const nameInputRef = useRef<HTMLInputElement>(null);
+  /** 快速模拟姓名校验提示 */
+  const [nameWarning, setNameWarning] = useState('');
   // 首局默认精简档：缩短首次「爽点」路径（约 15 分钟走完一生），老玩家仍默认沉浸档
   const [paceMode, setPaceMode] = useState<PaceMode>(() => (stats.totalLives === 0 ? 'lite' : 'full'));
   const [typeSpeed, setTypeSpeed] = useState<TypeSpeed>('normal');
@@ -341,9 +345,13 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
       <div className="z-10 flex flex-col items-center gap-2 animate-[fadeIn_1.8s_ease]">
         <label className="text-xs text-white/40 tracking-[3px]">你的名字</label>
         <input
+          ref={nameInputRef}
           type="text"
           value={name}
-          onChange={e => setName(e.target.value)}
+          onChange={e => {
+            setName(e.target.value);
+            if (nameWarning) setNameWarning('');
+          }}
           onKeyDown={e => { if (e.key === 'Enter') handleStart(); }}
           placeholder="输入名字或留空"
           maxLength={8}
@@ -352,6 +360,9 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
             focus:border-[#c9a96e] focus:shadow-[0_0_20px_rgba(201,169,110,0.3)]
             transition-all duration-300 font-sans"
         />
+        {nameWarning && (
+          <span className="text-[11px] text-[#e85d75] tracking-[1px]">{nameWarning}</span>
+        )}
       </div>
 
       {/* 性别选择 */}
@@ -504,11 +515,17 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
       <div className="z-10 flex items-center justify-center flex-wrap gap-x-4 gap-y-2 max-w-full px-4">
         <button
           onClick={() => {
+            const quickName = name.trim();
+            if (!quickName) {
+              setNameWarning('快速模拟需要先输入姓名');
+              nameInputRef.current?.focus();
+              return;
+            }
             sfx.select();
             // 埋点：快速模拟入口
             track({ type: 'feature_use', ts: Date.now(), feature: 'quick_sim' });
             const gender = Math.random() < 0.5 ? 'male' : 'female';
-            onAutoStart(gender, name.trim() || (gender === 'male' ? '小明' : '小美'));
+            onAutoStart(gender, quickName);
           }}
           className="px-10 py-2 rounded-[30px] text-[13px] tracking-[4px] transition-all duration-300 border font-sans
             border-white/15 text-white/35 bg-transparent

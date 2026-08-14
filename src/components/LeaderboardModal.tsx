@@ -1,26 +1,62 @@
+import { useState } from 'react';
 import { verdictTitle } from '../engine/verdict';
 import type { ChallengeMode, LeaderboardResponse } from '../utils/api';
 import Modal from './Modal';
 
+type BoardMap = Partial<Record<ChallengeMode, LeaderboardResponse | null>>;
+
 interface Props {
-  mode: ChallengeMode;
-  board: LeaderboardResponse;
+  boards: BoardMap;
   onClose: () => void;
 }
+
+const MODE_ORDER: ChallengeMode[] = ['daily', 'weekly', 'auto'];
 
 const MODE_TITLE: Record<ChallengeMode, string> = {
   daily: '📅 每日排行榜',
   weekly: '🗓️ 每周排行榜',
   seed: '🔑 种子排行榜',
+  auto: '⚡ 快速模拟榜',
 };
 
-export default function LeaderboardModal({ mode, board, onClose }: Props) {
+function emptyBoard(): LeaderboardResponse {
+  return {
+    mode: 'daily',
+    key: '',
+    entries: [],
+    myRank: null,
+    myPercentile: null,
+    total: 0,
+  };
+}
+
+export default function LeaderboardModal({ boards, onClose }: Props) {
+  const available = MODE_ORDER.filter(mode => boards[mode]);
+  const [active, setActive] = useState<ChallengeMode>(available[0] ?? 'daily');
+  const board = boards[active] ?? emptyBoard();
+
   return (
     <Modal onClose={onClose} labelledBy="leaderboard-title" contentClassName="w-[440px] max-w-[92vw] max-h-[82vh] overflow-y-auto">
       <h2 id="leaderboard-title" className="text-[16px] tracking-[4px] text-[#c9a96e] text-center font-normal">
-        {MODE_TITLE[mode]}
+        🏆 排行榜
       </h2>
-      <p className="mt-2 text-center text-[11px] tracking-[2px] text-white/40">
+
+      <div className="mt-3 flex justify-center gap-2">
+        {available.map(mode => (
+          <button
+            key={mode}
+            onClick={() => setActive(mode)}
+            className={`px-3 py-1.5 rounded-full text-[11px] tracking-[2px] border font-sans transition-colors
+              ${active === mode
+                ? 'border-[#c9a96e] bg-[#c9a96e]/10 text-[#c9a96e]'
+                : 'border-white/10 bg-white/[0.02] text-white/35 hover:text-white/70'}`}
+          >
+            {MODE_TITLE[mode]}
+          </button>
+        ))}
+      </div>
+
+      <p className="mt-3 text-center text-[11px] tracking-[2px] text-white/40">
         我的排名 {board.myRank ?? '未上榜'}
         <span className="mx-1.5 text-white/20">·</span>
         共 {board.total} 人
@@ -28,7 +64,7 @@ export default function LeaderboardModal({ mode, board, onClose }: Props) {
 
       <div className="mt-4 flex flex-col gap-1.5">
         {board.entries.length === 0 ? (
-          <p className="py-8 text-center text-[12px] text-white/35">还没有成绩，完成一局挑战后即可上榜。</p>
+          <p className="py-8 text-center text-[12px] text-white/35">还没有成绩，完成一局对应模式后即可上榜。</p>
         ) : (
           board.entries.map((entry, index) => {
             const rank = index + 1;

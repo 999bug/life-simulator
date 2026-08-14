@@ -122,6 +122,7 @@ export default function App() {
             isDaily={isDaily}
             isWeekly={isWeekly}
             isSeedChallenge={seedChallenge}
+            isAuto={autoPlay}
             weeklyGoal={weeklyGoal}
             duelTarget={duelTarget}
             totalLives={stats.totalLives}

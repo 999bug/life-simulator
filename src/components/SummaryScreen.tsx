@@ -45,6 +45,8 @@ interface Props {
   isWeekly?: boolean;
   /** 种子挑战局（玩家输入的好友种子；仅在挑战局上报成绩） */
   isSeedChallenge?: boolean;
+  /** 快速模拟局（自动随机选择；并入快速模拟榜） */
+  isAuto?: boolean;
   /** 种子挑战的对决目标（发起人评分/享年等；无则普通局不展示对决） */
   duelTarget?: ChallengeLink;
   /** 本周挑战目标（每周变化；周目标达成展示用） */
@@ -350,7 +352,7 @@ const PERSONA_NOTES: Record<PersonaTrait, string> = {
   altruistic: '你把手里的光分给了很多人——最后，光也照亮了你自己的路。',
 };
 
-export default function SummaryScreen({ game, onRestart, newAchievements, skippedTitles, generation, seed, collectedEndings = [], isDaily = false, isWeekly = false, isSeedChallenge = false, weeklyGoal, duelTarget, totalLives = 0, onReincarnate, inheritTalent = null }: Props) {
+export default function SummaryScreen({ game, onRestart, newAchievements, skippedTitles, generation, seed, collectedEndings = [], isDaily = false, isWeekly = false, isSeedChallenge = false, isAuto = false, weeklyGoal, duelTarget, totalLives = 0, onReincarnate, inheritTalent = null }: Props) {
   const score = calcScore(game.attributes);
   const { title, desc } = getVerdict(game);
   const endingKey = verdictKey(game);
@@ -403,14 +405,16 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
     setInherit({ talentId, date: formatDate(new Date()) });
   };
 
-  // 每日/每周/种子挑战局：结算后静默上报成绩；未配置后端或网络失败时不打扰玩家。
-  const challengeMode = isDaily ? 'daily' : isWeekly ? 'weekly' : isSeedChallenge ? 'seed' : null;
+  // 每日/每周/种子挑战/快速模拟局：结算后静默上报成绩；未配置后端或网络失败时不打扰玩家。
+  const challengeMode = isDaily ? 'daily' : isWeekly ? 'weekly' : isSeedChallenge ? 'seed' : isAuto ? 'auto' : null;
   const challengeKey = challengeMode === 'daily'
     ? formatDate(new Date())
     : challengeMode === 'weekly'
       ? weekOf(new Date())
       : challengeMode === 'seed' && seed != null
         ? String(seed)
+        : challengeMode === 'auto'
+          ? 'global'
         : null;
 
   useEffect(() => {

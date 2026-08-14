@@ -1,6 +1,6 @@
 # 人生模拟器 Life Simulator
 
-纯前端文字人生模拟游戏：从 0 岁到晚年，在 **752 个事件**中做出选择，走完属于你的一生。技术栈：React 18 + TypeScript + Vite + Tailwind CSS，可选接入昵称排行榜与云存档（Cloudflare Workers + KV），默认仍可离线游玩，PWA 可安装离线游玩。
+纯前端文字人生模拟游戏：从 0 岁到晚年，在 **752 个事件**中做出选择，走完属于你的一生。技术栈：React 18 + TypeScript + Vite + Tailwind CSS，可选接入昵称排行榜（Cloudflare Workers + KV），默认仍可离线游玩，PWA 可安装离线游玩。隐私说明见 [PRIVACY.md](PRIVACY.md)。
 
 ## 🎮 立即游玩
 

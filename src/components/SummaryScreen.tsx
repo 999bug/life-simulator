@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import type { AchievementId, ChoiceRecord, DeathCause, GameState } from '../types';
 import { ATTR_META, calcScore } from '../engine/state';
 import { GOALS, checkGoal } from '../engine/goals';
@@ -22,8 +22,9 @@ import { gaokaoResult } from '../engine/gaokao';
 import { assetStatus } from '../engine/assets';
 import { getTalent, saveInheritTalent, type TalentInherit } from '../engine/talents';
 import { formatDate } from '../hooks/useGame';
-import { checkWeeklyGoal, type WeeklyGoal } from '../engine/weekly';
+import { checkWeeklyGoal, weekOf, type WeeklyGoal } from '../engine/weekly';
 import { derivePersona, personaSummary, PERSONA_META, type PersonaState, type PersonaTrait } from '../engine/personality';
+import { getDeviceId, reportScore } from '../utils/api';
 
 interface Props {
   game: GameState;
@@ -42,6 +43,8 @@ interface Props {
   isDaily?: boolean;
   /** 每周挑战局（展示本周目标达成） */
   isWeekly?: boolean;
+  /** 种子挑战局（玩家输入的好友种子；仅在挑战局上报成绩） */
+  isSeedChallenge?: boolean;
   /** 种子挑战的对决目标（发起人评分/享年等；无则普通局不展示对决） */
   duelTarget?: ChallengeLink;
   /** 本周挑战目标（每周变化；周目标达成展示用） */
@@ -347,9 +350,10 @@ const PERSONA_NOTES: Record<PersonaTrait, string> = {
   altruistic: '你把手里的光分给了很多人——最后，光也照亮了你自己的路。',
 };
 
-export default function SummaryScreen({ game, onRestart, newAchievements, skippedTitles, generation, seed, collectedEndings = [], isDaily = false, isWeekly = false, weeklyGoal, duelTarget, totalLives = 0, onReincarnate, inheritTalent = null }: Props) {
+export default function SummaryScreen({ game, onRestart, newAchievements, skippedTitles, generation, seed, collectedEndings = [], isDaily = false, isWeekly = false, isSeedChallenge = false, weeklyGoal, duelTarget, totalLives = 0, onReincarnate, inheritTalent = null }: Props) {
   const score = calcScore(game.attributes);
   const { title, desc } = getVerdict(game);
+  const endingKey = verdictKey(game);
   const goal = checkGoal(game.goal, game);
   // 本局推导信息：职业 / 家人关系 / 高考结果 / 资产 / 性格画像 / 具体人物好感（纯函数，旧存档兼容）
   const job = jobStatus(game);
@@ -374,8 +378,8 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
   const basisText = verdictBasis(game, score);
   // 「下一站」：本局结算后（当前结局已计入收集）提示下一条未走过的路线；全收集显示通关文案
   const nextRoute = useMemo(
-    () => nextRouteToExplore(verdictKey(game), new Set(collectedEndings)),
-    [game, collectedEndings],
+    () => nextRouteToExplore(endingKey, new Set(collectedEndings)),
+    [endingKey, collectedEndings],
   );
   const allCollected = collectedEndings.length > 0 && nextRoute === null;
   // 完整时间线：全部选择 + 里程碑标记（旧存档无 flags 字段 → 无标记，正常显示）
@@ -398,6 +402,30 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
     saveInheritTalent(talentId, formatDate(new Date()));
     setInherit({ talentId, date: formatDate(new Date()) });
   };
+
+  // 每日/每周/种子挑战局：结算后静默上报成绩；未配置后端或网络失败时不打扰玩家。
+  const challengeMode = isDaily ? 'daily' : isWeekly ? 'weekly' : isSeedChallenge ? 'seed' : null;
+  const challengeKey = challengeMode === 'daily'
+    ? formatDate(new Date())
+    : challengeMode === 'weekly'
+      ? weekOf(new Date())
+      : challengeMode === 'seed' && seed != null
+        ? String(seed)
+        : null;
+
+  useEffect(() => {
+    if (!challengeMode || !challengeKey) {
+      return;
+    }
+    reportScore({
+      mode: challengeMode,
+      key: challengeKey,
+      deviceId: getDeviceId(),
+      score,
+      age: game.age,
+      endingKey,
+    }).catch(() => undefined);
+  }, [challengeMode, challengeKey, score, game.age, endingKey]);
 
   return (
     <div className="w-full h-full bg-gradient-to-b from-[#0a0a14] via-[#1a1a2e] to-[#0a0a14]
@@ -435,7 +463,7 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       )}
       <h2 className="text-[34px] font-extralight tracking-[10px] text-[#c9a96e] animate-[fadeInDown_0.8s_ease]">
         {title}
-        {VERDICT_META[verdictKey(game)]?.rare && (
+        {VERDICT_META[endingKey]?.rare && (
           <span className="ml-2 align-middle text-[11px] px-2 py-0.5 rounded-full bg-[#e8c95d]/15 border border-[#e8c95d]/40 text-[#e8c95d] tracking-[2px]">
             稀有
           </span>
@@ -446,7 +474,7 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
       </p>
       {/* 称号：路线/财富/性格/评分档推导的社交货币（确定性） */}
       <p className="text-[16px] text-[#e8c95d] tracking-[2px] text-center animate-[fadeIn_1.1s_ease]">
-        🏅 {deriveTitle(game, verdictKey(game))}
+        🏅 {deriveTitle(game, endingKey)}
       </p>
       {/* 判定依据：结局判定透明化（路线 flag 命中或分数档，低调不抢戏） */}
       <p className="text-[10px] text-white/35 tracking-wide text-center animate-[fadeIn_1.3s_ease]">
@@ -922,7 +950,7 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
         <ShareCardModal
           game={game}
           verdictTitle={title}
-          endingKey={verdictKey(game)}
+          endingKey={endingKey}
           collectionDone={collectedEndings.filter(k => VERDICT_META[k]).length}
           isDaily={isDaily}
           generation={generation}

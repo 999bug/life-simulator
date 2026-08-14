@@ -1,4 +1,4 @@
-import { useRef, useState, type ChangeEvent } from 'react';
+import { useEffect, useRef, useState, type ChangeEvent } from 'react';
 import { sfx } from '../utils/sound';
 import { track } from '../utils/analytics';
 import type { AchievementId, Attributes, CustomGoal, FamilyMember, GoalKey, PaceMode, TypeSpeed } from '../types';
@@ -27,6 +27,7 @@ import { CHANGELOG, LATEST_VERSION } from '../data/changelog';
 import type { ChallengeLink } from '../utils/share';
 import FriendLifeModal from './FriendLifeModal';
 import { parseLifeExport, type LifeExport } from '../engine/compare';
+import { fetchLeaderboard, getDeviceId, isApiConfigured, type LeaderboardResponse } from '../utils/api';
 
 /** 玩法说明首访标记（localStorage key；不存在则首进自动弹出） */
 const GUIDE_SEEN_KEY = 'life-sim-guide-seen';
@@ -118,6 +119,8 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
   const [showAnalytics, setShowAnalytics] = useState(false);
   /** 更新日志（🕓 入口 / 侧边栏「查看全部」弹出） */
   const [showChangelog, setShowChangelog] = useState(false);
+  /** 远端排行榜（仅后端已配置且拉取成功时展示） */
+  const [remoteBoards, setRemoteBoards] = useState<{ daily: LeaderboardResponse | null; weekly: LeaderboardResponse | null }>({ daily: null, weekly: null });
   /** 挑战开局（第 2 周目解锁）：属性整体下调 10 点 */
   const [challenge, setChallenge] = useState(false);
   /** 真实模式（第 2 周目解锁）：选项只显示属性倾向箭头，隐藏精确数值 */
@@ -141,6 +144,31 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
   }
   /** 图鉴收集进度（标题页入口实时可见，驱动收集欲） */
   const collectionDone = VERDICT_ROUTES.filter(r => (stats.endings[r.key] ?? 0) > 0).length;
+
+  // 后端未配置时完全静默；配置后拉取每日/每周全局榜单（失败也静默降级为「—」/隐藏）。
+  useEffect(() => {
+    if (!isApiConfigured()) {
+      setRemoteBoards({ daily: null, weekly: null });
+      return;
+    }
+    let cancelled = false;
+    const load = async () => {
+      const deviceId = getDeviceId();
+      const [dailyBoard, weeklyBoard] = await Promise.all([
+        fetchLeaderboard('daily', formatDate(new Date()), deviceId),
+        fetchLeaderboard('weekly', weekOf(new Date()), deviceId),
+      ]);
+      if (!cancelled) {
+        setRemoteBoards({ daily: dailyBoard, weekly: weeklyBoard });
+      }
+    };
+    load().catch(() => {
+      if (!cancelled) {
+        setRemoteBoards({ daily: null, weekly: null });
+      }
+    });
+    return () => { cancelled = true; };
+  }, []);
 
   // 导入好友人生档案：读取 JSON → 校验 → 展示档案模态（失败给出提示）
   const handleImportFile = (e: ChangeEvent<HTMLInputElement>) => {
@@ -500,6 +528,12 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
           </span>
         )}
 
+        {remoteBoards.daily && (
+          <span className="text-[10px] text-white/30 tracking-[1px] whitespace-nowrap">
+            全局最佳 {remoteBoards.daily.entries[0]?.score ?? '—'} · 我的排名 {remoteBoards.daily.myRank ?? '—'}
+          </span>
+        )}
+
         {/* 每周挑战：本周固定种子开局（同周同序列 + 本周目标），结算判定通关 */}
         <button
           onClick={() => {
@@ -521,6 +555,12 @@ export default function TitleScreen({ onStart, onAutoStart, onDailyStart, onWeek
             <span className={weekly.cleared ? 'text-[#5de8a0] ml-1' : 'text-white/25 ml-1'}>
               {weekly.cleared ? '已通关 ✓' : `最佳 ${weekly.bestScore || '—'}`}
             </span>
+          </span>
+        )}
+
+        {remoteBoards.weekly && (
+          <span className="text-[10px] text-white/30 tracking-[1px] whitespace-nowrap">
+            全局最佳 {remoteBoards.weekly.entries[0]?.score ?? '—'} · 我的排名 {remoteBoards.weekly.myRank ?? '—'}
           </span>
         )}
 

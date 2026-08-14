@@ -121,6 +121,7 @@ export default function App() {
             collectedEndings={Object.keys(stats.endings)}
             isDaily={isDaily}
             isWeekly={isWeekly}
+            isSeedChallenge={seedChallenge}
             weeklyGoal={weeklyGoal}
             duelTarget={duelTarget}
             totalLives={stats.totalLives}

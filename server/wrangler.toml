@@ -1,0 +1,15 @@
+name = "life-simulator-api"
+main = "src/index.js"
+compatibility_date = "2026-08-01"
+workers_dev = true
+
+# 部署前把下面这个 id 替换为 `wrangler kv namespace create LEADERBOARD` 输出的 id。
+# 这不是密钥，不需要放进 .dev.vars；也可以复制本文件后在本地按环境改写。
+kv_namespaces = [
+  { binding = "LEADERBOARD", id = "REPLACE_WITH_KV_NAMESPACE_ID" }
+]
+
+[vars]
+# 允许的前端来源：正式 GitHub Pages 与本地 Vite 调试地址。
+# 多个值用英文逗号分隔，不含末尾斜杠。
+CORS_ORIGINS = "https://999bug.github.io,http://localhost:5173"

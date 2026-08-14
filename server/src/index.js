@@ -9,7 +9,9 @@
 
 const TOP_N = 100;
 const SAVE_MAX_BYTES = 64 * 1024;
-const RATE_LIMIT_MAX = 20;
+const SCORE_MAX_BYTES = 8 * 1024;
+const DEVICE_RATE_LIMIT_MAX = 20;
+const IP_RATE_LIMIT_MAX = 60;
 const RATE_LIMIT_WINDOW_SECONDS = 60;
 
 const VALID_MODES = new Set(['daily', 'weekly', 'seed']);
@@ -45,6 +47,7 @@ function json(data, status = 200, extraHeaders = {}) {
     status,
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
+      'Cache-Control': 'no-store',
       ...extraHeaders,
     },
   });
@@ -89,6 +92,35 @@ function isPlainObject(value) {
 
 function clampInt(value, min, max) {
   return Math.min(max, Math.max(min, Math.round(value)));
+}
+
+function getClientIp(request) {
+  const connectingIp = request.headers.get('CF-Connecting-IP');
+  if (connectingIp) {
+    return connectingIp.slice(0, 64);
+  }
+  const forwarded = request.headers.get('X-Forwarded-For');
+  if (forwarded) {
+    return forwarded.split(',')[0].trim().slice(0, 64) || 'unknown';
+  }
+  return 'unknown';
+}
+
+async function readJsonBody(request, maxBytes) {
+  const raw = await request.text();
+  if (new TextEncoder().encode(raw).byteLength > maxBytes) {
+    return { error: '请求体过大', status: 413 };
+  }
+  try {
+    return { data: JSON.parse(raw) };
+  } catch {
+    return { error: 'body 必须是合法 JSON', status: 400 };
+  }
+}
+
+function hasJsonContentType(request) {
+  const contentType = request.headers.get('Content-Type') ?? '';
+  return contentType.split(';')[0].trim().toLowerCase() === 'application/json';
 }
 
 function isValidDeviceId(value) {
@@ -150,11 +182,11 @@ function rankInfo(entries, deviceId) {
   };
 }
 
-async function enforceRateLimit(env, deviceId) {
-  const windowKey = `rl:${deviceId}:${Math.floor(Date.now() / (RATE_LIMIT_WINDOW_SECONDS * 1000))}`;
+async function enforceRateLimit(env, scope, max) {
+  const windowKey = `rl:${scope}:${Math.floor(Date.now() / (RATE_LIMIT_WINDOW_SECONDS * 1000))}`;
   const currentRaw = await env.LEADERBOARD.get(windowKey);
   const current = currentRaw ? Number.parseInt(currentRaw, 10) || 0 : 0;
-  if (current >= RATE_LIMIT_MAX) {
+  if (current >= max) {
     return false;
   }
   await env.LEADERBOARD.put(windowKey, String(current + 1), {
@@ -164,12 +196,15 @@ async function enforceRateLimit(env, deviceId) {
 }
 
 async function handleScore(request, env) {
-  let body;
-  try {
-    body = await request.json();
-  } catch {
-    return json({ error: 'body 必须是合法 JSON' }, 400);
+  if (!hasJsonContentType(request)) {
+    return json({ error: 'Content-Type 必须是 application/json' }, 415);
   }
+
+  const parsed = await readJsonBody(request, SCORE_MAX_BYTES);
+  if (parsed.error) {
+    return json({ error: parsed.error }, parsed.status);
+  }
+  const body = parsed.data;
 
   if (!isPlainObject(body)) {
     return json({ error: 'body 必须是 JSON 对象' }, 400);
@@ -195,8 +230,9 @@ async function handleScore(request, env) {
     return json({ error: 'endingKey 不在白名单内' }, 400);
   }
 
-  const ok = await enforceRateLimit(env, deviceId);
-  if (!ok) {
+  const deviceOk = await enforceRateLimit(env, `device:${deviceId}`, DEVICE_RATE_LIMIT_MAX);
+  const ipOk = await enforceRateLimit(env, `ip:${getClientIp(request)}`, IP_RATE_LIMIT_MAX);
+  if (!deviceOk || !ipOk) {
     return json({ error: '请求过于频繁，请稍后再试' }, 429);
   }
 
@@ -286,17 +322,21 @@ async function handleSavePut(request, env) {
     return json({ error: 'deviceId 格式不合法' }, 400);
   }
 
-  const ok = await enforceRateLimit(env, deviceId);
-  if (!ok) {
+  if (!hasJsonContentType(request)) {
+    return json({ error: 'Content-Type 必须是 application/json' }, 415);
+  }
+
+  const deviceOk = await enforceRateLimit(env, `device:${deviceId}`, DEVICE_RATE_LIMIT_MAX);
+  const ipOk = await enforceRateLimit(env, `ip:${getClientIp(request)}`, IP_RATE_LIMIT_MAX);
+  if (!deviceOk || !ipOk) {
     return json({ error: '请求过于频繁，请稍后再试' }, 429);
   }
 
-  let body;
-  try {
-    body = await request.json();
-  } catch {
-    return json({ error: 'body 必须是合法 JSON' }, 400);
+  const parsed = await readJsonBody(request, SAVE_MAX_BYTES);
+  if (parsed.error) {
+    return json({ error: parsed.error }, parsed.status);
   }
+  const body = parsed.data;
   if (!isPlainObject(body)) {
     return json({ error: '云存档 body 必须是 JSON 对象' }, 400);
   }

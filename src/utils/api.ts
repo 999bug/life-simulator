@@ -1,6 +1,6 @@
 import { API_BASE } from '../config';
 
-export type ChallengeMode = 'daily' | 'weekly' | 'seed';
+export type ChallengeMode = 'daily' | 'weekly' | 'seed' | 'auto';
 
 export interface LeaderboardEntry {
   deviceId: string;

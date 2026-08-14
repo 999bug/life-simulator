@@ -14,7 +14,7 @@ const DEVICE_RATE_LIMIT_MAX = 20;
 const IP_RATE_LIMIT_MAX = 60;
 const RATE_LIMIT_WINDOW_SECONDS = 60;
 
-const VALID_MODES = new Set(['daily', 'weekly', 'seed']);
+const VALID_MODES = new Set(['daily', 'weekly', 'seed', 'auto']);
 const DEVICE_ID_RE = /^[A-Za-z0-9._-]{8,128}$/;
 
 // 16 条路线结局 key + 5 个分数档 key，与前端 src/engine/verdict.ts 对齐。
@@ -139,6 +139,9 @@ function isValidKey(mode, key) {
   }
   if (mode === 'seed') {
     return /^\d{1,10}$/.test(key);
+  }
+  if (mode === 'auto') {
+    return key === 'global' || /^\d{8}$/.test(key);
   }
   return false;
 }

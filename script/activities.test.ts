@@ -168,6 +168,22 @@ test('SKIP_INTRO：普通局 0 岁自动播放开启，快进到 13 岁并交还
   assert.strictEqual(reducer(manual, { type: 'SKIP_INTRO' }), manual);
 });
 
+test('童年快进：跨过 13 岁边界的选择不展示反馈页（直接进入手动段，免点击卡顿）', () => {
+  const events = [
+    evt('a_01', 0, { health: 2 }),
+    evt('b_01', 13, { wealth: 3 }),
+  ];
+  const base = createInitialRuntime();
+  const rt = reducer(base, { type: 'START_GAME', gender: 'male', name: '小明', paceMode: 'full', typeSpeed: 'normal', goal: null });
+  const setup = { ...rt, shuffledEvents: events, currentEvent: events[0], eventIndex: 0 };
+  // 0 岁选择（快进段）→ 下一个事件 13 岁：feedback 应为 null，玩家直接看到 13 岁选择面板
+  const step = reducer(setup, { type: 'MAKE_CHOICE', choice: events[0].choices[0], eventId: 'a_01' });
+  assert.strictEqual(step.game.age, 13, '跨到 13 岁');
+  assert.strictEqual(step.introAuto, false, '交还控制');
+  assert.strictEqual(step.feedback, null, '跨边界选择不展示反馈页');
+  assert.strictEqual(step.currentEvent?.id, 'b_01', '13 岁事件接续');
+});
+
 test('SKIP_INTRO：每日挑战局启用确定性快进（固定选第一个选项，公平同局）', () => {
   const base = createInitialRuntime();
   const rt = reducer(base, {

@@ -1013,10 +1013,14 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
           }).filter(id => !state.achievements.unlocked.includes(id))
         : [];
 
+      // 童年快进段（introAuto 时做出的选择）跨过 13 岁边界：不展示反馈页，直接进入手动段——
+      // 否则该条反馈无人自动清理（自动推进 effect 因 introAuto 变 false 退出），出现「需要点击才能继续」
+      const finalFeedback = state.introAuto && age >= 13 ? null : fb;
+
       return {
         game,
         currentEvent: gameOver ? null : nextEvent,
-        feedback: fb,
+        feedback: finalFeedback,
         // 伴侣互动不占事件数组位置：插入互动时 eventIndex 保持「插入点位置」（互动选择后
         // 从插入点继续扫，不跳过下一个正常事件）；互动选择完成（nextEvent = 正常事件）时
         // eventIndex 照常指向下一个正常事件

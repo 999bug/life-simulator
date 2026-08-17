@@ -15,6 +15,15 @@ export interface ChangelogEntry {
  */
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.23.0',
+    date: '2026-08-17',
+    title: '场景氛围全面升级',
+    items: [
+      '🎨 事件分类场景背景全面重绘，家庭 / 事业 / 健康 / 友谊 / 爱情 / 金融 / 爱好 / 运动等画面更细腻',
+      '✨ 新增落地阴影、灯光与细节摆件，氛围感更足',
+    ],
+  },
+  {
     version: '0.22.1',
     date: '2026-08-14',
     title: '修复监狱路线串线',

@@ -1,0 +1,574 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#0a0a1c">
+</stop>
+<stop offset="100%" stop-color="#050510">
+</stop>
+</linearGradient>
+<linearGradient id="vig" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="rgba(5,8,20,0)">
+</stop>
+<stop offset="62%" stop-color="rgba(5,8,20,0)">
+</stop>
+<stop offset="100%" stop-color="rgba(5,8,20,0.30)">
+</stop>
+</linearGradient>
+</defs>
+<style>
+@keyframes twinkle{0%,100%{opacity:.3}50%{opacity:1}}
+@keyframes glow{0%,100%{opacity:.3}50%{opacity:.7}}
+@keyframes neon{0%,100%{opacity:.3}50%{opacity:.7}}
+@keyframes infantMobile{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+.animate-twinkle{animation:twinkle 3s ease-in-out infinite}
+.animate-glow{animation:glow 2s ease-in-out infinite}
+.animate-neon{animation:neon 3s ease-in-out infinite}
+.animate-infant-mobile{animation:infantMobile 12s linear infinite;transform-origin:480px 180px}
+</style>
+<rect width="960" height="540" fill="url(#sky)">
+</rect>
+<g transform="translate(0 140)">
+<g>
+<defs>
+<linearGradient id="g65-ns" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#050510">
+</stop>
+<stop offset="50%" stop-color="#0a0a25">
+</stop>
+<stop offset="100%" stop-color="#151535">
+</stop>
+</linearGradient>
+</defs>
+<rect x="0" y="0" width="960" height="400" fill="url(#g65-ns)">
+</rect>
+<circle cx="829.3267061058427" cy="80.52025427014698" r="0.6572961111510691" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:1.146152538057125s">
+</circle>
+<circle cx="891.2872165286605" cy="36.91785115906116" r="1.720978409058626" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:1.8048262351802151s">
+</circle>
+<circle cx="916.5477213421793" cy="87.73102243084331" r="1.9301298961192204" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:1.9083952127150754s">
+</circle>
+<circle cx="866.4588893295162" cy="86.28084693450302" r="1.57438622586851" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:0.897193373653935s">
+</circle>
+<circle cx="654.1723483921819" cy="154.69664726347864" r="1.8993830550353683" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:0.5350647913676845s">
+</circle>
+<circle cx="73.20911274036682" cy="116.96960291723197" r="1.1748077993768906" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:0.4251751053712933s">
+</circle>
+<circle cx="434.3309815748339" cy="126.61560480192864" r="2.1466337133399427" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:0.0728332342426734s">
+</circle>
+<circle cx="319.8576440234768" cy="104.20827854974958" r="0.7378404556402074" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:1.8032225954347556s">
+</circle>
+<circle cx="702.3806691760319" cy="47.512511997340276" r="1.2085101006407337" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:2.6923993146671927s">
+</circle>
+<circle cx="136.28734423391464" cy="138.22307751657704" r="1.0069804023366296" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:1.6948804605312207s">
+</circle>
+<circle cx="815.3750536176789" cy="48.952051296895206" r="1.561886177079648" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:2.321069927125886s">
+</circle>
+<circle cx="313.3918076483924" cy="62.10345172983875" r="0.8261023720606284" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:2.1448238235950923s">
+</circle>
+<circle cx="187.15530215915857" cy="104.75874080201113" r="0.33295531974700693" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:2.531314944468451s">
+</circle>
+<circle cx="505.5867151428878" cy="129.01909397086848" r="1.105875143538759" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:1.602076394137919s">
+</circle>
+<circle cx="43.4058425907444" cy="70.2617538597666" r="1.5679137682585196" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:3.911715619255716s">
+</circle>
+<circle cx="572.1618876283665" cy="161.99500860887505" r="1.6998131284976734" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:1.5042253528706144s">
+</circle>
+<circle cx="856.0369738259" cy="110.82930779536956" r="1.2625964192057746" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:1.1699741711585183s">
+</circle>
+<circle cx="580.9819414754902" cy="46.881721388818576" r="1.6184510325218444" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:1.8134692281130889s">
+</circle>
+<circle cx="419.68605420689585" cy="44.758518400803055" r="0.3350905249341289" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:1.9843875259822852s">
+</circle>
+<circle cx="935.4258165037834" cy="76.2064700825397" r="2.020547505804103" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:0.6626899730386073s">
+</circle>
+<circle cx="479.2854924246574" cy="35.844213089593936" r="2.1441988539264005" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:1.1557767820531772s">
+</circle>
+<circle cx="296.4286328763318" cy="144.92092862873335" r="0.7740726330710672" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:3.634795714304105s">
+</circle>
+<circle cx="725.6959629989798" cy="42.77754490749815" r="1.9632540614516663" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:1.2934154178106816s">
+</circle>
+<circle cx="19.56579346174152" cy="156.0746642420411" r="1.6807152290449745" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:2.4959010835639974s">
+</circle>
+<circle cx="127.22557734714336" cy="104.82873564123719" r="1.0853025947667858" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:2.1329195370456606s">
+</circle>
+<circle cx="124.98410820249937" cy="53.12239159947702" r="2.295186229916897" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:0.02214799359728037s">
+</circle>
+<circle cx="733.5922898009077" cy="132.39337553026667" r="0.608266960667992" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:0.820398181200872s">
+</circle>
+<circle cx="902.0469919585174" cy="176.322095890097" r="0.6954062991106016" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:2.249408855440908s">
+</circle>
+<circle cx="672.2679583073962" cy="9.099516145215105" r="0.6461233563500131" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:2.8893864608210187s">
+</circle>
+<circle cx="890.9996193268894" cy="102.27567170057128" r="0.6885782485019389" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:0.19513639194190446s">
+</circle>
+<circle cx="677.1555560782839" cy="170.64720777102968" r="0.39348614312554825" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:2.97476924798298s">
+</circle>
+<circle cx="525.9554241863474" cy="57.88118219806981" r="2.278765282170987" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:1.9903687545715734s">
+</circle>
+<circle cx="240.0597105238881" cy="37.54161441772795" r="2.256332816776128" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:3.3485570424510485s">
+</circle>
+<circle cx="539.5879714634858" cy="4.8380264051438315" r="0.7756714607362662" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:1.5244523800431695s">
+</circle>
+<circle cx="374.7536366946747" cy="0.8107998792040627" r="0.5671313890949647" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:3.2150344528883705s">
+</circle>
+<circle cx="228.19906137477474" cy="52.092441502368246" r="0.4590474570101232" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:3.334496757289557s">
+</circle>
+<circle cx="604.2287493083976" cy="24.22610528886039" r="1.5177469958977834" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:0.67155674718206s">
+</circle>
+<circle cx="259.7710366733398" cy="59.15717624618551" r="1.5553166614741876" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:3.913599995811449s">
+</circle>
+<circle cx="404.3717412710222" cy="164.50246389135347" r="0.3062733915884894" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:0.4992518253556142s">
+</circle>
+<circle cx="425.52411240860005" cy="1.9179387178042173" r="1.2700770526254412" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:3.340273699417729s">
+</circle>
+<circle cx="16.27357619841959" cy="31.96656677992038" r="0.8322722019671016" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:2.0308613342804245s">
+</circle>
+<circle cx="485.3105470669831" cy="121.72029042614379" r="0.46275244265326715" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:3.9792009729677957s">
+</circle>
+<circle cx="146.09971607315202" cy="30.735002934748834" r="2.0125336737070065" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:1.9173686694437935s">
+</circle>
+<circle cx="891.5223653232508" cy="11.986524371873909" r="1.2988895686493718" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:0.5626327001205s">
+</circle>
+<circle cx="889.9385505322364" cy="85.53754859216927" r="0.9170062665337901" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:2.245897160621726s">
+</circle>
+<circle cx="820.2001315337595" cy="92.30203993936799" r="0.611612246662516" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:0.9524481749428508s">
+</circle>
+<circle cx="455.92899911594395" cy="140.21300213737376" r="1.6687672780893743" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:3.677898174563783s">
+</circle>
+<circle cx="420.09502499599927" cy="100.87588049311508" r="1.7210625389411314" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:2.7532065113063426s">
+</circle>
+<circle cx="26.319352462900838" cy="5.013041949000461" r="0.6260114580596554" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:0.007552711061355133s">
+</circle>
+<circle cx="900.4292508337222" cy="49.82751947437049" r="0.7629777795722801" fill="rgba(255,255,255,0.7)" class="animate-twinkle" style="animation-delay:1.6849632678290787s">
+</circle>
+<circle cx="150" cy="60" r="30" fill="rgba(255,255,240,0.15)">
+</circle>
+<circle cx="150" cy="60" r="25" fill="rgba(255,255,240,0.2)">
+</circle>
+<circle cx="155" cy="55" r="22" fill="#050510">
+</circle>
+<g opacity="0.5">
+<g>
+<rect x="20" y="240" width="29.427398350272124" height="80" fill="#0f0f25" rx="1">
+</rect>
+<rect x="35.70362808418757" y="246" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+<rect x="31.75814040215282" y="264" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+<rect x="33.26492567964123" y="282" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+<rect x="35.84933481828678" y="300" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+</g>
+<g>
+<rect x="80" y="180.50011137285188" width="43.153579205878856" height="139.49988862714812" fill="#0f0f25" rx="1">
+</rect>
+<rect x="91.72044575010955" y="186.50011137285188" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+<rect x="85.80885502769843" y="204.50011137285188" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+<rect x="87.93186631089843" y="222.50011137285188" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+<rect x="93.71221515818557" y="240.50011137285188" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+<rect x="97.93072623705845" y="258.50011137285185" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+<rect x="93.02639242069232" y="276.50011137285185" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+<rect x="94.66103206420534" y="294.50011137285185" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+</g>
+<g>
+<rect x="150" y="255.33246612160985" width="44.55587460561547" height="64.66753387839013" fill="#0f0f25" rx="1">
+</rect>
+<rect x="162.4352421151863" y="261.33246612160985" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+<rect x="166.75100293868223" y="279.33246612160985" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+<rect x="158.8116489028741" y="297.33246612160985" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+</g>
+<g>
+<rect x="210" y="295.54888093966395" width="28.671086954421277" height="24.451119060336055" fill="#0f0f25" rx="1">
+</rect>
+<rect x="215.36830160082698" y="301.54888093966395" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+</g>
+<g>
+<rect x="280" y="210.3531989316835" width="47.25873736102909" height="109.64680106831649" fill="#0f0f25" rx="1">
+</rect>
+<rect x="285.1780813713533" y="216.3531989316835" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+<rect x="288.37055744597063" y="234.3531989316835" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+<rect x="297.67957581637313" y="252.3531989316835" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+<rect x="295.9429961195271" y="270.3531989316835" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+<rect x="296.85054250821986" y="288.3531989316835" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+<rect x="284.4490260812132" y="306.3531989316835" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+</g>
+<g>
+<rect x="340" y="192.0907732425906" width="45.71876653182369" height="127.90922675740941" fill="#0f0f25" rx="1">
+</rect>
+<rect x="359.5447095252407" y="198.0907732425906" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+<rect x="349.26920775523814" y="216.0907732425906" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+<rect x="357.2182275075055" y="234.0907732425906" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+<rect x="346.18923342777174" y="252.0907732425906" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+<rect x="359.92974432987654" y="270.09077324259056" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+<rect x="347.70406887247515" y="288.09077324259056" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+<rect x="344.2620951112845" y="306.09077324259056" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+</g>
+<g>
+<rect x="410" y="281.9924812556125" width="34.346906526046034" height="38.00751874438746" fill="#0f0f25" rx="1">
+</rect>
+<rect x="418.59511714210095" y="287.9924812556125" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+<rect x="423.5432002326753" y="305.9924812556125" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+</g>
+<g>
+<rect x="470" y="277.088226734222" width="41.28653039132023" height="42.911773265778" fill="#0f0f25" rx="1">
+</rect>
+<rect x="482.153943743237" y="283.088226734222" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+<rect x="482.2193281335992" y="301.088226734222" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+</g>
+<g>
+<rect x="540" y="188.45029110861026" width="37.42990652214149" height="131.54970889138974" fill="#0f0f25" rx="1">
+</rect>
+<rect x="549.1839440436794" y="194.45029110861026" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+<rect x="552.6551032170122" y="212.45029110861026" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+<rect x="555.1788428182083" y="230.45029110861026" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+<rect x="552.997514771193" y="248.45029110861026" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+<rect x="548.4978260263244" y="266.45029110861026" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+<rect x="546.4310035090401" y="284.45029110861026" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+<rect x="544.4965790930116" y="302.45029110861026" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+</g>
+<g>
+<rect x="600" y="216.1955656121632" width="31.57134629488186" height="103.80443438783682" fill="#0f0f25" rx="1">
+</rect>
+<rect x="606.4880773146921" y="222.1955656121632" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+<rect x="611.9384290464825" y="240.1955656121632" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+<rect x="607.7596202752849" y="258.1955656121632" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+<rect x="607.6555560661915" y="276.1955656121632" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+<rect x="617.5450793365125" y="294.1955656121632" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+</g>
+<g>
+<rect x="670" y="297.6838495127734" width="32.127666796368096" height="22.316150487226594" fill="#0f0f25" rx="1">
+</rect>
+<rect x="689.6686340379712" y="303.6838495127734" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+</g>
+<g>
+<rect x="730" y="248.93994154885195" width="39.15745063548281" height="71.06005845114807" fill="#0f0f25" rx="1">
+</rect>
+<rect x="736.3410761682553" y="254.93994154885195" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+<rect x="744.6829064446921" y="272.93994154885195" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+<rect x="742.8158286344294" y="290.93994154885195" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+</g>
+<g>
+<rect x="800" y="180.01242599143984" width="43.55949058570893" height="139.98757400856016" fill="#0f0f25" rx="1">
+</rect>
+<rect x="811.8914922437832" y="186.01242599143984" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+<rect x="805.6700099864296" y="204.01242599143984" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+<rect x="818.8726424890915" y="222.01242599143984" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+<rect x="807.6946922140515" y="240.01242599143984" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+<rect x="804.9026722438485" y="258.01242599143984" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+<rect x="812.6745799661558" y="276.01242599143984" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+<rect x="811.4118312070922" y="294.01242599143984" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+</g>
+<g>
+<rect x="860" y="246.51819572544457" width="33.244773256099066" height="73.48180427455543" fill="#0f0f25" rx="1">
+</rect>
+<rect x="875.1951267548947" y="252.51819572544457" width="4" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+<rect x="866.4737884549728" y="270.51819572544457" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+<rect x="876.688864012161" y="288.51819572544457" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+<rect x="878.0375109729288" y="306.51819572544457" width="4" height="3" fill="rgba(255,220,150,0.4)">
+</rect>
+</g>
+</g>
+<g>
+<rect x="200" y="110" width="55" height="210" fill="#121230" rx="2">
+</rect>
+<rect x="237.5458566775277" y="120" width="4" height="3" fill="rgba(255,220,150,0.5)">
+</rect>
+<rect x="213.48051207201976" y="137" width="4" height="3" fill="rgba(255,220,150,0.5)">
+</rect>
+<rect x="219.82296606990283" y="154" width="4" height="3" fill="rgba(255,220,150,0.5)">
+</rect>
+<rect x="222.1226867958476" y="171" width="4" height="3" fill="rgba(255,220,150,0.5)">
+</rect>
+<rect x="213.53123932511343" y="188" width="4" height="3" fill="rgba(255,220,150,0.5)">
+</rect>
+<rect x="232.64416377312818" y="205" width="4" height="3" fill="rgba(255,220,150,0.5)">
+</rect>
+<rect x="239.70477472882442" y="222" width="4" height="3" fill="rgba(255,220,150,0.5)">
+</rect>
+<rect x="225.93860238972502" y="239" width="4" height="3" fill="rgba(255,220,150,0.5)">
+</rect>
+<rect x="215.34365238293563" y="256" width="4" height="3" fill="rgba(255,220,150,0.5)">
+</rect>
+<rect x="235.82942320081713" y="273" width="4" height="3" fill="rgba(255,220,150,0.5)">
+</rect>
+<rect x="270" y="160" width="40" height="160" fill="#0e0e28" rx="2">
+</rect>
+<rect x="284.17246341121813" y="170" width="3" height="3" fill="rgba(255,200,150,0.4)">
+</rect>
+<rect x="285.71997971259424" y="188" width="3" height="3" fill="rgba(255,200,150,0.4)">
+</rect>
+<rect x="296.0787484382508" y="206" width="3" height="3" fill="rgba(255,200,150,0.4)">
+</rect>
+<rect x="297.0725202441331" y="224" width="3" height="3" fill="rgba(255,200,150,0.4)">
+</rect>
+<rect x="282.5290103728342" y="242" width="3" height="3" fill="rgba(255,200,150,0.4)">
+</rect>
+<rect x="293.775923422141" y="260" width="3" height="3" fill="rgba(255,200,150,0.4)">
+</rect>
+<rect x="287.783056106152" y="278" width="3" height="3" fill="rgba(255,200,150,0.4)">
+</rect>
+<rect x="560" y="140" width="65" height="180" fill="#141438" rx="3">
+</rect>
+<rect x="594.4089781724767" y="152" width="4" height="3" fill="rgba(255,220,150,0.45)">
+</rect>
+<rect x="569.4271814256459" y="166" width="4" height="3" fill="rgba(255,220,150,0.45)">
+</rect>
+<rect x="575.6927133764509" y="180" width="4" height="3" fill="rgba(255,220,150,0.45)">
+</rect>
+<rect x="608.1939845158049" y="194" width="4" height="3" fill="rgba(255,220,150,0.45)">
+</rect>
+<rect x="573.5716015949233" y="208" width="4" height="3" fill="rgba(255,220,150,0.45)">
+</rect>
+<rect x="575.153402233997" y="222" width="4" height="3" fill="rgba(255,220,150,0.45)">
+</rect>
+<rect x="586.969930569172" y="236" width="4" height="3" fill="rgba(255,220,150,0.45)">
+</rect>
+<rect x="606.6615248723944" y="250" width="4" height="3" fill="rgba(255,220,150,0.45)">
+</rect>
+<rect x="591.8187843292126" y="264" width="4" height="3" fill="rgba(255,220,150,0.45)">
+</rect>
+<rect x="604.3287753838246" y="278" width="4" height="3" fill="rgba(255,220,150,0.45)">
+</rect>
+<rect x="574.5835218483653" y="292" width="4" height="3" fill="rgba(255,220,150,0.45)">
+</rect>
+<rect x="586.9043566652875" y="306" width="4" height="3" fill="rgba(255,220,150,0.45)">
+</rect>
+<rect x="640" y="170" width="35" height="150" fill="#10102a" rx="2">
+</rect>
+<rect x="690" y="130" width="50" height="190" fill="#161640" rx="3">
+</rect>
+<rect x="717.1322824787344" y="142" width="4" height="3" fill="rgba(255,200,150,0.5)">
+</rect>
+<rect x="724.3415997847954" y="158" width="4" height="3" fill="rgba(255,200,150,0.5)">
+</rect>
+<rect x="723.0962445187565" y="174" width="4" height="3" fill="rgba(255,200,150,0.5)">
+</rect>
+<rect x="715.6683317148095" y="190" width="4" height="3" fill="rgba(255,200,150,0.5)">
+</rect>
+<rect x="706.140057403316" y="206" width="4" height="3" fill="rgba(255,200,150,0.5)">
+</rect>
+<rect x="724.9505508377135" y="222" width="4" height="3" fill="rgba(255,200,150,0.5)">
+</rect>
+<rect x="724.2292808206283" y="238" width="4" height="3" fill="rgba(255,200,150,0.5)">
+</rect>
+<rect x="701.6048608214803" y="254" width="4" height="3" fill="rgba(255,200,150,0.5)">
+</rect>
+<rect x="707.2679889969125" y="270" width="4" height="3" fill="rgba(255,200,150,0.5)">
+</rect>
+<rect x="723.0739640574852" y="286" width="4" height="3" fill="rgba(255,200,150,0.5)">
+</rect>
+</g>
+<rect x="0" y="320" width="960" height="80" fill="#080816">
+</rect>
+<rect x="0" y="340" width="960" height="3" fill="rgba(255,200,100,0.15)">
+</rect>
+<g>
+<defs>
+<radialGradient id="g66-gp" cx="50%" cy="50%" r="50%">
+<stop offset="0%" stop-color="rgba(255,120,170,0.08)">
+</stop>
+<stop offset="100%" stop-color="rgba(255,120,170,0)">
+</stop>
+</radialGradient>
+</defs>
+<ellipse cx="540" cy="334" rx="70" ry="12" fill="url(#g66-gp)">
+</ellipse>
+</g>
+<g>
+<circle cx="100" cy="345" r="4" fill="rgba(255,220,150,0.5)">
+<animate attributeName="cx" from="100" to="300" dur="3s" repeatCount="indefinite" begin="0s">
+</animate>
+<animate attributeName="opacity" values="0.8;0.8;0" dur="3s" repeatCount="indefinite" begin="0s">
+</animate>
+</circle>
+<circle cx="130" cy="345" r="4" fill="rgba(255,100,100,0.35)">
+<animate attributeName="cx" from="130" to="330" dur="3s" repeatCount="indefinite" begin="0.2s">
+</animate>
+<animate attributeName="opacity" values="0.6;0.6;0" dur="3s" repeatCount="indefinite" begin="0.2s">
+</animate>
+</circle>
+</g>
+<g>
+<circle cx="400" cy="345" r="4" fill="rgba(255,220,150,0.5)">
+<animate attributeName="cx" from="400" to="600" dur="3s" repeatCount="indefinite" begin="3s">
+</animate>
+<animate attributeName="opacity" values="0.8;0.8;0" dur="3s" repeatCount="indefinite" begin="3s">
+</animate>
+</circle>
+<circle cx="430" cy="345" r="4" fill="rgba(255,100,100,0.35)">
+<animate attributeName="cx" from="430" to="630" dur="3s" repeatCount="indefinite" begin="3.2s">
+</animate>
+<animate attributeName="opacity" values="0.6;0.6;0" dur="3s" repeatCount="indefinite" begin="3.2s">
+</animate>
+</circle>
+</g>
+<g>
+<circle cx="700" cy="345" r="4" fill="rgba(255,220,150,0.5)">
+<animate attributeName="cx" from="700" to="900" dur="3s" repeatCount="indefinite" begin="6s">
+</animate>
+<animate attributeName="opacity" values="0.8;0.8;0" dur="3s" repeatCount="indefinite" begin="6s">
+</animate>
+</circle>
+<circle cx="730" cy="345" r="4" fill="rgba(255,100,100,0.35)">
+<animate attributeName="cx" from="730" to="930" dur="3s" repeatCount="indefinite" begin="6.2s">
+</animate>
+<animate attributeName="opacity" values="0.6;0.6;0" dur="3s" repeatCount="indefinite" begin="6.2s">
+</animate>
+</circle>
+</g>
+<rect x="500" y="280" width="80" height="18" rx="3" fill="rgba(255,100,150,0.25)" class="animate-neon">
+</rect>
+<rect x="500" y="280" width="80" height="18" rx="3" fill="none" stroke="rgba(255,100,150,0.5)" stroke-width="1">
+</rect>
+</g>
+<g>
+<g>
+<rect x="0" y="340" width="960" height="68" fill="rgba(56,189,248,0.08)">
+</rect>
+<rect x="0" y="340" width="960" height="4" fill="rgba(56,189,248,0.14)">
+</rect>
+</g>
+<g>
+<defs>
+<radialGradient id="cg9-sh" cx="50%" cy="50%" r="50%">
+<stop offset="0%" stop-color="rgba(56,189,248,0.18)">
+</stop>
+<stop offset="100%" stop-color="rgba(56,189,248,0)">
+</stop>
+</radialGradient>
+</defs>
+<ellipse cx="480" cy="332" rx="230" ry="12" fill="url(#cg9-sh)">
+</ellipse>
+</g>
+<rect x="300" y="70" width="360" height="200" rx="14" fill="rgba(56,189,248,0.08)" stroke="rgba(56,189,248,0.35)" stroke-width="4">
+</rect>
+<rect x="314" y="84" width="332" height="168" rx="8" fill="rgba(56,189,248,0.05)">
+</rect>
+<rect x="334" y="106" width="150" height="10" rx="4" fill="rgba(56,189,248,0.3)">
+</rect>
+<rect x="334" y="128" width="110" height="10" rx="4" fill="rgba(56,189,248,0.24)">
+</rect>
+<rect x="356" y="150" width="120" height="10" rx="4" fill="rgba(56,189,248,0.26)">
+</rect>
+<rect x="356" y="172" width="90" height="10" rx="4" fill="rgba(56,189,248,0.22)">
+</rect>
+<rect x="334" y="194" width="170" height="10" rx="4" fill="rgba(56,189,248,0.28)">
+</rect>
+<rect x="334" y="216" width="60" height="10" rx="4" fill="rgba(56,189,248,0.2)">
+</rect>
+<rect x="560" y="96" width="64" height="46" rx="4" fill="rgba(56,189,248,0.18)">
+</rect>
+<rect x="566" y="104" width="30" height="18" rx="3" fill="rgba(56,189,248,0.3)">
+</rect>
+<rect x="566" y="128" width="44" height="6" rx="3" fill="rgba(56,189,248,0.24)">
+</rect>
+<rect x="586" y="240" width="50" height="10" rx="4" fill="rgba(56,189,248,0.22)">
+</rect>
+<rect x="380" y="270" width="200" height="12" rx="5" fill="rgba(56,189,248,0.16)" stroke="rgba(56,189,248,0.3)" stroke-width="3">
+</rect>
+<rect x="330" y="282" width="300" height="10" rx="4" fill="rgba(56,189,248,0.14)">
+</rect>
+<rect x="620" y="280" width="120" height="10" rx="4" fill="rgba(56,189,248,0.16)" stroke="rgba(56,189,248,0.3)" stroke-width="2.5">
+</rect>
+<path d="M624 282 l50 -38 l50 38 z" fill="rgba(56,189,248,0.12)" stroke="rgba(56,189,248,0.3)" stroke-width="2.5">
+</path>
+<path d="M636 276 l38 -30 l38 30 z" fill="rgba(56,189,248,0.24)">
+</path>
+<rect x="150" y="230" width="34" height="60" rx="8" fill="rgba(56,189,248,0.12)" stroke="rgba(56,189,248,0.3)" stroke-width="2.5">
+</rect>
+<rect x="155" y="238" width="24" height="40" rx="4" fill="rgba(56,189,248,0.24)">
+</rect>
+<rect x="760" y="80" width="90" height="60" rx="8" fill="rgba(56,189,248,0.1)" stroke="rgba(56,189,248,0.3)" stroke-width="3">
+</rect>
+<rect x="770" y="92" width="40" height="14" rx="3" fill="rgba(56,189,248,0.26)">
+</rect>
+<rect x="770" y="114" width="60" height="8" rx="3" fill="rgba(56,189,248,0.2)">
+</rect>
+<rect x="120" y="60" width="80" height="54" rx="8" fill="rgba(56,189,248,0.08)" stroke="rgba(56,189,248,0.28)" stroke-width="3">
+</rect>
+<rect x="130" y="72" width="50" height="10" rx="3" fill="rgba(56,189,248,0.24)">
+</rect>
+<rect x="130" y="90" width="30" height="8" rx="3" fill="rgba(56,189,248,0.18)">
+</rect>
+<path d="M60 366 h90 l26 -34 h70 l30 34 h110" fill="none" stroke="rgba(56,189,248,0.32)" stroke-width="4">
+</path>
+<circle cx="60" cy="366" r="9" fill="rgba(56,189,248,0.3)">
+</circle>
+<circle cx="386" cy="366" r="9" fill="rgba(56,189,248,0.3)">
+</circle>
+<rect x="210" y="350" width="30" height="30" rx="5" fill="rgba(56,189,248,0.14)" stroke="rgba(56,189,248,0.32)" stroke-width="2.5" transform="rotate(45 225 365)">
+</rect>
+<path d="M520 366 h90 l24 -30 h60" fill="none" stroke="rgba(56,189,248,0.28)" stroke-width="4">
+</path>
+<circle cx="694" cy="336" r="8" fill="rgba(56,189,248,0.26)">
+</circle>
+<path d="M730 366 h60 l20 -20 h50" fill="none" stroke="rgba(56,189,248,0.26)" stroke-width="4">
+</path>
+<circle cx="860" cy="346" r="7" fill="rgba(56,189,248,0.24)">
+</circle>
+<circle cx="880" cy="100" r="22" fill="rgba(56,189,248,0.1)" stroke="rgba(56,189,248,0.32)" stroke-width="3">
+</circle>
+<circle cx="880" cy="100" r="9" fill="rgba(56,189,248,0.05)" stroke="rgba(56,189,248,0.32)" stroke-width="2.5">
+</circle>
+<path d="M880 66 v14 M880 120 v14 M846 100 h14 M900 100 h14 M856 76 l10 10 M904 124 l-10 -10 M904 76 l-10 10 M856 124 l10 -10" stroke="rgba(56,189,248,0.32)" stroke-width="3" stroke-linecap="round">
+</path>
+</g>
+</g>
+<rect width="960" height="540" fill="url(#vig)">
+</rect>
+</svg>

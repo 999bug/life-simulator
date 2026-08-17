@@ -1,0 +1,324 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#0f0f2a">
+</stop>
+<stop offset="100%" stop-color="#1a1a3e">
+</stop>
+</linearGradient>
+<linearGradient id="vig" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="rgba(5,8,20,0)">
+</stop>
+<stop offset="62%" stop-color="rgba(5,8,20,0)">
+</stop>
+<stop offset="100%" stop-color="rgba(5,8,20,0.30)">
+</stop>
+</linearGradient>
+</defs>
+<style>
+@keyframes twinkle{0%,100%{opacity:.3}50%{opacity:1}}
+@keyframes glow{0%,100%{opacity:.3}50%{opacity:.7}}
+@keyframes neon{0%,100%{opacity:.3}50%{opacity:.7}}
+@keyframes infantMobile{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+.animate-twinkle{animation:twinkle 3s ease-in-out infinite}
+.animate-glow{animation:glow 2s ease-in-out infinite}
+.animate-neon{animation:neon 3s ease-in-out infinite}
+.animate-infant-mobile{animation:infantMobile 12s linear infinite;transform-origin:480px 180px}
+</style>
+<rect width="960" height="540" fill="url(#sky)">
+</rect>
+<g transform="translate(0 140)">
+<g>
+<defs>
+<linearGradient id="g183-ts" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#1a1a3e">
+</stop>
+<stop offset="40%" stop-color="#2d2050">
+</stop>
+<stop offset="70%" stop-color="#8b3a62">
+</stop>
+<stop offset="100%" stop-color="#e8954a">
+</stop>
+</linearGradient>
+<radialGradient id="g183-sunset">
+<stop offset="0%" stop-color="rgba(255,140,40,0.7)">
+</stop>
+<stop offset="50%" stop-color="rgba(255,100,30,0.3)">
+</stop>
+<stop offset="100%" stop-color="rgba(255,80,20,0)">
+</stop>
+</radialGradient>
+</defs>
+<rect x="0" y="0" width="960" height="400" fill="url(#g183-ts)">
+</rect>
+<circle cx="700" cy="220" r="80" fill="url(#g183-sunset)">
+</circle>
+<circle cx="700" cy="220" r="32" fill="rgba(255,180,60,0.8)">
+</circle>
+<circle cx="365.18878356435016" cy="99.91200941295921" r="1.1326388745704539" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:0.2752681956051526s">
+</circle>
+<circle cx="330.9371373521255" cy="33.87644236629133" r="1.8857420179685904" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:2.4626042108800137s">
+</circle>
+<circle cx="155.0169850287767" cy="106.65254825655752" r="1.1083301531915009" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:1.4487959145951512s">
+</circle>
+<circle cx="267.2128427394873" cy="92.0256788546804" r="1.5694063860029326" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:0.6575697513346543s">
+</circle>
+<circle cx="298.4048776188716" cy="27.783717265474266" r="0.8069817026509649" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:0.20717537328743196s">
+</circle>
+<circle cx="345.3000534817269" cy="48.426500903290645" r="0.5330229677388535" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:1.963189520061039s">
+</circle>
+<circle cx="486.2155529746262" cy="1.341839302461949" r="1.421161664027023" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:2.6946782387271493s">
+</circle>
+<circle cx="206.44015480384414" cy="63.85328317829778" r="1.9989950869017605" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:2.1048770310988183s">
+</circle>
+<circle cx="265.12275914834106" cy="38.027091914915054" r="0.9815009566132715" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:1.86708662898616s">
+</circle>
+<circle cx="307.4908442951526" cy="99.8732591703376" r="0.5057542830585529" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:1.9758877122419105s">
+</circle>
+<circle cx="111.76023291086534" cy="106.10014133064442" r="0.7908962816730379" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:2.024925648068664s">
+</circle>
+<circle cx="315.6934522089748" cy="85.86922256371344" r="1.907702845530149" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:1.3888160682497963s">
+</circle>
+<circle cx="142.7793390232759" cy="65.14813483058954" r="1.4835654005211714" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:2.6876473843567483s">
+</circle>
+<circle cx="130.99241293592502" cy="41.78100582626599" r="1.055071044163737" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:2.019843818307307s">
+</circle>
+<circle cx="75.79659395009897" cy="16.11442079467188" r="1.2625061617333166" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:2.917464261006847s">
+</circle>
+<circle cx="73.89362878508021" cy="28.470037669816275" r="0.9986625847775131" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:1.3541894324445207s">
+</circle>
+<circle cx="213.46111871984664" cy="78.85541031090783" r="1.5333777888584255" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:0.010880504550321524s">
+</circle>
+<circle cx="298.4910105322414" cy="8.443143939924722" r="0.5913437939772073" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:0.9356712060568477s">
+</circle>
+<circle cx="368.37398932169793" cy="97.78617582510995" r="0.9600432160197817" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:2.6522460528177563s">
+</circle>
+<circle cx="155.78585189708306" cy="4.134373362536499" r="0.9574588004042439" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:0.6702262758456388s">
+</circle>
+<circle cx="204.85717797492697" cy="35.30392318094414" r="0.738202158066391" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:1.614824038295796s">
+</circle>
+<circle cx="2.9204860529264964" cy="93.93813018667433" r="0.9680123078501215" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:0.4007226157018031s">
+</circle>
+<circle cx="53.14102556015254" cy="66.69317315883372" r="1.9236225612841034" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:2.246363554620478s">
+</circle>
+<circle cx="115.78544742914387" cy="2.6276279272844594" r="1.5388951112613425" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:1.238769959716632s">
+</circle>
+<circle cx="373.4439853134931" cy="75.10577865256857" r="1.1264691580339279" fill="rgba(255,255,255,0.6)" class="animate-twinkle" style="animation-delay:1.8978575772499573s">
+</circle>
+<path d="M0,280 Q80,240 160,260 Q240,220 320,250 Q400,230 480,260 Q560,240 640,255 Q720,235 800,250 Q880,240 960,260 L960,400 L0,400Z" fill="#1a1a2e" opacity="0.6">
+</path>
+<rect x="0" y="240" width="100%" height="160" fill="#0d0d1a" opacity="0.7">
+</rect>
+<rect x="30" y="180" width="35" height="120" fill="#111128" rx="1">
+</rect>
+<rect x="40" y="195" width="6" height="4" fill="rgba(255,200,100,0.3)">
+</rect>
+<rect x="55" y="185" width="6" height="4" fill="rgba(255,200,100,0.4)">
+</rect>
+<rect x="70" y="210" width="6" height="4" fill="rgba(255,200,100,0.2)">
+</rect>
+<rect x="80" y="140" width="50" height="160" fill="#141430" rx="1">
+</rect>
+<rect x="90" y="155" width="5" height="4" fill="rgba(255,200,100,0.4)">
+</rect>
+<rect x="100" y="170" width="5" height="4" fill="rgba(255,200,100,0.3)">
+</rect>
+<rect x="110" y="150" width="5" height="4" fill="rgba(255,200,100,0.5)">
+</rect>
+<rect x="145" y="200" width="40" height="100" fill="#0f0f25" rx="1">
+</rect>
+<rect x="200" y="160" width="60" height="140" fill="#181835" rx="2">
+</rect>
+<rect x="212" y="175" width="6" height="4" fill="rgba(255,200,100,0.35)">
+</rect>
+<rect x="225" y="165" width="6" height="4" fill="rgba(255,200,100,0.3)">
+</rect>
+<rect x="240" y="190" width="6" height="4" fill="rgba(255,200,100,0.25)">
+</rect>
+<rect x="660" y="150" width="45" height="150" fill="#131330" rx="2">
+</rect>
+<rect x="670" y="165" width="5" height="4" fill="rgba(255,200,100,0.35)">
+</rect>
+<rect x="685" y="180" width="5" height="4" fill="rgba(255,200,100,0.3)">
+</rect>
+<rect x="720" y="170" width="55" height="130" fill="#101028" rx="1">
+</rect>
+<rect x="730" y="185" width="6" height="4" fill="rgba(255,200,100,0.4)">
+</rect>
+<rect x="745" y="200" width="6" height="4" fill="rgba(255,200,100,0.25)">
+</rect>
+<rect x="790" y="190" width="40" height="110" fill="#111130" rx="1">
+</rect>
+<rect x="845" y="155" width="50" height="145" fill="#151535" rx="2">
+</rect>
+<rect x="855" y="170" width="6" height="4" fill="rgba(255,200,100,0.3)">
+</rect>
+<rect x="868" y="185" width="6" height="4" fill="rgba(255,200,100,0.4)">
+</rect>
+<rect x="0" y="300" width="960" height="100" fill="#0a0a16">
+</rect>
+<g>
+<defs>
+<radialGradient id="g184-gp" cx="50%" cy="50%" r="50%">
+<stop offset="0%" stop-color="rgba(255,200,120,0.07)">
+</stop>
+<stop offset="100%" stop-color="rgba(255,200,120,0)">
+</stop>
+</radialGradient>
+</defs>
+<ellipse cx="220" cy="304" rx="60" ry="9" fill="url(#g184-gp)">
+</ellipse>
+</g>
+<g>
+<defs>
+<radialGradient id="g185-gp" cx="50%" cy="50%" r="50%">
+<stop offset="0%" stop-color="rgba(255,200,120,0.07)">
+</stop>
+<stop offset="100%" stop-color="rgba(255,200,120,0)">
+</stop>
+</radialGradient>
+</defs>
+<ellipse cx="600" cy="308" rx="60" ry="9" fill="url(#g185-gp)">
+</ellipse>
+</g>
+<g transform="translate(220,240)">
+<rect x="3" y="0" width="4" height="60" fill="#444">
+</rect>
+<rect x="-3" y="55" width="16" height="4" fill="#555" rx="2">
+</rect>
+<circle cx="5" cy="55" r="6" fill="rgba(255,220,150,0.3)" class="animate-glow">
+</circle>
+<circle cx="5" cy="55" r="3" fill="rgba(255,240,200,0.6)">
+</circle>
+</g>
+<g transform="translate(600,250)">
+<rect x="3" y="0" width="4" height="60" fill="#444">
+</rect>
+<rect x="-3" y="55" width="16" height="4" fill="#555" rx="2">
+</rect>
+<circle cx="5" cy="55" r="6" fill="rgba(255,220,150,0.3)" class="animate-glow">
+</circle>
+<circle cx="5" cy="55" r="3" fill="rgba(255,240,200,0.6)">
+</circle>
+</g>
+<g transform="translate(100,160)">
+<animateTransform attributeName="transform" type="translate" values="100,160; 160,240; 130,300; 180,360" dur="5s" repeatCount="indefinite" begin="0s">
+</animateTransform>
+<ellipse cx="0" cy="0" rx="5" ry="2.5" fill="#c07840" opacity="0.6" transform="rotate(0)">
+</ellipse>
+</g>
+<g transform="translate(350,100)">
+<animateTransform attributeName="transform" type="translate" values="350,100; 410,180; 380,240; 430,300" dur="6.75s" repeatCount="indefinite" begin="2.5s">
+</animateTransform>
+<ellipse cx="0" cy="0" rx="4" ry="2" fill="#c07840" opacity="0.6" transform="rotate(100)">
+</ellipse>
+</g>
+<g transform="translate(550,130)">
+<animateTransform attributeName="transform" type="translate" values="550,130; 610,210; 580,270; 630,330" dur="8.5s" repeatCount="indefinite" begin="5s">
+</animateTransform>
+<ellipse cx="0" cy="0" rx="5.5" ry="2.75" fill="#c07840" opacity="0.6" transform="rotate(200)">
+</ellipse>
+</g>
+</g>
+<g opacity="0.8">
+<g>
+<g>
+<rect x="0" y="340" width="960" height="68" fill="rgba(245,158,11,0.08)">
+</rect>
+<rect x="0" y="340" width="960" height="4" fill="rgba(245,158,11,0.14)">
+</rect>
+</g>
+<rect x="40" y="60" width="56" height="280" rx="6" fill="rgba(245,158,11,0.1)" stroke="rgba(245,158,11,0.28)" stroke-width="3">
+</rect>
+<rect x="32" y="48" width="72" height="20" rx="6" fill="rgba(245,158,11,0.14)" stroke="rgba(245,158,11,0.3)" stroke-width="3">
+</rect>
+<rect x="32" y="316" width="72" height="20" rx="6" fill="rgba(245,158,11,0.14)" stroke="rgba(245,158,11,0.3)" stroke-width="3">
+</rect>
+<g>
+<defs>
+<radialGradient id="cg51-sh" cx="50%" cy="50%" r="50%">
+<stop offset="0%" stop-color="rgba(245,158,11,0.18)">
+</stop>
+<stop offset="100%" stop-color="rgba(245,158,11,0)">
+</stop>
+</radialGradient>
+</defs>
+<ellipse cx="800" cy="332" rx="110" ry="12" fill="url(#cg51-sh)">
+</ellipse>
+</g>
+<rect x="720" y="120" width="160" height="220" rx="12" fill="rgba(245,158,11,0.1)" stroke="rgba(245,158,11,0.34)" stroke-width="4">
+</rect>
+<rect x="738" y="138" width="124" height="184" rx="8" fill="rgba(245,158,11,0.05)">
+</rect>
+<circle cx="800" cy="230" r="40" fill="none" stroke="rgba(245,158,11,0.32)" stroke-width="6">
+</circle>
+<line x1="800" y1="230" x2="800" y2="198" stroke="rgba(245,158,11,0.36)" stroke-width="5" stroke-linecap="round">
+</line>
+<line x1="800" y1="230" x2="826" y2="250" stroke="rgba(245,158,11,0.32)" stroke-width="4" stroke-linecap="round">
+</line>
+<circle cx="800" cy="230" r="8" fill="rgba(245,158,11,0.4)">
+</circle>
+<circle cx="748" cy="150" r="5" fill="rgba(245,158,11,0.28)">
+</circle>
+<circle cx="868" cy="150" r="5" fill="rgba(245,158,11,0.28)">
+</circle>
+<circle cx="748" cy="310" r="5" fill="rgba(245,158,11,0.28)">
+</circle>
+<circle cx="868" cy="310" r="5" fill="rgba(245,158,11,0.28)">
+</circle>
+<g>
+<defs>
+<radialGradient id="cg52-sh" cx="50%" cy="50%" r="50%">
+<stop offset="0%" stop-color="rgba(245,158,11,0.18)">
+</stop>
+<stop offset="100%" stop-color="rgba(245,158,11,0)">
+</stop>
+</radialGradient>
+</defs>
+<ellipse cx="250" cy="338" rx="90" ry="10" fill="url(#cg52-sh)">
+</ellipse>
+</g>
+<ellipse cx="250" cy="330" rx="62" ry="15" fill="rgba(245,158,11,0.13)" stroke="rgba(245,158,11,0.34)" stroke-width="3">
+</ellipse>
+<ellipse cx="260" cy="314" rx="62" ry="15" fill="rgba(245,158,11,0.18)" stroke="rgba(245,158,11,0.34)" stroke-width="3">
+</ellipse>
+<ellipse cx="270" cy="298" rx="62" ry="15" fill="rgba(245,158,11,0.23)" stroke="rgba(245,158,11,0.34)" stroke-width="3">
+</ellipse>
+<ellipse cx="250" cy="318" rx="50" ry="12" fill="rgba(245,158,11,0.22)" stroke="rgba(245,158,11,0.4)" stroke-width="2.5">
+</ellipse>
+<ellipse cx="250" cy="302" rx="38" ry="9" fill="rgba(245,158,11,0.26)" stroke="rgba(245,158,11,0.42)" stroke-width="2.5">
+</ellipse>
+<path d="M560 330 L610 290 L650 310 L710 240 L750 262" fill="none" stroke="rgba(245,158,11,0.45)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+</path>
+<circle cx="710" cy="240" r="8" fill="rgba(245,158,11,0.5)">
+</circle>
+<path d="M742 232 l8 26 l-20 -4 z" fill="rgba(245,158,11,0.5)">
+</path>
+<rect x="420" y="250" width="60" height="80" rx="8" fill="rgba(245,158,11,0.12)" stroke="rgba(245,158,11,0.3)" stroke-width="3">
+</rect>
+<rect x="428" y="258" width="44" height="16" rx="4" fill="rgba(245,158,11,0.24)">
+</rect>
+<rect x="430" y="282" width="11" height="9" rx="2" fill="rgba(245,158,11,0.18)">
+</rect>
+<rect x="445" y="282" width="11" height="9" rx="2" fill="rgba(245,158,11,0.18)">
+</rect>
+<rect x="460" y="282" width="11" height="9" rx="2" fill="rgba(245,158,11,0.18)">
+</rect>
+<rect x="430" y="296" width="11" height="9" rx="2" fill="rgba(245,158,11,0.18)">
+</rect>
+<rect x="445" y="296" width="11" height="9" rx="2" fill="rgba(245,158,11,0.18)">
+</rect>
+<rect x="460" y="296" width="11" height="9" rx="2" fill="rgba(245,158,11,0.18)">
+</rect>
+<rect x="470" y="300" width="70" height="52" rx="6" fill="rgba(245,158,11,0.1)" stroke="rgba(245,158,11,0.28)" stroke-width="2.5" transform="rotate(4 505 326)">
+</rect>
+<line x1="482" y1="312" x2="528" y2="312" stroke="rgba(245,158,11,0.28)" stroke-width="2.5" transform="rotate(4 505 326)">
+</line>
+<line x1="482" y1="324" x2="518" y2="324" stroke="rgba(245,158,11,0.28)" stroke-width="2.5" transform="rotate(4 505 326)">
+</line>
+</g>
+</g>
+</g>
+<rect width="960" height="540" fill="url(#vig)">
+</rect>
+</svg>

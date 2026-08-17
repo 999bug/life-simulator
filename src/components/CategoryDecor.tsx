@@ -21,7 +21,7 @@ const CATEGORY_COLOR: Record<EventCategory, string> = {
 };
 
 export default function CategoryDecor({ category }: Props) {
-  const svg = useMemo(() => (category ? renderCategory(category) : null), [category]);
+  const svg = useMemo(() => (category ? renderCategoryScene(category) : null), [category]);
   if (!svg) {
     return null;
   }
@@ -34,7 +34,8 @@ export default function CategoryDecor({ category }: Props) {
   );
 }
 
-function renderCategory(category: EventCategory) {
+/** 分类场景 SVG 内容（独立背景素材生成也复用此函数） */
+export function renderCategoryScene(category: EventCategory) {
   const c = CATEGORY_COLOR[category];
   const fill = (a: number) => hexToRgba(c, a);
   switch (category) {

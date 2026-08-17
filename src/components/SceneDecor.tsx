@@ -10,7 +10,7 @@ let _id = 0;
 function uid() { return `g${++_id}`; }
 
 export default function SceneDecor({ stage }: Props) {
-  const svg = useMemo(() => renderScene(stage), [stage]);
+  const svg = useMemo(() => renderStageScene(stage), [stage]);
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
       <svg viewBox="0 0 960 400" preserveAspectRatio="xMidYMax slice"
@@ -21,7 +21,8 @@ export default function SceneDecor({ stage }: Props) {
   );
 }
 
-function renderScene(stage: LifeStage) {
+/** 阶段场景 SVG 内容（独立背景素材生成也复用此函数） */
+export function renderStageScene(stage: LifeStage) {
   switch (stage) {
     case 'infant': return InfantScene();
     case 'childhood': return ChildhoodScene();

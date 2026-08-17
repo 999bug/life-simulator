@@ -16,3 +16,6 @@ dist/
 .env*
 !.env.example
 server/.dev.vars
+
+# 场景背景生成脚本的 esbuild 产物（可随时重建）
+script/gen-scenes/gen.cjs

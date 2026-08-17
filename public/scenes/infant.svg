@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#fdf6ea">
+</stop>
+<stop offset="100%" stop-color="#f5e6d0">
+</stop>
+</linearGradient>
+<linearGradient id="vig" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="rgba(5,8,20,0)">
+</stop>
+<stop offset="62%" stop-color="rgba(5,8,20,0)">
+</stop>
+<stop offset="100%" stop-color="rgba(5,8,20,0.30)">
+</stop>
+</linearGradient>
+</defs>
+<style>
+@keyframes twinkle{0%,100%{opacity:.3}50%{opacity:1}}
+@keyframes glow{0%,100%{opacity:.3}50%{opacity:.7}}
+@keyframes neon{0%,100%{opacity:.3}50%{opacity:.7}}
+@keyframes infantMobile{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+.animate-twinkle{animation:twinkle 3s ease-in-out infinite}
+.animate-glow{animation:glow 2s ease-in-out infinite}
+.animate-neon{animation:neon 3s ease-in-out infinite}
+.animate-infant-mobile{animation:infantMobile 12s linear infinite;transform-origin:480px 180px}
+</style>
+<rect width="960" height="540" fill="url(#sky)">
+</rect>
+<g transform="translate(0 140)">
+<g>
+<defs>
+<radialGradient id="g1-glow">
+<stop offset="0%" stop-color="rgba(255,240,210,0.35)">
+</stop>
+<stop offset="100%" stop-color="rgba(200,160,100,0)">
+</stop>
+</radialGradient>
+<linearGradient id="g1-wall" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#f5e6d0">
+</stop>
+<stop offset="100%" stop-color="#e8d5b8">
+</stop>
+</linearGradient>
+</defs>
+<rect x="0" y="0" width="960" height="400" fill="url(#g1-wall)">
+</rect>
+<circle cx="480" cy="200" r="300" fill="url(#g1-glow)">
+</circle>
+<rect x="350" y="20" width="260" height="160" rx="8" fill="#fff8e8" stroke="#d4b896" stroke-width="4">
+</rect>
+<line x1="480" y1="20" x2="480" y2="180" stroke="#d4b896" stroke-width="3">
+</line>
+<line x1="350" y1="100" x2="610" y2="100" stroke="#d4b896" stroke-width="3">
+</line>
+<path d="M620,120 Q580,80 550,100" stroke="#8a9a6a" stroke-width="3" fill="none">
+</path>
+<path d="M620,120 Q590,100 570,130" stroke="#8a9a6a" stroke-width="2" fill="none">
+</path>
+<ellipse cx="480" cy="352" rx="280" ry="36" fill="rgba(255,245,225,0.14)">
+</ellipse>
+<g>
+<defs>
+<radialGradient id="g2-sh" cx="50%" cy="50%" r="50%">
+<stop offset="0%" stop-color="rgba(25,20,15,0.13)">
+</stop>
+<stop offset="100%" stop-color="rgba(25,20,15,0)">
+</stop>
+</radialGradient>
+</defs>
+<ellipse cx="480" cy="350" rx="125" ry="12" fill="url(#g2-sh)">
+</ellipse>
+</g>
+<rect x="380" y="260" width="200" height="90" rx="6" fill="#f0dcc0" stroke="#c4a882" stroke-width="3">
+</rect>
+<rect x="390" y="270" width="180" height="70" rx="4" fill="#fff8f0">
+</rect>
+<rect x="390" y="255" width="4" height="15" rx="2" fill="#c4a882">
+</rect>
+<rect x="430" y="255" width="4" height="15" rx="2" fill="#c4a882">
+</rect>
+<rect x="470" y="255" width="4" height="15" rx="2" fill="#c4a882">
+</rect>
+<rect x="510" y="255" width="4" height="15" rx="2" fill="#c4a882">
+</rect>
+<rect x="550" y="255" width="4" height="15" rx="2" fill="#c4a882">
+</rect>
+<g class="animate-infant-mobile">
+<line x1="480" y1="180" x2="480" y2="240" stroke="#d4b896" stroke-width="1.5">
+</line>
+<animateTransform attributeName="transform" type="rotate" from="0 480 180" to="360 480 180" dur="12s" repeatCount="indefinite">
+</animateTransform>
+<circle cx="450" cy="235" r="8" fill="rgba(255,200,100,0.5)" class="animate-twinkle">
+</circle>
+<circle cx="510" cy="235" r="8" fill="rgba(255,200,100,0.5)" class="animate-twinkle">
+</circle>
+<circle cx="480" cy="220" r="7" fill="rgba(255,200,150,0.6)" class="animate-twinkle">
+</circle>
+<circle cx="465" cy="248" r="6" fill="rgba(255,180,120,0.4)" class="animate-twinkle">
+</circle>
+<circle cx="495" cy="248" r="6" fill="rgba(255,180,120,0.4)" class="animate-twinkle">
+</circle>
+</g>
+<g transform="translate(120,60) scale(1)" opacity="0.35">
+<animateTransform attributeName="transform" type="translate" from="80 60" to="240 60" dur="18s" repeatCount="indefinite" additive="sum">
+</animateTransform>
+<circle cx="0" cy="0" r="20" fill="white">
+</circle>
+<circle cx="22" cy="-8" r="28" fill="white">
+</circle>
+<circle cx="45" cy="-2" r="22" fill="white">
+</circle>
+<circle cx="18" cy="5" r="18" fill="white">
+</circle>
+</g>
+<g transform="translate(680,40) scale(0.7)" opacity="0.25">
+<animateTransform attributeName="transform" type="translate" from="640 40" to="800 40" dur="22s" repeatCount="indefinite" additive="sum">
+</animateTransform>
+<circle cx="0" cy="0" r="20" fill="white">
+</circle>
+<circle cx="22" cy="-8" r="28" fill="white">
+</circle>
+<circle cx="45" cy="-2" r="22" fill="white">
+</circle>
+<circle cx="18" cy="5" r="18" fill="white">
+</circle>
+</g>
+<g transform="translate(50,120) scale(0.5)" opacity="0.2">
+<animateTransform attributeName="transform" type="translate" from="10 120" to="170 120" dur="25s" repeatCount="indefinite" additive="sum">
+</animateTransform>
+<circle cx="0" cy="0" r="20" fill="white">
+</circle>
+<circle cx="22" cy="-8" r="28" fill="white">
+</circle>
+<circle cx="45" cy="-2" r="22" fill="white">
+</circle>
+<circle cx="18" cy="5" r="18" fill="white">
+</circle>
+</g>
+<circle cx="300" cy="355" r="12" fill="rgba(255,180,150,0.5)">
+</circle>
+<circle cx="650" cy="360" r="10" fill="rgba(180,200,255,0.5)">
+</circle>
+<rect x="280" y="348" width="40" height="6" rx="3" fill="rgba(200,180,160,0.6)">
+</rect>
+</g>
+</g>
+<rect width="960" height="540" fill="url(#vig)">
+</rect>
+</svg>

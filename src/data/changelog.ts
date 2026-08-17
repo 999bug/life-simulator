@@ -15,6 +15,15 @@ export interface ChangelogEntry {
  */
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.25.0',
+    date: '2026-08-17',
+    title: '阶段专属场景背景',
+    items: [
+      '🎨 70 张「阶段 × 分类」专属场景背景：每个事件都有对应的画面，同一话题在童年 / 青年 / 中年 / 老年呈现不同场景',
+      '⚙️ 场景由真实事件数据自动生成，新增事件即自动补齐背景，无需手工绘制',
+    ],
+  },
+  {
     version: '0.24.0',
     date: '2026-08-17',
     title: '童年快进与选择减负',

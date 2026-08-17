@@ -1,12 +1,13 @@
 {
   "name": "life-simulator",
   "private": true,
-  "version": "0.24.0",
+  "version": "0.25.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "build:events": "node script/convert-events.mjs",
+    "gen:scenes": "esbuild script/gen-scenes/entry.tsx --bundle --platform=node --format=cjs --jsx=automatic --packages=external --outfile=script/gen-scenes/gen.cjs && node script/gen-scenes/gen.cjs",
     "test": "node --test \"script/*.test.mjs\" && node --experimental-strip-types --test script/engine-state.test.ts script/pace-mode.test.ts script/goals.test.ts script/save.test.ts script/verdict.test.ts script/use-game.test.ts script/gameplay.test.ts script/family.test.ts script/talents.test.ts script/life-systems.test.ts script/weekly.test.ts script/achievements.test.ts script/undo.test.ts script/companion.test.ts script/jail-phase.test.ts",
     "test:ui": "vitest run",
     "preview": "vite preview"

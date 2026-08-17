@@ -11,6 +11,8 @@ import ConfirmModal from './ConfirmModal';
 import KeyChoicesModal from './KeyChoicesModal';
 import ActionModal from './ActionModal';
 import CharacterPanel from './CharacterPanel';
+import IntroSummaryModal from './IntroSummaryModal';
+import { buildIntroSummary } from '../engine/introSummary';
 import { checkGoal, GOALS } from '../engine/goals';
 import { jobStatus } from '../engine/jobs';
 import { assetStatus } from '../engine/assets';
@@ -102,6 +104,17 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
   // 快进中 / 自动推进（快速模拟或局内快进）：隐藏选择面板、跳过打字机
   const fastForwarding = fastForwardUntil != null;
   const autoMode = autoPlay || fastForwarding;
+  // 童年定格面板：快进结束（introAuto 从 true 变 false，即到达 13 岁）时弹出一次
+  const [showIntroSummary, setShowIntroSummary] = useState(false);
+  const prevIntroRef = useRef(false);
+  useEffect(() => {
+    if (prevIntroRef.current && !introAuto) {
+      setShowIntroSummary(true);
+    }
+    prevIntroRef.current = introAuto;
+  }, [introAuto]);
+  // 童年定格数据：0-12 岁关键选择与属性成长（纯函数推导，快进结束后历史不再增长）
+  const introSummary = useMemo(() => buildIntroSummary(game.history, game.snapshots), [game.history, game.snapshots]);
   // 后悔按钮「首次出现」标记（栈从空变非空只检测一次；requestTip 另有全局防重复）
   const undoShownRef = useRef(false);
   // 职业/资产/退休摘要（状态栏一行展示；纯函数推导，无职业时为空）
@@ -173,10 +186,8 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
   }, [onContinue]);
 
   const handleDialogComplete = useCallback(() => {
-    if (introAuto && currentEvent && currentEvent.choices.length > 0) {
-      // 幼儿期走过场（幻灯片式）：不显示选择面板，自动随机选——玩家只点击翻页，无需做选择
-      const ch = currentEvent.choices[Math.floor(Math.random() * currentEvent.choices.length)];
-      onChoice(ch);
+    if (introAuto) {
+      // 童年快进：选择由 hook 自动推进 effect 驱动（instant 立显会立即触发本回调，必须空返回防双推进）
       return;
     }
     if (currentEvent && currentEvent.choices.length === 1 && currentEvent.choices[0].text === '……') {
@@ -255,7 +266,9 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
                 ))}
               </div>
             )}
-            <div className="text-[11px] text-white/30 mt-3 animate-pulse">▼ 点击继续</div>
+            {!introAuto && (
+              <div className="text-[11px] text-white/30 mt-3 animate-pulse">▼ 点击继续</div>
+            )}
           </div>
         </div>
       </div>
@@ -271,8 +284,8 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
   }
 
   const stageMeta = STAGE_META[game.stage];
-  // 幻灯片式推进：纯叙事事件或幼儿期（无需选择，看完点「▼ 点击继续」翻页）
-  const isAuto = (currentEvent.choices.length === 1 && currentEvent.choices[0].text === '……') || introAuto;
+  // 幻灯片式推进：纯叙事事件（无需选择，看完点「▼ 点击继续」翻页）；童年快进走全自动（instant + hook 定时推进）
+  const isAuto = currentEvent.choices.length === 1 && currentEvent.choices[0].text === '……';
 
   return (
     <div className="w-full h-full relative">
@@ -307,16 +320,16 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
           age={game.age}
           stage={stageMeta.label}
           title={currentEvent.title}
-          autoAdvance={isAuto}
-          instant={autoMode}
+          autoAdvance={isAuto && !introAuto}
+          instant={autoMode || introAuto}
           typeSpeed={typeSpeed}
           onComplete={handleDialogComplete}
-          onAutoContinue={isAuto ? () => (introAuto ? handleDialogComplete() : handleChoice(currentEvent.choices[0])) : undefined}
+          onAutoContinue={isAuto && !introAuto ? () => handleChoice(currentEvent.choices[0]) : undefined}
         />
         <ChoicePanel
           choices={currentEvent.choices}
           onSelect={handleChoice}
-          visible={showChoices && !autoMode}
+          visible={showChoices && !autoMode && !introAuto}
           attributes={game.attributes}
           age={game.age}
           realMode={game.realMode ?? false}
@@ -546,15 +559,15 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
         knownPersonas={knownPersonas}
       />
 
-      {/* 幼儿期走过场：0-5 岁无需选择（幻灯片式点击翻阅，intraAuto），顶部角标 + 一键跳过 */}
+      {/* 童年快进：0-12 岁自动播放（introAuto），顶部角标 + 一键跳过到 13 岁 */}
       {introAuto && (
         <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
           <span className="px-3 py-1 rounded-full border border-[#c9a96e]/30 bg-black/50 text-[11px] text-[#c9a96e]">
-            👶 幼儿期 · 无需选择
+            🌱 童年 · 自动播放
           </span>
           <button
             onClick={() => { sfx.select(); onSkipIntro(); }}
-            title="跳过幼儿期"
+            title="跳过童年"
             className="px-2.5 h-7 rounded-full border border-white/25 bg-black/40 text-white/80 text-[11px]
               hover:border-[#c9a96e]/80 hover:text-[#c9a96e] transition-all duration-200 font-sans"
           >
@@ -565,6 +578,11 @@ export default function GameScreen({ game, currentEvent, feedback, autoPlay, typ
 
       {/* 新手渐进提示（底部居中胶囊，速度按钮上方；3 秒自动消失/点击关闭） */}
       <FirstTips tip={activeTip} onClose={() => setActiveTip(null)} />
+
+      {/* 童年定格面板：0-12 岁自动播放结束（13 岁交还控制）弹出，确认后开始少年人生 */}
+      {showIntroSummary && (
+        <IntroSummaryModal summary={introSummary} onClose={() => setShowIntroSummary(false)} />
+      )}
     </div>
   );
 }

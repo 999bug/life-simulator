@@ -24,6 +24,7 @@ import {
   scaleOutcomes,
   fatalCause,
   STAGE_ORDER,
+  ATTR_META,
 } from '../engine/state.ts';
 import { EVENTS, filterEvents, shuffleEvents, pickFateEvents, isIncarcerated, isJailContextEvent, JAIL_SUPPRESS_MIN_AGE, JAIL_SUPPRESS_MAX_AGE } from '../engine/events.ts';
 import { derivePersona, meetsPersonality } from '../engine/personality.ts';
@@ -752,8 +753,9 @@ function startNewGame(state: RuntimeState, p: StartParams): RuntimeState {
   // 第 3 周目起（累计完成 ≥ 2 局）：抽 1 个本局命运事件；第 5 周目起（累计 ≥ 4 局）：抽 2 个（效果 ×1.5）
   const fateCount = state.stats.totalLives >= 4 ? 2 : 1;
   const fateEvents = state.stats.totalLives >= 2 ? pickFateEvents(shuffleSeed, fateCount) : [];
-  // 幼儿期走过场资格：仅普通手动局（非快速模拟/每日/每周/种子）——每日/每周/种子挑战自动随机选择会破坏「同一天同一局」的公平性
-  const introEligible = p.seed == null && !p.isDaily && !p.isWeekly && game.age < 6;
+  // 童年快进资格：0-12 岁自动播放（快速模拟由 autoPlay 自带推进，不重复标记）；
+  // 挑战局亦启用——快进固定选第一个选项（确定性，不破坏「同一天同一局」公平）
+  const introEligible = game.age < 13;
   return {
     game,
     currentEvent: first,
@@ -762,8 +764,8 @@ function startNewGame(state: RuntimeState, p: StartParams): RuntimeState {
     shuffledEvents,
     skippedEvents: firstScan.skipped,
     shuffleSeed,
-    // 幼儿期走过场：普通手动局 0-5 岁不弹选择面板（introAuto 标记，幻灯片式自主点击翻页，6 岁起交还玩家）；
-    // autoPlay 仅快速模拟为 true——幼儿期由 GameScreen 点击推进（onChoice 自动随机选），不做全自动播放
+    // 童年快进：0-12 岁自动播放不弹选择面板（introAuto 标记，13 岁起交还玩家）；
+    // autoPlay 仅快速模拟为 true——童年快进由 hook 自动推进 effect 驱动（挑战局固定选第一个选项，普通局随机）
     autoPlay: p.autoPlay,
     introAuto: !p.autoPlay && introEligible,
     fastForwardUntil: null,
@@ -966,7 +968,7 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         snapshots: appendSnapshot(state.game.snapshots, isDead ? Math.min(age, maxAge) : age, attrs, gameOver),
       };
 
-      // 构建反馈文本
+      // 构建反馈文本：叙事行 + 数值行（带属性名）+ 选后因果标注（主导属性 → 塑造方向短语）
       let fb = `你选择了「${choice.text}」`;
       const attrChanges: Partial<Attributes> = out.attr ?? {};
       const changedKeys = (Object.keys(attrChanges) as AttributeKey[]).filter(k => attrChanges[k] !== 0);
@@ -977,8 +979,15 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
           const raw = attrChanges[k]!;
           const room = ageCap(state.game.age, k) - state.game.attributes[k];
           const decayNote = raw > 0 && room < 15 ? `（距上限${Math.max(0, Math.floor(room))}点）` : '';
-          return `${v > 0 ? '+' : ''}${v}${decayNote}`;
-        }).join('  ');
+          return `${v > 0 ? '+' : ''}${v}${decayNote} ${ATTR_META[k].name}`;
+        }).join(' · ');
+        // 主导属性（实际生效绝对值最大）显著时标注塑造方向——选择的影响即时可见
+        const lead = changedKeys
+          .map(k => ({ key: k, v: Math.abs(effectiveDelta(k, attrChanges[k]!, state.game.attributes, state.game.age)) }))
+          .sort((a, b) => b.v - a.v)[0];
+        if (lead && lead.v >= SHAPE_MIN_DELTA) {
+          fb += `\n这塑造了你：${SHAPE_PHRASES[lead.key]}`;
+        }
       }
 
       // 本局结算的结局 key（verdictKey 纯函数判定：路线 flag 优先，无则按分数档）
@@ -1019,7 +1028,7 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         shuffleSeed: state.shuffleSeed,
         // 幼儿期走过场：到 6 岁清除标记（自动选择期间不记录 undo）
         autoPlay: state.autoPlay,
-        introAuto: state.introAuto && age < 6,
+        introAuto: state.introAuto && age < 13,
         // 快进到目标年龄（或死亡）即交还手动控制
         fastForwardUntil: state.fastForwardUntil != null && !gameOver && age < state.fastForwardUntil
           ? state.fastForwardUntil
@@ -1115,17 +1124,21 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
     }
 
     case 'SKIP_INTRO': {
-      // 跳过剩余幼儿期：自动随机选择推进到 6 岁（与逐次自动播放的随机分布一致，可安全快进）
+      // 跳过剩余童年：推进到 13 岁交还控制（普通局随机选择；挑战局固定选第一个选项，快进段确定性不破坏公平）
       if (!state.introAuto) {
         return state;
       }
+      // 挑战局（每日/每周/种子）：固定选第一个选项——同一天/同周/同种子玩家快进段一致
+      const introDeterministic = state.isDaily || state.isWeekly || state.seedChallenge;
       let game = state.game;
       let currentEvent = state.currentEvent;
       let eventIndex = state.eventIndex;
       const shuffledEvents = state.shuffledEvents;
       let guard = 0;
-      while (game.age < 6 && currentEvent && guard++ < 500) {
-        const choice = currentEvent.choices[Math.floor(Math.random() * currentEvent.choices.length)];
+      while (game.age < 13 && currentEvent && guard++ < 500) {
+        const choice = introDeterministic
+          ? currentEvent.choices[0]
+          : currentEvent.choices[Math.floor(Math.random() * currentEvent.choices.length)];
         const out = state.fateEventIds.includes(currentEvent.id)
           ? scaleOutcomes(choice.outcomes, FATE_MULTIPLIER)
           : choice.outcomes;
@@ -1239,7 +1252,7 @@ export function reducer(state: RuntimeState, action: Action): RuntimeState {
         shuffledEvents,
         autoPlay: false,
         // 幼儿期中途退出读档：恢复幻灯片标记（自动模拟局不写槽，读档年龄 <6 必为手动局）
-        introAuto: saved.game.age < 6,
+        introAuto: saved.game.age < 13,
         fastForwardUntil: null,
         paceMode,
         typeSpeed,
@@ -1424,6 +1437,21 @@ const AUTO_PLAY_INTERVAL = 220;
 /** 快速模拟：反馈页跳过间隔（毫秒） */
 const AUTO_PLAY_FEEDBACK_INTERVAL = 50;
 
+/** 选后因果标注：主导属性 → 塑造方向短语（反馈页「这塑造了你」行，选择影响可见化） */
+const SHAPE_PHRASES: Record<AttributeKey, string> = {
+  health: '体魄',
+  intelligence: '学识',
+  wealth: '财富观',
+  happiness: '心境',
+  social: '人缘',
+  appearance: '气质',
+  luck: '运道',
+  morality: '品性',
+};
+
+/** 选后因果标注的最小生效变化（低于此值不标注，避免小波动噪音） */
+const SHAPE_MIN_DELTA = 5;
+
 export function useGame() {
   const [rt, dispatch] = useReducer(reducer, null, createInitialRuntime);
 
@@ -1499,9 +1527,10 @@ export function useGame() {
     }
   }, [rt]);
 
-  // 自动推进：快速模拟（到结算）或局内快进（到目标年龄）——随机选择并推进，避开致死选项
+  // 自动推进：快速模拟（到结算）/ 局内快进（到目标年龄）/ 童年快进（0-12 岁 introAuto）——
+  // 快速模拟随机选择并避开致死选项；挑战局童年快进固定选第一个选项（确定性公平）；普通局童年快进随机
   useEffect(() => {
-    if ((!rt.autoPlay && rt.fastForwardUntil == null) || rt.game.phase !== 'playing') {
+    if ((!rt.autoPlay && rt.fastForwardUntil == null && !rt.introAuto) || rt.game.phase !== 'playing') {
       return;
     }
     const timer = setTimeout(() => {
@@ -1509,13 +1538,22 @@ export function useGame() {
         dispatch({ type: 'CONTINUE' });
       } else if (rt.currentEvent) {
         const choices = rt.currentEvent.choices;
-        // 快速模拟避开致死选项（fatal flag：煤气/坠物/心梗等意外死亡留给手动玩家的真实选择——
-        // 「30 秒看一生」的快速模拟体验不应被 21 岁煤气泄漏打断；有非致死选项时才避开）
-        const fatalPool = choices.filter(c => (c.outcomes.flags ?? []).some(f => f.startsWith('fatal_')));
-        const pool = fatalPool.length > 0 && fatalPool.length < choices.length
-          ? choices.filter(c => !fatalPool.includes(c))
-          : choices;
-        const pick = pool[Math.floor(Math.random() * pool.length)];
+        let pick: Choice;
+        if (rt.introAuto && (rt.isDaily || rt.isWeekly || rt.seedChallenge)) {
+          // 挑战局童年快进：固定第一个选项（确定性，同一天/同周/同种子玩家快进段一致）
+          pick = choices[0];
+        } else if (rt.introAuto) {
+          // 普通局童年快进：随机（保留原幻灯片式随机分布）
+          pick = choices[Math.floor(Math.random() * choices.length)];
+        } else {
+          // 快速模拟/局内快进：避开致死选项（fatal flag：煤气/坠物/心梗等意外死亡留给手动玩家的真实选择——
+          // 「30 秒看一生」的快速模拟体验不应被 21 岁煤气泄漏打断；有非致死选项时才避开）
+          const fatalPool = choices.filter(c => (c.outcomes.flags ?? []).some(f => f.startsWith('fatal_')));
+          const pool = fatalPool.length > 0 && fatalPool.length < choices.length
+            ? choices.filter(c => !fatalPool.includes(c))
+            : choices;
+          pick = pool[Math.floor(Math.random() * pool.length)];
+        }
         dispatch({ type: 'MAKE_CHOICE', choice: pick, eventId: rt.currentEvent.id });
       }
     }, rt.feedback ? AUTO_PLAY_FEEDBACK_INTERVAL : AUTO_PLAY_INTERVAL);

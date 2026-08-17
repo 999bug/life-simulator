@@ -62,6 +62,43 @@ describe('ChoicePanel', () => {
     expect(onSelect).toHaveBeenCalledWith(ch);
   });
 
+  it('选项折叠：超过 2 个默认只显示前 2 个，「更多选择」展开其余', () => {
+    const onSelect = vi.fn();
+    render(
+      <ChoicePanel
+        choices={[choice('选项一', { happiness: 1 }), choice('选项二', { happiness: 1 }), choice('选项三', { happiness: 1 }), choice('选项四', { happiness: 1 })]}
+        onSelect={onSelect}
+        visible
+        attributes={attrs}
+        age={30}
+        realMode={false}
+      />,
+    );
+    expect(screen.getByText('选项一')).toBeTruthy();
+    expect(screen.getByText('选项二')).toBeTruthy();
+    expect(screen.queryByText('选项三')).toBeNull();
+    expect(screen.queryByText('选项四')).toBeNull();
+    expect(screen.getByText('· · · 更多选择（2）')).toBeTruthy();
+    // 展开后全部可见
+    fireEvent.click(screen.getByText('· · · 更多选择（2）'));
+    expect(screen.getByText('选项三')).toBeTruthy();
+    expect(screen.getByText('选项四')).toBeTruthy();
+  });
+
+  it('选项折叠：≤2 个选项不显示更多入口', () => {
+    render(
+      <ChoicePanel
+        choices={[choice('选项一', { happiness: 1 }), choice('选项二', { happiness: 1 })]}
+        onSelect={vi.fn()}
+        visible
+        attributes={attrs}
+        age={30}
+        realMode={false}
+      />,
+    );
+    expect(screen.queryByText(/更多选择/)).toBeNull();
+  });
+
   it('性格徽章：效果达强信号阈值时显示（普通模式也显示，风格提示非数值）', () => {
     render(
       <ChoicePanel

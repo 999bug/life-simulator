@@ -139,40 +139,56 @@ test('rollCrime：成功时随机挑成功变体（第二个 rand 控变体）',
   assert.strictEqual(r.attr.luck, -2);
 });
 
-// ============ SKIP_INTRO（幼儿期走过场快进） ============
+// ============ SKIP_INTRO（童年快进 0-12 岁） ============
 
-test('SKIP_INTRO：普通局 0 岁自动播放开启，快进到 6 岁并交还控制', () => {
+test('SKIP_INTRO：普通局 0 岁自动播放开启，快进到 13 岁并交还控制', () => {
   const events = [
     evt('a_01', 0, { health: 2 }),
     evt('a_02', 1, { intelligence: 2 }),
     evt('a_03', 3, { happiness: 2 }),
     evt('b_01', 6, { wealth: 3 }),
+    evt('b_02', 12, { social: 2 }),
+    evt('c_01', 13, { luck: 3 }),
   ];
   const base = createInitialRuntime();
   const rt = reducer(base, { type: 'START_GAME', gender: 'male', name: '小明', paceMode: 'full', typeSpeed: 'normal', goal: null });
-  // 普通手动局 0 岁：幼儿期幻灯片标记开启（introAuto；autoPlay 仅快速模拟为 true）
+  // 普通手动局 0 岁：童年快进标记开启（introAuto；autoPlay 仅快速模拟为 true）
   assert.strictEqual(rt.introAuto, true);
   assert.strictEqual(rt.autoPlay, false);
   // 覆盖事件流（自制数组）
   const setup = { ...rt, shuffledEvents: events, currentEvent: events[0], eventIndex: 0 };
   const skipped = reducer(setup, { type: 'SKIP_INTRO' });
-  assert.strictEqual(skipped.game.age, 6, '应推进到 6 岁');
-  assert.strictEqual(skipped.introAuto, false, '幻灯片标记清除');
+  assert.strictEqual(skipped.game.age, 13, '应推进到 13 岁');
+  assert.strictEqual(skipped.introAuto, false, '快进标记清除');
   assert.strictEqual(skipped.autoPlay, false, '保持手动');
+  assert.strictEqual(skipped.currentEvent?.id, 'c_01', '13 岁事件接续');
   assert.ok(skipped.game.attributes.health >= 65, '自动选择应积累了属性');
-  // 非幼儿期局 SKIP_INTRO 原样返回
+  // 非快进局 SKIP_INTRO 原样返回
   const manual = { ...setup, introAuto: false, autoPlay: false };
   assert.strictEqual(reducer(manual, { type: 'SKIP_INTRO' }), manual);
 });
 
-test('SKIP_INTRO：每日挑战局不开幼儿期自动播放（公平同局）', () => {
+test('SKIP_INTRO：每日挑战局启用确定性快进（固定选第一个选项，公平同局）', () => {
   const base = createInitialRuntime();
   const rt = reducer(base, {
     type: 'START_GAME', gender: 'male', name: '小明', paceMode: 'full', typeSpeed: 'normal',
     goal: null, challenge: false, seed: 12345, isDaily: true,
   });
   assert.strictEqual(rt.autoPlay, false, '每日挑战保持手动');
-  assert.strictEqual(rt.introAuto, false, '每日挑战无幼儿期标记');
+  assert.strictEqual(rt.introAuto, true, '每日挑战开启童年快进');
+  // 构造效果差异明显的多选项事件：choice[0] 加智力、choice[1] 加财富——确定性应恒选第一个
+  // （0 岁智力上限 55、初始 25 距上限远全额生效；财富 0 岁上限 30 会被锚点衰减，故用智力验证）
+  const event = {
+    ...evt('a_01', 0, { intelligence: 5 }),
+    choices: [
+      { text: '选一', effects: '', outcomes: { attr: { intelligence: 5 } } },
+      { text: '选二', effects: '', outcomes: { attr: { wealth: 9 } } },
+    ],
+  };
+  const setup = { ...rt, shuffledEvents: [event], currentEvent: event, eventIndex: 0 };
+  const skipped = reducer(setup, { type: 'SKIP_INTRO' });
+  assert.strictEqual(skipped.game.attributes.intelligence, rt.game.attributes.intelligence + 5, '应固定选第一个选项');
+  assert.strictEqual(skipped.game.attributes.wealth, rt.game.attributes.wealth, '第二个选项不应被选中');
 });
 
 // ============ 结果池随机抽取 ============
@@ -410,27 +426,27 @@ test('MAKE_ACTION 后 CONTINUE：清反馈、已做记录保留', () => {
   assert.deepStrictEqual(rt.game.actionsDone, ['leisure'], '已做记录不随 CONTINUE 重置');
 });
 
-test('幼儿期每岁只播 1 个事件：同岁多事件跳过（幻灯片精简），6 岁交还后恢复正常', () => {
+test('童年快进每岁只播 1 个事件：同岁多事件跳过（幻灯片精简），13 岁交还后恢复正常', () => {
   const events = [
     evt('a_01', 0, { health: 2 }),
     evt('a_02', 0, { intelligence: 2 }), // 同 0 岁，幻灯片跳过
     evt('b_01', 1, { wealth: 2 }),
     evt('b_02', 1, { happiness: 2 }),    // 同 1 岁，幻灯片跳过
-    evt('c_01', 6, { social: 2 }),
+    evt('c_01', 13, { social: 2 }),
   ];
   const base = createInitialRuntime();
   const rt = reducer(base, { type: 'START_GAME', gender: 'male', name: '小明', paceMode: 'full', typeSpeed: 'normal', goal: null });
-  assert.strictEqual(rt.introAuto, true, '0 岁幼儿期开启');
+  assert.strictEqual(rt.introAuto, true, '0 岁童年快进开启');
   const setup = { ...rt, shuffledEvents: events, currentEvent: events[0], eventIndex: 0 };
   // 第 1 张（0 岁 a_01）：同岁 a_02 跳过，直接到 1 岁
   const step1 = reducer(setup, { type: 'MAKE_CHOICE', choice: events[0].choices[0], eventId: 'a_01' });
   assert.strictEqual(step1.currentEvent?.id, 'b_01', '同岁 a_02 应被跳过');
   assert.strictEqual(step1.game.age, 1);
-  // 第 2 张（1 岁 b_01）：同岁 b_02 跳过，直接到 6 岁并交还控制
+  // 第 2 张（1 岁 b_01）：同岁 b_02 跳过，直接到 13 岁并交还控制
   const step2 = reducer(step1, { type: 'MAKE_CHOICE', choice: events[1].choices[0], eventId: 'b_01' });
   assert.strictEqual(step2.currentEvent?.id, 'c_01', '同岁 b_02 应被跳过');
-  assert.strictEqual(step2.game.age, 6);
-  assert.strictEqual(step2.introAuto, false, '6 岁交还玩家控制');
+  assert.strictEqual(step2.game.age, 13);
+  assert.strictEqual(step2.introAuto, false, '13 岁交还玩家控制');
 });
 
 test('MAKE_ACTION：进入新岁后本岁已做记录重置（每岁每个活动限 1 次）', () => {

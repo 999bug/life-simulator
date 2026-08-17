@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import type { AttributeKey, Attributes, Choice } from '../types';
 import { ATTR_META, effectiveDelta } from '../engine/state';
 import { PERSONA_META, traitForOutcome } from '../engine/personality';
@@ -13,12 +14,24 @@ interface Props {
   realMode: boolean;
 }
 
+/** 默认展示的选项数（其余折叠进「更多选择」，减轻选择阅读负荷） */
+const COLLAPSED_SHOWN = 2;
+
 export default function ChoicePanel({ choices, onSelect, visible, attributes, age, realMode }: Props) {
+  // 折叠展开态：切换事件（choices 引用变化）自动复位
+  const [expanded, setExpanded] = useState(false);
+  useEffect(() => {
+    setExpanded(false);
+  }, [choices]);
+
   if (!visible || choices.length === 0) return null;
+
+  const shown = expanded ? choices : choices.slice(0, COLLAPSED_SHOWN);
+  const hiddenCount = choices.length - COLLAPSED_SHOWN;
 
   return (
     <div className="px-7 pb-5 flex flex-col gap-2 max-w-[860px] mx-auto">
-      {choices.map((ch, idx) => {
+      {shown.map((ch, idx) => {
         // 性格徽章：手工标注优先，无标注走效果结构 + flag 补充规则（无信号不标注，留白也是区分）
         const traits = traitForOutcome(ch.outcomes.attr, ch.outcomes.flags, ch.outcomes.personality);
         return (
@@ -65,6 +78,19 @@ export default function ChoicePanel({ choices, onSelect, visible, attributes, ag
           </button>
         );
       })}
+
+      {/* 折叠展开入口：默认只读前 2 个选项，点开看其余（长选项列表的阅读减负） */}
+      {!expanded && hiddenCount > 0 && (
+        <button
+          onClick={() => { sfx.select(); setExpanded(true); }}
+          className="w-full px-4 py-2.5 text-left rounded-lg text-[13px] text-white/45
+            border border-dashed border-white/15
+            hover:border-[#c9a96e]/40 hover:text-[#c9a96e] hover:bg-white/[0.03]
+            transition-all duration-200 font-sans"
+        >
+          · · · 更多选择（{hiddenCount}）
+        </button>
+      )}
     </div>
   );
 }

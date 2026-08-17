@@ -24,6 +24,7 @@ import { getTalent, saveInheritTalent, type TalentInherit } from '../engine/tale
 import { formatDate } from '../hooks/useGame';
 import { checkWeeklyGoal, weekOf, type WeeklyGoal } from '../engine/weekly';
 import { derivePersona, personaSummary, PERSONA_META, type PersonaState, type PersonaTrait } from '../engine/personality';
+import { buildCausalChain } from '../engine/introSummary';
 import { getDeviceId, reportScore } from '../utils/api';
 
 interface Props {
@@ -385,6 +386,8 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
   );
   const allCollected = collectedEndings.length > 0 && nextRoute === null;
   // 完整时间线：全部选择 + 里程碑标记（旧存档无 flags 字段 → 无标记，正常显示）
+  // 因果链：13 岁起的关键选择串起一生走向（效果显著者，按时间升序；终局收束「选择塑造人生」）
+  const causalChain = useMemo(() => buildCausalChain(game.history), [game.history]);
   const milestoneHistory = game.history.map(h => ({
     ...h,
     isMilestone: (h.flags ?? []).some(f => MILESTONE_FLAGS.includes(f)),
@@ -787,6 +790,29 @@ export default function SummaryScreen({ game, onRestart, newAchievements, skippe
           </div>
         ))}
       </div>
+
+      {/* 因果链：13 岁起的关键选择如何走到结局（「选择塑造人生」的终局收束，重玩钩子） */}
+      {causalChain.length > 0 && (
+        <div className="w-full max-w-[720px] animate-[fadeInUp_1.35s_ease]">
+          <h3 className="text-[13px] tracking-[4px] text-[#c9a96e] mb-1 font-normal">🔗 因果链</h3>
+          <p className="text-[11px] text-white/35 mb-2.5">几个关键选择，串起了这一生——如果重来，你会怎么选？</p>
+          <div className="flex flex-col">
+            {causalChain.map((n, i) => (
+              <div key={i} className="flex gap-3 py-1.5 text-xs border-b border-white/[0.02]">
+                <span className="text-[#c9a96e] min-w-[32px] shrink-0">{n.age}岁</span>
+                <div className="min-w-0">
+                  <span className="text-white/60">{n.title} · 「{n.choiceText}」</span>
+                  {n.change && <span className="text-white/35 ml-2">{n.change}</span>}
+                </div>
+              </div>
+            ))}
+            <div className="flex gap-3 py-2 text-xs">
+              <span className="text-[#c9a96e] min-w-[32px] shrink-0">终点</span>
+              <span className="text-[#e8c95d]">→ {title}（享年 {game.age} 岁）</span>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* 新解锁成就（附分享入口：成就瞬间是分享欲峰值） */}
       {newAchievements.length > 0 && (
